@@ -21,11 +21,11 @@ See [INSTALL.md](INSTALL.md) for setup guide.
 
 
 ## Contributing
-Please read the [contribution guidelines](CONTRIBUTING.md) first.
+Please read the contribution guidelines [CONTRIBUTING.md](CONTRIBUTING.md).
 
 
 ## Support
-Please use [THIS]() for bug reports and feature requests.
+Please use [GitHub Issues](https://github.com/moldypenguins/Gandalf/issues) for bug reports and feature requests.
 
 
 ## Credits
@@ -36,5 +36,6 @@ Please use [THIS]() for bug reports and feature requests.
 
 ## Licenses
 Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High.  
-Licensed under the GNU GENERAL PUBLIC LICENSE. See [LICENSE.md](LICENSE.md) or [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html) for more details.
+Licensed under the GNU GENERAL PUBLIC LICENSE.  
+See [LICENSE.md](LICENSE.md) or [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html) for more details.
 
