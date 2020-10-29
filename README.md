@@ -1,4 +1,4 @@
-# Gandalf
+# Gandalf ![GitHub License](https://img.shields.io/github/license/risolv/AutotaskNET.svg?logo=GNU&logoColor=FFFFFF&style=flat)
 Planetarion Digital Assistant
 
 
