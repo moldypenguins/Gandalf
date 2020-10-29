@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<%- include("templates/head", {page_title: "Members", page_description: "Members"}); %>
+  </head>
+  <body>
+    <header>
+<%- include("templates/header"); %>
+    </header>
+    <main>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="content">
+              <h2>Members</h2>
+              <table id="members" class="table table-sm table-striped table-members">
+                <thead>
+                  <tr>
+                    <th scope="col" class="btn-col"></th>
+                    <th scope="col">Member (<%= members.length %>)</th>
+                    <th scope="col">PA Nick</th>
+                    <th scope="col">Access</th>
+                    <th scope="col">Coords</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col" class="btn-col"></th>
+                    <th scope="col">Email</th>
+                    <% if(member.isADM || member.isHC) { %>
+                    <th scope="col" class="fit-content">Last Access</th>
+                    <% } %>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i = 0; i < members.length; ++i) { %>
+                  <tr>
+                    <td class="btn-col">
+                      <% if(member.isADM || (member.isHC && !members[i].isADM && !members[i].isHC)) { %>
+                      <a class="btn btn-sm btn-warning" href="/members/<%= members[i].id %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
+                      <form method="POST" action="/members">
+                        <button type="submit" name="deactivate" value="<%= members[i].active %>" class="btn btn-sm btn-danger"><i class="fas fa-times" aria-hidden="true"></i></button>
+                      </form>
+                      <% } %>
+                    </td>
+                    <th scope="row">
+                      <img class="tg-pic" src="<% if(members[i].photo_url) { %><%= members[i].photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" alt="" />
+                      <% if(members[i].username) { %>
+                        <a href="https://t.me/<%= members[i].username %>"><%= members[i].username %></a>
+                      <% } else if(members[i].last_name) { %>
+                        <%= members[i].first_name %> <%= members[i].last_name %>
+                      <% } else { %>
+                        <%= members[i].first_name %>
+                      <% } %>
+                    </th>
+                    <td><%= members[i].panick %></td>
+                    <td class="pr-3">
+                      <% if(member.isADM || (member.isHC && !members[i].isADM && !members[i].isHC)) { %>
+                      <form method="POST" action="/members/<%= members[i].id %>">
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= members[i].accessRoles %></button>
+                            <div class="dropdown-menu">
+                              <div><label><input name="access" type="radio" value="0" <% if(members[i].access == 0) { %>checked="checked"<% } %>/> Recruit</label></div>
+                              <div><label><input name="access" type="radio" value="1" <% if(members[i].access == 1) { %>checked="checked"<% } %>/> Member</label></div>
+                              <div><label><input name="access" type="radio" value="3" <% if(members[i].access == 3) { %>checked="checked"<% } %>/> Commander</label></div>
+                              <div><label><input name="access" type="radio" value="5" <% if(members[i].access == 5) { %>checked="checked"<% } %>/> Admin</label></div>
+                              <div role="separator" class="dropdown-divider"></div>
+                              <div><label><input name="role1" type="checkbox" value="1" <% if((members[i].roles & 1) != 0) { %>checked="checked"<% } %>/> OOT</label></div>
+                              <div><label><input name="role2" type="checkbox" value="2" <% if((members[i].roles & 2) != 0) { %>checked="checked"<% } %>/> Scanner</label></div>
+                              <div><label><input name="role4" type="checkbox" value="4" <% if((members[i].roles & 4) != 0) { %>checked="checked"<% } %>/> Battle Commander</label></div>
+                              <div><label><input name="role8" type="checkbox" value="8" <% if((members[i].roles & 8) != 0) { %>checked="checked"<% } %>/> Defence Commander</label></div>
+                              <div><label><input name="role16" type="checkbox" value="16" <% if((members[i].roles & 16) != 0) { %>checked="checked"<% } %>/> High Commander</label></div>
+                            </div>
+                          </div>
+                          <div class="input-group-append">
+                            <button type="submit" id="submitaccess" name="submitaccess" class="btn btn-sm btn-primary")><i class="fas fa-save" aria-hidden="true"></i></button>
+                          </div>
+                        </div>
+                      </form>
+                      <% } else { %>
+                      <%= members[i].accessRoles %>
+                      <% } %>
+                    </td>
+                    <td><% if(members[i].planet) { %><%= members[i].planet.x %>:<%= members[i].planet.y %>:<%= members[i].planet.z %><% } %></td>
+                    <td><% if(members[i].phone) { %><a href="tel:<%= members[i].phone %>"><%= members[i].phone %></a><% } %></td>
+                    <td class="btn-col">
+                      <% if(members[i].phone && member.isADM) { %>
+                      <form name="callMember" method='POST' action="/members/call/<%= members[i].id %>">
+                        <button type="submit" name="submitcall" value="<%= members[i].phone %>" class="btn btn-info btn-sm mx-2"><i class="fas fa-phone" aria-hidden="true"></i></button>
+                      </form>
+                      <% } %>
+                    </td>
+                    <td><% if(members[i].email) { %><a href="mailto:<%= members[i].email %>"><%= members[i].email %></a><% } %></td>
+                    <% if(member.isADM || member.isHC) { %>
+                    <td class="fit-content">
+                      <% if(typeof(members[i].last_access) == "undefined") { %>
+                      never
+                      <% } else { %>
+                      <%= moment(members[i].last_access).fromNow() %>
+                      <% } %>
+                    </td>
+                    <% } %>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <% if(member.isADM || member.isHC) { %>
+          <div class="col-12">
+            <div class="content">
+              <h2>Inactives</h2>
+              <table id="inactives" class="table table-sm table-striped table-members">
+                <thead>
+                  <tr>
+                    <th scope="col" class="btn-col"></th>
+                    <th scope="col">Username (<%= inactives.length %>)</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">PA Nick</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i = 0; i < inactives.length; i++) { %>
+                  <tr>
+                    <td class="btn-col">
+                      <form method="POST" action="/members/inactives">
+                        <button type="submit" name="activate" value="<%= inactives[i].id %>" class="btn btn-sm btn-success"><i class="fas fa-plus" aria-hidden="true"></i></button>
+                        <button type="submit" name="remove" value="<%= inactives[i].id %>" class="btn btn-sm btn-danger"><i class="fas fa-times" aria-hidden="true"></i></button>
+                      </form>
+                    </td>
+                    <th scope="row">
+                      <img src="<%= inactives[i].photo_url %>" width="30" height="30" class="tg-pic" />
+                      <% if(inactives[i].username) { %>
+                        <a href="https://t.me/<%= inactives[i].username %>"><%= inactives[i].username %></a>
+                      <% } else if(inactives[i].last_name) { %>
+                        <%= inactives[i].first_name %> <%= inactives[i].last_name %>
+                      <% } else { %>
+                        <%= inactives[i].first_name %>
+                      <% } %>
+                    </th>
+                    <td><%= inactives[i].first_name %></td>
+                    <td><%= inactives[i].last_name %></td>
+                    <td><%= inactives[i].panick %></td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <% } %>
+          <% if(member.isADM || member.isHC) { %>
+          <div class="col-12">
+            <div class="content">
+              <h2>Applicants</h2>
+              <table id="applicants" class="table table-sm table-striped table-members">
+                <thead>
+                  <tr>
+                    <th scope="col" class="btn-col"></th>
+                    <th scope="col">Username (<%= applicants.length %>)</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i = 0; i < applicants.length; i++) { %>
+                  <tr>
+                    <td class="btn-col">
+                      <form method="POST" action="/members/applicants">
+                        <button type="submit" name="accept" value="<%= applicants[i].id %>" class="btn btn-sm btn-success"><i class="fas fa-plus" aria-hidden="true"></i></button>
+                        <button type="submit" name="reject" value="<%= applicants[i].id %>" class="btn btn-sm btn-danger"><i class="fas fa-times" aria-hidden="true"></i></button>
+                      </form>
+                    </td>
+                    <th scope="row">
+                      <img src="<%= applicants[i].photo_url %>" width="30" height="30" class="tg-pic" />
+                      <% if(applicants[i].username) { %>
+                        <a href="https://t.me/<%= applicants[i].username %>"><%= applicants[i].username %></a>
+                      <% } else if(applicants[i].last_name) { %>
+                        <%= applicants[i].first_name %> <%= applicants[i].last_name %>
+                      <% } else { %>
+                        <%= applicants[i].first_name %>
+                      <% } %>
+                    </th>
+                    <td><%= applicants[i].first_name %></td>
+                    <td><%= applicants[i].last_name %></td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <% } %>
+          <% if(member.isADM) { %>
+          <div class="col-12">
+            <div class="content">
+              <h2>Galmates</h2>
+              <table class="table table-sm table-striped table-members">
+                <thead>
+                  <tr>
+                    <th scope="col" class="btn-col"></th>
+                    <th scope="col">Galmate (<%= galmates.length %>)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i = 0; i < galmates.length; i++) { %>
+                  <tr>
+                    <td class="btn-col">
+                      <form method="POST" action="/members/galmate/<%= galmates[i].id %>">
+                        <button type="submit" name="delete" value="<%= galmates[i].id %>" class="btn btn-sm btn-danger">
+                          <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                        </button>
+                      </form>
+                    </td>
+                    <th scope="row">
+                      <img src="<%= galmates[i].photo_url %>" width="30" height="30" class="tg-pic" />
+                      <% if(galmates[i].username) { %>
+                        <a href="https://t.me/<%= galmates[i].username %>"><%= galmates[i].username %></a>
+                      <% } else if(galmates[i].last_name) { %>
+                        <%= galmates[i].first_name %> <%= galmates[i].last_name %>
+                      <% } else { %>
+                        <%= galmates[i].first_name %>
+                      <% } %>
+                    </th>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </main>
+    <footer>
+<%- include("templates/footer"); %>
+    </footer>
+    <script>
+      $(function() {
+        $('#members').DataTable({"paging":false,"info":false,"order":[3, 'asc']});
+        $('#applicants').DataTable({"paging":false,"info":false,"order":[1, 'asc']});
+      });
+    </script>
+  </body>
+</html>

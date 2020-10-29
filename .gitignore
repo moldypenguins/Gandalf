@@ -1,0 +1,15 @@
+#ignore node_modules folder
+**/node_modules/
+
+#ignore config file
+config.js
+
+#ignore html content
+Sauron/views/content/*
+!Sauron/views/content/*.example.html
+
+#ignore ssl files
+Sauron/ssl/*.crt
+Sauron/ssl/*.key
+!Sauron/ssl/*.example.crt
+!Sauron/ssl/*.example.key

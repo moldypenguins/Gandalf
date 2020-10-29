@@ -1,0 +1,401 @@
+@charset "UTF-8";
+
+/* # DOM ELEMENTS ################################################################################*/
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+
+/*# TABLE ELEMENTS ###############################################################################*/
+table {
+  min-width:100%;
+}
+
+th {
+  white-space: nowrap;
+  text-align: left;
+}
+
+td {
+  text-align: left;
+}
+
+.table-sm td, .table-sm th {
+  padding: 0.1rem;
+}
+@media (min-width: 576px) {
+  .table-sm td, .table-sm th {
+    padding: 0.15rem;
+  }
+}
+@media (min-width: 992px) {
+  .table-sm td, .table-sm th {
+    padding: 0.2rem;
+  }
+}
+
+
+.btn-box {
+  float: right;
+}
+.btn-box .btn {
+  margin: 8px 0;
+}
+
+/*
+.table-background-white td {
+  background-color:#ffffff;
+  text-align:left;
+}
+*/
+
+
+
+.btn-col {
+  white-space: nowrap;
+  width: 1%;
+}
+.btn-col form {
+  display: inline-block;
+}
+
+
+
+/* # LAYOUT ELEMENTS #############################################################################*/
+body {
+  font-family:"Ubuntu", "Lato", "Open Sans", sans-serif;
+  font-size:0.6rem;
+}
+@media (min-width: 576px) {
+  body {
+    font-size:0.8rem;
+  }
+}
+@media (min-width: 992px) {
+  body {
+    font-size:1rem;
+  }
+}
+
+
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.fit-content {
+  width:1%;
+}
+
+
+.container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+  padding-bottom: 50px
+}
+
+.content {
+  text-align: center;
+  padding: 10px;
+  overflow: hidden;
+}
+
+
+
+.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+  padding: 20px;
+}
+
+
+
+
+.dataTables_wrapper .row {
+  margin: 0;
+  width: 100%;
+  overflow-x: auto;
+}
+.dataTables_wrapper .row [class^="col"] {
+  padding: 0;
+  position: static;
+}
+
+
+
+footer {
+  position: fixed;
+  z-index: 1000;
+  bottom: 0;
+  width: 100%;
+  height: 2.45rem;
+  border-top: 1px solid rgba(0,0,0,.1);
+  padding: 0.75rem 0.5rem;
+  text-align: left;
+}
+@media (min-width: 576px) {
+  footer {
+    height: 2.85rem;
+  }
+}
+@media (min-width: 992px) {
+  footer {
+    height: 3.25rem;
+  }
+}
+
+
+
+
+/*# NAVIGATION ELEMENTS ##########################################################################*/
+nav {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+.navbar-logo {
+  display: inline-block;
+  vertical-align: top;
+  height: 30px;
+  width: 30px;
+  margin-right: 5px;
+}
+
+.navbar-toggler,
+.navbar-collapse {
+  margin-right: 40px;
+}
+
+.navbar-profile {
+  display: inline-block;
+  vertical-align: top;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+}
+
+
+/*# TELEGRAM ELEMENTS ############################################################################*/
+.tg-pic {
+  height: 30px;
+  width: 30px;
+  border-radius:20px;
+}
+
+.tg-btn {
+  font-size: 16px;
+  line-height: 20px;
+  padding: 9px 21px 11px;
+  border-radius: 20px;
+  display: inline-block;
+  vertical-align: top;
+  font-weight: 500;
+  background-color: #54a9eb;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0;
+  border: none;
+  color: #ffffff;
+  white-space: nowrap;
+  font-family:Arial;
+}
+
+
+/*# FORM ELEMENTS ################################################################################*/
+.form-label {
+  position: relative;
+  -ms-flex: 1 1 0%;
+  flex: 1 1 0%;
+  min-width: 0;
+  margin-bottom: 0;
+  display: block;
+  width: 100%;
+  /* height: calc(1.5em + .75rem + 2px); */
+  padding: .275rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+
+
+.btn-space { margin-left: 5px; }
+
+.btn-group-sm>.btn, .btn-sm { padding: .15rem .25rem; font-size: .375rem; line-height: 1; }
+.btn-group-sm>.btn-scan { padding: .25rem .5em !important }
+@media (min-width: 576px) {
+  .btn-group-sm>.btn, .btn-sm { padding: .20rem .30rem; font-size: .525rem; line-height: 1.125; }
+  .btn-group-sm>.btn-scan { padding: .25rem .5em !important }
+}
+@media (min-width: 992px) {
+  .btn-group-sm>.btn, .btn-sm { padding: .25rem .35rem; font-size: .675rem; line-height: 1.25; }
+  .btn-group-sm>.btn-scan { padding: .25rem .5em !important }
+}
+
+
+.input-group-sm>.custom-select, 
+.input-group-sm>.form-control, 
+.input-group-sm>.input-group-append>.btn, 
+.input-group-sm>.input-group-append>.input-group-text, 
+.input-group-sm>.input-group-prepend>.btn, 
+.input-group-sm>.input-group-prepend>.input-group-text {
+  font-size:0.6rem;
+  line-height:0.8rem;
+}
+@media (min-width: 576px) {
+  .input-group-sm>.custom-select,
+  .input-group-sm>.form-control,
+  .input-group-sm>.input-group-append>.btn,
+  .input-group-sm>.input-group-append>.input-group-text,
+  .input-group-sm>.input-group-prepend>.btn,
+  .input-group-sm>.input-group-prepend>.input-group-text {
+    font-size:0.8rem;
+    line-height:1rem;
+  }
+}
+@media (min-width: 992px) {
+  .input-group-sm>.custom-select,
+  .input-group-sm>.form-control,
+  .input-group-sm>.input-group-append>.btn,
+  .input-group-sm>.input-group-append>.input-group-text,
+  .input-group-sm>.input-group-prepend>.btn,
+  .input-group-sm>.input-group-prepend>.input-group-text {
+    font-size:0.8rem;
+    line-height:1rem;
+  }
+}
+
+.input-group {
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
+.input-group>.input-group-append:last-child>.input-group-text:not(:last-child), 
+.input-group>.input-group-append:not(:last-child)>.input-group-text, 
+.input-group>.input-group-prepend>.input-group-text {
+  border-color: #454d55;
+  background-color: #343a40;
+  color: #fff;
+}
+
+
+.center-form {
+  width: 0%;
+}
+@media (min-width: 992px) {
+  .center-form {
+    width: 15%;
+  }
+}
+
+
+
+.dropdown {
+  width: inherit;
+}
+.dropdown .btn {
+  width: 100%;
+  text-align: left;
+}
+.dropdown .dropdown-toggle::after {
+  float: right;
+  margin-top: 10px;
+  margin-left: unset;
+}
+.dropdown .input-group-sm .dropdown-toggle::after {
+  margin-top: 6px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*# PAGE ELEMENTS ################################################################################*/
+
+.strategy {
+  width: 200px;
+  margin: 20px auto;
+}
+
+
+.table-members tr th,
+.table-members tr td, 
+.table-members tr td i {
+  vertical-align:middle;
+  white-space:nowrap;
+  line-height: 0.8rem;
+  font-size:0.6rem;
+}
+@media (min-width: 576px) {
+  .table-members tr th,
+  .table-members tr td,
+  .table-members tr td i {
+    vertical-align:middle;
+    white-space:nowrap;
+    line-height: 1rem;
+    font-size:0.8rem;
+  }
+}
+@media (min-width: 992px) {
+  .table-members tr th,
+  .table-members tr td,
+  .table-members tr td i {
+    vertical-align:middle;
+    white-space:nowrap;
+    line-height: 1rem;
+    font-size:0.8rem;
+  }
+}
+
+.table-targets .dropdown-menu { font-size: inherit; }
+.table-targets .dropdown-item { padding: .25rem .75rem; }
+
+.table-targets tr th,
+.table-targets tr td,
+.table-targets tr td i {
+  vertical-align:middle;
+  white-space:nowrap;
+  line-height: 0.6rem;
+  font-size: 0.4rem;
+}
+@media (min-width: 576px) {
+  .table-targets tr th,
+  .table-targets tr td,
+  .table-targets tr td i {
+    line-height: 0.8rem;
+    font-size:0.6rem;
+  }
+}
+@media (min-width: 992px) {
+  .table-targets tr th, 
+  .table-targets tr td,
+  .table-targets tr td i {
+    line-height:1rem;
+    font-size:0.8rem;
+  }
+}
+
+td.sd, td.sd i {
+  vertical-align: middle !important;
+}
+td.claimed, td.claimed i {
+  vertical-align: middle;
+  font-size:1.25rem;
+}
+
+
+
+
+
+
+

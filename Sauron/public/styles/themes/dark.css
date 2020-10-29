@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.ter { color:#999999; }
+.cat { color:#1515FF; }
+.xan { color:#00A000; }
+.zik { color:#FF0033; }
+.etd { color:#FFFFFF; }
+
+nav {
+  background-color: #24303f !important;
+}
+
+body {
+  color:#cccccc;
+  background-color:#000000;
+  background-image: url('/images/bg/dark.jpg');
+  background-position: 0 0;
+  background-repeat: repeat;
+}
+
+footer {
+  background-color: #24303f !important;
+}
+
+.content {
+  background-color: #24303f !important;
+}
+
+.table {
+  color: #cccccc;
+}

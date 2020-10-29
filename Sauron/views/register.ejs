@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<%- include("templates/head", {page_title: "Register", page_description: "Register"}); %>
+  </head>
+  <body>
+    <header>
+<%- include("templates/header"); %>
+    </header>
+    <main>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="content">
+              <h2>Register</h2>
+              <% if(visitor != undefined) { %>
+              <form method='POST' action='/register'>
+              <% } %>
+                <div class="justify-content-center">
+                  <% if(visitor != undefined) { %>
+                    <img src="<%= visitor.photo_url %>" width="30" height="30" class="profile" />
+                    <% if(visitor.username) { %>
+                      <a href="https://t.me/<%= visitor.username %>"><%= visitor.username %></a>
+                    <% } else if(visitor.last_name) { %>
+                      <%= visitor.first_name %> <%= visitor.last_name %>
+                    <% } else { %>
+                      <%= visitor.first_name %>
+                    <% } %>
+                  <% } else if(applicant != undefined) { %>
+                    <img src="<%= applicant.photo_url %>" width="30" height="30" class="profile" />
+                    <% if(applicant.username) { %>
+                      <a href="https://t.me/<%= applicant.username %>"><%= applicant.username %></a>
+                    <% } else if(applicant.last_name) { %>
+                      <%= applicant.first_name %> <%= applicant.last_name %>
+                    <% } else { %>
+                      <%= applicant.first_name %>
+                    <% } %>
+                  <% } %>
+                </div>
+                <div class="justify-content-center">
+                  <% if(visitor != undefined) { %>
+                  <button class="tg-btn" type="submit">Register</button>
+                  <% } else if(applicant.rejected) { %>
+                  Your application has been rejected.
+                  <% } %>
+                </div>
+              <% if(visitor != undefined) { %>
+              </form>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+<%- include("templates/footer"); %>
+    </footer>
+  </body>
+</html>

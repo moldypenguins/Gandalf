@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<%- include("templates/head", {page_title: "Attacks", page_description: "Attacks"}); %>
+  </head>
+  <body>
+    <header>
+<%- include("templates/header"); %>
+    </header>
+    <main>
+      <div class="container-fluid">
+        <div class="row">
+        <% if(page == "att") { %>
+          <%
+            var attacker = "";
+            if(member.planet != null) {
+              attacker = "&att_coords_x_1="+member.planet.x + "&att_coords_y_1="+member.planet.y + "&att_coords_z_1="+member.planet.z + "&att_planet_value_1="+member.planet.value + "&att_planet_score_1="+member.planet.score
+            }
+            if(member.scans.d != null && typeof(member.scans.d.scan) != "undefined" && member.scans.d.scan != null) {
+              attacker += "&att_planet_mc_1=" + member.scans.d.scan.military_centre;
+            }
+            var allships = "";
+            var allfi = ""
+            var allco = ""
+            var allfr = ""
+            var allde = ""
+            var allcr = ""
+            var allbs = ""
+            if(member.scans.a != null && typeof(member.scans.a.scan) != "undefined" && member.scans.a.scan != null) {
+              for(var j = 0; j < member.scans.a.scan.length; j++) {
+                if(typeof(member.scans.a.scan[j].ship) != "undefined" && member.scans.a.scan[j].ship != null) {
+                  allships += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                  if(member.scans.a.scan[j].ship.class.toLowerCase() == "fighter") {
+                    allfi += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                  }
+                  if(member.scans.a.scan[j].ship.class.toLowerCase() == "corvette") {
+                    allco += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                  }
+                  if(member.scans.a.scan[j].ship.class.toLowerCase() == "frigate") {
+                    allfr += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                  }
+                  if(member.scans.a.scan[j].ship.class.toLowerCase() == "destroyer") {
+                    allde += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                  }
+                  if(member.scans.a.scan[j].ship.class.toLowerCase() == "cruiser") {
+                    allcr += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                  }
+                  if(member.scans.a.scan[j].ship.class.toLowerCase() == "battleship") {
+                    allbs += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                  }
+                }
+              }
+            }
+        ``%>
+          <% var myClms = claims.filter(c => c.member_id == member.id && c.attack_id == attack.id); %>
+          <% if(typeof(myClms) != "undefined" && myClms.length > 0) { %>
+            <div class="col-12">
+              <div class="content">
+                <h2>My Bookings</h2>
+                <table class="table table-sm table-striped table-targets">
+                  <thead>
+                    <tr>
+                      <th rowspan="2" scope="col">Coords</th>
+                      <th rowspan="2" scope="col">Land Tick</th>
+                      <th rowspan="2" scope="col">Race</th>
+                      <th rowspan="2" scope="col">Size</th>
+                      <th rowspan="2" scope="col">Value <strong>/</strong> Score</th>
+                      <th rowspan="2" scope="col">A <strong>/</strong> D <strong>/</strong> R</th>
+                      <th rowspan="2" scope="col">Stock <strong>/</strong> Prod</th>
+                      <th colspan="3" scope="col">Factories</th>
+                      <th rowspan="2" scope="col">Scans</th>
+                      <th rowspan="2" scope="col">Intel</th>
+                      <th rowspan="2" scope="col"></th>
+                    </tr>
+                    <tr>
+                      <th class="sh" scope="col">L</th>
+                      <th class="sh" scope="col">M</th>
+                      <th class="sh" scope="col">H</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for(var i = 0; i < myClms.length; i++) { %>
+                      <% var lt = attack.landtick + myClms[i].wave; %>
+                      <% var trg = targets.find(t => t.id == myClms[i].planet_id); %>
+                      <tr>
+                        <td><%= trg.x %>:<%= trg.y %>:<%= trg.z %></td>
+                        <td><%= lt %> (<%= numeral(lt - tick.id).format("+0") %>)</td>
+                        <td class="<%= trg.race.toLowerCase() %>"><%= trg.race %></td>
+                        <td><%= trg.size %></td>
+                        <td class="no-wrap"><%= numeral(trg.value).format("0,0") %> <strong>/</strong> <%= numeral(trg.score).format("0,0") %></td>
+                        <td class="no-wrap">
+                          <% if(typeof(trg.scans) != "undefined" && typeof(trg.scans.d) != "undefined" && typeof(trg.scans.d.scan) != "undefined") { %>
+                            <span class="text-info"><%= trg.scans.d.scan.wave_amplifier %></span><strong> / </strong><span class="text-info"><%= trg.scans.d.scan.wave_distorter %></span><strong> / </strong><span class="text-info"><%= scantypes[trg.scans.d.scan.waves + 1].charAt(0) %></span>
+                          <% } %>
+                        </td>
+                        <td class="no-wrap">
+                          <% if(typeof(trg.scans) != "undefined" && typeof(trg.scans.p) != "undefined" && typeof(trg.scans.p.scan) != "undefined") { %>
+                            <%= numeral(trg.scans.p.scan.res_metal + trg.scans.p.scan.res_crystal + trg.scans.p.scan.res_eonium).format("0,0") %><strong> / </strong><%= numeral(trg.scans.p.scan.prod_res + trg.scans.p.scan.ships_sold_res).format("0,0") %>
+                          <% } %>
+                        </td>
+                        <td class="sd">
+                          <% if(typeof(trg.scans) != "undefined" && typeof(trg.scans.p) != "undefined" && typeof(trg.scans.p.scan) != "undefined") { %>
+                            <% if(trg.scans.p.scan.factory_usage_light.toLowerCase() == "high") { %>
+                              <i class="fas fa-thermometer-full text-danger" aria-hidden="true"></i>
+                            <% } else if(trg.scans.p.scan.factory_usage_light.toLowerCase() == "medium") { %>
+                              <i class="fas fa-thermometer-half text-warning" aria-hidden="true"></i>
+                            <% } else if(trg.scans.p.scan.factory_usage_light.toLowerCase() == "low") { %>
+                              <i class="fas fa-thermometer-empty text-success" aria-hidden="true"></i>
+                            <% } else { %>
+                              <i class="fas fa-times text-secondary" aria-hidden="true"></i>
+                            <% } %>
+                          <% } %>
+                        </td>
+                        <td class="sd">
+                          <% if(typeof(trg.scans) != "undefined" && typeof(trg.scans.p) != "undefined" && typeof(trg.scans.p.scan) != "undefined") { %>
+                            <% if(trg.scans.p.scan.factory_usage_medium.toLowerCase() == "high") { %>
+                              <i class="fas fa-thermometer-full text-danger" aria-hidden="true"></i>
+                            <% } else if(trg.scans.p.scan.factory_usage_medium.toLowerCase() == "medium") { %>
+                              <i class="fas fa-thermometer-half text-warning" aria-hidden="true"></i>
+                            <% } else if(trg.scans.p.scan.factory_usage_medium.toLowerCase() == "low") { %>
+                              <i class="fas fa-thermometer-empty text-success" aria-hidden="true"></i>
+                            <% } else { %>
+                              <i class="fas fa-times text-secondary" aria-hidden="true"></i>
+                            <% } %>
+                          <% } %>
+                        </td>
+                        <td class="sd">
+                          <% if(typeof(trg.scans) != "undefined" && typeof(trg.scans.p) != "undefined" && typeof(trg.scans.p.scan) != "undefined") { %>
+                            <% if(trg.scans.p.scan.factory_usage_heavy.toLowerCase() == "high") { %>
+                              <i class="fas fa-thermometer-full text-danger" aria-hidden="true"></i>
+                            <% } else if(trg.scans.p.scan.factory_usage_heavy.toLowerCase() == "medium") { %>
+                              <i class="fas fa-thermometer-half text-warning" aria-hidden="true"></i>
+                            <% } else if(trg.scans.p.scan.factory_usage_heavy.toLowerCase() == "low") { %>
+                              <i class="fas fa-thermometer-empty text-success" aria-hidden="true"></i>
+                            <% } else { %>
+                              <i class="fas fa-times text-secondary" aria-hidden="true"></i>
+                            <% } %>
+                          <% } %>
+                        </td>
+                        <td>
+                          <% if(typeof(trg.scans) != "undefined") { %>
+                          <div class="btn-group btn-group-sm position-static" role="group" aria-label="Scans">
+                            <% if(typeof(trg.scans.p) != "undefined" && trg.scans.p != null) { %>
+                              <a class="btn btn-scan <% if(trg.scans.p.tick > tick.id - expiries.P.bestbefore) { %>btn-success<% } else if(trg.scans.p.tick > tick.id - expiries.P.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.p.id %>" target="_blank">P</a>
+                            <% } %>
+                            <% if(typeof(trg.scans.d) != "undefined" && trg.scans.d != null) { %>
+                              <a class="btn btn-scan <% if(trg.scans.d.tick > tick.id - expiries.D.bestbefore) { %>btn-success<% } else if(trg.scans.d.tick > tick.id - expiries.D.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.d.id %>" target="_blank">D</a>
+                            <% } %>
+                            <% if(typeof(trg.scans.u) != "undefined" && trg.scans.u != null) { %>
+                              <a class="btn btn-scan <% if(trg.scans.u.tick > tick.id - expiries.U.bestbefore) { %>btn-success<% } else if(trg.scans.u.tick > tick.id - expiries.U.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.u.id %>" target="_blank">U</a>
+                            <% } %>
+                            <% if(typeof(trg.scans.n) != "undefined" && trg.scans.n != null) { %>
+                              <a class="btn btn-scan <% if(trg.scans.n.tick > tick.id - expiries.N.bestbefore) { %>btn-success<% } else if(trg.scans.n.tick > tick.id - expiries.N.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.n.id %>" target="_blank">N</a>
+                            <% } %>
+                            <% if(typeof(trg.scans.j) != "undefined" && trg.scans.j != null) { %>
+                              <a class="btn btn-scan <% if(trg.scans.j.tick > tick.id - expiries.J.bestbefore) { %>btn-success<% } else if(trg.scans.j.tick > tick.id - expiries.J.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.j.id %>" target="_blank">J</a>
+                            <% } %>
+                            <% if(typeof(trg.scans.a) != "undefined" && trg.scans.a != null) { %>
+                              <a class="btn btn-scan <% if(trg.scans.a.tick > tick.id - expiries.A.bestbefore) { %>btn-success<% } else if(trg.scans.a.tick > tick.id - expiries.A.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.a.id %>" target="_blank">A</a>
+                            <% } %>
+                            <%
+                            var query = "?def_coords_x_1="+trg.x + "&def_coords_y_1="+trg.y + "&def_coords_z_1="+trg.z + "&def_planet_value_1="+trg.value + "&def_planet_score_1="+trg.score + "&def_1_race="+races[trg.race.toLowerCase()]
+                            if(typeof(trg.scans.p) != "undefined" && trg.scans.p != null && typeof(trg.scans.p.scan) != "undefined" && trg.scans.p.scan != null) {
+                              query += "&def_metal_asteroids="+trg.scans.p.scan.roid_metal + "&def_crystal_asteroids="+trg.scans.p.scan.roid_crystal + "&def_eonium_asteroids="+trg.scans.p.scan.roid_eonium + "&def_metal_resources="+trg.scans.p.scan.res_metal + "&def_crystal_resources="+trg.scans.p.scan.res_crystal + "&def_eonium_resources="+trg.scans.p.scan.res_eonium;
+                            }
+                            if(typeof(trg.scans.d) != "undefined" && trg.scans.d != null && typeof(trg.scans.d.scan) != "undefined" && trg.scans.d.scan != null) {
+                              var total_cons = trg.scans.d.scan.light_factory + trg.scans.d.scan.medium_factory + trg.scans.d.scan.heavy_factory + trg.scans.d.scan.wave_amplifier + trg.scans.    d.scan.wave_distorter + trg.scans.d.scan.metal_refinery + trg.scans.d.scan.crystal_refinery + trg.scans.d.scan.eonium_refinery + trg.scans.d.scan.research_lab + trg.scans.d.scan.finance_centre + trg.scans.d    .scan.military_centre + trg.scans.d.scan.security_centre + trg.scans.d.scan.structure_defence;
+                              query += "&def_structures="+total_cons + "&def_structure_defence="+trg.scans.d.scan.structure_defence;
+                            }
+                            if(typeof(trg.scans.a) != "undefined" && trg.scans.a != null && typeof(trg.scans.a.scan) != "undefined" && trg.scans.a.scan != null) {
+                              for(var s = 0; s < trg.scans.a.scan.length; s++) {
+                                query += "&def_1_" + trg.scans.a.scan[s].ship_id + "=" + trg.scans.a.scan[s].amount;
+                              }
+                            }
+                            %>
+                            <div class="btn-group btn-group-sm position-static" role="group">
+                              <button class="btn btn-secondary dropdown-toggle" id="bcalc<%= trg.id %>" type="button" data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false">C</button>
+                              <div class="dropdown-menu" aria-labelledby="bcalc<%= trg.id %>">
+                                <a class="dropdown-item" href="<%= bcalcurl %><%= query %>" target="_blank">NONE</a>
+                                <% if(allships.length > 0) { %><a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allships %>" target="_blank">ALL</a><% } %>
+                                <% if(allfi.length > 0) { %><a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allfi %>" target="_blank">FI</a><% } %>
+                                <% if(allco.length > 0) { %><a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allco %>" target="_blank">CO</a><% } %>
+                                <% if(allfr.length > 0) { %><a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allfr %>" target="_blank">FR</a><% } %>
+                                <% if(allde.length > 0) { %><a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allde %>" target="_blank">DE</a><% } %>
+                                <% if(allcr.length > 0) { %><a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allcr %>" target="_blank">CR</a><% } %>
+                                <% if(allbs.length > 0) { %><a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allbs %>" target="_blank">BS</a><% } %>
+                              </div>
+                            </div>
+                          </div>
+                          <% } %>
+                        </td>
+                        <td class="no-wrap">Name <strong>/</strong> Alliance</td>
+                        <td>
+                          <form method="POST" action="/att/<%= attack.hash %>">
+                            <input type="hidden" name="target" value="<%= trg.id %>" />
+                            <button class="btn btn-sm btn-danger" type="submit" name="drop" value="<%= myClms[i].wave %>"><i class="fas fa-plane-slash" aria-hidden="true"></i></button>
+                          </form>
+                        </td>
+                      </tr>
+                    <% } %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          <% } %>
+          <div class="col-12">
+            <div class="content">
+              <% if(member.isADM || member.isHC || member.isBC) {%>
+              <div class="btn-box"><a class="btn btn-sm btn-warning" href="/att/edit/<%= attack.hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a></div>
+              <% } %>
+              <h2>Attack <%= attack.id %></h2>
+              <table class="table table-sm table-striped table-targets">
+                <thead>
+                  <tr>
+                    <th rowspan="2" scope="col">Coords</th>
+                    <th rowspan="2" scope="col">Race</th>
+                    <th rowspan="2" scope="col">Size</th>
+                    <th rowspan="2" scope="col">Value</th>
+                    <th rowspan="2" scope="col">Score</th>
+                    <th rowspan="2" scope="col">A <strong>/</strong> D <strong>/</strong> R</th>
+                    <th colspan="6" scope="col">Anti</th>
+                    <th rowspan="2" scope="col">Ships</th>
+                    <th rowspan="2" scope="col">Stock <strong>/</strong> Prod</th>
+                    <th colspan="3" scope="col">Factories</th>
+                    <th rowspan="2" scope="col">Scans</th>
+                    <% for(var w = 0; w < attack.waves; w++) { %>
+                      <th rowspan="2" scope="col">LT <%= attack.landtick + w %> (<%= numeral(attack.landtick + w - tick.id).format("+0") %>)</th>
+                    <% } %>
+                    <th rowspan="2" scope="col">Intel</th>
+                  </tr>
+                  <tr>
+                    <th class="sh" scope="col">FI</th>
+                    <th class="sh" scope="col">CO</th>
+                    <th class="sh" scope="col">FR</th>
+                    <th class="sh" scope="col">DE</th>
+                    <th class="sh" scope="col">CR</th>
+                    <th class="sh" scope="col">BS</th>
+                    <th class="sh" scope="col">L</th>
+                    <th class="sh" scope="col">M</th>
+                    <th class="sh" scope="col">H</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i= 0; i < targets.length; i++) { %>
+                  <tr>
+                    <td><%= targets[i].x %>:<%= targets[i].y %>:<%= targets[i].z %></td>
+                    <td class="<%= targets[i].race.toLowerCase() %>"><%= targets[i].race %></td>
+                    <td><%= targets[i].size %></td>
+                    <td><%= numeral(targets[i].value).format("0,0") %></td>
+                    <td><%= numeral(targets[i].score).format("0,0") %></td>
+                    <td class="no-wrap">
+                      <% if(typeof(targets[i].scans) != "undefined" && typeof(targets[i].scans.d) != "undefined"  && targets[i].scans.d != null && typeof(targets[i].scans.d.scan) != "undefined" && targets[i].scans.d.scan != null) { %>
+                        <span class="text-info"><%= targets[i].scans.d.scan.wave_amplifier %></span><strong> / </strong><span class="text-info"><%= targets[i].scans.d.scan.wave_distorter %></span><strong> / </strong><span class="text-info"><%= scantypes[targets[i].scans.d.scan.waves + 1].charAt(0) %></span>
+                      <% } %>
+                    </td>
+                    <td class="sd">
+                      <% if(typeof(targets[i].anti) != "undefined" && typeof(targets[i].anti.fi) != "undefined") { %>
+                        <% if(targets[i].anti.fi) { %>
+                          <i class="fas fa-check text-success" aria-hidden="true"></i>
+                        <% } else { %>
+                          <i class="fas fa-times text-danger" aria-hidden="true"></i>
+                        <% } %>
+                      <% } else { %>
+                        <i class="fas fa-question text-warning" aria-hidden="true"></i>
+                      <% } %>
+                    </td>
+                    <td class="sd">
+                      <% if(typeof(targets[i].anti) != "undefined" && typeof(targets[i].anti.co) != "undefined") { %>
+                        <% if(targets[i].anti.co) { %>
+                          <i class="fas fa-check text-success" aria-hidden="true"></i>
+                        <% } else { %>
+                          <i class="fas fa-times text-danger" aria-hidden="true"></i>
+                        <% } %>
+                      <% } else { %>
+                        <i class="fas fa-question text-warning" aria-hidden="true"></i>
+                      <% } %>
+                    </td>
+                    <td class="sd">
+                      <% if(typeof(targets[i].anti) != "undefined" && typeof(targets[i].anti.fr) != "undefined") { %>
+                        <% if(targets[i].anti.fr) { %>
+                          <i class="fas fa-check text-success" aria-hidden="true"></i>
+                        <% } else { %>
+                          <i class="fas fa-times text-danger" aria-hidden="true"></i>
+                        <% } %>
+                      <% } else { %>
+                        <i class="fas fa-question text-warning" aria-hidden="true"></i>
+                      <% } %>
+                    </td>
+                    <td class="sd">
+                      <% if(typeof(targets[i].anti) != "undefined" && typeof(targets[i].anti.de) != "undefined") { %>
+                        <% if(targets[i].anti.de) { %>
+                          <i class="fas fa-check text-success" aria-hidden="true"></i>
+                        <% } else { %>
+                          <i class="fas fa-times text-danger" aria-hidden="true"></i>
+                        <% } %>
+                      <% } else { %>
+                        <i class="fas fa-question text-warning" aria-hidden="true"></i>
+                      <% } %>
+                    </td>
+                    <td class="sd">
+                      <% if(typeof(targets[i].anti) != "undefined" && typeof(targets[i].anti.cr) != "undefined") { %>
+                        <% if(targets[i].anti.cr) { %>
+                          <i class="fas fa-check text-success" aria-hidden="true"></i>
+                        <% } else { %>
+                          <i class="fas fa-times text-danger" aria-hidden="true"></i>
+                        <% } %>
+                      <% } else { %>
+                        <i class="fas fa-question text-warning" aria-hidden="true"></i>
+                      <% } %>
+                    </td>
+                    <td class="sd">
+                      <% if(typeof(targets[i].anti) != "undefined" && typeof(targets[i].anti.bs) != "undefined") { %>
+                        <% if(targets[i].anti.bs) { %>
+                          <i class="fas fa-check text-success" aria-hidden="true"></i>
+                        <% } else { %>
+                          <i class="fas fa-times text-danger" aria-hidden="true"></i>
+                        <% } %>
+                      <% } else { %>
+                        <i class="fas fa-question text-warning" aria-hidden="true"></i>
+                      <% } %>
+                    </td>
+                    <td>
+                      <div class="btn-group btn-group-sm position-static" role="group" aria-label="Ships">
+                        <button class="btn btn-info dropdown-toggle" id="ships<%= targets[i].id %>" type="button" data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><i class="fas fa-rocket" aria-hidden="true"></i></button>
+                        <% if(typeof(targets[i].scans) != "undefined" && typeof(targets[i].scans.a) != "undefined" && targets[i].scans.a != null && typeof(targets[i].scans.a.scan) != "undefined" && targets[i].scans.a.scan != null) { %>
+                        <div class="dropdown-menu" aria-labelledby="bcalc<%= targets[i].id %>">
+                          <% for(var j = 0; j < targets[i].scans.a.scan.length; j++) { %>
+                            <% if(typeof(targets[i].scans.a.scan[j].ship) != "undefined" && targets[i].scans.a.scan[j].ship != null) { %>
+                              <div class="dropdown-item"><%= targets[i].scans.a.scan[j].amount %> <%= targets[i].scans.a.scan[j].ship.name %></div>
+                            <% } %>
+                          <% } %>
+                        </div>
+                        <% } %>
+                      </div>
+                    </td>
+                    <td class="no-wrap">
+                      <% if(typeof(targets[i].scans) != "undefined" && typeof(targets[i].scans.p) != "undefined" && targets[i].scans.p != null && typeof(targets[i].scans.p.scan) != "undefined" && targets[i].scans.p.scan != null) { %>
+                        <%= numeral(targets[i].scans.p.scan.res_metal + targets[i].scans.p.scan.res_crystal + targets[i].scans.p.scan.res_eonium).format("0,0") %><strong> / </strong><%= numeral(targets[i].scans.p.scan.prod_res + targets[i].scans.p.scan.ships_sold_res).format("0,0") %>
+                      <% } %>
+                    </td>
+                    <td class="sd">
+                      <% if(typeof(targets[i].scans) != "undefined" && typeof(targets[i].scans.p) != "undefined" && targets[i].scans.p != null && typeof(targets[i].scans.p.scan) != "undefined" && targets[i].scans.p.scan != null) { %>
+                        <% if(targets[i].scans.p.scan.factory_usage_light.toLowerCase() == "high") { %>
+                          <i class="fas fa-thermometer-full text-danger" aria-hidden="true"></i>
+                        <% } else if(targets[i].scans.p.scan.factory_usage_light.toLowerCase() == "medium") { %>
+                          <i class="fas fa-thermometer-half text-warning" aria-hidden="true"></i>
+                        <% } else if(targets[i].scans.p.scan.factory_usage_light.toLowerCase() == "low") { %>
+                          <i class="fas fa-thermometer-empty text-success" aria-hidden="true"></i>
+                        <% } else { %>
+                          <i class="fas fa-times text-secondary" aria-hidden="true"></i>
+                        <% } %>
+                      <% } %>
+                    </td>
+                    <td class="sd">
+                      <% if(typeof(targets[i].scans) != "undefined" && typeof(targets[i].scans.p) != "undefined" && targets[i].scans.p != null && typeof(targets[i].scans.p.scan) != "undefined" && targets[i].scans.p.scan != null) { %>
+                        <% if(targets[i].scans.p.scan.factory_usage_medium.toLowerCase() == "high") { %>
+                          <i class="fas fa-thermometer-full text-danger" aria-hidden="true"></i>
+                        <% } else if(targets[i].scans.p.scan.factory_usage_medium.toLowerCase() == "medium") { %>
+                          <i class="fas fa-thermometer-half text-warning" aria-hidden="true"></i>
+                        <% } else if(targets[i].scans.p.scan.factory_usage_medium.toLowerCase() == "low") { %>
+                          <i class="fas fa-thermometer-empty text-success" aria-hidden="true"></i>
+                        <% } else { %>
+                          <i class="fas fa-times text-secondary" aria-hidden="true"></i>
+                        <% } %>
+                      <% } %>
+                    </td>
+                    <td class="sd">
+                      <% if(typeof(targets[i].scans) != "undefined" && typeof(targets[i].scans.p) != "undefined" && targets[i].scans.p != null && typeof(targets[i].scans.p.scan) != "undefined" && targets[i].scans.p.scan != null) { %>
+                        <% if(targets[i].scans.p.scan.factory_usage_heavy.toLowerCase() == "high") { %>
+                          <i class="fas fa-thermometer-full text-danger" aria-hidden="true"></i>
+                        <% } else if(targets[i].scans.p.scan.factory_usage_heavy.toLowerCase() == "medium") { %>
+                          <i class="fas fa-thermometer-half text-warning" aria-hidden="true"></i>
+                        <% } else if(targets[i].scans.p.scan.factory_usage_heavy.toLowerCase() == "low") { %>
+                          <i class="fas fa-thermometer-empty text-success" aria-hidden="true"></i>
+                        <% } else { %>
+                          <i class="fas fa-times text-secondary" aria-hidden="true"></i>
+                        <% } %>
+                      <% } %>
+                    </td>
+                    <td>
+                      <% if(typeof(targets[i].scans) != "undefined") { %>
+                      <div class="btn-group btn-group-sm position-static" role="group" aria-label="Scans">
+                        <% if(typeof(targets[i].scans.p) != "undefined" && targets[i].scans.p != null) { %>
+                          <a class="btn btn-scan <% if(targets[i].scans.p.tick > tick.id - expiries.P.bestbefore) { %>btn-success<% } else if(targets[i].scans.p.tick > tick.id - expiries.P.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.p.id %>" target="_blank">P</a>
+                        <% } %>
+                        <% if(typeof(targets[i].scans.d) != "undefined" && targets[i].scans.d != null) { %>
+                          <a class="btn btn-scan <% if(targets[i].scans.d.tick > tick.id - expiries.D.bestbefore) { %>btn-success<% } else if(targets[i].scans.d.tick > tick.id - expiries.D.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.d.id %>" target="_blank">D</a>
+                        <% } %>
+                        <% if(typeof(targets[i].scans.u) != "undefined" && targets[i].scans.u != null) { %>
+                          <a class="btn btn-scan <% if(targets[i].scans.u.tick > tick.id - expiries.U.bestbefore) { %>btn-success<% } else if(targets[i].scans.u.tick > tick.id - expiries.U.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.u.id %>" target="_blank">U</a>
+                        <% } %>
+                        <% if(typeof(targets[i].scans.n) != "undefined" && targets[i].scans.n != null) { %>
+                          <a class="btn btn-scan <% if(targets[i].scans.n.tick > tick.id - expiries.N.bestbefore) { %>btn-success<% } else if(targets[i].scans.n.tick > tick.id - expiries.N.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.n.id %>" target="_blank">N</a>
+                        <% } %>
+                        <% if(typeof(targets[i].scans.j) != "undefined" && targets[i].scans.j != null) { %>
+                          <a class="btn btn-scan <% if(targets[i].scans.j.tick > tick.id - expiries.J.bestbefore) { %>btn-success<% } else if(targets[i].scans.j.tick > tick.id - expiries.J.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.j.id %>" target="_blank">J</a>
+                        <% } %>
+                        <% if(typeof(targets[i].scans.a) != "undefined" && targets[i].scans.a != null) { %>
+                          <a class="btn btn-scan <% if(targets[i].scans.a.tick > tick.id - expiries.A.bestbefore) { %>btn-success<% } else if(targets[i].scans.a.tick > tick.id - expiries.A.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.a.id %>" target="_blank">A</a>
+                        <% } %>
+                        <%
+                        var query = "?def_coords_x_1="+targets[i].x + "&def_coords_y_1="+targets[i].y + "&def_coords_z_1="+targets[i].z + "&def_planet_value_1="+targets[i].value + "&def_planet_score_1="+targets[i].score + "&def_1_race="+races[targets[i].race.toLowerCase()]
+                        if(typeof(targets[i].scans.p) != "undefined" && targets[i].scans.p != null && typeof(targets[i].scans.p.scan) != "undefined" && targets[i].scans.p.scan != null) {
+                          query += "&def_metal_asteroids="+targets[i].scans.p.scan.roid_metal + "&def_crystal_asteroids="+targets[i].scans.p.scan.roid_crystal + "&def_eonium_asteroids="+targets[i].scans.p.scan.roid_eonium + "&def_metal_resources="+targets[i].scans.p.scan.res_metal + "&def_crystal_resources="+targets[i].scans.p.scan.res_crystal + "&def_eonium_resources="+targets[i].scans.p.scan.res_eonium;
+                        }
+                        if(typeof(targets[i].scans.d) != "undefined" && targets[i].scans.d != null && typeof(targets[i].scans.d.scan) != "undefined" && targets[i].scans.d.scan != null) {
+                          var total_cons = targets[i].scans.d.scan.light_factory + targets[i].scans.d.scan.medium_factory + targets[i].scans.d.scan.heavy_factory + targets[i].scans.d.scan.wave_amplifier + targets[i].scans.d.scan.wave_distorter + targets[i].scans.d.scan.metal_refinery + targets[i].scans.d.scan.crystal_refinery + targets[i].scans.d.scan.eonium_refinery + targets[i].scans.d.scan.research_lab + targets[i].scans.d.scan.finance_centre + targets[i].scans.d    .scan.military_centre + targets[i].scans.d.scan.security_centre + targets[i].scans.d.scan.structure_defence;
+                          query += "&def_structures="+total_cons + "&def_structure_defence="+targets[i].scans.d.scan.structure_defence;
+                        }
+                        if(typeof(targets[i].scans.a) != "undefined" && targets[i].scans.a != null && typeof(targets[i].scans.a.scan) != "undefined" && targets[i].scans.a.scan != null) {
+                          for(var s = 0; s < targets[i].scans.a.scan.length; s++) {
+                            query += "&def_1_" + targets[i].scans.a.scan[s].ship_id + "=" + targets[i].scans.a.scan[s].amount;
+                          }
+                        }
+                        %>
+                        <div class="btn-group btn-group-sm position-static" role="group">
+                          <button class="btn btn-secondary dropdown-toggle" id="bcalc<%= targets[i].id %>" type="button" data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false">C</button>
+                          <div class="dropdown-menu" aria-labelledby="bcalc<%= targets[i].id %>">
+                            <a class="dropdown-item" href="<%= bcalcurl %><%= query %>" target="_blank">NONE</a>
+                            <% if(allships.length > 0) { %><a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allships %>" target="_blank">ALL</a><% } %>
+                            <% if(allfi.length > 0) { %><a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allfi %>" target="_blank">FI</a><% } %>
+                            <% if(allco.length > 0) { %><a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allco %>" target="_blank">CO</a><% } %>
+                            <% if(allfr.length > 0) { %><a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allfr %>" target="_blank">FR</a><% } %>
+                            <% if(allde.length > 0) { %><a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allde %>" target="_blank">DE</a><% } %>
+                            <% if(allcr.length > 0) { %><a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allcr %>" target="_blank">CR</a><% } %>
+                            <% if(allbs.length > 0) { %><a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allbs %>" target="_blank">BS</a><% } %>
+                          </div>
+                        </div>
+                      </div>
+                      <% } %>
+                    </td>
+                    <% for(var w = 0; w < attack.waves; w++) { %>
+                      <% var clm = claims.filter(c => c.wave == w && c.planet_id == targets[i].id); %>
+                      <% if(clm.length > 0) { %>
+                        <% if(clm[0].member_id == member.id) { %>
+                          <td>
+                            <form method="POST" action="/att/<%= attack.hash %>">
+                              <input type="hidden" name="target" value="<%= targets[i].id %>" />
+                              <button class="btn btn-sm btn-danger" type="submit" name="drop" value="<%= w %>"><i class="fas fa-plane-slash" aria-hidden="true"></i></button>
+                            </form>
+                          </td>
+                        <% } else if(member.isMEM) { %>
+                            <td>
+                              <% 
+                              var memname = clm[0].member_id;
+                              for(var m = 0; m < members.length; m++) {
+                                if(members[m].id == clm[0].member_id) {
+                                  if(typeof(members[m].panick) != "undefined" && members[m].panick.length > 0) {
+                                    memname = members[m].panick;
+                                  }
+                                  break;
+                                }
+                              }
+                              %>
+                              <%= memname %>
+                            </td>
+                        <% } else { %>
+                          <td class="claimed"><i class="fas fa-times-circle text-danger" aria-hidden="true"></i></td>
+                        <% } %>
+                      <% } else { %>
+                        <td>
+                          <form method="POST" action="/att/<%= attack.hash %>">
+                            <input type="hidden" name="target" value="<%= targets[i].id %>" />
+                            <button class="btn btn-sm btn-primary" type="submit" name="claim" value="<%= w %>"><i class="fas fa-plane-departure" aria-hidden="true"></i></button>
+                          </form>
+                        </td>
+                      <% } %>
+                    <% } %>
+                    <td class="no-wrap">Name <strong>/</strong> Alliance</td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <% if(member.isCMDR || member.isSCNR) { %>
+            <div class="col-12">
+              <div class="content">
+                <table class="table table-sm table-striped table-members">
+                  <tbody>
+                    <tr>
+                    <% targets.forEach(function(trg) { %><%= trg.x %>:<%= trg.y %>:<%= trg.z %> <% }); %>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          <% } %>
+        <% } else if(page == "new" || page == "edit") { %>
+          <div class="col-12">
+            <div class="content">
+              <form method="POST" action="<% if(page == "new") { %>/att/new<% } else if(page == "edit") { %>/att/edit/<%= attack.hash %><% } %>">
+                <div class="btn-box"><button class="btn btn-sm btn-success" type="submit" name="save" value="save"><i class="fas <% if(page == "new") { %>fa-plus<% } else if(page == "edit") { %>fa-save<% } %>" aria-hidden="true"></i></button></div>
+                <h2><% if(page == "new") { %>Add Attack<% } else if(page == "edit") { %>Edit Attack <%= attack.id %><% } %></h2>
+                <table class="table table-sm table-striped">
+                  <tbody>
+                    <tr>
+                      <td class="center-form"></td>
+                      <td>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend">
+                            <span id="label-title" class="input-group-text">Title</span>
+                          </div>
+                          <input type="text" name="title" id="title" class="form-control" aria-describedby="label-title" value="<% if(page == "edit") { %><%= attack.title %><% } %>" />
+                        </div>
+                      </td>
+                      <td class="center-form"></td>
+                    </tr>
+                    <tr>
+                      <td class="center-form"></td>
+                      <td>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend">
+                            <span id="label-comment" class="input-group-comment">Comment</span>
+                          </div>
+                          <input type="text" name="comment" id="comment" class="form-control" aria-describedby="label-comment" value="<% if(page == "edit") { %><%= attack.comment %><% } %>" />
+                        </div>
+                      </td>
+                      <td class="center-form"></td>
+                    </tr>
+                    <tr>
+                      <td class="center-form"></td>
+                      <td>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend">
+                            <span id="label-landtick" class="input-group-landtick">Land Tick</span>
+                          </div>
+                          <select id="landtick" class="custom-select" name="landtick" aria-describedby="label-landtick">
+                            <% for(var i = 0; i < ticks.length; i++) { %>
+                              <% if(ticks[i] >= ticks[0] + min_uni_eta) { %>
+                              <option value="<%= ticks[i] %>" <% if(page == "edit" && ticks[i] == attack.landtick) { %> selected="selected"<% } %>><%= ticks[i] %></option>
+                              <% } %>
+                            <% } %>
+                          </select>
+                        </div>
+                      </td>
+                      <td class="center-form"></td>
+                    </tr>
+                    <tr>
+                      <td class="center-form"></td>
+                      <td>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend">
+                            <span id="label-waves" class="input-group-waves">Waves</span>
+                          </div>
+                          <input type="text" name="waves" id="waves" class="form-control" aria-describedby="label-waves" value="<% if(page == "edit") { %><%= attack.waves %><% } %>" />
+                        </div>
+                      </td>
+                      <td class="center-form"></td>
+                    </tr>
+                    <tr>
+                      <td class="center-form"></td>
+                      <td>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend">
+                            <span id="label-releasetick" class="input-group-releasetick">Release Tick</span>
+                          </div>
+                          <select id="releasetick" class="custom-select" name="releasetick" aria-describedby="label-releasetick">
+                            <% for(var i = 0; i < ticks.length; i++) { %>
+                            <option value="<%= ticks[i] %>" <% if(page == "edit" && ticks[i] == attack.releasetick) { %> selected="selected"<% } %>><%= ticks[i] %></option>
+                            <% } %>
+                          </select>
+                        </div>
+                      </td>
+                      <td class="center-form"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+            </div>
+          </div>
+          <% if(page == "edit") { %>
+            <div class="col-12">
+              <div class="content">
+                <h2><% if(page == "new") { %>Add Attack<% } else if(page == "edit") { %>Edit Attack <%= attack.id %><% } %></h2>
+                <form method="POST" action="/att/edit/targ/<%= attack.hash %>">
+                  <table class="table table-sm table-striped">
+                    <tbody>
+                      <tr>
+                        <td class="center-form"></td>
+                        <td>
+                          <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                              <span id="label-coords" class="input-group-coords">Coords</span>
+                            </div>
+                            <input type="text" name="coords" id="coords" class="form-control" aria-describedby="label-coords" />
+                            <div class="input-group-prepend">
+                              <button id="add" class="btn btn-success" type="submit" name="add"><i class="fas fa-plus" aria-hidden="true"></i></button>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="center-form"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="table table-sm table-striped table-targets">
+                    <thead>
+                      <tr>
+                        <th scope="col">Coords</th>
+                        <th scope="col">Ruler</th>
+                        <th scope="col">Planet</th>
+                        <th scope="col">Race</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Value</th>
+                        <th scope="col">Score</th>
+                        <th scope="col">Stock/Prod</th>
+                        <th scope="col">Intel</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% for(var i = 0; i < targets.length; i++) { %>
+                      <tr>
+                        <td><%= targets[i].x %>:<%= targets[i].y %>:<%= targets[i].z %></td>
+                        <td><%= targets[i].rulername %></td>
+                        <td><%= targets[i].planetname %></td>
+                        <td class="<%= targets[i].race.toLowerCase() %>"><%= targets[i].race %></td>
+                        <td><%= targets[i].size %></td>
+                        <td><%= numeral(targets[i].value).format("0,0") %></td>
+                        <td><%= numeral(targets[i].score).format("0,0") %></td>
+                        <td></td> <!-- stock/prod -->
+                        <td></td> <!-- intel -->
+                        <td>
+                          <button type="submit" name="delete" id="delete" class="btn btn-sm btn-danger" value="<%= targets[i].id %>"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
+                        </td>
+                      </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                </form>
+              </div>
+            </div>
+          <% } %>
+        <% } else { %>
+          <div class="col-12">
+            <div class="content">
+              <% if(member.isADM || member.isHC || member.isBC) { %>
+              <div class="btn-box"><a class="btn btn-sm btn-success" href="/att/new"><i class="fas fa-plus" aria-hidden="true"></i></a></div>
+              <% } %>
+              <h2>Attacks</h2>
+              <table class="table table-sm table-striped">
+                <thead>
+                  <tr>
+                    <th class="fit-content" scope="col">Number</th>
+                    <th class="fit-content" scope="col">Land Tick</th>
+                    <th scope="col">Title</th>
+                    <th class="fit-content" scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i = 0; i < attacks.length; i++) { %>
+                    <% if(attacks[i].landtick >= tick.id - after_land_ticks) { %>
+                      <% if(attacks[i].releasetick > tick.id && member.isCMDR) { %>
+                      <tr>
+                        <td class="fit-content"><a class="btn btn-sm btn-secondary" href="/att/<%= attacks[i].hash %>"><%= attacks[i].id %></a></td>
+                        <td class="fit-content"><%= attacks[i].landtick %></td>
+                        <td><%= attacks[i].title %></td>
+                        <td class="fit-content no-wrap">Released: pt<%= attacks[i].releasetick %></td>
+                      </tr>
+                      <% } else if(attacks[i].releasetick <= tick.id) { %>
+                      <tr>
+                        <td class="fit-content"><a class="btn btn-sm btn-secondary" href="/att/<%= attacks[i].hash %>"><%= attacks[i].id %></a></td>
+                        <td class="fit-content"><%= attacks[i].landtick %></td>
+                        <td><%= attacks[i].title %></td>
+                        <td class="fit-content"></td>
+                      </tr>
+                      <% } %>
+                    <% } %>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="content">
+              <h2>History</h2>
+              <table class="table table-sm table-striped">
+                <thead>
+                  <tr>
+                    <th class="fit-content" scope="col">Number</th>
+                    <th class="fit-content" scope="col">Land Tick</th>
+                    <th scope="col">Title</th>
+                    <th class="fit-content" scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i = 0; i < attacks.length; i++) { %>
+                    <% if(attacks[i].landtick < tick.id - after_land_ticks) { %>
+                    <tr>
+                      <td class="fit-content"><a class="btn btn-sm btn-secondary" href="/att/<%= attacks[i].hash %>"><%= attacks[i].id %></a></td>
+                      <td class="fit-content"><%= attacks[i].landtick %></td>
+                      <td><%= attacks[i].title %></td>
+                      <td class="fit-content"></td>
+                    </tr>
+                    <% } %>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <% } %>
+        </div>
+      </div>
+    </main>
+    <footer>
+<%- include("templates/footer"); %>
+    </footer>
+    <script>
+      $(function() {
+        $('.table').DataTable({"paging":false,"info":false});
+      });
+    </script>
+  </body>
+</html>
