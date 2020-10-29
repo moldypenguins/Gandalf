@@ -1,6 +1,8 @@
-# Gandalf ![GitHub License](https://img.shields.io/github/license/risolv/AutotaskNET.svg?logo=GNU&logoColor=FFFFFF&style=flat)
+# Gandalf ![GitHub License](https://img.shields.io/github/license/moldypenguins/Gandalf.svg?logo=GNU&logoColor=FFFFFF&style=flat)
+![GitHub Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf.svg?logo=GitHub&logoColor=FFFFFF&style=flat)
+![GitHub Issues](https://img.shields.io/github/issues-raw/moldypenguins/Gandalf.svg?logo=GitHub&logoColor=FFFFFF&style=flat)
+![GitHub Pull Requests](https://img.shields.io/github/issues-pr-raw/moldypenguins/Gandalf.svg?logo=GitHub&logoColor=FFFFFF&style=flat)
 Planetarion Digital Assistant
-
 
 ## Table of Contents
 * [Requirements](#requirements)
