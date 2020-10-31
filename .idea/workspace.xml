@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd522cec-c40e-4ee1-b570-ac60be7a2834" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/light.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/styles/light.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/battlegroups.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/battlegroups.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/covops.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/covops.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/dashboard.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/error.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/error.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/register.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/register.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/scans.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/scans.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/strategy.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/strategy.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/tickplan.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/tickplan.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/unauthorized.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/unauthorized.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/universe.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/universe.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +61,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1604167187014</updated>
-      <workItem from="1604167188048" duration="7756000" />
+      <workItem from="1604167188048" duration="7868000" />
     </task>
     <servers />
   </component>
