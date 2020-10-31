@@ -63,51 +63,107 @@
                                                 <div class="input-group-prepend dropdown">
                                                     <button class="btn btn-secondary dropdown-toggle" type="button"
                                                             data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false"><%= members[i].accessRoles %></button>
+                                                            aria-expanded="false">
+                                                        <%= members[i].accessRoles %>
+                                                    </button>
                                                     <div class="dropdown-menu">
-                                                        <div><label><input name="access" type="radio" value="0"
-                                                                           <% if(members[i].access == 0) { %>checked="checked"
+                                                        <div>
+                                                            <label>
+                                                                <input name="access" type="radio" value="0"
+                                                                <% if(members[i].access == 0) { %>
+                                                                       checked="checked"
                                                                         <% } %>
-                                                                /> Recruit</label></div>
-                                                        <div><label><input name="access" type="radio" value="1"
-                                                                           <% if(members[i].access == 1) { %>checked="checked"
+                                                                />
+                                                                Recruit
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <label>
+                                                                <input name="access" type="radio" value="1"
+                                                                <% if(members[i].access == 1) { %>
+                                                                       checked="checked"
                                                                         <% } %>
-                                                                /> Member</label></div>
-                                                        <div><label><input name="access" type="radio" value="3"
-                                                                           <% if(members[i].access == 3) { %>checked="checked"
+                                                                />
+                                                                Member
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <label>
+                                                                <input name="access" type="radio" value="3"
+                                                                <% if(members[i].access == 3) { %>
+                                                                       checked="checked"
                                                                         <% } %>
-                                                                /> Commander</label></div>
-                                                        <div><label><input name="access" type="radio" value="5"
-                                                                           <% if(members[i].access == 5) { %>checked="checked"
+                                                                />
+                                                                Commander
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <label>
+                                                                <input name="access" type="radio" value="5"
+                                                                <% if(members[i].access == 5) { %>
+                                                                       checked="checked"
                                                                         <% } %>
-                                                                /> Admin</label></div>
+                                                                />
+                                                                Admin
+                                                            </label>
+                                                        </div>
                                                         <div role="separator" class="dropdown-divider"></div>
-                                                        <div><label><input name="role1" type="checkbox" value="1"
-                                                                           <% if((members[i].roles & 1) != 0) { %>checked="checked"
+                                                        <div>
+                                                            <label>
+                                                                <input name="role1" type="checkbox" value="1"
+                                                                <% if((members[i].roles & 1) != 0) { %>
+                                                                       checked="checked"
                                                                         <% } %>
-                                                                /> OOT</label></div>
-                                                        <div><label><input name="role2" type="checkbox" value="2"
-                                                                           <% if((members[i].roles & 2) != 0) { %>checked="checked"
+                                                                />
+                                                                OOT
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <label>
+                                                                <input name="role2" type="checkbox" value="2"
+                                                                <% if((members[i].roles & 2) != 0) { %>
+                                                                       checked="checked"
                                                                         <% } %>
-                                                                /> Scanner</label></div>
-                                                        <div><label><input name="role4" type="checkbox" value="4"
-                                                                           <% if((members[i].roles & 4) != 0) { %>checked="checked"
+                                                                />
+                                                                Scanner
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <label>
+                                                                <input name="role4" type="checkbox" value="4"
+                                                                <% if((members[i].roles & 4) != 0) { %>
+                                                                       checked="checked"
                                                                         <% } %>
-                                                                /> Battle Commander</label></div>
-                                                        <div><label><input name="role8" type="checkbox" value="8"
-                                                                           <% if((members[i].roles & 8) != 0) { %>checked="checked"
+                                                                />
+                                                                Battle Commander
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <label>
+                                                                <input name="role8" type="checkbox" value="8"
+                                                                <% if((members[i].roles & 8) != 0) { %>
+                                                                       checked="checked"
                                                                         <% } %>
-                                                                /> Defence Commander</label></div>
-                                                        <div><label><input name="role16" type="checkbox" value="16"
-                                                                           <% if((members[i].roles & 16) != 0) { %>checked="checked"
+                                                                />
+                                                                Defence Commander
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <label>
+                                                                <input name="role16" type="checkbox" value="16"
+                                                                <% if((members[i].roles & 16) != 0) { %>
+                                                                       checked="checked"
                                                                         <% } %>
-                                                                /> High Commander</label></div>
+                                                                />
+                                                                High Commander
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="input-group-append">
                                                     <button type="submit" id="submitaccess" name="submitaccess"
-                                                            class="btn btn-sm btn-primary" )><i class="fas fa-save"
-                                                                                                aria-hidden="true"></i>
+                                                            class="btn btn-sm btn-primary" )>
+                                                        <i class="fas fa-save" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
                                             </div>
@@ -117,13 +173,15 @@
                                     <% } %>
                                 </td>
                                 <td>
-                                    <% if(members[i].planet) { %><%= members[i].planet.x %>:<%= members[i].planet.y %>
-                                    :<%= members[i].planet.z %>
+                                    <% if(members[i].planet) { %>
+                                        <%= members[i].planet.x %>:<%= members[i].planet.y %>:<%= members[i].planet.z %>
                                     <% } %>
                                 </td>
                                 <td>
-                                    <% if(members[i].phone) { %><a
-                                            href="tel:<%= members[i].phone %>"><%= members[i].phone %></a>
+                                    <% if(members[i].phone) { %>
+                                        <a href="tel:<%= members[i].phone %>">
+                                            +<%= members[i].phone %>
+                                        </a>
                                     <% } %>
                                 </td>
                                 <td class="btn-col">
@@ -131,14 +189,17 @@
                                         <form name="callMember" method='POST'
                                               action="/members/call/<%= members[i].id %>">
                                             <button type="submit" name="submitcall" value="<%= members[i].phone %>"
-                                                    class="btn btn-info btn-sm mx-2"><i class="fas fa-phone"
-                                                                                        aria-hidden="true"></i></button>
+                                                    class="btn btn-info btn-sm mx-2">
+                                                <i class="fas fa-phone" aria-hidden="true"></i>
+                                            </button>
                                         </form>
                                     <% } %>
                                 </td>
                                 <td>
-                                    <% if(members[i].email) { %><a
-                                            href="mailto:<%= members[i].email %>"><%= members[i].email %></a>
+                                    <% if(members[i].email) { %>
+                                        <a href="mailto:<%= members[i].email %>">
+                                            <%= members[i].email %>
+                                        </a>
                                     <% } %>
                                 </td>
                                 <% if(member.isADM || member.isHC) { %>
@@ -179,11 +240,13 @@
                                 <td class="btn-col">
                                     <form method="POST" action="/members/inactives">
                                         <button type="submit" name="activate" value="<%= inactives[i].id %>"
-                                                class="btn btn-sm btn-success"><i class="fas fa-plus"
-                                                                                  aria-hidden="true"></i></button>
+                                                class="btn btn-sm btn-success">
+                                            <i class="fas fa-plus" aria-hidden="true"></i>
+                                        </button>
                                         <button type="submit" name="remove" value="<%= inactives[i].id %>"
-                                                class="btn btn-sm btn-danger"><i class="fas fa-times"
-                                                                                 aria-hidden="true"></i></button>
+                                                class="btn btn-sm btn-danger">
+                                            <i class="fas fa-times" aria-hidden="true"></i>
+                                        </button>
                                     </form>
                                 </td>
                                 <th scope="row">
@@ -225,18 +288,22 @@
                                     <td class="btn-col">
                                         <form method="POST" action="/members/applicants">
                                             <button type="submit" name="accept" value="<%= applicants[i].id %>"
-                                                    class="btn btn-sm btn-success"><i class="fas fa-plus"
-                                                                                      aria-hidden="true"></i></button>
+                                                    class="btn btn-sm btn-success">
+                                                <i class="fas fa-plus" aria-hidden="true"></i>
+                                            </button>
                                             <button type="submit" name="reject" value="<%= applicants[i].id %>"
-                                                    class="btn btn-sm btn-danger"><i class="fas fa-times"
-                                                                                     aria-hidden="true"></i></button>
+                                                    class="btn btn-sm btn-danger">
+                                                <i class="fas fa-times" aria-hidden="true"></i>
+                                            </button>
                                         </form>
                                     </td>
                                     <th scope="row">
                                         <img src="<%= applicants[i].photo_url %>" width="30" height="30"
                                              class="tg-pic"/>
                                         <% if(applicants[i].username) { %>
-                                            <a href="https://t.me/<%= applicants[i].username %>"><%= applicants[i].username %></a>
+                                            <a href="https://t.me/<%= applicants[i].username %>">
+                                                <%= applicants[i].username %>
+                                            </a>
                                         <% } else if(applicants[i].last_name) { %>
                                             <%= applicants[i].first_name %> <%= applicants[i].last_name %>
                                         <% } else { %>

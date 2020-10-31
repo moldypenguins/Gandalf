@@ -6,12 +6,27 @@ body, p, td, th, input {
   line-height: 1.4;
 }
 
- body, p, input {
-   color: #ccc;
- }
+body, p, input {
+  color: #ccc;
+}
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-default;
+}
+
+h2 {
+  margin: 1rem 0;
+  font-size: 1rem;
+  padding: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: black;
+  background: #fff;
+  background: linear-gradient(to right, transparent 0%, #ffffff 50%, transparent 100%);
+  border: 1px solid transparent;
+  border-image: linear-gradient(to right, transparent 0%, #ccc 50%, transparent 100%);
+  border-image-slice: 1;
+  line-height: 100%;
 }
 
 a {

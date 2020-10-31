@@ -51,29 +51,45 @@
 .input-group {
   flex-wrap: nowrap;
 
-  > .input-group-append {
-	&:last-child {
-	  .input-group-text {
-		&:not(:last-child) {
-		  border-color: #454d55;
-		  background-color: #343a40;
-		  color: #fff;
-		}
-	  }
-	}
-
-	&:not(:last-child) > .input-group-text {
-	  border-color: #454d55;
-	  background-color: #343a40;
-	  color: #fff;
-	}
-  }
+  //> .input-group-append {
+  //&:last-child {
+  //  .input-group-text {
+  //	&:not(:last-child) {
+  //	  border-color: #454d55;
+  //	  background-color: #343a40;
+  //	  color: #fff;
+  //	}
+  //  }
+  //}
+  //
+  //&:not(:last-child) > [class^="input-group-"] {
+  //  border-color: #454d55;
+  //  background-color: #343a40;
+  //  color: #fff;
+  //}
+  //}
 
   > .input-group-prepend {
-	> .input-group-text {
-	  border-color: #454d55;
+	> [class^="input-group-"] {
+	  border: 1px solid #454d55;
 	  background-color: #343a40;
 	  color: #fff;
+	  font-weight: bold;
+	  width: 100%;
+	  padding: .25rem .5rem;
+	  border-radius: .2rem 0 0 .2rem;
+	  display: flex;
+	  align-items: center;
+	  font-size: .6rem;
+	  line-height: .8rem;
+	  @include respond-above(xs) {
+		font-size: .8rem;
+		line-height: 1rem;
+	  }
+	  @include respond-above(md) {
+		font-size: .8rem;
+		line-height: 1rem;
+	  }
 	}
   }
 }
@@ -109,4 +125,9 @@
 	  }
 	}
   }
+}
+
+.input-group-prepend {
+  width: 100px;
+
 }

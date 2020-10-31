@@ -4,16 +4,9 @@ html {
   line-height: 1.4;
 }
 
-//body {
-//  font-family: $font-default;
-//  font-size: .6rem;
-//  @include respond-above(xs) {
-//	font-size: .8rem;
-//  }
-//  @include respond-above(md) {
-//	font-size: 1rem;
-//  }
-//}
+body {
+  background-image: url('../images/bg/light.jpg');
+}
 
 
 .no-wrap {

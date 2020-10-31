@@ -612,20 +612,14 @@
                     <div class="content">
                         <form method="POST"
                               action="<% if(page == "new") { %>/att/new<% } else if(page == "edit") { %>/att/edit/<%= attack.hash %><% } %>">
-                            <div class="btn-box">
-                                <button class="btn btn-sm btn-success" type="submit" name="save" value="save"><i
-                                            class="fas <% if(page == "new") { %>fa-plus<% } else if(page == "edit") { %>fa-save<% } %>"
-                                            aria-hidden="true"></i></button>
-                            </div>
                             <h2>
                                 <% if(page == "new") { %>Add Attack
                                 <% } else if(page == "edit") { %>Edit Attack <%= attack.id %>
                                 <% } %>
                             </h2>
-                            <table class="table table-sm table-striped">
+                            <table class="table table-sm table-transparent">
                                 <tbody>
                                 <tr>
-                                    <td class="center-form"></td>
                                     <td>
                                         <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
@@ -636,10 +630,8 @@
                                                    value="<% if(page == "edit") { %><%= attack.title %><% } %>"/>
                                         </div>
                                     </td>
-                                    <td class="center-form"></td>
                                 </tr>
                                 <tr>
-                                    <td class="center-form"></td>
                                     <td>
                                         <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
@@ -650,10 +642,8 @@
                                                    value="<% if(page == "edit") { %><%= attack.comment %><% } %>"/>
                                         </div>
                                     </td>
-                                    <td class="center-form"></td>
                                 </tr>
                                 <tr>
-                                    <td class="center-form"></td>
                                     <td>
                                         <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
@@ -673,10 +663,8 @@
                                             </select>
                                         </div>
                                     </td>
-                                    <td class="center-form"></td>
                                 </tr>
                                 <tr>
-                                    <td class="center-form"></td>
                                     <td>
                                         <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
@@ -687,10 +675,8 @@
                                                    value="<% if(page == "edit") { %><%= attack.waves %><% } %>"/>
                                         </div>
                                     </td>
-                                    <td class="center-form"></td>
                                 </tr>
                                 <tr>
-                                    <td class="center-form"></td>
                                     <td>
                                         <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
@@ -708,10 +694,14 @@
                                             </select>
                                         </div>
                                     </td>
-                                    <td class="center-form"></td>
                                 </tr>
                                 </tbody>
                             </table>
+                            <div class="btn-box">
+                                <button class="btn btn-sm btn-success" type="submit" name="save" value="save"><i
+                                            class="fas <% if(page == "new") { %>fa-plus<% } else if(page == "edit") { %>fa-save<% } %>"
+                                            aria-hidden="true"></i></button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -727,7 +717,6 @@
                                 <table class="table table-sm table-striped">
                                     <tbody>
                                     <tr>
-                                        <td class="center-form"></td>
                                         <td>
                                             <div class="input-group input-group-sm">
                                                 <div class="input-group-prepend">
@@ -741,7 +730,6 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="center-form"></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -788,39 +776,31 @@
             <% } else { %>
                 <div class="col-12">
                     <div class="content">
-                        <% if(member.isADM || member.isHC || member.isBC) { %>
-                            <div class="btn-box"><a class="btn btn-sm btn-success" href="/att/new"><i
-                                            class="fas fa-plus" aria-hidden="true"></i></a></div>
-                        <% } %>
-                        <h2>Attacks</h2>
+                        <h2>Live attacks</h2>
                         <table class="table table-sm table-striped">
                             <thead>
                             <tr>
-                                <th class="fit-content" scope="col">Number</th>
-                                <th class="fit-content" scope="col">Land Tick</th>
+                                <th scope="col">Number</th>
+                                <th scope="col">Land Tick</th>
                                 <th scope="col">Title</th>
-                                <th class="fit-content" scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <% for(var i = 0; i < attacks.length; i++) { %>
                                 <% if(attacks[i].landtick >= tick.id - after_land_ticks) { %>
                                     <% if(attacks[i].releasetick > tick.id && member.isCMDR) { %>
-                                        <tr>
-                                            <td class="fit-content"><a class="btn btn-sm btn-secondary"
-                                                                       href="/att/<%= attacks[i].hash %>"><%= attacks[i].id %></a>
-                                            </td>
-                                            <td class="fit-content"><%= attacks[i].landtick %></td>
+                                        <tr data-href="/att/<%= attacks[i].hash %>">
+                                            <td><%= attacks[i].id %></td>
+                                            <td><%= attacks[i].landtick %></td>
                                             <td><%= attacks[i].title %></td>
-                                            <td class="fit-content no-wrap">Released:
+                                            <td class="no-wrap">Released:
                                                 pt<%= attacks[i].releasetick %></td>
                                         </tr>
                                     <% } else if(attacks[i].releasetick <= tick.id) { %>
-                                        <tr>
-                                            <td class="fit-content"><a class="btn btn-sm btn-secondary"
-                                                                       href="/att/<%= attacks[i].hash %>"><%= attacks[i].id %></a>
-                                            </td>
-                                            <td class="fit-content"><%= attacks[i].landtick %></td>
+                                        <tr data-href="/att/<%= attacks[i].hash %>">
+                                            <td><%= attacks[i].id %></td>
+                                            <td><%= attacks[i].landtick %></td>
                                             <td><%= attacks[i].title %></td>
                                             <td class="fit-content"></td>
                                         </tr>
@@ -829,30 +809,33 @@
                             <% } %>
                             </tbody>
                         </table>
+                        <% if(member.isADM || member.isHC || member.isBC) { %>
+                            <div class="btn-box">
+                                <a class="btn btn-sm btn-success" href="/att/new">
+                                    <i class="fas fa-plus" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        <% } %>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="content">
-                        <h2>History</h2>
+                        <h2>Attack history</h2>
                         <table class="table table-sm table-striped">
                             <thead>
                             <tr>
-                                <th class="fit-content" scope="col">Number</th>
-                                <th class="fit-content" scope="col">Land Tick</th>
+                                <th scope="col">Number</th>
+                                <th scope="col">Land Tick</th>
                                 <th scope="col">Title</th>
-                                <th class="fit-content" scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <% for(var i = 0; i < attacks.length; i++) { %>
                                 <% if(attacks[i].landtick < tick.id - after_land_ticks) { %>
-                                    <tr>
-                                        <td class="fit-content"><a class="btn btn-sm btn-secondary"
-                                                                   href="/att/<%= attacks[i].hash %>"><%= attacks[i].id %></a>
-                                        </td>
-                                        <td class="fit-content"><%= attacks[i].landtick %></td>
+                                    <tr data-href="/att/<%= attacks[i].hash %>">
+                                        <td><%= attacks[i].id %></td>
+                                        <td><%= attacks[i].landtick %></td>
                                         <td><%= attacks[i].title %></td>
-                                        <td class="fit-content"></td>
                                     </tr>
                                 <% } %>
                             <% } %>
