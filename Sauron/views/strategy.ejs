@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-<%- include("templates/head", {page_title: "Strategy", page_description: "Strategy"}); %>
-  </head>
-  <body class="page-strategy">
-    <header>
-<%- include("templates/header"); %>
-    </header>
-    <main>
-      <div class="container-fluid">
+<head>
+    <%- include("templates/head", {page_title: "Strategy", page_description: "Strategy"}); %>
+</head>
+<body class="page-strategy">
+<header>
+    <%- include("templates/header"); %>
+</header>
+<main>
+    <div class="container">
         <div class="row">
-          <div class="col-12">
-            <div class="content">
-              <% if(content_exists && strategy == "strategy") { %>
-                <h2>Strategy</h2>
-<%- include("content/strat.html"); %>
-              <% } else if(content_exists && strategy == "ship") { %>
-                <h2>Ship Build</h2>
-<%- include("content/strat_ship.html"); %>
-              <% } else if(content_exists && strategy == "tickplan") { %>
-                <h2>Tickplan</h2>
-<%- include("content/strat_tickplan.html"); %>
-              <% } else if(content_exists && strategy == "forting") { %>
-                <h2>Forting</h2>
-<%- include("content/strat_forting.html"); %>
-              <% } else if(content_exists && strategy == "startup") { %>
-                <h2>Startup Guide</h2>
-<%- include("content/strat_startup.html"); %>
-              <% } else if(content_exists && strategy == "quests") { %>
-                <h2>Quest Management</h2>
-<%- include("content/strat_quests.html"); %>
-              <% } else if(content_exists && strategy == "scans") { %>
-                <h2>Scans</h2>
-<%- include("content/strat_scans.html"); %>
-              <% } else if(content_exists && strategy == "attack") { %>
-                <h2>Attack Policy</h2>
-<%- include("content/strat_attack.html"); %>
-              <% } else if(content_exists && strategy == "defence") { %>
-                <h2>Defence</h2>
-<%- include("content/strat_defence.html"); %>
-              <% } else if(content_exists && strategy == "complaints") { %>
-                <h2>Complaints</h2>
-<%- include("content/strat_complaints.html"); %>
-              <% } %>
+            <div class="col-12">
+                <div class="content">
+                    <% if(content_exists && strategy == "strategy") { %>
+                        <h2>Strategy</h2>
+                        <%- include("content/strat.html"); %>
+                    <% } else if(content_exists && strategy == "ship") { %>
+                        <h2>Ship Build</h2>
+                        <%- include("content/strat_ship.html"); %>
+                    <% } else if(content_exists && strategy == "tickplan") { %>
+                        <h2>Tickplan</h2>
+                        <%- include("content/strat_tickplan.html"); %>
+                    <% } else if(content_exists && strategy == "forting") { %>
+                        <h2>Forting</h2>
+                        <%- include("content/strat_forting.html"); %>
+                    <% } else if(content_exists && strategy == "startup") { %>
+                        <h2>Startup Guide</h2>
+                        <%- include("content/strat_startup.html"); %>
+                    <% } else if(content_exists && strategy == "quests") { %>
+                        <h2>Quest Management</h2>
+                        <%- include("content/strat_quests.html"); %>
+                    <% } else if(content_exists && strategy == "scans") { %>
+                        <h2>Scans</h2>
+                        <%- include("content/strat_scans.html"); %>
+                    <% } else if(content_exists && strategy == "attack") { %>
+                        <h2>Attack Policy</h2>
+                        <%- include("content/strat_attack.html"); %>
+                    <% } else if(content_exists && strategy == "defence") { %>
+                        <h2>Defence</h2>
+                        <%- include("content/strat_defence.html"); %>
+                    <% } else if(content_exists && strategy == "complaints") { %>
+                        <h2>Complaints</h2>
+                        <%- include("content/strat_complaints.html"); %>
+                    <% } %>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </main>
-    <footer>
-<%- include("templates/footer"); %>
-    </footer>
-  </body>
+    </div>
+</main>
+<footer>
+    <%- include("templates/footer"); %>
+</footer>
+</body>
 </html>

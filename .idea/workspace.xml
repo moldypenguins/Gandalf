@@ -2,48 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd522cec-c40e-4ee1-b570-ac60be7a2834" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/gulpfile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/buttons.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/footer.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/forms-inputs.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/global.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/header-navigation.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/page-specific/attacks.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/page-specific/members.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/page-specific/profile.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/page-specific/strategy.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/tables.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/telegram.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/typography-links.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/dark/global.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/dark/header.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/dark/typography-links.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/dark.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/lib/mixins.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/lib/variables-dark.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/lib/variables-light.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/lib/variables.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/styles/dark.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/styles/style-backup.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/public/styles/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/styles/themes/dark.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/styles/themes/light.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/attacks.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/attacks.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sauron/views/battlegroups.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/battlegroups.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sauron/views/covops.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/covops.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sauron/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/dashboard.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sauron/views/error.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/error.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/members.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/members.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/profile.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/profile.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sauron/views/register.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/register.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sauron/views/scans.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/scans.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sauron/views/strategy.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/strategy.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/templates/footer.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/templates/footer.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/templates/head.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/templates/head.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/templates/header.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/templates/header.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sauron/views/tickplan.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/tickplan.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sauron/views/unauthorized.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/unauthorized.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sauron/views/universe.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/universe.ejs" afterDir="false" />
@@ -103,7 +69,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1604167187014</updated>
-      <workItem from="1604167188048" duration="7536000" />
+      <workItem from="1604167188048" duration="7756000" />
     </task>
     <servers />
   </component>
