@@ -1,64 +1,77 @@
-    <!-- views/templates/header.ejs -->
-    <nav class="navbar navbar-expand-lg navbar-<%= site_theme %> sticky-top">
-      <a class="navbar-brand" href="/"><img class="navbar-logo" src="/images/logo/<%= site_theme %>.png" width="30" height="30" alt=""/>Zero Tolerance</a>
-      <% if(member == undefined) { %>
-      <div class="navbar-nav ml-auto">
-        <script async src="https://telegram.org/js/telegram-widget.js?12" data-telegram-login="GandalfrBot" data-size="large" data-auth-url="https://ztpa.ca/auth" data-request-access="write"></script>
-      </div>
-      <% } else { %>
-      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navDrop" aria-controls="navDrop" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navDrop">
-        <ul class="navbar-nav ml-auto">
-          <% if(member.access > 0) { %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navDropMenuStrategy" href="/strat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Strategy</a>
-            <div class="dropdown-menu" aria-labelledby="navDropMenuStrategy">
-              <a class="dropdown-item" href="/strat">Strategy</a>
-              <a class="dropdown-item" href="/strat/ship">Ship Build</a>
-              <a class="dropdown-item" href="/strat/tickplan">Tickplan</a>
-              <a class="dropdown-item" href="/strat/forting">Forting</a>
-              <a class="dropdown-item" href="/strat/startup">Startup Guide</a>
-              <a class="dropdown-item" href="/strat/quests">Quest Management</a>
-              <a class="dropdown-item" href="/strat/scans">Scans</a>
-              <a class="dropdown-item" href="/strat/attack">Attack Policy</a>
-              <a class="dropdown-item" href="/strat/defence">Defence Policy</a>
-              <a class="dropdown-item" href="/strat/complaints">Complaints</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/members">Members</a>
-          </li>
-          <% } %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navDropMenuUniverse" href="/uni" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Universe</a>
-            <div class="dropdown-menu" aria-labelledby="navDropMenuUniverse">
-              <a class="dropdown-item" href="/uni">Universe</a>
-              <a class="dropdown-item" href="/uni/a">Alliances</a>
-              <a class="dropdown-item" href="/uni/c">Clusters</a>
-              <a class="dropdown-item" href="/uni/g">Galaxies</a>
-              <a class="dropdown-item" href="/uni/p">Planets</a>
-            </div>
-          </li>
-          <% if(member.access > 0) { %>
-          <li class="nav-item">
-            <a class="nav-link" href="/scans">Scans</a>
-          </li>
-          <% } %>
-          <li class="nav-item">
-            <a class="nav-link" href="/att">Attacks</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
-        </ul>
-      </div>
-      <a class="navbar-profile" href="/profile">
-        <img class="tg-pic" src="<% if(member.photo_url) { %><%= member.photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" alt="" />
-      </a>
-      <% } %>
-    </nav>
-    
+<!-- views/templates/header.ejs -->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <nav class="navbar navbar-expand-lg navbar-<%= site_theme %> sticky-top">
+                <a class="navbar-brand" href="/"><img class="navbar-logo" src="/images/logo/<%= site_theme %>.png"
+                                                      width="30" height="30" alt=""/>Zero Tolerance</a>
+                <% if(member == undefined) { %>
+                    <div class="navbar-nav ml-auto">
+                        <script async src="https://telegram.org/js/telegram-widget.js?12"
+                                data-telegram-login="GandalfrBot" data-size="large" data-auth-url="https://ztpa.ca/auth"
+                                data-request-access="write"></script>
+                    </div>
+                <% } else { %>
+                    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navDrop"
+                            aria-controls="navDrop" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navDrop">
+                        <ul class="navbar-nav ml-auto">
+                            <% if(member.access > 0) { %>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navDropMenuStrategy" href="/strat"
+                                       role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Strategy</a>
+                                    <div class="dropdown-menu" aria-labelledby="navDropMenuStrategy">
+                                        <a class="dropdown-item" href="/strat">Strategy</a>
+                                        <a class="dropdown-item" href="/strat/ship">Ship Build</a>
+                                        <a class="dropdown-item" href="/strat/tickplan">Tickplan</a>
+                                        <a class="dropdown-item" href="/strat/forting">Forting</a>
+                                        <a class="dropdown-item" href="/strat/startup">Startup Guide</a>
+                                        <a class="dropdown-item" href="/strat/quests">Quest Management</a>
+                                        <a class="dropdown-item" href="/strat/scans">Scans</a>
+                                        <a class="dropdown-item" href="/strat/attack">Attack Policy</a>
+                                        <a class="dropdown-item" href="/strat/defence">Defence Policy</a>
+                                        <a class="dropdown-item" href="/strat/complaints">Complaints</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/members">Members</a>
+                                </li>
+                            <% } %>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navDropMenuUniverse" href="/uni" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Universe</a>
+                                <div class="dropdown-menu" aria-labelledby="navDropMenuUniverse">
+                                    <a class="dropdown-item" href="/uni">Universe</a>
+                                    <a class="dropdown-item" href="/uni/a">Alliances</a>
+                                    <a class="dropdown-item" href="/uni/c">Clusters</a>
+                                    <a class="dropdown-item" href="/uni/g">Galaxies</a>
+                                    <a class="dropdown-item" href="/uni/p">Planets</a>
+                                </div>
+                            </li>
+                            <% if(member.access > 0) { %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/scans">Scans</a>
+                                </li>
+                            <% } %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/att">Attacks</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a class="navbar-profile" href="/profile">
+                        <img class="tg-pic"
+                             src="<% if(member.photo_url) { %><%= member.photo_url %><% } else { %><%= default_profile_pic %><% } %>"
+                             width="30" height="30" alt=""/>
+                    </a>
+                <% } %>
+            </nav>
+        </div>
+    </div>
+</div>
 
 

@@ -1,0 +1,112 @@
+/*# FORM ELEMENTS ################################################################################*/
+.form-label {
+  position: relative;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  min-width: 0;
+  margin-bottom: 0;
+  display: block;
+  width: 100%;
+  /* height: calc(1.5em + .75rem + 2px); */
+  padding: .275rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+
+.input-group-sm {
+  > .custom-select,
+  > .form-control {
+	font-size: .6rem;
+	line-height: .8rem;
+	@include respond-above(xs) {
+	  font-size: .8rem;
+	  line-height: 1rem;
+	}
+	@include respond-above(md) {
+	  font-size: .8rem;
+	  line-height: 1rem;
+	}
+  }
+
+  > .input-group-append,
+  > .input-group-prepend {
+	> .btn,
+	> .input-group-text {
+	  font-size: .6rem;
+	  line-height: .8rem;
+	  @include respond-above(xs) {
+		font-size: .8rem;
+		line-height: 1rem;
+	  }
+	  @include respond-above(md) {
+		font-size: .8rem;
+		line-height: 1rem;
+	  }
+	}
+  }
+}
+
+.input-group {
+  flex-wrap: nowrap;
+
+  > .input-group-append {
+	&:last-child {
+	  .input-group-text {
+		&:not(:last-child) {
+		  border-color: #454d55;
+		  background-color: #343a40;
+		  color: #fff;
+		}
+	  }
+	}
+
+	&:not(:last-child) > .input-group-text {
+	  border-color: #454d55;
+	  background-color: #343a40;
+	  color: #fff;
+	}
+  }
+
+  > .input-group-prepend {
+	> .input-group-text {
+	  border-color: #454d55;
+	  background-color: #343a40;
+	  color: #fff;
+	}
+  }
+}
+
+
+.center-form {
+  width: 0;
+  @include respond-above(md) {
+	width: 15%;
+  }
+}
+
+.dropdown {
+  width: inherit;
+
+  .btn {
+	width: 100%;
+	text-align: left;
+  }
+
+  .dropdown-toggle {
+	&:after {
+	  float: right;
+	  margin-top: 10px;
+	  margin-left: unset;
+	}
+  }
+
+  .input-group-sm {
+	.dropdown-toggle {
+	  &:after {
+		margin-top: 6px;
+	  }
+	}
+  }
+}

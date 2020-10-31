@@ -1,0 +1,18 @@
+footer {
+  position: fixed;
+  z-index: 1000;
+  bottom: 0;
+  width: 100%;
+  height: 2.45rem;
+  border-top: 1px solid rgba(black, .1);
+  padding: .75rem .5rem;
+  background: white;
+  text-align: center;
+  font-size: 0.6875rem;
+  @include respond-above(xs) {
+	height: 2.85rem;
+  }
+  @include respond-above(md) {
+	height: 3.25rem;
+  }
+}

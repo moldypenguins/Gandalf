@@ -1,0 +1,72 @@
+header {
+  border-bottom: 1px solid rgba(black, .1);
+}
+
+/*# NAVIGATION ELEMENTS ##########################################################################*/
+nav {
+  .navbar-logo {
+	display: inline-block;
+	vertical-align: top;
+	height: 30px;
+	width: 30px;
+	margin-right: 5px;
+  }
+
+  .navbar-toggler,
+  .navbar-collapse {
+	margin-right: 40px;
+  }
+
+  .navbar-profile {
+	display: inline-block;
+	vertical-align: top;
+	height: 30px;
+	width: 30px;
+	position: absolute;
+	top: .75rem;
+	right: 1rem;
+  }
+
+  .navbar-nav {
+	.nav-item {
+	  a {
+		font-size: .875rem;
+		line-height: 1;
+	  }
+
+	  .dropdown-menu {
+		padding: 0;
+		background: white;
+
+		a {
+		  &.dropdown-item {
+			padding: .25rem .5rem;
+			background: transparent;
+			transition: ease all .5s;
+
+			&:nth-child(odd) {
+			  background: rgba(black, .05);
+			}
+
+			&:hover {
+			  background: rgba(black, .2);
+			}
+		  }
+		}
+	  }
+
+	  &.dropdown {
+		.dropdown-toggle {
+		  display: flex;
+		  justify-content: space-between;
+		  align-items: center;
+
+		  &:after {
+			float: none;
+			margin: 0 0 0 .5rem;
+		  }
+		}
+	  }
+	}
+  }
+}

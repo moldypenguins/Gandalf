@@ -1,0 +1,49 @@
+/*# TABLE ELEMENTS ###############################################################################*/
+table,
+.table {
+  width: auto;
+  margin: 0 auto;
+
+  th {
+	white-space: nowrap;
+	text-align: left;
+  }
+
+  td {
+	text-align: left;
+  }
+
+  &.table-sm {
+	td,
+	th {
+	  padding: .25rem .5rem
+	}
+
+	th {
+	  font-size: .7rem;
+	}
+
+	td {
+	  font-size: .875rem;
+	}
+  }
+
+  &.table-striped {
+	tbody {
+	  tr {
+		background: transparent;
+		transition: ease all .5s;
+
+		&:nth-of-type(odd) {
+		  background-color: rgba(black, .05);
+		}
+
+		&:hover {
+		  background: rgba(black, .2);
+		}
+	  }
+	}
+  }
+}
+
+

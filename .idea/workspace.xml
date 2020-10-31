@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fd522cec-c40e-4ee1-b570-ac60be7a2834" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/gulpfile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/footer.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/forms-inputs.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/global.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/header-navigation.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/page-specific/attacks.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/page-specific/members.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/page-specific/profile.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/page-specific/strategy.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/tables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/telegram.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/typography-links.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/dark/global.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/dark/header.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/components/dark/typography-links.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/dark.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/lib/mixins.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/lib/variables-dark.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/lib/variables-light.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/lib/variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/assets/scss/style.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/styles/dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sauron/public/styles/style-backup.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/public/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/public/styles/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/public/styles/themes/dark.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/public/styles/themes/light.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/attacks.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/attacks.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/battlegroups.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/battlegroups.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/covops.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/covops.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/dashboard.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/error.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/error.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/members.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/members.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/profile.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/profile.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/register.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/register.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/scans.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/scans.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/strategy.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/strategy.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/templates/footer.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/templates/footer.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/templates/head.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/templates/head.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/templates/header.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/templates/header.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/tickplan.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/tickplan.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/unauthorized.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/unauthorized.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/views/universe.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/universe.ejs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="SCSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProjectId" id="1jeaodvA9vpKcUX1Pxdq4EVtv4U" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Sauron/public/styles" />
+    <property name="list.type.of.created.stylesheet" value="SCSS" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Sauron/public/styles" />
+      <recent name="$PROJECT_DIR$/Sauron/public/assets/scss/lib" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fd522cec-c40e-4ee1-b570-ac60be7a2834" name="Default Changelist" comment="" />
+      <created>1604167187014</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1604167187014</updated>
+      <workItem from="1604167188048" duration="7536000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="440" y="190" key="#Deployment" timestamp="1604167311644">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="440" y="190" key="#Deployment/0.0.1680.1050@0.0.1680.1050" timestamp="1604167311644" />
+    <state x="462" y="181" key="#Options" timestamp="1604167368544">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="462" y="181" key="#Options/0.0.1680.1050@0.0.1680.1050" timestamp="1604167368544" />
+    <state x="539" y="264" width="602" height="580" key="find.popup" timestamp="1604171182608">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="539" y="264" width="602" height="580" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1604171182608" />
+    <state x="745" y="182" width="326" height="685" key="ftp.server.browser" timestamp="1604167266150">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="745" y="182" width="326" height="685" key="ftp.server.browser/0.0.1680.1050@0.0.1680.1050" timestamp="1604167266150" />
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1604174284537">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1604174284537" />
+  </component>
+</project>

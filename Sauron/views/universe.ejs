@@ -1,164 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-<%- include("templates/head", {page_title: "Universe", page_description: "Universe"}); %>
-  </head>
-  <body>
-    <header>
-<%- include("templates/header"); %>
-    </header>
-    <main>
-      <div class="container-fluid">
+<head>
+    <%- include("templates/head", {page_title: "Universe", page_description: "Universe"}); %>
+</head>
+<body class="page-universe">
+<header>
+    <%- include("templates/header"); %>
+</header>
+<main>
+    <div class="container-fluid">
         <div class="row">
-        <% if(page == "p") { %>
-          <div class="col-12">
-            <div class="content">
-            <% if(typeof(planet) != "undefined") { %>
-              <h2><%= planet.rulername %> of <%= planet.planetname %></h2>
+            <% if(page == "p") { %>
+                <div class="col-12">
+                    <div class="content">
+                        <% if(typeof (planet) != "undefined") { %>
+                            <h2><%= planet.rulername %> of <%= planet.planetname %></h2>
+                        <% } else { %>
+                            <h2>Planets</h2>
+                            <table class="table table-sm table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">X</th>
+                                    <th scope="col">Y</th>
+                                    <th scope="col">Z</th>
+                                    <th scope="col">Planet Name</th>
+                                    <th scope="col">Ruler Name</th>
+                                    <th scope="col">Race</th>
+                                    <th scope="col">Size</th>
+                                    <th scope="col">Score</th>
+                                    <th scope="col">Value</th>
+                                    <th scope="col">XP</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <% for(var i = 0; i < planets.length; i++) { %>
+                                    <tr>
+                                        <td><%= planets[i].x %></td>
+                                        <td><%= planets[i].y %></td>
+                                        <td><%= planets[i].z %></td>
+                                        <td><%= planets[i].planetname %></td>
+                                        <td><%= planets[i].rulername %></td>
+                                        <td><%= planets[i].race %></td>
+                                        <td><%= planets[i].size %></td>
+                                        <td><%= planets[i].score %></td>
+                                        <td><%= planets[i].value %></td>
+                                        <td><%= planets[i].xp %></td>
+                                    </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
+                        <% } %>
+                    </div>
+                </div>
+            <% } else if(page == "g") { %>
+                <div class="col-12">
+                    <div class="content">
+                        <% if(typeof (galaxy) != "undefined") { %>
+                            <h2><%= galaxy.name %></h2>
+                        <% } else { %>
+                            <h2>Galaxies</h2>
+                            <table class="table table-sm table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">X</th>
+                                    <th scope="col">Y</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Size</th>
+                                    <th scope="col">Score</th>
+                                    <th scope="col">Value</th>
+                                    <th scope="col">XP</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <% for(var i = 0; i < galaxies.length; i++) { %>
+                                    <tr>
+                                        <td><%= galaxies[i].x %></td>
+                                        <td><%= galaxies[i].y %></td>
+                                        <td><%= galaxies[i].name %></td>
+                                        <td><%= galaxies[i].size %></td>
+                                        <td><%= galaxies[i].score %></td>
+                                        <td><%= galaxies[i].value %></td>
+                                        <td><%= galaxies[i].xp %></td>
+                                    </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
+                        <% } %>
+                    </div>
+                </div>
+            <% } else if(page == "c") { %>
+                <div class="col-12">
+                    <div class="content">
+                        <% if(typeof (cluster) != "undefined") { %>
+                            <h2>Cluster <%= cluster.x %></h2>
+                        <% } else { %>
+                            <h2>Clusters</h2>
+                            <table class="table table-sm table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">X</th>
+                                    <th scope="col">Size</th>
+                                    <th scope="col">Score</th>
+                                    <th scope="col">Value</th>
+                                    <th scope="col">XP</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <% for(var i = 0; i < clusters.length; i++) { %>
+                                    <tr>
+                                        <td><%= clusters[i].x %></td>
+                                        <td><%= clusters[i].size %></td>
+                                        <td><%= clusters[i].score %></td>
+                                        <td><%= clusters[i].value %></td>
+                                        <td><%= clusters[i].xp %></td>
+                                    </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
+                        <% } %>
+                    </div>
+                </div>
+            <% } else if(page == "a") { %>
+                <div class="col-12">
+                    <div class="content">
+                        <% if(typeof (alliance) != "undefined") { %>
+                            <h2><%= alliance.name %></h2>
+                        <% } else { %>
+                            <h2>Alliances</h2>
+                            <table class="table table-sm table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Size</th>
+                                    <th scope="col">Members</th>
+                                    <th scope="col">Points</th>
+                                    <th scope="col">Avg. Score</th>
+                                    <th scope="col">Score</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <% for(var i = 0; i < alliances.length; i++) { %>
+                                    <tr>
+                                        <td><%= alliances[i].name %></td>
+                                        <td><%= alliances[i].size %></td>
+                                        <td><%= alliances[i].members %></td>
+                                        <td><%= alliances[i].points %></td>
+                                        <td><%= alliances[i].score_avg %></td>
+                                        <td><%= alliances[i].score %></td>
+                                    </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
+                        <% } %>
+                    </div>
+                </div>
             <% } else { %>
-              <h2>Planets</h2>
-              <table class="table table-sm table-striped">
-                <thead>
-                  <th scope="col">X</th>
-                  <th scope="col">Y</th>
-                  <th scope="col">Z</th>
-                  <th scope="col">Planet Name</th>
-                  <th scope="col">Ruler Name</th>
-                  <th scope="col">Race</th>
-                  <th scope="col">Size</th>
-                  <th scope="col">Score</th>
-                  <th scope="col">Value</th>
-                  <th scope="col">XP</th>
-                </thead>
-                <tbody>
-                  <% for(var i = 0; i < planets.length; i++) { %>
-                    <tr>
-                      <th scope="row"><%= planets[i].x %></th>
-                      <th scope="row"><%= planets[i].y %></th>
-                      <th scope="row"><%= planets[i].z %></th>
-                      <td><%= planets[i].planetname %></td>
-                      <td><%= planets[i].rulername %></td>
-                      <td><%= planets[i].race %></td>
-                      <td><%= planets[i].size %></td>
-                      <td><%= planets[i].score %></td>
-                      <td><%= planets[i].value %></td>
-                      <td><%= planets[i].xp %></td>
-                    </tr>
-                  <% } %>
-                </tbody>
-              </table>
+                <div class="col-12">
+                    <div class="content">
+                        <h2>Universe</h2>
+
+                    </div>
+                </div>
             <% } %>
-            </div>
-          </div>
-        <% } else if(page == "g") { %>
-          <div class="col-12">
-            <div class="content">
-            <% if(typeof(galaxy) != "undefined") { %>
-              <h2><%= galaxy.name %></h2>
-            <% } else { %>
-              <h2>Galaxies</h2>
-              <table class="table table-sm table-striped">
-                <thead>
-                  <th scope="col">X</th>
-                  <th scope="col">Y</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Size</th>
-                  <th scope="col">Score</th>
-                  <th scope="col">Value</th>
-                  <th scope="col">XP</th>
-                </thead>
-                <tbody>
-                  <% for(var i = 0; i < galaxies.length; i++) { %>
-                    <tr>
-                      <th scope="row"><%= galaxies[i].x %></th>
-                      <th scope="row"><%= galaxies[i].y %></th>
-                      <td><%= galaxies[i].name %></td>
-                      <td><%= galaxies[i].size %></td>
-                      <td><%= galaxies[i].score %></td>
-                      <td><%= galaxies[i].value %></td>
-                      <td><%= galaxies[i].xp %></td>
-                    </tr>
-                  <% } %>
-                </tbody>
-              </table>
-            <% } %>
-            </div>
-          </div>
-        <% } else if(page == "c") { %>
-          <div class="col-12">
-            <div class="content">
-            <% if(typeof(cluster) != "undefined") { %>
-              <h2>Cluster <%= cluster.x %></h2>
-            <% } else { %>
-              <h2>Clusters</h2>
-              <table class="table table-sm table-striped">
-                <thead>
-                  <th scope="col">X</th>
-                  <th scope="col">Size</th>
-                  <th scope="col">Score</th>
-                  <th scope="col">Value</th>
-                  <th scope="col">XP</th>
-                </thead>
-                <tbody>
-                  <% for(var i = 0; i < clusters.length; i++) { %>
-                    <tr>
-                      <th scope="row"><%= clusters[i].x %></th>
-                      <td><%= clusters[i].size %></td>
-                      <td><%= clusters[i].score %></td>
-                      <td><%= clusters[i].value %></td>
-                      <td><%= clusters[i].xp %></td>
-                    </tr>
-                  <% } %>
-                </tbody>
-              </table>
-            <% } %>
-            </div>
-          </div>
-        <% } else if(page == "a") { %>
-          <div class="col-12">
-            <div class="content">
-            <% if(typeof(alliance) != "undefined") { %>
-              <h2><%= alliance.name %></h2>
-            <% } else { %>
-              <h2>Alliances</h2>
-              <table class="table table-sm table-striped">
-                <thead>
-                  <th scope="col">Name</th>
-                  <th scope="col">Size</th>
-                  <th scope="col">Members</th>
-                  <th scope="col">Points</th>
-                  <th scope="col">Avg. Score</th>
-                  <th scope="col">Score</th>
-                </thead>
-                <tbody>
-                  <% for(var i = 0; i < alliances.length; i++) { %>
-                    <tr>
-                      <th scope="row"><%= alliances[i].name %></td>
-                      <td><%= alliances[i].size %></td>
-                      <td><%= alliances[i].members %></td>
-                      <td><%= alliances[i].points %></td>
-                      <td><%= alliances[i].score_avg %></td>
-                      <td><%= alliances[i].score %></td>
-                    </tr>
-                  <% } %>
-                </tbody>
-              </table>
-            <% } %>
-            </div>
-          </div>
-        <% } else { %>
-          <div class="col-12">
-            <div class="content">
-              <h2>Universe</h2>
-              
-            </div>
-          </div>
-        <% } %>
         </div>
-      </div>
-    </main>
-    <footer>
-<%- include("templates/footer"); %>
-    </footer>
-  </body>
+    </div>
+</main>
+<footer>
+    <%- include("templates/footer"); %>
+</footer>
+</body>
 </html>

@@ -1,4 +1,15 @@
-    <!-- views/partials/footer.ejs -->
+<!-- views/partials/footer.ejs -->
+<div class="container">
     <% if(tick != undefined) { %>
-      pt<%= tick.id %>
+        <div class="row">
+            <div class="col-12">
+                It is currently tick <%= tick.id %>
+            </div>
+        </div>
     <% } %>
+    <div class="row">
+        <div class="col-12">
+            &copy; <%= new Date().getFullYear(); %> <a href="https://telegram.me/moldypenguins">moldypenguins</a>
+        </div>
+    </div>
+</div>

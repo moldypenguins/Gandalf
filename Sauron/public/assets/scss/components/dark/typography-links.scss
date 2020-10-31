@@ -1,0 +1,11 @@
+a {
+  font-weight: normal;
+  text-decoration: none;
+  color: $col-primary;
+  transition: ease all .5s;
+
+  &:hover {
+	text-decoration: underline;
+	color: $col-primary-dark;
+  }
+}
