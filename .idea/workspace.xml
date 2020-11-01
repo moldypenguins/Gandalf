@@ -2,41 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd522cec-c40e-4ee1-b570-ac60be7a2834" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Sauron/assets/public/styles/dark.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/assets/public/styles/light.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/assets/public/styles/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/styles/style-custom.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/gulpfile.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/js/footer/footer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/buttons.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/footer.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/forms-inputs.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/global.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/header-navigation.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/page-specific/attacks.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/page-specific/members.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/page-specific/profile.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/page-specific/strategy.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/tables.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/telegram.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/components/all/typography-links.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/components/dark/global.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/components/dark/header.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/components/dark/typography-links.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/dark.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/lib/mixins.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/lib/variables-dark.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/lib/variables-light.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/lib/variables.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/light.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/assets/scss/style.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/public/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/public/styles/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/attacks.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/attacks.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/templates/footer.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/templates/footer.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/views/templates/head.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/views/templates/head.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/assets/scss/components/dark/global.scss" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/assets/scss/components/dark/global.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/assets/scss/dark.scss" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/assets/scss/dark.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/assets/scss/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/assets/scss/style.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +66,7 @@
       <workItem from="1604167188048" duration="7868000" />
       <workItem from="1604178568129" duration="4976000" />
       <workItem from="1604201451305" duration="1964000" />
-      <workItem from="1604204593231" duration="892000" />
+      <workItem from="1604204593231" duration="1290000" />
     </task>
     <servers />
   </component>

@@ -5,28 +5,28 @@
 
 
 // includes
-@import "scss/lib/mixins";
-@import "scss/lib/variables";
+@import "lib/mixins";
+@import "lib/variables";
 
 // general stuff
-@import "scss/components/all/global";
+@import "components/all/global";
 
 body {
-  @import "scss/components/all/typography-links";
+  @import "components/all/typography-links";
   @import "components/all/buttons";
   @import "components/all/forms-inputs";
-  @import "scss/components/all/tables";
+  @import "components/all/tables";
 
   // components
   @import "components/all/header-navigation";
-  @import "scss/components/all/telegram";
-  @import "scss/components/all/footer";
+  @import "components/all/telegram";
+  @import "components/all/footer";
 
   // page specific
-  @import "scss/components/all/page-specific/strategy";
-  @import "scss/components/all/page-specific/members";
-  @import "scss/components/all/page-specific/attacks";
-  @import "scss/components/all/page-specific/profile";
+  @import "components/all/page-specific/strategy";
+  @import "components/all/page-specific/members";
+  @import "components/all/page-specific/attacks";
+  @import "components/all/page-specific/profile";
 }
 
 
