@@ -22,7 +22,7 @@ function buildStyles() {
 		.pipe(plumber()) // Global error listener.
 		.pipe(sass({outputStyle: 'compressed'}))
 		.pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7']))
-		.pipe(dest('../styles'))
+		.pipe(dest('public/styles'))
 }
 
 // Watch changes on all *.scss files and trigger buildStyles() at the end.
@@ -70,14 +70,14 @@ function sassLint() {
 // 		.pipe(dest('app/dist/'));
 // }
 
-// function scriptsFooter() {
-// 	return src([
-// 		'js/components/footerscripts.js',
-// 		// 'js/components/slick.js',
-// 	])
-// 		.pipe(concat('footer.js'))
-// 		.pipe(dest('app/dist/'));
-// }
+function scriptsFooter() {
+	return src([
+		'js/footer/footer.js',
+		// 'js/components/slick.js',
+	])
+		.pipe(concat('footer.js'))
+		.pipe(dest('public/scripts'));
+}
 
 
 // Export commands.

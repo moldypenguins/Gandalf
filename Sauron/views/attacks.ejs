@@ -3,7 +3,11 @@
 <head>
     <%- include("templates/head", {page_title: "Attacks", page_description: "Attacks"}); %>
 </head>
+<% if(page == "att") { %>
+<body class="page-attack">
+<% }else{ %>
 <body class="page-attacks">
+<% } %>
 <header>
     <%- include("templates/header"); %>
 </header>
@@ -20,12 +24,12 @@
                         attacker += "&att_planet_mc_1=" + member.scans.d.scan.military_centre;
                     }
                     var allships = "";
-                    var allfi = ""
-                    var allco = ""
-                    var allfr = ""
-                    var allde = ""
-                    var allcr = ""
-                    var allbs = ""
+                    var allfi = "";
+                    var allco = "";
+                    var allfr = "";
+                    var allde = "";
+                    var allcr = "";
+                    var allbs = "";
                     if(member.scans.a != null && typeof (member.scans.a.scan) != "undefined" && member.scans.a.scan != null) {
                         for (var j = 0; j < member.scans.a.scan.length; j++) {
                             if(typeof (member.scans.a.scan[j].ship) != "undefined" && member.scans.a.scan[j].ship != null) {
@@ -87,22 +91,25 @@
                                         <td><%= lt %> (<%= numeral(lt - tick.id).format("+0") %>)</td>
                                         <td class="<%= trg.race.toLowerCase() %>"><%= trg.race %></td>
                                         <td><%= trg.size %></td>
-                                        <td class="no-wrap"><%= numeral(trg.value).format("0,0") %>
-                                            <strong>/</strong> <%= numeral(trg.score).format("0,0") %></td>
+                                        <td class="no-wrap">
+                                            <%= numeral(trg.value).format("0,0") %>
+                                            <strong>/</strong>
+                                            <%= numeral(trg.score).format("0,0") %>
+                                        </td>
                                         <td class="no-wrap">
                                             <% if(typeof (trg.scans) != "undefined" && typeof (trg.scans.d) != "undefined" && typeof (trg.scans.d.scan) != "undefined") { %>
                                                 <span class="text-info"><%= trg.scans.d.scan.wave_amplifier %></span>
-                                                <strong> / </strong><span
-                                                        class="text-info"><%= trg.scans.d.scan.wave_distorter %></span>
-                                                <strong> / </strong><span
-                                                        class="text-info"><%= scantypes[trg.scans.d.scan.waves + 1].charAt(0) %></span>
+                                                <strong> / </strong>
+                                                <span class="text-info"><%= trg.scans.d.scan.wave_distorter %></span>
+                                                <strong> / </strong>
+                                                <span class="text-info"><%= scantypes[trg.scans.d.scan.waves + 1].charAt(0) %></span>
                                             <% } %>
                                         </td>
                                         <td class="no-wrap">
                                             <% if(typeof (trg.scans) != "undefined" && typeof (trg.scans.p) != "undefined" && typeof (trg.scans.p.scan) != "undefined") { %>
                                                 <%= numeral(trg.scans.p.scan.res_metal + trg.scans.p.scan.res_crystal + trg.scans.p.scan.res_eonium).format("0,0") %>
-                                                <strong>
-                                                    / </strong><%= numeral(trg.scans.p.scan.prod_res + trg.scans.p.scan.ships_sold_res).format("0,0") %>
+                                                <strong> / </strong>
+                                                <%= numeral(trg.scans.p.scan.prod_res + trg.scans.p.scan.ships_sold_res).format("0,0") %>
                                             <% } %>
                                         </td>
                                         <td class="sd">
@@ -219,9 +226,8 @@
                                                                                            href="<%= bcalcurl %><%= query %><%= attacker %><%= allfi %>"
                                                                                            target="_blank">FI</a>
                                                             <% } %>
-                                                            <% if(allco.length > 0) { %><a class="dropdown-item"
-                                                                                           href="<%= bcalcurl %><%= query %><%= attacker %><%= allco %>"
-                                                                                           target="_blank">CO</a>
+                                                            <% if(allco.length > 0) { %>
+                                                                <a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allco %>" target="_blank">CO</a>
                                                             <% } %>
                                                             <% if(allfr.length > 0) { %><a class="dropdown-item"
                                                                                            href="<%= bcalcurl %><%= query %><%= attacker %><%= allfr %>"
@@ -714,7 +720,7 @@
                                 <% } %>
                             </h2>
                             <form method="POST" action="/att/edit/targ/<%= attack.hash %>">
-                                <table class="table table-sm table-striped">
+                                <table class="table table-sm table-transparent">
                                     <tbody>
                                     <tr>
                                         <td>
