@@ -1,7 +1,7 @@
-@import "scss/lib/mixins";
-@import "scss/lib/variables";
-@import "scss/lib/variables-dark";
+@import "lib/mixins";
+@import "lib/variables";
+@import "lib/variables-dark";
 //
-@import "scss/components/dark/global";
+@import "components/dark/global";
 @import "components/dark/typography-links";
-@import "scss/components/dark/header";
+@import "components/dark/header";
