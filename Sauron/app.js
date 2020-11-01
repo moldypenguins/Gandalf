@@ -90,7 +90,9 @@ db.connection.once("open", () => {
   //add session objects to locals
   app.use(async(req, res, next) => {
     res.locals.site_theme = config.web.default_theme;
+    res.locals.site_url = config.web.uri;
     res.locals.alliance_name = config.alliance.name;
+    res.locals.bot_name = config.bot.username;
     res.locals.default_profile_pic = config.web.default_profile_pic;
     
     res.locals.tick = await Tick.findOne().sort({id: -1});
