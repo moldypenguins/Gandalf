@@ -13,3 +13,7 @@ Sauron/ssl/*.crt
 Sauron/ssl/*.key
 !Sauron/ssl/*.example.crt
 !Sauron/ssl/*.example.key
+
+#ignore project files
+.idea/
+.vs/
