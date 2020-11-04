@@ -1,7 +1,7 @@
-# Gandalf ![GitHub License](https://img.shields.io/github/license/moldypenguins/Gandalf) ![GitHub Release](https://img.shields.io/github/package-json/v/moldypenguins/Gandalf)
-![GitHub Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf)
-![GitHub Issues](https://img.shields.io/github/issues-raw/moldypenguins/Gandalf)
-![GitHub Pull Requests](https://img.shields.io/github/issues-pr-raw/moldypenguins/Gandalf)
+# Gandalf ![GitHub License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU) ![GitHub Release](https://img.shields.io/github/package-json/v/moldypenguins/Gandalf?logo=GitHub)
+![GitHub Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf?logo=GitHub)
+![GitHub Issues](https://img.shields.io/github/issues-raw/moldypenguins/Gandalf?logo=GitHub)
+![GitHub Pull Requests](https://img.shields.io/github/issues-pr-raw/moldypenguins/Gandalf?logo=GitHub)
 
 ## Table of Contents
 * [Requirements](#requirements)
