@@ -12,7 +12,8 @@
 * [Licenses](#licenses)
 
 ## Requirements
-![node.js 12.16.3](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=12.16.3&color=#339933)
+![Node.js 12.16.3](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=12.16.3&color=#339933)
+![MongoDB 4.4.1](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=4.4.1&color=#47A248)
 
 
 ## Installation
