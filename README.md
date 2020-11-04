@@ -17,7 +17,7 @@
 
 
 ## Installation
-See [INSTALL.md](INSTALL.md) for setup guide.
+See [INSTALL.md](INSTALL.md) for setup guide. (it needs to be updated)
 
 
 ## Contributing
