@@ -12,7 +12,7 @@
 * [Licenses](#licenses)
 
 ## Requirements
-![node.js 12.16.3](https://img.shields.io/static/v1?logo=Node.js&label=Node.js&message=12.16.3&color=#339933)
+![node.js 12.16.3](https://img.shields.io/static/v1?style=flat-square&logo=Node.js&label=Node.js&message=12.16.3&color=#339933)
 
 
 ## Installation
