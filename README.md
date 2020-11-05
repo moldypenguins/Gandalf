@@ -32,12 +32,12 @@ Please use [GitHub Issues](https://github.com/moldypenguins/Gandalf/issues) for 
 
 ## Credits
 * **Craig Roberts** - *Developer* - [@moldypenguins](https://t.me/moldypenguins)
-* **Braden Edmunds** - *Developer* - [@blanq](https://t.me/blanq4)
-* **Alex High** - *Stylist* - [@Ultimate](https://t.me/UltimateNewbie)
+* **Braden Edmunds** - *Developer* - [@blanq4](https://t.me/blanq4)
+* **Alex High** - *Stylist* - [@UltimateNewbie](https://t.me/UltimateNewbie)
 
 
 ## Licenses
-Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High.  
+Copyright © 2020 Craig Roberts, Braden Edmunds, Alex High.  
 Licensed under the GNU GENERAL PUBLIC LICENSE.  
 See [LICENSE.md](LICENSE.md) or [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html) for more details.
 
