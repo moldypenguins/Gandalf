@@ -12,11 +12,20 @@
 * [Licenses](#licenses)
 
 ## Requirements
-[![Node.js v12.16.3](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=v12.16.3&color=339933)](https://nodejs.org)  
-[![MongoDB v4.4.1](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=v4.4.1&color=47A248)](https://www.mongodb.com)  
-[![Mongoose](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Mongoose%20ODM&message=v5.9.3&color=800800)![npm version](https://img.shields.io/npm/v/mongoose?style=for-the-badge&color=800800)](https://www.npmjs.com/package/mongoose)  
-[![Moment.js](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment.js&message=v2.24.0&color=222222)![npm version](https://img.shields.io/npm/v/moment?style=for-the-badge&color=222222)](https://www.npmjs.com/package/moment)  
-[![Moment Timezone](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment%20Timezone&message=0.5.28&color=4e7cad)![npm version](https://img.shields.io/npm/v/moment-timezone?style=for-the-badge&color=4e7cad)](https://www.npmjs.com/package/moment-timezone)  
+[![Node.js v12.16.3](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=v12.16.3&color=339933)](https://nodejs.org/)  
+[![MongoDB v4.4.1](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=v4.4.1&color=47A248)](https://www.mongodb.com/)  
+[![Mongoose](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Mongoose%20ODM&message=v5.9.3&color=800800)](https://mongoosejs.com/) [![npm version](https://img.shields.io/npm/v/mongoose?style=for-the-badge&color=800800)](https://www.npmjs.com/package/mongoose)  
+[![Moment.js](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment.js&message=v2.24.0&color=222222)](https://momentjs.com/) [![npm version](https://img.shields.io/npm/v/moment?style=for-the-badge&color=222222)](https://www.npmjs.com/package/moment)  
+[![Moment Timezone](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment%20Timezone&message=0.5.28&color=4e7cad)](https://momentjs.com/timezone) [![npm version](https://img.shields.io/npm/v/moment-timezone?style=for-the-badge&color=4e7cad)](https://www.npmjs.com/package/moment-timezone)  
+[![Node Schedule](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Node%20Schedule&message=v1.3.2&color=CB3837)](https://github.com/node-schedule/node-schedule) [![npm version](https://img.shields.io/npm/v/node-schedule?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/node-schedule)  
+[![bent](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=bent&message=v7.1.2&color=CB3837)](https://github.com/mikeal/bent) [![npm version](https://img.shields.io/npm/v/bent?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/bent)  
+[![Numeral.js](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Numeral.js&message=v2.0.6&color=ff6a00)](https://numeraljs.com/) ![npm version](https://img.shields.io/npm/v/numeral?style=for-the-badge&color=ff6a00)](https://www.npmjs.com/package/numeral)  
+[![twilio](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=twilio&message=v3.43.0&color=CB3837)](https://github.com/twilio/twilio-node) ![npm version](https://img.shields.io/npm/v/twilio?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/twilio)  
+[![xml2js](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=xml2js&message=v0.4.23&color=CB3837)](https://github.com/Leonidas-from-XIV/node-xml2js) ![npm version](https://img.shields.io/npm/v/xml2js?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/xml2js)  
+[![fontawesome](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=fontawesome&message=v5.14.0&color=CB3837)](https://momentjs.com/) ![npm version](https://img.shields.io/npm/v/@fortawesome/fontawesome-free?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/@fortawesome/fontawesome-free)  
+[![Moment.js](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment.js&message=v2.24.0&color=CB3837)](https://momentjs.com/) ![npm version](https://img.shields.io/npm/v/moment?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/moment)  
+[![Moment.js](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment.js&message=v2.24.0&color=CB3837)](https://momentjs.com/) ![npm version](https://img.shields.io/npm/v/moment?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/moment)  
+[![Moment.js](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment.js&message=v2.24.0&color=CB3837)](https://momentjs.com/) ![npm version](https://img.shields.io/npm/v/moment?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/moment)  
 
 
 ## Installation
