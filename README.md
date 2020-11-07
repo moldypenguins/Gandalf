@@ -14,9 +14,9 @@
 ## Requirements
 [![Node.js v12.16.3](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=v12.16.3&color=339933)](https://nodejs.org)  
 [![MongoDB v4.4.1](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=v4.4.1&color=47A248)](https://www.mongodb.com)  
-[![Mongoose](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Mongoose%20ODM&message=v5.9.3&color=800800) ![npm version](https://img.shields.io/npm/v/mongoose?style=for-the-badge&color=800800)](https://www.npmjs.com/package/mongoose)  
-[![Moment.js](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment.js&message=v2.24.0&color=222222) ![npm version](https://img.shields.io/npm/v/moment?style=for-the-badge&color=222222)](https://www.npmjs.com/package/moment)  
-[![Moment Timezone](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment.js%20Timezone&message=0.5.28&color=4e7cad) ![npm version](https://img.shields.io/npm/v/moment-timezone?style=for-the-badge&color=4e7cad)](https://www.npmjs.com/package/moment-timezone)  
+[![Mongoose](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Mongoose%20ODM&message=v5.9.3&color=800800)![npm version](https://img.shields.io/npm/v/mongoose?style=for-the-badge&color=800800)](https://www.npmjs.com/package/mongoose)  
+[![Moment.js](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment.js&message=v2.24.0&color=222222)![npm version](https://img.shields.io/npm/v/moment?style=for-the-badge&color=222222)](https://www.npmjs.com/package/moment)  
+[![Moment Timezone](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment.js%20Timezone&message=0.5.28&color=4e7cad)![npm version](https://img.shields.io/npm/v/moment-timezone?style=for-the-badge&color=4e7cad)](https://www.npmjs.com/package/moment-timezone)  
 
 
 ## Installation
