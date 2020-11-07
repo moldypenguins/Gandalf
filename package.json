@@ -15,7 +15,7 @@
     "url": "https://github.com/moldypenguins/Gandalf/issues"
   },
   "homepage": "https://github.com/moldypenguins/Gandalf",
-  "description": "Planetarion Alliance Assistant (PAA)",
+  "description": "",
   "dependencies": {
     "bent": "^7.1.2",
     "moment": "^2.24.0",
