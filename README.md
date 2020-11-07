@@ -15,7 +15,7 @@
 ![Node.js v12.16.3](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=v12.16.3&color=339933)  
 ![MongoDB v4.4.1](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=v4.4.1&color=47A248)  
 ![Mongoose ODM v5.10.12](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Mongoose%20ODM&message=v5.10.12&color=800800)  
-[![Moment.js v2.29.1](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment.js&message=v2.29.1&color=222222)](https://www.npmjs.com/package/moment) ![npm version](https://img.shields.io/npm/v/moment)
+[![Moment.js v2.29.1](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment.js&message=v2.29.1&color=222222) ![npm version](https://img.shields.io/npm/v/moment)](https://www.npmjs.com/package/moment)  
 ![Moment.js Timezone v0.5.31-2020a](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment.js%20Timezone&message=v0.5.31-2020a&color=4e7cad)  
 
 [![NPM](https://nodei.co/npm/moment.png?compact=true)](https://npmjs.org/package/moment)
