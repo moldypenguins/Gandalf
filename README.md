@@ -42,11 +42,11 @@
 
 
 ## Installation
-See [INSTALL.md](INSTALL.md) for setup guide. (it needs to be updated)
+See [INSTALL.md](INSTALL.md) for setup guide. (needs to be updated)
 
 
 ## Contributing
-Please read the contribution guidelines [CONTRIBUTING.md](CONTRIBUTING.md).
+Please read the contribution guidelines [CONTRIBUTING.md](CONTRIBUTING.md) (needs to be updated)
 
 
 ## Support
