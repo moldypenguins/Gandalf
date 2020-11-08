@@ -1,10 +1,11 @@
 const config = require('../../config');
+const access = require('../access');
 const numeral = require('numeral');
 const moment = require('moment');
-const qs = require("querystring");
-const mongoose = require('../../db.js');
+const Entities = require('html-entities').AllHtmlEntities;
+const entities = new Entities();
+
 const Utils = require('../../utils');
-const util = require('util');
 const ScanRequest = require('../../models/scan-request');
 const Planet = require('../../models/planet');
 const Member = require('../../models/member');
@@ -13,7 +14,7 @@ const BotMessage = require('../../models/botmessage');
 const crypto = require("crypto");
 
 
-var Scans_req_usage = qs.encode('!req <x:y:z> <p|d|n|j|a>');
+var Scans_req_usage = entities.encode('!req <x:y:z> <p|d|n|j|a>');
 var Scans_req_desc = 'Request a scan.';
 var Scans_req = (args, current_member) => {
   return new Promise(async (resolve, reject) => {
@@ -34,7 +35,7 @@ var Scans_req = (args, current_member) => {
             //######################################################################################
             let txt = `[${scanreq.id}] ${current_member.panick} requested a ${config.pa.scantypes[scanreq.scantype]} Scan of ${scanreq.x}:${scanreq.y}:${scanreq.z} Dists(i:intel/r:${typeof(scanreq.dists) != 'undefined' ? scanreq.dists : "?"})`;
 
-            let msg = new BotMessage({ id:mongoose.Types.ObjectId(), group_id: config.groups.scans, 
+            let msg = new BotMessage({ id:crypto.randomBytes(8).toString("hex"), group_id: config.groups.scans, 
               message: txt, 
               sent: false 
             });
@@ -57,7 +58,7 @@ var Scans_req = (args, current_member) => {
 };
 
 
-var Scans_scan_usage = qs.encode('!scan <x:y:z> [p|d|n|j|a]');
+var Scans_scan_usage = entities.encode('!scan <x:y:z> [p|d|n|j|a]');
 var Scans_scan_desc = 'Show recent scans for a planet.';
 var Scans_scan = (args) => {
   return new Promise(function (resolve, reject) {
@@ -65,7 +66,7 @@ var Scans_scan = (args) => {
   });
 };
 
-var Scans_cancel_usage = qs.encode('!cancel <id>');
+var Scans_cancel_usage = entities.encode('!cancel <id>');
 var Scans_cancel_desc = 'Cancel a scan request given the id';
 var Scans_cancel = (args, current_member) => {
   return new Promise(async (resolve, reject) => {

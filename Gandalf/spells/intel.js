@@ -1,13 +1,16 @@
 const config = require('../../config');
+const access = require('../access');
 const numeral = require('numeral');
 const moment = require('moment');
-const qs = require("querystring");
+const Entities = require('html-entities').AllHtmlEntities;
+const entities = new Entities();
+
 const Utils = require('../../utils');
 const Intel = require('../../models/intel');
 const Planet = require('../../models/planet');
 const Alliance = require('../../models/alliance');
 
-var Intel_usage = qs.encode('!intel <coords> <alliance=alliance> <nick=nick>');
+var Intel_usage = entities.encode('!intel <coords> <alliance=alliance> <nick=nick>');
 var Intel_desc = 'Displays or sets a coords';
 var Intel_fn = (args) => {
     return new Promise(async (resolve, reject) => {

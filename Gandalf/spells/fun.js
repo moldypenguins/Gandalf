@@ -1,14 +1,16 @@
 const config = require('../../config');
 const access = require('../access');
-const qs = require('querystring');
 const numeral = require('numeral');
 const moment = require('moment');
+const Entities = require('html-entities').AllHtmlEntities;
+const entities = new Entities();
+
 const bent = require('bent');
 
-var Fun_gif_usage = qs.encode('!giphy <phrase>');
+var Fun_gif_usage = entities.encode('!giphy <phrase>');
 var Fun_gif_desc = 'Finds a random gifphy using your phrase';
 var Fun_gif = (args) => {
-  return new Promise(function (resolve, reject) {
+  return new Promise(async (resolve, reject) => {
     if (!Array.isArray(args) || args.length < 1) { reject(Fun_gif_desc); }
     let phrase = args.join('+');
     let search_url = `http://api.giphy.com/v1/gifs/search?q=${phrase}&api_key=${config.giphy.key}&rating=r&limit=10`;

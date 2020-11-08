@@ -1,10 +1,12 @@
 const config = require('../../config');
+const access = require('../access');
 const numeral = require('numeral');
 const moment = require('moment');
-const qs = require("querystring");
+const Entities = require('html-entities').AllHtmlEntities;
+const entities = new Entities();
 
 
-var Growth_epenis_usage = qs.encode('!epenis [user]');
+var Growth_epenis_usage = entities.encode('!epenis [user]');
 var Growth_epenis_desc = 'Score growth of user\'s planet over last 72 ticks.';
 var Growth_epenis = (args) => {
   return new Promise(function(resolve, reject) {
@@ -13,7 +15,7 @@ var Growth_epenis = (args) => {
 };
 
 
-var Growth_bigdicks_usage = qs.encode('!bigdicks');
+var Growth_bigdicks_usage = entities.encode('!bigdicks');
 var Growth_bigdicks_desc = 'Shows the current biggest five epenii in the alliance.';
 var Growth_bigdicks = (args) => {
   return new Promise(function(resolve, reject) {
@@ -22,7 +24,7 @@ var Growth_bigdicks = (args) => {
 };
 
 
-var Growth_loosecunts_usage = qs.encode('!loosecunts');
+var Growth_loosecunts_usage = entities.encode('!loosecunts');
 var Growth_loosecunts_desc = 'Shows the current smallest five epenii in the alliance.';
 var Growth_loosecunts = (args) => {
   return new Promise(function(resolve, reject) {
