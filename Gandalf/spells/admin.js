@@ -3,6 +3,7 @@ const access = require('../access');
 const qs = require('querystring');
 const numeral = require('numeral');
 const moment = require('moment');
+const util = require('util');
 
 var Admin_leavechat_usage = qs.encode('!leavechat <chat id>');
 var Admin_leavechat_desc = 'Leaves a group, supergroup, or channel.';
@@ -10,6 +11,7 @@ var Admin_leavechat = (args, bot) => {
   return new Promise((resolve, reject) => {
     if (!Array.isArray(args) || args.length < 1) { reject(Admin_leavechat_usage); }
     bot.telegram.leaveChat(args[0]).then((result) => {
+      console.log('RESULT:' + util.inspect(result, false, null, true));
       resolve(result);
     }).catch((error) => {
       reject(error);
