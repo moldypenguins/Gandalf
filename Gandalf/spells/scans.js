@@ -6,7 +6,9 @@ const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
 
 const Utils = require('../../utils');
+const Scan = require('../../models/scan');
 const ScanRequest = require('../../models/scan-request');
+const DevelopmentScan = require('../../models/scan-development');
 const Planet = require('../../models/planet');
 const Member = require('../../models/member');
 const Tick = require('../../models/tick');
@@ -31,9 +33,17 @@ var Scans_req = (args, current_member) => {
             console.log(number_type);
             let scanreq = new ScanRequest({ id:crypto.randomBytes(4).toString("hex"), planet_id: planet.id, x: planet.x, y: planet.y, z: planet.z, scantype: number_type, active: true, tick: last_tick.id, requester_id: current_member.id });
             scanreq = await scanreq.save();
-
+            
+            var dscan = await Scan.findOne({planet_id:planet.id,scantype:3}).sort({tick:-1});
+            var dev = null;
+            if(dscan != null) {
+              dev = await DevelopmentScan.findOne({scan_id:dscan.id});
+            }
             //######################################################################################
-            let txt = `[${scanreq.id}] ${current_member.panick} requested a ${config.pa.scantypes[scanreq.scantype]} Scan of ${scanreq.x}:${scanreq.y}:${scanreq.z} Dists(i:intel/r:${typeof(scanreq.dists) != 'undefined' ? scanreq.dists : "?"})`;
+            let txt = `[${scanreq.id}] ${current_member.panick} ` + 
+              `requested a ${config.pa.scantypes[scanreq.scantype]} Scan of ${scanreq.x}:${scanreq.y}:${scanreq.z} ` + 
+              `Dists(i:${dev != null ? dev.wave_distorter : "?"}/r:${typeof(scanreq.dists) != 'undefined' ? scanreq.dists : "?"})\n` + 
+              `https://game.planetarion.com/waves.pl?id=${scanreq.scantype}&x=${scanreq.x}&y=${scanreq.y}&z=${scanreq.z}`;
 
             let msg = new BotMessage({ id:crypto.randomBytes(8).toString("hex"), group_id: config.groups.scans, 
               message: txt, 
@@ -85,10 +95,19 @@ var Scans_cancel = (args, current_member) => {
   });
 };
 
+var Scans_links_usage = entities.encode();
+var Scans_links_desc = 'Shows a list of scan requests';
+var Scans_links = (args) => {
+  return new Promise(async (resolve, reject) => {
+    resolve('Coming Soon');
+    
+  });
+};
 
 module.exports = {
   "req": { usage: Scans_req_usage, description: Scans_req_desc, cast: Scans_req, include_member: true },
   "scan": { usage: Scans_scan_usage, description: Scans_scan_desc, cast: Scans_scan },
   "cancel": { usage: Scans_cancel_usage, description: Scans_cancel_desc, cast: Scans_cancel, include_member: true },
+  "links" : { usage: Scans_links_usage, description: Scans_links_desc, access: access.scannerRequired, cast: Scans_links }
 };
 

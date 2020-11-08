@@ -4,9 +4,12 @@ var Member = require('../models/member');
 var Tick = require('../models/tick');
 var GalMate = require('../models/galmate');
 var BotMessage = require('../models/botmessage');
+var Scan = require('../models/scan');
 var moment = require('moment');
 const util = require('util');
 const url = require('url');
+const bent = require('bent');
+const getStream = bent('string');
 
 var spells = {};
 Object.assign(spells, require(`./spells/admin`));
@@ -44,9 +47,7 @@ db.connection.once("open", () => {
     for(let [key, value] of Object.entries(spells)) {
       //console.log('SPELL ENTRIES:' + util.inspect(value, false, null, true));
       
-      if(typeof(spells[key].access) != 'undefined' && (mem == null || (mem != null && !spells[key].access(mem)))) {
-        
-      } else {
+      if(!(typeof(spells[key].access) != 'undefined' && (mem == null || (mem != null && !spells[key].access(mem))))) {
         commands += (`<b>${key}:</b> <i>${value.description}</i>\n`);
       }
     }
@@ -65,6 +66,36 @@ db.connection.once("open", () => {
   bot.on('text', async (ctx) => {
     console.log(ctx.message);
     
+    //parse scans
+    if(ctx.message && ctx.message.text && ctx.message.entities && Array.isArray(ctx.message.entities)) {
+      for(var entity in ctx.message.entities) {
+        if(ctx.message.entities[entity].type == 'url') {
+          var link = ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length);
+          console.log(`LINK: ${link}`);
+          
+          var matches = link.match(/showscan.pl\?scan_id=([a-z0-9]+)/i);
+          console.log(`MATCHES: ${matches}`);
+          if(Array.isArray(matches) && matches[1].length > 0) {
+            var exists = await Scan.exists({id:matches[1]});
+            if(!exists) {
+              let start_time = Date.now();
+              let scanurl = url.parse(config.pa.links.scans + '?scan_id=' + matches[1], true);
+              let page_content = await getStream(scanurl.href);
+              console.log(`Loaded scan from webserver in: ${Date.now() - start_time}ms`);
+              
+              try {
+                let result = await Scan.parse(ctx.from.id, scanurl.query.scan_id, null, page_content);
+                console.log('SUCCESS: ' + result);
+              } catch(err) {
+                console.log('ERROR: ' + err);
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    //parse commands
     if(ctx.message && ctx.message.text && (ctx.message.text.startsWith(config.bot.private_cmd) || ctx.message.text.startsWith(config.bot.public_cmd))) {
       var mem = await Member.findOne({id: ctx.from.id});
       var gm8 = await GalMate.findOne({id: ctx.from.id});
@@ -88,33 +119,31 @@ db.connection.once("open", () => {
             var promise = null;
             if(spells[cmd].include_member) {
               promise = spells[cmd].cast(args, mem);
-            } else if(spells[cmd].include_telegraf) {
-              promise = spells[cmd].cast(args, bot);
+            } else if(spells[cmd].include_ctx) {
+              promise = spells[cmd].cast(args, ctx);
             } else {
               promise = spells[cmd].cast(args);
             }
-            promise.then(
-              function(message) {
-                console.log(`Reply: ${message}`);
-                if(ctx.message.text.startsWith(config.bot.public_cmd)) {
-                  if(spells[cmd].send_as_video) {
-                    ctx.telegram.sendVideo(ctx.chat.id, message);
-                  } else {
-                    ctx.replyWithHTML(message, Extra.inReplyTo(ctx.message.message_id));  
-                  }
-                } else if(ctx.message.text.startsWith(config.bot.private_cmd)) {
-                  if(spells[cmd].send_as_video) {
-                    ctx.telegram.sendVideo(ctx.message.from.id, message);
-                  } else {
-                    ctx.telegram.sendMessage(ctx.message.from.id, message, Extra.HTML().markup());
-                  }
+            promise.then((message) => {
+              console.log(`Reply: ${message}`);
+              if((typeof(spells[cmd].reply_private) == 'undefined' || !spells[cmd].reply_private) && ctx.message.text.startsWith(config.bot.public_cmd)) {
+                if(spells[cmd].send_as_video) {
+                  ctx.telegram.sendVideo(ctx.chat.id, message);
+                } else {
+                  ctx.replyWithHTML(message, Extra.inReplyTo(ctx.message.message_id));  
                 }
-              },
-              function(error) {
-                console.log(`Error: ${error}`);
-                ctx.replyWithHTML(error, Extra.inReplyTo(ctx.message.message_id));
+              } else if(spells[cmd].reply_private || ctx.message.text.startsWith(config.bot.private_cmd)) {
+                if(spells[cmd].send_as_video) {
+                  ctx.telegram.sendVideo(ctx.message.from.id, message);
+                } else {
+                  ctx.telegram.sendMessage(ctx.message.from.id, message, Extra.HTML().markup());
+                }
               }
-            );
+            }).catch((error) => {
+              //console.log(`Error: ${error}`);
+              //console.log(`Usage: ${spells[cmd].usage}`);
+              ctx.replyWithHTML(error, Extra.inReplyTo(ctx.message.message_id));
+            });
           }
         }
       }
@@ -132,7 +161,7 @@ db.connection.once("open", () => {
     //console.log('Messages: ' + util.inspect(msgs, false, null, true));
     if(msgs) {
       for(let msg in msgs) {
-        console.log('Message: ' + util.inspect(msgs[msg], false, null, true));
+        //console.log('Message: ' + util.inspect(msgs[msg], false, null, true));
         var res = await BotMessage.updateOne({id:msgs[msg].id}, {sent:true});
         if(res) {
           //console.log('Sent: ' + util.inspect(res, false, null, true));
@@ -143,23 +172,4 @@ db.connection.once("open", () => {
   }, config.bot.message_interval * 1000);
 
 });
-
-
-
-var hasAccess = (member, required_access) => {
-  var allowed = false;
-  switch(required_access) {
-    case 'Administrator':
-      if(member.access == 5) { allowed = true; }
-      break;
-    case 'Commander':
-      if(member.access >= 3) { allowed = true; }
-      break;
-    case 'Member':
-      if(member.access >= 1) { allowed = true; }
-      break;
-  }
-  return allowed;
-};
-
 

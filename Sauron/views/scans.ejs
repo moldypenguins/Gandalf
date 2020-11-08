@@ -1,78 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <%- include("templates/head", {page_title: "Scans", page_description: "Scans"}); %>
-</head>
-<body class="page-scans">
-<header>
-    <%- include("templates/header"); %>
-</header>
-<main>
-    <div class="container">
+  <head>
+<%- include("templates/head", {page_title: "Scans", page_description: "Scans"}); %>
+  </head>
+  <body>
+    <header>
+<%- include("templates/header"); %>
+    </header>
+    <main>
+      <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
-                <div class="content">
-                    <h2>Scanners</h2>
-                    <table class="table table-sm">
-                        <thead>
-                        <tr>
-                            <th class="text-left nowrap" scope="col">Scanner</th>
-                            <th class="text-left nowrap" scope="col">Time Zone</th>
-                            <th class="text-left nowrap" scope="col">Race</th>
-                            <th class="text-left nowrap" scope="col">Research</th>
-                            <th class="text-left nowrap" scope="col">Amps</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <% for(var i = 0; i < scanners.length; i++) { %>
-                            <% var race = scanners[i].planet && scanners[i].planet.race ? scanners[i].planet.race : "Unknown"; %>
-                            <% var raceClass = scanners[i].planet ? " class=" + scanners[i].planet.race.toLowerCase() : ""; %>
-                            <% var tech = scanners[i].scans.d && scanners[i].scans.d.scan ? scantypes[scanners[i].scans.d.scan.waves + 1] : "Unknown"; %>
-                            <% var amps = scanners[i].scans.d && scanners[i].scans.d.scan ? scanners[i].scans.d.scan.wave_amplifier : "Unknown"; %>
-                            <tr>
-                                <td><%= scanners[i].panick %></td>
-                                <td><%= scanners[i].timezone %></td>
-                                <td<%= raceClass %>><%= race %></td>
-                                <td><%= tech %></td>
-                                <td><%= amps %></td>
-                            </tr>
-                        <% } %>
-                        </tbody>
-                    </table>
-                </div>
+          <div class="col-12">
+            <div class="content">
+              <h2>Scanners</h2>
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th class="text-left nowrap" scope="col">Scanner</th>
+                    <th class="text-left nowrap" scope="col">Time Zone</th>
+                    <th class="text-left nowrap" scope="col">Race</th>
+                    <th class="text-left nowrap" scope="col">Research</th>
+                    <th class="text-left nowrap" scope="col">Amps</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i = 0; i < scanners.length; i++) { %>
+                    <% var race = scanners[i].planet && scanners[i].planet.race ? scanners[i].planet.race : "Unknown"; %>
+                    <% var raceClass = scanners[i].planet ? " class=" + scanners[i].planet.race.toLowerCase() : ""; %>
+                    <% var tech = scanners[i].scans.d && scanners[i].scans.d.scan ? scantypes[scanners[i].scans.d.scan.waves + 1] : "Unknown"; %>
+                    <% var amps = scanners[i].scans.d && scanners[i].scans.d.scan ? scanners[i].scans.d.scan.wave_amplifier : "Unknown"; %>
+                  <tr><td><%= scanners[i].panick %></td><td><%= scanners[i].timezone %></td><td<%= raceClass %>><%= race %></td><td><%= tech %></td><td><%= amps %></td></tr>
+                  <% } %>
+                </tbody>
+              </table>
             </div>
-            <% if(member.isADM || member.isSCNR) { %>
-                <div class="col-12">
-                    <div class="content">
-                        <h2>Scan Requests</h2>
-                        <table class="table table-sm">
-                            <thead>
-                            <tr>
-                                <th class="text-left nowrap" scope="col">ID</th>
-                                <th class="text-left nowrap" scope="col">Coords</th>
-                                <th class="text-left nowrap" scope="col">Type</th>
-                                <th class="text-left nowrap" scope="col">Link</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <% for(var i = 0; i < requests.length; i++) { %>
-                                <tr>
-                                    <td><%= requests[i].id %></td>
-                                    <td>4:9:4</td>
-                                    <td>JGP</td>
-                                    <td><a href="">Scan</a></td>
-                                </tr>
-                            <% } %>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            <% } %>
+          </div>
+          <% if(member.isADM || member.isSCNR) {%>
+          <div class="col-12">
+            <div class="content">
+              <h2>Scan Requests</h2>
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th class="text-left nowrap" scope="col">ID</th>
+                    <th class="text-left nowrap" scope="col">Coords</th>
+                    <th class="text-left nowrap" scope="col">Type</th>
+                    <th class="text-left nowrap" scope="col">Link</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i = 0; i < requests.length; i++) { %>
+                  <tr><td><%= requests[i].id %></td><td><%= requests[i].x %>:<%= requests[i].y %>:<%= requests[i].z %></td><td><%= scantypes[requests[i].scantype] %></td><td><a href="https://game.planetarion.com/waves.pl?id=<%= requests[i].scantype %>&x=<%= requests[i].x %>&y=<%= requests[i].y %>&z=<%= requests[i].z %>">Scan</a></td></tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <% } %>
         </div>
-    </div>
-</main>
-<footer>
-    <%- include("templates/footer"); %>
-</footer>
-</body>
+      </div>
+    </main>
+    <footer>
+<%- include("templates/footer"); %>
+    </footer>
+  </body>
 </html>

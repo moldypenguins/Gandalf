@@ -32,32 +32,9 @@ router.post('/scans', async (req, res, next) => {
           if(scanurl.query.scan_id != undefined) {
             try {
               let result = await Scan.parse(res.locals.member.id, scanurl.query.scan_id, null, page_content);
-              // check if any outstanding scan requests for this!!
-console.log(`checking scan requests: ${JSON.stringify(result)}`);
-              let requests = await ScanRequests.find({active:true,planet_id:result.planet_id, scantype: result.scantype});
-              if (requests && requests.length > 0 && result) {
-console.log(`found a good request`);
-                for(var request of requests) {
-console.log(`iterating over requests: ${JSON.stringify(request)}`);
-                  // find the planet and send the message to whoever requested it
-                  let planet = await Planet.findOne({id: request.planet_id});
-                  if (planet && planet.id) {
-console.log(`found planet for scan request ${planet.x}:${planet.y}:${planet.z}`);
-                    let text = `Your ${config.pa.scantypes[result.scantype]} request for ${planet.x}:${planet.y}:${planet.z} has been fullfilled: https://game.planetarion.com/showscan.pl?scan_id=${result.id}`;
-console.log(`sending text: ${text}`);
-                    let msg = new BotMessage({id:db.Types.ObjectId(), group_id: request.requester_id, message: text, sent: false});
-                    await msg.save();
-                    // turn it off
-                    request.active = false;
-console.log(`set request to false`);
-                    await request.save();
-console.log(`saved.`);
-                  }
-                }
-              }
               //console.log('RESULT: ' + result);
             } catch(err) {
-              console.log(`Error: hijklmnop ${err}`);
+              console.log(`Error: ${err}`);
             }
           }
         }

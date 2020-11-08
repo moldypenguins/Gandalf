@@ -14,6 +14,7 @@ const access = require('../access');
 const url = require("url");
 const moment = require('moment');
 const util = require('util');
+const crypto = require("crypto");
 const bent = require('bent');
 const getStream = bent('string');
 
@@ -102,7 +103,7 @@ router.post('/parse', async (req, res, next) => {
                 // find the planet and send the message to whoever requested it
                 let planet = await Planet.findOne({id: request.planet_id});
                 let text = `Your scan request for ${planet.x}:${planet.y}:${planet.z} has been fullfilled: https://game.planetarion.com/showscan.pl?scan_id=${result.id}`;
-                let msg = new BotMessage({id:db.Types.ObjectId(), group_id: request.requester_id, message: text, sent: false});
+                let msg = new BotMessage({id:crypto.randomBytes(8).toString("hex"), group_id: request.requester_id, message: text, sent: false});
                 await msg.save();
                 // turn it off
                 request.active = false;

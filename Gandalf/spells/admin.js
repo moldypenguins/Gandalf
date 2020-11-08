@@ -5,18 +5,25 @@ const moment = require('moment');
 const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
 
-const util = require('util');
+//const util = require('util');
 
-var Admin_leavechat_usage = entities.encode('!leavechat <chat id>');
+var Admin_leavechat_usage = entities.encode('!leavechat [chat id]');
 var Admin_leavechat_desc = 'Leaves a group, supergroup, or channel.';
-var Admin_leavechat = (args, bot) => {
+var Admin_leavechat = (args, ctx) => {
   return new Promise(async (resolve, reject) => {
-    if (!Array.isArray(args) || args.length < 1) { reject(Admin_leavechat_usage); }
-    bot.telegram.leaveChat(args[0]).then((result) => {
-      console.log('RESULT:' + util.inspect(result, false, null, true));
-      resolve(result);
+    var chatid;
+    if (args == null || args.length == 0) {
+      chatid = ctx.chat.id;
+    } else if (args.length > 0) {
+      chatid = args[0];
+    }
+    //console.log('CHATID:' + util.inspect(chatid, false, null, true));
+    if(!chatid) {reject(Admin_leavechat_usage);}
+    ctx.telegram.leaveChat(chatid).then((result) => {
+      //console.log('RESULT:' + util.inspect(result, false, null, true));
+      resolve(`left the group ${chatid}`);
     }).catch((error) => {
-      reject(error);
+      reject(`unable to leave the group ${chatid}`)
     });
     
   });
@@ -24,5 +31,5 @@ var Admin_leavechat = (args, bot) => {
 
 
 module.exports = {
-  "leavechat": { usage: Admin_leavechat_usage, description: Admin_leavechat_desc, access: access.adminRequired, cast: Admin_leavechat, include_telegraf: true },
+  "leavechat": { usage: Admin_leavechat_usage, description: Admin_leavechat_desc, access: access.adminRequired, cast: Admin_leavechat, include_ctx: true, reply_private: true },
 };

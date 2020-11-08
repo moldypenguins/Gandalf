@@ -4,9 +4,12 @@ const Planet = require('../models/planet');
 const PlanetScan = require('../models/scan-planet');
 const DevelopmentScan = require('../models/scan-development');
 const UnitScan = require('../models/scan-unit');
+const ScanRequest = require('../models/scan-request');
 const Ship = require('../models/ship');
+const BotMessage = require('../models/botmessage');
 const numeral = require('numeral');
 const util = require('util');
+const crypto = require("crypto");
 
 var scanSchema = mongoose.Schema({
   id: {type:String, unique:true, required:true},
@@ -121,6 +124,30 @@ scanSchema.statics.parse = async (member_id, scan_id, group_id, page_content) =>
               break;
           }
           rslt = saved;
+          
+          // check if any outstanding scan requests for this!!
+          let requests = await ScanRequest.find({active:true,planet_id:saved.planet_id, scantype: saved.scantype});
+          if (requests && requests.length > 0) {
+            console.log(`found a good request`);
+            for(var request of requests) {
+              console.log(`iterating over requests: ${JSON.stringify(request)}`);
+              // find the planet and send the message to whoever requested it
+              let planet = await Planet.findOne({id: request.planet_id});
+              if (planet && planet.id) {
+                console.log(`found planet for scan request ${planet.x}:${planet.y}:${planet.z}`);
+                let text = `Your ${config.pa.scantypes[saved.scantype]} request for ${planet.x}:${planet.y}:${planet.z} has been fullfilled: https://game.planetarion.com/showscan.pl?scan_id=${saved.id}`;
+                console.log(`sending text: ${text}`);
+                let msg = new BotMessage({id:crypto.randomBytes(8).toString("hex"), group_id: request.requester_id, message: text, sent: false});
+                await msg.save();
+                // turn it off
+                request.active = false;
+                console.log(`set request to false`);
+                await request.save();
+                console.log(`saved.`);
+              }
+            }
+          }
+          
         }
       } catch (err) {
         console.log('Error in scans parsing: ' + err);
