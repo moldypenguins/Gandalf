@@ -37,8 +37,7 @@
 [![http-errors](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=http-errors&message=v1.9.1&color=CB3837)](https://github.com/jshttp/http-errors) [![npm version](https://img.shields.io/npm/v/http-errors?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/http-errors)  
 [![url](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=url&message=v0.11.0&color=CB3837)](https://github.com/defunctzombie/node-url) [![npm version](https://img.shields.io/npm/v/url?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/url)  
 [![ejs](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=EJS&message=v3.1.5&color=CB3837)](https://github.com/mde/ejs) [![npm version](https://img.shields.io/npm/v/ejs?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/ejs)  
- 
-[![request](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=request&message=v2.88.2&color=CB3837)](https://github.com/request/request) [![npm version](https://img.shields.io/npm/v/request?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/request) (Deprecated - replaced with bent?)  
+
 
 
 ## Installation
