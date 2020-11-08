@@ -22,7 +22,7 @@ function buildStyles() {
 		.pipe(plumber()) // Global error listener.
 		.pipe(sass({outputStyle: 'compressed'}))
 		.pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7']))
-		.pipe(dest('public/styles'))
+		.pipe(dest('../public/styles'))
 }
 
 // Watch changes on all *.scss files and trigger buildStyles() at the end.

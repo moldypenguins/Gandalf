@@ -12,9 +12,9 @@
     <%- include("templates/header"); %>
 </header>
 <main>
-    <div class="container">
-        <div class="row">
-            <% if(page == "att") { %>
+    <% if(page == "att") { %>
+        <div class="container-fluid">
+            <div class="row">
                 <%
                     var attacker = "";
                     if(member.planet != null) {
@@ -269,14 +269,28 @@
                 <% } %>
                 <div class="col-12">
                     <div class="content">
+                        <script>
+													$(function () {
+														$('#table-targets').DataTable({
+															"paging": false,
+															"info": false,
+															"dom": '<"toolbar">frtip',
+															"scrollX": true,
+														});
+													});
+                        </script>
+
                         <% if(member.isADM || member.isHC || member.isBC) { %>
-                            <div class="btn-box"><a class="btn btn-sm btn-warning"
-                                                    href="/att/edit/<%= attack.hash %>"><i class="fas fa-pen"
-                                                                                           aria-hidden="true"></i></a>
-                            </div>
+                            <script>
+															$(function () {
+																$(".page-attack div.toolbar").html('<a class="btn btn-sm btn-warning" href="/att/edit/<%= attack.hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>');
+																$('#table-targets_filter').addClass('is-admin');
+															});
+                            </script>
                         <% } %>
+
                         <h2>Attack <%= attack.id %></h2>
-                        <table class="table table-sm table-striped table-targets">
+                        <table id="table-targets" class="table table-sm table-striped table-targets">
                             <thead>
                             <tr>
                                 <th rowspan="2" scope="col">Coords</th>
@@ -600,20 +614,26 @@
                     </div>
                 </div>
                 <% if(member.isCMDR || member.isSCNR) { %>
-                    <div class="col-12">
-                        <div class="content">
-                            <table class="table table-sm table-striped table-members">
-                                <tbody>
-                                <tr>
-                                    <% targets.forEach(function(trg) { %><%= trg.x %>:<%= trg.y %>:<%= trg.z %>
-                                    <% }); %>
-                                </tr>
-                                </tbody>
-                            </table>
+                    <div class="col-6 col-sm-12">
+                        <div  id="coords-list-wrapper" class="content">
+                            <label for="coords-list">Copy coords:</label>
+                            <div class="input-group input-group-sm">
+                                <input id="coords-list" value="<% targets.forEach(function(trg) { %><%= trg.x %>:<%= trg.y %>:<%= trg.z %> <% }); %>"  readonly="readonly">
+                                <div class="input-group-append">
+                                    <button class="btn btn-sm btn-primary clipboard-button" data-clipboard-target="#coords-list">
+                                        <i class="fas fa-clipboard"></i>
+                                    </button>
+                                </div>
+                                <script>new ClipboardJS('.clipboard-button');</script>
+                            </div>
                         </div>
                     </div>
                 <% } %>
-            <% } else if(page == "new" || page == "edit") { %>
+            </div>
+        </div>
+    <% } else if(page == "new" || page == "edit") { %>
+        <div class="container">
+            <div class="row">
                 <div class="col-12">
                     <div class="content">
                         <form method="POST"
@@ -730,7 +750,7 @@
                                                 </div>
                                                 <input type="text" name="coords" id="coords" class="form-control"
                                                        aria-describedby="label-coords"/>
-                                                <div class="input-group-prepend">
+                                                <div class="input-group-append">
                                                     <button id="add" class="btn btn-success" type="submit" name="add"><i
                                                                 class="fas fa-plus" aria-hidden="true"></i></button>
                                                 </div>
@@ -779,7 +799,11 @@
                         </div>
                     </div>
                 <% } %>
-            <% } else { %>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="container">
+            <div class="row">
                 <div class="col-12">
                     <div class="content">
                         <h2>Live attacks</h2>
@@ -849,17 +873,13 @@
                         </table>
                     </div>
                 </div>
-            <% } %>
+            </div>
         </div>
-    </div>
+    <% } %>
+
 </main>
 <footer>
     <%- include("templates/footer"); %>
 </footer>
-<script>
-	$(function () {
-		$('.table').DataTable({"paging": false, "info": false});
-	});
-</script>
 </body>
 </html>

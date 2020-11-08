@@ -1,0 +1,59 @@
+.ter {
+  color: $col-terran;
+}
+
+.cat {
+  color: $col-cathaar;
+}
+
+.xan {
+  color: $col-xandathrii;
+}
+
+.zik {
+  color: $col-zikonian;
+}
+
+.etd {
+  color: $col-eitraides;
+}
+
+//
+
+.relations_war {
+  background: rgba($color-negative, .25);
+}
+
+.relations_hostile {
+  background: rgba($color-negative, .125);
+}
+
+.relations_brokennap {
+  background: rgba($color-broken, .2);
+}
+
+.relations_nap {
+  background: rgba($color-neutral, .2);
+}
+
+.relations_friendly {
+  background: rgba($color-positive, .15);
+}
+
+.relations_allied {
+  background: rgba($color-positive, .35);
+}
+
+.relations_own_member {
+  background: rgba($color-own, .25);
+}
+
+//
+//$col-killed: #f44;
+//$col-emp: #41c9ff;
+//$col-stolen: orange;
+////
+//$col-gc: #0080ff;
+//$col-moc: #8081ff;
+//$col-mow: #f44;
+//$col-mod: #00b500;

@@ -8,6 +8,10 @@ body {
   background-image: url('../images/bg/light.jpg');
 }
 
+main {
+  padding-top: 2rem;
+}
+
 
 .no-wrap {
   white-space: nowrap;
@@ -38,18 +42,7 @@ body {
 //}
 
 
-.dataTables_wrapper {
-  .row {
-	margin: 0;
-	width: 100%;
-	overflow-x: auto;
 
-	[class^="col"] {
-	  padding: 0;
-	  position: static;
-	}
-  }
-}
 
 
 

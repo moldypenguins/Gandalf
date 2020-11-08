@@ -55,7 +55,7 @@
   //&:last-child {
   //  .input-group-text {
   //	&:not(:last-child) {
-  //	  border-color: #454d55;
+  //	  border-color: $col-black;
   //	  background-color: #343a40;
   //	  color: #fff;
   //	}
@@ -63,7 +63,7 @@
   //}
   //
   //&:not(:last-child) > [class^="input-group-"] {
-  //  border-color: #454d55;
+  //  border-color: $col-black;
   //  background-color: #343a40;
   //  color: #fff;
   //}
@@ -71,7 +71,7 @@
 
   > .input-group-prepend {
 	> [class^="input-group-"] {
-	  border: 1px solid #454d55;
+	  border: 1px solid $col-black;
 	  background-color: #343a40;
 	  color: #fff;
 	  font-weight: bold;
@@ -130,4 +130,20 @@
 .input-group-prepend {
   width: 100px;
 
+}
+
+
+input,
+select,
+textarea {
+  &:focus {
+	border-color: $col-black !important;
+	outline: 0 !important;
+	box-shadow: inset 0 0 4px 0 rgba($col-black, .25) !important;
+  }
+}
+
+input#coords-list {
+  width: 80%;
+  max-width: 600px;
 }

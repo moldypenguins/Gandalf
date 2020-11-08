@@ -59,4 +59,91 @@ table,
   }
 }
 
+#table-targets_wrapper {
+  display: flex;
+  flex-wrap: wrap;
 
+  .toolbar {
+	flex: 40px;
+	order: 2;
+  }
+
+  #table-targets_filter {
+	flex: 100%;
+	order: 1;
+
+	&.is-admin {
+	  flex: calc(100% - 48px);
+	  margin-right: 8px;
+	}
+  }
+
+  .dataTables_scroll {
+	width: 100%;
+	order: 3;
+  }
+}
+
+
+.dataTables_wrapper {
+  display: table;
+  margin: 0 auto;
+
+  .row {
+	margin: 0;
+	width: 100%;
+	overflow-x: auto;
+
+	[class^="col"] {
+	  padding: 0;
+	  position: static;
+	}
+  }
+
+  .dataTables_length,
+  .dataTables_filter {
+	font-size: .8rem;
+
+  }
+
+  .dataTables_length,
+  .dataTables_filter {
+	select,
+	input {
+	  font-size: .8rem;
+	  height: unset;
+	  padding: .25rem 1rem .25rem .5rem;
+	}
+  }
+
+  .dataTables_length {
+	text-align: left;
+  }
+
+  .dataTables_filter {
+	padding-right: .5rem;
+  }
+
+
+  ul.pagination {
+	font-size: 0.7rem;
+
+	li {
+	  a {
+		&.page-link {
+		  color: $col-black;
+		}
+	  }
+
+	  &.active {
+		a {
+		  &.page-link {
+			background-color: $col-black;
+			border-color: #343a40;
+			color: #fff;
+		  }
+		}
+	  }
+	}
+  }
+}

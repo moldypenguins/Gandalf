@@ -17,7 +17,7 @@
                             <h2><%= planet.rulername %> of <%= planet.planetname %></h2>
                         <% } else { %>
                             <h2>Planets</h2>
-                            <table class="table table-sm table-striped">
+                            <table id="table-planets" class="table table-sm table-striped table-bordered">
                                 <thead>
                                 <tr>
                                     <th scope="col">X</th>
@@ -40,7 +40,7 @@
                                         <td><%= planets[i].z %></td>
                                         <td><%= planets[i].planetname %></td>
                                         <td><%= planets[i].rulername %></td>
-                                        <td><%= planets[i].race %></td>
+                                        <td class="<%= planets[i].race ? planets[i].race.toLowerCase() : '' %>"><%= planets[i].race %></td>
                                         <td><%= planets[i].size %></td>
                                         <td><%= planets[i].score %></td>
                                         <td><%= planets[i].value %></td>
@@ -49,6 +49,15 @@
                                 <% } %>
                                 </tbody>
                             </table>
+                            <script>
+															$(function () {
+																var table = $('#table-planets').DataTable({
+																	"paging": true,
+																	"info": false,
+																});
+																table.page.len(10).draw();
+															});
+                            </script>
                         <% } %>
                     </div>
                 </div>
@@ -59,7 +68,7 @@
                             <h2><%= galaxy.name %></h2>
                         <% } else { %>
                             <h2>Galaxies</h2>
-                            <table class="table table-sm table-striped">
+                            <table id="table-galaxy" class="table table-sm table-striped table-bordered">
                                 <thead>
                                 <tr>
                                     <th scope="col">X</th>
@@ -85,6 +94,15 @@
                                 <% } %>
                                 </tbody>
                             </table>
+                            <script>
+															$(function () {
+																var table = $('#table-galaxy').DataTable({
+																	"paging": true,
+																	"info": false,
+																});
+																table.page.len(10).draw();
+															});
+                            </script>
                         <% } %>
                     </div>
                 </div>
@@ -95,7 +113,7 @@
                             <h2>Cluster <%= cluster.x %></h2>
                         <% } else { %>
                             <h2>Clusters</h2>
-                            <table class="table table-sm table-striped">
+                            <table id="table-cluster" class="table table-sm table-striped table-bordered">
                                 <thead>
                                 <tr>
                                     <th scope="col">X</th>
@@ -117,6 +135,14 @@
                                 <% } %>
                                 </tbody>
                             </table>
+                            <script>
+															$(function () {
+																$('#table-cluster').DataTable({
+																	"paging": false,
+																	"info": false,
+																});
+															});
+                            </script>
                         <% } %>
                     </div>
                 </div>
@@ -127,7 +153,7 @@
                             <h2><%= alliance.name %></h2>
                         <% } else { %>
                             <h2>Alliances</h2>
-                            <table class="table table-sm table-striped">
+                            <table id="table-alliance" class="table table-sm table-striped table-bordered">
                                 <thead>
                                 <tr>
                                     <th scope="col">Name</th>
@@ -151,6 +177,14 @@
                                 <% } %>
                                 </tbody>
                             </table>
+                            <script>
+															$(function () {
+																$('#table-alliance').DataTable({
+																	"paging": false,
+																	"info": false,
+																});
+															});
+                            </script>
                         <% } %>
                     </div>
                 </div>
