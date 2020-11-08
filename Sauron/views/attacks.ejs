@@ -615,12 +615,12 @@
                 </div>
                 <% if(member.isCMDR || member.isSCNR) { %>
                     <div class="col-6 col-sm-12">
-                        <div  id="coords-list-wrapper" class="content">
-                            <label for="coords-list">Copy coords:</label>
+                        <div id="coords-list" class="content">
+                            <h3>Coordinates:</h3>
                             <div class="input-group input-group-sm">
-                                <input id="coords-list" value="<% targets.forEach(function(trg) { %><%= trg.x %>:<%= trg.y %>:<%= trg.z %> <% }); %>"  readonly="readonly">
+                                <input id="coords-list-content" value="<% targets.forEach(function(trg) { %><%= trg.x %>:<%= trg.y %>:<%= trg.z %> <% }); %>"  readonly="readonly">
                                 <div class="input-group-append">
-                                    <button class="btn btn-sm btn-primary clipboard-button" data-clipboard-target="#coords-list">
+                                    <button class="btn btn-sm btn-primary clipboard-button" data-clipboard-target="#coords-list-content">
                                         <i class="fas fa-clipboard"></i>
                                     </button>
                                 </div>

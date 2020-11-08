@@ -143,7 +143,14 @@ textarea {
   }
 }
 
-input#coords-list {
-  width: 80%;
-  max-width: 600px;
+#coords-list {
+  .input-group {
+	width: 80%;
+	max-width: 600px;
+	margin: 0 auto;
+
+	#coords-list-content {
+	  width: 100%;
+	}
+  }
 }

@@ -29,6 +29,21 @@ h2 {
   line-height: 100%;
 }
 
+h3 {
+  margin: 1rem 0;
+  font-size: .8rem;
+  padding: 8px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: black;
+  background: #fff;
+  background: linear-gradient(to right, transparent 0%, #ffffff 50%, transparent 100%);
+  border: 1px solid transparent;
+  border-image: linear-gradient(to right, transparent 0%, #ccc 50%, transparent 100%);
+  border-image-slice: 1;
+  line-height: 100%;
+}
+
 a {
   text-decoration: none;
 }
