@@ -54,7 +54,7 @@ Please use [GitHub Issues](https://github.com/moldypenguins/Gandalf/issues) for 
 
 
 ## Related Projects
-[Merlin](https://github.com/ellonweb/merlin)
+[Merlin](https://github.com/ellonweb/merlin) Copyright © 2008-2011 Robin K. Hansen, Elliot Rosemarine, Andreas Jacobsen
 
 
 ## Credits
