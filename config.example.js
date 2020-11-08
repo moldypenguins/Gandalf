@@ -8,10 +8,6 @@ module.exports = {
       default_waves:3,
       after_land_ticks:2,
       max_claims: 0  //0 for unlimited
-    },
-    fun:{
-      id:[Telegram id],
-      tries:5 //lower the number the higher the frequency
     }
   },
   bot:{

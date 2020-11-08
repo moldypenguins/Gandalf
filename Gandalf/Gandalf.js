@@ -82,9 +82,7 @@ db.connection.once("open", () => {
         } else if (cmd == "links") {
           links(ctx);
         } else if(cmd in spells && typeof(spells[cmd].cast) == 'function') {
-          if(ctx.message.from.id == config.alliance.fun.id && Math.floor(Math.random() * config.alliance.fun.tries) + 1 == config.alliance.fun.tries) {
-            ctx.replyWithHTML("<i>I don't wanna.</i>", Extra.inReplyTo(ctx.message.message_id));
-          } else if(typeof(spells[cmd].access) != 'undefined' && (mem == null || (mem != null && !spells[cmd].access(mem)))) {
+          if(typeof(spells[cmd].access) != 'undefined' && (mem == null || (mem != null && !spells[cmd].access(mem)))) {
             ctx.replyWithHTML('<i>You do not have sufficient privileges.</i>', Extra.inReplyTo(ctx.message.message_id));
           } else {
             var promise = null;
