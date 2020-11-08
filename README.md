@@ -12,10 +12,10 @@
 * [Licenses](#licenses)
 
 ## Requirements
-[![Node.js v12.16.3](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=v12.16.3&color=339933)](https://nodejs.org/)  
-[![MongoDB v4.4.1](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=v4.4.1&color=47A248)](https://www.mongodb.com/)  
+[![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=v8.10.0&color=339933)](https://nodejs.org/)  
+[![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=v4.2&color=47A248)](https://www.mongodb.com/)  
 [![Mongoose](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Mongoose%20ODM&message=v5.9.3&color=800800)](https://mongoosejs.com/) [![npm version](https://img.shields.io/npm/v/mongoose?style=for-the-badge&color=800800)](https://www.npmjs.com/package/mongoose)  
-[![telegraf.js](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=telegraf.js&message=v3.36.0&color=E74625)](https://telegraf.js.org/) [![npm version](https://img.shields.io/npm/v/telegraf?style=for-the-badge&color=E74625)](https://www.npmjs.com/package/telegraf) 
+[![telegraf.js](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=telegraf.js&message=v3.36.0&color=E74625)](https://telegraf.js.org/) [![npm version](https://img.shields.io/npm/v/telegraf?style=for-the-badge&color=E74625)](https://www.npmjs.com/package/telegraf)  
 [![twilio](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=twilio&message=v3.43.0&color=f22f46)](https://github.com/twilio/twilio-node) [![npm version](https://img.shields.io/npm/v/twilio?style=for-the-badge&color=f22f46)](https://www.npmjs.com/package/twilio)  
 [![Moment.js](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment.js&message=v2.24.0&color=222222)](https://momentjs.com/) [![npm version](https://img.shields.io/npm/v/moment?style=for-the-badge&color=222222)](https://www.npmjs.com/package/moment)  
 [![Moment Timezone](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=Moment%20Timezone&message=0.5.28&color=4e7cad)](https://momentjs.com/timezone) [![npm version](https://img.shields.io/npm/v/moment-timezone?style=for-the-badge&color=4e7cad)](https://www.npmjs.com/package/moment-timezone)  
