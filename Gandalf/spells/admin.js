@@ -1,8 +1,8 @@
 const config = require('../../config');
+const access = require('../access');
+const qs = require('querystring');
 const numeral = require('numeral');
 const moment = require('moment');
-const qs = require("querystring");
-const access = require('../access');
 
 var Admin_leavechat_usage = qs.encode('!leavechat <chat id>');
 var Admin_leavechat_desc = 'Leaves a group, supergroup, or channel.';

@@ -22,7 +22,6 @@
     "moment-timezone": "^0.5.28",
     "mongoose": "^5.9.3",
     "numeral": "^2.0.6",
-    "request": "^2.88.2",
     "telegraf": "^3.36.0"
   }
 }
