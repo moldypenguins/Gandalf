@@ -57,30 +57,66 @@ table,
 	  }
 	}
   }
+
+  &.dataTable {
+	&.table-sm {
+	  > thead {
+		> tr {
+		  > th {
+			:not(.sorting_disabled) {
+			  padding-right: .5rem;
+			  padding-left: .5rem;
+			}
+		  }
+
+		  > th,
+		  > td {
+			&.sorting_asc,
+			&.sorting_desc,
+			&.sorting {
+			  padding: .25rem 1rem;
+			}
+		  }
+		}
+	  }
+	}
+  }
 }
 
 #table-targets_wrapper {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+  position: relative;
 
   .toolbar {
-	flex: 40px;
-	order: 2;
+	width: 32px;
+	position: absolute;
+	right: 0;
   }
 
   #table-targets_filter {
-	flex: 100%;
-	order: 1;
+	width: 100%;
 
 	&.is-admin {
-	  flex: calc(100% - 48px);
-	  margin-right: 8px;
+	  width: calc(100% - 32px);
 	}
   }
 
-  .dataTables_scroll {
-	width: 100%;
-	order: 3;
+  #table-targets {
+	th,
+	td {
+	  text-align: center;
+
+	  &.sh {
+		width: 20px !important;
+	  }
+
+	  &.th-group {
+		background-color: #dee2e6;
+		text-align: center;
+	  }
+	}
   }
 }
 
@@ -144,6 +180,17 @@ table,
 		  }
 		}
 	  }
+	}
+  }
+}
+
+&.page-attack {
+  .dataTables_scrollBody {
+	box-shadow: 0 2px 10px 2px rgba(black, .15);
+
+	table,
+	.table {
+	  box-shadow: none;
 	}
   }
 }

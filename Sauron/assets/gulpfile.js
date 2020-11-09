@@ -1,6 +1,4 @@
 // Requires Gulp v4.
-// $ npm uninstall --global gulp gulp-cli
-// $ rm /usr/local/share/man/man1/gulp.1
 // $ npm install --global gulp-cli
 // $ npm install
 const {src, dest, watch, series, parallel} = require('gulp');

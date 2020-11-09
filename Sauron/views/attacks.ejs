@@ -112,7 +112,7 @@
                                                 <%= numeral(trg.scans.p.scan.prod_res + trg.scans.p.scan.ships_sold_res).format("0,0") %>
                                             <% } %>
                                         </td>
-                                        <td class="sd">
+                                        <td class="sd no-sort">
                                             <% if(typeof (trg.scans) != "undefined" && typeof (trg.scans.p) != "undefined" && typeof (trg.scans.p.scan) != "undefined") { %>
                                                 <% if(trg.scans.p.scan.factory_usage_light.toLowerCase() == "high") { %>
                                                     <i class="fas fa-thermometer-full text-danger"
@@ -128,7 +128,7 @@
                                                 <% } %>
                                             <% } %>
                                         </td>
-                                        <td class="sd">
+                                        <td class="sd no-sort">
                                             <% if(typeof (trg.scans) != "undefined" && typeof (trg.scans.p) != "undefined" && typeof (trg.scans.p.scan) != "undefined") { %>
                                                 <% if(trg.scans.p.scan.factory_usage_medium.toLowerCase() == "high") { %>
                                                     <i class="fas fa-thermometer-full text-danger"
@@ -144,7 +144,7 @@
                                                 <% } %>
                                             <% } %>
                                         </td>
-                                        <td class="sd">
+                                        <td class="sd no-sort">
                                             <% if(typeof (trg.scans) != "undefined" && typeof (trg.scans.p) != "undefined" && typeof (trg.scans.p.scan) != "undefined") { %>
                                                 <% if(trg.scans.p.scan.factory_usage_heavy.toLowerCase() == "high") { %>
                                                     <i class="fas fa-thermometer-full text-danger"
@@ -275,7 +275,12 @@
 															"paging": false,
 															"info": false,
 															"dom": '<"toolbar">frtip',
-															"scrollX": true,
+															"order": [],
+															"columnDefs": [{
+																"targets": 'no-sort',
+																"orderable": false,
+															}]
+
 														});
 													});
                         </script>
@@ -290,7 +295,7 @@
                         <% } %>
 
                         <h2>Attack <%= attack.id %></h2>
-                        <table id="table-targets" class="table table-sm table-striped table-targets">
+                        <table id="table-targets" class="table table-sm table-striped table-targets table-bordered">
                             <thead>
                             <tr>
                                 <th rowspan="2" scope="col">Coords</th>
@@ -298,29 +303,29 @@
                                 <th rowspan="2" scope="col">Size</th>
                                 <th rowspan="2" scope="col">Value</th>
                                 <th rowspan="2" scope="col">Score</th>
-                                <th rowspan="2" scope="col">A <strong>/</strong> D <strong>/</strong> R</th>
-                                <th colspan="6" scope="col">Anti</th>
-                                <th rowspan="2" scope="col">Ships</th>
-                                <th rowspan="2" scope="col">Stock <strong>/</strong> Prod</th>
-                                <th colspan="3" scope="col">Factories</th>
-                                <th rowspan="2" scope="col">Scans</th>
+                                <th rowspan="2" scope="col" class="no-sort">A <strong>/</strong> D <strong>/</strong> R</th>
+                                <th colspan="6" scope="col" class="no-sort th-group">Anti</th>
+                                <th rowspan="2" scope="col" class="no-sort">Ships</th>
+                                <th rowspan="2" scope="col" class="no-sort">Stock <strong>/</strong> Prod</th>
+                                <th colspan="3" scope="col" class="no-sort th-group">Factories</th>
+                                <th rowspan="2" scope="col" class="no-sort">Scans</th>
                                 <% for(var w = 0; w < attack.waves; w++) { %>
-                                    <th rowspan="2" scope="col">LT <%= attack.landtick + w %>
+                                    <th rowspan="2" scope="col" class="no-sort">LT <%= attack.landtick + w %>
                                         (<%= numeral(attack.landtick + w - tick.id).format("+0") %>)
                                     </th>
                                 <% } %>
-                                <th rowspan="2" scope="col">Intel</th>
+                                <th rowspan="2" scope="col" class="no-sort">Intel</th>
                             </tr>
                             <tr>
-                                <th class="sh" scope="col">FI</th>
-                                <th class="sh" scope="col">CO</th>
-                                <th class="sh" scope="col">FR</th>
-                                <th class="sh" scope="col">DE</th>
-                                <th class="sh" scope="col">CR</th>
-                                <th class="sh" scope="col">BS</th>
-                                <th class="sh" scope="col">L</th>
-                                <th class="sh" scope="col">M</th>
-                                <th class="sh" scope="col">H</th>
+                                <th class="sh no-sort" scope="col">FI</th>
+                                <th class="sh no-sort" scope="col">CO</th>
+                                <th class="sh no-sort" scope="col">FR</th>
+                                <th class="sh no-sort" scope="col">DE</th>
+                                <th class="sh no-sort" scope="col">CR</th>
+                                <th class="sh no-sort" scope="col">BS</th>
+                                <th class="sh no-sort" scope="col">L</th>
+                                <th class="sh no-sort" scope="col">M</th>
+                                <th class="sh no-sort" scope="col">H</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -331,7 +336,7 @@
                                     <td><%= targets[i].size %></td>
                                     <td><%= numeral(targets[i].value).format("0,0") %></td>
                                     <td><%= numeral(targets[i].score).format("0,0") %></td>
-                                    <td class="no-wrap">
+                                    <td class="no-wrap no-sort sorting_disabled">
                                         <% if(typeof (targets[i].scans) != "undefined" && typeof (targets[i].scans.d) != "undefined" && targets[i].scans.d != null && typeof (targets[i].scans.d.scan) != "undefined" && targets[i].scans.d.scan != null) { %>
                                             <span class="text-info"><%= targets[i].scans.d.scan.wave_amplifier %></span>
                                             <strong> / </strong><span
@@ -340,7 +345,7 @@
                                                     class="text-info"><%= scantypes[targets[i].scans.d.scan.waves + 1].charAt(0) %></span>
                                         <% } %>
                                     </td>
-                                    <td class="sd">
+                                    <td class="sd no-sort">
                                         <% if(typeof (targets[i].anti) != "undefined" && typeof (targets[i].anti.fi) != "undefined") { %>
                                             <% if(targets[i].anti.fi) { %>
                                                 <i class="fas fa-check text-success" aria-hidden="true"></i>
@@ -351,7 +356,7 @@
                                             <i class="fas fa-question text-warning" aria-hidden="true"></i>
                                         <% } %>
                                     </td>
-                                    <td class="sd">
+                                    <td class="sd no-sort">
                                         <% if(typeof (targets[i].anti) != "undefined" && typeof (targets[i].anti.co) != "undefined") { %>
                                             <% if(targets[i].anti.co) { %>
                                                 <i class="fas fa-check text-success" aria-hidden="true"></i>
@@ -362,7 +367,7 @@
                                             <i class="fas fa-question text-warning" aria-hidden="true"></i>
                                         <% } %>
                                     </td>
-                                    <td class="sd">
+                                    <td class="sd no-sort">
                                         <% if(typeof (targets[i].anti) != "undefined" && typeof (targets[i].anti.fr) != "undefined") { %>
                                             <% if(targets[i].anti.fr) { %>
                                                 <i class="fas fa-check text-success" aria-hidden="true"></i>
@@ -373,7 +378,7 @@
                                             <i class="fas fa-question text-warning" aria-hidden="true"></i>
                                         <% } %>
                                     </td>
-                                    <td class="sd">
+                                    <td class="sd no-sort">
                                         <% if(typeof (targets[i].anti) != "undefined" && typeof (targets[i].anti.de) != "undefined") { %>
                                             <% if(targets[i].anti.de) { %>
                                                 <i class="fas fa-check text-success" aria-hidden="true"></i>
@@ -384,7 +389,7 @@
                                             <i class="fas fa-question text-warning" aria-hidden="true"></i>
                                         <% } %>
                                     </td>
-                                    <td class="sd">
+                                    <td class="sd no-sort">
                                         <% if(typeof (targets[i].anti) != "undefined" && typeof (targets[i].anti.cr) != "undefined") { %>
                                             <% if(targets[i].anti.cr) { %>
                                                 <i class="fas fa-check text-success" aria-hidden="true"></i>
@@ -395,7 +400,7 @@
                                             <i class="fas fa-question text-warning" aria-hidden="true"></i>
                                         <% } %>
                                     </td>
-                                    <td class="sd">
+                                    <td class="sd no-sort">
                                         <% if(typeof (targets[i].anti) != "undefined" && typeof (targets[i].anti.bs) != "undefined") { %>
                                             <% if(targets[i].anti.bs) { %>
                                                 <i class="fas fa-check text-success" aria-hidden="true"></i>
@@ -406,7 +411,7 @@
                                             <i class="fas fa-question text-warning" aria-hidden="true"></i>
                                         <% } %>
                                     </td>
-                                    <td>
+                                    <td class="no-sort">
                                         <div class="btn-group btn-group-sm position-static" role="group"
                                              aria-label="Ships">
                                             <button class="btn btn-info dropdown-toggle" id="ships<%= targets[i].id %>"
@@ -425,14 +430,14 @@
                                             <% } %>
                                         </div>
                                     </td>
-                                    <td class="no-wrap">
+                                    <td class="no-wrap no-sort">
                                         <% if(typeof (targets[i].scans) != "undefined" && typeof (targets[i].scans.p) != "undefined" && targets[i].scans.p != null && typeof (targets[i].scans.p.scan) != "undefined" && targets[i].scans.p.scan != null) { %>
                                             <%= numeral(targets[i].scans.p.scan.res_metal + targets[i].scans.p.scan.res_crystal + targets[i].scans.p.scan.res_eonium).format("0,0") %>
                                             <strong>
                                                 / </strong><%= numeral(targets[i].scans.p.scan.prod_res + targets[i].scans.p.scan.ships_sold_res).format("0,0") %>
                                         <% } %>
                                     </td>
-                                    <td class="sd">
+                                    <td class="sd no-sort">
                                         <% if(typeof (targets[i].scans) != "undefined" && typeof (targets[i].scans.p) != "undefined" && targets[i].scans.p != null && typeof (targets[i].scans.p.scan) != "undefined" && targets[i].scans.p.scan != null) { %>
                                             <% if(targets[i].scans.p.scan.factory_usage_light.toLowerCase() == "high") { %>
                                                 <i class="fas fa-thermometer-full text-danger" aria-hidden="true"></i>
@@ -445,7 +450,7 @@
                                             <% } %>
                                         <% } %>
                                     </td>
-                                    <td class="sd">
+                                    <td class="sd no-sort">
                                         <% if(typeof (targets[i].scans) != "undefined" && typeof (targets[i].scans.p) != "undefined" && targets[i].scans.p != null && typeof (targets[i].scans.p.scan) != "undefined" && targets[i].scans.p.scan != null) { %>
                                             <% if(targets[i].scans.p.scan.factory_usage_medium.toLowerCase() == "high") { %>
                                                 <i class="fas fa-thermometer-full text-danger" aria-hidden="true"></i>
@@ -458,7 +463,7 @@
                                             <% } %>
                                         <% } %>
                                     </td>
-                                    <td class="sd">
+                                    <td class="sd no-sort">
                                         <% if(typeof (targets[i].scans) != "undefined" && typeof (targets[i].scans.p) != "undefined" && targets[i].scans.p != null && typeof (targets[i].scans.p.scan) != "undefined" && targets[i].scans.p.scan != null) { %>
                                             <% if(targets[i].scans.p.scan.factory_usage_heavy.toLowerCase() == "high") { %>
                                                 <i class="fas fa-thermometer-full text-danger" aria-hidden="true"></i>
@@ -471,7 +476,7 @@
                                             <% } %>
                                         <% } %>
                                     </td>
-                                    <td>
+                                    <td class="no-sort">
                                         <% if(typeof (targets[i].scans) != "undefined") { %>
                                             <div class="btn-group btn-group-sm position-static" role="group"
                                                  aria-label="Scans">
@@ -567,7 +572,7 @@
                                         <% var clm = claims.filter(c => c.wave == w && c.planet_id == targets[i].id); %>
                                         <% if(clm.length > 0) { %>
                                             <% if(clm[0].member_id == member.id) { %>
-                                                <td>
+                                                <td class="no-sort">
                                                     <form method="POST" action="/att/<%= attack.hash %>">
                                                         <input type="hidden" name="target"
                                                                value="<%= targets[i].id %>"/>
@@ -577,7 +582,7 @@
                                                     </form>
                                                 </td>
                                             <% } else if(member.isMEM) { %>
-                                                <td>
+                                                <td class="no-sort">
                                                     <%
                                                         var memname = clm[0].member_id;
                                                         for (var m = 0; m < members.length; m++) {
@@ -592,11 +597,11 @@
                                                     <%= memname %>
                                                 </td>
                                             <% } else { %>
-                                                <td class="claimed"><i class="fas fa-times-circle text-danger"
+                                                <td class="claimed no-sort"><i class="fas fa-times-circle text-danger"
                                                                        aria-hidden="true"></i></td>
                                             <% } %>
                                         <% } else { %>
-                                            <td>
+                                            <td  class="no-sort">
                                                 <form method="POST" action="/att/<%= attack.hash %>">
                                                     <input type="hidden" name="target" value="<%= targets[i].id %>"/>
                                                     <button class="btn btn-sm btn-primary" type="submit" name="claim"
@@ -606,7 +611,7 @@
                                             </td>
                                         <% } %>
                                     <% } %>
-                                    <td class="no-wrap">Name <strong>/</strong> Alliance</td>
+                                    <td class="no-wrap no-sort">Name <strong>/</strong> Alliance</td>
                                 </tr>
                             <% } %>
                             </tbody>
@@ -618,7 +623,7 @@
                         <div id="coords-list" class="content">
                             <h3>Coordinates:</h3>
                             <div class="input-group input-group-sm">
-                                <input id="coords-list-content" value="<% targets.forEach(function(trg) { %><%= trg.x %>:<%= trg.y %>:<%= trg.z %> <% }); %>"  readonly="readonly">
+                                <input id="coords-list-content" value="<% targets.forEach(function(trg) { %><%= trg.x %>:<%= trg.y %>:<%= trg.z %> <% }); %>" readonly="readonly">
                                 <div class="input-group-append">
                                     <button class="btn btn-sm btn-primary clipboard-button" data-clipboard-target="#coords-list-content">
                                         <i class="fas fa-clipboard"></i>
