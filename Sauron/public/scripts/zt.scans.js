@@ -65,17 +65,6 @@
   }
 
 
-  function postScanLinks(scan_ids) {
-    if(scan_ids.length > 0) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', 'https://ztpa.ca/parse/scans', true);
-      xhr.withCredentials = true;
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.send(JSON.stringify({scan_ids:scan_ids}));
-    }
-  }
-
-
   function unique(list) {
     var result = [];
     $j.each(list, function(i, e) {
@@ -114,6 +103,51 @@
       
     }
   }
+  
+  function postScanLinks(scan_ids) {
+    if(scan_ids.length > 0) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'https://ztpa.ca/parse/scans', true);
+      xhr.withCredentials = true;
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify({scan_ids:scan_ids}));
+    }
+  }
+    
+  function attemptScan(data) {
+    var urlRandomizer = Math.floor((Math.random() * 9999999999) + 1000000000);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://game.planetarion.com/waves.pl?rn=' + urlRandomizer, true);
+    xhr.withCredentials = true;
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("action=single_scan&scan_type=" + data.data.type + "&scan_x=" + data.data.x + "&scan_y=" + data.data.y + "&scan_z=" + data.data.z);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        if (xhr.responseText.indexOf("Invalid coords and/or scantype.") !== -1) {
+          alert("Invalid coords or scan type! Removing scan request!");
+          var reject = new XMLHttpRequest();
+          reject.open('POST', 'https://ztpa.ca/parse/reject', true);
+          reject.setRequestHeader("Content-Type", "application/json");
+          reject.send(JSON.stringify({id:data.data.id}));
+        } else if (xhr.responseText.indexOf("planet is too protected") !== -1) {
+          alert("Too many dists for you!");
+        } else if (xhr.responseText.indexOf("You can't scan before ticks start") !== -1) {
+          alert("Scans arent allowed before tick dummy!");
+        } else if (xhr.responseText.indexOf("The target planet is too well protected against scans, and you need more Wave Amplifiers to successfully scan") !== -1) {
+          alert("The target planet is too well protected against scans, and you need more Wave Amplifiers to successfully scan.");
+        } else {
+          var startText = "load('', 'show_scan', 'showscan.pl?scan_id=";
+          var endText = "&inc=1')";
+          var startIndex = xhr.responseText.indexOf(startText)+startText.length;
+          var endIndex = xhr.responseText.indexOf(endText);
+          var scanId = xhr.responseText.substring(startIndex, endIndex);
+          postScanLinks([scanId]);
+          sleepFor(2000);
+        }
+        initAllianceScanRequests();
+      }
+    };
+  }
 
 })(window);
 
@@ -151,38 +185,4 @@ function scanTypeToDisplay(number) {
   }
 }
 
-function attemptScan(data) {
-  var urlRandomizer = Math.floor((Math.random() * 9999999999) + 1000000000);
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'https://game.planetarion.com/waves.pl?rn=' + urlRandomizer, true);
-  xhr.withCredentials = true;
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xhr.send("action=single_scan&scan_type=" + data.data.type + "&scan_x=" + data.data.x + "&scan_y=" + data.data.y + "&scan_z=" + data.data.z);
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == XMLHttpRequest.DONE) {
-      if (xhr.responseText.indexOf("Invalid coords and/or scantype.") !== -1) {
-        alert("Invalid coords or scan type! Removing scan request!");
-        var reject = new XMLHttpRequest();
-        reject.open('POST', 'https://ztpa.ca/parse/reject', true);
-        reject.setRequestHeader("Content-Type", "application/json");
-        reject.send(JSON.stringify({id:data.data.id}));
-      } else if (xhr.responseText.indexOf("planet is too protected") !== -1) {
-        alert("Too many dists for you!");
-      } else if (xhr.responseText.indexOf("You can't scan before ticks start") !== -1) {
-        alert("Scans arent allowed before tick dummy!");
-      } else if (xhr.responseText.indexOf("The target planet is too well protected against scans, and you need more Wave Amplifiers to successfully scan") !== -1) {
-        alert("The target planet is too well protected against scans, and you need more Wave Amplifiers to successfully scan.");
-      } else {
-        var startText = "load('', 'show_scan', 'showscan.pl?scan_id=";
-        var endText = "&inc=1')";
-        var startIndex = xhr.responseText.indexOf(startText)+startText.length;
-        var endIndex = xhr.responseText.indexOf(endText);
-        var scanId = xhr.responseText.substring(startIndex, endIndex);
-        postScanLinks([scanId], function() {
-          sleepFor(2000);
-        });
-      }
-      initAllianceScanRequests();
-    }
-  };
-}
+

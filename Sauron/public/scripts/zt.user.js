@@ -110,10 +110,10 @@
         if($j(obj).children('td').length > 0) {
           switch($j(obj).children('td')[1].innerText) {
             case 'Attack':
-              $j(obj).children('td:not(:first)').addClass('attack');
+              $j(obj).children('td:not(:first)').addClass('mission_attack');
               break;
             case 'Defend':
-              $j(obj).children('td:not(:first)').addClass('defend');
+              $j(obj).children('td:not(:first)').addClass('mission_defend');
               break;
           }
         }
