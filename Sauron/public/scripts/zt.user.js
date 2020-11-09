@@ -57,28 +57,27 @@
     
     view = getUrlParameter('view');
     
-    if(page != 'bcalc') {
+    if(page != 'bcalc' && page != 'scan') {
       menu_updateMenu();
-      
-      switch(page) {
-        case 'overview':
-          overview_updateQuests();
-          break;
-        case 'galaxy':
-          galaxy_addNameToIntel();
-          break;
-        case 'scan':
-          scan_addFleetMissionColours();
-          break;
-        case 'fleets':
-          fleets_addLocalTime();
-          break;
-      }
-      
-      
-      
-      
     }
+    
+    switch(page) {
+      case 'overview':
+        overview_updateQuests();
+        break;
+      case 'galaxy':
+        galaxy_addNameToIntel();
+        break;
+      case 'scan':
+        scan_addFleetMissionColours();
+        break;
+      case 'fleets':
+        fleets_addLocalTime();
+        break;
+    }
+    
+    
+    
     
   } //end init()
 
