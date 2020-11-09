@@ -66,6 +66,9 @@ db.connection.once("open", () => {
   bot.on('text', async (ctx) => {
     console.log(ctx.message);
     
+    //parse channel
+    
+    
     //parse scans
     if(ctx.message && ctx.message.text && ctx.message.entities && Array.isArray(ctx.message.entities)) {
       for(var entity in ctx.message.entities) {
