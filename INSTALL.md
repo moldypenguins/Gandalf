@@ -93,6 +93,12 @@
   npm -v
   sudo apt install build-essential
   sudo npm install -g npx
+  sudo npm install -g nodemon
+  
+  
+  
+  
+  
   
   
   #setup
