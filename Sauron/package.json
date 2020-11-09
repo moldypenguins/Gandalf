@@ -9,6 +9,7 @@
     "@awaitjs/express": "^0.5.0",
     "@fortawesome/fontawesome-free": "^5.14.0",
     "bent": "^7.1.2",
+    "clipboard": "^2.0.6",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",

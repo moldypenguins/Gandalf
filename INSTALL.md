@@ -143,6 +143,10 @@
   sudo npm install --save @fortawesome/fontawesome-free
     ln -s /home/root/MiddleEarth/Sauron/node_modules/@fortawesome/fontawesome-free/webfonts/ /home/root/MiddleEarth/Sauron/public/
     ln -s /home/root/MiddleEarth/Sauron/node_modules/@fortawesome/fontawesome-free/css/all.min.css /home/root/MiddleEarth/Sauron/public/styles/
+    
+  sudo npm install --save clipboard
+    ln -s /home/root/MiddleEarth/Sauron/node_modules/clipboard/dist/clipboard.min.js /home/root/MiddleEarth/Sauron/public/scripts/
+  
   
   sudo npm install
   vi app.js
