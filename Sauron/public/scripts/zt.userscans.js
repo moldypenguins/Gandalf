@@ -83,6 +83,11 @@
       case 'fleets':
         fleets_addLocalTime();
         break;
+      case 'alliance_members':
+        var own_coords = $('#page a:contains("' + $('#header_planet').children('span').html().match(/\d+:\d+:\d+/)[0] + '")').parent('td');
+        own_coords.addClass('relations_own_member');
+        own_coords.siblings().addClass('relations_own_member');
+        break;
     }
     
     
