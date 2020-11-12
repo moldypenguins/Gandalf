@@ -1,19 +1,19 @@
-const config = require('../../config');
-const db = require('../../db');
-const Member = require('../../models/member');
-const Ship = require('../../models/ship');
-const Attack = require('../../models/attack');
-const AttackTarget = require('../../models/attack-target');
-const AttackTargetClaim = require('../../models/attack-target-claim');
-const Planet = require('../../models/planet');
-const Scan = require('../../models/scan');
-const PlanetScan = require('../../models/scan-planet');
-const DevelopmentScan = require('../../models/scan-development');
-const UnitScan = require('../../models/scan-unit');
+const config = require('config');
+const db = require('db');
+const Member = require('models/member');
+const Ship = require('models/ship');
+const Attack = require('models/attack');
+const AttackTarget = require('models/attack-target');
+const AttackTargetClaim = require('models/attack-target-claim');
+const Planet = require('models/planet');
+const Scan = require('models/scan');
+const PlanetScan = require('models/scan-planet');
+const DevelopmentScan = require('models/scan-development');
+const UnitScan = require('models/scan-unit');
 const createError = require('http-errors');
 const express = require('express');
 const router = express.Router();
-const access = require('../access');
+const access = require('access');
 const crypto = require("crypto");
 const numeral = require('numeral');
 const util = require('util');
@@ -32,7 +32,7 @@ router.get('/', async (req, res, next) => {
   res.render('attacks', { page: 'all', attacks: attacks, after_land_ticks: config.alliance.attack.after_land_ticks });
 });
 
-router.get('/new', access.commandRequired, async (req, res, next) => {
+router.get('/new', access.webCommandRequired, async (req, res, next) => {
   let tks = [];
   for(let i = res.locals.tick.id; i <= config.pa.tick.end; i++) {
     tks.push(i);
@@ -40,7 +40,7 @@ router.get('/new', access.commandRequired, async (req, res, next) => {
   res.render('attacks', { page: 'new', ticks: tks, waves: config.alliance.attack.default_waves, min_uni_eta: config.pa.ships.min_uni_eta });
 });
 
-router.post('/new', access.commandRequired, async (req, res, next) => {
+router.post('/new', access.webCommandRequired, async (req, res, next) => {
   if(req.body.save != undefined) {
     let lastatt = await Attack.findOne().sort({id: -1});
     lastatt = lastatt ? lastatt.id : 0;
@@ -68,7 +68,7 @@ router.post('/new', access.commandRequired, async (req, res, next) => {
   }
 });
 
-router.get('/edit/:hash', access.commandRequired, async (req, res, next) => {
+router.get('/edit/:hash', access.webCommandRequired, async (req, res, next) => {
   var att = await Attack.findOne({hash:req.params.hash});
   var atttarg = await AttackTarget.find({attack_id:att.id});
   var targs = await Planet.find({id:{$in:atttarg.map(at => at.planet_id)}});
@@ -79,7 +79,7 @@ router.get('/edit/:hash', access.commandRequired, async (req, res, next) => {
   res.render('attacks', { page: 'edit', attack: att, targets: targs, ticks: tks, waves: config.alliance.attack.default_waves, min_uni_eta: config.pa.ships.min_uni_eta, numeral: numeral });
 });
 
-router.post('/edit/:hash', access.commandRequired, async (req, res, next) => {
+router.post('/edit/:hash', access.webCommandRequired, async (req, res, next) => {
   let att = await Attack.updateOne({hash:req.params.hash}, {
     landtick: req.body.landtick,
     waves: req.body.waves,
@@ -97,7 +97,7 @@ router.post('/edit/:hash', access.commandRequired, async (req, res, next) => {
   }
 });
 
-router.post('/edit/targ/:hash', access.commandRequired, async (req, res, next) => {
+router.post('/edit/targ/:hash', access.webCommandRequired, async (req, res, next) => {
   let att = await Attack.findOne({hash:req.params.hash});
   if(req.body.add != undefined && req.body.coords != undefined){
     let inCoords = req.body.coords.split(' ');

@@ -1,18 +1,18 @@
-const config = require('../../config');
-const access = require('../access');
+const config = require('config');
+const access = require('access');
 const numeral = require('numeral');
 const moment = require('moment');
 const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
 
-const Utils = require('../../utils');
-const Scan = require('../../models/scan');
-const ScanRequest = require('../../models/scan-request');
-const DevelopmentScan = require('../../models/scan-development');
-const Planet = require('../../models/planet');
-const Member = require('../../models/member');
-const Tick = require('../../models/tick');
-const BotMessage = require('../../models/botmessage');
+const Utils = require('utils');
+const Scan = require('models/scan');
+const ScanRequest = require('models/scan-request');
+const DevelopmentScan = require('models/scan-development');
+const Planet = require('models/planet');
+const Member = require('models/member');
+const Tick = require('models/tick');
+const BotMessage = require('models/botmessage');
 const crypto = require('crypto');
 
 
@@ -108,6 +108,6 @@ module.exports = {
   "req": { usage: Scans_req_usage, description: Scans_req_desc, cast: Scans_req, include_member: true },
   "scan": { usage: Scans_scan_usage, description: Scans_scan_desc, cast: Scans_scan },
   "cancel": { usage: Scans_cancel_usage, description: Scans_cancel_desc, cast: Scans_cancel, include_member: true },
-  "links" : { usage: Scans_links_usage, description: Scans_links_desc, access: access.scannerRequired, cast: Scans_links }
+  "links" : { usage: Scans_links_usage, description: Scans_links_desc, access: access.botScannerRequired, cast: Scans_links }
 };
 

@@ -1,20 +1,20 @@
-const config = require('../../config');
-const db = require('../../db');
-const Member = require('../../models/member');
-const Inactive = require('../../models/inactive');
-const Applicant = require('../../models/applicant');
-const Planet = require('../../models/planet');
-const GalMate = require('../../models/galmate');
+const config = require('config');
+const db = require('db');
+const Member = require('models/member');
+const Inactive = require('models/inactive');
+const Applicant = require('models/applicant');
+const Planet = require('models/planet');
+const GalMate = require('models/galmate');
 const createError = require('http-errors');
 const express = require('express');
 var router = express.Router();
-const access = require('../access');
+const access = require('access');
 const moment = require('moment');
 const util = require('util');
 const client = require('twilio')(config.twilio.sid, config.twilio.secret);
 //var VoiceResponse = twilio.twiml.VoiceResponse;
 
-router.get('/', access.memberRequired, async (req, res, next) => {
+router.get('/', access.webMemberRequired, async (req, res, next) => {
   let mems = await Member.find();
   let inact = await Inactive.find();
   let plnts = await Planet.find();
@@ -58,7 +58,7 @@ router.get('/', access.memberRequired, async (req, res, next) => {
 });
 
 
-router.post('/', access.highCommandRequired, async (req, res, next) => {
+router.post('/', access.webHighCommandRequired, async (req, res, next) => {
   console.log('BODY: ' + util.inspect(req.body, false, null, true));
   if(req.body.deactivate != undefined) {
     Member.findOne({id: req.body.deactivate}).then((mbr) => {
@@ -92,7 +92,7 @@ router.post('/', access.highCommandRequired, async (req, res, next) => {
 });
 
 
-router.post('/applicants', access.highCommandRequired, async (req, res, next) => {
+router.post('/applicants', access.webHighCommandRequired, async (req, res, next) => {
   console.log(util.inspect(req.body, false, null, true));
   if(req.body.accept != undefined) {
     Applicant.findOne({id: req.body.accept}).then((applcnt) => {
@@ -138,7 +138,7 @@ router.post('/applicants', access.highCommandRequired, async (req, res, next) =>
 });
 
 
-router.post('/inactives', access.highCommandRequired, async (req, res, next) => {
+router.post('/inactives', access.webHighCommandRequired, async (req, res, next) => {
   if(req.body.activate != undefined) {
     
   } else if(req.body.remove != undefined) {
@@ -147,7 +147,7 @@ router.post('/inactives', access.highCommandRequired, async (req, res, next) => 
 });
 
 
-router.get('/:id', access.highCommandRequired, async (req, res, next) => {
+router.get('/:id', access.webHighCommandRequired, async (req, res, next) => {
   let mem = await Member.findOne({id:req.params.id});
   //console.log('PLANET: ' + util.inspect(mem, false, null, true));
   if(mem) {
@@ -162,7 +162,7 @@ router.get('/:id', access.highCommandRequired, async (req, res, next) => {
 });
 
 
-router.post('/:id', access.highCommandRequired, async (req, res, next) => {
+router.post('/:id', access.webHighCommandRequired, async (req, res, next) => {
   if(req.body != undefined) {
     console.log('BODY: ' + util.inspect(req.body, false, null, true));
     let mem = await Member.findOne({id: req.params.id});
@@ -193,7 +193,7 @@ router.post('/:id', access.highCommandRequired, async (req, res, next) => {
 });
 
 
-router.post('/galmate/:id', access.adminRequired, async (req, res, next) => {
+router.post('/galmate/:id', access.webAdminRequired, async (req, res, next) => {
   if(req.body != undefined && req.body.delete != undefined) {
     let gm = await GalMate.deleteOne({id: req.params.id});
     console.log(req.params.id + " deleted.");
@@ -204,7 +204,7 @@ router.post('/galmate/:id', access.adminRequired, async (req, res, next) => {
 });
 
 
-router.get('/call/:id', access.commandRequired, async (req, res, next) => {
+router.get('/call/:id', access.webCommandRequired, async (req, res, next) => {
   comms.callMember(req.params.id).then((response) => {
       console.log(message.responseText);
       response.send({

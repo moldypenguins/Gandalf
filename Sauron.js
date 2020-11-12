@@ -1,12 +1,12 @@
-const config = require('../config');
-const db = require('../db');
-const Tick = require('../models/tick');
-const Member = require('../models/member');
-const Planet = require('../models/planet');
-const Ship = require('../models/ship');
-const Scan = require('../models/scan');
-const UnitScan = require('../models/scan-unit');
-const DevelopmentScan = require('../models/scan-development');
+const config = require('config');
+const db = require('db');
+const Tick = require('models/tick');
+const Member = require('models/member');
+const Planet = require('models/planet');
+const Ship = require('models/ship');
+const Scan = require('models/scan');
+const UnitScan = require('models/scan-unit');
+const DevelopmentScan = require('models/scan-development');
 const createError = require('http-errors');
 const express = require('express');
 const cors = require('cors');
@@ -20,11 +20,11 @@ const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
 const http = require('http');
 const https = require('https');
-var options = {
+let options = {
   key: fs.readFileSync('ssl/private.key'),
   cert: fs.readFileSync('ssl/certificate.crt')
 };
-var corsOptions = {
+let corsOptions = {
   "origin": /game\.planetarion\.com$/,
   "methods": ["POST", "GET", "OPTIONS"],
   "allowedHeaders": ['Content-Type', 'Authorization'],
@@ -32,10 +32,10 @@ var corsOptions = {
   "optionsSuccessStatus": 204
 };
 
+const uptimeRoute = require('./routes/uptime');
 const authorizeRoute = require('./routes/authorize');
 const registerRoute = require('./routes/register');
-const uptimeRoute = require('./routes/uptime');
-const sarumanRoute = require('./routes/Saruman');
+const rootRoute = require('./routes/root');
 const strategyRoute = require('./routes/strategy');
 const membersRoute = require('./routes/members');
 const scansRoute = require('./routes/scans');
@@ -47,7 +47,7 @@ const util = require('util');
 var loginRequired = async (req, res, next) => {
   //console.log('LOCALS: ' + util.inspect(res.locals, false, null, true));
   //console.log('SESSION: ' + util.inspect(req.session, false, null, true));
-  if(res.locals.member == undefined) {
+  if(typeof(res.locals.member) == 'undefined') {
     
     //put req var to forward here
     console.log('REQ URL: ' + 
@@ -107,19 +107,19 @@ db.connection.once("open", () => {
     
     if(req.session.member !== 'undefined' && req.session.member) {
       if(req.session.member.site_theme) { res.locals.site_theme = req.session.member.site_theme; }
-      res.locals.member.isADM = req.session.member.access == 5;
-      res.locals.member.isHC = req.session.member.access >= 3 && (req.session.member.roles & 16) != 0;
-      res.locals.member.isDC = req.session.member.access >= 3 && (req.session.member.roles & 8) != 0;
-      res.locals.member.isBC = req.session.member.access >= 3 && (req.session.member.roles & 4) != 0;
+      res.locals.member.isADM = req.session.member.access === 5;
+      res.locals.member.isHC = req.session.member.access >= 3 && (req.session.member.roles & 16) !== 0;
+      res.locals.member.isDC = req.session.member.access >= 3 && (req.session.member.roles & 8) !== 0;
+      res.locals.member.isBC = req.session.member.access >= 3 && (req.session.member.roles & 4) !== 0;
       res.locals.member.isCMDR = req.session.member.access >= 3;
-      res.locals.member.isSCNR = req.session.member.access >= 1 && (req.session.member.roles & 2) != 0;
+      res.locals.member.isSCNR = req.session.member.access >= 1 && (req.session.member.roles & 2) !== 0;
       res.locals.member.isMEM = req.session.member.access >= 1;
       res.locals.member.planet = await Planet.findOne({id:res.locals.member.planet_id});
       res.locals.member.scans = {};
       res.locals.member.scans.d = await Scan.findOne({planet_id:res.locals.member.planet_id, scantype:3}).sort({tick:-1, _id:-1});
-      if(res.locals.member.scans.d != undefined) { res.locals.member.scans.d.scan = await DevelopmentScan.findOne({scan_id:res.locals.member.scans.d.id}); }
+      if(typeof(res.locals.member.scans.d) != 'undefined') { res.locals.member.scans.d.scan = await DevelopmentScan.findOne({scan_id:res.locals.member.scans.d.id}); }
       res.locals.member.scans.a = await Scan.findOne({planet_id:res.locals.member.planet_id, scantype:8}).sort({tick:-1, _id:-1});
-      if(res.locals.member.scans.a != undefined) { 
+      if(typeof(res.locals.member.scans.a) != 'undefined') {
         res.locals.member.scans.a.scan = await UnitScan.find({scan_id:res.locals.member.scans.a.id}); 
         for(let j = 0; j < res.locals.member.scans.a.scan.length; j++) {
           res.locals.member.scans.a.scan[j].ship = await Ship.findOne({id:res.locals.member.scans.a.scan[j].ship_id});

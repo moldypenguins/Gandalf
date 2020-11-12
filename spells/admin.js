@@ -1,5 +1,5 @@
-const config = require('../../config');
-const access = require('../access');
+const config = require('config');
+const access = require('access');
 const numeral = require('numeral');
 const moment = require('moment');
 const Entities = require('html-entities').AllHtmlEntities;
@@ -31,5 +31,5 @@ var Admin_leavechat = (args, ctx) => {
 
 
 module.exports = {
-  "leavechat": { usage: Admin_leavechat_usage, description: Admin_leavechat_desc, access: access.adminRequired, cast: Admin_leavechat, include_ctx: true, reply_private: true },
+  "leavechat": { usage: Admin_leavechat_usage, description: Admin_leavechat_desc, access: access.botAdminRequired, cast: Admin_leavechat, include_ctx: true, reply_private: true },
 };

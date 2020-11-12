@@ -1,16 +1,16 @@
-const config = require('../../config');
-const db = require('../../db');
-const Scan = require('../../models/scan');
-const ScanRequest = require('../../models/scan-request');
-const PlanetScan = require('../../models/scan-planet');
-const DevelopmentScan = require('../../models/scan-development');
-const BotMessage = require('../../models/botmessage');
-const Planet = require('../../models/planet');
-const Member = require('../../models/member');
+const config = require('config');
+const db = require('db');
+const Scan = require('models/scan');
+const ScanRequest = require('models/scan-request');
+const PlanetScan = require('models/scan-planet');
+const DevelopmentScan = require('models/scan-development');
+const BotMessage = require('models/botmessage');
+const Planet = require('models/planet');
+const Member = require('models/member');
 const createError = require('http-errors');
 const express = require('express');
 const router = express.Router();
-const access = require('../access');
+const access = require('access');
 const url = require("url");
 const moment = require('moment');
 const util = require('util');
@@ -19,7 +19,7 @@ const bent = require('bent');
 const getStream = bent('string');
 
 
-router.get('/', access.memberRequired, async (req, res, next) => {
+router.get('/', access.webMemberRequired, async (req, res, next) => {
   let scnrs = await Member.find({active: true, access:{$gte:1}});
   scnrs = scnrs.filter(s => (s.roles & 2) != 0);
   for(let i = 0; i < scnrs.length; i++) {

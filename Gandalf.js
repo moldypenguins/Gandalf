@@ -1,25 +1,25 @@
-var config = require('../config');
-var db = require('../db');
-var Member = require('../models/member');
-var Tick = require('../models/tick');
-var GalMate = require('../models/galmate');
-var BotMessage = require('../models/botmessage');
-var Scan = require('../models/scan');
-var moment = require('moment');
+const config = require('config');
+const db = require('db');
+const Member = require('models/member');
+const Tick = require('models/tick');
+const GalMate = require('models/galmate');
+const BotMessage = require('models/botmessage');
+const Scan = require('models/scan');
+const moment = require('moment');
 const util = require('util');
 const url = require('url');
 const bent = require('bent');
 const getStream = bent('string');
 
-var spells = {};
+let spells = {};
 Object.assign(spells, require(`./spells/admin`));
 config.bot.modules.forEach(function(name) {
-  var spell = require(`./spells/${name}`);
+  let spell = require(`./spells/${name}`);
   Object.assign(spells, spell);
 });
 
-var Telegraf = require('telegraf')
-var Extra = require('telegraf/extra')
+const Telegraf = require('telegraf')
+const Extra = require('telegraf/extra')
 /*
 const rateLimit = require('telegraf-ratelimit')
 //Set limit to 1 message per 3 seconds
@@ -31,7 +31,7 @@ const limitConfig = {
 */
 
 db.connection.once("open", () => {
-  var bot = new Telegraf(config.bot.token, { telegram: { agent: null, webhookReply: false }, username: config.bot.username });
+  let bot = new Telegraf(config.bot.token, { telegram: { agent: null, webhookReply: false }, username: config.bot.username });
   //bot.use(rateLimit(limitConfig));
   
   bot.start((ctx) => ctx.replyWithHTML(`Sign up: <a href="${config.web.uri}">${config.alliance.name}</a>`));
@@ -41,13 +41,13 @@ db.connection.once("open", () => {
   });
   
   function help(ctx, mem) {
-    var commands = '<b>Commands:</b>\n' + 
+    let commands = '<b>Commands:</b>\n' +
       '<b>help:</b> <i>Shows list of commands</i>\n' + 
       '<b>links:</b> <i>Shows web links</i>\n';
     for(let [key, value] of Object.entries(spells)) {
       //console.log('SPELL ENTRIES:' + util.inspect(value, false, null, true));
       
-      if(!(typeof(spells[key].access) != 'undefined' && (mem == null || (mem != null && !spells[key].access(mem))))) {
+      if(!(typeof (spells[key].access) != 'undefined' && (mem == null || (!spells[key].access(mem))))) {
         commands += (`<b>${key}:</b> <i>${value.description}</i>\n`);
       }
     }
@@ -72,7 +72,7 @@ db.connection.once("open", () => {
     //parse scans
     if(ctx.message && ctx.message.text && ctx.message.entities && Array.isArray(ctx.message.entities)) {
       for(var entity in ctx.message.entities) {
-        if(ctx.message.entities[entity].type == 'url') {
+        if(ctx.message.entities[entity].type === 'url') {
           var link = ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length);
           console.log(`LINK: ${link}`);
           
@@ -111,15 +111,15 @@ db.connection.once("open", () => {
         var cmd = args.shift();
         //console.log('Command: ' + cmd);
         
-        if (cmd == "help") {
+        if (cmd === "help") {
           help(ctx, mem);
-        } else if (cmd == "links") {
+        } else if (cmd === "links") {
           links(ctx);
         } else if(cmd in spells && typeof(spells[cmd].cast) == 'function') {
-          if(typeof(spells[cmd].access) != 'undefined' && (mem == null || (mem != null && !spells[cmd].access(mem)))) {
+          if(typeof(spells[cmd].access) != 'undefined' && (mem == null || (!spells[cmd].access(mem)))) {
             ctx.replyWithHTML('<i>You do not have sufficient privileges.</i>', Extra.inReplyTo(ctx.message.message_id));
           } else {
-            var promise = null;
+            let promise = null;
             if(spells[cmd].include_member) {
               promise = spells[cmd].cast(args, mem);
             } else if(spells[cmd].include_ctx) {
@@ -154,7 +154,7 @@ db.connection.once("open", () => {
   });
 
   console.log('Informing Gandalf.');
-  bot.launch();
+  bot.launch().then(r => {});
   
   
   setInterval(async () => {

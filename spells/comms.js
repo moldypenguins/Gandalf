@@ -1,12 +1,12 @@
-const config = require('../../config');
-const access = require('../access');
+const config = require('config');
+const access = require('access');
 const numeral = require('numeral');
 const moment = require('moment');
 const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
 
-const comms = require('../../comms');
-const Members = require('../../models/member');
+const comms = require('comms');
+const Members = require('models/member');
 
 var Comms_call_usage = entities.encode('!call <user>');
 var Comms_call_desc = 'Calls a user via twilio';
@@ -17,7 +17,7 @@ var Comms_call = (args) => {
             var username = args[0].toLowerCase();
             console.log(username);
             var member = members.find(m => (m.panick != null && m.panick.toLowerCase().startsWith(username)) || (m.first_name != null && m.first_name.toLowerCase().startsWith(username)));
-console.log(member);
+            //console.log(member);
             if (member == null) {
                 reject(`Sorry I don't know who ${args[0]} is`);
                 return;
@@ -52,6 +52,6 @@ var Comms_contact = (args) => {
 };
 
 module.exports = {
-    "call": { usage: Comms_call_usage, description: Comms_call_desc, access: access.memberRequired, cast: Comms_call },
-    "contact": { usage: Comms_contact_usage, description: Comms_contact_desc, access: access.memberRequired, cast: Comms_contact }
+    "call": { usage: Comms_call_usage, description: Comms_call_desc, access: access.botMemberRequired, cast: Comms_call },
+    "contact": { usage: Comms_contact_usage, description: Comms_contact_desc, access: access.botMemberRequired, cast: Comms_contact }
 };

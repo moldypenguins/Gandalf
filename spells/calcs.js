@@ -1,15 +1,15 @@
-const config = require('../../config');
-const access = require('../access');
+const config = require('config');
+const access = require('access');
 const numeral = require('numeral');
 //const moment = require('moment');
 const moment = require('moment-timezone');
 const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
 
-const Tick = require('../../models/tick');
-const Members = require('../../models/member');
-const Planets = require('../../models/planet');
-const Utils = require('../../utils');
+const Tick = require('models/tick');
+const Members = require('models/member');
+const Planets = require('models/planet');
+const Utils = require('utils');
 
 
 var Calcs_exile_usage = entities.encode('!exile');
