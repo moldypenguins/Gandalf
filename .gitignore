@@ -13,4 +13,3 @@ ssl/*.crt
 ssl/*.key
 !ssl/*.example.crt
 !ssl/*.example.key
-.idea/
