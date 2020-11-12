@@ -58,7 +58,7 @@ Please use [GitHub Issues](https://github.com/moldypenguins/Gandalf/issues) for 
 
 ## Related Projects
 [Merlin](https://github.com/ellonweb/merlin) - Robin K. Hansen, Elliot Rosemarine, Andreas Jacobsen
-
+[Munin](https://github.com/munin/munin)
 
 ## Credits
 * **Craig Roberts** - *Developer* - [@moldypenguins](https://t.me/moldypenguins)
