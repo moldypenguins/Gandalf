@@ -1,11 +1,15 @@
+#ignore project files
+.idea/
+.vs/
+
 #ignore node_modules folder
 **/node_modules/
 
-#ignore config file
-config.js
-
 #ignore package-lock.json
 package-lock.json
+
+#ignore config file
+config.js
 
 #ignore html content
 Sauron/views/content/*
@@ -16,7 +20,3 @@ Sauron/ssl/*.crt
 Sauron/ssl/*.key
 !Sauron/ssl/*.example.crt
 !Sauron/ssl/*.example.key
-
-#ignore project files
-.idea/
-.vs/

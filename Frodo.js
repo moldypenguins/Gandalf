@@ -202,12 +202,12 @@ let process_tick = async (planet, galaxy, alliance, user) => {
   let clusters = await Cluster.find({}, 'x');
   
   let cluster_temp = await GalaxyDump.find({x: {$nin: clusters.map(c => c.x)}}, 'x').distinct('x');
-  cluster_temp.forEach(async(c) => {
-    //console.log(util.inspect(c, false, null, true));
-    let clstr = new Cluster({ x: c, active: true });
+  for(let ckey in cluster_temp) {
+    //console.log(util.inspect(ckey, false, null, true));
+    let clstr = new Cluster({ x: cluster_temp[ckey], active: true });
     await clstr.save();
-  });
-  
+  }
+
   cluster_temp = await GalaxyDump.find();
   let cupdcount = await Cluster.updateMany({x: {$nin: cluster_temp.map(c => c.x)}}, {active: false});
   //console.log('Clusters set inactive: ' + util.inspect(cupdcount, false, null, true));
