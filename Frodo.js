@@ -17,6 +17,7 @@ const fs = require('fs');
 const bent = require('bent');
 const moment = require('moment');
 const util = require('util');
+const crypto = require('crypto');
 const schedule = require('node-schedule');
 const rule = new schedule.RecurrenceRule();
 
@@ -462,13 +463,13 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
 //##############
 //Send Message
 //##############
-    var txt = `pt<b>${thistick.id}</b> ${moment(thistick.timestamp).utc().format('H:mm')} <i>GMT</i>`;
+    let txt = `pt<b>${thistick.id}</b> ${moment(thistick.timestamp).utc().format('H:mm')} <i>GMT</i>`;
     let atts = await Attack.find({releasetick:thistick.id});
-      for(var m = 0; m < atts.length; m++) {
+    for(let m = 0; m < atts.length; m++) {
       txt += `\n<b>Attack ${atts[m].id}</b> released. <a href="${config.web.uri}/att/${atts[m].hash}">Claim Targets</a>`;
     }
     //console.log(util.inspect('TEXT: ' + txt, false, null, true));
-    let msg = new BotMessage({ id:db.Types.ObjectId(), group_id: config.groups.private, 
+    let msg = new BotMessage({ id:crypto.randomBytes(8).toString("hex"), group_id: config.groups.private,
       message: txt, 
       sent: false 
     });
