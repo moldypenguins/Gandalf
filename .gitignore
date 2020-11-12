@@ -3,17 +3,17 @@
 .vs/
 
 #ignore node_modules folder
-**/node_modules/
+node_modules/
 
 #ignore config file
 config.js
 
 #ignore html content
-Sauron/views/content/*
-!Sauron/views/content/*.example.html
+views/content/*
+!views/content/*.example.html
 
 #ignore ssl files
-Sauron/ssl/*.crt
-Sauron/ssl/*.key
-!Sauron/ssl/*.example.crt
-!Sauron/ssl/*.example.key
+ssl/*.crt
+ssl/*.key
+!ssl/*.example.crt
+!ssl/*.example.key
