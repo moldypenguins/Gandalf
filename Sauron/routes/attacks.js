@@ -17,6 +17,14 @@ const access = require('../access');
 const crypto = require("crypto");
 const numeral = require('numeral');
 const util = require('util');
+const rateLimit = require("express-rate-limit");
+
+const attackLimiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 5 minute window
+  max: 5, // start blocking after 5 requests
+  message:
+    "Too many refreshes, please try again after 5 minutes"
+});
 
 
 router.get('/', async (req, res, next) => {
@@ -152,7 +160,7 @@ router.post('/edit/targ/:hash', access.commandRequired, async (req, res, next) =
 
 
 
-router.get('/:hash', async (req, res, next) => {
+router.get('/:hash', attackLimiter, async (req, res, next) => {
   var mems = await Member.find();
   var att = await Attack.findOne({hash:req.params.hash});
   var atttarg = await AttackTarget.find({attack_id:att.id});
