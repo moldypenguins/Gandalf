@@ -16,17 +16,17 @@ const uglify = require('gulp-uglify');
 
 // Compile CSS from Sass.
 function buildStyles() {
-	return src('scss/*.scss', 'scss/**/*.scss')
+	return src('assets/scss/*.scss', 'assets/scss/**/*.scss')
 		.pipe(plumber()) // Global error listener.
 		.pipe(sass({outputStyle: 'compressed'}))
 		.pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7']))
-		.pipe(dest('../public/styles'))
+		.pipe(dest('public/styles'))
 }
 
 // Watch changes on all *.scss files and trigger buildStyles() at the end.
 function watchFiles() {
 	watch(
-		['scss/*.scss', 'scss/**/*.scss', 'js/*', 'js/*/*'],
+		['assets/scss/*.scss', 'assets/scss/**/*.scss', 'assets/js/*', 'assets/js/*/*'],
 		{events: 'all', ignoreInitial: false},
 		series(buildStyles)
 		// series(buildStyles, scriptsHeader, scriptsFooter)
@@ -35,7 +35,7 @@ function watchFiles() {
 
 // Init Sass linter.
 function sassLint() {
-	return src(['scss/*.scss', 'scss/**/*.scss'])
+	return src(['assets/scss/*.scss', 'assets/scss/**/*.scss'])
 		.pipe(cache('sasslint'))
 		.pipe(sasslint({
 			configFile: '.sass-lint.yml'
@@ -70,7 +70,7 @@ function sassLint() {
 
 function scriptsFooter() {
 	return src([
-		'js/footer/footer.js',
+		'assets/js/footer/footer.js',
 		// 'js/components/slick.js',
 	])
 		.pipe(concat('footer.js'))
