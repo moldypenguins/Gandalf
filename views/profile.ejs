@@ -20,10 +20,8 @@
                                 <td class="center-form"></td>
                                 <td>
                                     <div class="input-group">
-                                        <div name="username" id="username" class="form-label"
-                                             aria-describedby="label-username">
-                                            <img class="tg-pic" src="<%= profile.photo_url %>" width="30" height="30"
-                                                 alt=""/>
+                                        <div name="username" id="username" class="form-label" aria-describedby="label-username">
+                                            <img class="tg-pic" src="<%= profile.photo_url %>" width="30" height="30" alt=""/>
                                             <% if(profile.username) { %>
                                                 <a href="https://t.me/<%= profile.username %>"><%= profile.username %></a>
                                             <% } else if(profile.last_name) { %>
@@ -44,11 +42,7 @@
                                             <span id="label-theme" class="input-group-text">Theme</span>
                                         </div>
                                         <select id="theme" class="custom-select" name="theme">
-                                            <option name="theme" value="light"
-                                            <% if(profile.site_theme == "light") { %> selected
-                                                    <% } %>
-                                            >Light
-                                            </option>
+                                            <option name="theme" value="light" <% if(profile.site_theme == "light") { %>selected<% } %>>Light</option>
                                             <option name="theme" value="dark"
                                             <% if(profile.site_theme == "dark") { %> selected
                                                     <% } %>
@@ -66,8 +60,7 @@
                                         <div class="input-group-prepend">
                                             <span id="label-panick" class="input-group-text">PA Nick</span>
                                         </div>
-                                        <input type="text" name="panick" id="panick" class="form-control"
-                                               value="<%= profile.panick %>"/>
+                                        <input type="text" name="panick" id="panick" class="form-control" value="<%= profile.panick %>"/>
                                     </div>
                                 </td>
                                 <td class="center-form"></td>
@@ -80,8 +73,7 @@
                                             <span id="label-phone" class="input-group-text">Phone</span>
                                             <span class="input-group-text">+</span>
                                         </div>
-                                        <input type="text" name="phone" id="phone" class="form-control"
-                                               value="<%= profile.phone %>"/>
+                                        <input type="text" name="phone" id="phone" class="form-control" value="<%= profile.phone %>"/>
                                     </div>
                                 </td>
                                 <td class="center-form"></td>
@@ -93,8 +85,7 @@
                                         <div class="input-group-prepend">
                                             <span id="label-email" class="input-group-text">E-Mail</span>
                                         </div>
-                                        <input type="text" name="email" id="email" class="form-control"
-                                               value="<%= profile.email %>"/>
+                                        <input type="text" name="email" id="email" class="form-control" value="<%= profile.email %>"/>
                                     </div>
                                 </td>
                                 <td class="center-form"></td>
@@ -106,15 +97,9 @@
                                         <div class="input-group-prepend">
                                             <span id="label-planet" class="input-group-text">Planet</span>
                                         </div>
-                                        <input type="text" name="planet_x" id="planet_x" class="form-control"
-                                               placeholder="X"
-                                               value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.x %><% } %>"/>
-                                        <input type="text" name="planet_y" id="planet_y" class="form-control"
-                                               placeholder="Y"
-                                               value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.y %><% } %>"/>
-                                        <input type="text" name="planet_z" id="planet_z" class="form-control"
-                                               placeholder="Z"
-                                               value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.z %><% } %>"/>
+                                        <input type="text" name="planet_x" id="planet_x" class="form-control" placeholder="X" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.x %><% } %>"/>
+                                        <input type="text" name="planet_y" id="planet_y" class="form-control" placeholder="Y" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.y %><% } %>"/>
+                                        <input type="text" name="planet_z" id="planet_z" class="form-control" placeholder="Z" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.z %><% } %>"/>
                                     </div>
                                 </td>
                                 <td class="center-form"></td>
