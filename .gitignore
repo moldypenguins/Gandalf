@@ -5,9 +5,6 @@
 #ignore node_modules folder
 **/node_modules/
 
-#ignore package-lock.json
-package-lock.json
-
 #ignore config file
 config.js
 
