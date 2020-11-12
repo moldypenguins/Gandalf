@@ -20,7 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="318793aa-8048-4f80-892e-a688e801ce15" name="Default Changelist" comment="updates">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gulpfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/gulpfile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +50,10 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="true" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.15.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.14.7" />
+    <property name="js.buildTools.gulp.gulp_package_dir" value="$PROJECT_DIR$/node_modules/gulp" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.stylelint" value="true" />
     <property name="node.js.path.for.package.stylelint" value="project" />
@@ -53,6 +61,19 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="js.build_tools.gulp">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile>$PROJECT_DIR$/gulpfile.js</gulpfile>
+      <tasks>
+        <task>watch</task>
+      </tasks>
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -65,7 +86,7 @@
       <workItem from="1605131124955" duration="5343000" />
       <workItem from="1605151808838" duration="2847000" />
       <workItem from="1605161354228" duration="14913000" />
-      <workItem from="1605184756158" duration="2039000" />
+      <workItem from="1605184756158" duration="2584000" />
     </task>
     <task id="LOCAL-00001" summary="update Frodo.js">
       <created>1605165325612</created>
@@ -95,7 +116,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605186740994</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add idea folder">
+      <created>1605186931729</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1605186931729</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,7 +146,8 @@
     <MESSAGE value="add package-lock.json to .gitignore" />
     <MESSAGE value="updates" />
     <MESSAGE value="update gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="update gitignore" />
+    <MESSAGE value="add idea folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="add idea folder" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1129" y="323" key="#Node.js_and_NPM" timestamp="1605159541710">
@@ -129,9 +158,10 @@
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
     <state x="-1050" y="304" key="#Notifications/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605161392463" />
-    <state x="664" y="101" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605134749232">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="-1256" y="101" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605187365097">
+      <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
+    <state x="-1256" y="101" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605187365097" />
     <state x="664" y="101" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1605134749232" />
     <state x="-1525" y="107" width="1419" height="744" key="DiffContextDialog" timestamp="1605165937124">
       <screen x="-1920" y="0" width="1920" height="1050" />
@@ -141,22 +171,22 @@
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
     <state x="-949" y="290" key="FileChooserDialogImpl/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1605151680676" />
-    <state width="1138" height="243" key="GridCell.Tab.0.bottom" timestamp="1605185623829">
+    <state width="1516" height="243" key="GridCell.Tab.0.bottom" timestamp="1605187264669">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
-    <state width="1138" height="243" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605185623829" />
-    <state width="1138" height="243" key="GridCell.Tab.0.center" timestamp="1605185623829">
+    <state width="1516" height="243" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605187264669" />
+    <state width="1516" height="243" key="GridCell.Tab.0.center" timestamp="1605187264669">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
-    <state width="1138" height="243" key="GridCell.Tab.0.center/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605185623829" />
-    <state width="1138" height="243" key="GridCell.Tab.0.left" timestamp="1605185623829">
+    <state width="1516" height="243" key="GridCell.Tab.0.center/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605187264669" />
+    <state width="1516" height="243" key="GridCell.Tab.0.left" timestamp="1605187264669">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
-    <state width="1138" height="243" key="GridCell.Tab.0.left/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605185623829" />
-    <state width="1138" height="243" key="GridCell.Tab.0.right" timestamp="1605185623829">
+    <state width="1516" height="243" key="GridCell.Tab.0.left/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605187264669" />
+    <state width="1516" height="243" key="GridCell.Tab.0.right" timestamp="1605187264669">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
-    <state width="1138" height="243" key="GridCell.Tab.0.right/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605185623829" />
+    <state width="1516" height="243" key="GridCell.Tab.0.right/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605187264669" />
     <state x="-981" y="182" key="RollbackChangesDialog" timestamp="1605166913841">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
