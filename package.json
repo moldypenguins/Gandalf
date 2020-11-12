@@ -36,6 +36,7 @@
     "numeral": "^2.0.6",
     "twilio": "^3.43.0",
     "url": "^0.11.0",
+    "nodemon": "^2.0.6",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",
     "mongoose": "^5.9.3",

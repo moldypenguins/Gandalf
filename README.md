@@ -20,8 +20,9 @@
 [![Ubuntu](https://img.shields.io/static/v1?style=for-the-badge&logo=Ubuntu&label=Ubuntu&message=v20.04&color=E95420)](https://ubuntu.com/)  
 [![Fail2ban](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=Fail2ban&message=v0.11.1&color=FCC624)](https://www.fail2ban.org/)  
 [![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=v10.19.0&color=339933)](https://nodejs.org/)  
-[![nodemon](https://img.shields.io/npm/v/nodemon?style=for-the-badge&logo=NPM&label=nodemon&color=76d04b)](https://nodemon.io/)  
 [![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=v4.2&color=47A248)](https://www.mongodb.com/)  
+<br />
+[![nodemon](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/mongoose?style=for-the-badge&logo=NPM&color=76d04b)](https://nodemon.io/) [![npm](https://img.shields.io/npm/v/nodemon?style=for-the-badge&logo=NPM&label=nodemon&color=76d04b)](https://www.npmjs.com/package/nodemon)  
 [![Mongoose](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/mongoose?style=for-the-badge&logo=NPM&color=800800)](https://mongoosejs.com/) [![npm version](https://img.shields.io/npm/v/mongoose?style=for-the-badge&color=800800)](https://www.npmjs.com/package/mongoose)  
 [![telegraf.js](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/telegraf?style=for-the-badge&logo=NPM&color=E74625)](https://telegraf.js.org/) [![npm version](https://img.shields.io/npm/v/telegraf?style=for-the-badge&color=E74625)](https://www.npmjs.com/package/telegraf)  
 [![twilio](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/twilio?style=for-the-badge&logo=NPM&color=f22f46)](https://github.com/twilio/twilio-node) [![npm version](https://img.shields.io/npm/v/twilio?style=for-the-badge&color=f22f46)](https://www.npmjs.com/package/twilio)  
