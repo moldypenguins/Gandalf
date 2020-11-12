@@ -18,11 +18,18 @@ const bent = require('bent');
 const moment = require('moment');
 const util = require('util');
 const schedule = require('node-schedule');
-var rule = new schedule.RecurrenceRule();
-//havock: rule.minute = [1,16,31,46];
-rule.minute = 0;
-rule.second = 30;
+const rule = new schedule.RecurrenceRule();
 
+
+//use command line args for havoc flag
+const havoc = false;
+
+if(havoc) {
+  rule.minute = [1, 16, 31, 46];
+} else {
+  rule.minute = 0;
+  rule.second = 30;
+}
 
 const sleep = (ms) => {
   return new Promise(r => setTimeout(r, ms))
@@ -30,48 +37,48 @@ const sleep = (ms) => {
 
 
 db.connection.once("open", async () => {
-  var j = schedule.scheduleJob(rule, async () => {
+  let j = schedule.scheduleJob(rule, async () => {
     const start_time = Date.now();
     console.log('Frodo Embarking on The Quest Of The Ring.');
     console.log(`Start Time: ${moment(start_time).format('YYYY-MM-DD H:mm:ss')}`);
-    
-    var successful = false;
-    while(!successful && DateTime.Now.getTime() - start_time.getTime() < 55 * 60) {
-      var interation_start = DateTime.Now();
+
+    let successful = false;
+    while(!successful && (new Date()).getTime() - start_time.getTime() < 55 * 60) {
+      let iteration_start = new Date();
       try {
         //get last tick
-        var lasttick = await Tick.findOne().sort({id: -1});
-        if(lasttick == undefined) {
+        let lasttick = await Tick.findOne().sort({id: -1});
+        if(typeof(lasttick) == 'undefined') {
           console.log('No ticks.');
         } else {
           console.log('Last tick: ' + lasttick.id);
           console.log('Getting dump files...');
           //get dump files
           const getStream = bent('string');
-          var planet = await getStream(config.pa.dumps.planet);
-          var galaxy = await getStream(config.pa.dumps.galaxy);
-          var alliance = await getStream(config.pa.dumps.alliance);
-          var user = await getStream(config.pa.dumps.user);
+          let planet = await getStream(config.pa.dumps.planet);
+          let galaxy = await getStream(config.pa.dumps.galaxy);
+          let alliance = await getStream(config.pa.dumps.alliance);
+          let user = await getStream(config.pa.dumps.user);
           console.log(`Loaded dumps from webserver in: ${Date.now() - start_time}ms`);
           
-          if(planet != undefined && galaxy != undefined && alliance != undefined && user != undefined) {
-            var planet = planet.split('\n');
-            var galaxy = galaxy.split('\n');
-            var alliance = alliance.split('\n');
-            var user = user.split('\n');
+          if(typeof(planet) != 'undefined' && typeof(galaxy) != 'undefined' && typeof(alliance) != 'undefined' && typeof(user) != 'undefined') {
+            planet = planet.split('\n');
+            galaxy = galaxy.split('\n');
+            alliance = alliance.split('\n');
+            user = user.split('\n');
             
-            let ticktime = moment.utc().set({minute:(Math.floor(moment().minutes() / 15) * 15),second:0,millisecond:0});
+            let tick_time = moment.utc().set({minute:(Math.floor(moment().minutes() / 15) * 15),second:0,millisecond:0});
             
-            if(planet[3] != galaxy[3] || galaxy[3] != alliance[3] || planet[3] != alliance[3]) {
+            if(planet[3] !== galaxy[3] || galaxy[3] !== alliance[3] || planet[3] !== alliance[3]) {
               console.log(`Varying ticks found - planet: ${planet[3].match(/\d+/g).map(Number)[0]} - galaxy: ${galaxy[3].match(/\d+/g).map(Number)[0]} - alliance: ${alliance[3].match(/\d+/g).map(Number)[0]}.`);
             } else {
-              var dumptick = planet[3].match(/\d+/g).map(Number)[0];
+              let dump_tick = planet[3].match(/\d+/g).map(Number)[0];
               
-              if(dumptick <= lasttick.id) {
-                console.log(`Stale tick found (pt${dumptick})`);
+              if(dump_tick <= lasttick.id) {
+                console.log(`Stale tick found (pt${dump_tick})`);
                 return;
               } else {
-                process_tick(planet, galaxy, alliance, user);
+                await process_tick(planet, galaxy, alliance, user);
                 successful = true;
               }
             }
@@ -81,7 +88,7 @@ db.connection.once("open", async () => {
         console.log(util.inspect('Error: ' + error, false, null, true));
       }
       if(!successful) {
-        while(DateTime.Now.getTime() - interation_start.getTime() < 15) {
+        while((new Date()).getTime() - iteration_start.getTime() < 15) {
           await sleep(5 * 1000);
         }
       }
@@ -93,29 +100,28 @@ db.connection.once("open", async () => {
 
 
 
-var process_tick = async (planet, galaxy, alliance, user) => {
-  var newtick = new Tick({
+let process_tick = async (planet, galaxy, alliance, user) => {
+  let new_tick = new Tick({
     id: planet[3].match(/\d+/g).map(Number)[0],
     timestamp: ticktime
   });
 
-    
   //delete dump tables
   await PlanetDump.deleteMany();
   await GalaxyDump.deleteMany();
   await AllianceDump.deleteMany();
   console.log(`Deleted old dumps in: ${Date.now() - start_time}ms`);
   
-  if(newtick.id < config.pa.tick.shuffle) {
+  if(new_tick.id < config.pa.tick.shuffle) {
     console.log('Pre-shuffle dumps detected, dumping data.');
     planet = undefined;
     galaxy = undefined;
     alliance = undefined;
   }
   //Planets
-  if(planet != undefined) {
+  if(typeof(planet) != 'undefined' && planet != null) {
     for(let i=8; i <= planet.length; i++) {
-      if(planet[i] == 'EndOfPlanetarionDumpFile') {
+      if(planet[i] === 'EndOfPlanetarionDumpFile') {
         break;
       } else {
         let p = planet[i].split('\t');
@@ -128,10 +134,10 @@ var process_tick = async (planet, galaxy, alliance, user) => {
           planetname: p[4].replace(/\"/g, ''),
           rulername: p[5].replace(/\"/g, ''),
           race: p[6],
-          size: Number(p[7] != undefined ? p[7] : 0),
-          score: Number(p[8] != undefined ? p[8] : 0),
-          value: Number(p[9] != undefined ? p[9] :  0),
-          xp: Number(p[10] != undefined ? p[10] : 0)
+          size: Number(typeof(p[7]) != 'undefined' ? p[7] : 0),
+          score: Number(typeof(p[8]) != 'undefined' ? p[8] : 0),
+          value: Number(typeof(p[9]) != 'undefined' ? p[9] :  0),
+          xp: Number(typeof(p[10]) != 'undefined' ? p[10] : 0)
         });
         await pdmp.save();
       }
@@ -140,9 +146,9 @@ var process_tick = async (planet, galaxy, alliance, user) => {
     //console.log('Planet dumps saved.');
   }
   //Galaxies
-  if(galaxy != undefined) {
+  if(typeof(galaxy) != 'undefined' && galaxy != null) {
     for(let i=8; i <= galaxy.length; i++) {
-      if(galaxy[i] == 'EndOfPlanetarionDumpFile') {
+      if(galaxy[i] === 'EndOfPlanetarionDumpFile') {
         break;
       } else {
         let g = galaxy[i].split('\t');
@@ -151,10 +157,10 @@ var process_tick = async (planet, galaxy, alliance, user) => {
           x: Number(g[0]),
           y: Number(g[1]),
           name: g[2].replace(/\"/g, ''),
-          size: Number(g[3] != undefined ? g[3] : 0),
-          score: Number(g[4] != undefined ? g[4] : 0),
-          value: Number(g[5] != undefined ? g[5] :  0),
-          xp: Number(g[6] != undefined ? g[6] : 0)
+          size: Number(typeof(g[3]) != 'undefined' ? g[3] : 0),
+          score: Number(typeof(g[4]) != 'undefined' ? g[4] : 0),
+          value: Number(typeof(g[5]) != 'undefined' ? g[5] :  0),
+          xp: Number(typeof(g[6]) != 'undefined' ? g[6] : 0)
         });
         await gdmp.save();
       }
@@ -163,9 +169,9 @@ var process_tick = async (planet, galaxy, alliance, user) => {
     //console.log('Galaxy dumps saved.');
   }
   //Alliances
-  if(alliance != undefined) {
+  if(typeof(alliance) != 'undefined' && alliance != null) {
     for(let i=8; i <= alliance.length; i++) {
-      if(alliance[i] == 'EndOfPlanetarionDumpFile') {
+      if(alliance[i] === 'EndOfPlanetarionDumpFile') {
         break;
       } else {
         let a = alliance[i].split('\t');
@@ -173,13 +179,13 @@ var process_tick = async (planet, galaxy, alliance, user) => {
         let admp = new AllianceDump({
           score_rank: Number(a[0]),
           name: a[1].replace(/\"/g, ''),
-          size: Number(a[2] != undefined ? a[2] : 0),
-          members: Number(a[3] != undefined ? a[3] : 1),
-          score: Number(a[4] != undefined ? a[4] : 0),
-          points: Number(a[5] != undefined ? a[5] : 0),
-          size_avg: Number(a[2] != undefined ? a[2] : 0) / Number(a[3] != undefined ? a[3] : 1),
-          score_avg: Number(a[4] != undefined ? a[4] : 0) / Math.min(Number(a[3] != undefined ? a[3] : 1), config.pa.numbers.tag_total),
-          points_avg: Number(a[5] != undefined ? a[5] : 0) / Number(a[3] != undefined ? a[3] : 1)
+          size: Number(typeof(a[2]) != 'undefined' ? a[2] : 0),
+          members: Number(typeof(a[3]) != 'undefined' ? a[3] : 1),
+          score: Number(typeof(a[4]) != 'undefined' ? a[4] : 0),
+          points: Number(typeof(a[5]) != 'undefined' ? a[5] : 0),
+          size_avg: Number(typeof(a[2]) != 'undefined' ? a[2] : 0) / Number(typeof(a[3]) != 'undefined' ? a[3] : 1),
+          score_avg: Number(typeof(a[4]) != 'undefined' ? a[4] : 0) / Math.min(Number(typeof(a[3]) != 'undefined' ? a[3] : 1), config.pa.numbers.tag_total),
+          points_avg: Number(typeof(a[5]) != 'undefined' ? a[5] : 0) / Number(typeof(a[3]) != 'undefined' ? a[3] : 1)
         });
         await admp.save();
       }
@@ -288,7 +294,7 @@ var process_tick = async (planet, galaxy, alliance, user) => {
   });
   
   //shuffle tick
-  if(newtick.id == config.pa.tick.shuffle) {
+  if(new_tick.id == config.pa.tick.shuffle) {
     
   }
   
@@ -406,7 +412,7 @@ var process_tick = async (planet, galaxy, alliance, user) => {
   let zik_count = await Planet.aggregate([ {$match: {active: {$eq: true}, race: {$regex: /^zik$/i}}}, {$group: {_id: null, count: {$sum: 1}}} ]);
   let etd_count = await Planet.aggregate([ {$match: {active: {$eq: true}, race: {$regex: /^etd$/i}}}, {$group: {_id: null, count: {$sum: 1}}} ]);
   
-  await Tick.updateOne({id: newtick.id}, {
+  await Tick.updateOne({id: new_tick.id}, {
     clusters: cluster_count[0] != undefined ? cluster_count[0].count : 0,
     galaxies: galaxy_count[0] != undefined ? galaxy_count[0].count : 0,
     planets: planet_count[0] != undefined ? planet_count[0].count : 0,
@@ -440,13 +446,13 @@ var process_tick = async (planet, galaxy, alliance, user) => {
   
   
   
-  console.log(`Updated pt${newtick.id} stats in: ${Date.now() - start_time}ms\n`);
+  console.log(`Updated pt${new_tick.id} stats in: ${Date.now() - start_time}ms\n`);
   
   
 //##############
 //Save Tick
 //##############
-  var thistick = await newtick.save();
+  var thistick = await new_tick.save();
   
   if(thistick != null) {
     console.log(`pt${thistick.id} saved to Ticks collection.`);
