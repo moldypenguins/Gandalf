@@ -16,6 +16,8 @@ const session = require("express-session");
 const url = require('url');
 const fs = require('fs');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
 const http = require('http');
 const https = require('https');
 var options = {
@@ -127,12 +129,18 @@ db.connection.once("open", () => {
     
     next();
   });
-  //routes
-  app.use('/auth', authorizeRoute);
-  app.use('/register', registerRoute);
+  //non-csrf routes
   app.use('/uptime', uptimeRoute);
   app.use('/parse', cors(corsOptions), parseRoute);
   app.use('/reject', cors(corsOptions), parseRoute);
+  
+  //app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(cookieParser());
+  //app.use(csrf({ cookie: true }));
+
+  //csrf routes
+  app.use('/auth', authorizeRoute);
+  app.use('/register', registerRoute);
   app.use('/', loginRequired, sarumanRoute);
   app.use('/uni', loginRequired, universeRoute);
   app.use('/strat', loginRequired, strategyRoute);
@@ -145,10 +153,15 @@ db.connection.once("open", () => {
     next(createError(404));
   });
   app.use((err, req, res, next) => {
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-    res.status(err.status || 500);
-    res.render('error', { site_title: config.alliance.name, page_title: 'Error' });
+    if(err.code === 'EBADCSRFTOKEN') {
+      res.status(403);
+      res.send('form tampered with');
+    } else {
+      res.locals.message = err.message;
+      res.locals.error = req.app.get('env') === 'development' ? err : {};
+      res.status(err.status || 500);
+      res.render('error', { site_title: config.alliance.name, page_title: 'Error' });
+    }
   });
   //start listening
   http.createServer(app).listen(80);
