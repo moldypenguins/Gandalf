@@ -4,6 +4,9 @@
 #ignore config file
 config.js
 
+#ignore package-lock.json
+package-lock.json
+
 #ignore html content
 Sauron/views/content/*
 !Sauron/views/content/*.example.html
