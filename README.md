@@ -1,9 +1,10 @@
 # Gandalf
 ![GitHub License](https://img.shields.io/github/license/moldypenguins/Gandalf?style=for-the-badge&logo=GNU) 
 ![GitHub Release](https://img.shields.io/github/v/release/moldypenguins/Gandalf?style=for-the-badge&include_prereleases&logo=GitHub) 
-![GitHub Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)  
+![GitHub Workflow](https://img.shields.io/github/workflow/status/moldypenguins/Gandalf/CodeQL?style=for-the-badge&logo=GitHub)  
 ![GitHub Issues](https://img.shields.io/github/issues-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub) 
-![GitHub Pull Requests](https://img.shields.io/github/issues-pr-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
+![GitHub Pull Requests](https://img.shields.io/github/issues-pr-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub) 
+![GitHub Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub) 
 
 ## Table of Contents
 * [Requirements](#requirements)
@@ -57,8 +58,8 @@ Please use [GitHub Issues](https://github.com/moldypenguins/Gandalf/issues) for 
 
 
 ## Related Projects
-[Merlin](https://github.com/ellonweb/merlin) - Robin K. Hansen, Elliot Rosemarine, Andreas Jacobsen  
-[Munin](https://github.com/munin/munin) - Andreas Jacobsen
+* [Merlin](https://github.com/ellonweb/merlin) - Robin K. Hansen, Elliot Rosemarine, Andreas Jacobsen  
+* [Munin](https://github.com/munin/munin) - Andreas Jacobsen
 
 ## Credits
 * **Craig Roberts** - *Developer* - [@moldypenguins](https://t.me/moldypenguins)

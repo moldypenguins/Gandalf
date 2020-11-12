@@ -13,7 +13,7 @@ const Planet = require('../../models/planet');
 const Member = require('../../models/member');
 const Tick = require('../../models/tick');
 const BotMessage = require('../../models/botmessage');
-const crypto = require("crypto");
+const crypto = require('crypto');
 
 
 var Scans_req_usage = entities.encode('!req <x:y:z> <p|d|n|j|a>');
