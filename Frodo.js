@@ -78,7 +78,7 @@ db.connection.once("open", async () => {
                 console.log(`Stale tick found (pt${dump_tick})`);
                 return;
               } else {
-                await process_tick(planet, galaxy, alliance, user);
+                await process_tick(planet, galaxy, alliance, user, start_time);
                 successful = true;
               }
             }
@@ -100,7 +100,7 @@ db.connection.once("open", async () => {
 
 
 
-let process_tick = async (planet, galaxy, alliance, user) => {
+let process_tick = async (planet, galaxy, alliance, user, start_time) => {
   let new_tick = new Tick({
     id: planet[3].match(/\d+/g).map(Number)[0],
     timestamp: ticktime
@@ -288,25 +288,25 @@ let process_tick = async (planet, galaxy, alliance, user) => {
 //##############
   
   let planets = await Planet.find();
-  planets.forEach(async(p) => {
-    await PlanetDump.updateOne({id: p.id}, {
-      planet_id: p.id
+  for(let pkey in planets) {
+    await PlanetDump.updateOne({id: planets[pkey].id}, {
+      planet_id: planets[pkey].id
     });
-  });
+  }
+
   
   //shuffle tick
-  if(new_tick.id == config.pa.tick.shuffle) {
+  if(new_tick.id === config.pa.tick.shuffle) {
     
   }
   
   let planet_temp = await PlanetDump.find({planet_id: undefined});
-  planet_temp.forEach(async(p) => {
+  for(let pkey in planet_temp) {
     //console.log(util.inspect(p, false, null, true));
-    let plnt = new Planet({ id: p.id, x: p.x, y: p.y, z: p.z, active: true });
+    let plnt = new Planet({ id: planet_temp[pkey].id, x: planet_temp[pkey].x, y: planet_temp[pkey].y, z: planet_temp[pkey].z, active: true });
     let saved = await plnt.save();
-    await PlanetDump.updateOne({id: p.id}, {planet_id: saved.id});
-  });
-  
+    await PlanetDump.updateOne({id: planet_temp[pkey].id}, {planet_id: saved.id});
+  }
   
   //track planets
   
@@ -318,24 +318,24 @@ let process_tick = async (planet, galaxy, alliance, user) => {
   //console.log('Planets set inactive: ' + util.inspect(pupdcount, false, null, true));
   
   planets = await Planet.find({active: true});
-  planets.forEach(async(p) => {
-    console.log('Planet' + util.inspect(p, false, null, true));
+  for(let pkey in planets) {
+    //console.log('Planet' + util.inspect(planets[pkey], false, null, true));
     let t = await PlanetDump.aggregate([
-      {$match: {id: p.id}},
+      {$match: {id: planets[pkey].id}},
       {$group: {_id: null, planetname: {$first: '$planetname'}, rulername: {$first: '$rulername'}, race: {$first: '$race'}, size: {$sum: '$size'}, score: {$sum: '$score'}, value: {$sum: '$value'}, xp: {$sum: '$xp'}}}
     ]);
     await Planet.updateOne({id: p.id}, {
-      age: Number(p.age != undefined ? p.age + 1 : 1),
+      age: Number(typeof(planets[pkey].age) != 'undefined' ? planets[pkey].age + 1 : 1),
       planetname: t[0].planetname,
       rulername: t[0].rulername,
       race: t[0].race,
-      size: t[0].size, 
-      score: t[0].score, 
-      value: t[0].value, 
+      size: t[0].size,
+      score: t[0].score,
+      value: t[0].value,
       xp: t[0].xp,
-      ratio: t[0].value != 0 ? 10000.0 * t[0].size / t[0].value : 0
+      ratio: t[0].value !== 0 ? 10000.0 * t[0].size / t[0].value : 0
     });
-  });
+  }
   
   
   //idle
@@ -358,33 +358,33 @@ let process_tick = async (planet, galaxy, alliance, user) => {
 //Alliances
 //##############
   let alliances = await Alliance.find();
-  alliances.forEach(async(a) => {
-    await AllianceDump.updateOne({name: a.name}, {
-      alliance_id: a._id
+  for(let akey in alliances) {
+    await AllianceDump.updateOne({name: alliances[akey].name}, {
+      alliance_id: alliances[akey]._id
     });
-  });
+  }
   
   await Alliance.updateMany({}, {active: true});
   
   let alliance_temp = await AllianceDump.find({alliance_id: undefined});
-  alliance_temp.forEach(async(a) => {
-    //console.log(util.inspect(a, false, null, true));
-    let ally = new Alliance({ name: a.name, active: true });
+  for(let akey in alliance_temp) {
+    //console.log(util.inspect(alliance_temp[akey], false, null, true));
+    let ally = new Alliance({ name: alliance_temp[akey].name, active: true });
     let saved = await ally.save();
-    await AllianceDump.updateOne({name: a.name}, {alliance_id: saved._id});
-  });
-  
+    await AllianceDump.updateOne({name: alliance_temp[akey].name}, {alliance_id: saved._id});
+  }
+
   alliance_temp = await AllianceDump.find({alliance_id: {$ne: undefined}}, 'alliance_id');
   await Alliance.updateMany({alliance_id: {$nin: alliance_temp.map(a => a)}}, {active: false});
   
   alliances = await Alliance.find({active: true});
-  alliances.forEach(async(a) => {
+  for(let akey in alliances) {
     let ally = await AllianceDump.aggregate([
-      {$match: {name: a.name}},
+      {$match: {name: alliances[akey].name}},
       {$group: {_id: null, name: {$first: '$name'}, members: {$sum: '$members'}, size: {$sum: '$size'}, score: {$sum: '$score'}, points: {$sum: '$points'}, size_avg: {$sum: '$size_avg'}, score_avg: {$sum: '$score_avg'}, points_avg: {$sum: '$points_avg'}}}
     ]);
-    await Alliance.updateOne({name: a.name}, {
-      age: Number(a.age != undefined ? a.age + 1 : 1),
+    await Alliance.updateOne({name: alliances[akey].name}, {
+      age: Number(typeof(alliances[akey].age) != 'undefined' ? alliances[akey].age + 1 : 1),
       name: ally[0].name,
       members: ally[0].members,
       size: ally[0].size,
@@ -393,9 +393,10 @@ let process_tick = async (planet, galaxy, alliance, user) => {
       size_avg: ally[0].size_avg,
       score_avg: ally[0].score_avg,
       points_avg: ally[0].points_avg,
-      ratio: ally[0].score != 0 ? 10000.0 * ally[0].size / ally[0].score : 0
+      ratio: ally[0].score !== 0 ? 10000.0 * ally[0].size / ally[0].score : 0
     });
-  });
+  }
+
   
   
   console.log(`Updated alliances in: ${Date.now() - start_time}ms`);
@@ -414,16 +415,16 @@ let process_tick = async (planet, galaxy, alliance, user) => {
   let etd_count = await Planet.aggregate([ {$match: {active: {$eq: true}, race: {$regex: /^etd$/i}}}, {$group: {_id: null, count: {$sum: 1}}} ]);
   
   await Tick.updateOne({id: new_tick.id}, {
-    clusters: cluster_count[0] != undefined ? cluster_count[0].count : 0,
-    galaxies: galaxy_count[0] != undefined ? galaxy_count[0].count : 0,
-    planets: planet_count[0] != undefined ? planet_count[0].count : 0,
-    alliances: alliance_count[0] != undefined ? alliance_count[0].count : 0,
-    c200: c200_count[0] != undefined ? c200_count[0].count : 0,
-    ter: ter_count[0] != undefined ? ter_count[0].count : 0,
-    cat: cat_count[0] != undefined ? cat_count[0].count : 0,
-    xan: xan_count[0] != undefined ? xan_count[0].count : 0,
-    zik: zik_count[0] != undefined ? zik_count[0].count : 0,
-    etd: etd_count[0] != undefined ? etd_count[0].count : 0
+    clusters: typeof(cluster_count[0]) != 'undefined' ? cluster_count[0].count : 0,
+    galaxies: typeof(galaxy_count[0]) != 'undefined' ? galaxy_count[0].count : 0,
+    planets: typeof(planet_count[0]) != 'undefined' ? planet_count[0].count : 0,
+    alliances: typeof(alliance_count[0]) != 'undefined' ? alliance_count[0].count : 0,
+    c200: typeof(c200_count[0]) != 'undefined' ? c200_count[0].count : 0,
+    ter: typeof(ter_count[0]) != 'undefined' ? ter_count[0].count : 0,
+    cat: typeof(cat_count[0]) != 'undefined' ? cat_count[0].count : 0,
+    xan: typeof(xan_count[0]) != 'undefined' ? xan_count[0].count : 0,
+    zik: typeof(zik_count[0]) != 'undefined' ? zik_count[0].count : 0,
+    etd: typeof(etd_count[0]) != 'undefined' ? etd_count[0].count : 0
   });
   
   
