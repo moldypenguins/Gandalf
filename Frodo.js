@@ -455,7 +455,7 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
 //##############
 //Save Tick
 //##############
-  var thistick = await new_tick.save();
+  let thistick = await new_tick.save();
   
   if(thistick != null) {
     console.log(`pt${thistick.id} saved to Ticks collection.`);
