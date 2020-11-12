@@ -213,23 +213,23 @@ let process_tick = async (planet, galaxy, alliance, user) => {
   //console.log('Clusters set inactive: ' + util.inspect(cupdcount, false, null, true));
 
   clusters = await Cluster.find({active: true});
-  clusters.forEach(async(c) => {
+  for(let ckey in clusters) {
     //console.log(util.inspect(c, false, null, true));
     let t = await PlanetDump.aggregate([
-      {$match: {x: c.x}},
+      {$match: {x: clusters[ckey].x}},
       {$group: {_id: null, size: {$sum: '$size'}, score: {$sum: '$score'}, value: {$sum: '$value'}, xp: {$sum: '$xp'}, members: {$sum: 1}}}
     ]);
     await Cluster.updateOne({x: c.x}, {
-      age: Number(c.age != undefined ? c.age + 1 : 1),
-      size: t[0].size, 
-      score: t[0].score, 
-      value: t[0].value, 
+      age: Number(typeof(clusters[ckey].age) != 'undefined' ? clusters[ckey].age + 1 : 1),
+      size: t[0].size,
+      score: t[0].score,
+      value: t[0].value,
       xp: t[0].xp,
-      ratio: t[0].value != 0 ? 10000.0 * t[0].size / t[0].value : 0,
+      ratio: t[0].value !== 0 ? 10000.0 * t[0].size / t[0].value : 0,
       members: t[0].members
     });
-  });
-//ADD REMAINING FIELDS ABOVE
+  }
+//TODO:ADD REMAINING FIELDS ABOVE
 //##########################
   
   
@@ -238,28 +238,29 @@ let process_tick = async (planet, galaxy, alliance, user) => {
 //Galaxies
 //##############
   let galaxies = await Galaxy.find();
-  galaxies.forEach(async(g) => {
-    await GalaxyDump.updateOne({x: g.x, y: g.y}, {
-      galaxy_id: g._id
+  for(let gkey in galaxies) {
+    await GalaxyDump.updateOne({x: galaxies[gkey].x, y: galaxies[gkey].y}, {
+      galaxy_id: galaxies[gkey]._id
     });
-  });
+  }
   
   await Galaxy.updateMany({}, {active: true});
   
   let galaxy_temp = await GalaxyDump.find({galaxy_id: undefined});
-  galaxy_temp.forEach(async(g) => {
+  for(let gkey in galaxy_temp) {
     //console.log(util.inspect(g, false, null, true));
-    let gal = new Galaxy({ x: g.x, y: g.y, active: true });
+    let gal = new Galaxy({ x: galaxy_temp[gkey].x, y: galaxy_temp[gkey].y, active: true });
     let saved = await gal.save();
-    await GalaxyDump.updateOne({x: g.x, y: g.y}, {galaxy_id: saved._id});
-  });
+    await GalaxyDump.updateOne({x: galaxy_temp[gkey].x, y: galaxy_temp[gkey].y}, {galaxy_id: saved._id});
+  }
+
   
   galaxy_temp = await GalaxyDump.find({galaxy_id: {$ne: undefined}}, 'galaxy_id');
   let gupdcount = await Galaxy.updateMany({_id: {$nin: galaxy_temp.map(g => g.galaxy_id)}}, {active: false});
   //console.log('Galaxies set inactive: ' + util.inspect(gupdcount, false, null, true));
   
   galaxies = await Galaxy.find({active: true});
-  galaxies.forEach(async(g) => {
+  for(let gkey in galaxies) {
     //console.log(util.inspect(g, false, null, true));
     let gal = await GalaxyDump.aggregate([
       {$match: {x: g.x, y: g.y}},
@@ -270,16 +271,16 @@ let process_tick = async (planet, galaxy, alliance, user) => {
       {$group: {_id: null, members: {$sum: 1}}}
     ]);
     await Galaxy.updateOne({x: {$eq: g.x}, y: {$eq: g.y}}, {
-      age: Number(g.age != undefined ? g.age + 1 : 1),
+      age: Number(typeof(g.age) != 'undefined' ? g.age + 1 : 1),
       name: gal[0].name,
-      size: gal[0].size, 
-      score: gal[0].score, 
-      value: gal[0].value, 
+      size: gal[0].size,
+      score: gal[0].score,
+      value: gal[0].value,
       xp: gal[0].xp,
-      ratio: gal[0].value != 0 ? 10000.0 * gal[0].size / gal[0].value : 0,
+      ratio: gal[0].value !== 0 ? 10000.0 * gal[0].size / gal[0].value : 0,
       members: t[0].members
     });
-  });
+  }
   
   console.log(`Updated galaxies in: ${Date.now() - start_time}ms`);
 //##############
