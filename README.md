@@ -87,8 +87,7 @@ Please use [GitHub Issues](https://github.com/moldypenguins/Gandalf/issues) for 
 ## Licenses
 Copyright © 2020 Craig Roberts, Braden Edmunds, Alex High  
 Licensed under the GNU General Public License Version 3  
-See [LICENSE.md](LICENSE.md) or [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html) for more details  
-
-<br />
-<hr /> 
+See [LICENSE.md](LICENSE.md) or [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html) for more details.  
+<br /><br />
+*** 
 Developed using [JetBrains](https://www.jetbrains.com/) software
