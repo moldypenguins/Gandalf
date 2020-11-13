@@ -53,7 +53,7 @@
 [![Mongoose](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/mongoose?style=for-the-badge&logo=NPM&color=800800)](https://mongoosejs.com/) [![npm version](https://img.shields.io/npm/v/mongoose?style=for-the-badge&color=800800)](https://www.npmjs.com/package/mongoose)  
 [![morgan](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/morgan?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/expressjs/morgan) [![npm version](https://img.shields.io/npm/v/morgan?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/morgan)  
 [![Node Schedule](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/node-schedule?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/node-schedule/node-schedule) [![npm version](https://img.shields.io/npm/v/node-schedule?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/node-schedule)  
-[![nodemon](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/nodemon?style=for-the-badge&logo=NPM&color=76d04b)](https://nodemon.io/) [![npm](https://img.shields.io/npm/v/nodemon?style=for-the-badge&logo=NPM&label=nodemon&color=76d04b)](https://www.npmjs.com/package/nodemon)  
+[![nodemon](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/nodemon?style=for-the-badge&logo=NPM&color=76d04b)](https://nodemon.io/) [![npm](https://img.shields.io/npm/v/nodemon?style=for-the-badge&color=76d04b)](https://www.npmjs.com/package/nodemon)  
 [![Numeral.js](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/numeral?style=for-the-badge&logo=NPM&color=ff6a00)](https://numeraljs.com/) [![npm version](https://img.shields.io/npm/v/numeral?style=for-the-badge&color=ff6a00)](https://www.npmjs.com/package/numeral)  
 [![telegraf.js](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/telegraf?style=for-the-badge&logo=NPM&color=E74625)](https://telegraf.js.org/) [![npm version](https://img.shields.io/npm/v/telegraf?style=for-the-badge&color=E74625)](https://www.npmjs.com/package/telegraf)  
 [![twilio](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/twilio?style=for-the-badge&logo=NPM&color=f22f46)](https://github.com/twilio/twilio-node) [![npm version](https://img.shields.io/npm/v/twilio?style=for-the-badge&color=f22f46)](https://www.npmjs.com/package/twilio)  
@@ -78,7 +78,7 @@ Please use [GitHub Issues](https://github.com/moldypenguins/Gandalf/issues) for 
 * [Munin](https://github.com/munin/munin) - Andreas Jacobsen
 
 
-## Credits
+## Authors and acknowledgment
 * **Craig Roberts** - *Developer* - [@moldypenguins](https://t.me/moldypenguins)
 * **Braden Edmunds** - *Developer* - [@blanq4](https://t.me/blanq4)
 * **Alex High** - *Stylist* - [@UltimateNewbie](https://t.me/UltimateNewbie)
@@ -88,5 +88,7 @@ Please use [GitHub Issues](https://github.com/moldypenguins/Gandalf/issues) for 
 Copyright © 2020 Craig Roberts, Braden Edmunds, Alex High  
 Licensed under the GNU General Public License Version 3  
 See [LICENSE.md](LICENSE.md) or [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html) for more details  
-<br /><br />
+
+<br />
+<hr /> 
 Developed using [JetBrains](https://www.jetbrains.com/) software
