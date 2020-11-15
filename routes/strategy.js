@@ -1,7 +1,7 @@
 const config = require('../config');
 const express = require('express');
 let router = express.Router();
-const access = require('access');
+const access = require('../access');
 const fs = require('fs');
 
 

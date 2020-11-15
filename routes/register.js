@@ -6,16 +6,17 @@ const express = require('express');
 let router = express.Router();
 const util = require('util');
 
-router
-.get("/", (req, res, next) => {
-  if (req.session.applicant == undefined && req.session.visitor == undefined) { 
+router.get("/", (req, res, next) => {
+  if (typeof(req.session.applicant) == 'undefined' && typeof(req.session.visitor) == 'undefined') {
     next(400); 
   } else { 
     //console.log('REGISTER VISITOR: ' + req.session.visitor);
     res.render('register', { });
   }
-})
-.post("/", (req, res, next) => {
+});
+
+
+router.post("/", (req, res, next) => {
   console.log('SESSION VISITOR: ' + util.inspect(req.session.visitor, false, null, true));
   console.log('POST BODY APPLICANT: ' + util.inspect(req.body, false, null, true));
   let applcnt = new Applicant({ 
