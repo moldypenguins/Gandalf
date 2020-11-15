@@ -1,14 +1,14 @@
-var config = require('config');
-var db = require('db');
-var Member = require('models/member');
-var Applicant = require('models/applicant');
-var Alliance = require('models/alliance');
-var Cluster = require('models/cluster');
-var Galaxy = require('models/galaxy');
-var Planet = require('models/planet');
-var createError = require('http-errors');
-var express = require('express');
-var router = express.Router();
+const config = require('../config');
+const db = require('../db');
+const Member = require('../models/member');
+const Applicant = require('../models/applicant');
+const Alliance = require('../models/alliance');
+const Cluster = require('../models/cluster');
+const Galaxy = require('../models/galaxy');
+const Planet = require('../models/planet');
+const createError = require('http-errors');
+const express = require('express');
+let router = express.Router();
 const util = require('util');
 
 router.get('/', function(req, res, next) {

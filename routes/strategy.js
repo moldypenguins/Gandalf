@@ -1,6 +1,6 @@
-const config = require('config');
+const config = require('../config');
 const express = require('express');
-var router = express.Router();
+let router = express.Router();
 const access = require('access');
 const fs = require('fs');
 

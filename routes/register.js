@@ -1,9 +1,9 @@
-var config = require('config');
-var db = require('db');
-var Member = require('models/member');
-var Applicant = require('models/applicant');
-var express = require('express');
-var router = express.Router();
+const config = require('../config');
+const db = require('../db');
+const Member = require('../models/member');
+const Applicant = require('../models/applicant');
+const express = require('express');
+let router = express.Router();
 const util = require('util');
 
 router
