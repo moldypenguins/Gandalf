@@ -20,8 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="318793aa-8048-4f80-892e-a688e801ce15" name="Default Changelist" comment="updates">
-      <change beforePath="$PROJECT_DIR$/Gandalf.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron.js" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/scan.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/scan.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +84,7 @@
       <workItem from="1605184756158" duration="3156000" />
       <workItem from="1605187969163" duration="653000" />
       <workItem from="1605223445874" duration="4848000" />
-      <workItem from="1605479533754" duration="453000" />
+      <workItem from="1605479533754" duration="770000" />
     </task>
     <task id="LOCAL-00001" summary="update Frodo.js">
       <created>1605165325612</created>
@@ -135,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605479773509</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="update require db and config paths">
+      <created>1605480026486</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1605480026486</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,7 +167,8 @@
     <MESSAGE value="add idea folder" />
     <MESSAGE value="updates" />
     <MESSAGE value="update require model paths" />
-    <option name="LAST_COMMIT_MESSAGE" value="update require model paths" />
+    <MESSAGE value="update require db and config paths" />
+    <option name="LAST_COMMIT_MESSAGE" value="update require db and config paths" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1129" y="323" key="#Node.js_and_NPM" timestamp="1605159541710">
