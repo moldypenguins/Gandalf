@@ -1,5 +1,5 @@
-const config = require('config');
-const db = require('db');
+const config = require('./config');
+const db = require('./db');
 const Tick = require('./models/tick');
 const Member = require('./models/member');
 const Planet = require('./models/planet');

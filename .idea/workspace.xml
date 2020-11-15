@@ -20,11 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="318793aa-8048-4f80-892e-a688e801ce15" name="Default Changelist" comment="updates">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gandalf.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sauron.js" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +84,7 @@
       <workItem from="1605184756158" duration="3156000" />
       <workItem from="1605187969163" duration="653000" />
       <workItem from="1605223445874" duration="4848000" />
-      <workItem from="1605479533754" duration="180000" />
+      <workItem from="1605479533754" duration="453000" />
     </task>
     <task id="LOCAL-00001" summary="update Frodo.js">
       <created>1605165325612</created>
@@ -131,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605187419875</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="update require model paths">
+      <created>1605479773509</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1605479773509</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,7 +159,8 @@
     <MESSAGE value="update gitignore" />
     <MESSAGE value="add idea folder" />
     <MESSAGE value="updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="updates" />
+    <MESSAGE value="update require model paths" />
+    <option name="LAST_COMMIT_MESSAGE" value="update require model paths" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1129" y="323" key="#Node.js_and_NPM" timestamp="1605159541710">
@@ -205,10 +210,11 @@
     </state>
     <state x="-1375" y="180" width="1186" height="711" key="SettingsEditor/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605223881731" />
     <state x="-1375" y="180" width="1293" height="711" key="SettingsEditor/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1605152722743" />
-    <state x="-1184" y="215" key="Vcs.Push.Dialog.v2" timestamp="1605186754733">
-      <screen x="-1920" y="0" width="1920" height="1050" />
+    <state x="736" y="215" key="Vcs.Push.Dialog.v2" timestamp="1605479776080">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="-1184" y="215" key="Vcs.Push.Dialog.v2/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605186754733" />
+    <state x="736" y="215" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1605479776080" />
     <state x="-1125" y="352" key="jetbrains.nodejs.interpreters-dialog" timestamp="1605159465570">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
