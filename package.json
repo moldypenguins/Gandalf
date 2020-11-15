@@ -4,8 +4,13 @@
   "private": true,
   "author": "Craig Roberts, Braden Edmunds, Alex High",
   "license": "GPL-3.0",
-  "repository": { "type": "git", "url": "git+https://github.com/moldypenguins/Gandalf.git" },
-  "bugs": { "url": "https://github.com/moldypenguins/Gandalf/issues" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moldypenguins/Gandalf.git"
+  },
+  "bugs": {
+    "url": "https://github.com/moldypenguins/Gandalf/issues"
+  },
   "homepage": "https://github.com/moldypenguins/Gandalf",
   "description": "",
   "scripts": {
@@ -16,6 +21,7 @@
     "@awaitjs/express": "^0.5.0",
     "@fortawesome/fontawesome-free": "^5.14.0",
     "bent": "^7.1.2",
+    "body-parser": "^1.19.0",
     "browser-sync": "^2.26.7",
     "clipboard": "^2.0.6",
     "cookie-parser": "^1.4.5",
