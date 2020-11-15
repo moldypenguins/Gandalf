@@ -105,7 +105,7 @@ db.connection.once("open", () => {
     
     console.log('MEMBER: ' + util.inspect(res.session, false, null, true));
     
-    if(req.session.member !== 'undefined' && req.session.member) {
+    if(typeof(req.session) !== 'undefined' && typeof(req.session.member) !== 'undefined' && req.session.member != null) {
       if(req.session.member.site_theme) { res.locals.site_theme = req.session.member.site_theme; }
       res.locals.member.isADM = req.session.member.access === 5;
       res.locals.member.isHC = req.session.member.access >= 3 && (req.session.member.roles & 16) !== 0;
@@ -117,9 +117,9 @@ db.connection.once("open", () => {
       res.locals.member.planet = await Planet.findOne({id:res.locals.member.planet_id});
       res.locals.member.scans = {};
       res.locals.member.scans.d = await Scan.findOne({planet_id:res.locals.member.planet_id, scantype:3}).sort({tick:-1, _id:-1});
-      if(typeof(res.locals.member.scans.d) != 'undefined') { res.locals.member.scans.d.scan = await DevelopmentScan.findOne({scan_id:res.locals.member.scans.d.id}); }
+      if(typeof(res.locals.member.scans.d) != 'undefined' && res.locals.member.scans.d != null) { res.locals.member.scans.d.scan = await DevelopmentScan.findOne({scan_id:res.locals.member.scans.d.id}); }
       res.locals.member.scans.a = await Scan.findOne({planet_id:res.locals.member.planet_id, scantype:8}).sort({tick:-1, _id:-1});
-      if(typeof(res.locals.member.scans.a) != 'undefined') {
+      if(typeof(res.locals.member.scans.a) != 'undefined' && res.locals.member.scans.a != null) {
         res.locals.member.scans.a.scan = await UnitScan.find({scan_id:res.locals.member.scans.a.id}); 
         for(let j = 0; j < res.locals.member.scans.a.scan.length; j++) {
           res.locals.member.scans.a.scan[j].ship = await Ship.findOne({id:res.locals.member.scans.a.scan[j].ship_id});
