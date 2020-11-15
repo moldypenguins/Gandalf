@@ -5,8 +5,8 @@ const moment = require('moment');
 const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
 
-const comms = require('comms');
-const Members = require('models/member');
+const comms = require('../comms');
+const Members = require('../models/member');
 
 var Comms_call_usage = entities.encode('!call <user>');
 var Comms_call_desc = 'Calls a user via twilio';

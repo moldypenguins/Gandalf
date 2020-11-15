@@ -5,14 +5,14 @@ const moment = require('moment');
 const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
 
-const Utils = require('utils');
-const Scan = require('models/scan');
-const ScanRequest = require('models/scan-request');
-const DevelopmentScan = require('models/scan-development');
-const Planet = require('models/planet');
-const Member = require('models/member');
-const Tick = require('models/tick');
-const BotMessage = require('models/botmessage');
+const Utils = require('../utils');
+const Scan = require('../models/scan');
+const ScanRequest = require('../models/scan-request');
+const DevelopmentScan = require('../models/scan-development');
+const Planet = require('../models/planet');
+const Member = require('../models/member');
+const Tick = require('../models/tick');
+const BotMessage = require('../models/botmessage');
 const crypto = require('crypto');
 
 

@@ -5,8 +5,8 @@ const moment = require('moment');
 const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
 
-const Ship = require('models/ship');
-const Tick = require('models/tick');
+const Ship = require('../models/ship');
+const Tick = require('../models/tick');
 
 
 var Ships_eff_usage = entities.encode('!eff <number> <ship> [t1|t2|t3]');
