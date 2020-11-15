@@ -1,5 +1,5 @@
-const config = require('config');
-const access = require('access');
+const config = require('../config');
+const access = require('../access');
 const numeral = require('numeral');
 const moment = require('moment');
 const Entities = require('html-entities').AllHtmlEntities;
