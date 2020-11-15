@@ -141,7 +141,7 @@ db.connection.once("open", () => {
   //csrf routes
   app.use('/auth', authorizeRoute);
   app.use('/register', registerRoute);
-  app.use('/', loginRequired, sarumanRoute);
+  app.use('/', loginRequired, rootRoute);
   app.use('/uni', loginRequired, universeRoute);
   app.use('/strat', loginRequired, strategyRoute);
   app.use('/members', loginRequired, membersRoute);
