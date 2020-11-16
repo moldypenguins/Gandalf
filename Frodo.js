@@ -319,7 +319,7 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
   
   //set inactive
   planet_temp = await PlanetDump.find({planet_id: {$ne: undefined}}, 'planet_id');
-  console.log(util.inspect(planet_temp.map(p => p), false, null, true));
+  //console.log(util.inspect(planet_temp.map(p => p), false, null, true));
   //let pupdcount = await Planet.updateMany({id: {$nin: planet_temp.map(p => p.planet_id)}}, {active: false});
   //console.log('Planets set inactive: ' + util.inspect(pupdcount, false, null, true));
   
@@ -330,17 +330,19 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
       {$match: {id: planets[pkey].id}},
       {$group: {_id: null, planetname: {$first: '$planetname'}, rulername: {$first: '$rulername'}, race: {$first: '$race'}, size: {$sum: '$size'}, score: {$sum: '$score'}, value: {$sum: '$value'}, xp: {$sum: '$xp'}}}
     ]);
-    await Planet.updateOne({id: planets[pkey].id}, {
-      age: Number(typeof(planets[pkey].age) != 'undefined' ? planets[pkey].age + 1 : 1),
-      planetname: t[0].planetname,
-      rulername: t[0].rulername,
-      race: t[0].race,
-      size: t[0].size,
-      score: t[0].score,
-      value: t[0].value,
-      xp: t[0].xp,
-      ratio: t[0].value !== 0 ? 10000.0 * t[0].size / t[0].value : 0
-    });
+    if(t != null) {
+        await Planet.updateOne({id: planets[pkey].id}, {
+            age: Number(typeof (planets[pkey].age) != 'undefined' ? planets[pkey].age + 1 : 1),
+            planetname: t[0].planetname,
+            rulername: t[0].rulername,
+            race: t[0].race,
+            size: t[0].size,
+            score: t[0].score,
+            value: t[0].value,
+            xp: t[0].xp,
+            ratio: t[0].value !== 0 ? 10000.0 * t[0].size / t[0].value : 0
+        });
+    }
   }
   
   
