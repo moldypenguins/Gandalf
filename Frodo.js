@@ -39,7 +39,7 @@ const sleep = (ms) => {
 
 db.connection.once("open", async () => {
   let j = schedule.scheduleJob(rule, async () => {
-    const start_time = Date.now();
+    const start_time = new Date();
     console.log('Frodo Embarking on The Quest Of The Ring.');
     console.log(`Start Time: ${moment(start_time).format('YYYY-MM-DD H:mm:ss')}`);
 
@@ -60,7 +60,7 @@ db.connection.once("open", async () => {
           let galaxy = await getStream(config.pa.dumps.galaxy);
           let alliance = await getStream(config.pa.dumps.alliance);
           let user = await getStream(config.pa.dumps.user);
-          console.log(`Loaded dumps from webserver in: ${Date.now() - start_time}ms`);
+          console.log(`Loaded dumps from webserver in: ${(new Date()) - start_time}ms`);
           
           if(typeof(planet) != 'undefined' && typeof(galaxy) != 'undefined' && typeof(alliance) != 'undefined' && typeof(user) != 'undefined') {
             planet = planet.split('\n');
@@ -111,7 +111,7 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
   await PlanetDump.deleteMany();
   await GalaxyDump.deleteMany();
   await AllianceDump.deleteMany();
-  console.log(`Deleted old dumps in: ${Date.now() - start_time}ms`);
+  console.log(`Deleted old dumps in: ${(new Date()) - start_time}ms`);
   
   if(new_tick.id < config.pa.tick.shuffle) {
     console.log('Pre-shuffle dumps detected, dumping data.');
@@ -194,7 +194,7 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
     alliance = undefined;
     //console.log('Alliance dumps saved.');
   }
-  console.log(`Inserted dumps in: ${Date.now() - start_time}ms`);
+  console.log(`Inserted dumps in: ${(new Date()) - start_time}ms`);
 //##############
 //Clusters
 //##############
@@ -234,7 +234,7 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
 //##########################
   
   
-  console.log(`Updated clusters in: ${Date.now() - start_time}ms`);
+  console.log(`Updated clusters in: ${(new Date()) - start_time}ms`);
 //##############
 //Galaxies
 //##############
@@ -283,7 +283,7 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
     });
   }
   
-  console.log(`Updated galaxies in: ${Date.now() - start_time}ms`);
+  console.log(`Updated galaxies in: ${(new Date()) - start_time}ms`);
 //##############
 //Planets
 //##############
@@ -354,7 +354,7 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
   
   
   
-  console.log(`Updated planets in: ${Date.now() - start_time}ms`);
+  console.log(`Updated planets in: ${(new Date()) - start_time}ms`);
 //##############
 //Alliances
 //##############
@@ -400,7 +400,7 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
 
   
   
-  console.log(`Updated alliances in: ${Date.now() - start_time}ms`);
+  console.log(`Updated alliances in: ${(new Date()) - start_time}ms`);
 //##############
 //History
 //##############
@@ -449,7 +449,7 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
   
   
   
-  console.log(`Updated pt${new_tick.id} stats in: ${Date.now() - start_time}ms\n`);
+  console.log(`Updated pt${new_tick.id} stats in: ${(new Date()) - start_time}ms\n`);
   
   
 //##############
