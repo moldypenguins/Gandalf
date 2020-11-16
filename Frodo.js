@@ -224,7 +224,7 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
       {$match: {x: clusters[ckey].x}},
       {$group: {_id: null, size: {$sum: '$size'}, score: {$sum: '$score'}, value: {$sum: '$value'}, xp: {$sum: '$xp'}, members: {$sum: 1}}}
     ]);
-    await Cluster.updateOne({x: c.x}, {
+    await Cluster.updateOne({x: ckey.x}, {
       age: Number(typeof(clusters[ckey].age) != 'undefined' ? clusters[ckey].age + 1 : 1),
       size: t[0].size,
       score: t[0].score,
