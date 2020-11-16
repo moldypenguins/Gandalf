@@ -21,12 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="318793aa-8048-4f80-892e-a688e801ce15" name="Default Changelist" comment="updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/attacks.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/attacks.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/members.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/members.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/parse.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/parse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/scans.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/scans.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/strategy.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/strategy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frodo.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frodo.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +45,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="true" />
+    <property name="add_unversioned_files" value="true&#10;D:/Source/GitHub/MiddleEarth/config.js" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.15.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.14.7" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="$PROJECT_DIR$/node_modules/gulp" />
@@ -89,7 +84,7 @@
       <workItem from="1605184756158" duration="3156000" />
       <workItem from="1605187969163" duration="653000" />
       <workItem from="1605223445874" duration="4848000" />
-      <workItem from="1605479533754" duration="1437000" />
+      <workItem from="1605479533754" duration="4752000" />
     </task>
     <task id="LOCAL-00001" summary="update Frodo.js">
       <created>1605165325612</created>
