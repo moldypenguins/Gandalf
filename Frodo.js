@@ -268,15 +268,15 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
   for(let gkey in galaxies) {
     //console.log(util.inspect(g, false, null, true));
     let gal = await GalaxyDump.aggregate([
-      {$match: {x: g.x, y: g.y}},
+      {$match: {x: gkey.x, y: gkey.y}},
       {$group: {_id: null, name: {$first: '$name'}, size: {$sum: '$size'}, score: {$sum: '$score'}, value: {$sum: '$value'}, xp: {$sum: '$xp'}}}
     ]);
     let t = await PlanetDump.aggregate([
-      {$match: {x: {$eq: g.x}, y: {$eq: g.y}}},
+      {$match: {x: {$eq: gkey.x}, y: {$eq: gkey.y}}},
       {$group: {_id: null, members: {$sum: 1}}}
     ]);
-    await Galaxy.updateOne({x: {$eq: g.x}, y: {$eq: g.y}}, {
-      age: Number(typeof(g.age) != 'undefined' ? g.age + 1 : 1),
+    await Galaxy.updateOne({x: {$eq: gkey.x}, y: {$eq: gkey.y}}, {
+      age: Number(typeof(gkey.age) != 'undefined' ? gkey.age + 1 : 1),
       name: gal[0].name,
       size: gal[0].size,
       score: gal[0].score,
@@ -329,7 +329,7 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
       {$match: {id: planets[pkey].id}},
       {$group: {_id: null, planetname: {$first: '$planetname'}, rulername: {$first: '$rulername'}, race: {$first: '$race'}, size: {$sum: '$size'}, score: {$sum: '$score'}, value: {$sum: '$value'}, xp: {$sum: '$xp'}}}
     ]);
-    await Planet.updateOne({id: p.id}, {
+    await Planet.updateOne({id: pkey.id}, {
       age: Number(typeof(planets[pkey].age) != 'undefined' ? planets[pkey].age + 1 : 1),
       planetname: t[0].planetname,
       rulername: t[0].rulername,
