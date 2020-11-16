@@ -86,7 +86,8 @@ db.connection.once("open", async () => {
           }
         }
       } catch(error) {
-        console.log(util.inspect('Error: ' + error, false, null, true));
+        console.log(util.inspect(error, false, null, true));
+        break;
       }
       if(!successful) {
         while((new Date()).getTime() - iteration_start.getTime() < 15) {
@@ -268,15 +269,15 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
   for(let gkey in galaxies) {
     //console.log(util.inspect(g, false, null, true));
     let gal = await GalaxyDump.aggregate([
-      {$match: {x: gkey.x, y: gkey.y}},
+      {$match: {x: galaxies[gkey].x, y: galaxies[gkey].y}},
       {$group: {_id: null, name: {$first: '$name'}, size: {$sum: '$size'}, score: {$sum: '$score'}, value: {$sum: '$value'}, xp: {$sum: '$xp'}}}
     ]);
     let t = await PlanetDump.aggregate([
-      {$match: {x: {$eq: gkey.x}, y: {$eq: gkey.y}}},
+      {$match: {x: {$eq: galaxies[gkey].x}, y: {$eq: galaxies[gkey].y}}},
       {$group: {_id: null, members: {$sum: 1}}}
     ]);
-    await Galaxy.updateOne({x: {$eq: gkey.x}, y: {$eq: gkey.y}}, {
-      age: Number(typeof(gkey.age) != 'undefined' ? gkey.age + 1 : 1),
+    await Galaxy.updateOne({x: {$eq: galaxies[gkey].x}, y: {$eq: galaxies[gkey].y}}, {
+      age: Number(typeof(galaxies[gkey].age) != 'undefined' ? galaxies[gkey].age + 1 : 1),
       name: gal[0].name,
       size: gal[0].size,
       score: gal[0].score,
@@ -329,7 +330,7 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
       {$match: {id: planets[pkey].id}},
       {$group: {_id: null, planetname: {$first: '$planetname'}, rulername: {$first: '$rulername'}, race: {$first: '$race'}, size: {$sum: '$size'}, score: {$sum: '$score'}, value: {$sum: '$value'}, xp: {$sum: '$xp'}}}
     ]);
-    await Planet.updateOne({id: pkey.id}, {
+    await Planet.updateOne({id: planets[pkey].id}, {
       age: Number(typeof(planets[pkey].age) != 'undefined' ? planets[pkey].age + 1 : 1),
       planetname: t[0].planetname,
       rulername: t[0].rulername,
