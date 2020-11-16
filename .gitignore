@@ -1,15 +1,18 @@
+#ignore project files
+/.idea/
+
 #ignore node_modules folder
-node_modules/
+/node_modules/
 
 #ignore config file
-config.js
+/config.js
 
 #ignore html content
-views/content/*
-!views/content/*.example.html
+/views/content/*
+!/views/content/*.example.html
 
 #ignore ssl files
-ssl/*.crt
-ssl/*.key
-!ssl/*.example.crt
-!ssl/*.example.key
+/ssl/*.crt
+/ssl/*.key
+!/ssl/*.example.crt
+!/ssl/*.example.key
