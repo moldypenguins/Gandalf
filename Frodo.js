@@ -102,9 +102,13 @@ db.connection.once("open", async () => {
 
 
 let process_tick = async (planet, galaxy, alliance, user, start_time) => {
+  let tick_time = moment();
+  let remainder = tick_time.minute() % (havoc ? 15 : 60);
+  tick_time.add(remainder, 'minutes');
+
   let new_tick = new Tick({
     id: planet[3].match(/\d+/g).map(Number)[0],
-    timestamp: ticktime
+    timestamp: tick_time
   });
 
   //delete dump tables
