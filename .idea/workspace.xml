@@ -20,10 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="318793aa-8048-4f80-892e-a688e801ce15" name="Default Changelist" comment="updates">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scripts/zt.user.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts/zt.user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scripts/zt.userscans.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts/zt.userscans.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/styles/zt.user.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/styles/zt.user.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +86,7 @@
       <workItem from="1605223445874" duration="4848000" />
       <workItem from="1605479533754" duration="4909000" />
       <workItem from="1605531944179" duration="3153000" />
-      <workItem from="1605658649699" duration="8592000" />
+      <workItem from="1605658649699" duration="8867000" />
     </task>
     <task id="LOCAL-00001" summary="update Frodo.js">
       <created>1605165325612</created>
