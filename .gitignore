@@ -13,6 +13,3 @@
 /ssl/*.key
 !/ssl/*.example.crt
 !/ssl/*.example.key
-
-#ignore project workspace
-.idea/workspace.xml
