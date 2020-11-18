@@ -19,7 +19,7 @@ module.exports = {
     message_interval:5 //seconds
   },
   twilio:{
-    url:[Twilio url],
+    url:[Twilio url], //TwiML instructions url
     sid:[Twilio sid],
     secret:[Twilio secret],
     number:[Twilio phone],
