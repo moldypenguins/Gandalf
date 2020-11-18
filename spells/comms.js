@@ -8,9 +8,9 @@ const entities = new Entities();
 const comms = require('../comms');
 const Members = require('../models/member');
 
-var Comms_call_usage = entities.encode('!call <user>');
-var Comms_call_desc = 'Calls a user via twilio';
-var Comms_call = (args) => {
+let Comms_call_usage = entities.encode('!call <user>');
+let Comms_call_desc = 'Calls a user via twilio';
+let Comms_call = (args) => {
     return new Promise(function (resolve, reject) {
         if (!Array.isArray(args) || args.length < 1) { reject(Comms_call_usage); }
         Members.find().then((members) => {
@@ -34,9 +34,9 @@ var Comms_call = (args) => {
     });
 };
 
-var Comms_contact_usage = entities.encode('!contact <user>');
-var Comms_contact_desc = 'Displays a users TG username';
-var Comms_contact = (args) => {
+let Comms_contact_usage = entities.encode('!contact <user>');
+let Comms_contact_desc = 'Displays a users TG username';
+let Comms_contact = (args) => {
     return new Promise(function (resolve, reject) {
         if (!Array.isArray(args) || args.length < 1) { reject(Comms_contact_usage); }
         Members.find().then((members) => {
