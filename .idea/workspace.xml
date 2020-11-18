@@ -23,6 +23,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/scripts/zt.user.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts/zt.user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/scripts/zt.userscans.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts/zt.userscans.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/styles/zt.user.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/styles/zt.user.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +88,7 @@
       <workItem from="1605223445874" duration="4848000" />
       <workItem from="1605479533754" duration="4909000" />
       <workItem from="1605531944179" duration="3153000" />
-      <workItem from="1605658649699" duration="6271000" />
+      <workItem from="1605658649699" duration="8592000" />
     </task>
     <task id="LOCAL-00001" summary="update Frodo.js">
       <created>1605165325612</created>
@@ -191,11 +192,11 @@
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
     <state x="-1525" y="107" width="1419" height="744" key="DiffContextDialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605165937124" />
-    <state x="-949" y="290" key="FileChooserDialogImpl" timestamp="1605188426805">
+    <state x="-949" y="290" key="FileChooserDialogImpl" timestamp="1605683099509">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
     <state x="-949" y="290" key="FileChooserDialogImpl/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605188426805" />
-    <state x="-949" y="290" key="FileChooserDialogImpl/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1605151680676" />
+    <state x="-949" y="290" key="FileChooserDialogImpl/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1605683099509" />
     <state width="1516" height="235" key="GridCell.Tab.0.bottom" timestamp="1605224082762">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
