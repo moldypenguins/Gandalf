@@ -14,6 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name Sauron.js
+ * @version 2020/11/19
+ * @summary Website
  **/
 const config = require('./config');
 const db = require('./db');
