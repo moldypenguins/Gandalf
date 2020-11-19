@@ -18,6 +18,5 @@ var memberSchema = mongoose.Schema({
   timezone:    {type:String}
 });
 
-
 module.exports = mongoose.model('Member', memberSchema, 'Members');
 
