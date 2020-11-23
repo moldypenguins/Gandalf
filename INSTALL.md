@@ -1,10 +1,10 @@
 # Installation
 
 ```shell script
-[HOSTNAME] = ztpa.ca
+[HOSTNAME] = domain.com
 [SSHPORT] = 22222
-[USERNAME] = cr
-[USEREMAIL] = moldypenguins@crdevel.com
+[USERNAME] = pauser
+[USEREMAIL] = pauser@domain.com
 [BOTNAME] = Gandalf
 [DATABASENAME] = padb
 [DATABASEUSER] = pauser
@@ -43,7 +43,6 @@
   /etc/init.d/ssh restart
   exit
 ```
-
 ```shell script
 -login as [USERNAME]
   #install/configure fail2ban/sendmail
@@ -67,7 +66,6 @@
       action = %(action_mw)s 
   sudo /etc/init.d/fail2ban restart
 ```
-  
 ```shell script
   #install ntupdate
   sudo apt install ntpdate
@@ -101,24 +99,23 @@
   sudo npm install -g npx
   sudo npm install -g nodemon
 ```
-  
-  
-  
-## Clone Git
+
+
+## Bot Setup
 ```shell script
   git https://github.com/moldypenguins/Gandalf MiddleEarth
   cd MiddleEarth
   sudo npm install
 ```
 
-## Bilbo
+### Bilbo
 ```shell script
   sudo nodejs bilbo.js
   #Wait for the script to finish
   #Press Ctrl+C
 ```
 
-## Frodo
+### Frodo
 ```shell script
   screen -dmS Frodo
   screen -r Frodo
@@ -126,7 +123,7 @@
   #Press Ctrl+A+D
 ```
 
-## Gandalf
+### Gandalf
 ```shell script
   screen -dmS Gandalf
   screen -r Gandalf
@@ -134,7 +131,7 @@
   #Press Ctrl+A+D
 ```
 
-## Sauron
+### Sauron
 ```shell script
   #@fortawesome/fontawesome-free
   ln -s node_modules/@fortawesome/fontawesome-free/webfonts/ public/
@@ -150,29 +147,8 @@
 ```
 
 
-  
-  
-  
-
-
-
-
-
-
--check apps listening
+## Other Helpful Commands
+```shell script
+  #check apps listening
   sudo netstat -tulpn | grep LISTEN
-  
-  
-  
-  
-
-  
-
-
-
-
-
-
-
-
-
+```
