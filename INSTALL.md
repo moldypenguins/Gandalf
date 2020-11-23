@@ -103,9 +103,9 @@
   nodejs -v
   sudo apt install npm
   npm -v
-  sudo apt install build-essential
-  sudo npm install -g npx
-  sudo npm install -g nodemon
+  #sudo apt install build-essential  #unknown if needed
+  #sudo npm install -g npx           #unknown if needed
+  #sudo npm install -g nodemon       #is now in package.json
 ```
 
 
@@ -155,9 +155,12 @@
   #@fortawesome/fontawesome-free
   ln -s node_modules/@fortawesome/fontawesome-free/webfonts/ public/
   ln -s node_modules/@fortawesome/fontawesome-free/css/all.min.css public/styles/
-    
   #clipboard
   ln -s node_modules/clipboard/dist/clipboard.min.js public/scripts/
+  #jquery
+
+  #bootstrap
+
 
   screen -dmS Sauron
   screen -r Sauron
