@@ -69,7 +69,7 @@ See [INSTALL.md](INSTALL.md) for setup guide.
 
 
 ## Issues / Support
-See [SECURITY.md](SECURITY.md) for feature request or bug report
+See [SECURITY.md](SECURITY.md) for feature requests or bug reports
 
 
 ## Contributing
