@@ -36,6 +36,7 @@ const Attack = require('./models/attack');
 const path = require("path");
 const fs = require('fs');
 const bent = require('bent');
+const getStream = bent('string');
 const moment = require('moment');
 const util = require('util');
 const crypto = require('crypto');
@@ -76,7 +77,6 @@ db.connection.once("open", async () => {
           console.log('Last tick: ' + lasttick.id);
           console.log('Getting dump files...');
           //get dump files
-          const getStream = bent('string');
           let planet = await getStream(config.pa.dumps.planet);
           let galaxy = await getStream(config.pa.dumps.galaxy);
           let alliance = await getStream(config.pa.dumps.alliance);
