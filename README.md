@@ -66,12 +66,8 @@
 See [INSTALL.md](INSTALL.md) for setup guide.
 
 
-## Major Bugs / Severe Security Vulnerabilities / Other Issues
-Find us on [Telegram](https://t.me/joinchat/DbwzvRz1Z5agj8pIobYPww)
-
-
-## New Features / Bug Reports
-Use [Issues](https://github.com/moldypenguins/Gandalf/issues) to create a feature request or bug report
+## Issues
+See [SECURITY.md](SECURITY.md) for feature request or bug report
 
 
 ## Contributing
