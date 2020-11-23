@@ -1,4 +1,6 @@
--replace values
+# Installation
+
+```shell script
 [HOSTNAME] = ztpa.ca
 [SSHPORT] = 22222
 [USERNAME] = cr
@@ -7,8 +9,10 @@
 [DATABASENAME] = padb
 [DATABASEUSER] = pauser
 [DATABASEPASS] = G@nda1fr
+```
 
-
+## Server Setup
+```shell script
 -login as root
   #set hostname
   hostname
@@ -38,8 +42,9 @@
       PermitRootLogin no
   /etc/init.d/ssh restart
   exit
-  
-  
+```
+
+```shell script
 -login as [USERNAME]
   #install/configure fail2ban/sendmail
   sudo apt-get update
@@ -61,13 +66,14 @@
       destemail = [USEREMAIL]
       action = %(action_mw)s 
   sudo /etc/init.d/fail2ban restart
+```
   
-  
-  
+```shell script
+  #install ntupdate
   sudo apt install ntpdate
   sudo ntpdate time.windows.com
-  
-  
+```
+```shell script
   #install mongodb
   wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
   sudo vi /etc/apt/sources.list.d/mongodb-org-4.2.list
@@ -83,8 +89,8 @@
   sudo systemctl status mongod
   sudo mongo
   exit
-  
-  
+```
+```shell script
   #install node.js
   sudo apt update
   sudo apt install nodejs
@@ -94,85 +100,56 @@
   sudo apt install build-essential
   sudo npm install -g npx
   sudo npm install -g nodemon
+```
   
   
   
-  
-  
-  
-  
-  #setup
-  mkdir ~/[BOTNAME]
-  cd ~/[BOTNAME]/
-  sudo npm install xml2js
-  sudo npm install mongodb
-  sudo npm install mongoose
-  rm package-lock.json
-  
-  
-  
-  #bot
-  mkdir ~/[BOTNAME]/bot
-  cd ~/[BOTNAME]/bot/
-  vi package.json
-  sudo npm install mongodb --save
-  sudo npm install mongoose --save
-  sudo npm install numeral --save
-  sudo npm install telegraf --save
+## Clone Git
+```shell script
+  git https://github.com/moldypenguins/Gandalf MiddleEarth
+  cd MiddleEarth
+  sudo npm install
+```
 
-  sudo npm install
-  vi [BOTNAME].js
-  screen -dmS bot
-  screen -r bot
-  sudo nodejs [BOTNAME]
-  Press Ctrl+A+D
-  
-  
-  
-  
-  #web
-  mkdir ~/[BOTNAME]/web
-  cd ~/[BOTNAME]/web/
-  sudo npm install --save express
-  npx express-generator --view=pug
-  vi package.json
-  sudo npm install express-session --save
-  sudo npm install mongodb --save
-  sudo npm install mongoose --save
-  
-  sudo npm install --save @fortawesome/fontawesome-free
-    ln -s /home/root/MiddleEarth/Sauron/node_modules/@fortawesome/fontawesome-free/webfonts/ /home/root/MiddleEarth/Sauron/public/
-    ln -s /home/root/MiddleEarth/Sauron/node_modules/@fortawesome/fontawesome-free/css/all.min.css /home/root/MiddleEarth/Sauron/public/styles/
+## Bilbo
+```shell script
+  sudo nodejs bilbo.js
+  #Wait for the script to finish
+  #Press Ctrl+C
+```
+
+## Frodo
+```shell script
+  screen -dmS Frodo
+  screen -r Frodo
+  sudo nodejs Frodo.js
+  #Press Ctrl+A+D
+```
+
+## Gandalf
+```shell script
+  screen -dmS Gandalf
+  screen -r Gandalf
+  sudo nodejs Gandalf.js
+  #Press Ctrl+A+D
+```
+
+## Sauron
+```shell script
+  #@fortawesome/fontawesome-free
+  ln -s node_modules/@fortawesome/fontawesome-free/webfonts/ public/
+  ln -s node_modules/@fortawesome/fontawesome-free/css/all.min.css public/styles/
     
-  sudo npm install --save clipboard
-    ln -s /home/root/MiddleEarth/Sauron/node_modules/clipboard/dist/clipboard.min.js /home/root/MiddleEarth/Sauron/public/scripts/
-  
-  
-  sudo npm install
-  vi app.js
-  vi db.js
-  mkdir models
-  vi models/user.js
-  vi routes/Smaug.js
-  vi routes/TheBlackGate.js
-  vi public/stylesheets/style.css
-  vi views/layout.pug
-  vi views/error.pug
-  vi views/home.pug
-  vi views/register.pug
-  
-  mkdir ssl
-  cd ssl
-  openssl genrsa -out key.pem 2048
-  openssl req -new -key key.pem -out client.csr
-  openssl x509 -req -in client.csr -signkey key.pem -out cert.pem
-  rm client.csr
-  cd ..
-  
-  screen -dmS web
-  screen -r web
+  #clipboard
+  ln -s node_modules/clipboard/dist/clipboard.min.js public/scripts/
+
+  screen -dmS Sauron
+  screen -r Sauron
   sudo npm start
-  Press Ctrl+A+D
+  #Press Ctrl+A+D
+```
+
+
   
   
   
