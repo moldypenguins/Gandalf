@@ -6,7 +6,8 @@
 ![Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Build](https://img.shields.io/github/workflow/status/moldypenguins/Gandalf/CodeQL?style=for-the-badge&logo=GitHub)  
 ![Open Issues](https://img.shields.io/github/issues-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
-![Open Pull Requests](https://img.shields.io/github/issues-pr-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)  
+![Open Pull Requests](https://img.shields.io/github/issues-pr-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
+![Dependabot](https://img.shields.io/static/v1?style=for-the-badge&label=Dependabot&message=enabled&color=33CC11&logo=Dependabot)  
 ![Languages](https://img.shields.io/github/languages/count/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Top Language](https://img.shields.io/github/languages/top/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Total Lines](https://img.shields.io/tokei/lines/github/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
@@ -33,7 +34,6 @@
 [![NPM](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=NPM&message=v6.14.9&color=CB3837)](https://www.npmjs.com/)  
 
 ### Node Packages
-[![Dependencies](https://img.shields.io/librariesio/github/moldypenguins/Gandalf?style=for-the-badge&logo=NPM)](https://libraries.io/github/moldypenguins/Gandalf)  
 [![@awaitjs/express](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/@awaitjs/express?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/%40awaitjs/express)
 [![@fortawesome/fontawesome-free](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/@fortawesome/fontawesome-free?style=for-the-badge&logo=NPM&color=339af0)](https://www.npmjs.com/package/@fortawesome/fontawesome-free)
 [![bent](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/bent?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/bent)
