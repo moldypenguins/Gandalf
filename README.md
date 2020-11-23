@@ -75,7 +75,7 @@ Use [Issues](https://github.com/moldypenguins/Gandalf/issues) to create a featur
 
 
 ## Contributing
-Submit a pull request
+See [CONTRIBUTING.md](CONTRIBUTING.md) for more information
 
 
 ## Related Projects
