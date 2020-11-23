@@ -78,7 +78,7 @@ Please use [GitHub Issues](https://github.com/moldypenguins/Gandalf/issues) for 
 * [Munin](https://github.com/munin/munin) - Andreas Jacobsen
 
 
-## Authors and acknowledgment
+## Authors
 * **Craig Roberts** - *Developer* - [@moldypenguins](https://t.me/moldypenguins)
 * **Braden Edmunds** - *Developer* - [@blanq4](https://t.me/blanq4)
 * **Alex High** - *Stylist* - [@UltimateNewbie](https://t.me/UltimateNewbie)
