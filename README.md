@@ -1,11 +1,17 @@
 # Gandalf
-![GitHub License](https://img.shields.io/github/license/moldypenguins/Gandalf?style=for-the-badge&logo=GNU)
-![GitHub Release](https://img.shields.io/github/v/release/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub&include_prereleases)  
-![GitHub Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
-![GitHub Workflow](https://img.shields.io/github/workflow/status/moldypenguins/Gandalf/CodeQL?style=for-the-badge&logo=GitHub)  
-![GitHub Issues](https://img.shields.io/github/issues-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
-![GitHub Pull Requests](https://img.shields.io/github/issues-pr-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
-
+![License](https://img.shields.io/github/license/moldypenguins/Gandalf?style=for-the-badge&logo=GNU)
+![Release](https://img.shields.io/github/v/release/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub&include_prereleases)
+![Release Date](https://img.shields.io/github/release-date-pre/moldypenguins/Gandalf?logo=GitHub&style=for-the-badge)  
+![Contributors](https://img.shields.io/github/contributors/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
+![Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
+![Build](https://img.shields.io/github/workflow/status/moldypenguins/Gandalf/CodeQL?style=for-the-badge&logo=GitHub)  
+![Open Issues](https://img.shields.io/github/issues-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
+![Open Pull Requests](https://img.shields.io/github/issues-pr-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)  
+![Languages](https://img.shields.io/github/languages/count/moldypenguins/Gandalf?style=for-the-badge)
+![Top Language](https://img.shields.io/github/languages/top/moldypenguins/Gandalf?style=for-the-badge)
+![Total Lines](https://img.shields.io/tokei/lines/github/moldypenguins/Gandalf?style=for-the-badge)
+![Repo Size](https://img.shields.io/github/repo-size/moldypenguins/Gandalf?style=for-the-badge)  
+![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/moldypenguins/Gandalf?logo=CodeFactor&style=for-the-badge)
 
 ## Table of Contents
 * [Requirements](#requirements)
@@ -19,11 +25,11 @@
 
 
 ## Requirements
-[![Ubuntu](https://img.shields.io/static/v1?style=for-the-badge&logo=Ubuntu&label=Ubuntu&message=20.04&color=E95420)](https://ubuntu.com/)
-[![CentOS](https://img.shields.io/static/v1?style=for-the-badge&logo=CentOS&label=CentOS&message=7.5&color=262577)](https://centos.com/)  
-[![Fail2ban](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=Fail2ban&message=0.11.1&color=FCC624)](https://www.fail2ban.org/)  
-[![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=10.19.0&color=339933)](https://nodejs.org/)  
-[![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=4.2&color=47A248)](https://www.mongodb.com/)  
+[![Ubuntu](https://img.shields.io/static/v1?style=for-the-badge&logo=Ubuntu&label=Ubuntu&message=v20.04&color=E95420)](https://ubuntu.com/)
+[![CentOS](https://img.shields.io/static/v1?style=for-the-badge&logo=CentOS&label=CentOS&message=v7.5&color=262577)](https://centos.com/)  
+[![Fail2ban](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=Fail2ban&message=v0.11.1&color=FCC624)](https://www.fail2ban.org/)  
+[![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=v10.19.0&color=339933)](https://nodejs.org/)  
+[![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=v4.2&color=47A248)](https://www.mongodb.com/)  
 ### Node Packages
 [![@awaitjs/express](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/@awaitjs/express?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/%40awaitjs/express)
 [![@fortawesome/fontawesome-free](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/@fortawesome/fontawesome-free?style=for-the-badge&logo=NPM&color=339af0)](https://www.npmjs.com/package/@fortawesome/fontawesome-free)
