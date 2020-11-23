@@ -164,9 +164,9 @@
 
   screen -dmS Sauron
   screen -r Sauron
-  sudo npm start
+  sudo nodejs Sauron.js
   #if using nodemon
-  sudo nodemon --exec npm start
+  sudo nodemon Sauron.js
   #Press Ctrl+A+D
 ```
 
