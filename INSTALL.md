@@ -2,7 +2,6 @@
 
 ```shell script
 [HOSTNAME] = domain.com
-[SSHPORT] = 22222
 [USERNAME] = pauser
 [USEREMAIL] = pauser@domain.com
 [BOTNAME] = Gandalf
@@ -37,9 +36,12 @@
   exit
   passwd -l root
   sudo vi /etc/ssh/sshd_config
-      Port [SSHPORT]
-      PasswordAuthentication no
+      Port 22
       PermitRootLogin no
+      PubkeyAuthentication yes
+      AuthorizedKeysFile .ssh/authorized_keys .ssh/authorized_keys2
+      PasswordAuthentication no
+      ChallengeResponseAuthentication no
   /etc/init.d/ssh restart
   exit
 ```
@@ -51,8 +53,14 @@
   sudo apt-get install sendmail
   sudo vi /etc/mail/sendmail.conf
   sudo sendmailconfig
-  sudo ufw app list
-  sudo ufw allow [SSHPORT]
+    #update some settings
+  sudo vi /etc/default/ufw
+      IPV6=yes
+  sudo ufw default deny incoming
+  sudo ufw default allow outgoing
+  sudo ufw allow http
+  sudo ufw allow https
+  sudo ufw allow ssh
   sudo ufw enable
   sudo ufw status
   sudo fail2ban-client status
