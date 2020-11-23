@@ -31,7 +31,8 @@
 [![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=v4.2&color=47A248)](https://www.mongodb.com/)  
 [![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=v10.19.0&color=339933)](https://nodejs.org/)  
 [![NPM](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=NPM&message=v6.14.9&color=CB3837)](https://www.npmjs.com/)  
-### Node Packages
+
+### ![Dependencies](https://img.shields.io/librariesio/github/moldypenguins/Gandalf?style=for-the-badge&logo=NPM)  
 [![@awaitjs/express](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/@awaitjs/express?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/%40awaitjs/express)
 [![@fortawesome/fontawesome-free](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/@fortawesome/fontawesome-free?style=for-the-badge&logo=NPM&color=339af0)](https://www.npmjs.com/package/@fortawesome/fontawesome-free)
 [![bent](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/bent?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/bent)
