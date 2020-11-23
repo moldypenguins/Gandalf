@@ -7,11 +7,11 @@
 ![Build](https://img.shields.io/github/workflow/status/moldypenguins/Gandalf/CodeQL?style=for-the-badge&logo=GitHub)  
 ![Open Issues](https://img.shields.io/github/issues-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Open Pull Requests](https://img.shields.io/github/issues-pr-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)  
-![Languages](https://img.shields.io/github/languages/count/moldypenguins/Gandalf?style=for-the-badge)
-![Top Language](https://img.shields.io/github/languages/top/moldypenguins/Gandalf?style=for-the-badge)
-![Total Lines](https://img.shields.io/tokei/lines/github/moldypenguins/Gandalf?style=for-the-badge)
-![Repo Size](https://img.shields.io/github/repo-size/moldypenguins/Gandalf?style=for-the-badge)  
-![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/moldypenguins/Gandalf?logo=CodeFactor&style=for-the-badge)
+![Languages](https://img.shields.io/github/languages/count/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
+![Top Language](https://img.shields.io/github/languages/top/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
+![Total Lines](https://img.shields.io/tokei/lines/github/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
+![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/moldypenguins/Gandalf?style=for-the-badge&logo=CodeFactor)
+
 
 ## Table of Contents
 * [Requirements](#requirements)
