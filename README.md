@@ -8,11 +8,13 @@
 
 
 ## Table of Contents
-* [Requirements](#Requirements)
-* [Installation](#Installation)
-* [Issues/Support](#Issues)
-* [Contributing](#Contributing)
-* [Credits](#credits)
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [Issues / Support](#issues-/-support)
+* [Contributing](#contributing)
+* [Code of Conduct](#code-of-conduct)
+* [Related Projects](#related-projects)
+* [Authors](#authors)
 * [Licenses](#licenses)
 
 
@@ -72,6 +74,10 @@ See [SECURITY.md](SECURITY.md) for feature request or bug report
 
 ## Contributing
 See [CONTRIBUTING.md](CONTRIBUTING.md) for more information
+
+
+## Code of Conduct
+See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 
 ## Related Projects
