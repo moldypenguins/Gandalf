@@ -8,10 +8,10 @@
 
 
 ## Table of Contents
-* [Requirements](#requirements)
-* [Installation](#installation)
-* [Contributing](#contributing)
-* [Support](#support)
+* [Requirements](#Requirements)
+* [Installation](#Installation)
+* [Issues/Support](#Issues)
+* [Contributing](#Contributing)
 * [Credits](#credits)
 * [Licenses](#licenses)
 
@@ -66,7 +66,7 @@
 See [INSTALL.md](INSTALL.md) for setup guide.
 
 
-## Issues
+## Issues / Support
 See [SECURITY.md](SECURITY.md) for feature request or bug report
 
 
