@@ -18,7 +18,7 @@
 
 ## Requirements
 [![Ubuntu](https://img.shields.io/static/v1?style=for-the-badge&logo=Ubuntu&label=Ubuntu&message=20.04&color=E95420)](https://ubuntu.com/)
-[![Ubuntu](https://img.shields.io/static/v1?style=for-the-badge&logo=CentOS&label=CentOS&message=7&color=262577)](https://centos.com/)  
+[![CentOS](https://img.shields.io/static/v1?style=for-the-badge&logo=CentOS&label=CentOS&message=7.5&color=262577)](https://centos.com/)  
 [![Fail2ban](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=Fail2ban&message=0.11.1&color=FCC624)](https://www.fail2ban.org/)  
 [![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=10.19.0&color=339933)](https://nodejs.org/)  
 [![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=4.2&color=47A248)](https://www.mongodb.com/)  
