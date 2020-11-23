@@ -22,20 +22,20 @@
 [![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=v10.19.0&color=339933)](https://nodejs.org/)  
 [![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=v4.2&color=47A248)](https://www.mongodb.com/)  
 <br />
-[![@awaitjs/express](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/@awaitjs/express?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/vkarpov15/awaitjs-express) [![npm version](https://img.shields.io/npm/v/%40awaitjs/express?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/%40awaitjs/express)  
-[![@fortawesome/fontawesome-free](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/@fortawesome/fontawesome-free?style=for-the-badge&logo=NPM&color=339af0)](https://fontawesome.com/) [![npm version](https://img.shields.io/npm/v/@fortawesome/fontawesome-free?style=for-the-badge&color=339af0)](https://www.npmjs.com/package/@fortawesome/fontawesome-free)  
-[![bent](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/bent?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/mikeal/bent) [![npm version](https://img.shields.io/npm/v/bent?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/bent)  
-[![browser-sync](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/browser-sync?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/) [![npm version](https://img.shields.io/npm/v/browser-sync?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/browser-sync)  
-[![clipboard](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/clipboard?style=for-the-badge&logo=NPM&color=1bc1a1)](https://clipboardjs.com/) [![npm version](https://img.shields.io/npm/v/clipboard?style=for-the-badge&color=1bc1a1)](https://www.npmjs.com/package/clipboard)  
-[![cookie-parser](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/cookie-parser?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/expressjs/cookie-parser) [![npm version](https://img.shields.io/npm/v/cookie-parser?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/cookie-parser)  
-[![cors](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/cors?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/expressjs/cors) [![npm version](https://img.shields.io/npm/v/cors?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/cors)  
-[![csurf](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/csurf?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/) [![npm version](https://img.shields.io/npm/v/csurf?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/csurf)  
-[![debug](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/debug?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/visionmedia/debug) [![npm version](https://img.shields.io/npm/v/debug?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/debug)  
-[![ejs](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/ejs?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/mde/ejs) [![npm version](https://img.shields.io/npm/v/ejs?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/ejs)  
-[![express](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/express?style=for-the-badge&logo=NPM&color=CB3837)](https://expressjs.com/) [![npm version](https://img.shields.io/npm/v/express?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/express)  
-[![express-rate-limit](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/express-rate-limit?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/expressjs/rate-limit) [![npm version](https://img.shields.io/npm/v/express-rate-limit?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/express-rate-limit)  
-[![express-session](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/express-session?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/expressjs/session) [![npm version](https://img.shields.io/npm/v/express-session?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/express-session)  
-[![gulp](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/gulp?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/) [![npm version](https://img.shields.io/npm/v/gulp?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/gulp)  
+[![@awaitjs/express](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/@awaitjs/express?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/%40awaitjs/express)
+[![@fortawesome/fontawesome-free](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/@fortawesome/fontawesome-free?style=for-the-badge&logo=NPM&color=339af0)](https://www.npmjs.com/package/@fortawesome/fontawesome-free)
+[![bent](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/bent?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/bent)
+[![browser-sync](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/browser-sync?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/browser-sync)
+[![clipboard](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/clipboard?style=for-the-badge&logo=NPM&color=1bc1a1)](https://www.npmjs.com/package/clipboard)
+[![cookie-parser](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/cookie-parser?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/cookie-parser)
+[![cors](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/cors?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/cors)
+[![csurf](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/csurf?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/csurf)
+[![debug](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/debug?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/debug)
+[![ejs](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/ejs?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/ejs)
+[![express](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/express?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/express)
+[![express-rate-limit](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/express-rate-limit?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/express-rate-limit)
+[![express-session](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/express-session?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/express-session)
+[![gulp](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/gulp?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/gulp)
 [![gulp-autoprefixer](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/gulp-autoprefixer?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/) [![npm version](https://img.shields.io/npm/v/gulp-autoprefixer?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/gulp-autoprefixer)  
 [![gulp-cached](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/gulp-cached?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/) [![npm version](https://img.shields.io/npm/v/gulp-cached?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/gulp-cached)  
 [![gulp-concat](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/gulp-concat?style=for-the-badge&logo=NPM&color=CB3837)](https://github.com/) [![npm version](https://img.shields.io/npm/v/gulp-concat?style=for-the-badge&color=CB3837)](https://www.npmjs.com/package/gulp-concat)  
@@ -62,7 +62,7 @@
 
 
 ## Installation
-See [INSTALL.md](INSTALL.md) for setup guide. (needs to be updated)
+See [INSTALL.md](INSTALL.md) for setup guide.
 
 
 ## Contributing
