@@ -114,6 +114,13 @@
   git https://github.com/moldypenguins/Gandalf MiddleEarth
   cd MiddleEarth
   sudo npm install
+  #create config.js
+  cp config.example.js config.js
+  vi config.js
+  #create page content
+  cp views/content/dashboard.example.html views/content/dashboard.html
+  vi views/content/dashboard.html
+  #do the same for the remaining content files...
 ```
 
 ### Bilbo
@@ -128,6 +135,8 @@
   screen -dmS Frodo
   screen -r Frodo
   sudo nodejs Frodo.js
+  #if using nodemon
+  sudo nodemon Frodo.js
   #Press Ctrl+A+D
 ```
 
@@ -136,6 +145,8 @@
   screen -dmS Gandalf
   screen -r Gandalf
   sudo nodejs Gandalf.js
+  #if using nodemon
+  sudo nodemon Gandalf.js
   #Press Ctrl+A+D
 ```
 
@@ -151,6 +162,8 @@
   screen -dmS Sauron
   screen -r Sauron
   sudo npm start
+  #if using nodemon
+  sudo nodemon --exec npm start
   #Press Ctrl+A+D
 ```
 
