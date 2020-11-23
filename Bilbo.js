@@ -17,36 +17,28 @@
  *
  * @name Bilbo.js
  * @version 2020/11/19
- * @summary Round Starter
+ * @summary Initialization
  **/
-var config = require('./config');
-var https = require('https');
-var parseString = require('xml2js').parseString;
-var db = require('./db');
-var Ship = require('./models/ship.js');
-var Member = require('./models/member.js');
-var Tick = require('./models/tick.js');
+const config = require('./config');
+const db = require('./db');
+const bent = require('bent');
+const getStream = bent('string');
+const parseString = require('xml2js').parseString;
+const Ship = require('./models/ship.js');
+const Member = require('./models/member.js');
+const Tick = require('./models/tick.js');
 
 
-var req = https.get(config.pa.dumps.ship_stats, function(res) {
-  var xml = '';
-  res.on('data', function(chunk) {
-    xml += chunk;
-  });
-  res.on('error', function(e) {
-    callback(e, null);
-  });
-  res.on('timeout', function(e) {
-    callback(e, null);
-  });
-  res.on('end', function() {
-    parseString(xml, function(err, result) {
-      callback(null, result);
+db.connection.once("open", async () => {
+    let ship_stats = await getStream(config.pa.dumps.ship_stats);
+    parseString(ship_stats, (err, result) => {
+        callback(null, result);
     });
-  });
+    process.exitCode = 0;
 });
 
-function callback(err, docs) {
+
+let callback = (err, docs) => {
   let ship_id = 0;
   if (err){
     console.error(err);
