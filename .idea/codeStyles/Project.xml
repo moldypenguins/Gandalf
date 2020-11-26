@@ -19,6 +19,9 @@
       <option name="OBJECT_LITERAL_WRAP" value="0" />
       <option name="IMPORTS_WRAP" value="0" />
     </JSCodeStyleSettings>
+    <editorconfig>
+      <option name="ENABLED" value="false" />
+    </editorconfig>
     <codeStyleSettings language="Gherkin">
       <indentOptions>
         <option name="CONTINUATION_INDENT_SIZE" value="2" />
