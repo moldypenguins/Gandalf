@@ -71,13 +71,7 @@ let loginRequired = async (req, res, next) => {
   //console.log('SESSION: ' + util.inspect(req.session, false, null, true));
   if(typeof(res.locals.member) == 'undefined') {
     //put req var to forward here
-    console.log('REQ URL: ' + 
-      url.format({
-        protocol: req.protocol,
-        host: req.get('host'),
-        pathname: req.originalUrl
-      })
-    );
+    console.log('REQ URL: ' + req.originalUrl);
     req.session.req_url = url.format({
         protocol: req.protocol,
         host: req.get('host'),
