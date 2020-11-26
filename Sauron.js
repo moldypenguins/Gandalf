@@ -86,7 +86,7 @@ let loginRequired = async (req, res, next) => {
     
     return res.status(401).render('unauthorized', { site_title: config.alliance.name, page_title: config.alliance.name });
   } else {
-    res.locals.member = await Member.updateOne({id:res.locals.member.id}, {last_access:Date.now()});
+    let updated = await Member.updateOne({id:res.locals.member.id}, {last_access:Date.now()});
     if(req.session.req_url !== undefined) {
         let req_url = req.session.req_url;
         req.session.req_url = undefined;
