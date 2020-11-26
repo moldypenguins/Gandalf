@@ -70,14 +70,13 @@ let loginRequired = async (req, res, next) => {
   //console.log('LOCALS: ' + util.inspect(res.locals, false, null, true));
   //console.log('SESSION: ' + util.inspect(req.session, false, null, true));
   if(typeof(res.locals.member) == 'undefined') {
-    //put req var to forward here
-    console.log('REQ URL: ' + req.originalUrl);
-    req.session.req_url = url.format({
-        protocol: req.protocol,
-        host: req.get('host'),
-        pathname: req.originalUrl
-    });
-    
+    //req var to forward
+    //console.log('REQ URL: ' + req.originalUrl);
+    if(req.originalUrl !== '/') {
+        req.session.req_url = url.format({
+            protocol: req.protocol, host: req.get('host'), pathname: req.originalUrl
+        });
+    }
     return res.status(401).render('unauthorized', { site_title: config.alliance.name, page_title: config.alliance.name });
   } else {
     let updated = await Member.updateOne({id:res.locals.member.id}, {last_access:Date.now()});
