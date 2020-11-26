@@ -355,7 +355,7 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
       {$match: {id: planets[pkey].id}},
       {$group: {_id: null, planetname: {$first: '$planetname'}, rulername: {$first: '$rulername'}, race: {$first: '$race'}, size: {$sum: '$size'}, score: {$sum: '$score'}, value: {$sum: '$value'}, xp: {$sum: '$xp'}}}
     ]);
-    if(t != null) {
+    if(t != null && t.length >= 1) {
         await Planet.updateOne({id: planets[pkey].id}, {
             age: Number(typeof (planets[pkey].age) != 'undefined' ? planets[pkey].age + 1 : 1),
             planetname: t[0].planetname,
