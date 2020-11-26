@@ -21,7 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="318793aa-8048-4f80-892e-a688e801ce15" name="Default Changelist" comment="updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/INSTALL.md" beforeDir="false" afterPath="$PROJECT_DIR$/INSTALL.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron.js" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +88,8 @@
       <workItem from="1605479533754" duration="4909000" />
       <workItem from="1605531944179" duration="3153000" />
       <workItem from="1605658649699" duration="12651000" />
-      <workItem from="1605714350391" duration="16469000" />
+      <workItem from="1605714350391" duration="39404000" />
+      <workItem from="1606359180288" duration="2516000" />
     </task>
     <task id="LOCAL-00001" summary="update Frodo.js">
       <created>1605165325612</created>
@@ -196,26 +198,30 @@
     </state>
     <state x="-949" y="290" key="FileChooserDialogImpl/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605188426805" />
     <state x="-949" y="290" key="FileChooserDialogImpl/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1605683099509" />
-    <state width="1516" height="235" key="GridCell.Tab.0.bottom" timestamp="1605224082762">
+    <state width="1694" height="258" key="GridCell.Tab.0.bottom" timestamp="1606374062386">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
-    <state width="1516" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605224082762" />
-    <state width="1516" height="235" key="GridCell.Tab.0.center" timestamp="1605224082762">
+    <state width="1694" height="258" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606374062386" />
+    <state width="1694" height="258" key="GridCell.Tab.0.center" timestamp="1606374062386">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
-    <state width="1516" height="235" key="GridCell.Tab.0.center/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605224082762" />
-    <state width="1516" height="235" key="GridCell.Tab.0.left" timestamp="1605224082762">
+    <state width="1694" height="258" key="GridCell.Tab.0.center/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606374062386" />
+    <state width="1694" height="258" key="GridCell.Tab.0.left" timestamp="1606374062385">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
-    <state width="1516" height="235" key="GridCell.Tab.0.left/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605224082762" />
-    <state width="1516" height="235" key="GridCell.Tab.0.right" timestamp="1605224082762">
+    <state width="1694" height="258" key="GridCell.Tab.0.left/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606374062385" />
+    <state width="1694" height="258" key="GridCell.Tab.0.right" timestamp="1606374062386">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
-    <state width="1516" height="235" key="GridCell.Tab.0.right/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605224082762" />
-    <state x="-981" y="182" key="RollbackChangesDialog" timestamp="1605166913841">
+    <state width="1694" height="258" key="GridCell.Tab.0.right/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606374062386" />
+    <state x="-981" y="182" key="RollbackChangesDialog" timestamp="1606123634366">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
-    <state x="-981" y="182" key="RollbackChangesDialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605166913841" />
+    <state x="-981" y="182" key="RollbackChangesDialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606123634366" />
+    <state width="247" height="198" key="RunAnythingAction_Filter_Popup" timestamp="1606123621156">
+      <screen x="-1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="247" height="198" key="RunAnythingAction_Filter_Popup/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606123621156" />
     <state x="162" y="123" width="1186" height="711" key="SettingsEditor" timestamp="1605533318204">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -234,6 +240,10 @@
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
     <state x="-1125" y="352" key="jetbrains.nodejs.interpreters-dialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605159465570" />
+    <state x="-1449" y="389" key="run.anything.popup" timestamp="1606123622379">
+      <screen x="-1920" y="0" width="1920" height="1050" />
+    </state>
+    <state x="-1449" y="389" key="run.anything.popup/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606123622379" />
     <state x="-1030" y="162" width="672" height="678" key="search.everywhere.popup" timestamp="1605223814924">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>

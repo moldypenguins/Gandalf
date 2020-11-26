@@ -65,11 +65,11 @@ const attacksRoute = require('./routes/attacks');
 const universeRoute = require('./routes/universe');
 
 const util = require('util');
-var loginRequired = async (req, res, next) => {
+
+let loginRequired = async (req, res, next) => {
   //console.log('LOCALS: ' + util.inspect(res.locals, false, null, true));
   //console.log('SESSION: ' + util.inspect(req.session, false, null, true));
   if(typeof(res.locals.member) == 'undefined') {
-    
     //put req var to forward here
     console.log('REQ URL: ' + 
       url.format({
@@ -78,17 +78,27 @@ var loginRequired = async (req, res, next) => {
         pathname: req.originalUrl
       })
     );
-    
+    req.session.req_url = url.format({
+        protocol: req.protocol,
+        host: req.get('host'),
+        pathname: req.originalUrl
+    });
     
     return res.status(401).render('unauthorized', { site_title: config.alliance.name, page_title: config.alliance.name });
   } else {
-    let updated = await Member.updateOne({id:res.locals.member.id}, {last_access:Date.now()});
-    next();
+    res.locals.member = await Member.updateOne({id:res.locals.member.id}, {last_access:Date.now()});
+    if(req.session.req_url !== undefined) {
+        let req_url = req.session.req_url;
+        req.session.req_url = undefined;
+        res.redirect(req_url);
+    } else {
+        next();
+    }
   }
 }
 
 
-var app = express();
+let app = express();
 db.connection.once("open", () => {
   app.set('views', path.join(__dirname, 'views'));
   app.set('view engine', 'ejs');

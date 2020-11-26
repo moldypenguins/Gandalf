@@ -3,14 +3,18 @@
   "description": "Planetarion Tools",
   "version": "0.2.0-beta",
   "private": true,
-  "contributors": ["Craig Roberts", "Braden Edmunds", "Alex High"],
+  "contributors": [
+    "Craig Roberts",
+    "Braden Edmunds",
+    "Alex High"
+  ],
   "license": "GPL-3.0",
   "repository": "github:moldypenguins/Gandalf",
   "bugs": "https://github.com/moldypenguins/Gandalf/issues",
   "homepage": "https://github.com/moldypenguins/Gandalf",
-  "engines" : {
-    "node" : "^10.19.0",
-    "npm" : "^6.14.9"
+  "engines": {
+    "node": "^10.19.0",
+    "npm": "^6.14.9"
   },
   "dependencies": {
     "@awaitjs/express": "^0.5.0",
