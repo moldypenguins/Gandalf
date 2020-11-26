@@ -18,7 +18,7 @@
 const Mordor = require('../db.js');
 
 let allianceDumpSchema = Mordor.Schema({
-  alliance_id: { type: mongoose.Schema.Types.ObjectId, ref: "Alliance" },
+  alliance_id: { type: Mordor.Schema.Types.ObjectId, ref: "Alliance" },
   name: { type: String, required: true },
   size: { type: Number },
   members: { type: Number },
