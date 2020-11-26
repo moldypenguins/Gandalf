@@ -65,8 +65,8 @@ db.connection.once("open", async () => {
     console.log('Frodo Embarking on The Quest Of The Ring.');
     console.log(`Start Time: ${moment(start_time).format('YYYY-MM-DD H:mm:ss')}`);
 
-    let successful = false;
-    while(!successful && (new Date()).getTime() - start_time.getTime() < 55 * 60) {
+    let stop_trying = false;
+    while(!stop_trying) {
       let iteration_start = new Date();
       try {
         //get last tick
@@ -101,7 +101,7 @@ db.connection.once("open", async () => {
                 return;
               } else {
                 await process_tick(planet_dump, galaxy_dump, alliance_dump, user_dump, start_time);
-                successful = true;
+                stop_trying = true;
               }
             }
           }
@@ -110,13 +110,17 @@ db.connection.once("open", async () => {
         console.log(util.inspect(error, false, null, true));
         break;
       }
-      if(!successful) {
-        while((new Date()).getTime() - iteration_start.getTime() < 15) {
-          await sleep(5 * 1000);
+      if(!stop_trying) {
+        while((new Date()).getTime() - iteration_start.getTime() < 15) { //wait 15 seconds between each try
+          await sleep(5 * 1000); //sleep for 5 seconds
+        }
+        if((new Date()).getTime() - start_time.getTime() < (havoc ? start_time.getMinutes() + 10 : 55) * 60) { //give up after 55 minutes past the hour - havoc 10 minutes past the 15
+          console.log(`Reached timeout without a successful dump, giving up!`);
+          stop_trying = true;
         }
       }
     } //end while
-    
+
   });
 });
 
