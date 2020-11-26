@@ -41,19 +41,19 @@ config.bot.modules.forEach(function(name) {
 
 const Telegraf = require('telegraf')
 const Extra = require('telegraf/extra')
-/*
+
 const rateLimit = require('telegraf-ratelimit')
 //Set limit to 1 message per 3 seconds
 const limitConfig = {
   window: 3000,
   limit: 1,
   onLimitExceeded: (ctx, next) => ctx.reply('Rate limit exceeded')
-}
-*/
+};
+
 
 db.connection.once("open", () => {
   let bot = new Telegraf(config.bot.token, { telegram: { agent: null, webhookReply: false }, username: config.bot.username });
-  //bot.use(rateLimit(limitConfig));
+  bot.use(rateLimit(limitConfig));
   
   bot.start((ctx) => ctx.replyWithHTML(`Sign up: <a href="${config.web.uri}">${config.alliance.name}</a>`));
   
@@ -92,15 +92,15 @@ db.connection.once("open", () => {
     
     //parse scans
     if(ctx.message && ctx.message.text && ctx.message.entities && Array.isArray(ctx.message.entities)) {
-      for(var entity in ctx.message.entities) {
+      for(let entity in ctx.message.entities) {
         if(ctx.message.entities[entity].type === 'url') {
-          var link = ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length);
+          let link = ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length);
           console.log(`LINK: ${link}`);
-          
-          var matches = link.match(/showscan.pl\?scan_id=([a-z0-9]+)/i);
+
+          let matches = link.match(/showscan.pl\?scan_id=([a-z0-9]+)/i);
           console.log(`MATCHES: ${matches}`);
           if(Array.isArray(matches) && matches[1].length > 0) {
-            var exists = await Scan.exists({id:matches[1]});
+            let exists = await Scan.exists({id:matches[1]});
             if(!exists) {
               let start_time = Date.now();
               let scanurl = url.parse(config.pa.links.scans + '?scan_id=' + matches[1], true);
@@ -121,15 +121,15 @@ db.connection.once("open", () => {
     
     //parse commands
     if(ctx.message && ctx.message.text && (ctx.message.text.startsWith(config.bot.private_cmd) || ctx.message.text.startsWith(config.bot.public_cmd))) {
-      var mem = await Member.findOne({id: ctx.from.id});
-      var gm8 = await GalMate.findOne({id: ctx.from.id});
+      let mem = await Member.findOne({id: ctx.from.id});
+      let gm8 = await GalMate.findOne({id: ctx.from.id});
       
       if(!mem && !gm8) {
         ctx.replyWithHTML('<i>Access denied!</i>', Extra.inReplyTo(ctx.message.message_id));
         //ctx.replyWithAnimation({url: 'https://media.giphy.com/media/5SAPlGAS1YnLN9jHua/giphy-downsized-large.gif'}, {caption: 'Access denied!', inReplyTo: ctx.message.message_id});
       } else {
-        var args = ctx.message.text.substr(1).toLowerCase().replace(/\s+/g, ' ').split(' ');
-        var cmd = args.shift();
+        let args = ctx.message.text.substr(1).toLowerCase().replace(/\s+/g, ' ').split(' ');
+        let cmd = args.shift();
         //console.log('Command: ' + cmd);
         
         if (cmd === "help") {
@@ -181,17 +181,17 @@ db.connection.once("open", () => {
   
   
   setInterval(async () => {
-    console.log("Peering into Palantír.");
+    //console.log("Peering into Palantír.");
     
-    var msgs = await BotMessage.find({sent:false});
+    let msgs = await BotMessage.find({sent:false});
     //console.log('Messages: ' + util.inspect(msgs, false, null, true));
     if(msgs) {
       for(let msg in msgs) {
         //console.log('Message: ' + util.inspect(msgs[msg], false, null, true));
-        var res = await BotMessage.updateOne({id:msgs[msg].id}, {sent:true});
+        let res = await BotMessage.updateOne({id:msgs[msg].id}, {sent:true});
         if(res) {
           //console.log('Sent: ' + util.inspect(res, false, null, true));
-          bot.telegram.sendMessage(`${msgs[msg].group_id}`, `${msgs[msg].message}`, { parse_mode: 'HTML' });
+          await bot.telegram.sendMessage(`${msgs[msg].group_id}`, `${msgs[msg].message}`, { parse_mode: 'HTML' });
         }
       }
     }
