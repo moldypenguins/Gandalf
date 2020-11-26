@@ -77,30 +77,30 @@ db.connection.once("open", async () => {
           console.log('Last tick: ' + lasttick.id);
           console.log('Getting dump files...');
           //get dump files
-          let planet = await getStream(config.pa.dumps.planet);
-          let galaxy = await getStream(config.pa.dumps.galaxy);
-          let alliance = await getStream(config.pa.dumps.alliance);
-          let user = await getStream(config.pa.dumps.user);
+          let planet_dump = await getStream(config.pa.dumps.planet);
+          let galaxy_dump = await getStream(config.pa.dumps.galaxy);
+          let alliance_dump = await getStream(config.pa.dumps.alliance);
+          let user_dump = await getStream(config.pa.dumps.user);
           console.log(`Loaded dumps from webserver in: ${(new Date()) - start_time}ms`);
           
-          if(typeof(planet) != 'undefined' && typeof(galaxy) != 'undefined' && typeof(alliance) != 'undefined' && typeof(user) != 'undefined') {
-            planet = planet.split('\n');
-            galaxy = galaxy.split('\n');
-            alliance = alliance.split('\n');
-            user = user.split('\n');
+          if(planet_dump !== undefined && galaxy_dump !== undefined && alliance_dump !== undefined && user_dump !== undefined) {
+            planet_dump = planet_dump.split('\n');
+            galaxy_dump = galaxy_dump.split('\n');
+            alliance_dump = alliance_dump.split('\n');
+            user_dump = user_dump.split('\n');
             
-            let tick_time = moment.utc().set({minute:(Math.floor(moment().minutes() / 15) * 15),second:0,millisecond:0});
+            //let tick_time = moment.utc().set({minute:(Math.floor(moment().minutes() / 15) * 15),second:0,millisecond:0});
             
-            if(planet[3] !== galaxy[3] || galaxy[3] !== alliance[3] || planet[3] !== alliance[3]) {
-              console.log(`Varying ticks found - planet: ${planet[3].match(/\d+/g).map(Number)[0]} - galaxy: ${galaxy[3].match(/\d+/g).map(Number)[0]} - alliance: ${alliance[3].match(/\d+/g).map(Number)[0]}.`);
+            if(planet_dump[3] !== galaxy_dump[3] || galaxy_dump[3] !== alliance_dump[3] || planet_dump[3] !== alliance_dump[3]) {
+              console.log(`Varying ticks found - planet: ${planet_dump[3].match(/\d+/g).map(Number)[0]} - galaxy: ${galaxy_dump[3].match(/\d+/g).map(Number)[0]} - alliance: ${alliance_dump[3].match(/\d+/g).map(Number)[0]}.`);
             } else {
-              let dump_tick = planet[3].match(/\d+/g).map(Number)[0];
+              let dump_tick = planet_dump[3].match(/\d+/g).map(Number)[0];
               
               if(dump_tick <= lasttick.id) {
                 console.log(`Stale tick found (pt${dump_tick})`);
                 return;
               } else {
-                await process_tick(planet, galaxy, alliance, user, start_time);
+                await process_tick(planet_dump, galaxy_dump, alliance_dump, user_dump, start_time);
                 successful = true;
               }
             }
@@ -123,13 +123,13 @@ db.connection.once("open", async () => {
 
 
 
-let process_tick = async (planet, galaxy, alliance, user, start_time) => {
+let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, start_time) => {
   let tick_time = moment();
   let remainder = tick_time.minute() % (havoc ? 15 : 60);
   tick_time.add(remainder, 'minutes');
 
   let new_tick = new Tick({
-    id: planet[3].match(/\d+/g).map(Number)[0],
+    id: planet_dump[3].match(/\d+/g).map(Number)[0],
     timestamp: tick_time
   });
 
@@ -141,19 +141,19 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
   
   if(new_tick.id < config.pa.tick.shuffle) {
     console.log('Pre-shuffle dumps detected, dumping data.');
-    planet = undefined;
-    galaxy = undefined;
-    alliance = undefined;
+    planet_dump = undefined;
+    galaxy_dump = undefined;
+    alliance_dump = undefined;
   }
   //Planets
-  if(typeof(planet) != 'undefined' && planet != null) {
-    for(let i=8; i <= planet.length; i++) {
-      if(planet[i] === 'EndOfPlanetarionDumpFile') {
+  if(planet_dump !== undefined && planet_dump != null) {
+    for(let i=8; i <= planet_dump.length; i++) {
+      if(planet_dump[i] === 'EndOfPlanetarionDumpFile') {
         break;
       } else {
-        let p = planet[i].split('\t');
+        let p = planet_dump[i].split('\t');
         //console.log(util.inspect(p, false, null, true));
-        let pdmp = new PlanetDump({
+        let p_dump = new PlanetDump({
           id: p[0],
           x: Number(p[1]),
           y: Number(p[2]),
@@ -161,66 +161,70 @@ let process_tick = async (planet, galaxy, alliance, user, start_time) => {
           planetname: p[4].replace(/\"/g, ''),
           rulername: p[5].replace(/\"/g, ''),
           race: p[6],
-          size: Number(typeof(p[7]) != 'undefined' ? p[7] : 0),
-          score: Number(typeof(p[8]) != 'undefined' ? p[8] : 0),
-          value: Number(typeof(p[9]) != 'undefined' ? p[9] :  0),
-          xp: Number(typeof(p[10]) != 'undefined' ? p[10] : 0)
+          size: Number(p[7] !== undefined ? p[7] : 0),
+          score: Number(p[8] !== undefined ? p[8] : 0),
+          value: Number(p[9] !== undefined ? p[9] :  0),
+          xp: Number(p[10] !== undefined ? p[10] : 0)
         });
-        await pdmp.save();
+        await p_dump.save();
       }
     }
-    planet = undefined;
-    //console.log('Planet dumps saved.');
+    planet_dump = undefined;
+    //console.log('Planet dumps inserted in: ${(new Date()) - start_time}ms');
   }
   //Galaxies
-  if(typeof(galaxy) != 'undefined' && galaxy != null) {
-    for(let i=8; i <= galaxy.length; i++) {
-      if(galaxy[i] === 'EndOfPlanetarionDumpFile') {
+  if(galaxy_dump !== undefined && galaxy_dump != null) {
+    for(let i=8; i <= galaxy_dump.length; i++) {
+      if(galaxy_dump[i] === 'EndOfPlanetarionDumpFile') {
         break;
       } else {
-        let g = galaxy[i].split('\t');
+        let g = galaxy_dump[i].split('\t');
         //console.log(util.inspect(g, false, null, true));
-        let gdmp = new GalaxyDump({
+        let g_dump = new GalaxyDump({
           x: Number(g[0]),
           y: Number(g[1]),
           name: g[2].replace(/\"/g, ''),
-          size: Number(typeof(g[3]) != 'undefined' ? g[3] : 0),
-          score: Number(typeof(g[4]) != 'undefined' ? g[4] : 0),
-          value: Number(typeof(g[5]) != 'undefined' ? g[5] :  0),
-          xp: Number(typeof(g[6]) != 'undefined' ? g[6] : 0)
+          size: Number(g[3] !== undefined ? g[3] : 0),
+          score: Number(g[4] !== undefined ? g[4] : 0),
+          value: Number(g[5] !== undefined ? g[5] :  0),
+          xp: Number(g[6] !== undefined ? g[6] : 0)
         });
-        await gdmp.save();
+        await g_dump.save();
       }
     }
-    galaxy = undefined;
-    //console.log('Galaxy dumps saved.');
+    galaxy_dump = undefined;
+    //console.log('Galaxy dumps inserted in: ${(new Date()) - start_time}ms');
   }
   //Alliances
-  if(typeof(alliance) != 'undefined' && alliance != null) {
-    for(let i=8; i <= alliance.length; i++) {
-      if(alliance[i] === 'EndOfPlanetarionDumpFile') {
+  if(alliance_dump !== undefined && alliance_dump != null) {
+    for(let i=8; i <= alliance_dump.length; i++) {
+      if(alliance_dump[i] === 'EndOfPlanetarionDumpFile') {
         break;
       } else {
-        let a = alliance[i].split('\t');
+        let a = alliance_dump[i].split('\t');
         //console.log(util.inspect(a, false, null, true));
-        let admp = new AllianceDump({
+        let a_dump = new AllianceDump({
           score_rank: Number(a[0]),
           name: a[1].replace(/\"/g, ''),
-          size: Number(typeof(a[2]) != 'undefined' ? a[2] : 0),
-          members: Number(typeof(a[3]) != 'undefined' ? a[3] : 1),
-          score: Number(typeof(a[4]) != 'undefined' ? a[4] : 0),
-          points: Number(typeof(a[5]) != 'undefined' ? a[5] : 0),
-          size_avg: Number(typeof(a[2]) != 'undefined' ? a[2] : 0) / Number(typeof(a[3]) != 'undefined' ? a[3] : 1),
-          score_avg: Number(typeof(a[4]) != 'undefined' ? a[4] : 0) / Math.min(Number(typeof(a[3]) != 'undefined' ? a[3] : 1), config.pa.numbers.tag_total),
-          points_avg: Number(typeof(a[5]) != 'undefined' ? a[5] : 0) / Number(typeof(a[3]) != 'undefined' ? a[3] : 1)
+          size: Number(a[2] !== undefined ? a[2] : 0),
+          members: Number(a[3] !== undefined ? a[3] : 1),
+          score: Number(a[4] !== undefined ? a[4] : 0),
+          points: Number(a[5] !== undefined ? a[5] : 0),
+          size_avg: Number(a[2] !== undefined ? a[2] : 0) / Number(a[3] !== undefined ? a[3] : 1),
+          score_avg: Number(a[4] !== undefined ? a[4] : 0) / Math.min(Number(a[3] !== undefined ? a[3] : 1), config.pa.numbers.tag_total),
+          points_avg: Number(a[5] !== undefined ? a[5] : 0) / Number(a[3] !== undefined ? a[3] : 1)
         });
-        await admp.save();
+        await a_dump.save();
       }
     }
-    alliance = undefined;
-    //console.log('Alliance dumps saved.');
+    alliance_dump = undefined;
+    //console.log('Alliance dumps inserted in: ${(new Date()) - start_time}ms');
   }
+
+  user_dump = undefined; //not used
+
   console.log(`Inserted dumps in: ${(new Date()) - start_time}ms`);
+
 //##############
 //Clusters
 //##############
