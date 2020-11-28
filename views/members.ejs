@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="content">
+                <div class="content list-members">
                     <h2>Members</h2>
                     <table id="members" class="table table-sm table-striped table-members">
                         <thead>
@@ -34,19 +34,16 @@
                             <tr>
                                 <td class="btn-col">
                                     <% if(member.isADM || (member.isHC && !members[i].isADM && !members[i].isHC)) { %>
-                                        <a class="btn btn-sm btn-warning" href="/members/<%= members[i].id %>"><i
-                                                    class="fas fa-pen" aria-hidden="true"></i></a>
+                                        <a class="btn btn-sm btn-warning" href="/members/<%= members[i].id %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
                                         <form method="POST" action="/members">
-                                            <button type="submit" name="deactivate" value="<%= members[i].active %>"
-                                                    class="btn btn-sm btn-danger"><i class="fas fa-times"
-                                                                                     aria-hidden="true"></i></button>
+                                            <button type="submit" name="deactivate" value="<%= members[i].active %>" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-times" aria-hidden="true"></i>
+                                            </button>
                                         </form>
                                     <% } %>
                                 </td>
                                 <th scope="row">
-                                    <img class="tg-pic"
-                                         src="<% if(members[i].photo_url) { %><%= members[i].photo_url %><% } else { %><%= default_profile_pic %><% } %>"
-                                         width="30" height="30" alt=""/>
+                                    <img class="tg-pic" src="<% if(members[i].photo_url) { %><%= members[i].photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" alt=""/>
                                     <% if(members[i].username) { %>
                                         <a href="https://t.me/<%= members[i].username %>"><%= members[i].username %></a>
                                     <% } else if(members[i].last_name) { %>
@@ -61,9 +58,7 @@
                                         <form method="POST" action="/members/<%= members[i].id %>">
                                             <div class="input-group input-group-sm">
                                                 <div class="input-group-prepend dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <%= members[i].accessRoles %>
                                                     </button>
                                                     <div class="dropdown-menu">
@@ -161,8 +156,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="input-group-append">
-                                                    <button type="submit" id="submitaccess" name="submitaccess"
-                                                            class="btn btn-sm btn-primary" )>
+                                                    <button type="submit" id="submitaccess" name="submitaccess" class="btn btn-sm btn-primary" )>
                                                         <i class="fas fa-save" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
@@ -186,10 +180,8 @@
                                 </td>
                                 <td class="btn-col">
                                     <% if(members[i].phone && member.isADM) { %>
-                                        <form name="callMember" method='POST'
-                                              action="/members/call/<%= members[i].id %>">
-                                            <button type="submit" name="submitcall" value="<%= members[i].phone %>"
-                                                    class="btn btn-info btn-sm mx-2">
+                                        <form name="callMember" method='POST' action="/members/call/<%= members[i].id %>">
+                                            <button type="submit" name="submitcall" value="<%= members[i].phone %>" class="btn btn-info btn-sm mx-2">
                                                 <i class="fas fa-phone" aria-hidden="true"></i>
                                             </button>
                                         </form>
@@ -239,12 +231,10 @@
                             <tr>
                                 <td class="btn-col">
                                     <form method="POST" action="/members/inactives">
-                                        <button type="submit" name="activate" value="<%= inactives[i].id %>"
-                                                class="btn btn-sm btn-success">
+                                        <button type="submit" name="activate" value="<%= inactives[i].id %>" class="btn btn-sm btn-success">
                                             <i class="fas fa-plus" aria-hidden="true"></i>
                                         </button>
-                                        <button type="submit" name="remove" value="<%= inactives[i].id %>"
-                                                class="btn btn-sm btn-danger">
+                                        <button type="submit" name="remove" value="<%= inactives[i].id %>" class="btn btn-sm btn-danger">
                                             <i class="fas fa-times" aria-hidden="true"></i>
                                         </button>
                                     </form>
@@ -287,19 +277,16 @@
                                 <tr>
                                     <td class="btn-col">
                                         <form method="POST" action="/members/applicants">
-                                            <button type="submit" name="accept" value="<%= applicants[i].id %>"
-                                                    class="btn btn-sm btn-success">
+                                            <button type="submit" name="accept" value="<%= applicants[i].id %>" class="btn btn-sm btn-success">
                                                 <i class="fas fa-plus" aria-hidden="true"></i>
                                             </button>
-                                            <button type="submit" name="reject" value="<%= applicants[i].id %>"
-                                                    class="btn btn-sm btn-danger">
+                                            <button type="submit" name="reject" value="<%= applicants[i].id %>" class="btn btn-sm btn-danger">
                                                 <i class="fas fa-times" aria-hidden="true"></i>
                                             </button>
                                         </form>
                                     </td>
                                     <th scope="row">
-                                        <img src="<%= applicants[i].photo_url %>" width="30" height="30"
-                                             class="tg-pic"/>
+                                        <img src="<%= applicants[i].photo_url %>" width="30" height="30" class="tg-pic"/>
                                         <% if(applicants[i].username) { %>
                                             <a href="https://t.me/<%= applicants[i].username %>">
                                                 <%= applicants[i].username %>
@@ -337,8 +324,7 @@
                                 <tr>
                                     <td class="btn-col">
                                         <form method="POST" action="/members/galmate/<%= galmates[i].id %>">
-                                            <button type="submit" name="delete" value="<%= galmates[i].id %>"
-                                                    class="btn btn-sm btn-danger">
+                                            <button type="submit" name="delete" value="<%= galmates[i].id %>" class="btn btn-sm btn-danger">
                                                 <i class="fas fa-trash-alt" aria-hidden="true"></i>
                                             </button>
                                         </form>
@@ -370,10 +356,27 @@
 </footer>
 
 <script>
-	$(function () {
-		$('#members').DataTable({"paging": false, "info": false, "order": [3, 'asc']});
-		$('#applicants').DataTable({"paging": false, "info": false, "order": [1, 'asc']});
-	});
+  $(function () {
+    $('#members').DataTable({
+      "paging": false,
+      "info": false,
+      "order": [
+        3,
+        'asc'
+      ],
+      language: {
+        searchPlaceholder: "Search.."
+      }
+    });
+    $('#applicants').DataTable({
+      "paging": false,
+      "info": false,
+      "order": [
+        1,
+        'asc'
+      ]
+    });
+  });
 </script>
 </body>
 </html>

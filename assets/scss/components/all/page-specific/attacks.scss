@@ -2,8 +2,59 @@
   .content {
     display: block;
   }
+
+  #table-targets_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    position: relative;
+
+    .toolbar {
+      width: 32px;
+      position: absolute;
+      right: 0;
+    }
+
+    #table-targets_filter {
+      width: 100%;
+
+      &.is-admin {
+        width: calc(100% - 32px);
+        padding-right: .5rem;
+      }
+    }
+
+    #table-targets {
+      display: block;
+      max-width: 100% !important;
+      overflow-x: scroll;
+
+      th,
+      td {
+        text-align: center;
+
+        &.sh {
+          width: 20px !important;
+        }
+
+        &.th-group {
+          background-color: #dee2e6;
+          text-align: center;
+        }
+      }
+    }
+  }
 }
 
+&.page-attacks {
+  .btn-box {
+    margin: .5rem 0 0;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
 
 .table-targets {
   .dropdown-menu {

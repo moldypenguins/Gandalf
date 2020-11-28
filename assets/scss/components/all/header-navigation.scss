@@ -42,6 +42,11 @@ nav {
     }
 
     .navbar-nav {
+      background: white;
+      @include respond-above(md) {
+        background: transparent;
+      }
+
       .nav-item {
         a {
           font-size: .875rem;

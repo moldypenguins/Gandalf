@@ -14,6 +14,9 @@
   line-height: 1.5;
 }
 
+.label {
+  margin: 0;
+}
 
 .input-group-sm {
   > .custom-select,
@@ -144,14 +147,12 @@ textarea {
 }
 
 #coords-list {
-  display: unset;
+  display: table;
+  width: 600px;
+  max-width: 80%;
 
   .input-group {
-    max-width: 600px;
     margin: 0 auto;
-    @include respond-above(sm) {
-      width: 80%;
-    }
 
     #coords-list-content {
       width: 100%;

@@ -54,6 +54,9 @@
 																var table = $('#table-planets').DataTable({
 																	"paging": true,
 																	"info": false,
+                                                                  language: {
+                                                                    searchPlaceholder: "Search.."
+                                                                  }
 																});
 																table.page.len(10).draw();
 															});
@@ -99,6 +102,9 @@
 																var table = $('#table-galaxy').DataTable({
 																	"paging": true,
 																	"info": false,
+                                                                  language: {
+                                                                    searchPlaceholder: "Search.."
+                                                                  }
 																});
 																table.page.len(10).draw();
 															});
@@ -140,6 +146,9 @@
 																$('#table-cluster').DataTable({
 																	"paging": false,
 																	"info": false,
+                                                                  language: {
+                                                                    searchPlaceholder: "Search.."
+                                                                  }
 																});
 															});
                             </script>
@@ -183,6 +192,9 @@
 																	"paging": false,
 																	"info": false,
 																});
+                                                              language: {
+                                                                searchPlaceholder: "Search.."
+                                                              }
 															});
                             </script>
                         <% } %>

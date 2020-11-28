@@ -1,3 +1,14 @@
+.btn {
+
+}
+
+.toolbar {
+  .btn {
+    height: 2rem;
+    width: 2rem;
+  }
+}
+
 .btn-box {
   margin: .5rem 0;
 }
@@ -7,7 +18,7 @@
   width: 1%;
 
   form {
-	display: inline-block;
+    display: inline-block;
   }
 }
 
@@ -19,29 +30,29 @@
 .btn-group-sm {
   > .btn,
   .btn-sm {
-	padding: .15rem .25rem;
-	font-size: .375rem;
-	line-height: 1;
-	@include respond-above(xs) {
-	  padding: .20rem .30rem;
-	  font-size: .525rem;
-	  line-height: 1.125;
-	}
-	@include respond-above(md) {
-	  padding: .25rem .35rem;
-	  font-size: .675rem;
-	  line-height: 1.25;
-	}
+    padding: .15rem .25rem;
+    font-size: .375rem;
+    line-height: 1;
+    @include respond-above(xs) {
+      padding: .20rem .30rem;
+      font-size: .525rem;
+      line-height: 1.125;
+    }
+    @include respond-above(md) {
+      padding: .25rem .35rem;
+      font-size: .675rem;
+      line-height: 1.25;
+    }
   }
 
   > .btn-scan {
-	padding: .25rem .5em !important;
-	@include respond-above(xs) {
-	  padding: .25rem .5em !important;
-	}
-	@include respond-above(md) {
-	  padding: .25rem .5em !important;
-	}
+    padding: .25rem .5em !important;
+    @include respond-above(xs) {
+      padding: .25rem .5em !important;
+    }
+    @include respond-above(md) {
+      padding: .25rem .5em !important;
+    }
   }
 }
 

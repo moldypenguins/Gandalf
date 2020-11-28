@@ -15,9 +15,11 @@
       <option name="HTML_KEEP_LINE_BREAKS" value="false" />
     </HTMLCodeStyleSettings>
     <JSCodeStyleSettings version="0">
-      <option name="VAR_DECLARATION_WRAP" value="0" />
-      <option name="OBJECT_LITERAL_WRAP" value="0" />
-      <option name="IMPORTS_WRAP" value="0" />
+      <option name="ALIGN_VAR_STATEMENTS" value="1" />
+      <option name="VAR_DECLARATION_WRAP" value="2" />
+      <option name="OBJECT_LITERAL_WRAP" value="2" />
+      <option name="IMPORTS_WRAP" value="2" />
+      <option name="USE_CHAINED_CALLS_GROUP_INDENTS" value="true" />
     </JSCodeStyleSettings>
     <editorconfig>
       <option name="ENABLED" value="false" />
@@ -54,7 +56,12 @@
       </indentOptions>
     </codeStyleSettings>
     <codeStyleSettings language="JavaScript">
-      <option name="KEEP_LINE_BREAKS" value="false" />
+      <option name="KEEP_FIRST_COLUMN_COMMENT" value="false" />
+      <option name="ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION" value="true" />
+      <option name="EXTENDS_KEYWORD_WRAP" value="2" />
+      <option name="ARRAY_INITIALIZER_WRAP" value="2" />
+      <option name="ARRAY_INITIALIZER_LBRACE_ON_NEXT_LINE" value="true" />
+      <option name="ARRAY_INITIALIZER_RBRACE_ON_NEXT_LINE" value="true" />
       <indentOptions>
         <option name="INDENT_SIZE" value="2" />
         <option name="CONTINUATION_INDENT_SIZE" value="0" />

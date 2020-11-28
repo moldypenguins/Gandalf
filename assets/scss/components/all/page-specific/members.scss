@@ -1,66 +1,88 @@
 &.page-members {
   .dataTables_wrapper {
-	.row {
-	  margin: 0;
-	  width: 100%;
-	  overflow: visible;
-	}
+    .row {
+      margin: 0;
+      width: 100%;
+      overflow: visible;
+    }
+  }
+
+  .content {
+    &.list-members {
+      display: block;
+    }
+  }
+
+  #members_wrapper {
+    display: block;
   }
 
   .table-members {
-	tr {
-	  th,
-	  td,
-	  td i {
-		vertical-align: middle;
-		white-space: nowrap;
-		line-height: .8rem;
-		font-size: .6rem;
-		@include respond-above(xs) {
-		  vertical-align: middle;
-		  white-space: nowrap;
-		  line-height: 1rem;
-		  font-size: .8rem;
-		}
-		@include respond-above(md) {
-		  vertical-align: middle;
-		  white-space: nowrap;
-		  line-height: 1rem;
-		  font-size: .8rem;
-		}
-	  }
-	}
+    overflow: scroll;
+    display: block;
 
-	.dropdown {
-	  .dropdown-menu {
-		background: white;
-		padding: 0;
-		font-size: .875rem;
+    tr {
+      th,
+      td,
+      td i {
+        vertical-align: middle;
+        white-space: nowrap;
+        line-height: .8rem;
+        font-size: .6rem;
+        @include respond-above(xs) {
+          vertical-align: middle;
+          white-space: nowrap;
+          line-height: 1rem;
+          font-size: .8rem;
+        }
+        @include respond-above(md) {
+          vertical-align: middle;
+          white-space: nowrap;
+          line-height: 1rem;
+          font-size: .8rem;
+        }
+      }
 
-		> div {
-		  padding: .25rem .5rem;
-		  background: transparent;
-		  transition: ease all .5s;
+      td {
+        form {
+          button {
+            &.dropdown-toggle {
+            }
+          }
+        }
+      }
+    }
 
-		  &:nth-child(odd) {
-			background: rgba(black, .05);
-		  }
+    .dropdown {
+      .dropdown-menu {
+        background: white;
+        padding: 0;
+        font-size: .875rem;
 
-		  &:hover {
-			background: rgba(black, .2);
-		  }
+        > div {
+          padding: .25rem .5rem;
+          background: transparent;
+          transition: ease all .5s;
 
-		  &.dropdown-divider {
-			margin: 0;
-			padding: .5rem;
-			background: transparent;
-		  }
+          &:nth-child(odd) {
+            background: rgba(black, .05);
+          }
 
-		  label {
-			margin: 0;
-		  }
-		}
-	  }
-	}
+          &:hover {
+            background: rgba(black, .2);
+          }
+
+          &.dropdown-divider {
+            margin: 0;
+            padding: .5rem;
+            background: transparent;
+          }
+
+          label {
+            margin: 0;
+          }
+        }
+      }
+    }
   }
 }

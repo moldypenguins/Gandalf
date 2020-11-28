@@ -249,12 +249,17 @@
                               "info": false,
                               "dom": '<"toolbar">frtip',
                               "order": [],
-                              "columnDefs": [{
-                                "targets": 'no-sort',
-                                "orderable": false,
-                              }],
-                              "scrollX": true ,
-                              "scrollCollapse": true,
+                              "columnDefs": [
+                                {
+                                  "targets": 'no-sort',
+                                  "orderable": false,
+                                }
+                              ],
+                              language: {
+                                searchPlaceholder: "Search.."
+                              }
+                              // "scrollX": true ,
+                              // "scrollCollapse": true,
                             });
                           });
                         </script>
@@ -570,7 +575,7 @@
                 <% if(member.isCMDR || member.isSCNR) { %>
                     <div class="col-12">
                         <div id="coords-list" class="content">
-                            <h3>Coordinates:</h3>
+                            <h2>Coordinates:</h2>
                             <div class="input-group input-group-sm">
                                 <input id="coords-list-content" value="<% targets.forEach(function(trg) { %><%= trg.x %>:<%= trg.y %>:<%= trg.z %> <% }); %>" readonly="readonly">
                                 <div class="input-group-append">

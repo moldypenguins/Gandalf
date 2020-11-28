@@ -34,10 +34,14 @@ main {
 
 .content {
   text-align: center;
-  padding: 10px 0 80px;
   overflow: hidden;
-  margin: 0 auto;
+  margin: 3rem auto;
   display: table;
+  background: #f7f7f7;
+  padding: .5rem .5rem .5rem;
+  border-radius: .5rem;
+  border: 1px solid rgba(black, .15);
+  box-shadow: 0 1px 7px 1px rgba(black, .18);
 }
 
 
