@@ -18,33 +18,33 @@
 .input-group-sm {
   > .custom-select,
   > .form-control {
-	font-size: .6rem;
-	line-height: .8rem;
-	@include respond-above(xs) {
-	  font-size: .8rem;
-	  line-height: 1rem;
-	}
-	@include respond-above(md) {
-	  font-size: .8rem;
-	  line-height: 1rem;
-	}
+    font-size: .6rem;
+    line-height: .8rem;
+    @include respond-above(xs) {
+      font-size: .8rem;
+      line-height: 1rem;
+    }
+    @include respond-above(md) {
+      font-size: .8rem;
+      line-height: 1rem;
+    }
   }
 
   > .input-group-append,
   > .input-group-prepend {
-	> .btn,
-	> .input-group-text {
-	  font-size: .6rem;
-	  line-height: .8rem;
-	  @include respond-above(xs) {
-		font-size: .8rem;
-		line-height: 1rem;
-	  }
-	  @include respond-above(md) {
-		font-size: .8rem;
-		line-height: 1rem;
-	  }
-	}
+    > .btn,
+    > .input-group-text {
+      font-size: .6rem;
+      line-height: .8rem;
+      @include respond-above(xs) {
+        font-size: .8rem;
+        line-height: 1rem;
+      }
+      @include respond-above(md) {
+        font-size: .8rem;
+        line-height: 1rem;
+      }
+    }
   }
 }
 
@@ -70,27 +70,27 @@
   //}
 
   > .input-group-prepend {
-	> [class^="input-group-"] {
-	  border: 1px solid $col-black;
-	  background-color: #343a40;
-	  color: #fff;
-	  font-weight: bold;
-	  width: 100%;
-	  padding: .25rem .5rem;
-	  border-radius: .2rem 0 0 .2rem;
-	  display: flex;
-	  align-items: center;
-	  font-size: .6rem;
-	  line-height: .8rem;
-	  @include respond-above(xs) {
-		font-size: .8rem;
-		line-height: 1rem;
-	  }
-	  @include respond-above(md) {
-		font-size: .8rem;
-		line-height: 1rem;
-	  }
-	}
+    > [class^="input-group-"] {
+      border: 1px solid $col-black;
+      background-color: #343a40;
+      color: #fff;
+      font-weight: bold;
+      width: 100%;
+      padding: .25rem .5rem;
+      border-radius: .2rem 0 0 .2rem;
+      display: flex;
+      align-items: center;
+      font-size: .6rem;
+      line-height: .8rem;
+      @include respond-above(xs) {
+        font-size: .8rem;
+        line-height: 1rem;
+      }
+      @include respond-above(md) {
+        font-size: .8rem;
+        line-height: 1rem;
+      }
+    }
   }
 }
 
@@ -98,7 +98,7 @@
 .center-form {
   width: 0;
   @include respond-above(md) {
-	width: 15%;
+    width: 15%;
   }
 }
 
@@ -106,24 +106,24 @@
   width: inherit;
 
   .btn {
-	width: 100%;
-	text-align: left;
+    width: 100%;
+    text-align: left;
   }
 
   .dropdown-toggle {
-	&:after {
-	  float: right;
-	  margin-top: 10px;
-	  margin-left: unset;
-	}
+    &:after {
+      float: right;
+      margin-top: 10px;
+      margin-left: unset;
+    }
   }
 
   .input-group-sm {
-	.dropdown-toggle {
-	  &:after {
-		margin-top: 6px;
-	  }
-	}
+    .dropdown-toggle {
+      &:after {
+        margin-top: 6px;
+      }
+    }
   }
 }
 
@@ -137,20 +137,24 @@ input,
 select,
 textarea {
   &:focus {
-	border-color: $col-black !important;
-	outline: 0 !important;
-	box-shadow: inset 0 0 4px 0 rgba($col-black, .25) !important;
+    border-color: $col-black !important;
+    outline: 0 !important;
+    box-shadow: inset 0 0 4px 0 rgba($col-black, .25) !important;
   }
 }
 
 #coords-list {
-  .input-group {
-	width: 80%;
-	max-width: 600px;
-	margin: 0 auto;
+  display: unset;
 
-	#coords-list-content {
-	  width: 100%;
-	}
+  .input-group {
+    max-width: 600px;
+    margin: 0 auto;
+    @include respond-above(sm) {
+      width: 80%;
+    }
+
+    #coords-list-content {
+      width: 100%;
+    }
   }
 }

@@ -2,79 +2,85 @@ header {
   border-bottom: 1px solid rgba(black, .1);
   background: white;
   box-shadow: 0 0 3px 1px rgba(black, .12);
+  @include respond-above(sm) {
+    position: fixed;
+    width: 100%;
+    height: 3.5rem;
+    z-index: 1000;
+  }
 }
 
 /*# NAVIGATION ELEMENTS ##########################################################################*/
 nav {
   &.navbar-light,
   &.navbar-dark {
-	.navbar-brand {
-	  color: #212529;
+    .navbar-brand {
+      color: #212529;
 
-	  .navbar-logo {
-		display: inline-block;
-		vertical-align: top;
-		height: 30px;
-		width: 30px;
-		margin-right: 5px;
-	  }
-	}
+      .navbar-logo {
+        display: inline-block;
+        vertical-align: top;
+        height: 30px;
+        width: 30px;
+        margin-right: 5px;
+      }
+    }
 
-	.navbar-toggler,
-	.navbar-collapse {
-	  margin-right: 40px;
-	}
+    .navbar-toggler,
+    .navbar-collapse {
+      margin-right: 40px;
+    }
 
-	.navbar-profile {
-	  display: inline-block;
-	  vertical-align: top;
-	  height: 30px;
-	  width: 30px;
-	  position: absolute;
-	  top: .75rem;
-	  right: 1rem;
-	}
+    .navbar-profile {
+      display: inline-block;
+      vertical-align: top;
+      height: 30px;
+      width: 30px;
+      position: absolute;
+      top: .75rem;
+      right: 1rem;
+    }
 
-	.navbar-nav {
-	  .nav-item {
-		a {
-		  font-size: .875rem;
-		  line-height: 1;
-		  color: #212529;
-		}
+    .navbar-nav {
+      .nav-item {
+        a {
+          font-size: .875rem;
+          line-height: 1;
+          color: #212529;
+        }
 
-		.dropdown-menu {
-		  padding: 0;
-		  background: white;
-		  box-shadow: 0 1px 4px 1px rgba(black, .2);
+        .dropdown-menu {
+          padding: 0;
+          background: white;
+          box-shadow: 0 1px 4px 1px rgba(black, .2);
 
-		  a {
-			&.dropdown-item {
-			  padding: .25rem .5rem;
-			  border-top: 1px solid #dee2e6;
-			  background: transparent;
-			  transition: ease all .5s;
+          a {
+            &.dropdown-item {
+              padding: .25rem .5rem;
+              border-top: 1px solid #dee2e6;
+              background: transparent;
+              transition: ease all .5s;
 
-			  &:hover {
-				background: rgba(black, .05);
-			  }
-			}
-		  }
-		}
+              &:hover {
+                background: rgba(black, .05);
+              }
+            }
+          }
+        }
 
-		&.dropdown {
-		  .dropdown-toggle {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
+        &.dropdown {
+          .dropdown-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-			&:after {
-			  float: none;
-			  margin: 0 0 0 .5rem;
-			}
-		  }
-		}
-	  }
-	}
+            &:after {
+              float: none;
+              margin: 0 0 0 .5rem;
+            }
+          }
+        }
+      }
+    }
   }
 }
