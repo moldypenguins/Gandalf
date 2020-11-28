@@ -32,6 +32,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -93,6 +100,7 @@
       <workItem from="1605658649699" duration="12651000" />
       <workItem from="1605714350391" duration="39404000" />
       <workItem from="1606359180288" duration="4574000" />
+      <workItem from="1606522658040" duration="6483000" />
     </task>
     <task id="LOCAL-00001" summary="update Frodo.js">
       <created>1605165325612</created>
@@ -192,6 +200,18 @@
     </state>
     <state x="-1256" y="101" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605187365097" />
     <state x="664" y="101" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1605533259568" />
+    <state x="1048" y="502" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606523327082">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1048" y="502" key="#com.intellij.fileTypes.FileTypeChooser/3840.-218.1536.936/0.0.2560.1400@0.0.2560.1400" timestamp="1606523327082" />
+    <state x="1011" y="447" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606523625628">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1011" y="447" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/3840.-218.1536.936/0.0.2560.1400@0.0.2560.1400" timestamp="1606523625628" />
+    <state x="904" y="269" key="CommitChangelistDialog2" timestamp="1606529907948">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="904" y="269" key="CommitChangelistDialog2/3840.-218.1536.936/0.0.2560.1400@0.0.2560.1400" timestamp="1606529907948" />
     <state x="-1525" y="107" width="1419" height="744" key="DiffContextDialog" timestamp="1605165937124">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
@@ -225,20 +245,22 @@
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
     <state width="247" height="198" key="RunAnythingAction_Filter_Popup/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606123621156" />
-    <state x="-1375" y="180" width="1186" height="711" key="SettingsEditor" timestamp="1606376857834">
-      <screen x="-1920" y="0" width="1920" height="1050" />
+    <state x="727" y="240" width="1186" height="711" key="SettingsEditor" timestamp="1606522694947">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="-1375" y="180" width="1186" height="711" key="SettingsEditor/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606376857834" />
     <state x="162" y="123" width="1293" height="711" key="SettingsEditor/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1605533318204" />
+    <state x="727" y="240" key="SettingsEditor/3840.-218.1536.936/0.0.2560.1400@0.0.2560.1400" timestamp="1606522694947" />
     <state x="736" y="215" key="Vcs.Push.Dialog.v2" timestamp="1605479776080">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="-1184" y="215" key="Vcs.Push.Dialog.v2/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605186754733" />
     <state x="736" y="215" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1605479776080" />
-    <state x="-1110" y="117" width="586" height="915" key="find.popup" timestamp="1606109142448">
-      <screen x="-1920" y="0" width="1920" height="1050" />
+    <state x="1080" y="156" width="782" height="1220" key="find.popup" timestamp="1606524899039">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="-1110" y="117" width="586" height="915" key="find.popup/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606109142448" />
+    <state x="1080" y="156" width="782" height="1220" key="find.popup/3840.-218.1536.936/0.0.2560.1400@0.0.2560.1400" timestamp="1606524899039" />
     <state x="-1125" y="352" key="jetbrains.nodejs.interpreters-dialog" timestamp="1605159465570">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>

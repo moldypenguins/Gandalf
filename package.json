@@ -16,6 +16,18 @@
     "node": "^10.19.0",
     "npm": "^6.14.9"
   },
+  "scripts": {
+    "setup": "nodejs Bilbo.js",
+    "ticker": "nodejs Frodo.js",
+    "bot": "nodejs Gandalf.js",
+    "webby": "nodejs Sauron.js",
+    "setup-localhost": "npm run generate-local-certs && npm run setup-hosts-file && npm run start-localhost",
+    "start-localhost": "npm run setup && npm run webby",
+    "generate-local-certs": "npm run generate-certs && npm run load-certs",
+    "generate-certs": "cd ssl/ && openssl req -x509 -newkey rsa:2048 -keyout privatetemp.key -out certificate.crt -days 365 -passout pass:foobar",
+    "load-certs": "cd ssl/ && openssl rsa -in privatetemp.key -out private.key && rm privatetemp.key",
+    "setup-hosts-file": "node ./utils/hosts.js"
+  },
   "dependencies": {
     "@awaitjs/express": "^0.6.3",
     "@fortawesome/fontawesome-free": "^5.14.0",
@@ -33,6 +45,7 @@
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.3",
     "express-session": "^1.17.0",
+    "fast-xml-parser": "^3.17.4",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-cached": "^1.1.1",
@@ -46,6 +59,7 @@
     "gulp-uglify": "^3.0.2",
     "html-entities": "^1.2.1",
     "http-errors": "~1.8.0",
+    "lodash": "^4.17.20",
     "lodash.template": "^4.5.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.32",
@@ -58,6 +72,10 @@
     "telegraf-ratelimit": "^2.0.0",
     "twilio": "^3.43.0",
     "url": "^0.11.0",
-    "xml2js": "^0.4.23"
+    "xml2js": "^0.4.23",
+    "xml2json": "^0.12.0"
+  },
+  "devDependencies": {
+    "hostile": "^1.3.3"
   }
 }

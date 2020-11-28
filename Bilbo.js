@@ -16,81 +16,66 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Bilbo.js
- * @version 2020/11/19
+ * @version 2020/11/27
  * @summary Initialization
  **/
 const config = require('./config');
 const db = require('./db');
 const bent = require('bent');
 const getStream = bent('string');
-const parseString = require('xml2js').parseString;
 const Ship = require('./models/ship.js');
 const Member = require('./models/member.js');
 const Tick = require('./models/tick.js');
+const xmlParser = require('xml2json');
 
+db.connection.once("open", setup);
 
-db.connection.once("open", async () => {
-    let ship_stats = await getStream(config.pa.dumps.ship_stats);
-    parseString(ship_stats, (err, result) => {
-        callback(null, result);
-    });
-    process.exitCode = 0;
-});
-
-
-let callback = (err, docs) => {
-  let ship_id = 0;
-  if (err){
-    console.error(err);
-    return;
-  }
-  Object.keys(docs).forEach(doc => {
-    //console.log(docs[key]);
-    Object.keys(docs[doc]).forEach(col => {
-      docs[doc][col].forEach(sh => {
-        Object.entries(sh).forEach(([key, val]) => {
-          //console.log(`${key}: ${val[0]}`);
-          sh[key] = val[0];
-        });
-        //console.log(sh);
-        let ship = new Ship(sh);
-        ship.id = ship_id++;
-        //console.log(ship);
-
-        ship.save(function (err, saved) {
-          if (err){
-            console.error(err);
-            return;
-          }
-          console.log(saved.name + " saved to Ships collection.");
-        });
-
-      });
-    });
-  });
-
-  Member.find({id: config.admin.id}).then((admin) => {
-    console.log(admin);
-    if (!admin || admin.length == 0) {
-      let adm = new Member({ id: config.admin.id, access: 5, active: true });
-      adm.save(function (err, saved) {
-        if (err) return console.error(err);
-        console.log(saved.username + " saved to Members collection.");
-      });
-    } else {
-      console.log(config.admin.username + " already exists");
-    }
-  });
-  // setup ticks if empty
-  Tick.find().then((ticks) => {
-    console.log(ticks);
-    if (!ticks || ticks.length == 0) {
-      Tick.insertMany([{id:0}]);
-      console.log("adding first tick");
-    } else {
-      console.log("ticks already exist")
-    }
-  });
+async function setup() {
+  const stream = await getStream(config.pa.dumps.ship_stats);
+  const json = JSON.parse(xmlParser.toJson(stream));
+  await load_ships(json["stats"]["ship"]); // {"stats": { "ship": [ ... ]}}
+  await load_ticks();
+  await setup_admins();
+  process.exit(0);
 }
 
+async function load_ships(ships) {
+  // remove all the ships first
+  await Ship.deleteMany({});
 
+  // load each one
+  let ship_id = 0;
+  for (let json_ship of ships) {
+    let ship = new Ship(json_ship);
+    ship.id = ship_id++; // set primary key
+    let saved = await ship.save();
+    if (saved) {
+      console.log(`${saved.name} saved to Ships collection!`);
+    } else {
+      console.error(`${json_ship["name"]} could not be saved!`)
+    }
+  }
+}
+
+async function load_ticks() {
+  let ticks = await Tick.find();
+  if (!ticks || ticks.length == 0) {
+    Tick.insertMany([{id:0}]);
+    console.log("Added first tick!");
+  } else {
+    console.log("First tick already exists!")
+  }
+}
+
+async function setup_admins() {
+  let admin = await Member.find({id: config.admin.id})
+  if (!admin || admin.length == 0) {
+    if (new Member({id: config.admin.id, access: 5, active: true}).save()) {
+      console.log(`${config.admin.username} saved to Members collection!`);
+    } else {
+      console.log(`Could not add admin to Members collection!!`)
+    }
+  } else {
+    console.log(`${config.admin.username} already exists.`);
+  }
+}
