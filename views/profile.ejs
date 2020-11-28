@@ -17,7 +17,7 @@
                         <table class="table table-sm table-transparent">
                             <tbody>
                             <tr>
-                                <td class="center-form"></td>
+                                
                                 <td>
                                     <div class="input-group">
                                         <div name="username" id="username" class="form-label" aria-describedby="label-username">
@@ -32,17 +32,20 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="center-form"></td>
+
                             </tr>
                             <tr>
-                                <td class="center-form"></td>
+
                                 <td>
                                     <div class="input-group input-group-sm">
                                         <div class="input-group-prepend">
                                             <span id="label-theme" class="input-group-text">Theme</span>
                                         </div>
                                         <select id="theme" class="custom-select" name="theme">
-                                            <option name="theme" value="light" <% if(profile.site_theme == "light") { %>selected<% } %>>Light</option>
+                                            <option name="theme" value="light" <% if(profile.site_theme == "light") { %>selected
+                                                    <% } %>
+                                            >Light
+                                            </option>
                                             <option name="theme" value="dark"
                                             <% if(profile.site_theme == "dark") { %> selected
                                                     <% } %>
@@ -51,10 +54,10 @@
                                         </select>
                                     </div>
                                 </td>
-                                <td class="center-form"></td>
+
                             </tr>
                             <tr>
-                                <td class="center-form"></td>
+
                                 <td>
                                     <div class="input-group input-group-sm">
                                         <div class="input-group-prepend">
@@ -63,10 +66,10 @@
                                         <input type="text" name="panick" id="panick" class="form-control" value="<%= profile.panick %>"/>
                                     </div>
                                 </td>
-                                <td class="center-form"></td>
+
                             </tr>
                             <tr>
-                                <td class="center-form"></td>
+
                                 <td>
                                     <div class="input-group input-group-sm">
                                         <div class="input-group-prepend">
@@ -76,10 +79,10 @@
                                         <input type="text" name="phone" id="phone" class="form-control" value="<%= profile.phone %>"/>
                                     </div>
                                 </td>
-                                <td class="center-form"></td>
+
                             </tr>
                             <tr>
-                                <td class="center-form"></td>
+
                                 <td>
                                     <div class="input-group input-group-sm">
                                         <div class="input-group-prepend">
@@ -88,10 +91,10 @@
                                         <input type="text" name="email" id="email" class="form-control" value="<%= profile.email %>"/>
                                     </div>
                                 </td>
-                                <td class="center-form"></td>
+
                             </tr>
                             <tr>
-                                <td class="center-form"></td>
+
                                 <td>
                                     <div class="input-group input-group-sm">
                                         <div class="input-group-prepend">
@@ -102,7 +105,7 @@
                                         <input type="text" name="planet_z" id="planet_z" class="form-control" placeholder="Z" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.z %><% } %>"/>
                                     </div>
                                 </td>
-                                <td class="center-form"></td>
+
                             </tr>
                             </tbody>
                         </table>
