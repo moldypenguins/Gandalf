@@ -54,7 +54,12 @@ const limitConfig = {
 db.connection.once("open", () => {
   let bot = new Telegraf(config.bot.token, { telegram: { agent: null, webhookReply: false }, username: config.bot.username });
   bot.use(rateLimit(limitConfig));
-  
+
+  bot.use(() => (ctx, next) => {
+    console.log('CHATID: ' + ctx.message.chat.id);
+  });
+
+
   bot.start((ctx) => ctx.replyWithHTML(`Sign up: <a href="${config.web.uri}">${config.alliance.name}</a>`));
   
   bot.catch((err, ctx) => {
