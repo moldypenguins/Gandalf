@@ -242,40 +242,51 @@
                 <% } %>
                 <div class="col-12">
                     <div class="content">
+                        <script>
+                          $(function () {
+                            $('#table-targets').bootstrapTable({
+                              pagination: false,
+                              search: false,
+                              toolbar: ".toolbar",
+                            });
+                          });
+                        </script>
+
                         <% if(member.isADM || member.isHC || member.isBC) { %>
                             <script>
-                              $(function () {
+                              //$(function () {
                                 //$(".page-attack div.toolbar").html('<a class="btn btn-sm btn-warning" href="/att/edit/<%= attack.hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>');
                                 //$('#table-targets_filter').addClass('is-admin');
-                              });
+                              //});
                             </script>
                         <% } %>
 
                         <h2>Attack <%= attack.id %></h2>
-                        <table id="table-targets" class="table table-sm table-striped table-targets table-bordered"
-                            data-toggle="table"
-                            data-pagination="false"
-                            data-search="false"
-                        >
+                        <table id="table-targets" class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th data-sortable="true" data-field="coords" rowspan="2" scope="col">Coords</th>
-                                <th data-sortable="true" data-field="race" rowspan="2" scope="col">Race</th>
-                                <th data-sortable="true" data-field="size" rowspan="2" scope="col">Size</th>
-                                <th data-sortable="true" data-field="value" rowspan="2" scope="col">Value</th>
-                                <th data-sortable="true" data-field="score" rowspan="2" scope="col">Score</th>
-                                <th data-field="adr" rowspan="2" scope="col">A <strong>/</strong> D <strong>/</strong> R</th>
-                                <th data-field="anti" colspan="6" scope="col" class="th-group">Anti</th>
-                                <th data-field="ships" rowspan="2" scope="col">Ships</th>
-                                <th data-field="stockprod" rowspan="2" scope="col">Stock <strong>/</strong> Prod</th>
-                                <th data-field="factories" colspan="3" scope="col" class="th-group">Factories</th>
-                                <th data-field="scans" rowspan="2" scope="col">Scans</th>
-                                <% for(let wv = 0; wv < attack.waves; wv++) { %>
-                                    <th data-field="wave<%= wv %>>" rowspan="2" scope="col">LT <%= attack.landtick + w %>
-                                        (<%= numeral(attack.landtick + wv - tick.id).format("+0") %>)
+                                <th rowspan="2" scope="col">Coords</th>
+                                <th rowspan="2" scope="col">Race</th>
+                                <th rowspan="2" scope="col">Size</th>
+                                <th rowspan="2" scope="col">Value</th>
+                                <th rowspan="2" scope="col">Score</th>
+                                <th rowspan="2" scope="col" class="no-sort">A
+                                    <strong>/</strong> D
+                                    <strong>/</strong> R
+                                </th>
+                                <th colspan="6" scope="col" class="no-sort th-group">Anti</th>
+                                <th rowspan="2" scope="col" class="no-sort">Ships</th>
+                                <th rowspan="2" scope="col" class="no-sort">Stock
+                                    <strong>/</strong> Prod
+                                </th>
+                                <th colspan="3" scope="col" class="no-sort th-group">Factories</th>
+                                <th rowspan="2" scope="col" class="no-sort">Scans</th>
+                                <% for(var w = 0; w < attack.waves; w++) { %>
+                                    <th rowspan="2" scope="col" class="no-sort">LT <%= attack.landtick + w %>
+                                        (<%= numeral(attack.landtick + w - tick.id).format("+0") %>)
                                     </th>
                                 <% } %>
-                                <th data-field="intel" rowspan="2" scope="col">Intel</th>
+                                <th rowspan="2" scope="col" class="no-sort">Intel</th>
                             </tr>
                             <tr>
                                 <th class="sh no-sort" scope="col">FI</th>
