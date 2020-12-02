@@ -30,14 +30,17 @@
     "setup-hosts-file": "node ./utils/hosts.js",
     "symlink-jquery-js": "[ -L ./public/scripts/jquery.min.js ] || ln -sf ../../node_modules/jquery/dist/jquery.min.js ./public/scripts/jquery.min.js",
     "symlink-popper-js": "[ -L ./public/scripts/popper.min.js ] || ln -sf ../../node_modules/@popperjs/core/dist/umd/popper.min.js ./public/scripts/popper.min.js",
+    "symlink-popper-js-map": "[ -L ./public/scripts/popper.min.js.map ] || ln -sf ../../node_modules/@popperjs/core/dist/umd/popper.min.js.map ./public/scripts/popper.min.js.map",
     "symlink-bootstrap-js": "[ -L ./public/scripts/bootstrap.min.js ] || ln -sf ../../node_modules/bootstrap/dist/js/bootstrap.min.js ./public/scripts/bootstrap.min.js",
+    "symlink-bootstrap-js-map": "[ -L ./public/scripts/bootstrap.min.js.map ] || ln -sf ../../node_modules/bootstrap/dist/js/bootstrap.min.js.map ./public/scripts/bootstrap.min.js.map",
     "symlink-bootstrap-css": "[ -L ./public/styles/bootstrap.min.css ] || ln -sf ../../node_modules/bootstrap/dist/css/bootstrap.min.css ./public/styles/bootstrap.min.css",
+    "symlink-bootstrap-css-map": "[ -L ./public/styles/bootstrap.min.css.map ] || ln -sf ../../node_modules/bootstrap/dist/css/bootstrap.min.css.map ./public/styles/bootstrap.min.css.map",
     "symlink-bootstrap-table-js": "[ -L ./public/scripts/bootstrap-table.min.js ] || ln -sf ../../node_modules/clipboard/dist/clipboard.min.js ./public/scripts/bootstrap-table.min.js",
     "symlink-bootstrap-table-css": "[ -L ./public/styles/bootstrap-table.min.css ] || ln -sf ../../node_modules/clipboard/dist/clipboard.min.js ./public/styles/bootstrap-table.min.css",
     "symlink-fontawesome-fonts": "[ -L ./public/webfonts/ ] || ln -sf ../node_modules/@fortawesome/fontawesome-free/webfonts/ ./public/",
     "symlink-fontawesome-css": "[ -L ./public/styles/fontawesome.min.css ] || ln -sf ../../node_modules/@fortawesome/fontawesome-free/css/all.min.css ./public/styles/fontawesome.min.css",
     "symlink-clipboard-js": "[ -L ./public/scripts/clipboard.min.js ] || ln -sf ../../node_modules/clipboard/dist/clipboard.min.js ./public/scripts/clipboard.min.js",
-    "postinstall": "npm run symlink-jquery-js && npm run symlink-popper-js && npm run symlink-bootstrap-js && npm run symlink-bootstrap-css && npm run symlink-bootstrap-table-js && npm run symlink-bootstrap-table-css && npm run symlink-fontawesome-fonts && npm run symlink-fontawesome-css && npm run symlink-clipboard-js"
+    "postinstall": "npm run symlink-jquery-js && npm run symlink-popper-js && npm run symlink-popper-js-map && npm run symlink-bootstrap-js && npm run symlink-bootstrap-js-map && npm run symlink-bootstrap-css && npm run symlink-bootstrap-css-map && npm run symlink-bootstrap-table-js && npm run symlink-bootstrap-table-css && npm run symlink-fontawesome-fonts && npm run symlink-fontawesome-css && npm run symlink-clipboard-js"
   },
   "dependencies": {
     "@awaitjs/express": "^0.6.3",
