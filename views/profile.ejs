@@ -109,7 +109,9 @@
 </body>
 <script>
   $(function() {
-    window.intlTelInput($('#phone'), {
+    let phone_input = document.querySelector("#phone");
+    $('#phone').intlTelInput({
+      preferredCountries: ["ca", "gb", "us"],
       utilsScript: "/scripts/intlTelInput-utils.js"
     });
   });
