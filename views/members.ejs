@@ -354,29 +354,5 @@
 <footer>
     <%- include("templates/footer"); %>
 </footer>
-
-<script>
-  $(function () {
-    $('#members').DataTable({
-      "paging": false,
-      "info": false,
-      "order": [
-        3,
-        'asc'
-      ],
-      language: {
-        searchPlaceholder: "Search.."
-      }
-    });
-    $('#applicants').DataTable({
-      "paging": false,
-      "info": false,
-      "order": [
-        1,
-        'asc'
-      ]
-    });
-  });
-</script>
 </body>
 </html>
