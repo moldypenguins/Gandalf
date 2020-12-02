@@ -242,16 +242,6 @@
                 <% } %>
                 <div class="col-12">
                     <div class="content">
-                        <script>
-                          $(function () {
-                            $('#table-targets').bootstrapTable({
-                              pagination: false,
-                              search: false,
-                              toolbar: ".toolbar",
-                            });
-                          });
-                        </script>
-
                         <% if(member.isADM || member.isHC || member.isBC) { %>
                             <script>
                               //$(function () {
@@ -260,33 +250,30 @@
                               //});
                             </script>
                         <% } %>
-
                         <h2>Attack <%= attack.id %></h2>
-                        <table id="table-targets" class="table table-sm table-striped table-bordered">
+                        <table id="table-targets" class="table table-sm table-striped table-bordered"
+                           data-toggle="table"
+                           data-toolbar=".toolbar"
+                        >
                             <thead>
                             <tr>
-                                <th rowspan="2" scope="col">Coords</th>
-                                <th rowspan="2" scope="col">Race</th>
-                                <th rowspan="2" scope="col">Size</th>
-                                <th rowspan="2" scope="col">Value</th>
-                                <th rowspan="2" scope="col">Score</th>
-                                <th rowspan="2" scope="col" class="no-sort">A
-                                    <strong>/</strong> D
-                                    <strong>/</strong> R
-                                </th>
-                                <th colspan="6" scope="col" class="no-sort th-group">Anti</th>
-                                <th rowspan="2" scope="col" class="no-sort">Ships</th>
-                                <th rowspan="2" scope="col" class="no-sort">Stock
-                                    <strong>/</strong> Prod
-                                </th>
-                                <th colspan="3" scope="col" class="no-sort th-group">Factories</th>
-                                <th rowspan="2" scope="col" class="no-sort">Scans</th>
+                                <th data-sortable="true" rowspan="2" scope="col">Coords</thdata-sortable>
+                                <th data-sortable="true" rowspan="2" scope="col">Race</th>
+                                <th data-sortable="true" rowspan="2" scope="col">Size</th>
+                                <th data-sortable="true" rowspan="2" scope="col">Value</th>
+                                <th data-sortable="true" rowspan="2" scope="col">Score</th>
+                                <th rowspan="2" scope="col">A <strong>/</strong> D <strong>/</strong> R</th>
+                                <th colspan="6" scope="col" class="th-group">Anti</th>
+                                <th rowspan="2" scope="col">Ships</th>
+                                <th rowspan="2" scope="col">Stock <strong>/</strong> Prod</th>
+                                <th colspan="3" scope="col" class="th-group">Factories</th>
+                                <th rowspan="2" scope="col">Scans</th>
                                 <% for(var w = 0; w < attack.waves; w++) { %>
-                                    <th rowspan="2" scope="col" class="no-sort">LT <%= attack.landtick + w %>
+                                    <th rowspan="2" scope="col">LT <%= attack.landtick + w %>
                                         (<%= numeral(attack.landtick + w - tick.id).format("+0") %>)
                                     </th>
                                 <% } %>
-                                <th rowspan="2" scope="col" class="no-sort">Intel</th>
+                                <th rowspan="2" scope="col">Intel</th>
                             </tr>
                             <tr>
                                 <th class="sh no-sort" scope="col">FI</th>
