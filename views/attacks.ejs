@@ -244,22 +244,10 @@
                     <div class="content">
                         <script>
                           $(function () {
-                            $('#table-targets').DataTable({
-                              "paging": false,
-                              "info": false,
-                              "dom": '<"toolbar">frtip',
-                              "order": [],
-                              "columnDefs": [
-                                {
-                                  "targets": 'no-sort',
-                                  "orderable": false,
-                                }
-                              ],
-                              language: {
-                                searchPlaceholder: "Search.."
-                              }
-                              // "scrollX": true ,
-                              // "scrollCollapse": true,
+                            $('#table-targets').bootstrapTable({
+                              pagination: false,
+                              search: false,
+                              toolbar: ".toolbar",
                             });
                           });
                         </script>
