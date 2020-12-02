@@ -13,14 +13,14 @@
             <div class="col-12">
                 <div class="content list-members">
                     <h2>Members</h2>
-                    <table id="members" class="table table-sm table-striped table-members">
+                    <table id="table-members" class="table table-sm table-striped table-bordered" data-toggle="table">
                         <thead>
                         <tr>
                             <th scope="col" class="btn-col"></th>
-                            <th scope="col">Member (<%= members.length %>)</th>
-                            <th scope="col">PA Nick</th>
-                            <th scope="col">Access</th>
-                            <th scope="col">Coords</th>
+                            <th data-sortable="true" scope="col">Member (<%= members.length %>)</th>
+                            <th data-sortable="true" scope="col">PA Nick</th>
+                            <th data-sortable="true" scope="col">Access</th>
+                            <th data-sortable="true" scope="col">Coords</th>
                             <th scope="col">Phone</th>
                             <th scope="col" class="btn-col"></th>
                             <th scope="col">Email</th>
