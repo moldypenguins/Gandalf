@@ -55,7 +55,7 @@ router.post('/profile', async (req, res, next) => {
     let upd = await Member.updateOne({id: req.session.member.id}, {
       site_theme: req.body.theme,
       panick: req.body.panick,
-      phone: req.body.phone,
+      phone: req.body.full_phone,
       email: req.body.email,
       planet_id: plnt ? plnt.id : null
     });
