@@ -42,7 +42,7 @@ module.exports = {
   },
   db:{
     uri:"mongodb://localhost:27017",
-    name:"[Database name]"
+    name:"Mordor"
   },
   access:{
     0:"Recruit",        //gives access to: 
