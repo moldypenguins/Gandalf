@@ -16,7 +16,8 @@ module.exports = {
     private_cmd:".",
     public_cmd:"!",
     modules:['admin', 'ships', 'calcs', 'comms', 'intel', 'fun', 'scans'],
-    message_interval:5 //seconds
+    message_interval:5, //seconds
+    tick_alert:true
   },
   twilio:{
     url:[Twilio url], //TwiML instructions url
