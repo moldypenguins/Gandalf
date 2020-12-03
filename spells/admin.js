@@ -21,7 +21,6 @@ const numeral = require('numeral');
 const moment = require('moment');
 const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
-
 //const util = require('util');
 
 let Admin_leavechat_usage = entities.encode('!leavechat [chat id]');
@@ -47,7 +46,7 @@ let Admin_leavechat = (args, ctx) => {
 }
 
 let Admin_tickalert_usage = entities.encode('!tickalert <on/off>');
-let Admin_tickalert_desc = 'Leaves a group, supergroup, or channel.';
+let Admin_tickalert_desc = 'Turns tick alerts on/off.';
 let Admin_tickalert = (args) => {
   return new Promise(async (resolve, reject) => {
     if (args.length > 0) {
