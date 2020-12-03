@@ -46,7 +46,29 @@ let Admin_leavechat = (args, ctx) => {
   });
 }
 
+let Admin_tickalert_usage = entities.encode('!tickalert <on/off>');
+let Admin_tickalert_desc = 'Leaves a group, supergroup, or channel.';
+let Admin_tickalert = (args) => {
+  return new Promise(async (resolve, reject) => {
+    if (args.length > 0) {
+      let mode = args[0];
+      if (!mode) {
+        reject(Admin_tickalert_usage);
+      }
+      config.bot.tick_alert = mode.toLowerCase() === 'on';
+      if(config.bot.tick_alert === (mode.toLowerCase() === 'on')) {
+        //console.log('RESULT:' + util.inspect(result, false, null, true));
+        resolve(`tick alerts turned ${mode}`);
+      } else {
+        reject(`unable to turn tick alerts ${mode}`)
+      }
+    } else {
+      reject(Admin_tickalert_usage);
+    }
+  });
+}
 
 module.exports = {
   "leavechat": { usage: Admin_leavechat_usage, description: Admin_leavechat_desc, access: access.botAdminRequired, cast: Admin_leavechat, include_ctx: true, private_reply: true },
+  "tickalert": { usage: Admin_tickalert_usage, description: Admin_tickalert_desc, access: access.botAdminRequired, cast: Admin_tickalert, private_reply: true },
 };
