@@ -1,9 +1,9 @@
 module.exports = {
   admin:{
-    id:[Telegram id]
+    id:123456789 //[Telegram ID]
   },
   alliance:{
-    name:[Alliance Name],
+    name:"[Alliance Name]",
     attack:{
       default_waves:3,
       after_land_ticks:2,
@@ -11,8 +11,8 @@ module.exports = {
     }
   },
   bot:{
-    token:[Telegram bot token],
-    username:[Telegram bot username],
+    token:"[Telegram bot token]",
+    username:"[Telegram bot username]",
     private_cmd:".",
     public_cmd:"!",
     modules:['admin', 'ships', 'calcs', 'comms', 'intel', 'fun', 'scans'],
@@ -20,29 +20,29 @@ module.exports = {
     tick_alert:true
   },
   twilio:{
-    url:[Twilio url], //TwiML instructions url
-    sid:[Twilio sid],
-    secret:[Twilio secret],
-    number:[Twilio phone],
-    ring_timeout: 20 //seconds
+    url:"[Twilio url]", //TwiML instructions url
+    sid:"[Twilio sid]",
+    secret:"[Twilio secret]",
+    number:+12345554367, //[Twilio phone]
+    ring_timeout:20 //seconds
   },
   groups:{
-    admin:[Telegram channel bot output],
-    scans:[Telegram channel alliance scans],
-    private:[Telegram channel alliance private],
-    public:[Telegram channel alliance public],
-    galaxy:[Telegram channel galaxy channel]
+    admin:0, //[Telegram channel bot output],
+    scans:0, //[Telegram channel alliance scans],
+    private:0, //[Telegram channel alliance private],
+    public:0, //[Telegram channel alliance public],
+    galaxy:0 //[Telegram channel galaxy channel]
   },
   web:{
-    uri:[Website URL],
-    session:[Website session key], //ex: 'hihehfw98KDJ@E#ohhoiuhEEDouhfgw8r3fhiw'
-    temp_folder:[Website temp folder path], //ex: '/home/root/MiddleEarth/temp'
+    uri:"[Website URL]",
+    session:"[Website session key]", //ex: 'hihehfw98KDJ@E#ohhoiuhEEDouhfgw8r3fhiw'
+    temp_folder:"[Website temp folder path]", //ex: '/home/root/MiddleEarth/temp'
     default_profile_pic:'/images/member.jpg',
     default_theme:'light'
   },
   db:{
     uri:"mongodb://localhost:27017",
-    name:[Database name]
+    name:"[Database name]"
   },
   access:{
     0:"Recruit",        //gives access to: 
