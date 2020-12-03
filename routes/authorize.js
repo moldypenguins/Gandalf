@@ -42,7 +42,7 @@ router.get("/", async (req, res, next) => {
         console.log('Is Visitor');
         req.session.visitor = params;
       }
-      res.redirect("/register");
+      res.redirect("/reg");
     }
   } else {
     //failed login
