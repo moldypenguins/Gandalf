@@ -38,7 +38,7 @@ router.get('/bgs', async (req, res, next) => {
 //##########################
 router.get('/profile', async (req, res, next) => {
   //console.log('PLANET: ' + util.inspect(req.session.member, false, null, true));
-  var mem = req.session.member;
+  let mem = req.session.member;
   if(mem) {
     mem.planet = await Planet.findOne({id: req.session.member.planet_id});
   }
@@ -46,11 +46,11 @@ router.get('/profile', async (req, res, next) => {
 });
 
 router.post('/profile', async (req, res, next) => {
-  if(req.session.member != undefined) {
-    var plnt;
-    if(req.body.planet_x != undefined && req.body.planet_y != undefined && req.body.planet_z != undefined) {
+  if(req.session.member !== undefined) {
+    console.log('REQBODY: ' + util.inspect(req.body, true, null, true));
+    let plnt;
+    if(req.body.planet_x !== undefined && req.body.planet_y !== undefined && req.body.planet_z !== undefined) {
       plnt = await Planet.findOne({x: req.body.planet_x, y: req.body.planet_y, z: req.body.planet_z});
-      //console.log('PLANET: ' + util.inspect(plnt, false, null, true));
     }
     let upd = await Member.updateOne({id: req.session.member.id}, {
       site_theme: req.body.theme,
