@@ -50,7 +50,6 @@
   "dependencies": {
     "@awaitjs/express": "^0.6.3",
     "@fortawesome/fontawesome-free": "^5.14.0",
-    "@popperjs/core": "^2.5.4",
     "ajv": "^6.12.6",
     "ajv-keywords": "^3.5.2",
     "bent": "^7.1.2",
