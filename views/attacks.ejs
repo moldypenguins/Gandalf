@@ -13,6 +13,10 @@
 </head>
 <% if(page === "att" || page === "new" || page === "edit") { %>
 <body class="page-attack">
+<% } else if(page === "new") { %>
+<body class="page-attack-new">
+<% } else if(page === "edit") { %>
+<body class="page-attack-edit">
 <% } else { %>
 <body class="page-attacks">
 <% } %>
