@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <% if(page === "att") { %>
-        <%- include("templates/head", {page_title: "Attack", page_description: "Attack"}); %>
+        <%- include("templates/head", {page_title: "Attack " + attack.id, page_description: "Attack " + attack.id}); %>
     <% } else if(page === "new") { %>
         <%- include("templates/head", {page_title: "New Attack", page_description: "New Attack"}); %>
     <% } else if(page === "edit") { %>
