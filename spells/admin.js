@@ -28,7 +28,7 @@ let Admin_leavechat_desc = 'Leaves a group, supergroup, or channel.';
 let Admin_leavechat = (args, ctx) => {
   return new Promise(async (resolve, reject) => {
     let chatid;
-    if (args == null || args.length == 0) {
+    if (args == null || args.length === 0) {
       chatid = ctx.chat.id;
     } else if (args.length > 0) {
       chatid = args[0];
