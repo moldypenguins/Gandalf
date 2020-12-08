@@ -83,7 +83,7 @@ router.post('/', access.webHighCommandRequired, async (req, res, next) => {
           console.log(saved.username + " saved to Members collection.");
           Member.deleteOne({id: req.body.deactivate}, function(err) {
             if (err) return console.error(err);
-            res.redirect('/members');
+            res.redirect('/mem');
           });
         });
       }
@@ -115,7 +115,7 @@ router.post('/applicants', access.webHighCommandRequired, async (req, res, next)
           console.log(saved.username + " saved to Members collection.");
           Applicant.deleteOne({id: req.body.accept}, function(err) {
             if (err) return console.error(err);
-            res.redirect('/members');
+            res.redirect('/mem');
           });
         });
       }
@@ -129,7 +129,7 @@ router.post('/applicants', access.webHighCommandRequired, async (req, res, next)
           return;
         }
         console.log(saved.username + " has been rejected.");
-        res.redirect('/members');
+        res.redirect('/mem');
       });
     });
   } else {
@@ -186,7 +186,7 @@ router.post('/:id', access.webHighCommandRequired, async (req, res, next) => {
     }
     let upd = await mem.save();
     console.log(mem.id + " profile updated.");
-    res.redirect('/members');
+    res.redirect('/mem');
   } else {
     next(createError(400));
   }
@@ -197,7 +197,7 @@ router.post('/galmate/:id', access.webAdminRequired, async (req, res, next) => {
   if(req.body != undefined && req.body.delete != undefined) {
     let gm = await GalMate.deleteOne({id: req.params.id});
     console.log(req.params.id + " deleted.");
-    res.redirect('/members');
+    res.redirect('/mem');
   } else {
     next(createError(400));
   }
