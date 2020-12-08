@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%- include("templates/head", {page_title: "Attacks", page_description: "Attacks"}); %>
+    <% if(page === "att") { %>
+        <%- include("templates/head", {page_title: "Attack", page_description: "Attack"}); %>
+    <% } else if(page === "new") { %>
+        <%- include("templates/head", {page_title: "New Attack", page_description: "New Attack"}); %>
+    <% } else if(page === "edit") { %>
+        <%- include("templates/head", {page_title: "Edit Attack " + attack.id, page_description: "Edit Attack " + attack.id}); %>
+    <% } else { %>
+        <%- include("templates/head", {page_title: "Attacks", page_description: "Attacks"}); %>
+    <% } %>
 </head>
-<% if(page == "att") { %>
+<% if(page === "att" || page === "new" || page === "edit") { %>
 <body class="page-attack">
-<% }else{ %>
+<% } else { %>
 <body class="page-attacks">
 <% } %>
 <header>
     <%- include("templates/header"); %>
 </header>
 <main>
-    <% if(page == "att") { %>
+    <% if(page === "att") { %>
         <div class="container-fluid">
             <div class="row">
                 <% var attacker = "";
@@ -54,7 +62,7 @@
                             }
                         }
                     }
-                    `` %>
+                %>
                 <% var myClms = claims.filter(c => c.member_id == member.id && c.attack_id == attack.id); %>
                 <% if(typeof (myClms) != "undefined" && myClms.length > 0) { %>
                     <div class="col-12">
