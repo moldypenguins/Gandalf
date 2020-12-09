@@ -101,7 +101,7 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 ## Authors
 * **Craig Roberts** - *Developer* - [@moldypenguins](https://t.me/moldypenguins)
 * **Braden Edmunds** - *Developer* - [@blanq4](https://t.me/blanq4)
-* **Alex High** - *Stylist* - [@UltimateNewbie](https://t.me/UltimateNewbie)
+* **Alex High** - *Designer* - [@UltimateNewbie](https://t.me/UltimateNewbie)
 
 
 ## Licenses
