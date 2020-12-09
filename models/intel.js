@@ -18,7 +18,7 @@
 const Mordor = require('../db.js');
 
 let intelSchema = Mordor.Schema({
-  planet_id: Number,
+  planet_id: String,
   alliance_id: Number,
   nick: String,
   fakenick: String,
