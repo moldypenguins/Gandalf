@@ -47,6 +47,11 @@ const rateLimit = require('telegraf-ratelimit')
 const limitConfig = {
   window: 3000,
   limit: 1,
+  keyGenerator: (ctx) => {
+    if(ctx.message && ctx.message.text && (ctx.message.text.startsWith(config.bot.private_cmd) || ctx.message.text.startsWith(config.bot.public_cmd))) {
+      return ctx.from.id
+    }
+  },
   onLimitExceeded: (ctx, next) => ctx.reply('Rate limit exceeded')
 };
 
