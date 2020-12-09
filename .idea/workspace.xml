@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -20,9 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="318793aa-8048-4f80-892e-a688e801ce15" name="Default Changelist" comment="updates">
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scss/components/all/forms-inputs.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scss/components/all/forms-inputs.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/profile.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/profile.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +46,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="2" />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="c2dce7c2-2fc2-40b1-9801-b778a688aa23" />
+  </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
     <exe-path />
@@ -52,23 +62,27 @@
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectId" id="1kA6aifW9LpawLbfzIcatuxQ3uO" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="true&#10;D:/Source/GitHub/MiddleEarth/config.js" />
-    <property name="javascript.nodejs.core.library.configured.version" value="13.9.0" />
-    <property name="javascript.nodejs.core.library.typings.version" value="13.9.0" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.15.0" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.14.10" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="$PROJECT_DIR$/node_modules/gulp" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.stylelint" value="true" />
     <property name="node.js.path.for.package.stylelint" value="project" />
     <property name="node.js.selected.package.stylelint" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
+    <property name="settings.editor.selected.configurable" value="zielu.svntoolbox.prj.config" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -107,6 +121,23 @@
       <workItem from="1606548084461" duration="591000" />
       <workItem from="1606548784910" duration="3321000" />
       <workItem from="1606590131555" duration="3139000" />
+      <workItem from="1606872875433" duration="22506000" />
+      <workItem from="1606956978986" duration="9881000" />
+      <workItem from="1606980033427" duration="460000" />
+      <workItem from="1606980508833" duration="1106000" />
+      <workItem from="1606981634909" duration="113000" />
+      <workItem from="1606981760539" duration="82000" />
+      <workItem from="1606981860140" duration="690000" />
+      <workItem from="1606982588004" duration="1799000" />
+      <workItem from="1606992848590" duration="937000" />
+      <workItem from="1606993803931" duration="1138000" />
+      <workItem from="1606994963377" duration="2919000" />
+      <workItem from="1606998078103" duration="341000" />
+      <workItem from="1606998495342" duration="1916000" />
+      <workItem from="1607000675097" duration="225000" />
+      <workItem from="1607000915464" duration="2707000" />
+      <workItem from="1607406193792" duration="9443000" />
+      <workItem from="1607469763792" duration="2475000" />
     </task>
     <task id="LOCAL-00001" summary="update Frodo.js">
       <created>1605165325612</created>
@@ -183,6 +214,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="update Frodo.js" />
     <MESSAGE value="add package-lock.json to .gitignore" />
     <MESSAGE value="update gitignore" />
@@ -191,111 +223,5 @@
     <MESSAGE value="update require model paths" />
     <MESSAGE value="update require db and config paths" />
     <option name="LAST_COMMIT_MESSAGE" value="update require db and config paths" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="440" y="190" key="#Deployment" timestamp="1606549059341">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="440" y="190" key="#Deployment/0.0.1680.1050@0.0.1680.1050" timestamp="1606549059341" />
-    <state x="-1129" y="323" key="#Node.js_and_NPM" timestamp="1605159541710">
-      <screen x="-1920" y="0" width="1920" height="1050" />
-    </state>
-    <state x="-1129" y="323" key="#Node.js_and_NPM/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605159541710" />
-    <state x="-1050" y="304" key="#Notifications" timestamp="1605161392463">
-      <screen x="-1920" y="0" width="1920" height="1050" />
-    </state>
-    <state x="-1050" y="304" key="#Notifications/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605161392463" />
-    <state x="462" y="181" key="#Options" timestamp="1606548598805">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="462" y="181" key="#Options/0.0.1680.1050@0.0.1680.1050" timestamp="1606548598805" />
-    <state x="424" y="177" key="#SSH_Configurations" timestamp="1606549046891">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="424" y="177" key="#SSH_Configurations/0.0.1680.1050@0.0.1680.1050" timestamp="1606549046891" />
-    <state x="664" y="101" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605533259568">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="-1256" y="101" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605187365097" />
-    <state x="664" y="101" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1605533259568" />
-    <state x="1048" y="502" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606523327082">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1048" y="502" key="#com.intellij.fileTypes.FileTypeChooser/3840.-218.1536.936/0.0.2560.1400@0.0.2560.1400" timestamp="1606523327082" />
-    <state x="1011" y="447" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606523625628">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1011" y="447" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/3840.-218.1536.936/0.0.2560.1400@0.0.2560.1400" timestamp="1606523625628" />
-    <state x="904" y="269" key="CommitChangelistDialog2" timestamp="1606529907948">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="904" y="269" key="CommitChangelistDialog2/3840.-218.1536.936/0.0.2560.1400@0.0.2560.1400" timestamp="1606529907948" />
-    <state x="-1525" y="107" width="1419" height="744" key="DiffContextDialog" timestamp="1605165937124">
-      <screen x="-1920" y="0" width="1920" height="1050" />
-    </state>
-    <state x="-1525" y="107" width="1419" height="744" key="DiffContextDialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605165937124" />
-    <state x="-949" y="290" key="FileChooserDialogImpl" timestamp="1605683099509">
-      <screen x="-1920" y="0" width="1920" height="1050" />
-    </state>
-    <state x="-949" y="290" key="FileChooserDialogImpl/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605188426805" />
-    <state x="-949" y="290" key="FileChooserDialogImpl/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1605683099509" />
-    <state width="1776" height="258" key="GridCell.Tab.0.bottom" timestamp="1606377595748">
-      <screen x="-1920" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1776" height="258" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606377595748" />
-    <state width="1776" height="258" key="GridCell.Tab.0.center" timestamp="1606377595748">
-      <screen x="-1920" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1776" height="258" key="GridCell.Tab.0.center/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606377595748" />
-    <state width="1776" height="258" key="GridCell.Tab.0.left" timestamp="1606377595748">
-      <screen x="-1920" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1776" height="258" key="GridCell.Tab.0.left/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606377595748" />
-    <state width="1776" height="258" key="GridCell.Tab.0.right" timestamp="1606377595748">
-      <screen x="-1920" y="0" width="1920" height="1050" />
-    </state>
-    <state width="1776" height="258" key="GridCell.Tab.0.right/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606377595748" />
-    <state x="-981" y="182" key="RollbackChangesDialog" timestamp="1606123634366">
-      <screen x="-1920" y="0" width="1920" height="1050" />
-    </state>
-    <state x="-981" y="182" key="RollbackChangesDialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606123634366" />
-    <state width="247" height="198" key="RunAnythingAction_Filter_Popup" timestamp="1606123621156">
-      <screen x="-1920" y="0" width="1920" height="1050" />
-    </state>
-    <state width="247" height="198" key="RunAnythingAction_Filter_Popup/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606123621156" />
-    <state x="477" y="180" width="1105" height="722" key="SettingsEditor" timestamp="1606592789697">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="477" y="180" width="1105" height="722" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1606592789697" />
-    <state x="-1375" y="180" width="1186" height="711" key="SettingsEditor/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606376857834" />
-    <state x="162" y="123" width="1293" height="711" key="SettingsEditor/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1605533318204" />
-    <state x="727" y="240" key="SettingsEditor/3840.-218.1536.936/0.0.2560.1400@0.0.2560.1400" timestamp="1606522694947" />
-    <state x="736" y="215" key="Vcs.Push.Dialog.v2" timestamp="1605479776080">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="-1184" y="215" key="Vcs.Push.Dialog.v2/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605186754733" />
-    <state x="736" y="215" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1605479776080" />
-    <state x="709" y="117" width="568" height="915" key="find.popup" timestamp="1606595215847">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="709" y="117" width="568" height="915" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1606595215847" />
-    <state x="-1110" y="117" width="586" height="915" key="find.popup/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606109142448" />
-    <state x="1080" y="156" width="782" height="1220" key="find.popup/3840.-218.1536.936/0.0.2560.1400@0.0.2560.1400" timestamp="1606524899039" />
-    <state x="744" y="182" width="334" height="685" key="ftp.server.browser" timestamp="1606548639383">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="744" y="182" width="334" height="685" key="ftp.server.browser/0.0.1680.1050@0.0.1680.1050" timestamp="1606548639383" />
-    <state x="-1125" y="352" key="jetbrains.nodejs.interpreters-dialog" timestamp="1605159465570">
-      <screen x="-1920" y="0" width="1920" height="1050" />
-    </state>
-    <state x="-1125" y="352" key="jetbrains.nodejs.interpreters-dialog/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605159465570" />
-    <state x="-1449" y="389" key="run.anything.popup" timestamp="1606123622379">
-      <screen x="-1920" y="0" width="1920" height="1050" />
-    </state>
-    <state x="-1449" y="389" key="run.anything.popup/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1606123622379" />
-    <state x="-1030" y="162" width="672" height="678" key="search.everywhere.popup" timestamp="1605223814924">
-      <screen x="-1920" y="0" width="1920" height="1050" />
-    </state>
-    <state x="-1030" y="162" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/-1920.0.1920.1050@-1920.0.1920.1050" timestamp="1605223814924" />
   </component>
 </project>
