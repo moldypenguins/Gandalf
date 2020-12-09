@@ -90,7 +90,7 @@ let Intel_fn = (args) => {
                         case 'alliance': {
                             let alliances = await Alliance.find();
                             console.log(value);
-                            let alliance = alliances.find(a => a.name.toLowerCase().startsWith(value.toLowerCase()) || a.name.toLowerCase().includes(value.toLowerCase()) || a.alias.toLowerCase() === value.toLowerCase());
+                            let alliance = alliances.find(a => a.name.toLowerCase().startsWith(value.toLowerCase()) || a.name.toLowerCase().includes(value.toLowerCase()) || (a.alias !== undefined && a.alias.toLowerCase() === value.toLowerCase()));
                             console.log(alliance);
                             if (!alliance) {
                                 reject(`No alliance found for: <b>${value}</b>`);
