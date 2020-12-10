@@ -62,9 +62,8 @@ db.connection.once("open", () => {
   bot.use(rateLimit(limitConfig));
 
   bot.use(async(ctx, next) => {
-    console.log('CHAT_ID: ' + ctx.message.chat.id.toString());
     if(!await Chat.exists({id:ctx.message.chat.id.toString()})) {
-      console.log('CHAT_TITLE: ' + ctx.message.chat.title);
+      console.log('CHAT: id=' + ctx.message.chat.id + ' title=' + ctx.message.chat.title);
       await new Chat({id: ctx.message.chat.id.toString(), title: ctx.message.chat.title, type: ctx.message.chat.type}).save();
     }
     next();
