@@ -5,10 +5,8 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="/"><img class="navbar-logo" src="/images/logo/<%= site_theme %>.png" width="30" height="30" alt=""/><%= alliance_name %></a>
-                    <% if(member == undefined) { %>
-                        <div class="navbar-nav ml-auto">
-                            <script async src="https://telegram.org/js/telegram-widget.js?12" data-telegram-login="<%= bot_name %>" data-size="large" data-auth-url="<%= site_url %>/auth" data-request-access="write"></script>
-                        </div>
+                    <% if(member === undefined) { %>
+                        <div class="navbar-nav ml-auto"><script async src="https://telegram.org/js/telegram-widget.js?12" data-telegram-login="<%= bot_name %>" data-size="large" data-auth-url="<%= site_url %>/auth" data-request-access="write"></script></div>
                     <% } else { %>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -55,7 +53,7 @@
                             </ul>
                             <a class="navbar-profile" href="/profile"><img class="tg-pic" src="<% if(member.photo_url) { %><%= member.photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" alt=""/></a>
                         </div>
-                    <% } %>>
+                    <% } %>
                 </div>
             </nav>
         </div>
