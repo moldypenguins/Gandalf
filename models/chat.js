@@ -17,11 +17,11 @@
  **/
 const Mordor = require('../db.js');
 
-let channelSchema = Mordor.Schema({
+let chatSchema = Mordor.Schema({
   id: {type:Number, unique:true, required:true},
   title: {type:String},
   type: {type:String}
 });
 
-module.exports = Mordor.model('Channel', channelSchema, 'Channels');
+module.exports = Mordor.model('Chat', chatSchema, 'Chats');
 
