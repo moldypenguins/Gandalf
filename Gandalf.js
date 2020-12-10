@@ -66,7 +66,7 @@ db.connection.once("open", () => {
     if(!Chat.exists(c => c.id === ctx.message.chat.id)) {
       Chat.insertOne({id: ctx.message.chat.id, title: ctx.message.chat.title, type: ctx.message.chat.type});
     }
-    //next();
+    next();
   });
 
 
