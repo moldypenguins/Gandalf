@@ -62,7 +62,7 @@ db.connection.once("open", () => {
   bot.use(rateLimit(limitConfig));
 
   bot.use((ctx, next) => {
-    console.log('CHAT_ID: ' + typeof ctx.message.chat.id);
+    console.log('CHAT_ID: ' + Chat.exists({id:ctx.message.chat.id.toString()}));
     if(!Chat.exists({id:ctx.message.chat.id.toString()})) {
       console.log('CHAT_TITLE: ' + ctx.message.chat.title);
       Chat.insertOne({id: ctx.message.chat.id.toString(), title: ctx.message.chat.title, type: ctx.message.chat.type});
