@@ -63,12 +63,11 @@ db.connection.once("open", () => {
 
   bot.use((ctx, next) => {
     console.log('CHATID: ' + ctx.message.chat.id);
-    if(!Chat.exists(c => c.id === ctx.message.chat.id)) {
+    if(!Chat.exists({id:ctx.message.chat.id})) {
       Chat.insertOne({id: ctx.message.chat.id, title: ctx.message.chat.title, type: ctx.message.chat.type});
     }
     next();
   });
-
 
   bot.start((ctx) => ctx.replyWithHTML(`Sign up: <a href="${config.web.uri}">${config.alliance.name}</a>`));
   
