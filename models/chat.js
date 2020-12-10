@@ -24,4 +24,3 @@ let chatSchema = Mordor.Schema({
 });
 
 module.exports = Mordor.model('Chat', chatSchema, 'Chats');
-

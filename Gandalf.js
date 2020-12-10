@@ -26,6 +26,7 @@ const Tick = require('./models/tick');
 const GalMate = require('./models/galmate');
 const BotMessage = require('./models/botmessage');
 const Scan = require('./models/scan');
+const Chat = require('./models/chat');
 const moment = require('moment');
 const util = require('util');
 const url = require('url');
@@ -62,7 +63,10 @@ db.connection.once("open", () => {
 
   bot.use((ctx, next) => {
     console.log('CHATID: ' + ctx.message.chat.id);
-    next();
+    if(!Chat.exists(c => c.id === ctx.message.chat.id)) {
+      Chat.insertOne({id: ctx.message.chat.id, title: ctx.message.chat.title, type: ctx.message.chat.type});
+    }
+    //next();
   });
 
 
