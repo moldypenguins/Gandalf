@@ -65,7 +65,7 @@ db.connection.once("open", () => {
     console.log('CHAT_ID: ' + ctx.message.chat.id.toString());
     if(!await Chat.exists({id:ctx.message.chat.id.toString()})) {
       console.log('CHAT_TITLE: ' + ctx.message.chat.title);
-      await Chat.insertOne({id: ctx.message.chat.id.toString(), title: ctx.message.chat.title, type: ctx.message.chat.type});
+      await new Chat({id: ctx.message.chat.id.toString(), title: ctx.message.chat.title, type: ctx.message.chat.type}).save();
     }
     next();
   });
