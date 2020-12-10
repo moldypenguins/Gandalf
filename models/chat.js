@@ -18,7 +18,7 @@
 const Mordor = require('../db.js');
 
 let chatSchema = Mordor.Schema({
-  id: {type:Number, unique:true, required:true},
+  id: {type:String, unique:true, required:true},
   title: {type:String},
   type: {type:String}
 });
