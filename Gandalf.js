@@ -61,11 +61,11 @@ db.connection.once("open", () => {
   let bot = new Telegraf(config.bot.token, { telegram: { agent: null, webhookReply: false }, username: config.bot.username });
   bot.use(rateLimit(limitConfig));
 
-  bot.use((ctx, next) => {
-    console.log('CHAT_ID: ' + Chat.exists({id:ctx.message.chat.id.toString()}));
-    if(!Chat.exists({id:ctx.message.chat.id.toString()})) {
+  bot.use(async(ctx, next) => {
+    console.log('CHAT_ID: ' + ctx.message.chat.id.toString());
+    if(!await Chat.exists({id:ctx.message.chat.id.toString()})) {
       console.log('CHAT_TITLE: ' + ctx.message.chat.title);
-      Chat.insertOne({id: ctx.message.chat.id.toString(), title: ctx.message.chat.title, type: ctx.message.chat.type});
+      await Chat.insertOne({id: ctx.message.chat.id.toString(), title: ctx.message.chat.title, type: ctx.message.chat.type});
     }
     next();
   });
