@@ -84,7 +84,7 @@ db.connection.once("open", () => {
           }
         }
         for (let i = 0; i < message.entities.filter(e => e.type === 'text_mention').length; i++) {
-          console.log('TEXT_MENTION_USER:' + util.inspect(message.entities[i].user, false, null, true));
+          //console.log('TEXT_MENTION_USER:' + util.inspect(message.entities[i].user, false, null, true));
           let usr = await User.findOne({first_name: message.entities[i].user.first_name, last_name: message.entities[i].user.last_name});
           if(usr != null) {
             mentions.push(usr);
@@ -104,7 +104,7 @@ db.connection.once("open", () => {
           }
         }
         for (let i = 0; i < message.entities.filter(e => e.type === 'text_mention').length; i++) {
-          console.log('TEXT_MENTION_USER:' + util.inspect(message.entities[i].user, false, null, true));
+          //console.log('TEXT_MENTION_USER:' + util.inspect(message.entities[i].user, false, null, true));
           let mbr = await Member.findOne({first_name: message.entities[i].user.first_name, last_name: message.entities[i].user.last_name});
           if(mbr != null) {
             mentions.push(mbr);
