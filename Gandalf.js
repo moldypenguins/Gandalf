@@ -71,6 +71,7 @@ db.connection.once("open", () => {
 
   bot.context.mentions = {
     get: async (message) => {
+      console.log('MESSAGE:' + util.inspect(message, false, null, true));
       let mentions = [];
       if(message.entities !== undefined) {
         for (let i = 0; i < ctx.message.entities.filter(e => e.type === 'mention').length; i++) {
