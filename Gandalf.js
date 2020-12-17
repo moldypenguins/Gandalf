@@ -70,11 +70,11 @@ db.connection.once("open", () => {
   });
 
   bot.context.mentions = {
-    get: async (ctx) => {
+    get: async (message) => {
       let mentions = [];
-      if(ctx.message.entities !== undefined) {
+      if(message.entities !== undefined) {
         for (let i = 0; i < ctx.message.entities.filter(e => e.type === 'mention').length; i++) {
-          let text = ctx.message.text.substr(ctx.message.entities[i].offset, ctx.message.entities[i].length);
+          let text = message.text.substr(message.entities[i].offset, message.entities[i].length);
           //console.log('MENTION:' + util.inspect(text, false, null, true));
           let mem = await Member.findOne({username: text.replace('@', '')});
           //console.log('MEMBER:' + util.inspect(mem, false, null, true));
