@@ -94,7 +94,7 @@ let Admin_addgalmate = (args, ctx) => {
       let tguser = args[0];
       if (!tguser) { reject(Admin_addgalmate_usage); }
 
-      let mentions = await ctx.mentions.getUsers(ctx.message);
+      let mentions = await ctx.mentions.get(ctx.message);
       //console.log('MENTIONS: ' + util.inspect(mentions, false, null, true));
       if(mentions.length <= 0) {
         reject(`User ${tguser} not found.`);
