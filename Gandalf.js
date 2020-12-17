@@ -83,6 +83,13 @@ db.connection.once("open", () => {
             mentions.push(usr);
           }
         }
+        for (let i = 0; i < message.entities.filter(e => e.type === 'text_mention').length; i++) {
+          console.log('TEXT_MENTION_USER:' + util.inspect(message.entities[i].user, false, null, true));
+          let usr = await User.findOne({username: message.entities[i].user.username});
+          if(usr != null) {
+            mentions.push(usr);
+          }
+        }
       }
       return mentions;
     },
