@@ -24,6 +24,7 @@ const moment = require('moment');
 const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
 const util = require('util');
+const tgresolve = require('tg-resolve');
 
 let Admin_leavechat_usage = entities.encode('!leavechat [chat id]');
 let Admin_leavechat_desc = 'Leaves a group, supergroup, or channel.';
@@ -98,19 +99,24 @@ let Admin_addgalmate = (args, ctx) => {
 
       //let messages = ctx.telegram.getChat(ctx.message.chat.id);
       //console.log('Participants: ' + util.inspect(messages, false, null, true));
-      reject('This does not work yet');
+      tgresolve(config.bot.token, tguser, async(error, mention) => {
+        // ... handle error ...
+        console.log(mention.id);
+        reject('This does not work yet');
 
-      if(!await GalMate.exists({id:mentions[0].id})) {
-        let galm8 = new GalMate({id:mentions[0].id,first_name:mentions[0].first_name,last_name:mentions[0].last_name,username:mentions[0].username});
-        let saved = await galm8.save();
-        if(saved != null) {
-          resolve(`GalMate added`);
+        if(!await GalMate.exists({id:mention.id})) {
+          let galm8 = new GalMate({id:mention.id,first_name:mention.first_name,last_name:mention.last_name,username:mention.username});
+          let saved = await galm8.save();
+          if(saved != null) {
+            resolve(`GalMate added`);
+          } else {
+            reject(`Unable to add GalMate`);
+          }
         } else {
-          reject(`Unable to add GalMate`);
+          reject(`GalMate already exists`);
         }
-      } else {
-        reject(`GalMate already exists`);
-      }
+      });
+
     } else {
       reject(Admin_addgalmate_usage);
     }
