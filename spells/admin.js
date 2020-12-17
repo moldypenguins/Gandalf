@@ -42,7 +42,7 @@ let Admin_leavechat = (args, ctx) => {
       await Chat.remove({id: chatid});
       resolve(`left the group ${chatid}`);
     }).catch((error) => {
-      reject(`unable to leave the group ${chatid}`)
+      reject(`unable to leave the group ${chatid}.\n${error}`)
     });
     
   });
