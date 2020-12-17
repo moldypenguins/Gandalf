@@ -74,7 +74,11 @@ db.connection.once("open", () => {
   bot.catch((err, ctx) => {
     console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)
   });
-  
+
+  bot.mention(config.bot.username, (ctx) => {
+    console.log('MENTION:' + util.inspect(ctx.message, false, null, true));
+  });
+
   function help(ctx, mem) {
     let commands = '<b>Commands:</b>\n' +
       '<b>help:</b> <i>Shows list of commands</i>\n' + 
