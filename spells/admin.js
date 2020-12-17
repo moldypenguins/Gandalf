@@ -24,7 +24,8 @@ const moment = require('moment');
 const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
 const util = require('util');
-const tgresolve = require('tg-resolve');
+const bent = require('bent');
+const getStream = bent('string');
 
 let Admin_leavechat_usage = entities.encode('!leavechat [chat id]');
 let Admin_leavechat_desc = 'Leaves a group, supergroup, or channel.';
@@ -93,32 +94,35 @@ let Admin_addgalmate = (args, ctx) => {
       let tguser = args[0];
       if (!tguser) { reject(Admin_addgalmate_usage); }
 
-      console.log('TGUSER: ' + util.inspect(tguser, false, null, true));
-      
-      //let mentions = await ctx.mentions.get(ctx.message);
+
+      let user = await getStream(`https://t.me/${tguser.replace('@','')}`);
+
+      console.log('TGUSER: ' + util.inspect(user, false, null, true));
+
+      let mentions = [];await ctx.mentions.get(ctx.message);
       //console.log('MENTIONS: ' + util.inspect(mentions, false, null, true));
       //if(mentions.length <= 0) { reject(Admin_addgalmate_usage); }
 
       //let messages = ctx.telegram.getChat(ctx.message.chat.id);
       //console.log('Participants: ' + util.inspect(messages, false, null, true));
-      tgresolve(config.bot.token, tguser, async(error, mention) => {
-        // ... handle error ...
-        console.log('MENTION: ' + util.inspect(mention, false, null, true));
-        console.log('ERROR: ' + util.inspect(error, false, null, true));
-        reject('This does not work yet');
+      let mention = mentions[0];
 
-        if(!await GalMate.exists({id:mention.id})) {
-          let galm8 = new GalMate({id:mention.id,first_name:mention.first_name,last_name:mention.last_name,username:mention.username});
-          let saved = await galm8.save();
-          if(saved != null) {
-            resolve(`GalMate added`);
-          } else {
-            reject(`Unable to add GalMate`);
-          }
+      console.log('MENTION: ' + util.inspect(mention, false, null, true));
+      console.log('ERROR: ' + util.inspect(error, false, null, true));
+      reject('This does not work yet');
+
+      if(!await GalMate.exists({id:mention.id})) {
+        let galm8 = new GalMate({id:mention.id,first_name:mention.first_name,last_name:mention.last_name,username:mention.username});
+        let saved = await galm8.save();
+        if(saved != null) {
+          resolve(`GalMate added`);
         } else {
-          reject(`GalMate already exists`);
+          reject(`Unable to add GalMate`);
         }
-      });
+      } else {
+        reject(`GalMate already exists`);
+      }
+
 
     } else {
       reject(Admin_addgalmate_usage);
