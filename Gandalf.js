@@ -69,21 +69,23 @@ db.connection.once("open", () => {
     next();
   });
 
+  bot.use(async (ctx, next) => {
+    if(ctx.message.entities !== undefined) {
+      for (let i = 0; i <= ctx.message.entities.filter(e => e.type === 'mention').length; i++) {
+        let text = ctx.message.text.substr(ctx.message.entities[i].offset, ctx.message.entities[i].length);
+        console.log('MENTION:' + util.inspect(text, false, null, true));
+
+        let mem = await Member.findOne({username: text.replace('@', '')});
+        console.log('MEMBER:' + util.inspect(mem, false, null, true));
+      }
+    }
+    next();
+  });
+
   bot.start((ctx) => ctx.replyWithHTML(`Sign up: <a href="${config.web.uri}">${config.alliance.name}</a>`));
   
   bot.catch((err, ctx) => {
     console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)
-  });
-
-  bot.mention(config.bot.username, async (ctx, next) => {
-    for(let i = 0; i <= ctx.message.entities.filter(e => e.type === 'mention').length; i++) {
-      let text = ctx.message.text.substr(ctx.message.entities[i].offset, ctx.message.entities[i].length);
-      console.log('MENTION:' + util.inspect(text, false, null, true));
-
-      let mem = await Member.findOne({username:  text.replace('@', '')});
-      console.log('MEMBER:' + util.inspect(mem, false, null, true));
-    }
-    next();
   });
 
   function help(ctx, mem) {
