@@ -72,6 +72,8 @@ db.connection.once("open", () => {
   bot.use(async (ctx, next) => {
     if(ctx.message.entities !== undefined) {
       for (let i = 0; i <= ctx.message.entities.filter(e => e.type === 'mention').length; i++) {
+        console.log('ENTITY:' + util.inspect(ctx.message.entities[i], false, null, true));
+
         let text = ctx.message.text.substr(ctx.message.entities[i].offset, ctx.message.entities[i].length);
         console.log('MENTION:' + util.inspect(text, false, null, true));
 
