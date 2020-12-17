@@ -101,7 +101,8 @@ let Admin_addgalmate = (args, ctx) => {
       //console.log('Participants: ' + util.inspect(messages, false, null, true));
       tgresolve(config.bot.token, tguser, async(error, mention) => {
         // ... handle error ...
-        console.log(mention.id);
+        console.log('MENTION: ' + util.inspect(mention, false, null, true));
+        console.log('ERROR: ' + util.inspect(error, false, null, true));
         reject('This does not work yet');
 
         if(!await GalMate.exists({id:mention.id})) {
