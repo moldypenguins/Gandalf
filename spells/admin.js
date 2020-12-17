@@ -93,11 +93,11 @@ let Admin_addgalmate = (args, ctx) => {
       if (!tguser) { reject(Admin_addgalmate_usage); }
 
       let mentions = await ctx.mentions.get(ctx.message);
-      console.log('MENTIONS: ' + util.inspect(mentions, false, null, true));
-      
-      if(!await GalMate.exists({id:tguser.id})) {
-        console.log('TGUSER:' + util.inspect(tguser, false, null, true));
-        let galm8 = new GalMate({id:tguser.id,first_name:tguser.first_name,last_name:tguser.last_name,username:tguser.username});
+      //console.log('MENTIONS: ' + util.inspect(mentions, false, null, true));
+      if(mentions.length <= 0) { reject(Admin_addgalmate_usage); }
+
+      if(!await GalMate.exists({id:mentions[0].id})) {
+        let galm8 = new GalMate({id:mentions[0].id,first_name:mentions[0].first_name,last_name:mentions[0].last_name,username:mentions[0].username});
         let saved = await galm8.save();
         if(saved != null) {
           resolve(`GalMate added`);
