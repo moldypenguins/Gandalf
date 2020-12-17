@@ -18,6 +18,7 @@
 const config = require('../config');
 const access = require('../access');
 const Chat = require('../models/chat');
+const GalMate = require('../models/galmate');
 const numeral = require('numeral');
 const moment = require('moment');
 const Entities = require('html-entities').AllHtmlEntities;
@@ -52,12 +53,11 @@ let Admin_listchats_desc = 'Lists chats bot is a member of.';
 let Admin_listchats = (args) => {
   return new Promise(async (resolve, reject) => {
     let chats = await Chat.find();
-    if(config.bot.tick_alert === (mode.toLowerCase() === 'on')) {
-      console.log('CHATS:' + util.inspect(chats, false, null, true));
-      resolve(`tick alerts turned ${mode}`);
-    } else {
-      reject(`unable to turn tick alerts ${mode}`)
+    console.log('CHATS:' + util.inspect(chats, false, null, true));
+    for(let i = 0; i<chats.length; i++) {
+      console.log(chats[i].name);
     }
+    resolve(`Chats: ${chats.join('<br/>')}`);
   });
 }
 
@@ -84,8 +84,32 @@ let Admin_tickalert = (args) => {
 }
 
 
+let Admin_addgalmate_usage = entities.encode('!addgalmate <@GalMate>');
+let Admin_addgalmate_desc = 'Lists chats bot is a member of.';
+let Admin_addgalmate = (args) => {
+  return new Promise(async (resolve, reject) => {
+    if (args.length > 0) {
+      let tguser = args[0];
+      if (!tguser) { reject(Admin_addgalmate_usage); }
+
+      if(!await GalMate.exists({id:tguser.id})) {
+        //console.log('RESULT:' + util.inspect(result, false, null, true));
+        await new GalMate({id:tguser.id,first_name:tguser.first_name,last_name:tguser.last_name,username:tguser.username}).save();
+        resolve(`GalMate added`);
+      } else {
+        reject(`GalMate already exists`)
+      }
+    } else {
+      reject(Admin_addgalmate_usage);
+    }
+  });
+}
+
+
+
 module.exports = {
   "leavechat": { usage: Admin_leavechat_usage, description: Admin_leavechat_desc, access: access.botAdminRequired, cast: Admin_leavechat, include_ctx: true, private_reply: true },
   "listchats": { usage: Admin_listchats_usage, description: Admin_listchats_desc, access: access.botAdminRequired, cast: Admin_listchats, private_reply: true },
   "tickalert": { usage: Admin_tickalert_usage, description: Admin_tickalert_desc, access: access.botAdminRequired, cast: Admin_tickalert, private_reply: true },
+  "tickalert": { usage: Admin_addgalmate_usage, description: Admin_addgalmate_desc, access: access.botAdminRequired, cast: Admin_addgalmate },
 };
