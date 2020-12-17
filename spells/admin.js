@@ -111,5 +111,5 @@ module.exports = {
   "leavechat": { usage: Admin_leavechat_usage, description: Admin_leavechat_desc, access: access.botAdminRequired, cast: Admin_leavechat, include_ctx: true, private_reply: true },
   "listchats": { usage: Admin_listchats_usage, description: Admin_listchats_desc, access: access.botAdminRequired, cast: Admin_listchats, private_reply: true },
   "tickalert": { usage: Admin_tickalert_usage, description: Admin_tickalert_desc, access: access.botAdminRequired, cast: Admin_tickalert, private_reply: true },
-  "tickalert": { usage: Admin_addgalmate_usage, description: Admin_addgalmate_desc, access: access.botAdminRequired, cast: Admin_addgalmate },
+  "addgalmate": { usage: Admin_addgalmate_usage, description: Admin_addgalmate_desc, access: access.botAdminRequired, cast: Admin_addgalmate },
 };
