@@ -90,11 +90,11 @@ let Admin_addgalmate = (args, ctx) => {
   return new Promise(async (resolve, reject) => {
     if (args.length > 0) {
       let tguser = args[0];
+      if (!tguser) { reject(Admin_addgalmate_usage); }
 
-      console.log('MENTIONS: ' + util.inspect(ctx.mentions.get(ctx.message), false, null, true));
-
-      if (!tguser || !ctx.mentions.length > 0) { reject(Admin_addgalmate_usage); }
-
+      let mentions = await ctx.mentions.get(ctx.message);
+      console.log('MENTIONS: ' + util.inspect(mentions, false, null, true));
+      
       if(!await GalMate.exists({id:tguser.id})) {
         console.log('TGUSER:' + util.inspect(tguser, false, null, true));
         let galm8 = new GalMate({id:tguser.id,first_name:tguser.first_name,last_name:tguser.last_name,username:tguser.username});
