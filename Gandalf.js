@@ -69,20 +69,23 @@ db.connection.once("open", () => {
     next();
   });
 
-  bot.use(async (ctx, next) => {
-    if(ctx.message.entities !== undefined) {
-      for (let i = 0; i < ctx.message.entities.filter(e => e.type === 'mention').length; i++) {
-        let text = ctx.message.text.substr(ctx.message.entities[i].offset, ctx.message.entities[i].length);
-        //console.log('MENTION:' + util.inspect(text, false, null, true));
-        let mem = await Member.findOne({username: text.replace('@', '')});
-        //console.log('MEMBER:' + util.inspect(mem, false, null, true));
-        if(mem != null) {
-          ctx.mentions.push(mem);
+  bot.context.mentions = {
+    get: async (ctx) => {
+      let mentions = [];
+      if(ctx.message.entities !== undefined) {
+        for (let i = 0; i < ctx.message.entities.filter(e => e.type === 'mention').length; i++) {
+          let text = ctx.message.text.substr(ctx.message.entities[i].offset, ctx.message.entities[i].length);
+          //console.log('MENTION:' + util.inspect(text, false, null, true));
+          let mem = await Member.findOne({username: text.replace('@', '')});
+          //console.log('MEMBER:' + util.inspect(mem, false, null, true));
+          if(mem != null) {
+            mentions.push(mem);
+          }
         }
       }
+      return mentions;
     }
-    next();
-  });
+  }
 
   bot.start((ctx) => ctx.replyWithHTML(`Sign up: <a href="${config.web.uri}">${config.alliance.name}</a>`));
   
