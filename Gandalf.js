@@ -27,11 +27,10 @@ const GalMate = require('./models/galmate');
 const BotMessage = require('./models/botmessage');
 const Scan = require('./models/scan');
 const Chat = require('./models/chat');
+const User = require('./models/user');
 const moment = require('moment');
 const util = require('util');
 const url = require('url');
-const bent = require('bent');
-const getStream = bent('string');
 
 let spells = {};
 Object.assign(spells, require(`./spells/admin`));
@@ -66,6 +65,10 @@ db.connection.once("open", () => {
       //console.log('CHAT: id=' + ctx.message.chat.id + ' title=' + ctx.message.chat.title);
       await new Chat({id: ctx.message.chat.id.toString(), title: ctx.message.chat.title, type: ctx.message.chat.type}).save();
     }
+    if(!ctx.message.from.is_bot && !await User.exists({id:ctx.message.from.id})) {
+      //console.log('CHAT: id=' + ctx.message.chat.id + ' title=' + ctx.message.chat.title);
+      await new User({id: ctx.message.from.id, first_name: ctx.message.from.first_name, last_name: ctx.message.from.last_name, username: ctx.message.from.username, language_code: ctx.message.from.language_code}).save();
+    }
     next();
   });
 
@@ -77,10 +80,10 @@ db.connection.once("open", () => {
         for (let i = 0; i < message.entities.filter(e => e.type === 'mention').length; i++) {
           let text = message.text.substr(message.entities[i].offset, message.entities[i].length);
           //console.log('MENTION:' + util.inspect(text, false, null, true));
-          let mem = await Member.findOne({username: text.replace('@', '')});
-          //console.log('MEMBER:' + util.inspect(mem, false, null, true));
-          if(mem != null) {
-            mentions.push(mem);
+          let usr = await User.findOne({username: text.replace('@', '')});
+          //console.log('User:' + util.inspect(mem, false, null, true));
+          if(usr != null) {
+            mentions.push(usr);
           }
         }
       }
