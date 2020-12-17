@@ -74,7 +74,7 @@ db.connection.once("open", () => {
       console.log('MESSAGE:' + util.inspect(message, false, null, true));
       let mentions = [];
       if(message.entities !== undefined) {
-        for (let i = 0; i < ctx.message.entities.filter(e => e.type === 'mention').length; i++) {
+        for (let i = 0; i < message.entities.filter(e => e.type === 'mention').length; i++) {
           let text = message.text.substr(message.entities[i].offset, message.entities[i].length);
           //console.log('MENTION:' + util.inspect(text, false, null, true));
           let mem = await Member.findOne({username: text.replace('@', '')});
