@@ -92,11 +92,13 @@ let Admin_addgalmate = (args, ctx) => {
       let tguser = args[0];
       if (!tguser) { reject(Admin_addgalmate_usage); }
 
-      let mentions = await ctx.mentions.get(ctx.message);
+      //let mentions = await ctx.mentions.get(ctx.message);
       //console.log('MENTIONS: ' + util.inspect(mentions, false, null, true));
-      if(mentions.length <= 0) { reject(Admin_addgalmate_usage); }
+      //if(mentions.length <= 0) { reject(Admin_addgalmate_usage); }
 
-
+      let messages = ctx.telegram.channels.getParticipants(ctx.message.chat.id);
+      console.log('Participants: ' + util.inspect(messages, false, null, true));
+      reject(messages);
 
       if(!await GalMate.exists({id:mentions[0].id})) {
         let galm8 = new GalMate({id:mentions[0].id,first_name:mentions[0].first_name,last_name:mentions[0].last_name,username:mentions[0].username});
