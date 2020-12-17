@@ -98,16 +98,8 @@ let Admin_addgalmate = (args, ctx) => {
       //console.log('MENTIONS: ' + util.inspect(mentions, false, null, true));
       if(mentions.length <= 0) { reject('No users found.'); }
 
-      //let messages = ctx.telegram.getChat(ctx.message.chat.id);
-      //console.log('Participants: ' + util.inspect(messages, false, null, true));
-      let mention = mentions[0] || null;
-
-      console.log('MENTION: ' + util.inspect(mention, false, null, true));
-
-      reject('This does not work yet');
-
-      if(!await GalMate.exists({id:mention.id})) {
-        let galm8 = new GalMate({id:mention.id,first_name:mention.first_name,last_name:mention.last_name,username:mention.username});
+      if(!await GalMate.exists({id:mentions[0].id})) {
+        let galm8 = new GalMate({id:mentions[0].id,first_name:mentions[0].first_name,last_name:mentions[0].last_name,username:mentions[0].username});
         let saved = await galm8.save();
         if(saved != null) {
           resolve(`GalMate added`);
@@ -117,8 +109,6 @@ let Admin_addgalmate = (args, ctx) => {
       } else {
         reject(`GalMate already exists`);
       }
-
-
     } else {
       reject(Admin_addgalmate_usage);
     }
