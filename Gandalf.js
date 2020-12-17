@@ -22,6 +22,7 @@
 const config = require('./config');
 const db = require('./db');
 const Member = require('./models/member');
+const Inactive = require('./models/inactive');
 const Tick = require('./models/tick');
 const GalMate = require('./models/galmate');
 const BotMessage = require('./models/botmessage');
@@ -73,26 +74,7 @@ db.connection.once("open", () => {
   });
 
   bot.context.mentions = {
-    getUsers: async (message) => {
-      let mentions = [];
-      if(message.entities !== undefined) {
-        for (let i = 0; i < message.entities.filter(e => e.type === 'mention').length; i++) {
-          let text = message.text.substr(message.entities[i].offset, message.entities[i].length);
-          let usr = await User.findOne({username: text.replace('@', '')});
-          if(usr != null) {
-            mentions.push(usr);
-          }
-        }
-        for (let i = 0; i < message.entities.filter(e => e.type === 'text_mention').length; i++) {
-          let usr = await User.findOne({first_name: message.entities[i].user.first_name, last_name: message.entities[i].user.last_name});
-          if(usr != null) {
-            mentions.push(usr);
-          }
-        }
-      }
-      return mentions;
-    },
-    getMembers: async (message) => {
+    get: async (message) => {
       let mentions = [];
       if(message.entities !== undefined) {
         for (let i = 0; i < message.entities.filter(e => e.type === 'mention').length; i++) {
@@ -100,12 +82,32 @@ db.connection.once("open", () => {
           let mbr = await Member.findOne({username: text.replace('@', '')});
           if(mbr != null) {
             mentions.push(mbr);
+          } else {
+            let inact = await Inactive.findOne({username: text.replace('@', '')});
+            if(inact != null) {
+              mentions.push(inact);
+            } else {
+              let usr = await User.findOne({username: text.replace('@', '')});
+              if(usr != null) {
+                mentions.push(usr);
+              }
+            }
           }
         }
         for (let i = 0; i < message.entities.filter(e => e.type === 'text_mention').length; i++) {
           let mbr = await Member.findOne({first_name: message.entities[i].user.first_name, last_name: message.entities[i].user.last_name});
           if(mbr != null) {
             mentions.push(mbr);
+          } else {
+            let inact = await Inactive.findOne({first_name: message.entities[i].user.first_name, last_name: message.entities[i].user.last_name});
+            if(inact != null) {
+              mentions.push(inact);
+            } else {
+              let usr = await User.findOne({first_name: message.entities[i].user.first_name, last_name: message.entities[i].user.last_name});
+              if(usr != null) {
+                mentions.push(usr);
+              }
+            }
           }
         }
       }
