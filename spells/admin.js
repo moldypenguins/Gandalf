@@ -94,21 +94,16 @@ let Admin_addgalmate = (args, ctx) => {
       let tguser = args[0];
       if (!tguser) { reject(Admin_addgalmate_usage); }
 
-
-      let user = await getStream(`tg://resolve?domain=${tguser.replace('@','')}`);
-
-      console.log('TGUSER: ' + util.inspect(user, false, null, true));
-
-      let mentions = [];await ctx.mentions.get(ctx.message);
+      let mentions = await ctx.mentions.get(ctx.message);
       //console.log('MENTIONS: ' + util.inspect(mentions, false, null, true));
-      //if(mentions.length <= 0) { reject(Admin_addgalmate_usage); }
+      if(mentions.length <= 0) { reject('No users found.'); }
 
       //let messages = ctx.telegram.getChat(ctx.message.chat.id);
       //console.log('Participants: ' + util.inspect(messages, false, null, true));
-      let mention = mentions[0];
+      let mention = mentions[0] || null;
 
       console.log('MENTION: ' + util.inspect(mention, false, null, true));
-      console.log('ERROR: ' + util.inspect(error, false, null, true));
+
       reject('This does not work yet');
 
       if(!await GalMate.exists({id:mention.id})) {
