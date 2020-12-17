@@ -73,17 +73,34 @@ db.connection.once("open", () => {
   });
 
   bot.context.mentions = {
-    get: async (message) => {
-      console.log('MESSAGE:' + util.inspect(message, false, null, true));
+    getUsers: async (message) => {
       let mentions = [];
       if(message.entities !== undefined) {
         for (let i = 0; i < message.entities.filter(e => e.type === 'mention').length; i++) {
           let text = message.text.substr(message.entities[i].offset, message.entities[i].length);
-          //console.log('MENTION:' + util.inspect(text, false, null, true));
           let usr = await User.findOne({username: text.replace('@', '')});
-          //console.log('User:' + util.inspect(mem, false, null, true));
           if(usr != null) {
             mentions.push(usr);
+          }
+        }
+      }
+      return mentions;
+    },
+    getMembers: async (message) => {
+      let mentions = [];
+      if(message.entities !== undefined) {
+        for (let i = 0; i < message.entities.filter(e => e.type === 'mention').length; i++) {
+          let text = message.text.substr(message.entities[i].offset, message.entities[i].length);
+          let mbr = await Member.findOne({username: text.replace('@', '')});
+          if(mbr != null) {
+            mentions.push(mbr);
+          }
+        }
+        for (let i = 0; i < message.entities.filter(e => e.type === 'text_mention').length; i++) {
+          console.log('TEXT_MENTION_USER:' + util.inspect(message.entities[i].user, false, null, true));
+          let mbr = await Member.findOne({username: message.entities[i].user.username});
+          if(mbr != null) {
+            mentions.push(mbr);
           }
         }
       }
