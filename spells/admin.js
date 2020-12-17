@@ -93,7 +93,7 @@ let Admin_addgalmate = (args) => {
       if (!tguser) { reject(Admin_addgalmate_usage); }
 
       if(!await GalMate.exists({id:tguser.id})) {
-        console.log('RESULT:' + util.inspect(tguser, false, null, true));
+        console.log('TGUSER:' + util.inspect(tguser, false, null, true));
         let galm8 = new GalMate({id:tguser.id,first_name:tguser.first_name,last_name:tguser.last_name,username:tguser.username});
         let saved = await galm8.save();
         if(saved != null) {
