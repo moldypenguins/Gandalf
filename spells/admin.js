@@ -95,7 +95,7 @@ let Admin_addgalmate = (args, ctx) => {
       if (!tguser) { reject(Admin_addgalmate_usage); }
 
 
-      let user = await getStream(`https://t.me/${tguser.replace('@','')}`);
+      let user = await getStream(`tg://resolve?domain=${tguser.replace('@','')}`);
 
       console.log('TGUSER: ' + util.inspect(user, false, null, true));
 
