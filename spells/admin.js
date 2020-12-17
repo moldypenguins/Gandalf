@@ -91,7 +91,7 @@ let Admin_addgalmate = (args, ctx) => {
     if (args.length > 0) {
       let tguser = args[0];
 
-      console.log('MENTIONS: ' + util.inspect(ctx.mentions.get(), false, null, true));
+      console.log('MENTIONS: ' + util.inspect(ctx.mentions.get(ctx.message.text), false, null, true));
 
       if (!tguser || !ctx.mentions.length > 0) { reject(Admin_addgalmate_usage); }
 
