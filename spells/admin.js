@@ -96,18 +96,25 @@ let Admin_addgalmate = (args, ctx) => {
 
       let mentions = await ctx.mentions.get(ctx.message);
       //console.log('MENTIONS: ' + util.inspect(mentions, false, null, true));
-      if(mentions.length <= 0) { reject(`User ${tguser} not found.`); }
-
-      if(!await GalMate.exists({id:mentions[0].id})) {
-        let galm8 = new GalMate({id:mentions[0].id,first_name:mentions[0].first_name,last_name:mentions[0].last_name,username:mentions[0].username});
-        let saved = await galm8.save();
-        if(saved != null) {
-          resolve(`GalMate added`);
-        } else {
-          reject(`Unable to add GalMate`);
-        }
+      if(mentions.length <= 0) { 
+        reject(`User ${tguser} not found.`);
       } else {
-        reject(`GalMate already exists`);
+        if (!await GalMate.exists({id: mentions[0].id})) {
+          let galm8 = new GalMate({
+            id: mentions[0].id,
+            first_name: mentions[0].first_name,
+            last_name: mentions[0].last_name,
+            username: mentions[0].username
+          });
+          let saved = await galm8.save();
+          if (saved != null) {
+            resolve(`GalMate added`);
+          } else {
+            reject(`Unable to add GalMate`);
+          }
+        } else {
+          reject(`GalMate already exists`);
+        }
       }
     } else {
       reject(Admin_addgalmate_usage);
