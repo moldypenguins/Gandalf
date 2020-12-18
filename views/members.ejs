@@ -57,10 +57,7 @@
                                     <% if(member.isADM || (member.isHC && !members[i].isADM && !members[i].isHC)) { %>
                                         <form method="POST" action="/mem/<%= members[i].id %>">
                                             <div class="btn-group btn-group-sm">
-                                                <button type="button" class="btn btn-secondary"><%= members[i].accessRoles %></button>
-                                                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference_<%= members[i].id %>" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
-                                                    <span class="visually-hidden">Toggle Dropdown</span>
-                                                </button>
+                                                <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuReference_<%= members[i].id %>" data-bs-toggle="dropdown" aria-expanded="false"><%= members[i].accessRoles %></button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuReference_<%= members[i].id %>">
                                                     <div><label><input name="access" type="radio" value="0"<% if(members[i].access == 0) { %> checked="checked"<% } %> />Recruit</label></div>
                                                     <div><label><input name="access" type="radio" value="1"<% if(members[i].access == 1) { %> checked="checked"<% } %> />Member</label></div>
