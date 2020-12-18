@@ -56,7 +56,7 @@
                                 <td class="pr-3">
                                     <% if(member.isADM || (member.isHC && !members[i].isADM && !members[i].isHC)) { %>
                                         <form method="POST" action="/mem/<%= members[i].id %>">
-                                            <div class="btn-group btn-group-sm dropdown">
+                                            <div class="btn-group btn-group-sm">
                                                 <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuReference_<%= members[i].id %>" data-bs-toggle="dropdown" aria-expanded="false"><%= members[i].accessRoles %></button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuReference_<%= members[i].id %>">
                                                     <li><label><input name="access" type="radio" value="0"<% if(members[i].access == 0) { %> checked="checked"<% } %> />Recruit</label></li>
@@ -70,8 +70,8 @@
                                                     <li><label><input name="role8" type="checkbox" value="8"<% if((members[i].roles & 8) != 0) { %> checked="checked"<% } %> />Defence Commander</label></li>
                                                     <li><label><input name="role16" type="checkbox" value="16"<% if((members[i].roles & 16) != 0) { %> checked="checked"<% } %> />High Commander</label></li>
                                                 </ul>
-                                                <button type="submit" id="submitaccess<%= members[i].id %>>" name="submitaccess" class="btn btn-primary"><i class="fas fa-save" aria-hidden="true"></i></button>
                                             </div>
+                                            <button type="submit" id="submitaccess<%= members[i].id %>>" name="submitaccess" class="btn btn-primary"><i class="fas fa-save" aria-hidden="true"></i></button>
                                         </form>
                                     <% } else { %>
                                         <%= members[i].accessRoles %>
