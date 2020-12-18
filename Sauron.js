@@ -190,7 +190,7 @@ db.connection.once("open", () => {
       res.locals.message = err.message;
       res.locals.error = req.app.get('env') === 'development' ? err : {};
       res.status(err.status || 500);
-      res.render('error', {site_title: config.alliance.name, page_title: 'Error'});
+      res.render('error', {alliance_name: config.alliance.name, site_title: config.alliance.name, page_title: 'Error'});
     }
   });
   //start listening
