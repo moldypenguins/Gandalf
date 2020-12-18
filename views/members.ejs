@@ -62,97 +62,16 @@
                                                     <span class="visually-hidden">Toggle Dropdown</span>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuReference_<%= members[i].id %>">
-                                                    <div>
-                                                        <label>
-                                                            <input name="access" type="radio" value="0"
-                                                            <% if(members[i].access == 0) { %>
-                                                                   checked="checked"
-                                                                    <% } %>
-                                                            />
-                                                            Recruit
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label>
-                                                            <input name="access" type="radio" value="1"
-                                                            <% if(members[i].access == 1) { %>
-                                                                   checked="checked"
-                                                                    <% } %>
-                                                            />
-                                                            Member
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label>
-                                                            <input name="access" type="radio" value="3"
-                                                            <% if(members[i].access == 3) { %>
-                                                                   checked="checked"
-                                                                    <% } %>
-                                                            />
-                                                            Commander
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label>
-                                                            <input name="access" type="radio" value="5"
-                                                            <% if(members[i].access == 5) { %>
-                                                                   checked="checked"
-                                                                    <% } %>
-                                                            />
-                                                            Admin
-                                                        </label>
-                                                    </div>
-                                                    <div role="separator" class="dropdown-divider"></div>
-                                                    <div>
-                                                        <label>
-                                                            <input name="role1" type="checkbox" value="1"
-                                                            <% if((members[i].roles & 1) != 0) { %>
-                                                                   checked="checked"
-                                                                    <% } %>
-                                                            />
-                                                            OOT
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label>
-                                                            <input name="role2" type="checkbox" value="2"
-                                                            <% if((members[i].roles & 2) != 0) { %>
-                                                                   checked="checked"
-                                                                    <% } %>
-                                                            />
-                                                            Scanner
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label>
-                                                            <input name="role4" type="checkbox" value="4"
-                                                            <% if((members[i].roles & 4) != 0) { %>
-                                                                   checked="checked"
-                                                                    <% } %>
-                                                            />
-                                                            Battle Commander
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label>
-                                                            <input name="role8" type="checkbox" value="8"
-                                                            <% if((members[i].roles & 8) != 0) { %>
-                                                                   checked="checked"
-                                                                    <% } %>
-                                                            />
-                                                            Defence Commander
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label>
-                                                            <input name="role16" type="checkbox" value="16"
-                                                            <% if((members[i].roles & 16) != 0) { %>
-                                                                   checked="checked"
-                                                                    <% } %>
-                                                            />
-                                                            High Commander
-                                                        </label>
-                                                    </div>
+                                                    <div><label><input name="access" type="radio" value="0"<% if(members[i].access == 0) { %> checked="checked"<% } %> />Recruit</label></div>
+                                                    <div><label><input name="access" type="radio" value="1"<% if(members[i].access == 1) { %> checked="checked"<% } %> />Member</label></div>
+                                                    <div><label><input name="access" type="radio" value="3"<% if(members[i].access == 3) { %> checked="checked"<% } %> />Commander</label></div>
+                                                    <div><label><input name="access" type="radio" value="5"<% if(members[i].access == 5) { %> checked="checked"<% } %> />Admin</label></div>
+                                                    <div class="dropdown-divider"></div>
+                                                    <div><label><input name="role1" type="checkbox" value="1"<% if((members[i].roles & 1) != 0) { %> checked="checked"<% } %> />OOT</label></div>
+                                                    <div><label><input name="role2" type="checkbox" value="2"<% if((members[i].roles & 2) != 0) { %> checked="checked"<% } %> />Scanner</label></div>
+                                                    <div><label><input name="role4" type="checkbox" value="4"<% if((members[i].roles & 4) != 0) { %> checked="checked"<% } %> />Battle Commander</label></div>
+                                                    <div><label><input name="role8" type="checkbox" value="8"<% if((members[i].roles & 8) != 0) { %> checked="checked"<% } %> />Defence Commander</label></div>
+                                                    <div><label><input name="role16" type="checkbox" value="16"<% if((members[i].roles & 16) != 0) { %> checked="checked"<% } %> />High Commander</label></div>
                                                 </div>
                                                 <button type="submit" id="submitaccess<%= members[i].id %>>" name="submitaccess" class="btn btn-primary"><i class="fas fa-save" aria-hidden="true"></i></button>
                                             </div>
