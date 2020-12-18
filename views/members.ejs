@@ -56,9 +56,8 @@
                                 <td class="pr-3">
                                     <% if(member.isADM || (member.isHC && !members[i].isADM && !members[i].isHC)) { %>
                                         <form method="POST" action="/mem/<%= members[i].id %>">
-
                                             <div class="btn-group btn-group-sm">
-                                                <button type="button" class="btn btn-secondary">Reference</button>
+                                                <button type="button" class="btn btn-secondary"><%= members[i].accessRoles %></button>
                                                 <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference_<%= members[i].id %>" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
                                                     <span class="visually-hidden">Toggle Dropdown</span>
                                                 </button>
