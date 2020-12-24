@@ -20,10 +20,14 @@
     "npm": "^6.14.9"
   },
   "scripts": {
+    "start-server": "npm run setup && npm run screen-ticker && npm run screen-bot && npm run screen-webby",
     "setup": "nodejs Bilbo.js",
     "ticker": "nodejs Frodo.js",
+    "screen-ticker": "screen -Sdm frodo npm run ticker",
     "bot": "nodejs Gandalf.js",
+    "screen-bot": "screen -Sdm gandalf npm run bot",
     "webby": "nodejs Sauron.js",
+    "screen-webby": "screen -Sdm sauron npm run webby",
     "setup-localhost": "npm run generate-local-certs && npm run setup-hosts-file && npm run start-localhost",
     "start-localhost": "npm run setup && npm run webby",
     "generate-local-certs": "npm run generate-certs && npm run load-certs",
