@@ -74,7 +74,6 @@
 [![telegraf.js](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/telegraf?style=for-the-badge&logo=NPM&color=E74625)](https://www.npmjs.com/package/telegraf)
 [![twilio](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/twilio?style=for-the-badge&logo=NPM&color=f22f46)](https://www.npmjs.com/package/twilio)
 [![url](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/url?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/url)
-[![xml2js](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/xml2js?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/xml2js)
 
 
 ## Installation

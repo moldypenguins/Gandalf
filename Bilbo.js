@@ -60,7 +60,7 @@ async function load_ships(ships) {
 async function load_ticks() {
   let ticks = await Tick.find();
   if (!ticks || ticks.length == 0) {
-    Tick.insertMany([{id:0}]);
+    await Tick.insertMany([{id: 0}]);
     console.log("Added first tick!");
   } else {
     console.log("First tick already exists!")
@@ -70,7 +70,7 @@ async function load_ticks() {
 async function setup_admins() {
   let admin = await Member.find({id: config.admin.id})
   if (!admin || admin.length == 0) {
-    if (new Member({id: config.admin.id, access: 5, active: true}).save()) {
+    if (await new Member({id: config.admin.id, access: 5, active: true}).save()) {
       console.log(`${config.admin.username} saved to Members collection!`);
     } else {
       console.log(`Could not add admin to Members collection!!`)
