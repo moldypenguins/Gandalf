@@ -81,7 +81,7 @@ See [INSTALL.md](INSTALL.md) for setup guide.
 
 
 ## Issues / Support
-See [SECURITY.md](SECURITY.md) for feature requests or bug reports
+See [SECURITY.md](SECURITY.md) for feature requests or bug reports  
 Join [Gandalf Support](https://t.me/joinchat/HPVnlgHnFUShtg_D) on Telegram
 
 ## Contributing
