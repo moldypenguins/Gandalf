@@ -9,16 +9,10 @@ const util = require('util');
 const fs = require('fs');
 const csrf = require('csurf')
 
-const csrfProtection = csrf({ cookie: true });
 
-//router.get('/', csrfProtection, async (req, res, next) => {
 router.get('/', async (req, res, next) => {
-  fs.access('views/content/dashboard.html', fs.constants.F_OK, (err) => {
-    //res.render('dashboard', { csrfToken: req.csrfToken(), content_exists: err ? false : true });
-    res.render('dashboard', { content_exists: !err });
-  });
+  res.render('battlegroups', { });
 });
-
 
 
 module.exports = router;

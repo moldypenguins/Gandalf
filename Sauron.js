@@ -55,8 +55,12 @@ let corsOptions = {
 
 const uptimeRoute = require('./routes/uptime');
 const authorizeRoute = require('./routes/authorize');
+const logoutRoute = require('./routes/logout');
 const registerRoute = require('./routes/register');
-const theoneringRoute = require('./routes/theonering');
+const dashboardRoute = require('./routes/dashboard');
+const battlegroupsRoute = require('./routes/battlegroups');
+const covertoperationsRoute = require('./routes/covertoperations');
+const profileRoute = require('./routes/profile');
 const strategyRoute = require('./routes/strategy');
 const membersRoute = require('./routes/members');
 const scansRoute = require('./routes/scans');
@@ -170,11 +174,14 @@ db.connection.once("open", () => {
   //csrf routes
   app.use('/auth', authorizeRoute);
   app.use('/reg', registerRoute);
-  app.use('/', loginRequired, theoneringRoute);
+  app.use('/', loginRequired, dashboardRoute);
+  app.use('/logout', loginRequired, logoutRoute);
+  app.use('/profile', loginRequired, profileRoute);
+  app.use('/bgs', loginRequired, battlegroupsRoute);
+  app.use('/covops', loginRequired, covertoperationsRoute);
   app.use('/uni', loginRequired, universeRoute);
   app.use('/strat', loginRequired, strategyRoute);
   app.use('/mem', loginRequired, membersRoute);
-  // app.options('/scans', cors(corsOptions));
   app.use('/scans', loginRequired, cors(corsOptions), scansRoute);
   app.use('/att', loginRequired, attacksRoute);
   //errors
