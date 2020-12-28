@@ -121,7 +121,7 @@ db.connection.once("open", () => {
   });
   //add session objects to locals
   app.use(async (req, res, next) => {
-    res.locals.site_theme = await Theme.findOne(t => t.name.toLowerCase() === config.web.default_theme.toLowerCase()).exec();
+    res.locals.site_theme = await Theme.findOne({key: config.web.default_theme.toLowerCase()});
     res.locals.site_url = config.web.uri;
     res.locals.alliance_name = config.alliance.name;
     res.locals.bot_name = config.bot.username;
@@ -136,7 +136,7 @@ db.connection.once("open", () => {
     //console.log('MEMBER: ' + util.inspect(req.session.member, false, null, true));
     if (typeof (req.session) !== 'undefined' && typeof (req.session.member) !== 'undefined' && req.session.member != null) {
       if (req.session.member.site_theme) {
-        res.locals.site_theme = await Theme.findOne(t => t.name.toLowerCase() === req.session.member.site_theme.toLowerCase());
+        res.locals.site_theme = await Theme.findOne({key: req.session.member.site_theme.toLowerCase()});
       }
       res.locals.member.isADM = req.session.member.access === 5;
       res.locals.member.isHC = req.session.member.access >= 3 && (req.session.member.roles & 16) !== 0;
