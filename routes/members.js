@@ -155,7 +155,7 @@ router.get('/:id', access.webHighCommandRequired, async (req, res, next) => {
       mem.planet = await Planet.findOne({id:mem.planet_id});
     }
     //console.log('PLANET: ' + util.inspect(plnt, false, null, true));
-    res.render('profile', { site_title: config.alliance.name, page_title: 'Edit Member', page: 'member', post_action: '/members/' + mem.id, profile: mem });
+    res.render('profile', { site_title: config.alliance.name, page_title: 'Edit Member', page: 'member', post_action: '/mem/' + mem.id, profile: mem });
   } else {
     next(createError(400));
   }
