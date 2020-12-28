@@ -26,20 +26,21 @@ const getStream = bent('string');
 const Ship = require('./models/ship.js');
 const Member = require('./models/member.js');
 const Tick = require('./models/tick.js');
+const Theme = require('./models/theme.js');
 const xmlParser = require('xml2json');
 
-db.connection.once("open", setup);
-
-async function setup() {
-  const stream = await getStream(config.pa.dumps.ship_stats);
-  const json = JSON.parse(xmlParser.toJson(stream));
+db.connection.once("open", async() => {
+  let stream = await getStream(config.pa.dumps.ship_stats);
+  let json = JSON.parse(xmlParser.toJson(stream));
   await load_ships(json["stats"]["ship"]); // {"stats": { "ship": [ ... ]}}
   await load_ticks();
   await setup_admins();
+  await setup_themes();
   process.exit(0);
-}
+});
 
-async function load_ships(ships) {
+
+let load_ships = async(ships) => {
   // remove all the ships first
   await Ship.deleteMany({});
 
@@ -55,9 +56,9 @@ async function load_ships(ships) {
       console.error(`${json_ship["name"]} could not be saved!`)
     }
   }
-}
+};
 
-async function load_ticks() {
+let load_ticks = async() => {
   let ticks = await Tick.find();
   if (!ticks || ticks.length == 0) {
     await Tick.insertMany([{id: 0}]);
@@ -65,9 +66,9 @@ async function load_ticks() {
   } else {
     console.log("First tick already exists!")
   }
-}
+};
 
-async function setup_admins() {
+let setup_admins = async() => {
   let admin = await Member.find({id: config.admin.id})
   if (!admin || admin.length == 0) {
     if (await new Member({id: config.admin.id, access: 5, active: true}).save()) {
@@ -78,4 +79,11 @@ async function setup_admins() {
   } else {
     console.log(`${config.admin.username} already exists.`);
   }
-}
+};
+
+let setup_themes = async() => {
+  let light_theme = new Theme({name:'Light', navbar: 'light', file:'theme-light.css'});
+  await light_theme.save();
+  let dark_theme = new Theme({name:'Dark', navbar: 'dark', file:'theme-dark.css'});
+  await dark_theme.save();
+};
