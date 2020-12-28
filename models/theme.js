@@ -18,7 +18,7 @@
 const Mordor = require('../db.js');
 
 let themeSchema = Mordor.Schema({
-  name: {type:Number, unique:true, required:true},
+  name: {type:String, unique:true, required:true},
   navbar: {type:String, required:true, default:'light'},
   file: {type:String, required:true, default:'theme-name.css'},
   active: {type:Boolean, default:true}
