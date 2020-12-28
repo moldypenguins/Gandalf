@@ -1,0 +1,12 @@
+footer {
+  background: $col-secondary;
+  color: white;
+
+  a {
+	color: white !important;
+
+	&:hover {
+	  text-decoration: underline;
+	}
+  }
+}

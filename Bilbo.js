@@ -82,8 +82,10 @@ let setup_admins = async() => {
 };
 
 let setup_themes = async() => {
-  let light_theme = new Theme({name:'Light', navbar: 'light'});
-  await light_theme.save();
-  let dark_theme = new Theme({name:'Dark', navbar: 'dark'});
-  await dark_theme.save();
+  let default_theme = new Theme({name:'Default', navbar: 'light'});
+  await default_theme.save();
+  let ultimate_theme = new Theme({name:'Ultimate', navbar: 'dark'});
+  await ultimate_theme.save();
+  let telegram_theme = new Theme({name:'Telegram', navbar: 'dark'});
+  await telegram_theme.save();
 };

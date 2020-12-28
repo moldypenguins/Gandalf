@@ -5,22 +5,22 @@
 @import "lib/variables";
 
 // general stuff
-@import "components/all/global";
+@import "components/default/global";
 
 body {
-  @import "components/all/typography-links";
-  @import "components/all/buttons";
-  @import "components/all/forms-inputs";
-  @import "components/all/tables";
+  @import "components/default/typography-links";
+  @import "components/default/buttons";
+  @import "components/default/forms-inputs";
+  @import "components/default/tables";
 
   // components
-  @import "components/all/header-navigation";
-  @import "components/all/telegram";
-  @import "components/all/footer";
+  @import "components/default/header-navigation";
+  @import "components/default/telegram";
+  @import "components/default/footer";
 
   // page specific
-  @import "components/all/page-specific/strategy";
-  @import "components/all/page-specific/members";
-  @import "components/all/page-specific/attacks";
-  @import "components/all/page-specific/profile";
+  @import "components/default/page-specific/strategy";
+  @import "components/default/page-specific/members";
+  @import "components/default/page-specific/attacks";
+  @import "components/default/page-specific/profile";
 }
