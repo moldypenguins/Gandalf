@@ -185,10 +185,10 @@ db.connection.once("open", () => {
   app.use('/scans', loginRequired, cors(corsOptions), scansRoute);
   app.use('/att', loginRequired, attacksRoute);
   //errors
-  app.use((req, res, next) => {
+  app.use(async(req, res, next) => {
     next(createError(404));
   });
-  app.use((err, req, res, next) => {
+  app.use(async(err, req, res, next) => {
     //csrf
     if (err.code === 'EBADCSRFTOKEN') {
       res.status(403);
@@ -197,7 +197,7 @@ db.connection.once("open", () => {
       res.locals.message = err.message;
       res.locals.error = req.app.get('env') === 'development' ? err : {};
       res.status(err.status || 500);
-      res.render('error', {alliance_name: config.alliance.name, site_title: config.alliance.name, page_title: 'Error'});
+      res.render('error', {alliance_name: config.alliance.name, site_title: config.alliance.name, page_title: 'Error', site_theme: await Theme.findOne({key: config.web.default_theme.toLowerCase()})});
     }
   });
   //start listening
