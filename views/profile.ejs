@@ -63,7 +63,7 @@
                                         <div class="input-group-prepend">
                                             <span id="label-phone" class="input-group-text">Phone</span>
                                         </div>
-                                        <input type="text" name="phone" id="phone" class="form-control" value="<%= profile.phone %>"/>
+                                        <input type="tel" name="phone" id="phone" class="form-control" value="<%= profile.phone %>"/>
                                     </div>
                                 </td>
                             </tr>
@@ -73,7 +73,7 @@
                                         <div class="input-group-prepend">
                                             <span id="label-email" class="input-group-text">E-Mail</span>
                                         </div>
-                                        <input type="text" name="email" id="email" class="form-control" value="<%= profile.email %>"/>
+                                        <input type="email" name="email" id="email" class="form-control" value="<%= profile.email %>"/>
                                     </div>
                                 </td>
                             </tr>
@@ -83,9 +83,9 @@
                                         <div class="input-group-prepend">
                                             <span id="label-planet" class="input-group-text">Planet</span>
                                         </div>
-                                        <input type="text" name="planet_x" id="planet_x" class="form-control" placeholder="X" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.x %><% } %>"/>
-                                        <input type="text" name="planet_y" id="planet_y" class="form-control" placeholder="Y" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.y %><% } %>"/>
-                                        <input type="text" name="planet_z" id="planet_z" class="form-control" placeholder="Z" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.z %><% } %>"/>
+                                        <input type="number" name="planet_x" id="planet_x" class="form-control" placeholder="X" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.x %><% } %>"/>
+                                        <input type="number" name="planet_y" id="planet_y" class="form-control" placeholder="Y" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.y %><% } %>"/>
+                                        <input type="number" name="planet_z" id="planet_z" class="form-control" placeholder="Z" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.z %><% } %>"/>
                                     </div>
                                 </td>
                             </tr>
