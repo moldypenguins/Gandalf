@@ -121,7 +121,7 @@ db.connection.once("open", () => {
   });
   //add session objects to locals
   app.use(async (req, res, next) => {
-    res.locals.site_theme = await Theme.findOne(t => t.name.toLowerCase() === config.web.default_theme.toLowerCase());
+    res.locals.site_theme = await Theme.findOne(t => t.name.toLowerCase() === config.web.default_theme.toLowerCase()).exec();
     res.locals.site_url = config.web.uri;
     res.locals.alliance_name = config.alliance.name;
     res.locals.bot_name = config.bot.username;
