@@ -82,8 +82,8 @@ let setup_admins = async() => {
 };
 
 let setup_themes = async() => {
-  let light_theme = new Theme({name:'Light', navbar: 'light', file:'theme-light.css'});
+  let light_theme = new Theme({name:'Light', navbar: 'light'});
   await light_theme.save();
-  let dark_theme = new Theme({name:'Dark', navbar: 'dark', file:'theme-dark.css'});
+  let dark_theme = new Theme({name:'Dark', navbar: 'dark'});
   await dark_theme.save();
 };
