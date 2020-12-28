@@ -51,8 +51,8 @@
                                     <a class="nav-link" href="/logout">Logout</a>
                                 </li>
                             </ul>
-                            <a class="navbar-profile" href="/profile"><img class="tg-pic" src="<% if(member.photo_url) { %><%= member.photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" alt=""/></a>
                         </div>
+                        <a class="navbar-profile" href="/profile"><img class="tg-pic" src="<% if(member.photo_url) { %><%= member.photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" alt=""/></a>
                     <% } %>
                 </div>
             </nav>
