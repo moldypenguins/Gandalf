@@ -14,7 +14,7 @@ var memberSchema = mongoose.Schema({
   sponsor:     {type:String},
   planet_id:   {type:String},
   last_access: {type:Date},
-  site_theme:  {type:String, default:'light'},
+  site_theme:  {type:String, default:'default'},
   timezone:    {type:String}
 });
 
