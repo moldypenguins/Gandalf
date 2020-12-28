@@ -29,11 +29,17 @@ nav {
   .navbar-profile {
     display: inline-block;
     vertical-align: top;
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     position: absolute;
     top: .75rem;
     right: 1rem;
+
+    img {
+      height: 40px;
+      width: 40px;
+      border-radius: 20px;
+    }
   }
 
   .navbar-nav {
