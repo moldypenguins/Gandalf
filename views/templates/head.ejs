@@ -12,5 +12,5 @@
     <link rel="stylesheet" href="/styles/bootstrap-table.min.css" />
     <link rel="stylesheet" href="/styles/fontawesome.min.css" />
     <link rel="stylesheet" href="/styles/style.css" />
-    <link rel="stylesheet" href="/styles/theme-<%= site_theme %>.css" />
+    <% if(site_theme !== "default") { %><link rel="stylesheet" href="/styles/theme-<%= site_theme %>.css" /><% } %>
     <link rel="stylesheet" href="/styles/style-custom.css" />
