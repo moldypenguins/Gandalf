@@ -1,3 +1,25 @@
+
+.iti__flag {
+  background-image: url("../flags/flags.png");
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag { background-image: url("../flags/flags@2x.png"); }
+}
+.iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
+  background-color: #343a400d;
+}
+.iti__selected-flag:focus {
+  outline: none;
+  background-color: #343a4033 !important;
+}
+.iti input, .iti input[type=tel], .iti input[type=text] {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  font-size: .8rem;
+  line-height: 1rem;
+}
+
+
 /*# FORM ELEMENTS ################################################################################*/
 .form-label {
   position: relative;
@@ -151,3 +173,4 @@ textarea {
     }
   }
 }
+
