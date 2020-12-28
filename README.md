@@ -43,7 +43,6 @@
 [![cookie-parser](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/cookie-parser?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/cookie-parser)
 [![cors](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/cors?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/cors)
 [![csurf](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/csurf?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/csurf)
-[![debug](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/debug?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/debug)
 [![ejs](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/ejs?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/ejs)
 [![express](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/express?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/express)
 [![express-rate-limit](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/express-rate-limit?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/express-rate-limit)
