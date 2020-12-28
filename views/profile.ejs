@@ -41,7 +41,7 @@
                                             <span id="label-theme" class="input-group-text">Theme</span>
                                         </div>
                                         <select id="theme" class="form-control custom-select" name="theme">
-                                            <% for(var t = 0; t < themes.length; i++) { %>
+                                            <% for(var t = 0; t < themes.length; t++) { %>
                                             <option name="theme" value="<%= themes[t].key %>"<% if(profile.site_theme == themes[t].key) { %> selected="selected"<% } %>><%= themes[t].name %></option>
                                             <% } %>
                                         </select>
