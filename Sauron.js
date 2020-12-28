@@ -198,7 +198,7 @@ db.connection.once("open", () => {
       res.locals.error = req.app.get('env') === 'development' ? err : {};
       res.status(err.status || 500);
       let theme = await Theme.findOne({key: config.web.default_theme.toLowerCase()});
-      console.log('THEME: ' + util.inspect(theme, false, null, true));
+      //console.log('THEME: ' + util.inspect(theme, false, null, true));
       res.render('error', {alliance_name: config.alliance.name, site_title: config.alliance.name, page_title: 'Error', site_theme: theme});
     }
   });
