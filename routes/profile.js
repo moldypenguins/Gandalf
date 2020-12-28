@@ -3,6 +3,7 @@ const db = require('../db');
 const Member = require('../models/member');
 const Applicant = require('../models/applicant');
 const Planet = require('../models/planet');
+const Theme = require('../models/theme');
 const express = require('express');
 let router = express.Router();
 const util = require('util');
@@ -17,7 +18,7 @@ router.get('/', async (req, res, next) => {
   if(mem) {
     mem.planet = await Planet.findOne({id: req.session.member.planet_id});
   }
-  res.render('profile', { page: 'profile', post_action: '/profile', profile: req.session.member });
+  res.render('profile', { page: 'profile', post_action: '/profile', profile: req.session.member, themes: await Theme.find() });
 });
 
 router.post('/', async (req, res, next) => {

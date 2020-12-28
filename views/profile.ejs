@@ -41,8 +41,9 @@
                                             <span id="label-theme" class="input-group-text">Theme</span>
                                         </div>
                                         <select id="theme" class="custom-select" name="theme">
-                                            <option name="theme" value="light"<% if(profile.site_theme == "light") { %> selected="selected"<% } %>>Light</option>
-                                            <option name="theme" value="dark"<% if(profile.site_theme == "dark") { %> selected="selected"<% } %>>Dark</option>
+                                            <% for(var t = 0; t < themes.length; i++) { %>
+                                            <option name="theme" value="<%= themes[t].key %>"<% if(profile.site_theme == themes[t].key) { %> selected="selected"<% } %>><%= themes[t].name %></option>
+                                            <% } %>
                                         </select>
                                     </div>
                                 </td>

@@ -4,6 +4,7 @@ const Member = require('../models/member');
 const Inactive = require('../models/inactive');
 const Applicant = require('../models/applicant');
 const Planet = require('../models/planet');
+const Theme = require('../models/theme');
 const GalMate = require('../models/galmate');
 const createError = require('http-errors');
 const express = require('express');
@@ -155,7 +156,7 @@ router.get('/:id', access.webHighCommandRequired, async (req, res, next) => {
       mem.planet = await Planet.findOne({id:mem.planet_id});
     }
     //console.log('PLANET: ' + util.inspect(plnt, false, null, true));
-    res.render('profile', { site_title: config.alliance.name, page_title: 'Edit Member', page: 'member', post_action: '/mem/' + mem.id, profile: mem });
+    res.render('profile', { site_title: config.alliance.name, page_title: 'Edit Member', page: 'member', post_action: '/mem/' + mem.id, profile: mem, themes: await Theme.find() });
   } else {
     next(createError(400));
   }
