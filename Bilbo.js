@@ -32,9 +32,9 @@ const xmlParser = require('xml2json');
 db.connection.once("open", async() => {
   let stream = await getStream(config.pa.dumps.ship_stats);
   let json = JSON.parse(xmlParser.toJson(stream));
-  //await load_ships(json["stats"]["ship"]); // {"stats": { "ship": [ ... ]}}
-  //await load_ticks();
-  //await setup_admins();
+  await load_ships(json["stats"]["ship"]); // {"stats": { "ship": [ ... ]}}
+  await load_ticks();
+  await setup_admins();
   await setup_themes();
   process.exit(0);
 });
