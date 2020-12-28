@@ -20,7 +20,7 @@ router.get('/', access.webMemberRequired, async (req, res, next) => {
   let plnts = await Planet.find();
   let glm8s = await GalMate.find();
   mems.forEach((m) => {
-    if(m.planet_id != undefined && plnts.some(p => p.id == m.planet_id)) {
+    if(m.planet_id !== undefined && plnts.some(p => p.id == m.planet_id)) {
       m.planet = plnts.find(p => p.id == m.planet_id);
     }
     var rolesString = [];
@@ -60,7 +60,7 @@ router.get('/', access.webMemberRequired, async (req, res, next) => {
 
 router.post('/', access.webHighCommandRequired, async (req, res, next) => {
   console.log('BODY: ' + util.inspect(req.body, false, null, true));
-  if(req.body.deactivate != undefined) {
+  if(req.body.deactivate !== undefined) {
     Member.findOne({id: req.body.deactivate}).then((mbr) => {
       if(mbr) {
         let inatv = new Inactive({
@@ -94,7 +94,7 @@ router.post('/', access.webHighCommandRequired, async (req, res, next) => {
 
 router.post('/applicants', access.webHighCommandRequired, async (req, res, next) => {
   console.log(util.inspect(req.body, false, null, true));
-  if(req.body.accept != undefined) {
+  if(req.body.accept !== undefined) {
     Applicant.findOne({id: req.body.accept}).then((applcnt) => {
       console.log('applcnt: ' + applcnt);
       if(applcnt) {
@@ -120,7 +120,7 @@ router.post('/applicants', access.webHighCommandRequired, async (req, res, next)
         });
       }
     });
-  } else if(req.body.reject != undefined) {
+  } else if(req.body.reject !== undefined) {
     Applicant.findOne({id: req.body.reject}).then((applcnt) => {
       applcnt.rejected = true;
       applcnt.save(function (err, saved) {
@@ -139,9 +139,9 @@ router.post('/applicants', access.webHighCommandRequired, async (req, res, next)
 
 
 router.post('/inactives', access.webHighCommandRequired, async (req, res, next) => {
-  if(req.body.activate != undefined) {
+  if(req.body.activate !== undefined) {
     
-  } else if(req.body.remove != undefined) {
+  } else if(req.body.remove !== undefined) {
     
   }
 });
@@ -151,7 +151,7 @@ router.get('/:id', access.webHighCommandRequired, async (req, res, next) => {
   let mem = await Member.findOne({id:req.params.id});
   //console.log('PLANET: ' + util.inspect(mem, false, null, true));
   if(mem) {
-    if(mem.planet_id != undefined) {
+    if(mem.planet_id !== undefined) {
       mem.planet = await Planet.findOne({id:mem.planet_id});
     }
     //console.log('PLANET: ' + util.inspect(plnt, false, null, true));
@@ -163,24 +163,24 @@ router.get('/:id', access.webHighCommandRequired, async (req, res, next) => {
 
 
 router.post('/:id', access.webHighCommandRequired, async (req, res, next) => {
-  if(req.body != undefined) {
+  if(req.body !== undefined) {
     console.log('BODY: ' + util.inspect(req.body, false, null, true));
     let mem = await Member.findOne({id: req.params.id});
-    if(req.body.panick != undefined) { mem.panick = req.body.panick; }
-    if(req.body.active != undefined) { mem.active = req.body.active; }
-    if(req.body.access != undefined) { mem.access = req.body.access; }
-    if(req.body.role1 != undefined || req.body.role2 != undefined || req.body.role4 != undefined || req.body.role8 != undefined || req.body.role16 != undefined) { 
+    if(req.body.panick !== undefined) { mem.panick = req.body.panick; }
+    if(req.body.active !== undefined) { mem.active = req.body.active; }
+    if(req.body.access !== undefined) { mem.access = req.body.access; }
+    if(req.body.role1 !== undefined || req.body.role2 !== undefined || req.body.role4 !== undefined || req.body.role8 !== undefined || req.body.role16 !== undefined) {
       mem.roles = 
-        (req.body.role1 != undefined ? 1 : 0) + 
-        (req.body.role2 != undefined ? 2 : 0) + 
-        (req.body.role4 != undefined ? 4 : 0) + 
-        (req.body.role8 != undefined ? 8 : 0) + 
-        (req.body.role16 != undefined ? 16 : 0); 
+        (req.body.role1 !== undefined ? 1 : 0) +
+        (req.body.role2 !== undefined ? 2 : 0) +
+        (req.body.role4 !== undefined ? 4 : 0) +
+        (req.body.role8 !== undefined ? 8 : 0) +
+        (req.body.role16 !== undefined ? 16 : 0);
       console.log('ROLES: ' + util.inspect(mem.roles, false, null, true));
     }
-    if(req.body.phone != undefined) { mem.phone = req.body.phone; }
-    if(req.body.email != undefined) { mem.email = req.body.email; }
-    if(req.body.planet_x != undefined && req.body.planet_y != undefined && req.body.planet_z != undefined) {
+    if(req.body.full_phone !== undefined) { mem.phone = req.body.full_phone; }
+    if(req.body.email !== undefined) { mem.email = req.body.email; }
+    if(req.body.planet_x !== undefined && req.body.planet_y !== undefined && req.body.planet_z !== undefined) {
       plnt = await Planet.findOne({x: req.body.planet_x, y: req.body.planet_y, z: req.body.planet_z});
       mem.planet_id = plnt ? plnt.id : null;
     }
@@ -194,7 +194,7 @@ router.post('/:id', access.webHighCommandRequired, async (req, res, next) => {
 
 
 router.post('/galmate/:id', access.webAdminRequired, async (req, res, next) => {
-  if(req.body != undefined && req.body.delete != undefined) {
+  if(req.body !== undefined && req.body.delete !== undefined) {
     let gm = await GalMate.deleteOne({id: req.params.id});
     console.log(req.params.id + " deleted.");
     res.redirect('/mem');
