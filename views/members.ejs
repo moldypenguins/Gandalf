@@ -97,7 +97,9 @@
                                 <td class="btn-col">
                                     <% if(members[i].phone && member.isADM) { %>
                                         <form name="callMember" method='POST' action="/mem/call/<%= members[i].id %>">
-                                            <button type="submit" name="submitcall" value="<%= members[i].phone %>" class="btn btn-info btn-sm mx-2"><i class="fas fa-phone" aria-hidden="true"></i></button>
+                                            <div class="btn-group btn-group-sm position-static" role="group">
+                                                <button type="submit" name="submitcall" value="<%= members[i].phone %>" class="btn btn-info"><i class="fas fa-phone" aria-hidden="true"></i></button>
+                                            </div>
                                         </form>
                                     <% } %>
                                 </td>
