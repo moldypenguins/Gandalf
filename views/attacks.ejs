@@ -230,9 +230,9 @@
                                         <td>
                                             <form method="POST" action="/att/<%= attack.hash %>">
                                                 <input type="hidden" name="target" value="<%= trg.id %>"/>
-                                                <button class="btn btn-sm btn-danger" type="submit" name="drop" value="<%= myClms[i].wave %>">
-                                                    <i class="fas fa-plane-slash" aria-hidden="true"></i>
-                                                </button>
+                                                <div class="btn-group btn-group-sm position-static" role="group">
+                                                    <button class="btn btn-danger" type="submit" name="drop" value="<%= myClms[i].wave %>"><i class="fas fa-plane-slash" aria-hidden="true"></i></button>
+                                                </div>
                                             </form>
                                         </td>
                                     </tr>
