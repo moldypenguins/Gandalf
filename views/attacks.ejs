@@ -118,9 +118,7 @@
                                         </td>
                                         <td class="no-wrap">
                                             <% if(typeof (trg.scans) != "undefined" && typeof (trg.scans.p) != "undefined" && typeof (trg.scans.p.scan) != "undefined") { %>
-                                                <%= numeral(trg.scans.p.scan.res_metal + trg.scans.p.scan.res_crystal + trg.scans.p.scan.res_eonium).format("0,0") %>
-                                                <strong> / </strong>
-                                                <%= numeral(trg.scans.p.scan.prod_res + trg.scans.p.scan.ships_sold_res).format("0,0") %>
+                                                <%= numeral(trg.scans.p.scan.res_metal + trg.scans.p.scan.res_crystal + trg.scans.p.scan.res_eonium).format("0,0") %><strong> / </strong><%= numeral(trg.scans.p.scan.prod_res + trg.scans.p.scan.ships_sold_res).format("0,0") %>
                                             <% } %>
                                         </td>
                                         <td class="sd no-sort">
@@ -370,11 +368,9 @@
                                     </td>
                                     <td class="no-sort">
                                         <div class="btn-group btn-group-sm position-static" role="group" aria-label="Ships">
-                                            <button class="btn btn-info dropdown-toggle" id="ships<%= targets[i].id %>" type="button" data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-rocket" aria-hidden="true"></i>
-                                            </button>
+                                            <button class="btn btn-info dropdown-toggle" id="target_ships<%= targets[i].id %>" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-rocket" aria-hidden="true"></i></button>
                                             <% if(typeof (targets[i].scans) != "undefined" && typeof (targets[i].scans.a) != "undefined" && targets[i].scans.a != null && typeof (targets[i].scans.a.scan) != "undefined" && targets[i].scans.a.scan != null) { %>
-                                                <div class="dropdown-menu" aria-labelledby="bcalc<%= targets[i].id %>">
+                                                <div class="dropdown-menu" aria-labelledby="target_bcalc<%= targets[i].id %>">
                                                     <% for(var j = 0; j < targets[i].scans.a.scan.length; j++) { %>
                                                         <% if(typeof (targets[i].scans.a.scan[j].ship) != "undefined" && targets[i].scans.a.scan[j].ship != null) { %>
                                                             <div class="dropdown-item"><%= targets[i].scans.a.scan[j].amount %> <%= targets[i].scans.a.scan[j].ship.name %></div>
@@ -386,9 +382,7 @@
                                     </td>
                                     <td class="no-wrap no-sort">
                                         <% if(typeof (targets[i].scans) != "undefined" && typeof (targets[i].scans.p) != "undefined" && targets[i].scans.p != null && typeof (targets[i].scans.p.scan) != "undefined" && targets[i].scans.p.scan != null) { %>
-                                            <%= numeral(targets[i].scans.p.scan.res_metal + targets[i].scans.p.scan.res_crystal + targets[i].scans.p.scan.res_eonium).format("0,0") %>
-                                            <strong>
-                                                / </strong><%= numeral(targets[i].scans.p.scan.prod_res + targets[i].scans.p.scan.ships_sold_res).format("0,0") %>
+                                            <%= numeral(targets[i].scans.p.scan.res_metal + targets[i].scans.p.scan.res_crystal + targets[i].scans.p.scan.res_eonium).format("0,0") %><strong> / </strong><%= numeral(targets[i].scans.p.scan.prod_res + targets[i].scans.p.scan.ships_sold_res).format("0,0") %>
                                         <% } %>
                                     </td>
                                     <td class="sd no-sort">
