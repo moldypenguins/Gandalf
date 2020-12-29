@@ -522,9 +522,9 @@
                                             <td class="no-sort">
                                                 <form method="POST" action="/att/<%= attack.hash %>">
                                                     <input type="hidden" name="target" value="<%= targets[i].id %>"/>
-                                                    <button class="btn btn-sm btn-primary" type="submit" name="claim" value="<%= w %>">
-                                                        <i class="fas fa-plane-departure" aria-hidden="true"></i>
-                                                    </button>
+                                                    <div class="btn-group btn-group-sm position-static" role="group">
+                                                        <button class="btn btn-sm btn-primary" type="submit" name="claim" value="<%= w %>"><i class="fas fa-plane-slash" aria-hidden="true"></i></button>
+                                                    </div>
                                                 </form>
                                             </td>
                                         <% } %>
