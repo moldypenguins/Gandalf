@@ -195,7 +195,7 @@
                                                             }
                                                         } %>
                                                     <div class="btn-group btn-group-sm position-static" role="group">
-                                                        <button class="btn btn-secondary dropdown-toggle" id="claim_bcalc<%= trg.id %>" type="button"  data-bs-toggle="dropdown" data-boundary="scrollParent" aria-expanded="false">C</button>
+                                                        <button class="btn btn-secondary dropdown-toggle" id="claim_bcalc<%= trg.id %>" type="button"  data-bs-toggle="dropdown" data-bs-boundary="scrollParent" aria-expanded="false">C</button>
                                                         <div class="dropdown-menu" aria-labelledby="claim_bcalc<%= trg.id %>">
                                                             <a class="dropdown-item" href="<%= bcalcurl %><%= query %>" target="_blank">NONE</a>
                                                             <% if(allships.length > 0) { %>
@@ -368,7 +368,7 @@
                                     </td>
                                     <td class="no-sort">
                                         <div class="btn-group btn-group-sm position-static" role="group" aria-label="Ships">
-                                            <button class="btn btn-info dropdown-toggle" id="target_ships<%= targets[i].id %>" type="button" data-bs-toggle="dropdown" data-boundary="scrollParent" aria-expanded="false"><i class="fas fa-rocket" aria-hidden="true"></i></button>
+                                            <button class="btn btn-info dropdown-toggle" id="target_ships<%= targets[i].id %>" type="button" data-bs-toggle="dropdown" data-bs-boundary="scrollParent" aria-expanded="false"><i class="fas fa-rocket" aria-hidden="true"></i></button>
                                             <% if(typeof (targets[i].scans) != "undefined" && typeof (targets[i].scans.a) != "undefined" && targets[i].scans.a != null && typeof (targets[i].scans.a.scan) != "undefined" && targets[i].scans.a.scan != null) { %>
                                                 <div class="dropdown-menu" aria-labelledby="target_bcalc<%= targets[i].id %>">
                                                     <% for(var j = 0; j < targets[i].scans.a.scan.length; j++) { %>
@@ -459,7 +459,7 @@
                                                         }
                                                     } %>
                                                 <div class="btn-group btn-group-sm position-static" role="group">
-                                                    <button class="btn btn-secondary dropdown-toggle" id="target_bcalc<%= targets[i].id %>" type="button" data-bs-toggle="dropdown"  data-boundary="scrollParent" aria-expanded="false">C/button>
+                                                    <button class="btn btn-secondary dropdown-toggle" id="target_bcalc<%= targets[i].id %>" type="button" data-bs-toggle="dropdown"  data-bs-boundary="scrollParent" aria-expanded="false">C/button>
                                                     <div class="dropdown-menu" aria-labelledby="target_bcalc<%= targets[i].id %>">
                                                         <a class="dropdown-item" href="<%= bcalcurl %><%= query %>" target="_blank">NONE</a>
                                                         <% if(allships.length > 0) { %>
