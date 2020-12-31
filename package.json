@@ -36,7 +36,7 @@
     "setup-hosts-file": "node ./utils/hosts.js",
     "symlink-jquery-js": "ln -sf ../../node_modules/jquery/dist/jquery.min.js ./public/scripts/jquery.min.js",
     "symlink-bootstrap-js": "ln -sf ../../node_modules/bootstrap/dist/js/bootstrap.min.js ./public/scripts/bootstrap.min.js",
-    "symlink-bootstrap-js-map": "[ -L ./public/scripts/bootstrap.min.js.map ] || ln -sf ../../node_modules/bootstrap/dist/js/bootstrap.min.js.map ./public/scripts/bootstrap.min.js.map",
+    "symlink-bootstrap-js-map": "ln -sf ../../node_modules/bootstrap/dist/js/bootstrap.min.js.map ./public/scripts/bootstrap.min.js.map",
     "symlink-bootstrap-bundle-js": "ln -sf ../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js ./public/scripts/bootstrap.bundle.min.js",
     "symlink-bootstrap-bundle-js-map": "ln -sf ../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map ./public/scripts/bootstrap.bundle.min.js.map",
     "symlink-bootstrap-css": "ln -sf ../../node_modules/bootstrap/dist/css/bootstrap.min.css ./public/styles/bootstrap.min.css",
