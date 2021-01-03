@@ -153,8 +153,8 @@
                                             </button>
                                         </div>
                                         <div class="btn-group btn-group-sm position-static" role="group">
-                                            <button type="submit" name="remove" value="<%= inactives[i].id %>" class="btn btn-sm btn-danger">
-                                                <i class="fas fa-times" aria-hidden="true"></i>
+                                            <button type="submit" name="delete" value="<%= inactives[i].id %>" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash-alt" aria-hidden="true"></i>
                                             </button>
                                         </div>
                                     </form>
@@ -247,7 +247,7 @@
                             <% for(var i = 0; i < galmates.length; i++) { %>
                                 <tr>
                                     <td class="btn-col">
-                                        <form method="POST" action="/mem/galmate/<%= galmates[i].id %>">
+                                        <form method="POST" action="/mem/galmate">
                                             <div class="btn-group btn-group-sm position-static" role="group">
                                                 <button type="submit" name="delete" value="<%= galmates[i].id %>" class="btn btn-sm btn-danger">
                                                     <i class="fas fa-trash-alt" aria-hidden="true"></i>
