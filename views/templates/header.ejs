@@ -29,7 +29,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/mem">Members</a>
+                                    <a class="nav-link" href="/mem"><% if(member.site_navigation == 'icon' || member.site_navigation == 'icontext') { %><i class="fas fa-user-friends" aria-hidden="true"></i><% } if(member.site_navigation == 'icontext' || member.site_navigation == 'text') { %>Members<% } %></a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUniverse" role="button" data-bs-toggle="dropdown" aria-expanded="false"><% if(member.site_navigation == 'icon' || member.site_navigation == 'icontext') { %><i class="fas fa-cloud-sun" aria-hidden="true"></i><% } if(member.site_navigation == 'icontext' || member.site_navigation == 'text') { %>Universe<% } %></a>
