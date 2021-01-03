@@ -15,6 +15,7 @@ var memberSchema = mongoose.Schema({
   planet_id:   {type:String},
   last_access: {type:Date},
   site_theme:  {type:String, default:'default'},
+  site_navigation: {type:String, default:'text'},
   timezone:    {type:String}
 });
 
