@@ -22,8 +22,10 @@ const rateLimit = require("express-rate-limit");
 const attackLimiter = rateLimit({
   windowMs: 5 * 60 * 1000, // 5 minute window
   max: 5, // start blocking after 5 requests
-  message:
-    "Too many refreshes, please try again after 5 minutes"
+  message: "Too many refreshes, please try again after 5 minutes",
+  keyGenerator: (req, res) => {
+    return req.ip + '-' + req.params.hash;
+  }
 });
 
 
