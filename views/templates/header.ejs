@@ -14,7 +14,7 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStrategy" role="button" data-bs-toggle="dropdown" aria-expanded="false">Strategy</a>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStrategy" role="button" data-bs-toggle="dropdown" aria-expanded="false"><% if(member.site_navigation == 'icon' || member.site_navigation == 'icontext') { %><i class="fas fa-chess" aria-hidden="true"></i><% } if(member.site_navigation == 'icontext' || member.site_navigation == 'text') { %>Strategy<% } %></a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownStrategy">
                                         <li><a class="dropdown-item" href="/strat">Strategy</a></li>
                                         <li><a class="dropdown-item" href="/strat/ship">Ship Build</a></li>
@@ -32,7 +32,7 @@
                                     <a class="nav-link" href="/mem">Members</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUniverse" role="button" data-bs-toggle="dropdown" aria-expanded="false">Universe</a>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUniverse" role="button" data-bs-toggle="dropdown" aria-expanded="false"><% if(member.site_navigation == 'icon' || member.site_navigation == 'icontext') { %><i class="fas fa-cloud-sun" aria-hidden="true"></i><% } if(member.site_navigation == 'icontext' || member.site_navigation == 'text') { %>Universe<% } %></a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownUniverse">
                                         <li><a class="dropdown-item" href="/uni">Universe</a></li>
                                         <li><a class="dropdown-item" href="/uni/a">Alliances</a></li>
@@ -42,13 +42,13 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/scans">Scans</a>
+                                    <a class="nav-link" href="/scans"><% if(member.site_navigation == 'icon' || member.site_navigation == 'icontext') { %><i class="fas fa-satellite-dish" aria-hidden="true"></i><% } if(member.site_navigation == 'icontext' || member.site_navigation == 'text') { %>Scans<% } %></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/att">Attacks</a>
+                                    <a class="nav-link" href="/att"><% if(member.site_navigation == 'icon' || member.site_navigation == 'icontext') { %><i class="fas fa-rocket" aria-hidden="true"></i><% } if(member.site_navigation == 'icontext' || member.site_navigation == 'text') { %>Attacks<% } %></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/logout">Logout</a>
+                                    <a class="nav-link" href="/logout"><% if(member.site_navigation == 'icon' || member.site_navigation == 'icontext') { %><i class="fas fa-sign-out-alt" aria-hidden="true"></i><% } if(member.site_navigation == 'icontext' || member.site_navigation == 'text') { %>Logout<% } %></a>
                                 </li>
                             </ul>
                         </div>
