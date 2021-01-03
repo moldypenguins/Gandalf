@@ -60,7 +60,7 @@ router.get('/', access.webMemberRequired, async (req, res, next) => {
 
 
 router.post('/', access.webHighCommandRequired, async(req, res, next) => {
-  console.log('BODY: ' + util.inspect(req.body, false, null, true));
+  //console.log('BODY: ' + util.inspect(req.body, false, null, true));
   if(req.body.deactivate !== undefined) {
     let mbr = await Member.findOne({id: req.body.deactivate});
     if(mbr != null) {
@@ -81,7 +81,7 @@ router.post('/', access.webHighCommandRequired, async(req, res, next) => {
           console.log(err);
           return;
         }
-        console.log(saved.username + " saved to Members collection.");
+        //console.log(saved.username + " saved to Inactives collection.");
         Member.deleteOne({id: req.body.deactivate}, function(err) {
           if (err) return console.error(err);
           res.redirect('/mem');
