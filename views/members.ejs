@@ -32,7 +32,7 @@
                         <tbody>
                         <% for(var i = 0; i < members.length; ++i) { %>
                             <tr>
-                                <td class="btn-col">
+                                <td class="btn-col no-wrap">
                                     <% if(member.isADM || (member.isHC && !members[i].isADM && !members[i].isHC)) { %>
                                         <div class="btn-group btn-group-sm position-static" role="group">
                                             <a class="btn btn-warning" href="/mem/<%= members[i].id %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
@@ -44,7 +44,7 @@
                                         </form>
                                     <% } %>
                                 </td>
-                                <th scope="row">
+                                <th scope="row" class="no-wrap">
                                     <img class="tg-pic" src="<% if(members[i].photo_url) { %><%= members[i].photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" alt=""/>
                                     <% if(members[i].username) { %>
                                         <a href="https://t.me/<%= members[i].username %>"><%= members[i].username %></a>
@@ -54,8 +54,8 @@
                                         <%= members[i].first_name %>
                                     <% } %>
                                 </th>
-                                <td><%= members[i].panick %></td>
-                                <td class="pr-3">
+                                <td class="no-wrap"><%= members[i].panick %></td>
+                                <td class="pr-3 no-wrap">
                                     <% if(member.isADM || (member.isHC && !members[i].isADM && !members[i].isHC)) { %>
                                         <form method="POST" action="/mem/<%= members[i].id %>">
                                             <div class="btn-group btn-group-sm">
@@ -82,19 +82,19 @@
                                         <%= members[i].accessRoles %>
                                     <% } %>
                                 </td>
-                                <td>
+                                <td class="no-wrap">
                                     <% if(members[i].planet) { %>
                                         <%= members[i].planet.x %>:<%= members[i].planet.y %>:<%= members[i].planet.z %>
                                     <% } %>
                                 </td>
-                                <td>
+                                <td class="no-wrap">
                                     <% if(members[i].phone) { %>
                                         <a href="tel:<%= members[i].phone %>">
                                             <%= members[i].phone %>
                                         </a>
                                     <% } %>
                                 </td>
-                                <td class="btn-col">
+                                <td class="btn-col no-wrap">
                                     <% if(members[i].phone && member.isADM) { %>
                                         <form name="callMember" method='POST' action="/mem/call/<%= members[i].id %>">
                                             <div class="btn-group btn-group-sm position-static" role="group">
@@ -103,7 +103,7 @@
                                         </form>
                                     <% } %>
                                 </td>
-                                <td>
+                                <td class="no-wrap">
                                     <% if(members[i].email) { %>
                                         <a href="mailto:<%= members[i].email %>">
                                             <%= members[i].email %>
