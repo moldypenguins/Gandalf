@@ -12,6 +12,8 @@ header {
 /*# NAVIGATION ELEMENTS ##########################################################################*/
 nav {
   .navbar-brand {
+    font-family: var(--font-default);
+    
     .navbar-logo {
       display: inline-block;
       vertical-align: top;
