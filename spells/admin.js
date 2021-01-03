@@ -40,7 +40,7 @@ let Admin_leavechat = (args, ctx) => {
     if(!chatid) {reject(Admin_leavechat_usage);}
     ctx.telegram.leaveChat(chatid).then(async(result) => {
       //console.log('RESULT:' + util.inspect(result, false, null, true));
-      await Chat.remove({id: chatid});
+      await Chat.deleteOne({id: chatid});
       resolve(`left the group ${chatid}`);
     }).catch((error) => {
       reject(`unable to leave the group ${chatid}.\n${error}`)
