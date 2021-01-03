@@ -11,12 +11,7 @@ footer {
   text-align: center;
   font-size: .6875rem;
   box-shadow: 0 0 3px 1px rgba(black, .12);
-  @include respond-above(xs) {
-	height: 2.85rem;
-  }
-  @include respond-above(md) {
-	height: 3.25rem;
-  }
+  height: 3.25rem;
 
   a {
 	color: black;
