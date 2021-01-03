@@ -12,7 +12,7 @@ header {
 /*# NAVIGATION ELEMENTS ##########################################################################*/
 nav {
   .navbar-brand {
-    font-family: var(--font-default);
+    font-family: $font-default;
 
     .navbar-logo {
       display: inline-block;
