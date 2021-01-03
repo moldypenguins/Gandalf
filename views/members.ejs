@@ -157,7 +157,7 @@
                                     </form>
                                 </td>
                                 <th scope="row">
-                                    <img src="<%= inactives[i].photo_url %>" width="30" height="30" class="tg-pic"/>
+                                    <img src="<% if(inactives[i].photo_url) { %><%= inactives[i].photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" class="tg-pic"/>
                                     <% if(inactives[i].username) { %>
                                         <a href="https://t.me/<%= inactives[i].username %>"><%= inactives[i].username %></a>
                                     <% } else if(inactives[i].last_name) { %>
@@ -207,7 +207,7 @@
                                         </form>
                                     </td>
                                     <th scope="row">
-                                        <img src="<%= applicants[i].photo_url %>" width="30" height="30" class="tg-pic"/>
+                                        <img src="<% if(applicants[i].photo_url) { %><%= applicants[i].photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" class="tg-pic"/>
                                         <% if(applicants[i].username) { %>
                                             <a href="https://t.me/<%= applicants[i].username %>">
                                                 <%= applicants[i].username %>
@@ -253,7 +253,7 @@
                                         </form>
                                     </td>
                                     <th scope="row">
-                                        <img src="<%= galmates[i].photo_url %>" width="30" height="30" class="tg-pic"/>
+                                        <img src="<%= default_profile_pic %>" width="30" height="30" class="tg-pic"/>
                                         <% if(galmates[i].username) { %>
                                             <a href="https://t.me/<%= galmates[i].username %>"><%= galmates[i].username %></a>
                                         <% } else if(galmates[i].last_name) { %>
