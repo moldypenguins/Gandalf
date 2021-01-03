@@ -140,7 +140,34 @@ router.post('/applicants', access.webHighCommandRequired, async (req, res, next)
 
 router.post('/inactives', access.webHighCommandRequired, async (req, res, next) => {
   if(req.body.activate !== undefined) {
-    
+    let inact = await Inactive.findOne({id: req.body.activate});
+    if(inact != null) {
+      let mbr = new Member({
+        id: inact.id,
+        username: inact.username,
+        first_name: inact.first_name,
+        last_name: inact.last_name,
+        photo_url: inact.photo_url,
+        panick: inact.panick,
+        email: inact.email,
+        phone: inact.phone,
+        sponsor: inact.sponsor,
+        timezone: inact.timezone,
+        access: 0,
+        roles: 0
+      });
+      mbr.save(function (err, saved) {
+        if(err) {
+          console.log(err);
+          return;
+        }
+        //console.log(saved.username + " saved to Members collection.");
+        Inactive.deleteOne({id: req.body.activate}, function(err) {
+          if (err) return console.error(err);
+          res.redirect('/mem');
+        });
+      });
+    }
   } else if(req.body.remove !== undefined) {
     
   }
