@@ -19,14 +19,13 @@ const config = require('../config');
 const access = require('../access');
 const numeral = require('numeral');
 const moment = require('moment');
-const Entities = require('html-entities').AllHtmlEntities;
-const entities = new Entities();
+import {encode} from 'html-entities';
 
 const comms = require('../comms');
 const Members = require('../models/member');
 const util = require("util");
 
-let Comms_call_usage = entities.encode('!call <user>');
+let Comms_call_usage = encode('!call <user>');
 let Comms_call_desc = 'Calls a user via twilio';
 let Comms_call = (args, ctx) => {
     return new Promise(async (resolve, reject) => {
@@ -62,7 +61,7 @@ let Comms_call = (args, ctx) => {
     });
 };
 
-let Comms_contact_usage = entities.encode('!contact <user>');
+let Comms_contact_usage = encode('!contact <user>');
 let Comms_contact_desc = 'Displays a users TG username';
 let Comms_contact = (args, ctx) => {
     return new Promise(function (resolve, reject) {

@@ -19,15 +19,14 @@ const config = require('../config');
 const access = require('../access');
 const numeral = require('numeral');
 const moment = require('moment');
-const Entities = require('html-entities').AllHtmlEntities;
-const entities = new Entities();
+import {encode} from 'html-entities';
 
 const Utils = require('../utils');
 const Intel = require('../models/intel');
 const Planet = require('../models/planet');
 const Alliance = require('../models/alliance');
 
-let Intel_usage = entities.encode('!intel <coords> <alliance=alliance> <nick=nick>');
+let Intel_usage = encode('!intel <coords> <alliance=alliance> <nick=nick>');
 let Intel_desc = 'Displays or sets a coords';
 let Intel_fn = (args) => {
     return new Promise(async (resolve, reject) => {

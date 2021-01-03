@@ -19,8 +19,7 @@ const config = require('../config');
 const access = require('../access');
 const numeral = require('numeral');
 const moment = require('moment');
-const Entities = require('html-entities').AllHtmlEntities;
-const entities = new Entities();
+import {encode} from 'html-entities';
 
 const Utils = require('../utils');
 const Scan = require('../models/scan');
@@ -33,7 +32,7 @@ const BotMessage = require('../models/botmessage');
 const crypto = require('crypto');
 
 
-var Scans_req_usage = entities.encode('!req <x:y:z> <p|d|n|j|a>');
+var Scans_req_usage = encode('!req <x:y:z> <p|d|n|j|a>');
 var Scans_req_desc = 'Request a scan.';
 var Scans_req = (args, current_member) => {
   return new Promise(async (resolve, reject) => {
@@ -85,7 +84,7 @@ var Scans_req = (args, current_member) => {
 };
 
 
-var Scans_scan_usage = entities.encode('!scan <x:y:z> [p|d|n|j|a]');
+var Scans_scan_usage = encode('!scan <x:y:z> [p|d|n|j|a]');
 var Scans_scan_desc = 'Show recent scans for a planet.';
 var Scans_scan = (args) => {
   return new Promise(function (resolve, reject) {
@@ -93,7 +92,7 @@ var Scans_scan = (args) => {
   });
 };
 
-var Scans_cancel_usage = entities.encode('!cancel <id>');
+var Scans_cancel_usage = encode('!cancel <id>');
 var Scans_cancel_desc = 'Cancel a scan request given the id';
 var Scans_cancel = (args, current_member) => {
   return new Promise(async (resolve, reject) => {
@@ -112,7 +111,7 @@ var Scans_cancel = (args, current_member) => {
   });
 };
 
-var Scans_links_usage = entities.encode();
+var Scans_links_usage = encode();
 var Scans_links_desc = 'Shows a list of scan requests';
 var Scans_links = (args) => {
   return new Promise(async (resolve, reject) => {

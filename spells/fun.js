@@ -19,12 +19,11 @@ const config = require('../config');
 const access = require('../access');
 const numeral = require('numeral');
 const moment = require('moment');
-const Entities = require('html-entities').AllHtmlEntities;
-const entities = new Entities();
+import {encode} from 'html-entities';
 
 const bent = require('bent');
 
-var Fun_gif_usage = entities.encode('!giphy <phrase>');
+var Fun_gif_usage = encode('!giphy <phrase>');
 var Fun_gif_desc = 'Finds a random gifphy using your phrase';
 var Fun_gif = (args) => {
   return new Promise(async (resolve, reject) => {
