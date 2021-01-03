@@ -168,8 +168,10 @@ router.post('/inactives', access.webHighCommandRequired, async (req, res, next) 
         });
       });
     }
-  } else if(req.body.remove !== undefined) {
-    
+  } else if(req.body.delete !== undefined) {
+    let rem = await Inactive.deleteOne({id: req.body.delete});
+    console.log(req.body.delete + " deleted.");
+    res.redirect('/mem');
   }
 });
 
@@ -220,10 +222,10 @@ router.post('/:id', access.webHighCommandRequired, async (req, res, next) => {
 });
 
 
-router.post('/galmate/:id', access.webAdminRequired, async (req, res, next) => {
+router.post('/galmate', access.webAdminRequired, async (req, res, next) => {
   if(req.body !== undefined && req.body.delete !== undefined) {
-    let gm = await GalMate.deleteOne({id: req.params.id});
-    console.log(req.params.id + " deleted.");
+    let gm = await GalMate.deleteOne({id: req.body.delete});
+    console.log(req.body.delete + " deleted.");
     res.redirect('/mem');
   } else {
     next(createError(400));
