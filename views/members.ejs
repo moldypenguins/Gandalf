@@ -22,7 +22,6 @@
                             <th data-sortable="true" data-field="access" scope="col">Access</th>
                             <th data-sortable="true" data-field="coords" scope="col">Coords</th>
                             <th data-field="phone" scope="col">Phone</th>
-                            <th scope="col" class="btn-col"></th>
                             <th data-field="email" scope="col">Email</th>
                             <% if(member.isADM || member.isHC) { %>
                                 <th data-sortable="true" data-field="lastaccess" scope="col" class="fit-content">Last Access</th>
@@ -89,18 +88,16 @@
                                 </td>
                                 <td class="no-wrap">
                                     <% if(members[i].phone) { %>
+                                        <% if(member.isADM) { %>
+                                            <form name="callMember" method='POST' action="/mem/call/<%= members[i].id %>">
+                                                <div class="btn-group btn-group-sm position-static" role="group">
+                                                    <button type="submit" name="submitcall" value="<%= members[i].phone %>" class="btn btn-info"><i class="fas fa-phone" aria-hidden="true"></i></button>
+                                                </div>
+                                            </form>
+                                        <% } %>
                                         <a href="tel:<%= members[i].phone %>">
                                             <%= members[i].phone %>
                                         </a>
-                                    <% } %>
-                                </td>
-                                <td class="btn-col no-wrap">
-                                    <% if(members[i].phone && member.isADM) { %>
-                                        <form name="callMember" method='POST' action="/mem/call/<%= members[i].id %>">
-                                            <div class="btn-group btn-group-sm position-static" role="group">
-                                                <button type="submit" name="submitcall" value="<%= members[i].phone %>" class="btn btn-info"><i class="fas fa-phone" aria-hidden="true"></i></button>
-                                            </div>
-                                        </form>
                                     <% } %>
                                 </td>
                                 <td class="no-wrap">
