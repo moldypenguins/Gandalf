@@ -19,8 +19,8 @@
  * @version 2020/11/19
  * @summary Ticker
 **/
+const Mordor = require('./mordor');
 const config = require('./config');
-const db = require('./db');
 const Ship = require('./models/ship');
 const Member = require('./models/member');
 const Tick = require('./models/tick');
@@ -59,7 +59,7 @@ const sleep = (ms) => {
 }
 
 
-db.connection.once("open", async () => {
+Mordor.connection.once("open", async () => {
   let j = schedule.scheduleJob(rule, async () => {
     const start_time = new Date();
     console.log('Frodo Embarking on The Quest Of The Ring.');

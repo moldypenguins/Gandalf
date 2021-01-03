@@ -19,8 +19,8 @@
  * @version 2020/11/19
  * @summary Website
  **/
+const Mordor = require('./mordor');
 const config = require('./config');
-const db = require('./db');
 const Tick = require('./models/tick');
 const Member = require('./models/member');
 const Theme = require('./models/theme');
@@ -97,7 +97,7 @@ let loginRequired = async (req, res, next) => {
 
 
 let app = express();
-db.connection.once("open", () => {
+Mordor.connection.once("open", () => {
   app.set('views', path.join(__dirname, 'views'));
   app.set('view engine', 'ejs');
   app.use(logger('dev'));

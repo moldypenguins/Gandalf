@@ -19,8 +19,8 @@
  * @version 2020/11/19
  * @summary Telegram Bot
  **/
+const Mordor = require('./mordor');
 const config = require('./config');
-const db = require('./db');
 const Member = require('./models/member');
 const Inactive = require('./models/inactive');
 const Tick = require('./models/tick');
@@ -57,7 +57,7 @@ const limitConfig = {
 };
 
 
-db.connection.once("open", () => {
+Mordor.connection.once("open", () => {
   let bot = new Telegraf(config.bot.token, { telegram: { agent: null, webhookReply: false }, username: config.bot.username });
   bot.use(rateLimit(limitConfig));
 

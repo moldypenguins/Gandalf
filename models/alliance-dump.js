@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  **/
-const Mordor = require('../db.js');
+const Mordor = require('../mordor');
 
 let allianceDumpSchema = Mordor.Schema({
   alliance_id: { type: Mordor.Schema.Types.ObjectId, ref: "Alliance" },

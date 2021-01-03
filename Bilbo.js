@@ -19,8 +19,8 @@
  * @version 2020/11/27
  * @summary Initialization
  **/
+const Mordor = require('./mordor');
 const config = require('./config');
-const db = require('./db');
 const bent = require('bent');
 const getStream = bent('string');
 const Ship = require('./models/ship.js');
@@ -29,7 +29,7 @@ const Tick = require('./models/tick.js');
 const Theme = require('./models/theme.js');
 const xmlParser = require('xml2json');
 
-db.connection.once("open", async() => {
+Mordor.connection.once("open", async() => {
   let stream = await getStream(config.pa.dumps.ship_stats);
   let json = JSON.parse(xmlParser.toJson(stream));
   await load_ships(json["stats"]["ship"]); // {"stats": { "ship": [ ... ]}}

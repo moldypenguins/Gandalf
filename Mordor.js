@@ -33,4 +33,3 @@ mongoose.connection.once("open", () => {
   console.log("Evil is stirring in Mordor.");
 });
 module.exports = mongoose;
-
