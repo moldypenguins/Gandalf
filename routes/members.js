@@ -62,33 +62,32 @@ router.get('/', access.webMemberRequired, async (req, res, next) => {
 router.post('/', access.webHighCommandRequired, async(req, res, next) => {
   console.log('BODY: ' + util.inspect(req.body, false, null, true));
   if(req.body.deactivate !== undefined) {
-    Member.findOne({id: req.body.deactivate}).then((mbr) => {
-      if(mbr) {
-        let inatv = new Inactive({
-          id: mbr.id,
-          username: mbr.username,
-          first_name: mbr.first_name,
-          last_name: mbr.last_name,
-          photo_url: mbr.photo_url,
-          panick: mbr.panick,
-          email: mbr.email,
-          phone: mbr.phone,
-          sponsor: mbr.sponsor,
-          timezone: mbr.timezone
+    let mbr = await Member.findOne({id: req.body.deactivate});
+    if(mbr != null) {
+      let inatv = new Inactive({
+        id: mbr.id,
+        username: mbr.username,
+        first_name: mbr.first_name,
+        last_name: mbr.last_name,
+        photo_url: mbr.photo_url,
+        panick: mbr.panick,
+        email: mbr.email,
+        phone: mbr.phone,
+        sponsor: mbr.sponsor,
+        timezone: mbr.timezone
+      });
+      inatv.save(function (err, saved) {
+        if(err) {
+          console.log(err);
+          return;
+        }
+        console.log(saved.username + " saved to Members collection.");
+        Member.deleteOne({id: req.body.deactivate}, function(err) {
+          if (err) return console.error(err);
+          res.redirect('/mem');
         });
-        inatv.save(function (err, saved) {
-          if(err) {
-            console.log(err);
-            return;
-          }
-          console.log(saved.username + " saved to Members collection.");
-          Member.deleteOne({id: req.body.deactivate}, function(err) {
-            if (err) return console.error(err);
-            res.redirect('/mem');
-          });
-        });
-      }
-    });
+      });
+    }
   }
 });
 
