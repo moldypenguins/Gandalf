@@ -11,22 +11,22 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="content list-members">
+                <div class="content content-members">
                     <h2>Members</h2>
                     <table id="table-members" class="table table-sm table-striped table-bordered" data-toggle="table" data-search="true">
                         <thead>
-                        <tr>
-                            <th scope="col" class="btn-col"></th>
-                            <th data-sortable="true" data-field="member" scope="col">Member (<%= members.length %>)</th>
-                            <th data-sortable="true" data-field="panick" scope="col">PA Nick</th>
-                            <th data-sortable="true" data-field="access" scope="col">Access</th>
-                            <th data-sortable="true" data-field="coords" scope="col">Coords</th>
-                            <th data-field="phone" scope="col">Phone</th>
-                            <th data-field="email" scope="col">Email</th>
-                            <% if(member.isADM || member.isHC) { %>
-                                <th data-sortable="true" data-field="lastaccess" scope="col" class="fit-content">Last Access</th>
-                            <% } %>
-                        </tr>
+                            <tr>
+                                <th scope="col" class="btn-col"></th>
+                                <th data-sortable="true" data-field="member" scope="col">Member (<%= members.length %>)</th>
+                                <th data-sortable="true" data-field="panick" scope="col">PA Nick</th>
+                                <th data-sortable="true" data-field="access" scope="col">Access</th>
+                                <th data-sortable="true" data-field="coords" scope="col">Coords</th>
+                                <th data-field="phone" scope="col">Phone</th>
+                                <th data-field="email" scope="col">Email</th>
+                                <% if(member.isADM || member.isHC) { %>
+                                    <th data-sortable="true" data-field="lastaccess" scope="col" class="fit-content">Last Access</th>
+                                <% } %>
+                            </tr>
                         </thead>
                         <tbody>
                         <% for(var i = 0; i < members.length; ++i) { %>
