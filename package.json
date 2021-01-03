@@ -35,10 +35,11 @@
     "load-certs": "cd ssl/ && openssl rsa -in privatetemp.key -out private.key && rm privatetemp.key",
     "setup-hosts-file": "node ./utils/hosts.js",
     "symlink-jquery-js": "ln -sf ../../node_modules/jquery/dist/jquery.min.js ./public/scripts/jquery.min.js",
+    "symlink-popper-js": "ln -sf ../../node_modules/@popperjs/core/dist/umd/popper.min.js ./public/scripts/popper.min.js",
+    "symlink-popper-js-map": "ln -sf ../../node_modules/@popperjs/core/dist/umd/popper.min.js.map ./public/scripts/popper.min.js.map",
+    "symlink-popper-js-flow": "ln -sf ../../node_modules/@popperjs/core/dist/umd/popper.min.js.flow ./public/scripts/popper.min.js.flow",
     "symlink-bootstrap-js": "ln -sf ../../node_modules/bootstrap/dist/js/bootstrap.min.js ./public/scripts/bootstrap.min.js",
     "symlink-bootstrap-js-map": "ln -sf ../../node_modules/bootstrap/dist/js/bootstrap.min.js.map ./public/scripts/bootstrap.min.js.map",
-    "symlink-bootstrap-bundle-js": "ln -sf ../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js ./public/scripts/bootstrap.bundle.min.js",
-    "symlink-bootstrap-bundle-js-map": "ln -sf ../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map ./public/scripts/bootstrap.bundle.min.js.map",
     "symlink-bootstrap-css": "ln -sf ../../node_modules/bootstrap/dist/css/bootstrap.min.css ./public/styles/bootstrap.min.css",
     "symlink-bootstrap-css-map": "ln -sf ../../node_modules/bootstrap/dist/css/bootstrap.min.css.map ./public/styles/bootstrap.min.css.map",
     "symlink-bootstrap-table-js": "ln -sf ../../node_modules/bootstrap-table/dist/bootstrap-table.min.js ./public/scripts/bootstrap-table.min.js",
@@ -50,7 +51,7 @@
     "symlink-intltelinput-js": "ln -sf ../../node_modules/intl-tel-input/build/js/intlTelInput-jquery.min.js ./public/scripts/intlTelInput-jquery.min.js",
     "symlink-intltelinput-utils": "ln -sf ../../node_modules/intl-tel-input/build/js/utils.js ./public/scripts/intlTelInput-utils.js",
     "symlink-intltelinput-flags": "ln -sf ../node_modules/intl-tel-input/build/img/ ./public/flags",
-    "postinstall": "npm run symlink-jquery-js && npm run symlink-bootstrap-js && npm run symlink-bootstrap-js-map && npm run symlink-bootstrap-bundle-js && npm run symlink-bootstrap-bundle-js-map && npm run symlink-bootstrap-css && npm run symlink-bootstrap-css-map && npm run symlink-bootstrap-table-js && npm run symlink-bootstrap-table-css && npm run symlink-fontawesome-fonts && npm run symlink-fontawesome-css && npm run symlink-clipboard-js && npm run symlink-intltelinput-css && npm run symlink-intltelinput-js && npm run symlink-intltelinput-utils && npm run symlink-intltelinput-flags"
+    "postinstall": "npm run symlink-jquery-js && npm run symlink-popper-js && npm run symlink-popper-js-map && npm run symlink-popper-js-flow && npm run symlink-bootstrap-js && npm run symlink-bootstrap-js-map && npm run symlink-bootstrap-css && npm run symlink-bootstrap-css-map && npm run symlink-bootstrap-table-js && npm run symlink-bootstrap-table-css && npm run symlink-fontawesome-fonts && npm run symlink-fontawesome-css && npm run symlink-clipboard-js && npm run symlink-intltelinput-css && npm run symlink-intltelinput-js && npm run symlink-intltelinput-utils && npm run symlink-intltelinput-flags"
   },
   "dependencies": {
     "@awaitjs/express": "^0.6.3",
