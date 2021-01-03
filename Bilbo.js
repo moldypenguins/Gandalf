@@ -19,7 +19,7 @@
  * @version 2020/11/27
  * @summary Initialization
  **/
-const Mordor = require('./mordor');
+const Mordor = require('./Mordor');
 const config = require('./config');
 const bent = require('bent');
 const getStream = bent('string');

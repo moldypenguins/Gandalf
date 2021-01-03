@@ -19,7 +19,7 @@
  * @version 2020/11/19
  * @summary Website
  **/
-const Mordor = require('./mordor');
+const Mordor = require('./Mordor');
 const config = require('./config');
 const Tick = require('./models/tick');
 const Member = require('./models/member');
