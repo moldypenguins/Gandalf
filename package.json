@@ -69,7 +69,7 @@
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.3",
     "express-session": "^1.17.0",
-    "html-entities": "^1.2.1",
+    "html-entities": "^2.0.2",
     "http-errors": "~1.8.0",
     "intl-tel-input": "^17.0.8",
     "jquery": "^3.5.1",
