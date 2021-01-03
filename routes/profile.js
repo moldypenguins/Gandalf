@@ -45,7 +45,8 @@ router.post('/', async (req, res, next) => {
       plnt = await Planet.findOne({x: req.body.planet_x, y: req.body.planet_y, z: req.body.planet_z});
     }
     let upd = await Member.updateOne({id: req.session.member.id}, {
-      site_theme: req.body.theme,
+      site_theme: req.body.site_theme,
+      site_navigation: req.body.site_navigation,
       panick: req.body.panick,
       phone: req.body.full_phone,
       email: req.body.email,
