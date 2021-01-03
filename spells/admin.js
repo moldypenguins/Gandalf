@@ -21,12 +21,13 @@ const Chat = require('../models/chat');
 const GalMate = require('../models/galmate');
 const numeral = require('numeral');
 const moment = require('moment');
-import {encode} from 'html-entities';
+const Entities = require('html-entities').AllHtmlEntities;
+let entities = new Entities();
 const util = require('util');
 const bent = require('bent');
 const getStream = bent('string');
 
-let Admin_leavechat_usage = encode('!leavechat [chat id]');
+let Admin_leavechat_usage = entities.encode('!leavechat [chat id]');
 let Admin_leavechat_desc = 'Leaves a group, supergroup, or channel.';
 let Admin_leavechat = (args, ctx) => {
   return new Promise(async (resolve, reject) => {
@@ -49,7 +50,7 @@ let Admin_leavechat = (args, ctx) => {
   });
 }
 
-let Admin_listchats_usage = encode('!listchats');
+let Admin_listchats_usage = entities.encode('!listchats');
 let Admin_listchats_desc = 'Lists chats bot is a member of.';
 let Admin_listchats = (args) => {
   return new Promise(async (resolve, reject) => {
@@ -62,7 +63,7 @@ let Admin_listchats = (args) => {
   });
 }
 
-let Admin_tickalert_usage = encode('!tickalert <on/off>');
+let Admin_tickalert_usage = entities.encode('!tickalert <on/off>');
 let Admin_tickalert_desc = 'Turns tick alerts on/off.';
 let Admin_tickalert = (args) => {
   return new Promise(async (resolve, reject) => {
@@ -85,7 +86,7 @@ let Admin_tickalert = (args) => {
 }
 
 
-let Admin_addgalmate_usage = encode('!addgalmate <@GalMate>');
+let Admin_addgalmate_usage = entities.encode('!addgalmate <@GalMate>');
 let Admin_addgalmate_desc = 'Adds a TG user as a GalMate.';
 let Admin_addgalmate = (args, ctx) => {
   return new Promise(async (resolve, reject) => {
