@@ -19,13 +19,13 @@ const config = require('../config');
 const access = require('../access');
 const numeral = require('numeral');
 const moment = require('moment');
-import {encode} from 'html-entities';
+const he = require('he');
 
 const Ship = require('../models/ship');
 const Tick = require('../models/tick');
 
 
-var Ships_eff_usage = encode('!eff <number> <ship> [t1|t2|t3]');
+var Ships_eff_usage = he.encode('!eff <number> <ship> [t1|t2|t3]');
 var Ships_eff_desc = 'Calculates the efficiency of the specified number of ships.';
 var Ships_eff = (args) => {
   return new Promise((resolve, reject) => {
@@ -86,7 +86,7 @@ var Ships_eff = (args) => {
   });
 };
 
-var Ships_stop_usage = encode('!stop <number> <ship>');
+var Ships_stop_usage = he.encode('!stop <number> <ship>');
 var Ships_stop_desc = 'Calculates the required defence to the specified number of ships.';
 var Ships_stop = (args) => {
   return new Promise(function(resolve, reject) {
@@ -129,7 +129,7 @@ var Ships_stop = (args) => {
   });
 };
 
-var Ships_cost_usage = encode('!cost <number> <ship>');
+var Ships_cost_usage = he.encode('!cost <number> <ship>');
 var Ships_cost_desc = 'Calculates the cost of producing the specified number of ships.';
 var Ships_cost = (args) => {
   return new Promise(function(resolve, reject) {
@@ -154,7 +154,7 @@ var Ships_cost = (args) => {
   });
 };
 
-var Ships_afford_usage = entities.encode('!afford <x:y:z> <ship>');
+var Ships_afford_usage = he.encode('!afford <x:y:z> <ship>');
 var Ships_afford_desc = 'Calculates the number of a certain ship the planet can produce based on the most recent planet scan.';
 var Ships_afford = (args) => {
   return new Promise(function(resolve, reject) {
@@ -162,7 +162,7 @@ var Ships_afford = (args) => {
   });
 };
 
-var Ships_ship_usage = encode('!ship <ship>');
+var Ships_ship_usage = he.encode('!ship <ship>');
 var Ships_ship_desc = 'Returns the stats of the specified ship.';
 var Ships_ship = (args) => {
   return new Promise(function(resolve, reject) {
@@ -201,7 +201,7 @@ var Ships_ship = (args) => {
 /*
 eta 10 landing pt 1800 (currently 1553) must launch at pt 1790 (05-24 20:55), or with prelaunch tick 1791 (currently +237)
 */
-var Ships_launch_usage = encode('!launch <class|eta> <LT>');
+var Ships_launch_usage = he.encode('!launch <class|eta> <LT>');
 var Ships_launch_desc = 'When ships should be launch to land at LT.';
 var Ships_launch = (args) => {
   return new Promise((resolve, reject) => {

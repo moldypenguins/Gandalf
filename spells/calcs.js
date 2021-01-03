@@ -20,7 +20,7 @@ const access = require('../access');
 const numeral = require('numeral');
 //const moment = require('moment');
 const moment = require('moment-timezone');
-import {encode} from 'html-entities';
+const he = require('he');
 
 const Tick = require('../models/tick');
 const Members = require('../models/member');
@@ -28,7 +28,7 @@ const Planets = require('../models/planet');
 const Utils = require('../utils');
 
 
-var Calcs_exile_usage = encode('!exile');
+var Calcs_exile_usage = he.encode('!exile');
 var Calcs_exile_desc = 'Shows information regarding chances of landing in desired galaxies.';
 var Calcs_exile = (args) => {
   return new Promise(function (resolve, reject) {
@@ -36,7 +36,7 @@ var Calcs_exile = (args) => {
   });
 };
 
-var Calcs_bonusmining_usage = encode('!bonusmining <tick=NOW> <bonus=0>');
+var Calcs_bonusmining_usage = he.encode('!bonusmining <tick=NOW> <bonus=0>');
 var Calcs_bonusmining_desc = 'Calculates how many ticks you need to keep the bonus roids to be worth it vs accepting resources';
 var Calcs_bonusmining = (args) => {
   return new Promise(async (resolve, reject) => {
@@ -60,7 +60,7 @@ var Calcs_bonusmining = (args) => {
   });
 };
 
-var Calcs_bonus_usage = encode('!bonus <tick=NOW> <bonus=0>');
+var Calcs_bonus_usage = he.encode('!bonus <tick=NOW> <bonus=0>');
 var Calcs_bonus_desc = 'Calculates the bonus for a given tick (bonus argument is provided by PA bonus screen 3% etc.)';
 var Calcs_bonus = (args) => {
   return new Promise(async (resolve, reject) => {
@@ -82,7 +82,7 @@ var Calcs_bonus = (args) => {
   });
 };
 
-var Calcs_roidcost_usage = encode('!roidcost <roids> <value_cost> [mining_bonus]');
+var Calcs_roidcost_usage = he.encode('!roidcost <roids> <value_cost> [mining_bonus]');
 var Calcs_roidcost_desc = 'Calculate how long it will take to repay a value loss capping roids.';
 var Calcs_roidcost = (args) => {
   return new Promise(function (resolve, reject) {
@@ -112,7 +112,7 @@ var Calcs_roidcost = (args) => {
   });
 };
 
-var Calcs_tick_usage = encode('!tick <tick=NOW> <timezone=GMT>');
+var Calcs_tick_usage = he.encode('!tick <tick=NOW> <timezone=GMT>');
 var Calcs_tick_desc = 'Calculate when a tick will occur.';
 var Calcs_tick = (args) => {
   return new Promise(async (resolve, reject) => {
@@ -138,7 +138,7 @@ var Calcs_tick = (args) => {
   });
 };
 
-var Calcs_lookup_usage = encode('!lookup <nick|coords|default=user>');
+var Calcs_lookup_usage = he.encode('!lookup <nick|coords|default=user>');
 var Calcs_lookup_desc = 'Lookup a current users stats (score/value/xp/size)';
 var Calcs_lookup = (args, current_member) => {
   return new Promise(async (resolve, reject) => {
@@ -180,7 +180,7 @@ var Calcs_lookup = (args, current_member) => {
   });
 };
 
-var Calcs_refsvsfcs_usage = encode('!refsvsfcs <roids> <metal ref #> <crystal ref #> <eonium ref #> <FC #> <gov> <mining population> <cores>');
+var Calcs_refsvsfcs_usage = he.encode('!refsvsfcs <roids> <metal ref #> <crystal ref #> <eonium ref #> <FC #> <gov> <mining population> <cores>');
 var Calcs_refsvsfcs_desc = 'Calculates if you should be building refs or fcs based on inputs';
 var Calcs_refsvsfcs = (args) =>{
   return new Promise(async (resolve, reject) => {
