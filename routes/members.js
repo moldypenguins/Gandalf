@@ -59,7 +59,7 @@ router.get('/', access.webMemberRequired, async (req, res, next) => {
 });
 
 
-router.post('/', access.webHighCommandRequired, async (req, res, next) => {
+router.post('/', access.webHighCommandRequired, async(req, res, next) => {
   console.log('BODY: ' + util.inspect(req.body, false, null, true));
   if(req.body.deactivate !== undefined) {
     Member.findOne({id: req.body.deactivate}).then((mbr) => {
