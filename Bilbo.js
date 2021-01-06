@@ -69,23 +69,37 @@ let load_ticks = async() => {
 };
 
 let setup_admins = async() => {
-  let admin = await Member.find({id: config.admin.id})
-  if (!admin || admin.length == 0) {
+  if (!await Member.exists({id: config.admin.id})) {
     if (await new Member({id: config.admin.id, access: 5, active: true}).save()) {
-      console.log(`${config.admin.username} saved to Members collection!`);
+      console.log(`User id ${config.admin.id} saved to Members collection.`);
     } else {
-      console.log(`Could not add admin to Members collection!!`)
+      console.log(`Could not add admin to Members collection.`)
     }
   } else {
-    console.log(`${config.admin.username} already exists.`);
+    console.log(`User id ${config.admin.id} already exists.`);
   }
 };
 
 let setup_themes = async() => {
-  let default_theme = new Theme({name:'Default', navbar: 'light'});
-  await default_theme.save();
-  let ultimate_theme = new Theme({name:'Ultimate', navbar: 'dark'});
-  await ultimate_theme.save();
-  let telegram_theme = new Theme({name:'Telegram', navbar: 'dark'});
-  await telegram_theme.save();
+  if (!await Theme.exists({key: 'default'})) {
+    if (await new Theme({name: 'Default', navbar: 'light'}).save()) {
+      console.log(`Default theme saved to Themes collection.`)
+    } else {
+      console.log(`Could not add Default theme to Themes collection.`)
+    }
+  }
+  if (!await Theme.exists({key: 'ultimate'})) {
+    if (await new Theme({name: 'Ultimate', navbar: 'dark'}).save()) {
+      console.log(`Ultimate theme saved to Themes collection.`)
+    } else {
+      console.log(`Could not add Ultimate theme to Themes collection.`)
+    }
+  }
+  if (!await Theme.exists({key: 'telegram'})) {
+    if (await new Theme({name: 'Telegram', navbar: 'light'}).save()) {
+      console.log(`Telegram theme saved to Themes collection.`)
+    } else {
+      console.log(`Could not add Telegram theme to Themes collection.`)
+    }
+  }
 };
