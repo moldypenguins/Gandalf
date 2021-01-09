@@ -38,7 +38,8 @@ module.exports = {
     session:"[Website session key]", //ex: 'hihehfw98KDJ@E#ohhoiuhEEDouhfgw8r3fhiw'
     temp_folder:"[Website temp folder path]", //ex: '/home/root/MiddleEarth/temp'
     default_profile_pic:'/images/member.jpg',
-    default_theme:'Default'
+    default_theme:'default',
+    default_navigation:'iconstext'
   },
   db:{
     uri:"mongodb://localhost:27017",

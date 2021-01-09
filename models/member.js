@@ -32,7 +32,7 @@ let memberSchema = Mordor.Schema({
   planet_id:   {type:String},
   last_access: {type:Date},
   site_theme:  {type:String, default:'default'},
-  site_navigation: {type:String, default:'text'},
+  site_navigation: {type:String, default:'iconstext'},
   timezone:    {type:String}
 });
 

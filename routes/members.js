@@ -121,7 +121,9 @@ router.post('/applicants', access.webHighCommandRequired, async (req, res, next)
           last_name: applcnt.last_name,
           photo_url: applcnt.photo_url,
           access: 0,
-          active: 1
+          roles:0,
+          site_navigation: config.web.default_navigation,
+          site_theme: config.web.default_theme
         });
         mem.save(function (err, saved) {
           if(err) {
@@ -212,7 +214,6 @@ router.post('/:id', access.webHighCommandRequired, async (req, res, next) => {
     console.log('BODY: ' + util.inspect(req.body, false, null, true));
     let mem = await Member.findOne({id: req.params.id});
     if(req.body.panick !== undefined) { mem.panick = req.body.panick; }
-    if(req.body.active !== undefined) { mem.active = req.body.active; }
     if(req.body.access !== undefined) { mem.access = req.body.access; }
     if(req.body.role1 !== undefined || req.body.role2 !== undefined || req.body.role4 !== undefined || req.body.role8 !== undefined || req.body.role16 !== undefined) {
       mem.roles = 
