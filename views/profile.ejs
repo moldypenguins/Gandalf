@@ -18,92 +18,102 @@
                         <h2>Profile</h2>
                         <table class="table table-sm table-transparent">
                             <tbody>
-                            <tr>
-                                <td>
-                                    <div class="input-group">
-                                        <div name="username" id="username" class="form-label" aria-describedby="label-username">
-                                            <img class="tg-pic" src="<%= profile.photo_url %>" width="30" height="30" alt=""/>
-                                            <% if(profile.username) { %>
-                                                <a href="https://t.me/<%= profile.username %>"><%= profile.username %></a>
-                                            <% } else if(profile.last_name) { %>
-                                                <%= profile.first_name %> <%= profile.last_name %>
-                                            <% } else { %>
-                                                <%= profile.first_name %>
-                                            <% } %>
+                                <tr>
+                                    <td>
+                                        <div class="input-group">
+                                            <div name="username" id="username" class="form-label" aria-describedby="label-username">
+                                                <img class="tg-pic" src="<%= profile.photo_url %>" width="30" height="30" alt=""/>
+                                                <% if(profile.username) { %>
+                                                    <a href="https://t.me/<%= profile.username %>"><%= profile.username %></a>
+                                                <% } else if(profile.last_name) { %>
+                                                    <%= profile.first_name %> <%= profile.last_name %>
+                                                <% } else { %>
+                                                    <%= profile.first_name %>
+                                                <% } %>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span id="label-theme" class="input-group-text">Theme</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span id="label-theme" class="input-group-text">Theme</span>
+                                            </div>
+                                            <select id="site_theme" class="form-control custom-select" name="site_theme">
+                                                <% for(var t = 0; t < themes.length; t++) { %>
+                                                <option value="<%= themes[t].key %>"<% if(profile.site_theme == themes[t].key) { %> selected="selected"<% } %>><%= themes[t].name %></option>
+                                                <% } %>
+                                            </select>
                                         </div>
-                                        <select id="site_theme" class="form-control custom-select" name="site_theme">
-                                            <% for(var t = 0; t < themes.length; t++) { %>
-                                            <option value="<%= themes[t].key %>"<% if(profile.site_theme == themes[t].key) { %> selected="selected"<% } %>><%= themes[t].name %></option>
-                                            <% } %>
-                                        </select>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span id="label-theme" class="input-group-text">Navigation</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span id="label-theme" class="input-group-text">Navigation</span>
+                                            </div>
+                                            <select id="site_navigation" class="form-control custom-select" name="site_navigation">
+                                                <option value="icons"<% if(profile.site_navigation === 'icons') { %> selected="selected"<% } %>>Icons Only</option>
+                                                <option value="iconstext"<% if(profile.site_navigation === 'iconstext') { %> selected="selected"<% } %>>Icons / Text</option>
+                                                <option value="text"<% if(profile.site_navigation === 'text') { %> selected="selected"<% } %>>Text Only</option>
+                                            </select>
                                         </div>
-                                        <select id="site_navigation" class="form-control custom-select" name="site_navigation">
-                                            <option value="icons"<% if(profile.site_navigation === 'icons') { %> selected="selected"<% } %>>Icons Only</option>
-                                            <option value="iconstext"<% if(profile.site_navigation === 'iconstext') { %> selected="selected"<% } %>>Icons / Text</option>
-                                            <option value="text"<% if(profile.site_navigation === 'text') { %> selected="selected"<% } %>>Text Only</option>
-                                        </select>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span id="label-panick" class="input-group-text">PA Nick</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span id="label-panick" class="input-group-text">PA Nick</span>
+                                            </div>
+                                            <input type="text" name="panick" id="panick" class="form-control" value="<%= profile.panick %>"/>
                                         </div>
-                                        <input type="text" name="panick" id="panick" class="form-control" value="<%= profile.panick %>"/>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span id="label-phone" class="input-group-text">Phone</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span id="label-timezone" class="input-group-text">PA Nick</span>
+                                            </div>
+                                            <input type="text" name="timezone" id="timezone" class="form-control" value="<%= profile.timezone %>"/>
                                         </div>
-                                        <input type="tel" name="phone" id="phone" class="form-control" value="<%= profile.phone %>"/>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span id="label-email" class="input-group-text">E-Mail</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span id="label-phone" class="input-group-text">Phone</span>
+                                            </div>
+                                            <input type="tel" name="phone" id="phone" class="form-control" value="<%= profile.phone %>"/>
                                         </div>
-                                        <input type="email" name="email" id="email" class="form-control" value="<%= profile.email %>"/>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span id="label-planet" class="input-group-text">Planet</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span id="label-email" class="input-group-text">E-Mail</span>
+                                            </div>
+                                            <input type="email" name="email" id="email" class="form-control" value="<%= profile.email %>"/>
                                         </div>
-                                        <input type="number" name="planet_x" id="planet_x" class="form-control" placeholder="X" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.x %><% } %>"/>
-                                        <input type="number" name="planet_y" id="planet_y" class="form-control" placeholder="Y" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.y %><% } %>"/>
-                                        <input type="number" name="planet_z" id="planet_z" class="form-control" placeholder="Z" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.z %><% } %>"/>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span id="label-planet" class="input-group-text">Planet</span>
+                                            </div>
+                                            <input type="number" name="planet_x" id="planet_x" class="form-control" placeholder="X" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.x %><% } %>"/>
+                                            <input type="number" name="planet_y" id="planet_y" class="form-control" placeholder="Y" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.y %><% } %>"/>
+                                            <input type="number" name="planet_z" id="planet_z" class="form-control" placeholder="Z" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.z %><% } %>"/>
+                                        </div>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="btn-box">
