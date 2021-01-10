@@ -42,7 +42,7 @@
                                             </div>
                                             <select id="site_theme" class="form-control custom-select" name="site_theme">
                                                 <% for(var t = 0; t < themes.length; t++) { %>
-                                                <option value="<%= themes[t].key %>"<% if(profile.site_theme == themes[t].key) { %> selected="selected"<% } %>><%= themes[t].name %></option>
+                                                <option value="<%= themes[t].key %>"<% if(profile.site_theme === themes[t].key) { %> selected="selected"<% } %>><%= themes[t].name %></option>
                                                 <% } %>
                                             </select>
                                         </div>
@@ -78,7 +78,11 @@
                                             <div class="input-group-prepend">
                                                 <span id="label-timezone" class="input-group-text">Timezone</span>
                                             </div>
-                                            <input type="text" name="timezone" id="timezone" class="form-control" value="<%= profile.timezone %>"/>
+                                            <select id="timezone" class="form-control custom-select" name="timezone">
+                                                <% for(var tz = 0; tz < timezones.length; tz++) { %>
+                                                    <option value="<%= timezones[tz] %>"<% if(profile.timezone === timezones[tz]) { %> selected="selected"<% } %>><%= timezones[tz] %></option>
+                                                <% } %>
+                                            </select>
                                         </div>
                                     </td>
                                 </tr>
