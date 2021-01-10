@@ -25,6 +25,7 @@ let router = express.Router();
 const util = require('util');
 const fs = require('fs');
 const csrf = require('csurf')
+const moment = require('moment-timezone');
 const createError = require("http-errors");
 
 
@@ -34,7 +35,7 @@ router.get('/', async (req, res, next) => {
   if(mem) {
     mem.planet = await Planet.findOne({id: req.session.member.planet_id});
   }
-  res.render('profile', { page: 'profile', post_action: '/profile', profile: req.session.member, themes: await Theme.find() });
+  res.render('profile', { page: 'profile', post_action: '/profile', profile: req.session.member, themes: await Theme.find(), timezones: moment.tz.names() });
 });
 
 router.post('/', async (req, res, next) => {
