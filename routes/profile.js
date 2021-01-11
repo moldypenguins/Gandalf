@@ -49,6 +49,7 @@ router.post('/', async (req, res, next) => {
       site_theme: req.body.site_theme,
       site_navigation: req.body.site_navigation,
       panick: req.body.panick,
+      timezone: req.body.timezone,
       phone: req.body.full_phone,
       email: req.body.email,
       planet_id: plnt ? plnt.id : null

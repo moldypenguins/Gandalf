@@ -79,6 +79,7 @@
                                                 <span id="label-timezone" class="input-group-text">Time Zone</span>
                                             </div>
                                             <select id="timezone" class="form-control custom-select" name="timezone">
+                                                <option value=""<% if(profile.timezone === undefined) { %> selected="selected"<% } %>>None</option>
                                                 <% for(var tz = 0; tz < timezones.length; tz++) { %>
                                                     <option value="<%= timezones[tz] %>"<% if(profile.timezone === timezones[tz]) { %> selected="selected"<% } %>><%= timezones[tz] %></option>
                                                 <% } %>
