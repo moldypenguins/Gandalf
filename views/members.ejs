@@ -10,7 +10,8 @@
 <main>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
+            <div class="col-xl-1 col-lg-0"></div>
+            <div class="col-xl-10 col-lg-12">
                 <div class="content content-members">
                     <h2>Members</h2>
                     <table id="table-members" class="table table-sm table-striped table-bordered" data-toggle="table" data-search="true">
@@ -122,8 +123,8 @@
                     </table>
                 </div>
             </div>
+            <div class="col-xl-1 col-lg-0"></div>
         </div>
-
         <% if(member.isADM || member.isHC) { %>
         <div class="row">
             <div class="col-12">
@@ -175,9 +176,9 @@
                     </table>
                 </div>
             </div>
-            <% } %>
-            <% if(member.isADM || member.isHC) { %>
-                <div class="col-12">
+        </div>
+        <div class="row">
+            <div class="col-12">
                     <div class="content">
                         <h2>Applicants</h2>
                         <table id="table-applicants" class="table table-sm table-striped table-bordered" data-toggle="table">
@@ -229,48 +230,47 @@
         </div>
         <% } %>
         <% if(member.isADM) { %>
-            <div class="row">
-                <div class="col-12">
-                    <div class="content">
-                        <h2>Galmates</h2>
-                        <table id="table-galmates" class="table table-sm table-striped table-bordered" data-toggle="table">
-                            <thead>
+        <div class="row">
+            <div class="col-12">
+                <div class="content">
+                    <h2>Galmates</h2>
+                    <table id="table-galmates" class="table table-sm table-striped table-bordered" data-toggle="table">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="btn-col"></th>
+                            <th scope="col">Galmate (<%= galmates.length %>)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% for(var i = 0; i < galmates.length; i++) { %>
                             <tr>
-                                <th scope="col" class="btn-col"></th>
-                                <th scope="col">Galmate (<%= galmates.length %>)</th>
+                                <td class="btn-col">
+                                    <form method="POST" action="/mem/galmate">
+                                        <div class="btn-group btn-group-sm position-static" role="group">
+                                            <button type="submit" name="delete" value="<%= galmates[i].id %>" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </td>
+                                <th scope="row">
+                                    <img src="<%= default_profile_pic %>" width="30" height="30" class="tg-pic"/>
+                                    <% if(galmates[i].username) { %>
+                                        <a href="https://t.me/<%= galmates[i].username %>"><%= galmates[i].username %></a>
+                                    <% } else if(galmates[i].last_name) { %>
+                                        <%= galmates[i].first_name %> <%= galmates[i].last_name %>
+                                    <% } else { %>
+                                        <%= galmates[i].first_name %>
+                                    <% } %>
+                                </th>
                             </tr>
-                            </thead>
-                            <tbody>
-                            <% for(var i = 0; i < galmates.length; i++) { %>
-                                <tr>
-                                    <td class="btn-col">
-                                        <form method="POST" action="/mem/galmate">
-                                            <div class="btn-group btn-group-sm position-static" role="group">
-                                                <button type="submit" name="delete" value="<%= galmates[i].id %>" class="btn btn-sm btn-danger">
-                                                    <i class="fas fa-trash-alt" aria-hidden="true"></i>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <th scope="row">
-                                        <img src="<%= default_profile_pic %>" width="30" height="30" class="tg-pic"/>
-                                        <% if(galmates[i].username) { %>
-                                            <a href="https://t.me/<%= galmates[i].username %>"><%= galmates[i].username %></a>
-                                        <% } else if(galmates[i].last_name) { %>
-                                            <%= galmates[i].first_name %> <%= galmates[i].last_name %>
-                                        <% } else { %>
-                                            <%= galmates[i].first_name %>
-                                        <% } %>
-                                    </th>
-                                </tr>
-                            <% } %>
-                            </tbody>
-                        </table>
-                    </div>
+                        <% } %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
         <% } %>
-
     </div>
 </main>
 <footer>
