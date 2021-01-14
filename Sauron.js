@@ -133,7 +133,7 @@ Mordor.connection.once("open", () => {
     res.locals.applicant = req.session.applicant;
     res.locals.visitor = req.session.visitor;
 
-    console.log('MEMBER: ' + util.inspect(req.session.member, false, null, true));
+    //console.log('MEMBER: ' + util.inspect(req.session.member, false, null, true));
     if (typeof (req.session) !== 'undefined' && typeof (req.session.member) !== 'undefined' && req.session.member != null) {
       if (req.session.member.site_theme) {
         res.locals.site_theme = await Theme.findOne({key: req.session.member.site_theme.toLowerCase()});
