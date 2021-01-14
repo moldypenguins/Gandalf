@@ -25,7 +25,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% for(var i = 0; i < scanners.length; i++) { %>
+                  <% for(let i = 0; i < scanners.length; i++) { %>
                     <% var race = scanners[i].planet && scanners[i].planet.race ? scanners[i].planet.race : "Unknown"; %>
                     <% var raceClass = scanners[i].planet ? " class=" + scanners[i].planet.race.toLowerCase() : ""; %>
                     <% var tech = scanners[i].scans.d && scanners[i].scans.d.scan ? scantypes[scanners[i].scans.d.scan.waves + 1] : "Unknown"; %>
