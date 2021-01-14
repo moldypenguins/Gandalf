@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  **/
-const config = require('../config');
+const config = require('./config');
 const createError = require('http-errors');
 
 const webAdminRequired = (req, res, next) => {
