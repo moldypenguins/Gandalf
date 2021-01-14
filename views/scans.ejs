@@ -42,40 +42,42 @@
           <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
           <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
             <div class="content">
-              <h2>Request A Scan</h2>
-              <table class="table table-sm table-transparent">
-                <tbody>
-                  <tr>
-                    <td>
-                      <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                          <span id="label-planet" class="input-group-text">Coords</span>
+              <form method="POST" action="/scans">
+                <h2>Request A Scan</h2>
+                <table class="table table-sm table-transparent">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend">
+                            <span id="label-planet" class="input-group-text">Coords</span>
+                          </div>
+                          <input type="number" name="coords_x" id="coords_x" class="form-control" placeholder="X" value=""/>
+                          <input type="number" name="coords_y" id="coords_y" class="form-control" placeholder="Y" value=""/>
+                          <input type="number" name="coords_z" id="coords_z" class="form-control" placeholder="Z" value=""/>
                         </div>
-                        <input type="number" name="coords_x" id="coords_x" class="form-control" placeholder="X" value=""/>
-                        <input type="number" name="coords_y" id="coords_y" class="form-control" placeholder="Y" value=""/>
-                        <input type="number" name="coords_z" id="coords_z" class="form-control" placeholder="Z" value=""/>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                          <span id="label-theme" class="input-group-text">Type</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend">
+                            <span id="label-theme" class="input-group-text">Type</span>
+                          </div>
+                          <select id="scantype" class="form-control custom-select" name="scantype">
+                            <% for(var t = 0; t < scantypes.length; t++) { %>
+                              <option value="<%= t+1 %>"><%= scantypes[t] %></option>
+                            <% } %>
+                          </select>
                         </div>
-                        <select id="scan_type" class="form-control custom-select" name="scan_type">
-                          <% for(var t = 0; t < scantypes.length; t++) { %>
-                            <option value="<%= scantypes[t] %>"><%= scantypes[t] %></option>
-                          <% } %>
-                        </select>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="btn-box">
-                <button type="submit" name="save" id="save" class="btn btn-sm btn-primary" value="save"><i class="far fa-save" aria-hidden="true"></i></button>
-              </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="btn-box">
+                  <button type="submit" name="save" id="save" class="btn btn-sm btn-primary" value="save"><i class="far fa-save" aria-hidden="true"></i></button>
+                </div>
+              </form>
             </div>
           </div>
           <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>

@@ -142,6 +142,28 @@ router.get('/requests', async (req, res) => {
   res.send(requests);
 });
 
+router.post('/request', async(req, res, next) => {
+  if(req.body.coords_x !== undefined && req.body.coords_y !== undefined && req.body.coords_z !== undefined && req.body.scantype !== undefined) {
+    let plnt = await Planet.findOne({x:req.body.coords_x, y:req.body.coords_y, z:req.body.coords_z});
+    if(plnt == null) {
+      next(createError(400));
+    } else {
+      let scanreq = new ScanRequest({
+        id: crypto.randomBytes(4).toString("hex"),
+        planet_id: plnt.id,
+        x: plnt.x,
+        y: plnt.y,
+        z: plnt.z,
+        scantype: req.body.scantype,
+        active: true,
+        tick: res.locals.tick,
+        requester_id: res.locals.member.id
+
+      });
+      scanreq = await scanreq.save();
+    }
+  }
+});
 
 module.exports = router;
 
