@@ -127,7 +127,7 @@ Mordor.connection.once("open", () => {
       '<b>links:</b> <i>Shows web links</i>\n';
     for(let [key, value] of Object.entries(spells)) {
       //console.log('SPELL ENTRIES:' + util.inspect(value, false, null, true));
-      if((spells[key].channel === undefined || !spells[key].channel(ctx.message)) && !(typeof (spells[key].access) != 'undefined' && (mem == null || (!spells[key].access(mem))))) {
+      if((spells[key].channel === undefined || !spells[key].channel(ctx.message)) && !(spells[key].access !== undefined && (mem == null || (!spells[key].access(mem))))) {
         commands += (`<b>${key}:</b> <i>${value.description}</i>\n`);
       }
     }
