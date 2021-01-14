@@ -65,10 +65,9 @@
                             <span id="label-theme" class="input-group-text">Type</span>
                           </div>
                           <select id="scantype" class="form-control custom-select" name="scantype">
-                            <option value="1"><%= scantypes[1] %></option>
-                            <% for(let st = 1; st <= scantypes.count; st++) { %>
-                              <option value="<%= st %>"><%= scantypes[st] %></option>
-                            <% } %>
+                            <% Object.keys(scantypes).forEach(function(k) { %>
+                              <option value="<%= k %>"><%= scantypes[k] %></option>
+                            <% }); %>
                           </select>
                         </div>
                       </td>
