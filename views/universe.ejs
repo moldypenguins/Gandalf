@@ -9,9 +9,10 @@
 </header>
 <main>
     <div class="container-fluid">
-        <div class="row">
-            <% if(page == "p") { %>
-                <div class="col-12">
+        <% if(page == "p") { %>
+            <div class="row">
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
+                <div class="col-xl-8 col-lg-10 col-md-12">
                     <div class="content">
                         <% if(typeof (planet) != "undefined") { %>
                             <h2><%= planet.rulername %> of <%= planet.planetname %></h2>
@@ -50,22 +51,26 @@
                                 </tbody>
                             </table>
                             <script>
-															$(function () {
-																var table = $('#table-planets').DataTable({
-																	"paging": true,
-																	"info": false,
-                                                                  language: {
-                                                                    searchPlaceholder: "Search.."
-                                                                  }
-																});
-																table.page.len(10).draw();
-															});
+                              $(function () {
+                                var table = $('#table-planets').DataTable({
+                                  "paging": true,
+                                  "info": false,
+                                  language: {
+                                    searchPlaceholder: "Search.."
+                                  }
+                                });
+                                table.page.len(10).draw();
+                              });
                             </script>
                         <% } %>
                     </div>
                 </div>
-            <% } else if(page == "g") { %>
-                <div class="col-12">
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
+            </div>
+        <% } else if(page == "g") { %>
+            <div class="row">
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
+                <div class="col-xl-8 col-lg-10 col-md-12">
                     <div class="content">
                         <% if(typeof (galaxy) != "undefined") { %>
                             <h2><%= galaxy.name %></h2>
@@ -98,22 +103,26 @@
                                 </tbody>
                             </table>
                             <script>
-															$(function () {
-																var table = $('#table-galaxy').DataTable({
-																	"paging": true,
-																	"info": false,
-                                                                  language: {
-                                                                    searchPlaceholder: "Search.."
-                                                                  }
-																});
-																table.page.len(10).draw();
-															});
+                              $(function () {
+                                var table = $('#table-galaxy').DataTable({
+                                  "paging": true,
+                                  "info": false,
+                                  language: {
+                                    searchPlaceholder: "Search.."
+                                  }
+                                });
+                                table.page.len(10).draw();
+                              });
                             </script>
                         <% } %>
                     </div>
                 </div>
-            <% } else if(page == "c") { %>
-                <div class="col-12">
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
+            </div>
+        <% } else if(page == "c") { %>
+            <div class="row">
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
+                <div class="col-xl-8 col-lg-10 col-md-12">
                     <div class="content">
                         <% if(typeof (cluster) != "undefined") { %>
                             <h2>Cluster <%= cluster.x %></h2>
@@ -142,21 +151,25 @@
                                 </tbody>
                             </table>
                             <script>
-															$(function () {
-																$('#table-cluster').DataTable({
-																	"paging": false,
-																	"info": false,
-                                                                  language: {
-                                                                    searchPlaceholder: "Search.."
-                                                                  }
-																});
-															});
+                              $(function () {
+                                $('#table-cluster').DataTable({
+                                  "paging": false,
+                                  "info": false,
+                                  language: {
+                                    searchPlaceholder: "Search.."
+                                  }
+                                });
+                              });
                             </script>
                         <% } %>
                     </div>
                 </div>
-            <% } else if(page == "a") { %>
-                <div class="col-12">
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
+            </div>
+        <% } else if(page == "a") { %>
+            <div class="row">
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
+                <div class="col-xl-8 col-lg-10 col-md-12">
                     <div class="content">
                         <% if(typeof (alliance) != "undefined") { %>
                             <h2><%= alliance.name %></h2>
@@ -187,28 +200,33 @@
                                 </tbody>
                             </table>
                             <script>
-															$(function () {
-																$('#table-alliance').DataTable({
-																	"paging": false,
-																	"info": false,
-																});
-                                                              language: {
-                                                                searchPlaceholder: "Search.."
-                                                              }
-															});
+                              $(function () {
+                                $('#table-alliance').DataTable({
+                                  "paging": false,
+                                  "info": false,
+                                });
+                                language: {
+                                  searchPlaceholder: "Search.."
+                                }
+                              });
                             </script>
                         <% } %>
                     </div>
                 </div>
-            <% } else { %>
-                <div class="col-12">
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
+            </div>
+        <% } else { %>
+            <div class="row">
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
+                <div class="col-xl-8 col-lg-10 col-md-12">
                     <div class="content">
                         <h2>Universe</h2>
 
                     </div>
                 </div>
-            <% } %>
-        </div>
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
+            </div>
+        <% } %>
     </div>
 </main>
 <footer>
