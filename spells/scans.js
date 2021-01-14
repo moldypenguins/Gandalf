@@ -121,9 +121,9 @@ var Scans_links = (args) => {
 };
 
 module.exports = {
-  "req": { usage: Scans_req_usage, description: Scans_req_desc, cast: Scans_req, include_member: true },
-  "scan": { usage: Scans_scan_usage, description: Scans_scan_desc, cast: Scans_scan },
-  "cancel": { usage: Scans_cancel_usage, description: Scans_cancel_desc, cast: Scans_cancel, include_member: true },
-  "links" : { usage: Scans_links_usage, description: Scans_links_desc, access: access.botScannerRequired, channel: access.botChannelScannerPrivate, cast: Scans_links }
+  "reqscan": { usage: Scans_req_usage, description: Scans_req_desc, cast: Scans_req, include_member: true },
+  "findscan": { usage: Scans_scan_usage, description: Scans_scan_desc, cast: Scans_scan },
+  "reqcancel": { usage: Scans_cancel_usage, description: Scans_cancel_desc, cast: Scans_cancel, include_member: true },
+  "reqlinks" : { usage: Scans_links_usage, description: Scans_links_desc, access: access.botScannerRequired, channel: access.botChannelScannerPrivate, cast: Scans_links }
 };
 
