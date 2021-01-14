@@ -198,7 +198,7 @@ Mordor.connection.once("open", () => {
         } else if (cmd === "links") {
           links(ctx);
         } else if(cmd in spells && typeof(spells[cmd].cast) == 'function') {
-          if((spells[key].channel === undefined || spells[key].channel(ctx.message)) && !(spells[key].access !== undefined && (mem == null || (!spells[key].access(mem))))) {
+          if((spells[cmd].channel === undefined || spells[cmd].channel(ctx.message)) && !(spells[cmd].access !== undefined && (mem == null || (!spells[cmd].access(mem))))) {
             ctx.replyWithHTML('<i>You do not have sufficient privileges.</i>', Extra.inReplyTo(ctx.message.message_id));
           } else {
             let promise = null;
