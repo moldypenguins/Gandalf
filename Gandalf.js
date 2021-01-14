@@ -32,6 +32,8 @@ const User = require('./models/user');
 const moment = require('moment');
 const util = require('util');
 const url = require('url');
+const bent = require('bent');
+const getStream = bent('string');
 
 let spells = {};
 Object.assign(spells, require(`./spells/admin`));
