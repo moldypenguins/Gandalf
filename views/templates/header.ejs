@@ -1,70 +1,75 @@
 <!-- views/templates/header.ejs -->
-<nav class="navbar navbar-expand-lg navbar-<%= site_theme.navbar %>">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/"><img class="navbar-logo" src="/images/logo/<%= site_theme.key %>.png" width="30" height="30" alt=""/><%= alliance_name %></a>
-        <% if(typeof(member) === 'undefined' || (typeof(member) !== 'undefined' && member == null)) { %>
-            <div class="navbar-nav ml-auto"><script async src="https://telegram.org/js/telegram-widget.js?12" data-telegram-login="<%= bot_name %>" data-size="large" data-auth-url="<%= site_url %>/auth" data-request-access="write"></script></div>
-        <% } else { %>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStrategy" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %>
-                        <i class="fas fa-chess" aria-hidden="true"></i>
-                        <% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>
-                            Strategy
-                        <% } %>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownStrategy">
-                            <li><a class="dropdown-item" href="/strat">Strategy</a></li>
-                            <li><a class="dropdown-item" href="/strat/ship">Ship Build</a></li>
-                            <li><a class="dropdown-item" href="/strat/tickplan">Tickplan</a></li>
-                            <li><a class="dropdown-item" href="/strat/forting">Forting</a></li>
-                            <li><a class="dropdown-item" href="/strat/startup">Startup Guide</a></li>
-                            <li><a class="dropdown-item" href="/strat/quests">Quest Management</a></li>
-                            <li><a class="dropdown-item" href="/strat/scans">Scans</a></li>
-                            <li><a class="dropdown-item" href="/strat/attack">Attack Policy</a></li>
-                            <li><a class="dropdown-item" href="/strat/defence">Defence Policy</a></li>
-                            <li><a class="dropdown-item" href="/strat/complaints">Complaints</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/mem"><% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %><i class="fas fa-user-friends" aria-hidden="true"></i><% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>Members<% } %></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUniverse" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %>
-                            <i class="fas fa-star-and-crescent" aria-hidden="true"></i>
-                        <% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>
-                            Universe
-                        <% } %>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownUniverse">
-                            <li><a class="dropdown-item" href="/uni">Universe</a></li>
-                            <li><a class="dropdown-item" href="/uni/a">Alliances</a></li>
-                            <li><a class="dropdown-item" href="/uni/c">Clusters</a></li>
-                            <li><a class="dropdown-item" href="/uni/g">Galaxies</a></li>
-                            <li><a class="dropdown-item" href="/uni/p">Planets</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/scans"><% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %><i class="fas fa-satellite-dish" aria-hidden="true"></i><% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>Scans<% } %></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/att"><% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %><i class="fas fa-rocket" aria-hidden="true"></i><% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>Attacks<% } %></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout"><% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %><i class="fas fa-sign-out-alt" aria-hidden="true"></i><% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>Logout<% } %></a>
-                    </li>
-                </ul>
-            </div>
-            <a class="navbar-profile" href="/profile"><img src="<% if(member.photo_url) { %><%= member.photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" alt=""/></a>
-        <% } %>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <nav class="navbar navbar-expand-lg navbar-<%= site_theme.navbar %>">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/"><img class="navbar-logo" src="/images/logo/<%= site_theme.key %>.png" width="30" height="30" alt=""/><%= alliance_name %></a>
+                    <% if(typeof(member) === 'undefined' || (typeof(member) !== 'undefined' && member == null)) { %>
+                        <div class="navbar-nav ml-auto"><script async src="https://telegram.org/js/telegram-widget.js?12" data-telegram-login="<%= bot_name %>" data-size="large" data-auth-url="<%= site_url %>/auth" data-request-access="write"></script></div>
+                    <% } else { %>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStrategy" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %>
+                                    <i class="fas fa-chess" aria-hidden="true"></i>
+                                    <% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>
+                                        Strategy
+                                    <% } %>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownStrategy">
+                                        <li><a class="dropdown-item" href="/strat">Strategy</a></li>
+                                        <li><a class="dropdown-item" href="/strat/ship">Ship Build</a></li>
+                                        <li><a class="dropdown-item" href="/strat/tickplan">Tickplan</a></li>
+                                        <li><a class="dropdown-item" href="/strat/forting">Forting</a></li>
+                                        <li><a class="dropdown-item" href="/strat/startup">Startup Guide</a></li>
+                                        <li><a class="dropdown-item" href="/strat/quests">Quest Management</a></li>
+                                        <li><a class="dropdown-item" href="/strat/scans">Scans</a></li>
+                                        <li><a class="dropdown-item" href="/strat/attack">Attack Policy</a></li>
+                                        <li><a class="dropdown-item" href="/strat/defence">Defence Policy</a></li>
+                                        <li><a class="dropdown-item" href="/strat/complaints">Complaints</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/mem"><% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %><i class="fas fa-user-friends" aria-hidden="true"></i><% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>Members<% } %></a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUniverse" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %>
+                                        <i class="fas fa-star-and-crescent" aria-hidden="true"></i>
+                                    <% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>
+                                        Universe
+                                    <% } %>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownUniverse">
+                                        <li><a class="dropdown-item" href="/uni">Universe</a></li>
+                                        <li><a class="dropdown-item" href="/uni/a">Alliances</a></li>
+                                        <li><a class="dropdown-item" href="/uni/c">Clusters</a></li>
+                                        <li><a class="dropdown-item" href="/uni/g">Galaxies</a></li>
+                                        <li><a class="dropdown-item" href="/uni/p">Planets</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/scans"><% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %><i class="fas fa-satellite-dish" aria-hidden="true"></i><% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>Scans<% } %></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/att"><% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %><i class="fas fa-rocket" aria-hidden="true"></i><% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>Attacks<% } %></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/logout"><% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %><i class="fas fa-sign-out-alt" aria-hidden="true"></i><% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>Logout<% } %></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="navbar-profile" href="/profile"><img src="<% if(member.photo_url) { %><%= member.photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" alt=""/></a>
+                    <% } %>
+                </div>
+            </nav>
+        </div>
     </div>
-</nav>
-
+</div>
 
 
