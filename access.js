@@ -103,8 +103,8 @@ const botMemberRequired = (mem) => {
   return mem.access >= 1;
 }
 
-const botChannelScannerPrivate = (from) => {
-  return from.id === config.groups.scans;
+const botChannelScannerPrivate = (msg) => {
+  return (msg.chat.type === 'private' || msg.from.id === config.groups.scans);
 }
 
 
