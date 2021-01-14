@@ -103,6 +103,11 @@ const botMemberRequired = (mem) => {
   return mem.access >= 1;
 }
 
+const botChannelScannerPrivate = (from) => {
+  return from.id === config.groups.scans;
+}
+
+
 
 module.exports = {
   "webAdminRequired": webAdminRequired,
@@ -119,5 +124,6 @@ module.exports = {
   "botCommandRequired": botCommandRequired,
   "botScannerRequired": botScannerRequired,
   "botMemberRequired": botMemberRequired,
+  "botChannelScannerPrivate": botChannelScannerPrivate,
 };
 
