@@ -11,6 +11,10 @@ header {
 
 /*# NAVIGATION ELEMENTS ##########################################################################*/
 nav {
+  .container-fluid {
+    padding: 0;
+  }
+
   .navbar-brand {
     font-family: $font-default;
 
