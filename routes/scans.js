@@ -45,7 +45,7 @@ router.get('/', async (req, res, next) => {
     if(scnrs[i].scans.d != undefined) { scnrs[i].scans.d.scan = await DevelopmentScan.findOne({scan_id:scnrs[i].scans.d.id}); }
   }
   let reqs = await ScanRequest.find({active: true});
-  console.log('SCANTYPES: ' + util.inspect(config.pa.scantypes, false, null, true));
+  //console.log('SCANTYPES: ' + util.inspect(config.pa.scantypes, false, null, true));
   res.render('scans', { scanners: scnrs, requests: reqs, scantypes:config.pa.scantypes });
 });
 
