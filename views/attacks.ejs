@@ -26,50 +26,50 @@
 <main>
     <% if(page === "att") { %>
         <div class="container-fluid">
-            <div class="row">
-                <% var attacker = "";
-                    if (member.planet != null) {
-                        attacker = "&att_coords_x_1=" + member.planet.x + "&att_coords_y_1=" + member.planet.y + "&att_coords_z_1=" + member.planet.z + "&att_planet_value_1=" + member.planet.value + "&att_planet_score_1=" + member.planet.score
-                    }
-                    if (member.scans.d != null && typeof (member.scans.d.scan) != "undefined" && member.scans.d.scan != null) {
-                        attacker += "&att_planet_mc_1=" + member.scans.d.scan.military_centre;
-                    }
-                    var allships = "";
-                    var allfi = "";
-                    var allco = "";
-                    var allfr = "";
-                    var allde = "";
-                    var allcr = "";
-                    var allbs = "";
-                    if (member.scans.a != null && typeof (member.scans.a.scan) != "undefined" && member.scans.a.scan != null) {
-                        for (var j = 0; j < member.scans.a.scan.length; j++) {
-                            if (typeof (member.scans.a.scan[j].ship) != "undefined" && member.scans.a.scan[j].ship != null) {
-                                allships += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
-                                if (member.scans.a.scan[j].ship.class.toLowerCase() == "fighter") {
-                                    allfi += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
-                                }
-                                if (member.scans.a.scan[j].ship.class.toLowerCase() == "corvette") {
-                                    allco += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
-                                }
-                                if (member.scans.a.scan[j].ship.class.toLowerCase() == "frigate") {
-                                    allfr += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
-                                }
-                                if (member.scans.a.scan[j].ship.class.toLowerCase() == "destroyer") {
-                                    allde += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
-                                }
-                                if (member.scans.a.scan[j].ship.class.toLowerCase() == "cruiser") {
-                                    allcr += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
-                                }
-                                if (member.scans.a.scan[j].ship.class.toLowerCase() == "battleship") {
-                                    allbs += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
-                                }
+            <% var attacker = "";
+                if (member.planet != null) {
+                    attacker = "&att_coords_x_1=" + member.planet.x + "&att_coords_y_1=" + member.planet.y + "&att_coords_z_1=" + member.planet.z + "&att_planet_value_1=" + member.planet.value + "&att_planet_score_1=" + member.planet.score
+                }
+                if (member.scans.d != null && typeof (member.scans.d.scan) != "undefined" && member.scans.d.scan != null) {
+                    attacker += "&att_planet_mc_1=" + member.scans.d.scan.military_centre;
+                }
+                var allships = "";
+                var allfi = "";
+                var allco = "";
+                var allfr = "";
+                var allde = "";
+                var allcr = "";
+                var allbs = "";
+                if (member.scans.a != null && typeof (member.scans.a.scan) != "undefined" && member.scans.a.scan != null) {
+                    for (var j = 0; j < member.scans.a.scan.length; j++) {
+                        if (typeof (member.scans.a.scan[j].ship) != "undefined" && member.scans.a.scan[j].ship != null) {
+                            allships += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                            if (member.scans.a.scan[j].ship.class.toLowerCase() == "fighter") {
+                                allfi += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                            }
+                            if (member.scans.a.scan[j].ship.class.toLowerCase() == "corvette") {
+                                allco += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                            }
+                            if (member.scans.a.scan[j].ship.class.toLowerCase() == "frigate") {
+                                allfr += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                            }
+                            if (member.scans.a.scan[j].ship.class.toLowerCase() == "destroyer") {
+                                allde += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                            }
+                            if (member.scans.a.scan[j].ship.class.toLowerCase() == "cruiser") {
+                                allcr += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                            }
+                            if (member.scans.a.scan[j].ship.class.toLowerCase() == "battleship") {
+                                allbs += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
                             }
                         }
                     }
-                %>
-                <% var myClms = claims.filter(c => c.member_id == member.id && c.attack_id == attack.id); %>
-                <% if(typeof (myClms) != "undefined" && myClms.length > 0) { %>
-                    <div class="col-12">
+                }
+            %>
+            <% var myClms = claims.filter(c => c.member_id == member.id && c.attack_id == attack.id); %>
+            <% if(typeof (myClms) != "undefined" && myClms.length > 0) { %>
+            <div class="row">
+                <div class="col-12">
                         <div class="content">
                             <h2>My Bookings</h2>
                             <table class="table table-sm table-striped table-bordered">
@@ -241,7 +241,9 @@
                             </table>
                         </div>
                     </div>
-                <% } %>
+            </div>
+            <% } %>
+            <div class="row">
                 <div class="col-12">
                     <div class="content">
                         <h2>Attack <%= attack.id %></h2>
@@ -537,8 +539,10 @@
                         </table>
                     </div>
                 </div>
-                <% if(member.isCMDR || member.isSCNR) { %>
-                    <div class="col-12">
+            </div>
+            <% if(member.isCMDR || member.isSCNR) { %>
+            <div class="row">
+                <div class="col-12">
                         <div id="coords-list" class="content">
                             <h2>Coordinates:</h2>
                             <div class="input-group input-group-sm">
@@ -552,8 +556,8 @@
                             </div>
                         </div>
                     </div>
-                <% } %>
             </div>
+            <% } %>
         </div>
     <% } else if(page == "new" || page == "edit") { %>
         <div class="container-fluid">
@@ -646,8 +650,10 @@
                         </form>
                     </div>
                 </div>
-                <% if(page == "edit") { %>
-                    <div class="col-12">
+            </div>
+            <% if(page == "edit") { %>
+            <div class="row">
+                <div class="col-12">
                         <div class="content">
                             <h2>
                                 <% if(page == "new") { %>Add Attack
@@ -715,13 +721,14 @@
                             </form>
                         </div>
                     </div>
-                <% } %>
             </div>
+            <% } %>
         </div>
     <% } else { %>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
+                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
+                <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
                     <div class="content">
                         <h2>Live attacks</h2>
                         <table class="table table-sm table-striped">
@@ -765,7 +772,11 @@
                         <% } %>
                     </div>
                 </div>
-                <div class="col-12">
+                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
+            </div>
+            <div class="row">
+                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
+                <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
                     <div class="content">
                         <h2>Attack history</h2>
                         <table class="table table-sm table-striped">
@@ -790,6 +801,7 @@
                         </table>
                     </div>
                 </div>
+                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
             </div>
         </div>
     <% } %>
