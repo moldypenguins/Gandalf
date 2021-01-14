@@ -65,8 +65,8 @@
                             <span id="label-theme" class="input-group-text">Type</span>
                           </div>
                           <select id="scantype" class="form-control custom-select" name="scantype">
-                            <% for(var t = 0; t < scantypes.length; t++) { %>
-                              <option value="<%= t+1 %>"><%= scantypes[t] %></option>
+                            <% for(var t = 1; t <= scantypes.length; t++) { %>
+                              <option value="<%= t %>"><%= scantypes[t] %></option>
                             <% } %>
                           </select>
                         </div>

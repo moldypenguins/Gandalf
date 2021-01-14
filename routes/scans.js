@@ -35,7 +35,7 @@ const bent = require('bent');
 const getStream = bent('string');
 
 
-router.get('/', access.webMemberRequired, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   let scnrs = await Member.find({access:{$gte:1}});
   scnrs = scnrs.filter(s => (s.roles & 2) != 0);
   for(let i = 0; i < scnrs.length; i++) {
@@ -49,7 +49,7 @@ router.get('/', access.webMemberRequired, async (req, res, next) => {
 });
 
 
-router.get('/parse', async (req, res, next) => {
+router.get('/parse', access.webScannerRequired, async (req, res, next) => {
   if(req.query.url == undefined) {
     next(createError(400));
   } else {
@@ -97,8 +97,8 @@ router.get('/parse', async (req, res, next) => {
 });
 
 
-router.post('/parse', async (req, res, next) => {
-  if(req.body.scan_ids != undefined && req.body.scan_ids.length > 0) {
+router.post('/parse', access.webScannerRequired, async (req, res, next) => {
+  if(req.body.scan_ids !== undefined && req.body.scan_ids.length > 0) {
     const start_time = Date.now();
     console.log('Sauron Forging The One Ring.');
     console.log(`Start Time: ${moment(start_time).format('YYYY-MM-DD H:mm:ss')}`);
@@ -137,7 +137,7 @@ router.post('/parse', async (req, res, next) => {
   }
 });
 
-router.get('/requests', async (req, res) => {
+router.get('/requests', access.webScannerRequired, async (req, res) => {
   let requests = await ScanRequest.find({active: true});
   res.send(requests);
 });
