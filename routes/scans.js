@@ -159,9 +159,26 @@ router.post('/request', async(req, res, next) => {
         active: true,
         tick: res.locals.tick,
         requester_id: res.locals.member.id
-
       });
       scanreq = await scanreq.save();
+      if(scanreq != null){
+        let dscan = await Scan.findOne({planet_id:plnt.id, scantype:3}).sort({tick:-1});
+        let dev = null;
+        if(dscan != null) {
+          dev = await DevelopmentScan.findOne({scan_id:dscan.id});
+        }
+
+        let msg = new BotMessage({
+          id: crypto.randomBytes(8).toString("hex"),
+          group_id: config.groups.scans,
+          message: `[${scanreq.id}] ${current_member.panick} ` +
+          `requested a ${config.pa.scantypes[scanreq.scantype]} Scan of ${scanreq.x}:${scanreq.y}:${scanreq.z} ` +
+          `Dists(i:${dev != null ? dev.wave_distorter : "?"}/r:${typeof(scanreq.dists) != 'undefined' ? scanreq.dists : "?"})\n` +
+          `https://game.planetarion.com/waves.pl?id=${scanreq.scantype}&x=${scanreq.x}&y=${scanreq.y}&z=${scanreq.z}`,
+          sent: false
+        });
+        await msg.save();
+      }
     }
   }
 });
