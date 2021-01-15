@@ -18,7 +18,7 @@
 const Mordor = require('../Mordor');
 
 let galaxyDumpSchema = Mordor.Schema({
-  galaxy_id: { type: mongoose.Schema.Types.ObjectId, ref: "Galaxy" },
+  galaxy_id: { type: Mordor.Schema.Types.ObjectId, ref: "Galaxy" },
   x: { type: Number, required: true },
   y: { type: Number, required: true },
   name: { type: String },
