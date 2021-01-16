@@ -20,34 +20,39 @@ const access = require('../access');
 const numeral = require('numeral');
 const moment = require('moment');
 const he = require('he');
-
 const bent = require('bent');
-
-var Fun_gif_usage = he.encode('!giphy <phrase>');
-var Fun_gif_desc = 'Finds a random gifphy using your phrase';
-var Fun_gif = (args) => {
-  return new Promise(async (resolve, reject) => {
-    if (!Array.isArray(args) || args.length < 1) { reject(Fun_gif_desc); }
-    let phrase = args.join('+');
-    let search_url = `http://api.giphy.com/v1/gifs/search?q=${phrase}&api_key=${config.giphy.key}&rating=r&limit=10`;
-    
-    const getStream = bent('string');
-    var gif = await getStream(search_url);
-    
-    if(gif != undefined) {
-      var content = body.data[getRandomInt(body.data.length-1)].images.original_mp4.mp4;
-      resolve(content);
-    } else {
-      console.log(error);
-      resolve(`Didnt find dick for that.`);
-    }
-      
-  });
-};
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
+
+function getRandomizedGiphy(body) {
+  return body.data[getRandomInt(body.data.length - 1)];
+}
+
+async function search(phrase, key) {
+  const search_url = `http://api.giphy.com/v1/gifs/search?q=${phrase}&api_key=${key}&rating=r&limit=50`;
+  const getStream = bent('string');
+  const body = JSON.parse(await getStream(search_url));
+  if (body) {
+    const data = getRandomizedGiphy(body);
+    if (data && data.images) {
+      return data.images.original_mp4.mp4;
+    }
+  }
+
+  //if it didnt return anything use the 404 search term
+  return search('404', key);
+}
+
+let Fun_gif_usage = he.encode('!giphy <phrase>');
+let Fun_gif_desc = 'Finds a random gifphy using your phrase';
+let Fun_gif = (args) => {
+  return new Promise(async (resolve, reject) => {
+    if (!Array.isArray(args) || args.length < 1) { reject(Fun_gif_desc); }
+    resolve(await search(args.join('+'), config.giphy.key));
+  });
+};
 
 module.exports = {
   "giphy": { usage: Fun_gif_usage, description: Fun_gif_desc, cast: Fun_gif, send_as_video: true },
