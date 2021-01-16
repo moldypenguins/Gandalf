@@ -117,4 +117,13 @@ let allianceSchema = Mordor.Schema({
   points_avg_lowest_rank_tick: Number
 });
 
+allianceSchema.statics.findByName = function (name, cb) {
+  return this.find(a =>
+    a.name.toLowerCase().startsWith(name.toLowerCase()) ||
+    a.name.toLowerCase().includes(name.toLowerCase()) ||
+    (a.alias !== undefined && a.alias.toLowerCase() === name.toLowerCase()), cb);
+}
+
 module.exports = Mordor.model('Alliance', allianceSchema, 'Alliances');
+
+
