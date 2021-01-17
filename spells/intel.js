@@ -62,28 +62,28 @@ async function intelDisplayPlanet(coords) {
         let intel = await Intel.findOne({planet_id: planet.id});
         if (intel) {
             console.log(`intel: ${JSON.stringify(intel)}`);
-            if (intel.nick) {
-                response += `\t<b>${intel.nick}</b>`
-            } else {
-                response += `\t<b>Nick not set</b>`
-            }
-            let alliance = await Alliance.findOne({id: intel.alliance_id});
+            let alliance = await Alliance.findOne({ _id: intel.alliance_id});
             console.log(`alliance: ${JSON.stringify(alliance)}`);
             if (alliance && alliance.name) {
                 response += `\t<b>${alliance.name}</b>`
             }
+            if (intel.nick) {
+                response += `\t<b>${intel.nick}</b>`
+            } else {
+                response += `\t<i>Nick not set</i>`
+            }
             return response + '\n';
         }
     }
-    return;
+    return response+ '\tNone\n';
 }
 
 async function intelDisplayGalaxy(coords) {
-    let response = `Intel ${coords.x}:${coords.y}`;
+    let response = `Intel ${coords.x}:${coords.y}\n`;
     for(let i = 1; i < 10; i++) {
         response += await intelDisplayPlanet({x:coords.x, y:coords.y, z: i});
     }
-    if (!!response) {
+    if (!response) {
         return `No intel found for galaxy ${coords.x}:${coords.y}.`
     }
     return response;
@@ -119,12 +119,17 @@ async function intelSet(args) {
     }
 
     if (args.alliance) {
-        let alliance = await Alliance.findByName(args.alliance);
+        console.log(`finding alliance by name ${args.alliance}`);
+        // let alliance = await Alliance.findByName(args.alliance);
+        let alliance = await Alliance.findOne({"name": new RegExp(args.alliance, 'i')});
+        console.log(alliance._id);
+        console.log(alliance.name);
         if (!alliance) {
             return `No alliance found for ${args.alliance}!!`;
         }
 
-        intel.alliance_id = alliance.id;
+        intel.alliance_id = alliance._id;
+        console.log(intel);
     }
 
     if (args.nick) {
@@ -132,13 +137,14 @@ async function intelSet(args) {
     }
 
     await intel.save();
-    return `Intel saved for ${coords.x}:${coords.y}:${coords.z}`;
+    let alliance = await Alliance.findOne({ _id: intel.alliance_id});
+    return `Intel saved for ${coords.x}:${coords.y}:${coords.z} ${alliance}/${intel.nick}`;
 }
 
 let Intel_usage = he.encode('!intel <coords> <alliance> <nick>');
 let Intel_desc = 'Displays or sets a coords';
 let Intel_fn = (args) => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve) => {
         let parsed = parseArgs(args);
         console.log(parsed);
         switch (parsed.action) {
@@ -148,23 +154,32 @@ let Intel_fn = (args) => {
             case INTEL_ACTION_SET:
                 resolve(await intelSet(parsed));
         }
-    })
+    });
 };
 
 
-let output = (intel) => {
-    return new Promise(async (resolve) => {
-        console.log(intel.alliance_id);
-        console.log({ _id: `ObjectId(${intel.alliance_id})` });
-        let alliance = await Alliance.findOne({ _id: `ObjectId("${intel.alliance_id}")` });
-        console.log(alliance);
-        let alliance_text = ``;
-        if (alliance) alliance_text = `Alliance: <b>${alliance.name}</b>`;
-        resolve(`Nick: <b>${intel.nick}</b>\n${alliance_text}`);
+let Intel_spam_usage = he.encode('!spam <alliance>');
+let Intel_spam_desc = 'Displays a set of coords based on alliance';
+let Intel_spam = (args) => {
+    return new Promise(async (resolve, reject) => {
+        if (args.length == 0) {
+            reject(Intel_spam_usage);
+            return;
+        }
+
+        let alliance = await Alliance.findOne({"name": new RegExp(args[0], 'i')});
+        let response = `Spam for <b>${alliance.name}</b>\n`;
+        let intels = await Intel.find({alliance_id: alliance._id});
+        for(let intel of intels) {
+            let planet = await Planet.findOne({id: intel.planet_id});
+            response += `${planet.x}:${planet.y}:${planet.z} `;
+        }
+        resolve(response);
     });
 };
 
 module.exports = {
-    "intel": { usage: Intel_usage, description: Intel_desc, cast: Intel_fn }
+    "intel": { usage: Intel_usage, description: Intel_desc, cast: Intel_fn },
+    "spam": { usage: Intel_spam_usage, description: Intel_spam_desc, cast: Intel_spam }
 };
 

@@ -19,7 +19,7 @@ const Mordor = require('../Mordor');
 
 let intelSchema = Mordor.Schema({
   planet_id: String,
-  alliance_id: Number,
+  alliance_id: String,
   nick: String,
   fakenick: String,
   defwhore: Boolean,
