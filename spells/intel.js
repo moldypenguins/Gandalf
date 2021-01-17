@@ -138,7 +138,7 @@ async function intelSet(args) {
 
     await intel.save();
     let alliance = await Alliance.findOne({ _id: intel.alliance_id});
-    return `Intel saved for ${coords.x}:${coords.y}:${coords.z} ${alliance}/${intel.nick}`;
+    return `Intel saved for ${coords.x}:${coords.y}:${coords.z} ${alliance.name}/${intel.nick}`;
 }
 
 let Intel_usage = he.encode('!intel <coords> <alliance> <nick>');
@@ -172,14 +172,43 @@ let Intel_spam = (args) => {
         let intels = await Intel.find({alliance_id: alliance._id});
         for(let intel of intels) {
             let planet = await Planet.findOne({id: intel.planet_id});
-            response += `${planet.x}:${planet.y}:${planet.z} `;
+	    if (planet && planet.x && planet.y && planet.z)
+	            response += `${planet.x}:${planet.y}:${planet.z} `;
         }
         resolve(response);
     });
 };
 
+let Intel_spamset_usage = he.encode('!spamset <alliance> <coords list>');
+let Intel_spamset_desc = 'Set of alliance for multiple coords at once';
+let Intel_spamset = (args) => {
+    return new Promise(async (resolve, reject) => {
+        if (args.length < 2) {
+            reject(Intel_spamset_usage);
+            return;
+        }
+
+        let alliance = await Alliance.findOne({"name": new RegExp(args[0], 'i')});
+        for(let i = 1; i < args.length; i++) {
+            let planet = await Utils.coordsToPlanetLookup(args[i]);
+		console.log(planet);
+            let intel = await Intel.findOne({planet_id: planet.id});
+            if (!intel) {
+		    console.log(`creating new intel`);
+                intel = new Intel({planet_id: planet.id});
+            }
+
+            intel.alliance_id = alliance._id;
+            await intel.save();
+		console.log(`intel saved for ${intel}`);
+        }
+        resolve(`Spam for <b>${alliance.name}</b> set.\n`);
+    });
+};
+
 module.exports = {
     "intel": { usage: Intel_usage, description: Intel_desc, cast: Intel_fn },
-    "spam": { usage: Intel_spam_usage, description: Intel_spam_desc, cast: Intel_spam }
+    "spam": { usage: Intel_spam_usage, description: Intel_spam_desc, cast: Intel_spam },
+    "spamset": { usage: Intel_spamset_usage, description: Intel_spamset_desc, cast: Intel_spamset }
 };
 
