@@ -10,43 +10,56 @@ let patterns = [ //Note these are order dependent xyz has to come before xy
 ];
 
 function parseCoords(input) {
-	    for (var regex of patterns) {
-		            var matches = regex.exec(input);
-		            if (matches) {
-				                if (matches.length == 4) {
-							                return { x: +matches[1], y: +matches[2], z: +matches[3] };
-							            } else if (matches.length == 3) {
-									                    return { x: +matches[1], y: +matches[2] };
-									                }
-				            }
-		        }
-	    return null;
+	for (let regex of patterns) {
+		let matches = regex.exec(input);
+		if (matches) {
+			if (matches.length == 4) {
+				return {x: +matches[1], y: +matches[2], z: +matches[3]};
+			} else if (matches.length == 3) {
+				return {x: +matches[1], y: +matches[2]};
+			}
+		}
+	}
+	return null;
 }
 
-function coordsToPlanetLookup(coordstr) {
-	    return new Promise(async (resolve, reject) => {
-		          var coords = parseCoords(coordstr);
-		          if (!coords) {
-				          reject(formatInvalidResponse(coordstr));
-				          return;
-				        }
-		      
-		          Planet.find().then((planets) => {
-				          var planet = planets.find(p => p && p.x && p.y && p.z && p.x == coords.x && p.y == coords.y && p.z == coords.z);
-				          if (!planet) {
-						            resolve(null);
-						            return;
-						          }
-				          resolve(planet);
-				        });
-		        });
-	  }
+const PLANET_COORD_TYPE = 0, GALAXY_COORD_TYPE = 1;
+
+function coordType(coords) {
+	if (coords.x && coords.y && coords.z) {
+		return PLANET_COORD_TYPE;
+	} else {
+		return GALAXY_COORD_TYPE;
+	}
+}
+
+function coordsToPlanetLookup(input) {
+	return new Promise(async (resolve, reject) => {
+		let coords = parseCoords(input);
+		if (!coords) {
+			reject(formatInvalidResponse(input));
+			return;
+		}
+
+		Planet.find().then((planets) => {
+			let planet = planets.find(p => p && p.x && p.y && p.z && p.x == coords.x && p.y == coords.y && p.z == coords.z);
+			if (!planet) {
+				resolve(null);
+				return;
+			}
+			resolve(planet);
+		});
+	});
+}
     
 function formatInvalidResponse(str) {
   return `Sorry I don't know who ${str} or they don't have coords set.`;
 }
 
 module.exports = {
-	    "parseCoords": parseCoords,
-	    "coordsToPlanetLookup": coordsToPlanetLookup
+	"parseCoords": parseCoords,
+	"coordsToPlanetLookup": coordsToPlanetLookup,
+	"coordType": coordType,
+	"PLANET_COORD_TYPE": PLANET_COORD_TYPE,
+	"GALAXY_COORD_TYPE": GALAXY_COORD_TYPE
 };

@@ -26,104 +26,160 @@ const Intel = require('../models/intel');
 const Planet = require('../models/planet');
 const Alliance = require('../models/alliance');
 
-let Intel_usage = he.encode('!intel <coords> <alliance=alliance> <nick=nick>');
+const INTEL_ACTION_DISPLAY = 0, INTEL_ACTION_SET = 1
+
+function parseArgs(args) {
+    // coords will always be 0
+    let coords = Utils.parseCoords(args[0]); // may be gal 1.2.* or planet 1.2.3
+    let type = Utils.coordType(coords);
+    let rval = {coords: coords, type: type};
+
+    // display
+    if (args.length == 1) {
+        return Object.assign(rval, {action:INTEL_ACTION_DISPLAY});
+    }
+
+    // assinging
+    rval = Object.assign(rval, {action:INTEL_ACTION_SET});
+
+    // setting alliance
+    if (args.length > 1) {
+        rval['alliance'] = args[1];
+    }
+
+    // setting nick
+    if (args.length > 2) {
+        rval['nick'] = args[2];
+    }
+
+    return rval;
+}
+
+async function intelDisplayPlanet(coords) {
+    let response = `${coords.x}:${coords.y}:${coords.z}`;
+    let planet = await Planet.findOne({x: coords.x, y:coords.y, z: coords.z});
+    if (planet) {
+        let intel = await Intel.findOne({planet_id: planet.id});
+        if (intel) {
+            console.log(`intel: ${JSON.stringify(intel)}`);
+            let alliance = await Alliance.findOne({ _id: intel.alliance_id});
+            console.log(`alliance: ${JSON.stringify(alliance)}`);
+            if (alliance && alliance.name) {
+                response += `\t<b>${alliance.name}</b>`
+            }
+            if (intel.nick) {
+                response += `\t<b>${intel.nick}</b>`
+            } else {
+                response += `\t<i>Nick not set</i>`
+            }
+            return response + '\n';
+        }
+    }
+    return response+ '\tNone\n';
+}
+
+async function intelDisplayGalaxy(coords) {
+    let response = `Intel ${coords.x}:${coords.y}\n`;
+    for(let i = 1; i < 10; i++) {
+        response += await intelDisplayPlanet({x:coords.x, y:coords.y, z: i});
+    }
+    if (!response) {
+        return `No intel found for galaxy ${coords.x}:${coords.y}.`
+    }
+    return response;
+}
+
+async function intelDisplay(args) {
+    switch(args.type) {
+        case Utils.GALAXY_COORD_TYPE:
+            return await intelDisplayGalaxy(args.coords);
+        case Utils.PLANET_COORD_TYPE:
+            let response = await intelDisplayPlanet(args.coords);
+            if (!response) {
+                response = `No intel found for planet ${args.coords.x}:${args.coords.y}:${args.coords.z}`;
+            }
+            return response;
+    }
+}
+
+async function intelSet(args) {
+    if (args.type == Utils.GALAXY_COORD_TYPE) {
+        return `You can't set intel for an entire galaxy gtfo.`;
+    }
+
+    let coords = args.coords;
+    let planet = await Planet.findOne({ x: coords.x, y: coords.y, z: coords.z});
+    if (!planet) {
+        return `No planet found for ${x}:${y}:${z}!!`;
+    }
+
+    let intel = await Intel.findOne({planet_id: planet.id});
+    if (!intel) {
+        intel = new Intel({planet_id: planet.id});
+    }
+
+    if (args.alliance) {
+        console.log(`finding alliance by name ${args.alliance}`);
+        // let alliance = await Alliance.findByName(args.alliance);
+        let alliance = await Alliance.findOne({"name": new RegExp(args.alliance, 'i')});
+        console.log(alliance._id);
+        console.log(alliance.name);
+        if (!alliance) {
+            return `No alliance found for ${args.alliance}!!`;
+        }
+
+        intel.alliance_id = alliance._id;
+        console.log(intel);
+    }
+
+    if (args.nick) {
+        intel.nick = args.nick;
+    }
+
+    await intel.save();
+    let alliance = await Alliance.findOne({ _id: intel.alliance_id});
+    return `Intel saved for ${coords.x}:${coords.y}:${coords.z} ${alliance}/${intel.nick}`;
+}
+
+let Intel_usage = he.encode('!intel <coords> <alliance> <nick>');
 let Intel_desc = 'Displays or sets a coords';
 let Intel_fn = (args) => {
-    return new Promise(async (resolve, reject) => {
-        if (!Array.isArray(args) || args.length < 1) { reject(Intel_usage); }
-        let coords = Utils.parseCoords(args[0]);
-        if (coords === undefined) {
-            reject(`Cannot parse provided coords: ${args[0]}`)
-        } else {
-            if (args.length === 1 && coords.x && coords.y && !coords.z) {
-                let reply = `Intel for ${coords.x}:${coords.y}:\n`;
-                for (let i = 1; i < 12; i++) {
-                    let planet = await Planet.findOne({ x: coords.x, y: coords.y, z: i });
-                    if (planet) {
-                        let intel = await Intel.findOne({planet_id: planet.id});
-                        if (intel) {
-                            let alliance_text = ``;
-                            if (intel.alliance_id) {
-                                let alliance = await Alliance.findOne({id: intel.alliance_id});
-                                if (alliance) alliance_text = `<b>${alliance.name}</b>`;
-                            }
-                            reply += `${i}: <b>${intel.nick}</b> ${alliance_text}\n`
-                        }
-                    }
-                }
-                resolve(reply);
-            } else if (args.length === 1 && coords.x && coords.y && coords.z) {
-                let planet = await Planet.findOne({ x: coords.x, y: coords.y, z: coords.z });
-                if (!planet) {
-                    reject(`(1) No planet found for ${coords.x}:${coords.y}:${coords.z}`);
-                }
-                let intel = await Intel.findOne({planet_id: planet.id});
-                let reply = "";
-                if (!intel) {
-                    reply = `No intel stored for ${coords.x}:${coords.y}:${coords.z}`;
-                } else {
-                    reply = `Intel for ${coords.x}:${coords.y}:${coords.z}\n` + await output(intel)
-                }
-                resolve(reply);
-            } else {
-                let planet = await Planet.findOne({ x: coords.x, y: coords.y, z: coords.z });
-                if (!planet) {
-                    reject(`(2) No planet found for ${coords.x}:${coords.y}:${coords.z}`);
-                }
-                let intel = await Intel.findOne({ planet_id: planet.id });
-                if (!intel) {
-                    intel = new Intel({ planet_id: planet.id });
-                }
-                for (let item of args.slice(1)) {
-                    let split = item.split("=");
-                    if (split.length !== 2) {
-                        reject(Intel_usage);
-                        return;
-                    }
-                    let key = split[0];
-                    let value = split[1];
-                    switch (key.toLowerCase()) {
-                        case 'nick':
-                            intel.nick = value;
-                            break;
-                        case 'alliance': {
-                            let alliances = await Alliance.find();
-                            console.log(value);
-                            let alliance = alliances.find(a => a.name.toLowerCase().startsWith(value.toLowerCase()) || a.name.toLowerCase().includes(value.toLowerCase()) || (a.alias !== undefined && a.alias.toLowerCase() === value.toLowerCase()));
-                            console.log(alliance);
-                            if (!alliance) {
-                                reject(`No alliance found for: <b>${value}</b>`);
-                                return;
-                            }
-                            intel.alliance_id = alliance.id;
-                            break;
-                        }
-                        default:
-                            reject(`Haven't added that intel command yet: ${key}`);
-                            return;
-                    }
-                }
-                await intel.save();
-                resolve(`Added intel for ${coords.x}:${coords.y}:${coords.z}\n${await output(intel)}`);
-            }
-
+    return new Promise(async (resolve) => {
+        let parsed = parseArgs(args);
+        console.log(parsed);
+        switch (parsed.action) {
+            default:
+            case INTEL_ACTION_DISPLAY:
+                resolve(await intelDisplay(parsed));
+            case INTEL_ACTION_SET:
+                resolve(await intelSet(parsed));
         }
     });
 };
 
-let output = (intel) => {
-    return new Promise(async (resolve) => {
-        console.log(intel.alliance_id);
-        console.log({ _id: `ObjectId(${intel.alliance_id})` });
-        let alliance = await Alliance.findOne({ _id: `ObjectId("${intel.alliance_id}")` });
-        console.log(alliance);
-        let alliance_text = ``;
-        if (alliance) alliance_text = `Alliance: <b>${alliance.name}</b>`;
-        resolve(`Nick: <b>${intel.nick}</b>\n${alliance_text}`);
+
+let Intel_spam_usage = he.encode('!spam <alliance>');
+let Intel_spam_desc = 'Displays a set of coords based on alliance';
+let Intel_spam = (args) => {
+    return new Promise(async (resolve, reject) => {
+        if (args.length == 0) {
+            reject(Intel_spam_usage);
+            return;
+        }
+
+        let alliance = await Alliance.findOne({"name": new RegExp(args[0], 'i')});
+        let response = `Spam for <b>${alliance.name}</b>\n`;
+        let intels = await Intel.find({alliance_id: alliance._id});
+        for(let intel of intels) {
+            let planet = await Planet.findOne({id: intel.planet_id});
+            response += `${planet.x}:${planet.y}:${planet.z} `;
+        }
+        resolve(response);
     });
 };
 
 module.exports = {
-    "intel": { usage: Intel_usage, description: Intel_desc, cast: Intel_fn }
+    "intel": { usage: Intel_usage, description: Intel_desc, cast: Intel_fn },
+    "spam": { usage: Intel_spam_usage, description: Intel_spam_desc, cast: Intel_spam }
 };
 

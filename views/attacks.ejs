@@ -163,29 +163,29 @@
                                         <td>
                                             <% if(trg && trg.scans) { %>
                                                 <div class="btn-group btn-group-sm position-static" role="group" aria-label="Scans">
-                                                    <% if(typeof (trg.scans.p) != "undefined" && trg.scans.p != null) { %>
+                                                    <% if(trg.scans.p && trg.scans.p.scan) { %>
                                                         <a class="btn btn-scan <% if(trg.scans.p.tick > tick.id - expiries.P.bestbefore) { %>btn-success<% } else if(trg.scans.p.tick > tick.id - expiries.P.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.p.id %>" target="_blank">P</a>
                                                     <% } %>
-                                                    <% if(trg.scans.d) { %>
+                                                    <% if(trg.scans.d && trg.scans.d.scan) { %>
                                                         <a class="btn btn-scan <% if(trg.scans.d.tick > tick.id - expiries.D.bestbefore) { %>btn-success<% } else if(trg.scans.d.tick > tick.id - expiries.D.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.d.id %>" target="_blank">D</a>
                                                     <% } %>
-                                                    <% if(trg.scans.u) { %>
+                                                    <% if(trg.scans.u && trg.scans.u.scan) { %>
                                                         <a class="btn btn-scan <% if(trg.scans.u.tick > tick.id - expiries.U.bestbefore) { %>btn-success<% } else if(trg.scans.u.tick > tick.id - expiries.U.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.u.id %>" target="_blank">U</a>
                                                     <% } %>
-                                                    <% if(trg.scans.n) { %>
+                                                    <% if(trg.scans.n && trg.scans.n.scan) { %>
                                                         <a class="btn btn-scan <% if(trg.scans.n.tick > tick.id - expiries.N.bestbefore) { %>btn-success<% } else if(trg.scans.n.tick > tick.id - expiries.N.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.n.id %>" target="_blank">N</a>
                                                     <% } %>
-                                                    <% if(trg.scans.j) { %>
+                                                    <% if(trg.scans.j && trg.scans.j.scan) { %>
                                                         <a class="btn btn-scan <% if(trg.scans.j.tick > tick.id - expiries.J.bestbefore) { %>btn-success<% } else if(trg.scans.j.tick > tick.id - expiries.J.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.j.id %>" target="_blank">J</a>
                                                     <% } %>
-                                                    <% if(trg.scans.a) { %>
+                                                    <% if(trg.scans.a && trg.scans.a.scan) { %>
                                                         <a class="btn btn-scan <% if(trg.scans.a.tick > tick.id - expiries.A.bestbefore) { %>btn-success<% } else if(trg.scans.a.tick > tick.id - expiries.A.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.a.id %>" target="_blank">A</a>
                                                     <% } %>
                                                     <% var query = "?def_coords_x_1=" + trg.x + "&def_coords_y_1=" + trg.y + "&def_coords_z_1=" + trg.z + "&def_planet_value_1=" + trg.value + "&def_planet_score_1=" + trg.score + "&def_1_race=" + races[trg.race.toLowerCase()]
-                                                        if (typeof (trg.scans.p) != "undefined" && trg.scans.p != null && typeof (trg.scans.p.scan) != "undefined" && trg.scans.p.scan != null) {
+                                                        if (trg.scans.p && trg.scans.p.scan) {
                                                             query += "&def_metal_asteroids=" + trg.scans.p.scan.roid_metal + "&def_crystal_asteroids=" + trg.scans.p.scan.roid_crystal + "&def_eonium_asteroids=" + trg.scans.p.scan.roid_eonium + "&def_metal_resources=" + trg.scans.p.scan.res_metal + "&def_crystal_resources=" + trg.scans.p.scan.res_crystal + "&def_eonium_resources=" + trg.scans.p.scan.res_eonium;
                                                         }
-                                                        if (typeof (trg.scans.d) != "undefined" && trg.scans.d != null && typeof (trg.scans.d.scan) != "undefined" && trg.scans.d.scan != null) {
+                                                        if (trg.scans.d && trg.scans.d.scan) {
                                                             var total_cons = trg.scans.d.scan.light_factory + trg.scans.d.scan.medium_factory + trg.scans.d.scan.heavy_factory + trg.scans.d.scan.wave_amplifier + trg.scans.d.scan.wave_distorter + trg.scans.d.scan.metal_refinery + trg.scans.d.scan.crystal_refinery + trg.scans.d.scan.eonium_refinery + trg.scans.d.scan.research_lab + trg.scans.d.scan.finance_centre + trg.scans.d.scan.military_centre + trg.scans.d.scan.security_centre + trg.scans.d.scan.structure_defence;
                                                             query += "&def_structures=" + total_cons + "&def_structure_defence=" + trg.scans.d.scan.structure_defence;
                                                         }
@@ -523,7 +523,7 @@
                                         <% } else { %>
                                             <td class="no-sort">
                                                 <form method="POST" action="/att/<%= attack.hash %>">
- 						<input type="hidden" name="target" value="<%= targets[i].id %>"/>
+                                                    <input type="hidden" name="target" value="<%= targets[i].id %>"/>
                                                     <div class="btn-group btn-group-sm position-static" role="group">
                                                         <button class="btn btn-sm btn-primary" type="submit" name="claim" value="<%= w %>"><i class="fas fa-plane-departure" aria-hidden="true"></i></button>
                                                     </div>
@@ -813,3 +813,4 @@
 </footer>
 </body>
 </html>
+
