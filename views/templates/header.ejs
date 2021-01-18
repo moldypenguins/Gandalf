@@ -2,9 +2,9 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <nav class="navbar navbar-expand-lg navbar-<%= site_theme.navbar %>">
+            <nav class="navbar navbar-expand-lg navbar-<%= site_theme && site_theme.navbar ? site_theme.navbar : 'brand' %>">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="/"><img class="navbar-logo" src="/images/logo/<%= site_theme.key %>.png" width="30" height="30" alt=""/><%= alliance_name %></a>
+                    <a class="navbar-brand" href="/"><img class="navbar-logo" src="/images/logo/<%= site_theme && site_theme.key ? site_theme.key : 'default' %>.png" width="30" height="30" alt=""/><%= alliance_name %></a>
                     <% if(typeof(member) === 'undefined' || (typeof(member) !== 'undefined' && member == null)) { %>
                         <div class="navbar-nav ml-auto"><script async src="https://telegram.org/js/telegram-widget.js?12" data-telegram-login="<%= bot_name %>" data-size="large" data-auth-url="<%= site_url %>/auth" data-request-access="write"></script></div>
                     <% } else { %>
