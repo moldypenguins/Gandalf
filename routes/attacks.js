@@ -97,7 +97,7 @@ router.post('/new', access.webCommandRequired, async (req, res, next) => {
   }
 });
 
-async function addIntel(target) {
+let addIntel = async (target) => {
   let intel = await Intel.findOne({planet_id: target.id});
   target.intel = {};
   if (intel) {
@@ -109,7 +109,6 @@ async function addIntel(target) {
     } else {
       target.intel.alliance = "-"
     }
-
     target.intel.nick = intel.nick ? intel.nick : '-';
   }
   return target;
@@ -150,7 +149,7 @@ router.post('/edit/:hash', access.webCommandRequired, async (req, res, next) => 
 
 router.post('/edit/targ/:hash', access.webCommandRequired, async (req, res, next) => {
   let att = await Attack.findOne({hash:req.params.hash});
-  if(req.body.add != undefined && req.body.coords != undefined){
+  if(req.body.add !== undefined && req.body.coords !== undefined){
     let inCoords = req.body.coords.split(' ');
     //console.log('COORDS' + util.inspect(inCoords, false, null, true));
     for(let x = 0; x < inCoords.length; x++) {
@@ -198,7 +197,7 @@ router.post('/edit/targ/:hash', access.webCommandRequired, async (req, res, next
       }
     }
     res.redirect(`/att/edit/${req.params.hash}`);
-  } else if(req.body.delete != undefined) {
+  } else if(req.body.delete !== undefined) {
     let att = await Attack.findOne({hash:req.params.hash});
     let claims = await AttackTargetClaim.deleteMany({ attack_id:att.id, planet_id:req.body.delete });
     let trg = await AttackTarget.deleteOne({attack_id:att.id, planet_id:req.body.delete});
@@ -218,10 +217,6 @@ router.get('/:hash', attackLimiter, async (req, res, next) => {
   var targs = await Planet.find({id:{$in:atttarg.map(at => at.planet_id)}});
   var clms = await AttackTargetClaim.find({attack_id:att.id});
   for(let i = 0; i < targs.length; i++) {
-    targs[i].intel = await Intel.findOne({planet_id:targs[i].id});
-    if(targs[i].intel != null && targs[i].intel.alliance_id !== undefined && targs[i].intel.alliance_id != null) {
-      targs[i].intel.alliance = await Alliance.findOne({id: targs[i].intel.alliance_id});
-    }
     targs[i].scans = {};
     targs[i].scans.p = await Scan.findOne({planet_id:targs[i].id, scantype:1}).sort({tick:-1, _id:-1});
     if(targs[i].scans.p != undefined) { targs[i].scans.p.scan = await PlanetScan.findOne({scan_id:targs[i].scans.p.id}); }
@@ -250,7 +245,7 @@ router.get('/:hash', attackLimiter, async (req, res, next) => {
     }
     //targs[i].bashlimit = 0.16;
 
-    targs[i] = await addIntel(targs[i]);
+    await addIntel(targs[i]);
   }
   //console.log('MEMBERS: ' + util.inspect(mems, false, null, true));
   res.render('attacks', { page: 'att', attack: att, races:config.pa.races, targets: targs, claims: clms, numeral: numeral, scanurl: config.pa.links.scans, bcalcurl: config.pa.links.bcalc, expiries: config.pa.scans, members:mems, scantypes:config.pa.scantypes });
