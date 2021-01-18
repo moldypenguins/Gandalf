@@ -34,7 +34,9 @@ const crypto = require("crypto");
 const numeral = require('numeral');
 const util = require('util');
 const rateLimit = require("express-rate-limit");
+const slowDown = require("express-slow-down");
 
+/*
 const attackLimiter = rateLimit({
   windowMs: 5 * 60 * 1000, // 5 minute window
   max: 5, // start blocking after 5 requests
@@ -43,7 +45,12 @@ const attackLimiter = rateLimit({
     return req.ip + '-' + req.params.hash;
   }
 });
-
+*/
+const attackLimiter = slowDown({
+  windowMs: 5 * 60 * 1000, // 5 minutes
+  delayAfter: 5, // allow 5 requests to go at full-speed, then...
+  delayMs: 100 // 6th request has a 100ms delay, 7th has a 200ms delay, 8th gets 300ms, etc.
+});
 
 router.get('/', async (req, res, next) => {
   var attacks = await Attack.find().sort({id: -1});
