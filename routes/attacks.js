@@ -22,6 +22,8 @@ const Attack = require('../models/attack');
 const AttackTarget = require('../models/attack-target');
 const AttackTargetClaim = require('../models/attack-target-claim');
 const Planet = require('../models/planet');
+const Alliance = require('../models/alliance');
+const Intel = require('../models/intel');
 const Scan = require('../models/scan');
 const PlanetScan = require('../models/scan-planet');
 const DevelopmentScan = require('../models/scan-development');
@@ -192,6 +194,10 @@ router.get('/:hash', attackLimiter, async (req, res, next) => {
   var targs = await Planet.find({id:{$in:atttarg.map(at => at.planet_id)}});
   var clms = await AttackTargetClaim.find({attack_id:att.id});
   for(let i = 0; i < targs.length; i++) {
+    targs[i].intel = await Intel.findOne({planet_id:targs[i].id});
+    if(targs[i].intel != null && targs[i].intel.alliance_id !== undefined && targs[i].intel.alliance_id != null) {
+      targs[i].intel.alliance = await Alliance.findOne({id: targs[i].intel.alliance_id});
+    }
     targs[i].scans = {};
     targs[i].scans.p = await Scan.findOne({planet_id:targs[i].id, scantype:1}).sort({tick:-1, _id:-1});
     if(targs[i].scans.p != undefined) { targs[i].scans.p.scan = await PlanetScan.findOne({scan_id:targs[i].scans.p.id}); }

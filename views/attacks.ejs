@@ -224,8 +224,10 @@
                                                 </div>
                                             <% } %>
                                         </td>
-                                        <td class="no-wrap">Name
-                                            <strong>/</strong> Alliance
+                                        <td class="no-wrap">
+                                            <% if (trg.intel) { %>
+                                                <%= trg.intel.nick %><strong>/</strong> <%= trg.intel.alliance.name %>
+                                            <% } %>
                                         </td>
                                         <td>
                                             <form method="POST" action="/att/<%= attack.hash %>">
