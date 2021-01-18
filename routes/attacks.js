@@ -26,6 +26,8 @@ const Scan = require('../models/scan');
 const PlanetScan = require('../models/scan-planet');
 const DevelopmentScan = require('../models/scan-development');
 const UnitScan = require('../models/scan-unit');
+const Intel = require('../models/intel');
+const Alliance = require('../models/alliance');
 const createError = require('http-errors');
 const express = require('express');
 let router = express.Router();
@@ -86,10 +88,32 @@ router.post('/new', access.webCommandRequired, async (req, res, next) => {
   }
 });
 
+async function addIntel(target) {
+  let intel = await Intel.findOne({planet_id: target.id});
+  target.intel = {};
+  if (intel) {
+//    console.log(intel);
+    if (intel.alliance_id) {
+      let alliance = await Alliance.findOne({ _id: intel.alliance_id});
+  //    console.log(alliance)
+      target.intel.alliance = alliance.name;
+    } else {
+      target.intel.alliance = "-"
+    }
+
+    target.intel.nick = intel.nick ? intel.nick : '-';
+  }
+  return target;
+}
+
+
 router.get('/edit/:hash', access.webCommandRequired, async (req, res, next) => {
   var att = await Attack.findOne({hash:req.params.hash});
   var atttarg = await AttackTarget.find({attack_id:att.id});
   var targs = await Planet.find({id:{$in:atttarg.map(at => at.planet_id)}});
+  for(var target of targs) {
+    await addIntel(target);
+  }
   let tks = [];
   for(let i = att.createtick; i <= config.pa.tick.end; i++) {
     tks.push(i);
@@ -212,6 +236,8 @@ router.get('/:hash', attackLimiter, async (req, res, next) => {
       targs[i].anti.bs = false; if(targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() == "battleship" || shp.ship.target2.toLowerCase() == "battleship" || shp.ship.target3.toLowerCase() == "battleship"))) { targs[i].anti.bs = true; }
     }
     //targs[i].bashlimit = 0.16;
+
+    targs[i] = await addIntel(targs[i]);
   }
   //console.log('MEMBERS: ' + util.inspect(mems, false, null, true));
   res.render('attacks', { page: 'att', attack: att, races:config.pa.races, targets: targs, claims: clms, numeral: numeral, scanurl: config.pa.links.scans, bcalcurl: config.pa.links.bcalc, expiries: config.pa.scans, members:mems, scantypes:config.pa.scantypes });
@@ -239,10 +265,12 @@ router.post('/:hash', async (req, res, next) => {
             planet_id:req.body.target,
             wave:req.body.claim
           });
-          let saved = await clm.save();
+          console.log(clm);
+		let saved = await clm.save();
           //console.log('CLAIM: ' + util.inspect(saved, false, null, true));
           res.redirect(`/att/${att.hash}`);
         } catch(err) {
+		console.log(err);
           next(createError(409));
         }
       }
@@ -257,3 +285,4 @@ router.post('/:hash', async (req, res, next) => {
 });
 
 module.exports = router;
+

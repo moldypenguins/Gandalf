@@ -224,8 +224,8 @@
                                                 </div>
                                             <% } %>
                                         </td>
-                                        <td class="no-wrap">Name
-                                            <strong>/</strong> Alliance
+                                        <td class="no-wrap"><% trg.intel.nick %>
+                                            <strong>/</strong> <% trg.intel.alliance %>
                                         </td>
                                         <td>
                                             <form method="POST" action="/att/<%= attack.hash %>">
@@ -531,8 +531,8 @@
                                             </td>
                                         <% } %>
                                     <% } %>
-                                    <td class="no-wrap no-sort">Name
-                                        <strong>/</strong> Alliance
+                                    <td class="no-wrap no-sort"><% trg && trg.intel && trg.intel.nick ? trg.intel.nick : '-' %>
+                                        <strong>/</strong> <% trg && trg.intel && trg.intel.alliance ? trg.intel.nak : '-' %>
                                     </td>
                                 </tr>
                             <% } %>
@@ -708,7 +708,7 @@
                                                 <td><%= numeral(targets[i].value).format("0,0") %></td>
                                                 <td><%= numeral(targets[i].score).format("0,0") %></td>
                                                 <td></td> <!-- stock/prod -->
-                                                <td></td> <!-- intel -->
+                                                <td><%= targets[i].intel.nick %>/<%= targets[i].intel.alliance %></td>
                                                 <td>
                                                     <button type="submit" name="delete" id="delete" class="btn btn-sm btn-danger" value="<%= targets[i].id %>">
                                                         <i class="fas fa-trash-alt" aria-hidden="true"></i>
