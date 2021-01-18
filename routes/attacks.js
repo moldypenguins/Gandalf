@@ -33,7 +33,7 @@ const access = require('../access');
 const crypto = require("crypto");
 const numeral = require('numeral');
 const util = require('util');
-const rateLimit = require("express-rate-limit");
+//const rateLimit = require("express-rate-limit");
 const slowDown = require("express-slow-down");
 
 /*
