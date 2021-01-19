@@ -49,7 +49,7 @@ const attackLimiter = rateLimit({
 });
 */
 const attackLimiter = slowDown({
-  windowMs: 5 * 60 * 1000, // 5 minutes
+  windowMs: 2 * 60 * 1000, // 2 minutes
   delayAfter: 5, // allow 5 requests to go at full-speed, then...
   delayMs: 100 // 6th request has a 100ms delay, 7th has a 200ms delay, 8th gets 300ms, etc.
 });
