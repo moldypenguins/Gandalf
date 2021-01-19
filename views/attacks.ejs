@@ -226,7 +226,7 @@
                                         </td>
                                         <td class="no-wrap">
                                             <% if (trg.intel) { %>
-                                                <%= trg.intel.nick %><strong>/</strong> <%= trg.intel.alliance %>
+                                                <%= trg.intel.nick %>/<%= trg.intel.alliance %>
                                             <% } %>
                                         </td>
                                         <td>
@@ -533,8 +533,10 @@
                                             </td>
                                         <% } %>
                                     <% } %>
-                                    <td class="no-wrap no-sort"><% trg && trg.intel && trg.intel.nick ? trg.intel.nick : '-' %>
-                                        <strong>/</strong> <% trg && trg.intel && trg.intel.alliance ? trg.intel.nak : '-' %>
+                                    <td class="no-wrap no-sort">
+                                        <% if (targets[i].intel) { %>
+                                            <%= targets[i].intel.nick %>/<%= targets[i].intel.alliance %>
+                                        <% } %>
                                     </td>
                                 </tr>
                             <% } %>
