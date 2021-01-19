@@ -209,6 +209,6 @@ let Intel_spamset = (args) => {
 module.exports = {
     "intel": { usage: Intel_usage, description: Intel_desc, cast: Intel_fn },
     "spam": { usage: Intel_spam_usage, description: Intel_spam_desc, cast: Intel_spam },
-    "spamset": { usage: Intel_spamset_usage, description: Intel_spamset_desc, cast: Intel_spamset }
+    "spamset": { usage: Intel_spamset_usage, description: Intel_spamset_desc, access: access.botCommandRequired, cast: Intel_spamset }
 };
 
