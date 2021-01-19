@@ -128,21 +128,14 @@ router.get('/edit/:hash', access.webCommandRequired, async (req, res, next) => {
 });
 
 router.post('/edit/:hash', access.webCommandRequired, async (req, res, next) => {
-  let att = await Attack.updateOne({hash:req.params.hash}, {
+  await Attack.updateOne({hash:req.params.hash}, {
     landtick: req.body.landtick,
     waves: req.body.waves,
     releasetick: req.body.releasetick,
     title: req.body.title,
     comment: req.body.comment
   });
-  //console.log(util.inspect(att, false, null, true));
-  if(att.nModified > 0) {
-    let saved = await Attack.findOne({hash:req.params.hash});
-    //console.log("Attack #" + saved.id + " saved to Attacks collection.");
-    res.redirect(`/att/${saved.hash}`);
-  } else {
-    next(createError(500));
-  }
+  res.redirect(`/att/${req.params.hash}`);
 });
 
 router.post('/edit/targ/:hash', access.webCommandRequired, async (req, res, next) => {
