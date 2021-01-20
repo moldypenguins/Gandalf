@@ -87,8 +87,30 @@ var Scans_req = (args, current_member) => {
 var Scans_scan_usage = he.encode('!scan <x:y:z> [p|d|n|j|a]');
 var Scans_scan_desc = 'Show recent scans for a planet.';
 var Scans_scan = (args) => {
-  return new Promise(function (resolve, reject) {
-    resolve('Coming Soon');
+  return new Promise(async (resolve, reject)  => {
+    if (!Array.isArray(args) || args.length < 2) { reject(Scans_scan_usage); }
+    let coords = args[0];
+    let scan_types = args[1];
+    let planet = await Utils.coordsToPlanetLookup(coords);
+    if (!planet) {
+      reject(`Planet not found!`);
+      return;
+    }
+    let reply = `Found scans for ${planet.x}:${planet.y}:${planet.z}:\n`
+    for (let type of scan_types) {
+      let scan_type = Object.keys(config.pa.scantypes).find(key => config.pa.scantypes[key].charAt(0).toUpperCase() === type.toUpperCase());
+      reply += `${type.toUpperCase()}:\n`
+      let scans = await Scan.find({planet_id: planet.id, scantype: scan_type}).sort({tick: -1}).limit(3);
+      if (scans && scans.length > 0) {
+        for (let scan of scans) {
+          reply += `${config.pa.links.scans}?scan_id=${scan.id}\n`
+        }
+      } else {
+        reply += `<i>None found</i>\n`
+      }
+      reply += `\n`;
+    }
+    resolve(reply);
   });
 };
 
