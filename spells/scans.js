@@ -84,9 +84,9 @@ var Scans_req = (args, current_member) => {
 };
 
 
-var Scans_scan_usage = he.encode('!scan <x:y:z> [p|d|n|j|a]');
-var Scans_scan_desc = 'Show recent scans for a planet.';
-var Scans_scan = (args) => {
+var Scans_findscan_usage = he.encode('!findscan <x:y:z> [p|d|n|j|a]');
+var Scans_findscan_desc = 'Find recent scans for a planet.';
+var Scans_findscan = (args) => {
   return new Promise(async (resolve, reject)  => {
     if (!Array.isArray(args) || args.length < 2) { reject(Scans_scan_usage); }
     let coords = args[0];
@@ -144,7 +144,7 @@ var Scans_links = (args) => {
 
 module.exports = {
   "reqscan": { usage: Scans_req_usage, description: Scans_req_desc, cast: Scans_req, include_member: true },
-  "findscan": { usage: Scans_scan_usage, description: Scans_scan_desc, cast: Scans_scan },
+  "findscan": { usage: Scans_findscan_usage, description: Scans_findscan_desc, cast: Scans_findscan },
   "reqcancel": { usage: Scans_cancel_usage, description: Scans_cancel_desc, cast: Scans_cancel, include_member: true },
   "reqlinks" : { usage: Scans_links_usage, description: Scans_links_desc, access: access.botScannerRequired, channel: access.botChannelScannerPrivate, cast: Scans_links }
 };
