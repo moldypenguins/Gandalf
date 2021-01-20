@@ -175,7 +175,7 @@
                                                     <% if(trg.scans.n && trg.scans.n.scan) { %>
                                                         <a class="btn btn-scan <% if(trg.scans.n.tick > tick.id - expiries.N.bestbefore) { %>btn-success<% } else if(trg.scans.n.tick > tick.id - expiries.N.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.n.id %>" target="_blank">N</a>
                                                     <% } %>
-                                                    <% if(trg.scans.j && trg.scans.j.scan) { %>
+                                                    <% if(trg.scans.j !== undefined && trg.scans.j != null) { %>
                                                         <a class="btn btn-scan <% if(trg.scans.j.tick > tick.id - expiries.J.bestbefore) { %>btn-success<% } else if(trg.scans.j.tick > tick.id - expiries.J.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.j.id %>" target="_blank">J</a>
                                                     <% } %>
                                                     <% if(trg.scans.a && trg.scans.a.scan) { %>
@@ -443,7 +443,7 @@
                                                 <% if(typeof (targets[i].scans.n) != "undefined" && targets[i].scans.n != null) { %>
                                                     <a class="btn btn-scan <% if(targets[i].scans.n.tick > tick.id - expiries.N.bestbefore) { %>btn-success<% } else if(targets[i].scans.n.tick > tick.id - expiries.N.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.n.id %>" target="_blank">N</a>
                                                 <% } %>
-                                                <% if(typeof (targets[i].scans.j) != "undefined" && targets[i].scans.j != null) { %>
+                                                <% if(targets[i].scans.j !== undefined && targets[i].scans.j != null) { %>
                                                     <a class="btn btn-scan <% if(targets[i].scans.j.tick > tick.id - expiries.J.bestbefore) { %>btn-success<% } else if(targets[i].scans.j.tick > tick.id - expiries.J.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.j.id %>" target="_blank">J</a>
                                                 <% } %>
                                                 <% if(typeof (targets[i].scans.a) != "undefined" && targets[i].scans.a != null) { %>
