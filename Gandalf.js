@@ -157,7 +157,7 @@ Mordor.connection.once("open", () => {
           if(scanurl.query.scan_id !== undefined && !await Scan.exists({id:scanurl.query.scan_id})) {
             //scan
             try {
-              let result = await Scan.parse(req.session.member.id, scanurl.query.scan_id, null, page_content);
+              let result = await Scan.parse(ctx.message.from.id, scanurl.query.scan_id, null, page_content);
               //console.log('SUCCESS: ' + result);
             } catch(err) {
               console.log('ERROR: ' + err);
