@@ -48,7 +48,8 @@ const rule = new schedule.RecurrenceRule();
 const havoc = false;
 
 if(havoc) {
-  rule.minute = [1, 16, 31, 46];
+  rule.minute = [0, 15, 30, 45];
+  rule.second = 30;
 } else {
   rule.minute = 0;
   rule.second = 30;

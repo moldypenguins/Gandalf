@@ -62,6 +62,15 @@
       postScanLinks([... new Set(unique(scns))]);
       initAllianceScanRequests();
     }
+
+    switch (page) {
+      case 'alliance_members':
+        alliance_member_addCoordButton();
+        break;
+      case 'alliance_intel':
+        alliance_intel_addCoordButton();
+        break;
+    }
   }
 
 
@@ -147,6 +156,40 @@
         initAllianceScanRequests();
       }
     };
+  }
+
+  function alliance_intel_addCoordButton() {
+    $j('#contents_footer').append('<input id="coordList" type="submit" value="Get Coord List"></input>');
+    $j('#coordList').click(listIntelCoords);
+  }
+
+  function alliance_member_addCoordButton() {
+    $j('#contents_footer').append('<input id="coordList" type="submit" value="Get Coord List"></input>');
+    $j('#coordList').click(listMemberCoords);
+  }
+
+  function listMemberCoords() {
+    coordsList($j('table tbody tr td:nth-child(5) a'));
+  }
+
+  function listIntelCoords() {
+    coordsList($j('table tbody tr td:nth-child(1) a'), true);
+  }
+
+  function coordsList(selector, skip_first) {
+    var coords = "";
+    $j.each(selector, function(ind, obj) {
+      if (ind == 0 && skip_first) {
+      } else {
+        coords += $j(obj).text() + " ";
+      }
+    });
+    $j('#contents_footer').append('<textarea id="js-copytextarea">' + coords + '</textarea>');
+    $j('#js-copytextarea').focus();
+    $j('#js-copytextarea').select();
+    document.execCommand('copy');
+    $j('#js-copytextarea').remove();
+    alert('Copied coords to clipboard, paste to use.');
   }
 
 })(window);
