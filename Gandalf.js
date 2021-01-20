@@ -171,7 +171,7 @@ Mordor.connection.once("open", () => {
               if(m != null  && !await Scan.exists({id:m[1]})) {
                 //console.log('M: ' +  util.inspect(m, false, null, true));
                 try {
-                  let result = await Scan.parse(req.session.member.id, m[1], scanurl.query.scan_grp, scans[i]);
+                  let result = await Scan.parse(ctx.message.from.id, m[1], scanurl.query.scan_grp, scans[i]);
                   //console.log('SUCCESS: ' + result);
                 } catch(err) {
                   console.log('ERROR: ' + err);
