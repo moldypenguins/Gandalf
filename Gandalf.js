@@ -152,32 +152,33 @@ Mordor.connection.once("open", () => {
     if(ctx.message && ctx.message.text && ctx.message.entities && Array.isArray(ctx.message.entities)) {
       for(let entity in ctx.message.entities) {
         if(ctx.message.entities[entity].type === 'url') {
-          let link = ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length);
-          console.log(`LINK: ${link}`);
-
-          //single scan
-          let matches = link.match(/showscan.pl\?scan_id=([a-z0-9]+)/i);
-          console.log(`MATCHES: ${matches}`);
-          if(Array.isArray(matches) && matches[1].length > 0) {
-            let exists = await Scan.exists({id:matches[1]});
-            if(!exists) {
-              let start_time = Date.now();
-              let scanurl = url.parse(config.pa.links.scans + '?scan_id=' + matches[1], true);
-              let page_content = await getStream(scanurl.href);
-              console.log(`Loaded scan from webserver in: ${Date.now() - start_time}ms`);
-              
-              try {
-                let result = await Scan.parse(ctx.from.id, scanurl.query.scan_id, null, page_content);
-                console.log('SUCCESS: ' + result);
-              } catch(err) {
-                console.log('ERROR: ' + err);
+          let scanurl = url.parse(ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length), true);
+          let page_content = await getStream(scanurl.href);
+          if(scanurl.query.scan_id !== undefined && !await Scan.exists({id:scanurl.query.scan_id})) {
+            //scan
+            try {
+              let result = await Scan.parse(req.session.member.id, scanurl.query.scan_id, null, page_content);
+              //console.log('SUCCESS: ' + result);
+            } catch(err) {
+              console.log('ERROR: ' + err);
+            }
+          }
+          if(scanurl.query.scan_grp !== undefined) {
+            //group
+            let scans = page_content.split("<hr>");
+            for(let i = 1; i < scans.length; i++) {
+              let m = scans[i].match(/scan_id=([0-9a-zA-Z]+)/i);
+              if(m != null  && !await Scan.exists({id:m[1]})) {
+                //console.log('M: ' +  util.inspect(m, false, null, true));
+                try {
+                  let result = await Scan.parse(req.session.member.id, m[1], scanurl.query.scan_grp, scans[i]);
+                  //console.log('SUCCESS: ' + result);
+                } catch(err) {
+                  console.log('ERROR: ' + err);
+                }
               }
             }
           }
-
-          //group scany
-
-
         }
       }
     }
