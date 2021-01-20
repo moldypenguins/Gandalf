@@ -30,7 +30,7 @@
 [![CentOS](https://img.shields.io/static/v1?style=for-the-badge&logo=CentOS&label=CentOS&message=v7.5&color=262577)](https://centos.com/)  
 [![Fail2ban](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=Fail2ban&message=v0.11.1&color=FCC624)](https://www.fail2ban.org/)  
 [![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=v4.2&color=47A248)](https://www.mongodb.com/)  
-[![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=v10.19.0&color=339933)](https://nodejs.org/)  
+[![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=v14.15.4&color=339933)](https://nodejs.org/)  
 [![NPM](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=NPM&message=v6.14.9&color=CB3837)](https://www.npmjs.com/)  
 
 ### Node Packages
