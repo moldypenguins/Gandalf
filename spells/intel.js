@@ -74,13 +74,14 @@ async function intelDisplayPlanet(coords) {
             }
             return response + '\n';
         }
+	return response + `\tNone\n`;
     }
-    return response+ '\tNone\n';
+    return '\n';
 }
 
 async function intelDisplayGalaxy(coords) {
     let response = `Intel ${coords.x}:${coords.y}\n`;
-    for(let i = 1; i < 10; i++) {
+    for(let i = 1; i < 14; i++) {
         response += await intelDisplayPlanet({x:coords.x, y:coords.y, z: i});
     }
     if (!response) {
