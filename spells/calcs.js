@@ -122,10 +122,10 @@ var Calcs_tick = (args) => {
     var timezone = args.length > 1 ? args[1] : "GMT";
     if (moment.tz.zone(timezone) == null) reject(`invalid timezone: ${timezone}`);
 
-    let dt = moment.utc(); //moment(now.timestamp);
+    let dt = moment(now.timestamp);
     let diff = tick - now.id;
     if (tick == now.id) diff = 0; //why this line?
-    dt = typeof(now.timestamp) != "undefined" ? moment(now.timestamp) : dt.add(diff, 'hours');
+    dt = dt.add(diff, 'hours');
     dt = dt.tz(timezone);
 
     var reply;
