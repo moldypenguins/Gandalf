@@ -28,7 +28,7 @@ const express = require('express');
 let router = express.Router();
 const access = require('../access');
 const url = require("url");
-const moment = require('moment');
+const moment = require('moment-timezone');
 const util = require('util');
 const crypto = require("crypto");
 const bent = require('bent');
@@ -42,7 +42,8 @@ router.get('/', async (req, res, next) => {
     scnrs[i].planet = await Planet.findOne({id:scnrs[i].planet_id});
     scnrs[i].scans = {};
     scnrs[i].scans.d = await Scan.findOne({planet_id:scnrs[i].planet_id, scantype:3}).sort({tick:-1, _id:-1});
-    if(scnrs[i].scans.d != undefined) { scnrs[i].scans.d.scan = await DevelopmentScan.findOne({scan_id:scnrs[i].scans.d.id}); }
+    if(scnrs[i].scans.d !== undefined) { scnrs[i].scans.d.scan = await DevelopmentScan.findOne({scan_id:scnrs[i].scans.d.id}); }
+    if(scnrs[i].timezone !== undefined) { scnrs[i].currenttime = moment().tz(scnrs[i].timezone).format('LT'); }
   }
   let reqs = await ScanRequest.find({active: true});
   //console.log('SCANTYPES: ' + util.inspect(config.pa.scantypes, false, null, true));

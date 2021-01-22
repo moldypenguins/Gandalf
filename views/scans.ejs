@@ -34,7 +34,7 @@
                     <tr>
                       <td><%= scanners[i].panick %></td>
                       <td><%= scanners[i].timezone %></td>
-                      <td><% if(scanners[i].timezone !== undefined) { %><%= moment().tz(scanners[i].timezone).format('LT'); %><% } %></td>
+                      <td><% if(scanners[i].currenttime !== undefined) { %><%= scanners[i].currenttime; %><% } %></td>
                       <td<%= raceClass %>><%= race %></td>
                       <td><%= tech %></td>
                       <td><%= amps %></td>
