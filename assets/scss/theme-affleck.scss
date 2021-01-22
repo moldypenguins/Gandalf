@@ -3,27 +3,27 @@
 // includes
 @import "lib/mixins";
 @import "lib/variables";
-@import "lib/variables-telegram";
+@import "lib/variables-affleck";
 
 
 // general stuff
 @import "components/global/global";
-@import "components/telegram/global";
+@import "components/affleck/global";
 
 body {
-  @import "components/telegram/typography-links";
-  @import "components/telegram/header-navigation";
-  @import "components/telegram/footer";
+  @import "components/affleck/typography-links";
+  @import "components/affleck/header-navigation";
+  @import "components/affleck/footer";
 }
 
 
 
 //Bootstrap
-// Required
+//Required
 @import "../../node_modules/bootstrap/scss/functions";
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/mixins";
-// Optional
+//Optional
 @import "../../node_modules/bootstrap/scss/root";
 @import "../../node_modules/bootstrap/scss/reboot";
 @import "../../node_modules/bootstrap/scss/type";

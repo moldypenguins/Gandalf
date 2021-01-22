@@ -5,11 +5,29 @@
 @import "lib/variables";
 @import "lib/variables-ultimate";
 
+
 // general stuff
+@import "components/global/global";
 @import "components/ultimate/global";
 
 body {
   @import "components/ultimate/typography-links";
-  @import "components/ultimate/header";
+  @import "components/ultimate/header-navigation";
   @import "components/ultimate/footer";
 }
+
+
+
+//Bootstrap
+// Required
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+// Optional
+@import "../../node_modules/bootstrap/scss/root";
+@import "../../node_modules/bootstrap/scss/reboot";
+@import "../../node_modules/bootstrap/scss/type";
+@import "../../node_modules/bootstrap/scss/images";
+@import "../../node_modules/bootstrap/scss/containers";
+@import "../../node_modules/bootstrap/scss/grid";
+
