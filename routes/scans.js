@@ -158,10 +158,9 @@ router.post('/request', async(req, res, next) => {
         z: plnt.z,
         scantype: req.body.scantype,
         active: true,
-        tick: res.locals.tick,
+        tick: res.locals.tick.id,
         requester_id: res.locals.member.id
       });
-      console.log('SCANREQ: ' + util.inspect(res.locals.tick, false, null, true));
       scanreq = await scanreq.save();
       if(scanreq != null){
         let dscan = await Scan.findOne({planet_id:plnt.id, scantype:3}).sort({tick:-1});
