@@ -140,7 +140,7 @@ let Scans_links = (args) => {
     let requests = await ScanRequest.find({active:true});
     let msg = '';
     for(let req in requests) {
-      msg += `[${req.id}] https://game.planetarion.com/waves.pl?id=${req.scantype}&x=${req.x}&y=${req.y}&z=${req.z}<br/>`;
+      msg += `[${requests[req].id}] https://game.planetarion.com/waves.pl?id=${requests[req].scantype}&x=${requests[req].x}&y=${requests[req].y}&z=${requests[req].z}\n`;
     }
     resolve(msg);
   });
