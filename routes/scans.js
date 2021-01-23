@@ -172,7 +172,7 @@ router.post('/request', async(req, res, next) => {
         let msg = new BotMessage({
           id: crypto.randomBytes(8).toString("hex"),
           group_id: config.groups.scans,
-          message: `[${scanreq.id}] ${current_member.panick} ` +
+          message: `[${scanreq.id}] ${res.locals.member.panick} ` +
           `requested a ${config.pa.scantypes[scanreq.scantype]} Scan of ${scanreq.x}:${scanreq.y}:${scanreq.z} ` +
           `Dists(i:${dev != null ? dev.wave_distorter : "?"}/r:${typeof(scanreq.dists) != 'undefined' ? scanreq.dists : "?"})\n` +
           `https://game.planetarion.com/waves.pl?id=${scanreq.scantype}&x=${scanreq.x}&y=${scanreq.y}&z=${scanreq.z}`,
