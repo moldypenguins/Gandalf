@@ -133,12 +133,17 @@ var Scans_cancel = (args, current_member) => {
   });
 };
 
-var Scans_links_usage = he.encode('!links');
-var Scans_links_desc = 'Shows a list of scan requests';
-var Scans_links = (args) => {
+let Scans_links_usage = he.encode('!links');
+let Scans_links_desc = 'Shows a list of scan requests';
+let Scans_links = (args) => {
   return new Promise(async (resolve, reject) => {
-    resolve('Coming Soon');
-    
+    let requests = await ScanRequest.find({active:true});
+    let msg = '<ul>';
+    for(let req in requests) {
+      msg += `<li>[${req.id}] https://game.planetarion.com/waves.pl?id=${req.scantype}&x=${req.x}&y=${req.y}&z=${req.z}</li>`;
+    }
+    msg += '</ul>';
+    resolve(msg);
   });
 };
 
