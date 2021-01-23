@@ -138,11 +138,10 @@ let Scans_links_desc = 'Shows a list of scan requests';
 let Scans_links = (args) => {
   return new Promise(async (resolve, reject) => {
     let requests = await ScanRequest.find({active:true});
-    let msg = '<ul>';
+    let msg = '';
     for(let req in requests) {
-      msg += `<li>[${req.id}] https://game.planetarion.com/waves.pl?id=${req.scantype}&x=${req.x}&y=${req.y}&z=${req.z}</li>`;
+      msg += `[${req.id}] https://game.planetarion.com/waves.pl?id=${req.scantype}&x=${req.x}&y=${req.y}&z=${req.z}<br/>`;
     }
-    msg += '</ul>';
     resolve(msg);
   });
 };
