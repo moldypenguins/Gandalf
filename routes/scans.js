@@ -182,6 +182,7 @@ router.post('/request', async(req, res, next) => {
       }
     }
   }
+  res.redirect('/scans');
 });
 
 module.exports = router;
