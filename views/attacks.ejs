@@ -103,9 +103,9 @@
                                     <td class="<%= trg.race.toLowerCase() %>"><%= trg.race %></td>
                                     <td><%= trg.size %></td>
                                     <td class="no-wrap">
-                                        <%= numeral(trg.value).format("0,0") %>
+                                        <% if(trg.value <= member.planet.value * bashlimit.value ) { %><span class="bashlimit"><% } %><%= numeral(trg.value).format("0,0") %><% if(trg.value <= member.planet.value * bashlimit.value ) { %></span><% } %>
                                         <strong>/</strong>
-                                        <%= numeral(trg.score).format("0,0") %>
+                                        <% if(trg.score <= member.planet.score * bashlimit.score ) { %><span class="bashlimit"><% } %><%= numeral(trg.score).format("0,0") %><% if(trg.score <= member.planet.score * bashlimit.score ) { %></span><% } %>
                                     </td>
                                     <td class="no-wrap">
                                         <% if(trg && trg.scans && trg.scans.d && trg.scans.d.scan) { %>
@@ -226,7 +226,7 @@
                                     </td>
                                     <td class="no-wrap">
                                         <% if (trg.intel) { %>
-                                            <%= trg.intel.nick %>/<%= trg.intel.alliance %>
+                                            <%= trg.intel.nick %><strong> / </strong><%= trg.intel.alliance %>
                                         <% } %>
                                     </td>
                                     <td>
@@ -535,7 +535,7 @@
                                     <% } %>
                                     <td class="no-wrap no-sort">
                                         <% if (targets[i].intel) { %>
-                                            <%= targets[i].intel.nick %>/<%= targets[i].intel.alliance %>
+                                            <%= targets[i].intel.nick %><strong> / </strong><%= targets[i].intel.alliance %>
                                         <% } %>
                                     </td>
                                 </tr>
