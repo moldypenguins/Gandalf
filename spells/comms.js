@@ -40,6 +40,9 @@ let Comms_call = (args, ctx) => {
             let members = await Members.find();
             mem = members.find(m => (m.panick != null && m.panick.toLowerCase().startsWith(username.toLowerCase())) || (m.first_name != null && m.first_name.toLowerCase().startsWith(username.toLowerCase())));
         }
+
+        console.log('MEMBER: ' + util.inspect(mem, false, null, true));
+
         if (mem == null) {
             reject(`Sorry I don't know who ${args[0]} is`);
         } else {
