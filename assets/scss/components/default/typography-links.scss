@@ -28,6 +28,8 @@ h2 {
   border-image: linear-gradient(to right, rgba(#ccc, 0) 0%, #ccc 50%, rgba(#ccc, 0) 100%);
   border-image-slice: 1;
   line-height: 100%;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
 }
 
 h3 {
