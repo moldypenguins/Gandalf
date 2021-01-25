@@ -47,7 +47,6 @@
 [![express](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/express?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/express)
 [![express-rate-limit](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/express-rate-limit?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/express-rate-limit)
 [![express-session](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/express-session?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/express-session)
-[![html-entities](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/html-entities?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/html-entities)
 [![http-errors](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/http-errors?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/http-errors)
 [![moment](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/moment?style=for-the-badge&logo=NPM&color=222222)](https://www.npmjs.com/package/moment)
 [![moment-timezone](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/moment-timezone?style=for-the-badge&logo=NPM&color=4e7cad)](https://www.npmjs.com/package/moment-timezone)
@@ -64,16 +63,21 @@
 See [INSTALL.md](INSTALL.md) for setup guide.
 
 
+## Installation
+See [INSTALL.md](INSTALL.md) for setup guide.
+
+
 ## Issues / Support
 See [SECURITY.md](SECURITY.md) for feature requests or bug reports  
 Join [Gandalf Support](https://t.me/joinchat/HPVnlgHnFUShtg_D) on Telegram
+
 
 ## Contributing
 See [CONTRIBUTING.md](CONTRIBUTING.md) for more information
 
 
 ## Code of Conduct
-See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+See [CODEOFCONDUCT.md](CODEOFCONDUCT.md)
 
 
 ## Related Projects
