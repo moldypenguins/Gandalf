@@ -158,7 +158,7 @@ module.exports = {
     },
     bash: {
       value: 0.4,
-      score: 0.6
+      score: 0.4
     },
     governments: {
       corp: {
