@@ -237,12 +237,8 @@ router.get('/:hash', attackLimiter, async (req, res, next) => {
       targs[i].anti.cr = !!targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() == "cruiser" || shp.ship.target2.toLowerCase() == "cruiser" || shp.ship.target3.toLowerCase() == "cruiser"));
       targs[i].anti.bs = !!targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() == "battleship" || shp.ship.target2.toLowerCase() == "battleship" || shp.ship.target3.toLowerCase() == "battleship"));
     }
-    if(req.session.member.planet !== undefined) {
-      console.log('Planet' + req.session.member.planet);
-      targs[i].bashlimit = targs[i].value <= req.session.member.planet.value * config.pa.bashlimit.value && targs[i].score <= req.session.member.planet.score * config.pa.bashlimit.score;
-    } else {
-      targs[i].bashlimit = false;
-    }
+    targs[i].bashlimit = targs[i].value <= req.session.member.planet?.value * config.pa.bash.value && targs[i].score <= req.session.member.planet?.score * config.pa.bash.score;
+    
   }
   const sortedTargs = [...targs].sort((a, b) => { return a.x - b.x || a.y - b.y || a.z -b.z; });
   //console.log('MEMBERS: ' + util.inspect(mems, false, null, true));
