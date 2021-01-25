@@ -293,8 +293,8 @@
                                     <td><%= targets[i].x %>:<%= targets[i].y %>:<%= targets[i].z %></td>
                                     <td class="<%= targets[i].race.toLowerCase() %>"><%= targets[i].race %></td>
                                     <td><%= targets[i].size %></td>
-                                    <td><% if(member.planet != null && targets[i].value <= member.planet.value * bashlimit.value ) { %><span class="bashlimit"><% } %><%= numeral(targets[i].value).format("0,0") %><% if(targets[i].value <= member.planet.value * bashlimit.value ) { %></span><% } %></td>
-                                    <td><% if(member.planet != null && targets[i].score <= member.planet.score * bashlimit.score ) { %><span class="bashlimit"><% } %><%= numeral(targets[i].score).format("0,0") %><% if(targets[i].score <= member.planet.score * bashlimit.score ) { %></span><% } %></td>
+                                    <td><% if(targets[i].bashlimit) { %><span class="bashlimit"><% } %><%= numeral(targets[i].value).format("0,0") %><% if(targets[i].bashlimit) { %></span><% } %></td>
+                                    <td><% if(targets[i].bashlimit) { %><span class="bashlimit"><% } %><%= numeral(targets[i].score).format("0,0") %><% if(targets[i].bashlimit) { %></span><% } %></td>
                                     <td class="no-wrap no-sort sorting_disabled">
                                         <% if(typeof (targets[i].scans) != "undefined" && typeof (targets[i].scans.d) != "undefined" && targets[i].scans.d != null && typeof (targets[i].scans.d.scan) != "undefined" && targets[i].scans.d.scan != null) { %>
                                             <span class="text-info"><%= targets[i].scans.d.scan.wave_amplifier %></span>

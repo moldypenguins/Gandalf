@@ -237,10 +237,11 @@ router.get('/:hash', attackLimiter, async (req, res, next) => {
       targs[i].anti.cr = !!targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() == "cruiser" || shp.ship.target2.toLowerCase() == "cruiser" || shp.ship.target3.toLowerCase() == "cruiser"));
       targs[i].anti.bs = !!targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() == "battleship" || shp.ship.target2.toLowerCase() == "battleship" || shp.ship.target3.toLowerCase() == "battleship"));
     }
+    targs[i].bashlimit = targs[i].value <= res.locals.member.planet.value * config.pa.bashlimit.value && targs[i].score <= res.locals.member.planet.score * config.pa.bashlimit.score;
   }
   const sortedTargs = [...targs].sort((a, b) => { return a.x - b.x || a.y - b.y || a.z -b.z; });
   //console.log('MEMBERS: ' + util.inspect(mems, false, null, true));
-  res.render('attacks', { page: 'att', attack: att, races:config.pa.races, targets: sortedTargs, claims: clms, numeral: numeral, scanurl: config.pa.links.scans, bcalcurl: config.pa.links.bcalc, expiries: config.pa.scans, members:mems, scantypes:config.pa.scantypes, bashlimit: config.pa.bash });
+  res.render('attacks', { page: 'att', attack: att, races:config.pa.races, targets: sortedTargs, claims: clms, numeral: numeral, scanurl: config.pa.links.scans, bcalcurl: config.pa.links.bcalc, expiries: config.pa.scans, members:mems, scantypes:config.pa.scantypes });
 });
 
 router.post('/:hash', async (req, res, next) => {
