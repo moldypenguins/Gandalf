@@ -238,6 +238,7 @@ router.get('/:hash', attackLimiter, async (req, res, next) => {
       targs[i].anti.bs = !!targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() == "battleship" || shp.ship.target2.toLowerCase() == "battleship" || shp.ship.target3.toLowerCase() == "battleship"));
     }
     if(req.session.member.planet !== undefined) {
+      console.log('Planet' + req.session.member.planet);
       targs[i].bashlimit = targs[i].value <= req.session.member.planet.value * config.pa.bashlimit.value && targs[i].score <= req.session.member.planet.score * config.pa.bashlimit.score;
     } else {
       targs[i].bashlimit = false;
