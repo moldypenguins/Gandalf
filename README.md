@@ -16,6 +16,7 @@
 
 ## Table of Contents
 * [Requirements](#requirements)
+* [Change Log](#change-log)
 * [Installation](#installation)
 * [Issues / Support](#issues-/-support)
 * [Contributing](#contributing)
@@ -59,8 +60,8 @@
 [![url](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/url?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/url)
 
 
-## Installation
-See [INSTALL.md](INSTALL.md) for setup guide.
+## Change Log
+See [CHANGELOG.md](CHANGELOG.md) for changes.
 
 
 ## Installation
