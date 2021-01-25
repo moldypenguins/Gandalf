@@ -103,9 +103,9 @@
                                     <td class="<%= trg.race.toLowerCase() %>"><%= trg.race %></td>
                                     <td><%= trg.size %></td>
                                     <td class="no-wrap">
-                                        <% if(trg.value <= member.planet.value * bashlimit.value ) { %><span class="bashlimit"><% } %><%= numeral(trg.value).format("0,0") %><% if(trg.value <= member.planet.value * bashlimit.value ) { %></span><% } %>
+                                        <% if(trg.bashlimit) { %><span class="bashlimit"><% } %><%= numeral(trg.value).format("0,0") %><% if(trg.bashlimit) { %></span><% } %>
                                         <strong>/</strong>
-                                        <% if(trg.score <= member.planet.score * bashlimit.score ) { %><span class="bashlimit"><% } %><%= numeral(trg.score).format("0,0") %><% if(trg.score <= member.planet.score * bashlimit.score ) { %></span><% } %>
+                                        <% if(trg.bashlimit) { %><span class="bashlimit"><% } %><%= numeral(trg.score).format("0,0") %><% if(trg.bashlimit) { %></span><% } %>
                                     </td>
                                     <td class="no-wrap">
                                         <% if(trg && trg.scans && trg.scans.d && trg.scans.d.scan) { %>
