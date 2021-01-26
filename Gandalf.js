@@ -42,7 +42,8 @@ config.bot.modules.forEach(function(name) {
   Object.assign(spells, spell);
 });
 
-const Telegraf = require('telegraf');
+const { Context, Telegraf } = require('telegraf');
+
 const rateLimit = require('telegraf-ratelimit');
 //Set limit to 1 message per 3 seconds
 const limitConfig = {
