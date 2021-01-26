@@ -37,13 +37,16 @@ let Attacks_claims = (args, ctx) => {
     } else {
       attack = await Attack.findOne().sort({id:-1});
     }
+
+    console.log('ATTACK:' + util.inspect(attack, false, null, true));
+
     if(attack == null) {
       reject('Attack not found.');
     } else {
       let reply = ``;
       let claims = await AttackTargetClaims.find({member_id: ctx.message.from.id, id: attackid});
 
-      console.log('CLAIMS:' + util.inspect(claims, false, null, true));
+      //console.log('CLAIMS:' + util.inspect(claims, false, null, true));
 
       if (claims == null) {
         reply = `No claims found.`;
