@@ -44,7 +44,7 @@ let Attacks_claims = (args, ctx) => {
       reject('Attack not found.');
     } else {
       let reply = ``;
-      let claims = await AttackTargetClaims.find({member_id: ctx.message.from.id, id: attackid});
+      let claims = await AttackTargetClaims.find({member_id: ctx.message.from.id, id: attack.id});
 
       //console.log('CLAIMS:' + util.inspect(claims, false, null, true));
 
