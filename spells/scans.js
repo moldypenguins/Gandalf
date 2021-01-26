@@ -84,7 +84,7 @@ var Scans_req = (args, current_member) => {
 };
 
 
-var Scans_findscan_usage = he.encode('!findscan <x:y:z> [p|d|n|j|a]');
+var Scans_findscan_usage = he.encode('!findscan <x:y:z> <p|d|n|j|a>');
 var Scans_findscan_desc = 'Find recent scans for a planet.';
 var Scans_findscan = (args) => {
   return new Promise(async (resolve, reject)  => {
