@@ -42,10 +42,8 @@ config.bot.modules.forEach(function(name) {
   Object.assign(spells, spell);
 });
 
-const Telegraf = require('telegraf')
-const Extra = require('telegraf/extra')
-
-const rateLimit = require('telegraf-ratelimit')
+const Telegraf = require('telegraf');
+const rateLimit = require('telegraf-ratelimit');
 //Set limit to 1 message per 3 seconds
 const limitConfig = {
   window: 3000,
@@ -134,7 +132,7 @@ Mordor.connection.once("open", () => {
         commands += (`<b>${key}:</b> <i>${value.description}</i>\n`);
       }
     }
-    ctx.telegram.sendMessage(ctx.message.from.id, commands, Extra.HTML().markup());
+    ctx.telegram.sendMessage(ctx.message.from.id, commands, {parse_mode: 'HTML'});
   }
   
   function links(ctx) {
@@ -189,7 +187,7 @@ Mordor.connection.once("open", () => {
       let gm8 = await GalMate.findOne({id: ctx.from.id});
       
       if(!mem && !gm8) {
-        ctx.replyWithHTML('<i>Access denied!</i>', Extra.inReplyTo(ctx.message.message_id));
+        ctx.replyWithHTML('<i>Access denied!</i>', {reply_to_message_id: ctx.message.message_id});
         //ctx.replyWithAnimation({url: 'https://media.giphy.com/media/5SAPlGAS1YnLN9jHua/giphy-downsized-large.gif'}, {caption: 'Access denied!', inReplyTo: ctx.message.message_id});
       } else {
         let args = ctx.message.text.substr(1).toLowerCase().replace(/\s+/g, ' ').split(' ');
@@ -202,9 +200,9 @@ Mordor.connection.once("open", () => {
           links(ctx);
         } else if(cmd in spells && typeof(spells[cmd].cast) == 'function') {
           if(spells[cmd].channel !== undefined && !spells[cmd].channel(ctx.message.chat)) {
-            ctx.replyWithHTML('<i>Wrong chat for this command.</i>', Extra.inReplyTo(ctx.message.message_id));
+            ctx.replyWithHTML('<i>Wrong chat for this command.</i>', {reply_to_message_id: ctx.message.message_id});
           } else if(spells[cmd].access !== undefined && (mem == null || !spells[cmd].access(mem))) {
-            ctx.replyWithHTML('<i>You do not have sufficient privileges.</i>', Extra.inReplyTo(ctx.message.message_id));
+            ctx.replyWithHTML('<i>You do not have sufficient privileges.</i>', {reply_to_message_id:ctx.message.message_id});
           } else {
             let promise = null;
             if(spells[cmd].include_member) {
@@ -215,26 +213,26 @@ Mordor.connection.once("open", () => {
               promise = spells[cmd].cast(args);
             }
             promise.then((message) => {
-              console.log(`Reply: ${message}`);
+              console.log(`Reply: ${message.toString()}`);
               if(typeof(spells[cmd].no_reply) == 'undefined') {
                   if ((typeof (spells[cmd].private_reply) == 'undefined' || !spells[cmd].private_reply) && ctx.message.text.startsWith(config.bot.public_cmd)) {
                       if (spells[cmd].send_as_video) {
                           ctx.telegram.sendVideo(ctx.chat.id, message);
                       } else {
-                          ctx.replyWithHTML(message, Extra.inReplyTo(ctx.message.message_id));
+                          ctx.replyWithHTML(message.toString(), {reply_to_message_id:ctx.message.message_id});
                       }
                   } else if (spells[cmd].private_reply || ctx.message.text.startsWith(config.bot.private_cmd)) {
                       if (spells[cmd].send_as_video) {
                           ctx.telegram.sendVideo(ctx.message.from.id, message);
                       } else {
-                          ctx.telegram.sendMessage(ctx.message.from.id, message, Extra.HTML().markup());
+                          ctx.telegram.sendMessage(ctx.message.from.id, message.toString(), {parse_mode:'HTML'});
                       }
                   }
               }
             }).catch((error) => {
               //console.log(`Error: ${error}`);
               //console.log(`Usage: ${spells[cmd].usage}`);
-              ctx.replyWithHTML(error, Extra.inReplyTo(ctx.message.message_id));
+              ctx.replyWithHTML(error, {reply_to_message_id:ctx.message.message_id});
             });
           }
         }
