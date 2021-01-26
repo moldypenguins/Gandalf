@@ -30,34 +30,32 @@ let Comms_call_desc = 'Calls a user via twilio';
 let Comms_call = (args, ctx) => {
     return new Promise(async (resolve, reject) => {
         if (!Array.isArray(args) || args.length < 1) { reject(Comms_call_usage); }
+        let username = args[0];
+        console.log(username);
 
         let mem = null;
         if(args[0].startsWith('@') && ctx.message.entities.some(e => e.type === 'mention')) {
-            mem = await Members.findOne({username: args[0].replace(/^@/, '')});
+            mem = await Members.findOne({username: username.replace(/^@/, '')});
         } else {
-            mem = '';
+            let members = await Members.find();
+            mem = members.find(m => (m.panick != null && m.panick.toLowerCase().startsWith(username.toLowerCase())) || (m.first_name != null && m.first_name.toLowerCase().startsWith(username.toLowerCase())));
         }
-        if(mem !== null) {
-            comms.callMember(mem);
-        }
-        Members.find().then((members) => {
-            var username = args[0].toLowerCase();
-            console.log(username);
-            var member = members.find(m => (m.panick != null && m.panick.toLowerCase().startsWith(username)) || (m.first_name != null && m.first_name.toLowerCase().startsWith(username)));
-            //console.log(member);
-            if (member == null) {
-                reject(`Sorry I don't know who ${args[0]} is`);
-                return;
-            } else if (member.phone === null || member.phone == '') {
-                reject(`${member.panick} does not have a phone number set!`);
-                return;            
+
+        console.log('MEMBER: ' + util.inspect(mem, false, null, true));
+
+        if (mem == null) {
+            reject(`Sorry I don't know who ${args[0]} is`);
+        } else {
+            if (mem.phone === null || mem.phone === '') {
+                reject(`${mem.panick} does not have a phone number set!`);
+            } else {
+                comms.callMember(mem.id).then(() => {
+                    resolve(`Successfully called <a href="tg://user?id=${mem.id}">${mem.panick != null ? mem.panick : mem.username}</a>`);
+                }, (error) => {
+                    reject(error);
+                });
             }
-            comms.callMember(member.id).then(() => {
-                resolve(`Successfully called <a href="tg://user?id=${member.id}">${member.panick != null ? member.panick : member.username}</a>`);
-            }, (error) => {
-                reject(error);
-            });
-        });
+        }
     });
 };
 

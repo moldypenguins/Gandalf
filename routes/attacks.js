@@ -202,20 +202,20 @@ router.post('/edit/targ/:hash', access.webCommandRequired, async (req, res, next
 
 
 router.get('/:hash', attackLimiter, async (req, res, next) => {
-  var mems = await Member.find();
-  var att = await Attack.findOne({hash:req.params.hash});
-  var atttarg = await AttackTarget.find({attack_id:att.id});
-  var targs = await Planet.find({id:{$in:atttarg.map(at => at.planet_id)}});
-  var clms = await AttackTargetClaim.find({attack_id:att.id});
+  let mems = await Member.find();
+  let att = await Attack.findOne({hash:req.params.hash});
+  let atttarg = await AttackTarget.find({attack_id:att.id});
+  let targs = await Planet.find({id:{$in:atttarg.map(at => at.planet_id)}});
+  let clms = await AttackTargetClaim.find({attack_id:att.id});
   for(let target of targs) {
     await addIntel(target);
   }
   for(let i = 0; i < targs.length; i++) {
     targs[i].scans = {};
     targs[i].scans.p = await Scan.findOne({planet_id:targs[i].id, scantype:1}).sort({tick:-1, _id:-1});
-    if(targs[i].scans.p != undefined) { targs[i].scans.p.scan = await PlanetScan.findOne({scan_id:targs[i].scans.p.id}); }
+    if(targs[i].scans.p != null) { targs[i].scans.p.scan = await PlanetScan.findOne({scan_id:targs[i].scans.p.id}); }
     targs[i].scans.d = await Scan.findOne({planet_id:targs[i].id, scantype:3}).sort({tick:-1, _id:-1});
-    if(targs[i].scans.d != undefined) { targs[i].scans.d.scan = await DevelopmentScan.findOne({scan_id:targs[i].scans.d.id}); }
+    if(targs[i].scans.d != null) { targs[i].scans.d.scan = await DevelopmentScan.findOne({scan_id:targs[i].scans.d.id}); }
     targs[i].scans.u = await Scan.findOne({planet_id:targs[i].id, scantype:4}).sort({tick:-1, _id:-1});
     //if(targs[i].scans.u != undefined) { targs[i].scans.u.scan = await UnitScan.findOne({scan_id:targs[i].scans.u.id}); }
     targs[i].scans.n = await Scan.findOne({planet_id:targs[i].id, scantype:5}).sort({tick:-1, _id:-1});
@@ -223,24 +223,26 @@ router.get('/:hash', attackLimiter, async (req, res, next) => {
     targs[i].scans.j = await Scan.findOne({planet_id:targs[i].id, scantype:7}).sort({tick:-1, _id:-1});
     //if(targs[i].scans.j != undefined) { targs[i].scans.j.scan = await JumpgateProbe.findOne({scan_id:targs[i].scans.j.id}); }
     targs[i].scans.a = await Scan.findOne({planet_id:targs[i].id, scantype:8}).sort({tick:-1, _id:-1});
-    if(targs[i].scans.a != undefined) { 
+    if(targs[i].scans.a != null) {
       targs[i].scans.a.scan = await UnitScan.find({scan_id:targs[i].scans.a.id}); 
       for(let j = 0; j < targs[i].scans.a.scan.length; j++) {
         targs[i].scans.a.scan[j].ship = await Ship.findOne({id:targs[i].scans.a.scan[j].ship_id});
         //console.log('SHIP: ' + util.inspect(targs[i].scans.a.scan[j], false, null, true));
       }
       targs[i].anti = {};
-      targs[i].anti.fi = false; if(targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() == "fighter" || shp.ship.target2.toLowerCase() == "fighter" || shp.ship.target3.toLowerCase() == "fighter"))) { targs[i].anti.fi = true; }
-      targs[i].anti.co = false; if(targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() == "corvette" || shp.ship.target2.toLowerCase() == "corvette" || shp.ship.target3.toLowerCase() == "corvette"))) { targs[i].anti.co = true; }
-      targs[i].anti.fr = false; if(targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() == "frigate" || shp.ship.target2.toLowerCase() == "frigate" || shp.ship.target3.toLowerCase() == "frigate"))) { targs[i].anti.fr = true; }
-      targs[i].anti.de = false; if(targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() == "destroyer" || shp.ship.target2.toLowerCase() == "destroyer" || shp.ship.target3.toLowerCase() == "destroyer"))) { targs[i].anti.de = true; }
-      targs[i].anti.cr = false; if(targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() == "cruiser" || shp.ship.target2.toLowerCase() == "cruiser" || shp.ship.target3.toLowerCase() == "cruiser"))) { targs[i].anti.cr = true; }
-      targs[i].anti.bs = false; if(targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() == "battleship" || shp.ship.target2.toLowerCase() == "battleship" || shp.ship.target3.toLowerCase() == "battleship"))) { targs[i].anti.bs = true; }
+      targs[i].anti.fi = !!targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() === "fighter" || shp.ship.target2.toLowerCase() === "fighter" || shp.ship.target3.toLowerCase() === "fighter"));
+      targs[i].anti.co = !!targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() === "corvette" || shp.ship.target2.toLowerCase() === "corvette" || shp.ship.target3.toLowerCase() === "corvette"));
+      targs[i].anti.fr = !!targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() === "frigate" || shp.ship.target2.toLowerCase() === "frigate" || shp.ship.target3.toLowerCase() === "frigate"));
+      targs[i].anti.de = !!targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() === "destroyer" || shp.ship.target2.toLowerCase() === "destroyer" || shp.ship.target3.toLowerCase() === "destroyer"));
+      targs[i].anti.cr = !!targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() === "cruiser" || shp.ship.target2.toLowerCase() === "cruiser" || shp.ship.target3.toLowerCase() === "cruiser"));
+      targs[i].anti.bs = !!targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() === "battleship" || shp.ship.target2.toLowerCase() === "battleship" || shp.ship.target3.toLowerCase() === "battleship"));
     }
-    //targs[i].bashlimit = 0.16;
+    targs[i].bashlimit = targs[i].value <= req.session.member.planet.value * config.pa.bash.value && targs[i].score <= req.session.member.planet.score * config.pa.bash.score;
+
   }
+  const sortedTargs = [...targs].sort((a, b) => { return a.x - b.x || a.y - b.y || a.z -b.z; });
   //console.log('MEMBERS: ' + util.inspect(mems, false, null, true));
-  res.render('attacks', { page: 'att', attack: att, races:config.pa.races, targets: targs, claims: clms, numeral: numeral, scanurl: config.pa.links.scans, bcalcurl: config.pa.links.bcalc, expiries: config.pa.scans, members:mems, scantypes:config.pa.scantypes });
+  res.render('attacks', { page: 'att', attack: att, races:config.pa.races, targets: sortedTargs, claims: clms, numeral: numeral, scanurl: config.pa.links.scans, bcalcurl: config.pa.links.bcalc, expiries: config.pa.scans, members:mems, scantypes:config.pa.scantypes });
 });
 
 router.post('/:hash', async (req, res, next) => {

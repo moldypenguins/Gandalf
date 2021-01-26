@@ -156,6 +156,10 @@ module.exports = {
       mincap: 0,
       mining: 250
     },
+    bash: {
+      value: 0.4,
+      score: 0.4
+    },
     governments: {
       corp: {
         name: "Corporatism",

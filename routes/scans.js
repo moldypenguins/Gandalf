@@ -28,7 +28,7 @@ const express = require('express');
 let router = express.Router();
 const access = require('../access');
 const url = require("url");
-const moment = require('moment');
+const moment = require('moment-timezone');
 const util = require('util');
 const crypto = require("crypto");
 const bent = require('bent');
@@ -42,7 +42,8 @@ router.get('/', async (req, res, next) => {
     scnrs[i].planet = await Planet.findOne({id:scnrs[i].planet_id});
     scnrs[i].scans = {};
     scnrs[i].scans.d = await Scan.findOne({planet_id:scnrs[i].planet_id, scantype:3}).sort({tick:-1, _id:-1});
-    if(scnrs[i].scans.d != undefined) { scnrs[i].scans.d.scan = await DevelopmentScan.findOne({scan_id:scnrs[i].scans.d.id}); }
+    if(scnrs[i].scans.d !== undefined) { scnrs[i].scans.d.scan = await DevelopmentScan.findOne({scan_id:scnrs[i].scans.d.id}); }
+    if(scnrs[i].timezone !== undefined) { scnrs[i].currenttime = moment().tz(scnrs[i].timezone).format('LT'); }
   }
   let reqs = await ScanRequest.find({active: true});
   //console.log('SCANTYPES: ' + util.inspect(config.pa.scantypes, false, null, true));
@@ -157,7 +158,7 @@ router.post('/request', async(req, res, next) => {
         z: plnt.z,
         scantype: req.body.scantype,
         active: true,
-        tick: res.locals.tick,
+        tick: res.locals.tick.id,
         requester_id: res.locals.member.id
       });
       scanreq = await scanreq.save();
@@ -171,7 +172,7 @@ router.post('/request', async(req, res, next) => {
         let msg = new BotMessage({
           id: crypto.randomBytes(8).toString("hex"),
           group_id: config.groups.scans,
-          message: `[${scanreq.id}] ${current_member.panick} ` +
+          message: `[${scanreq.id}] ${res.locals.member.panick} ` +
           `requested a ${config.pa.scantypes[scanreq.scantype]} Scan of ${scanreq.x}:${scanreq.y}:${scanreq.z} ` +
           `Dists(i:${dev != null ? dev.wave_distorter : "?"}/r:${typeof(scanreq.dists) != 'undefined' ? scanreq.dists : "?"})\n` +
           `https://game.planetarion.com/waves.pl?id=${scanreq.scantype}&x=${scanreq.x}&y=${scanreq.y}&z=${scanreq.z}`,
@@ -181,6 +182,7 @@ router.post('/request', async(req, res, next) => {
       }
     }
   }
+  res.redirect('/scans');
 });
 
 module.exports = router;

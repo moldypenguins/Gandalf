@@ -19,6 +19,7 @@
                   <tr>
                     <th class="text-left nowrap" scope="col">Scanner</th>
                     <th class="text-left nowrap" scope="col">Time Zone</th>
+                    <th class="text-left nowrap" scope="col">Current Time</th>
                     <th class="text-left nowrap" scope="col">Race</th>
                     <th class="text-left nowrap" scope="col">Research</th>
                     <th class="text-left nowrap" scope="col">Amps</th>
@@ -30,7 +31,14 @@
                     <% var raceClass = scanners[i].planet ? " class=" + scanners[i].planet.race.toLowerCase() : ""; %>
                     <% var tech = scanners[i].scans.d && scanners[i].scans.d.scan ? scantypes[scanners[i].scans.d.scan.waves + 1] : "Unknown"; %>
                     <% var amps = scanners[i].scans.d && scanners[i].scans.d.scan ? scanners[i].scans.d.scan.wave_amplifier : "Unknown"; %>
-                  <tr><td><%= scanners[i].panick %></td><td><%= scanners[i].timezone %></td><td<%= raceClass %>><%= race %></td><td><%= tech %></td><td><%= amps %></td></tr>
+                    <tr>
+                      <td><%= scanners[i].panick %></td>
+                      <td><%= scanners[i].timezone %></td>
+                      <td><% if(scanners[i].currenttime !== undefined) { %><%= scanners[i].currenttime; %><% } %></td>
+                      <td<%= raceClass %>><%= race %></td>
+                      <td><%= tech %></td>
+                      <td><%= amps %></td>
+                    </tr>
                   <% } %>
                 </tbody>
               </table>
@@ -42,7 +50,7 @@
           <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
           <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
             <div class="content">
-              <form method="POST" action="/scans">
+              <form method="POST" action="/scans/request">
                 <h2>Request A Scan</h2>
                 <table class="table table-sm table-transparent">
                   <tbody>
