@@ -46,7 +46,7 @@ let Attacks_claims = (args, ctx) => {
       } else {
         for (let claim of claims) {
           let planet = await Planet.findOne({id: claim.planet_id});
-          reply += `${planet.x}:${planet.y}:${planet.z} LT${claim.wave + lastatt.landtick} (A:?|D:?)\n`;
+          reply += `${planet.x}:${planet.y}:${planet.z} LT${claim.wave + attack.landtick} (A:?|D:?)\n`;
         }
       }
       resolve(reply);
