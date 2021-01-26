@@ -48,7 +48,7 @@ let Attacks_claims = (args, ctx) => {
 
       //console.log('CLAIMS:' + util.inspect(claims, false, null, true));
 
-      if (claims == null) {
+      if (claims == null || claims.length <= 0) {
         reply = `No claims found.`;
       } else {
         for (let claim of claims) {
