@@ -15,7 +15,7 @@ module.exports = {
     username:"[Telegram bot username]",
     private_cmd:".",
     public_cmd:"!",
-    modules:['admin', 'ships', 'calcs', 'comms', 'intel', 'fun', 'scans'],
+    modules:['admin', 'ships', 'calcs', 'comms', 'intel', 'fun', 'attacks', 'scans'],
     message_interval:5, //seconds
     tick_alert:true
   },
