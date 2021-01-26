@@ -24,6 +24,7 @@ const util = require('util');
 const Attack = require('../models/attack');
 const AttackTargetClaims = require('../models/attack-target-claim');
 const Planet = require('../models/planet');
+const Tick = require('../models/tick');
 
 
 let Attacks_claims_usage = he.encode('!claims [attack number]');
@@ -31,11 +32,14 @@ let Attacks_claims_desc = 'List your claims.';
 let Attacks_claims = (args, ctx) => {
   return new Promise(async (resolve, reject)  => {
     let attackid = args[0] || null;
+
+    let lasttick = await Tick.findOne().sort({id:-1});
+
     let attack = null;
     if(attackid != null) {
-      attack = await Attack.findOne({id:attackid});
+      attack = await Attack.findOne({id:attackid, releasetick:{$lte:lasttick.id}});
     } else {
-      attack = await Attack.findOne().sort({id:-1});
+      attack = await Attack.findOne({releasetick:{$lte:lasttick.id}}).sort({id:-1});
     }
     //console.log('ATTACK:' + util.inspect(attack, false, null, true));
 
