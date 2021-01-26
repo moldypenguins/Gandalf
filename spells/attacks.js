@@ -42,7 +42,7 @@ let Attacks_claims = (args, ctx) => {
     } else {
       let reply = ``;
       let claims = await AttackTargetClaims.find({member_id: ctx.message.from.id, id: attackid});
-      if (claims == null || claims.count() <= 0) {
+      if (claims == null || claims.countDocuments() <= 0) {
         reply = `No claims found.`;
       } else {
         for (let claim of claims) {
