@@ -20,7 +20,7 @@ const access = require('../access');
 const numeral = require('numeral');
 const moment = require('moment');
 const he = require('he');
-
+const util = require('util');
 const Attack = require('../models/attack');
 const AttackTargetClaims = require('../models/attack-target-claim');
 const Planet = require('../models/planet');
@@ -42,7 +42,10 @@ let Attacks_claims = (args, ctx) => {
     } else {
       let reply = ``;
       let claims = await AttackTargetClaims.find({member_id: ctx.message.from.id, id: attackid});
-      if (claims == null || claims.countDocuments() <= 0) {
+
+      console.log('CLAIMS:' + util.inspect(claims, false, null, true));
+
+      if (claims == null) {
         reply = `No claims found.`;
       } else {
         for (let claim of claims) {
