@@ -68,6 +68,7 @@ const scansRoute = require('./routes/scans');
 const parseRoute = require('./routes/parse');
 const attacksRoute = require('./routes/attacks');
 const universeRoute = require('./routes/universe');
+const claimsRoute = require('./routes/claims');
 
 const util = require('util');
 
@@ -166,6 +167,7 @@ Mordor.connection.once("open", () => {
   app.use('/uptime', uptimeRoute);
   app.use('/parse', cors(corsOptions), parseRoute);
   app.use('/reject', cors(corsOptions), parseRoute);
+  app.use('/claims', cors(corsOptions), claimsRoute);
 
   //app.use(bodyParser.urlencoded({ extended: false }));
   app.use(cookieParser());
