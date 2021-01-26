@@ -25,6 +25,7 @@ const Attack = require('../models/attack');
 const AttackTargetClaims = require('../models/attack-target-claim');
 const Planet = require('../models/planet');
 
+
 let Attacks_claims_usage = he.encode('!claims [attack number]');
 let Attacks_claims_desc = 'List your claims.';
 let Attacks_claims = (args, ctx) => {
@@ -41,7 +42,7 @@ let Attacks_claims = (args, ctx) => {
     } else {
       let reply = ``;
       let claims = await AttackTargetClaims.find({member_id: ctx.message.from.id, id: attackid});
-      if (claims == null || claims.length <= 0) {
+      if (claims == null || claims.count() <= 0) {
         reply = `No claims found.`;
       } else {
         for (let claim of claims) {
