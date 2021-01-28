@@ -1,16 +1,10 @@
-.btn {
-
-}
-
-.toolbar {
-  .btn {
-    height: 2rem;
-    width: 2rem;
-  }
-}
 
 .btn-box {
   margin: .5rem 0;
+
+  &.btn {
+    width: 100%;
+  }
 }
 
 .btn-col {
@@ -26,7 +20,6 @@
 .btn-space {
   margin-left: 5px;
 }
-
 
 .btn,.btn-sm {
   padding: .15rem .25rem;
