@@ -37,9 +37,9 @@ const getStream = bent('string');
 
 function compareAmps( a, b ) {
   let rtn = 0;
-  if(a.scans.d?.scan !== undefined && a.scans.d.scan.wave_amplifier < b.scans.d.scan.wave_amplifier) {
+  if(a.scans.d?.scan !== undefined && a.scans.d.scan.wave_amplifier > b.scans.d.scan.wave_amplifier) {
     rtn =  -1;
-  } else if(b.scans.d?.scan !== undefined && b.scans.d.scan.wave_amplifier < a.scans.d.scan.wave_amplifier) {
+  } else if(b.scans.d?.scan !== undefined && b.scans.d.scan.wave_amplifier > a.scans.d.scan.wave_amplifier) {
     rtn =  1;
   }
   return rtn;
