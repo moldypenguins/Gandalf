@@ -36,8 +36,8 @@ const getStream = bent('string');
 
 
 router.get('/', async (req, res, next) => {
-  let scnrs = await Member.find({access:{$gte:1}});
-  scnrs = scnrs.filter(s => (s.roles & 2) != 0);
+  let scnrs = await Member.find({access:{$gte:1}, $where:`(this.roles & 2) !== 0`});
+  //scnrs = scnrs.filter(s => (s.roles & 2) !== 0);
   for(let i = 0; i < scnrs.length; i++) {
     scnrs[i].planet = await Planet.findOne({id:scnrs[i].planet_id});
     scnrs[i].scans = {};
