@@ -60,10 +60,11 @@ let Attacks_claims = (args, ctx) => {
         console.log('GROUPED:' + util.inspect(groupedClaims, false, null, true));
         for (let w = 1; w <= attack.waves; w++) {
           if(groupedClaims[w]?.length > 0) {
+            reply += `LT ${w + attack.landtick}:`;
             for (let c = 0; c < groupedClaims[w].length; c++) {
               let planet = await Planet.findOne({id: groupedClaims[w][c].planet_id});
               let dscan = await DevelopmentScan.findOne({planet_id: groupedClaims[w][c].planet_id});
-              reply += `${planet.x}:${planet.y}:${planet.z} LT${groupedClaims[w][c].wave + attack.landtick} (A: ${dscan == null ? '?' : dscan.wave_amplifier} | D: ${dscan == null ? '?' : dscan.wave_distorter})\n`;
+              reply += `${planet.x}:${planet.y}:${planet.z} (A: ${dscan == null ? '?' : dscan.wave_amplifier} | D: ${dscan == null ? '?' : dscan.wave_distorter})\n`;
             }
           }
         }
