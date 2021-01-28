@@ -48,7 +48,7 @@ let Attacks_claims = (args, ctx) => {
     if(attack == null) {
       reject('No attack found.');
     } else {
-      let reply = `<b>Attack ${attack.id}</b>\n`;
+      let reply = `<b>Attack ${attack.id}</b>\n\n`;
       let claims = await AttackTargetClaims.find({member_id: ctx.message.from.id, attack_id: attack.id}).sort({wave: 1});
       //console.log('CLAIMS:' + util.inspect(claims, false, null, true));
       if (claims == null || claims.length <= 0) {
@@ -61,7 +61,7 @@ let Attacks_claims = (args, ctx) => {
         console.log('GROUPED:' + util.inspect(groupedClaims, false, null, true));
         for (let w = 0; w < attack.waves; w++) {
           if(groupedClaims[w]?.length > 0) {
-            reply += `LT <i>${w + attack.landtick}</i>\n`;
+            reply += `<i>LT ${w + attack.landtick}</i>\n`;
             for (let c = 0; c < groupedClaims[w].length; c++) {
               let planet = await Planet.findOne({id: groupedClaims[w][c].planet_id});
               let dscan = await Scan.findOne({planet_id:groupedClaims[w][c].planet_id, scantype:3}).sort({tick:-1, _id:-1});
