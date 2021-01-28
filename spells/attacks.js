@@ -64,7 +64,7 @@ let Attacks_claims = (args, ctx) => {
             reply += `LT <i>${w + attack.landtick}</i>\n`;
             for (let c = 0; c < groupedClaims[w].length; c++) {
               let planet = await Planet.findOne({id: groupedClaims[w][c].planet_id});
-              let dscan = await Scan.findOne({planet_id:targs[i].id, scantype:3}).sort({tick:-1, _id:-1});
+              let dscan = await Scan.findOne({planet_id:groupedClaims[w][c].planet_id, scantype:3}).sort({tick:-1, _id:-1});
               let dscanvals = dscan == null ? null : await DevelopmentScan.findOne({scan_id: dscan.id});
               reply += `${planet.x}:${planet.y}:${planet.z} (A: ${dscanvals == null ? '?' : dscanvals.wave_amplifier} | D: ${dscanvals == null ? '?' : dscanvals.wave_distorter})\n`;
             }
