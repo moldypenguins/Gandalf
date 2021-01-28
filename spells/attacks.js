@@ -57,10 +57,10 @@ let Attacks_claims = (args, ctx) => {
           if(obj.wave === undefined) return hash;
           return Object.assign(hash, { [obj.wave]:( hash[obj.wave] || [] ).concat(obj)})
         }, {});
-        for (let claim of groupedClaims) {
-          let planet = await Planet.findOne({id: claim.planet_id});
-          let dscan = await DevelopmentScan.findOne({planet_id: claim.planet_id});
-          reply += `${planet.x}:${planet.y}:${planet.z} LT${claim.wave + attack.landtick} (A: ${dscan == null ? '?' : dscan.wave_amplifier} | D: ${dscan == null ? '?' : dscan.wave_distorter})\n`;
+        for (let n = 0; n < groupedClaims.length; n++) {
+          let planet = await Planet.findOne({id: groupedClaims[n].planet_id});
+          let dscan = await DevelopmentScan.findOne({planet_id: groupedClaims[n].planet_id});
+          reply += `${planet.x}:${planet.y}:${planet.z} LT${groupedClaims[n].wave + attack.landtick} (A: ${dscan == null ? '?' : dscan.wave_amplifier} | D: ${dscan == null ? '?' : dscan.wave_distorter})\n`;
         }
       }
       resolve(reply);
