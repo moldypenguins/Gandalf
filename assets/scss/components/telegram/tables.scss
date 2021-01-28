@@ -3,12 +3,12 @@
   .fixed-table-toolbar {
     .search {
       input.search-input {
-        color: #fff;
-        background-color: #565e64;
-        border-color: #51585e;
+        color: black;
+        background-color: rgba(81, 88, 94, 0.25);
+        border-color: rgba(81, 88, 94, 0.33);
 
         &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-          color: #efefef;
+          color: white;
           opacity: 1; /* Firefox */
         }
         &:-ms-input-placeholder, /* Internet Explorer 10-11 */
