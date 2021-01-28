@@ -35,6 +35,17 @@ const bent = require('bent');
 const getStream = bent('string');
 
 
+function compareAmps( a, b ) {
+  let rtn = 0;
+  if(a.scans.d?.scan !== undefined && a.scans.d.scan.wave_amplifier < b.scans.d.scan.wave_amplifier) {
+    rtn =  -1;
+  } else if(b.scans.d?.scan !== undefined && b.scans.d.scan.wave_amplifier < a.scans.d.scan.wave_amplifier) {
+    rtn =  1;
+  }
+  return rtn;
+}
+
+
 router.get('/', async (req, res, next) => {
   let scnrs = await Member.find({$where:`this.access >= 1 && (this.roles & 2) !== 0`});
   for(let i = 0; i < scnrs.length; i++) {
@@ -44,6 +55,7 @@ router.get('/', async (req, res, next) => {
     if(scnrs[i].scans.d !== undefined) { scnrs[i].scans.d.scan = await DevelopmentScan.findOne({scan_id:scnrs[i].scans.d.id}); }
     if(scnrs[i].timezone !== undefined) { scnrs[i].currenttime = moment().tz(scnrs[i].timezone).format('LT'); }
   }
+  scnrs.sort(compareAmps);
   let reqs = await ScanRequest.find({active: true});
   //console.log('SCANTYPES: ' + util.inspect(config.pa.scantypes, false, null, true));
   res.render('scans', { scanners: scnrs, requests: reqs, scantypes:config.pa.scantypes });
