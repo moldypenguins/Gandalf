@@ -58,13 +58,14 @@ let Attacks_claims = (args, ctx) => {
           return Object.assign(hash, { [obj.wave]:( hash[obj.wave] || [] ).concat(obj)})
         }, {});
         console.log('GROUPED:' + util.inspect(groupedClaims, false, null, true));
-        for (let w = 1; w <= attack.waves; w++) {
+        for (let w = 0; w < attack.waves; w++) {
           if(groupedClaims[w]?.length > 0) {
             reply += `LT <i>${w + attack.landtick}</i>\n`;
             for (let c = 0; c < groupedClaims[w].length; c++) {
               let planet = await Planet.findOne({id: groupedClaims[w][c].planet_id});
-              let dscan = await DevelopmentScan.findOne({planet_id: groupedClaims[w][c].planet_id});
-              reply += `${planet.x}:${planet.y}:${planet.z} (A: ${dscan == null ? '?' : dscan.wave_amplifier} | D: ${dscan == null ? '?' : dscan.wave_distorter})\n`;
+              let dscan = await Scan.findOne({planet_id:targs[i].id, scantype:3}).sort({tick:-1, _id:-1});
+              let dscanvals = dscan == null ? null : await DevelopmentScan.findOne({scan_id: dscan.id});
+              reply += `${planet.x}:${planet.y}:${planet.z} (A: ${dscanvals == null ? '?' : dscanvals.wave_amplifier} | D: ${dscanvals == null ? '?' : dscanvals.wave_distorter})\n`;
             }
             reply += `\n`;
           }
