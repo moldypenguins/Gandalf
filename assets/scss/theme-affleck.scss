@@ -2,12 +2,11 @@
 
 // includes
 @import "lib/mixins";
-@import "lib/variables-telegram";
+@import "lib/variables-affleck";
 
 // general stuff
 @import "components/global/global";
 @import "components/global/constants";
-@import "components/telegram/global";
 
 body {
   @import "components/affleck/typography-links";
@@ -19,9 +18,4 @@ body {
   @import "components/affleck/header-navigation";
   @import "components/affleck/telegram";
   @import "components/affleck/footer";
-
-  // theme
-  @import "components/telegram/typography-links";
-  @import "components/telegram/header-navigation";
-  @import "components/telegram/footer";
 }

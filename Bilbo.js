@@ -81,25 +81,25 @@ let setup_admins = async() => {
 };
 
 let setup_themes = async() => {
-  if (!await Theme.exists({key: 'default'})) {
-    if (await new Theme({name: 'Default', navbar: 'light'}).save()) {
-      console.log(`Default theme saved to Themes collection.`)
+  if (!await Theme.exists({key: 'affleck'})) {
+    if (await new Theme({name: 'Affleck', navbar: 'light'}).save()) {
+      console.log(`Affleck theme saved to Themes collection.`);
     } else {
-      console.log(`Could not add Default theme to Themes collection.`)
+      console.log(`Could not add Affleck theme to Themes collection.`);
     }
   }
   if (!await Theme.exists({key: 'ultimate'})) {
     if (await new Theme({name: 'Ultimate', navbar: 'dark'}).save()) {
-      console.log(`Ultimate theme saved to Themes collection.`)
+      console.log(`Ultimate theme saved to Themes collection.`);
     } else {
-      console.log(`Could not add Ultimate theme to Themes collection.`)
+      console.log(`Could not add Ultimate theme to Themes collection.`);
     }
   }
   if (!await Theme.exists({key: 'telegram'})) {
     if (await new Theme({name: 'Telegram', navbar: 'light'}).save()) {
-      console.log(`Telegram theme saved to Themes collection.`)
+      console.log(`Telegram theme saved to Themes collection.`);
     } else {
-      console.log(`Could not add Telegram theme to Themes collection.`)
+      console.log(`Could not add Telegram theme to Themes collection.`);
     }
   }
 };
