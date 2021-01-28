@@ -53,7 +53,11 @@ let Attacks_claims = (args, ctx) => {
       if (claims == null || claims.length <= 0) {
         reply = `No claims found.`;
       } else {
-        for (let claim of claims) {
+        let groupedClaims = claims.reduce((hash, obj) => {
+          if(obj[key] === undefined) return hash;
+          return Object.assign(hash, { [obj[key]]:( hash[obj[key]] || [] ).concat(obj)})
+        }, {});
+        for (let claim of groupedClaims) {
           let planet = await Planet.findOne({id: claim.planet_id});
           let dscan = await DevelopmentScan.findOne({planet_id: claim.planet_id});
           reply += `${planet.x}:${planet.y}:${planet.z} LT${claim.wave + attack.landtick} (A: ${dscan == null ? '?' : dscan.wave_amplifier} | D: ${dscan == null ? '?' : dscan.wave_distorter})\n`;
