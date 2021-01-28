@@ -48,7 +48,7 @@ let Attacks_claims = (args, ctx) => {
     if(attack == null) {
       reject('No attack found.');
     } else {
-      let reply = `<b>Attack ${attack.id}</b>\n\n`;
+      let reply = `<b>Attack ${attack.id}</b>\n`;
       let claims = await AttackTargetClaims.find({member_id: ctx.message.from.id, attack_id: attack.id}).sort({wave: 1});
       //console.log('CLAIMS:' + util.inspect(claims, false, null, true));
       if (claims == null || claims.length <= 0) {
