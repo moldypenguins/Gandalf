@@ -49,7 +49,7 @@ let Attacks_claims = (args, ctx) => {
     } else {
       let reply = `<b>Attack ${attack.id}:</b>\n`;
       let claims = await AttackTargetClaims.find({member_id: ctx.message.from.id, attack_id: attack.id}).sort({wave: 1});
-      //console.log('CLAIMS:' + util.inspect(claims, false, null, true));
+      console.log('CLAIMS:' + util.inspect(claims, false, null, true));
       if (claims == null || claims.length <= 0) {
         reply = `No claims found.`;
       } else {
@@ -57,6 +57,7 @@ let Attacks_claims = (args, ctx) => {
           if(obj.wave === undefined) return hash;
           return Object.assign(hash, { [obj.wave]:( hash[obj.wave] || [] ).concat(obj)})
         }, {});
+        console.log('GROUPED:' + util.inspect(groupedClaims, false, null, true));
         for (let n = 0; n < groupedClaims.length; n++) {
           let planet = await Planet.findOne({id: groupedClaims[n].planet_id});
           let dscan = await DevelopmentScan.findOne({planet_id: groupedClaims[n].planet_id});
