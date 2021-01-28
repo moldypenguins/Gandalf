@@ -23,6 +23,7 @@ const he = require('he');
 const util = require('util');
 const Attack = require('../models/attack');
 const AttackTargetClaims = require('../models/attack-target-claim');
+const Scan = require('../models/scan')
 const DevelopmentScan = require('../models/scan-development')
 const Planet = require('../models/planet');
 const Tick = require('../models/tick');
