@@ -59,7 +59,7 @@ let Attacks_claims = (args, ctx) => {
         }, {});
         console.log('GROUPED:' + util.inspect(groupedClaims, false, null, true));
         for (let w = 1; w <= attack.waves; w++) {
-          if(groupedClaims[w].length > 0) {
+          if(groupedClaims[w]?.length > 0) {
             for (let c = 0; c < groupedClaims[w].length; c++) {
               let planet = await Planet.findOne({id: groupedClaims[w][c].planet_id});
               let dscan = await DevelopmentScan.findOne({planet_id: groupedClaims[w][c].planet_id});
