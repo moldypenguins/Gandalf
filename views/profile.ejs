@@ -17,10 +17,15 @@
                 <div class="content">
                     <form method="POST" action="<%= post_action %>">
                         <h2>Profile</h2>
+                        <div class="btn-box">
+                            <button type="submit" name="save" id="save" class="btn btn-sm btn-primary" value="save">
+                                <i class="far fa-save" aria-hidden="true"></i>
+                            </button>
+                        </div>
                         <table class="table table-sm table-transparent">
                             <tbody>
                                 <tr>
-                                    <td>
+                                    <td class="text-center">
                                         <div class="input-group">
                                             <div name="username" id="username" class="form-label" aria-describedby="label-username">
                                                 <img class="tg-pic" src="<%= profile.photo_url %>" width="30" height="30" alt=""/>
@@ -41,7 +46,7 @@
                                             <div class="input-group-prepend">
                                                 <span id="label-theme" class="input-group-text">Theme</span>
                                             </div>
-                                            <select id="site_theme" class="form-control custom-select" name="site_theme">
+                                            <select id="site_theme" class="form-control custom-select" name="site_theme" aria-labelledby="label-theme">
                                                 <% for(var t = 0; t < themes.length; t++) { %>
                                                 <option value="<%= themes[t].key %>"<% if(profile.site_theme === themes[t].key) { %> selected="selected"<% } %>><%= themes[t].name %></option>
                                                 <% } %>
@@ -53,9 +58,9 @@
                                     <td>
                                         <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
-                                                <span id="label-theme" class="input-group-text">Navigation</span>
+                                                <span id="label-navigation" class="input-group-text">Navigation</span>
                                             </div>
-                                            <select id="site_navigation" class="form-control custom-select" name="site_navigation">
+                                            <select id="site_navigation" class="form-control custom-select" name="site_navigation" aria-labelledby="label-navigation">
                                                 <option value="icons"<% if(profile.site_navigation === 'icons') { %> selected="selected"<% } %>>Icons Only</option>
                                                 <option value="iconstext"<% if(profile.site_navigation === 'iconstext') { %> selected="selected"<% } %>>Icons / Text</option>
                                                 <option value="text"<% if(profile.site_navigation === 'text') { %> selected="selected"<% } %>>Text Only</option>
@@ -122,11 +127,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="btn-box">
-                            <button type="submit" name="save" id="save" class="btn btn-sm btn-primary" value="save">
-                                <i class="far fa-save" aria-hidden="true"></i>
-                            </button>
-                        </div>
                     </form>
                 </div>
             </div>
