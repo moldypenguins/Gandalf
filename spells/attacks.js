@@ -23,6 +23,7 @@ const he = require('he');
 const util = require('util');
 const Attack = require('../models/attack');
 const AttackTargetClaims = require('../models/attack-target-claim');
+const DevelopmentScan = require('../models/scan-development')
 const Planet = require('../models/planet');
 const Tick = require('../models/tick');
 
@@ -39,23 +40,23 @@ let Attacks_claims = (args, ctx) => {
     if(attackid != null) {
       attack = await Attack.findOne({id:attackid, releasetick:{$lte:lasttick.id}});
     } else {
-      attack = await Attack.findOne({releasetick:{$lte:lasttick.id}}).sort({id:-1});
+      attack = await Attack.findOne({releasetick:{$lte:lasttick.id}, $where:`this.landtick + this.waves > ${lasttick.id}`}).sort({id:-1});
     }
     //console.log('ATTACK:' + util.inspect(attack, false, null, true));
 
     if(attack == null) {
-      reject('Attack not found.');
+      reject('No attack found.');
     } else {
       let reply = ``;
-      let claims = await AttackTargetClaims.find({member_id: ctx.message.from.id, attack_id: attack.id});
-      console.log('CLAIMS:' + util.inspect(claims, false, null, true));
-
+      let claims = await AttackTargetClaims.find({member_id: ctx.message.from.id, attack_id: attack.id}).sort({wave: 1});
+      //console.log('CLAIMS:' + util.inspect(claims, false, null, true));
       if (claims == null || claims.length <= 0) {
         reply = `No claims found.`;
       } else {
         for (let claim of claims) {
           let planet = await Planet.findOne({id: claim.planet_id});
-          reply += `${planet.x}:${planet.y}:${planet.z} LT${claim.wave + attack.landtick} (A:?|D:?)\n`;
+          let dscan = await DevelopmentScan.findOne({planet_id: claim.planet_id});
+          reply += `${planet.x}:${planet.y}:${planet.z} LT${claim.wave + attack.landtick} (A: ${dscan == null ? '?' : dscan.wave_amplifier} | D: ${dscan == null ? '?' : dscan.wave_distorter})\n`;
         }
       }
       resolve(reply);
