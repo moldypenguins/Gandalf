@@ -49,7 +49,7 @@ let Attacks_claims = (args, ctx) => {
     } else {
       let reply = `<b>Attack ${attack.id}:</b>\n`;
       let claims = await AttackTargetClaims.find({member_id: ctx.message.from.id, attack_id: attack.id}).sort({wave: 1});
-      console.log('CLAIMS:' + util.inspect(claims, false, null, true));
+      //console.log('CLAIMS:' + util.inspect(claims, false, null, true));
       if (claims == null || claims.length <= 0) {
         reply = `No claims found.`;
       } else {
@@ -58,10 +58,14 @@ let Attacks_claims = (args, ctx) => {
           return Object.assign(hash, { [obj.wave]:( hash[obj.wave] || [] ).concat(obj)})
         }, {});
         console.log('GROUPED:' + util.inspect(groupedClaims, false, null, true));
-        for (let n = 0; n < groupedClaims.length; n++) {
-          let planet = await Planet.findOne({id: groupedClaims[n].planet_id});
-          let dscan = await DevelopmentScan.findOne({planet_id: groupedClaims[n].planet_id});
-          reply += `${planet.x}:${planet.y}:${planet.z} LT${groupedClaims[n].wave + attack.landtick} (A: ${dscan == null ? '?' : dscan.wave_amplifier} | D: ${dscan == null ? '?' : dscan.wave_distorter})\n`;
+        for (let w = 1; w <= attack.waves; w++) {
+          if(groupedClaims[w].length > 0) {
+            for (let c = 0; c < groupedClaims[w].length; c++) {
+              let planet = await Planet.findOne({id: groupedClaims[w][c].planet_id});
+              let dscan = await DevelopmentScan.findOne({planet_id: groupedClaims[w][c].planet_id});
+              reply += `${planet.x}:${planet.y}:${planet.z} LT${groupedClaims[w][c].wave + attack.landtick} (A: ${dscan == null ? '?' : dscan.wave_amplifier} | D: ${dscan == null ? '?' : dscan.wave_distorter})\n`;
+            }
+          }
         }
       }
       resolve(reply);
