@@ -7,11 +7,11 @@
 // general stuff
 @import "components/global/global";
 @import "components/global/constants";
+@import "components/global/buttons";
 @import "components/telegram/global";
 
 body {
   @import "components/affleck/typography-links";
-  @import "components/affleck/buttons";
   @import "components/affleck/forms-inputs";
   @import "components/affleck/tables";
 
