@@ -249,11 +249,7 @@
                 <div class="col-12">
                     <div class="content">
                         <h2>Attack <%= attack.id %></h2>
-                        <div id="table-targets-toolbar">
-                            <% if(member.isADM || member.isHC || member.isBC) { %>
-                                <a class="btn btn-sm btn-warning" href="/att/edit/<%= attack.hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
-                            <% } %>
-                        </div>
+
                         <table class="table table-sm table-striped table-bordered" data-toggle="table" data-remember-order="true">
                             <thead>
                                 <tr>
@@ -542,6 +538,11 @@
                             <% } %>
                             </tbody>
                         </table>
+                        <% if(member.isADM || member.isHC || member.isBC) { %>
+                            <div class="btn-box">
+                                <a class="btn btn-sm btn-warning" href="/att/edit/<%= attack.hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
+                            </div>
+                        <% } %>
                     </div>
                 </div>
             </div>
@@ -549,19 +550,19 @@
             <div class="row">
                 <div class="col-xl-2 col-lg-1 col-md-0"></div>
                 <div class="col-xl-8 col-lg-10 col-md-12">
-                        <div id="coords-list" class="content">
-                            <h2>Coordinates:</h2>
-                            <div class="input-group input-group-sm">
-                                <input class="w-100" value="<% targets.forEach(function(trg) { %><%= trg.x %>:<%= trg.y %>:<%= trg.z %> <% }); %>" readonly="readonly" />
-                                <div class="input-group-append">
-                                    <button class="btn btn-sm btn-primary clipboard-button" data-clipboard-target="#coords-list-content">
-                                        <i class="fas fa-clipboard"></i>
-                                    </button>
-                                </div>
-                                <script>new ClipboardJS('.clipboard-button');</script>
+                    <div id="coords-list" class="content">
+                        <h2>Coordinates:</h2>
+                        <div class="input-group input-group-sm">
+                            <input class="w-100" value="<% targets.forEach(function(trg) { %><%= trg.x %>:<%= trg.y %>:<%= trg.z %> <% }); %>" readonly="readonly" />
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btn-primary clipboard-button" data-clipboard-target="#coords-list-content">
+                                    <i class="fas fa-clipboard"></i>
+                                </button>
                             </div>
+                            <script>new ClipboardJS('.clipboard-button');</script>
                         </div>
                     </div>
+                </div>
                 <div class="col-xl-2 col-lg-1 col-md-0"></div>
             </div>
             <% } %>
@@ -737,7 +738,7 @@
                 <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
                 <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
                     <div class="content">
-                        <h2>Live attacks</h2>
+                        <h2>Live Attacks</h2>
                         <table class="table table-sm table-striped">
                             <thead>
                             <tr>
