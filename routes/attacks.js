@@ -204,7 +204,7 @@ router.post('/delete/:hash', access.webCommandRequired, async (req, res, next) =
   if(req.body.delete !== undefined) {
     let claims = await AttackTargetClaim.deleteMany({ attack_id:att.id });
     let trg = await AttackTarget.deleteMany({attack_id:att.id});
-    let deleted = await Attack.deleteOne({attack_id:att.id});
+    let deleted = await Attack.deleteOne({id:att.id});
     res.redirect(`/att`);
   } else {
     next(createError(400));
