@@ -79,7 +79,7 @@
     "jquery": "^3.5.1",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.32",
-    "mongoose": "^5.11.13",
+    "mongoose": "^5.11.14",
     "morgan": "~1.10.0",
     "node-schedule": "^2.0.0",
     "numeral": "^2.0.6",
