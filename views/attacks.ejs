@@ -251,7 +251,8 @@
                         <h2>Attack <%= attack.id %></h2>
                         <% if(member.isADM || member.isHC || member.isBC) { %>
                             <div class="btn-box">
-                                <a class="btn btn-sm btn-warning" href="/att/edit/<%= attack.hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
+                                <a class="btn btn-sm btn-warning w-50" href="/att/edit/<%= attack.hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
+                                <a class="btn btn-sm btn-danger w-50" href="/att/delete/<%= attack.hash %>"><i class="fas fa-times" aria-hidden="true"></i></a>
                             </div>
                         <% } %>
                         <table class="table table-sm table-striped table-bordered" data-toggle="table" data-remember-order="true">
