@@ -199,6 +199,18 @@ router.post('/edit/targ/:hash', access.webCommandRequired, async (req, res, next
 });
 
 
+router.post('/delete/:hash', access.webCommandRequired, async (req, res, next) => {
+  let att = await Attack.findOne({hash:req.params.hash});
+  if(req.body.delete !== undefined) {
+    let claims = await AttackTargetClaim.deleteMany({ attack_id:att.id });
+    let trg = await AttackTarget.deleteMany({attack_id:att.id});
+    let deleted = await Attack.deleteOne({attack_id:att.id});
+    res.redirect(`/att`);
+  } else {
+    next(createError(400));
+  }
+});
+
 
 
 router.get('/:hash', attackLimiter, async (req, res, next) => {
