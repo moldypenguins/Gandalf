@@ -9,17 +9,17 @@
   /* two buttons */
   & .btn:first-child:nth-last-child(2),
   & .btn:first-child:nth-last-child(2) ~ .btn {
-    width: 50%;
+    width: 49.75%;
   }
   /* three buttons */
   & .btn:first-child:nth-last-child(3),
   & .btn:first-child:nth-last-child(3) ~ .btn {
-    width: 33.3333%;
+    width: 33%;
   }
   /* four buttons */
   & .btn:first-child:nth-last-child(4),
   & .btn:first-child:nth-last-child(4) ~ .btn {
-    width: 25%;
+    width: 24.625%;
   }
 
   & .btn:not(:first-child) {
