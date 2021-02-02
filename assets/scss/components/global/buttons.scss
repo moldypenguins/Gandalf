@@ -5,6 +5,12 @@
   & .btn {
     width: 100%;
   }
+  & .btn::not:first-child {
+    margin-left: 0.5%;
+  }
+  & .w-50 {
+    width: 49.75% !important;
+  }
 }
 
 .btn-col {
