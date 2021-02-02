@@ -2,24 +2,8 @@
 .btn-box {
   margin: 0.5rem 0 1rem 0;
 
-  /* one button */
-  & .btn:first-child:nth-last-child(1) {
-    width: 100%;
-  }
-  /* two buttons */
-  & .btn:first-child:nth-last-child(2),
-  & .btn:first-child:nth-last-child(2) ~ .btn {
-    width: 49.75%;
-  }
-  /* three buttons */
-  & .btn:first-child:nth-last-child(3),
-  & .btn:first-child:nth-last-child(3) ~ .btn {
-    width: 33%;
-  }
-  /* four buttons */
-  & .btn:first-child:nth-last-child(4),
-  & .btn:first-child:nth-last-child(4) ~ .btn {
-    width: 24.625%;
+  & .btn-group>.btn {
+    border-radius: .2rem !important;
   }
 
   & .btn:not(:first-child) {
