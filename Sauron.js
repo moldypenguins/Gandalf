@@ -121,7 +121,7 @@ Mordor.connection.once("open", () => {
   });
   //add session objects to locals
   app.use(async (req, res, next) => {
-    res.locals.site_theme = config.web.themes[config.web.default_theme.toLowerCase()] ? config.web.themes[config.web.default_theme.toLowerCase()] : config.web.themes['affleck'];
+    res.locals.site_theme = config.web.default_theme.toLowerCase() ? config.web.default_theme.toLowerCase() : 'affleck';
 
     console.log('THEME: ' + res.locals.site_theme)
 
