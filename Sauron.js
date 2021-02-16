@@ -23,7 +23,6 @@ const Mordor = require('./Mordor');
 const config = require('./config');
 const Tick = require('./models/tick');
 const Member = require('./models/member');
-const Theme = require('./models/theme');
 const Planet = require('./models/planet');
 const Ship = require('./models/ship');
 const Scan = require('./models/scan');
@@ -122,7 +121,7 @@ Mordor.connection.once("open", () => {
   });
   //add session objects to locals
   app.use(async (req, res, next) => {
-    res.locals.site_theme = await Theme.exists({key: config.web.default_theme.toLowerCase()}) ? await Theme.findOne({key: config.web.default_theme.toLowerCase()}) : await Theme.findOne({key: 'affleck'});
+    res.locals.site_theme = config.web.themes[config.web.default_theme.toLowerCase()] ? config.web.themes[config.web.default_theme.toLowerCase()] : config.web.themes['affleck'];
     res.locals.site_url = config.web.uri;
     res.locals.alliance_name = config.alliance.name;
     res.locals.bot_name = config.bot.username;
@@ -136,8 +135,8 @@ Mordor.connection.once("open", () => {
 
     //console.log('MEMBER: ' + util.inspect(req.session.member, false, null, true));
     if(req.session?.member !== undefined && req.session.member != null) {
-      if(req.session.member.site_theme !== undefined && req.session.member.site_theme !== 'default' && await Theme.exists({key: req.session.member.site_theme.toLowerCase()})) {
-        res.locals.site_theme =  await Theme.findOne({key: req.session.member.site_theme.toLowerCase()});
+      if(req.session.member.site_theme !== undefined && req.session.member.site_theme !== 'default' && config.web.themes[config.web.default_theme.toLowerCase()]) {
+        res.locals.site_theme = config.web.themes[config.web.default_theme.toLowerCase()];
       }
       res.locals.member.isADM = req.session.member.access === 5;
       res.locals.member.isHC = req.session.member.access >= 3 && (req.session.member.roles & 16) !== 0;
@@ -199,7 +198,7 @@ Mordor.connection.once("open", () => {
       res.locals.message = err.message;
       res.locals.error = req.app.get('env') === 'development' ? err : {};
       res.status(err.status || 500);
-      res.render('error', {alliance_name: config.alliance.name, site_title: config.alliance.name, page_title: 'Error', site_theme: await Theme.findOne({key: config.web.default_theme.toLowerCase()}), bot_name: config.bot.username});
+      res.render('error', {alliance_name: config.alliance.name, site_title: config.alliance.name, page_title: 'Error', site_theme: config.web.themes['affleck'], bot_name: config.bot.username});
     }
   });
   //start listening

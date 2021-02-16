@@ -35,7 +35,6 @@ Mordor.connection.once("open", async() => {
   await load_ships(json["stats"]["ship"]); // {"stats": { "ship": [ ... ]}}
   await load_ticks();
   await setup_admins();
-  await setup_themes();
   process.exit(0);
 });
 
@@ -77,29 +76,5 @@ let setup_admins = async() => {
     }
   } else {
     console.log(`User id ${config.admin.id} already exists.`);
-  }
-};
-
-let setup_themes = async() => {
-  if (!await Theme.exists({key: 'affleck'})) {
-    if (await new Theme({name: 'Affleck', navbar: 'light'}).save()) {
-      console.log(`Affleck theme saved to Themes collection.`);
-    } else {
-      console.log(`Could not add Affleck theme to Themes collection.`);
-    }
-  }
-  if (!await Theme.exists({key: 'ultimate'})) {
-    if (await new Theme({name: 'Ultimate', navbar: 'dark'}).save()) {
-      console.log(`Ultimate theme saved to Themes collection.`);
-    } else {
-      console.log(`Could not add Ultimate theme to Themes collection.`);
-    }
-  }
-  if (!await Theme.exists({key: 'telegram'})) {
-    if (await new Theme({name: 'Telegram', navbar: 'light'}).save()) {
-      console.log(`Telegram theme saved to Themes collection.`);
-    } else {
-      console.log(`Could not add Telegram theme to Themes collection.`);
-    }
   }
 };

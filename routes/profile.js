@@ -35,7 +35,7 @@ router.get('/', async (req, res, next) => {
   if(mem) {
     mem.planet = await Planet.findOne({id: req.session.member.planet_id});
   }
-  res.render('profile', { page: 'profile', post_action: '/profile', profile: req.session.member, themes: await Theme.find(), timezones: moment.tz.names() });
+  res.render('profile', { page: 'profile', post_action: '/profile', profile: req.session.member, themes: config.web.themes, timezones: moment.tz.names() });
 });
 
 router.post('/', async (req, res, next) => {

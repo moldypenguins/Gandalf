@@ -38,8 +38,14 @@ module.exports = {
     session:"[Website session key]", //ex: 'hihehfw98KDJ@E#ohhoiuhEEDouhfgw8r3fhiw'
     temp_folder:"[Website temp folder path]", //ex: '/home/root/MiddleEarth/temp'
     default_profile_pic:'/images/member.jpg',
-    default_theme:'default',
-    default_navigation:'iconstext'
+    default_theme:'affleck',
+    default_navigation:'iconstext',
+    themes:{
+      affleck:{name:'Affleck', navbar:'light'},
+      telegram:{name: 'Telegram', navbar: 'light'},
+      matrix:{name: 'The Matrix', navbar: 'dark'},
+      ultimate:{name: 'Ultimate', navbar: 'dark'}
+    }
   },
   db:{
     uri:"mongodb://localhost:27017",
