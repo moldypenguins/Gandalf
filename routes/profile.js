@@ -19,7 +19,6 @@ const config = require('../config');
 const Member = require('../models/member');
 const Applicant = require('../models/applicant');
 const Planet = require('../models/planet');
-const Theme = require('../models/theme');
 const express = require('express');
 let router = express.Router();
 const util = require('util');
