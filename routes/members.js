@@ -20,7 +20,6 @@ const Member = require('../models/member');
 const Inactive = require('../models/inactive');
 const Applicant = require('../models/applicant');
 const Planet = require('../models/planet');
-const Theme = require('../models/theme');
 const GalMate = require('../models/galmate');
 const createError = require('http-errors');
 const express = require('express');
