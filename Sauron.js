@@ -139,7 +139,7 @@ Mordor.connection.once("open", () => {
     //console.log('MEMBER: ' + util.inspect(req.session.member, false, null, true));
     if(req.session?.member !== undefined && req.session.member != null) {
       if(req.session.member.site_theme !== undefined && req.session.member.site_theme !== 'default' && config.web.themes[config.web.default_theme.toLowerCase()]) {
-        res.locals.site_theme = config.web.themes[config.web.default_theme.toLowerCase()];
+        res.locals.site_theme = config.web.default_theme.toLowerCase();
       }
       res.locals.member.isADM = req.session.member.access === 5;
       res.locals.member.isHC = req.session.member.access >= 3 && (req.session.member.roles & 16) !== 0;
