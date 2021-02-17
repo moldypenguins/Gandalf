@@ -21,7 +21,7 @@ const client = require('twilio')(config.twilio.sid, config.twilio.secret);
 
 let callMember = (member) => {
   return new Promise((resolve, reject) => {
-    console.log('Member: ' + util.inspect(member,true,null,true));
+    //console.log('Member: ' + util.inspect(member,true,null,true));
     if(member.phone === undefined || member.phone === null || member.phone.length <= 0) {
       reject(`${member.username} does not have a phone number set`);
     } else {
@@ -30,7 +30,7 @@ let callMember = (member) => {
         from: config.twilio.number,
         url: config.twilio.url,
       };
-      console.log('Before Calling');
+      console.log('Calling ' + member.panick);
       client.calls.create(options).then((call) => {
           console.log(util.inspect(call, false, null, true));
           //TODO: send message saying calling, get message.id
@@ -40,7 +40,6 @@ let callMember = (member) => {
           }, config.twilio.ring_timeout * 1000);
           resolve();
       });
-      console.log('After Calling');
     }
   });
 }
