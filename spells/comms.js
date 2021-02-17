@@ -46,15 +46,11 @@ let Comms_call = (args, ctx) => {
         if (mem == null) {
             reject(`Sorry I don't know who ${args[0]} is`);
         } else {
-            if (mem.phone === null || mem.phone === '') {
-                reject(`${mem.panick} does not have a phone number set!`);
-            } else {
-                comms.callMember(mem.id).then(() => {
-                    resolve(`Successfully called <a href="tg://user?id=${mem.id}">${mem.panick != null ? mem.panick : mem.username}</a>`);
-                }, (error) => {
-                    reject(error);
-                });
-            }
+            comms.callMember(mem.id).then(() => {
+                resolve(`Successfully called <a href="tg://user?id=${mem.id}">${mem.panick != null ? mem.panick : mem.username}</a>`);
+            }, (error) => {
+                reject(error);
+            });
         }
     });
 };
