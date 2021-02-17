@@ -31,7 +31,7 @@ let Comms_call = (args, ctx) => {
     return new Promise(async (resolve, reject) => {
         if (!Array.isArray(args) || args.length < 1) { reject(Comms_call_usage); }
         let username = args[0];
-        console.log(username);
+        //console.log(username);
 
         let mem = null;
         if(args[0].startsWith('@') && ctx.message.entities.some(e => e.type === 'mention')) {
@@ -40,13 +40,12 @@ let Comms_call = (args, ctx) => {
             let members = await Members.find();
             mem = members.find(m => (m.panick != null && m.panick.toLowerCase().startsWith(username.toLowerCase())) || (m.first_name != null && m.first_name.toLowerCase().startsWith(username.toLowerCase())));
         }
-
-        console.log('MEMBER: ' + util.inspect(mem, false, null, true));
+        //console.log('MEMBER: ' + util.inspect(mem, false, null, true));
 
         if (mem == null) {
             reject(`Sorry I don't know who ${args[0]} is`);
         } else {
-            comms.callMember(mem.id).then(() => {
+            comms.callMember(mem).then(() => {
                 resolve(`Successfully called <a href="tg://user?id=${mem.id}">${mem.panick != null ? mem.panick : mem.username}</a>`);
             }, (error) => {
                 reject(error);
