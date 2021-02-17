@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [0.4.5-beta] - 2021-02-15
 ### Added
 - Themes to config.js
+- Default theme option
 ### Changed/Updated
 ### Removed
 - Theme Database Model
