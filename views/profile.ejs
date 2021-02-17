@@ -47,8 +47,8 @@
                                                 <span id="label-theme" class="input-group-text">Theme</span>
                                             </div>
                                             <select id="site_theme" class="form-control custom-select" name="site_theme" aria-labelledby="label-theme">
-                                                <% for(var t = 0; t < themes.length; t++) { %>
-                                                <option value="<%= themes[t].key %>"<% if(profile.site_theme === themes[t].key) { %> selected="selected"<% } %>><%= themes[t].name %></option>
+                                                <% for(theme in themes) { %>
+                                                <option value="<%= theme %>"<% if(profile.site_theme === theme) { %> selected="selected"<% } %>><%= themes[theme].name %></option>
                                                 <% } %>
                                             </select>
                                         </div>
