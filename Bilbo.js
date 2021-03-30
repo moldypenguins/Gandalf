@@ -23,29 +23,75 @@ const Mordor = require('./Mordor');
 const config = require('./config');
 const bent = require('bent');
 const getStream = bent('string');
+const xmlParser = require('xml2json');
 const Ship = require('./models/ship.js');
 const Member = require('./models/member.js');
 const Tick = require('./models/tick.js');
-const Theme = require('./models/theme.js');
-const xmlParser = require('xml2json');
+const AttackTargetClaim = require('./models/attack-target-claim.js');
+const AttackTarget = require('./models/attack-target.js');
+const Attack = require('./models/attack.js');
+const BotMessage = require('./models/botmessage.js');
+const Intel = require('./models/intel.js');
+const Scan = require('./models/scan.js');
+const ScanRequest = require('./models/scan-request.js');
+const PlanetScan = require('./models/scan-planet.js');
+const DevelopmentScan = require('./models/scan-development.js');
+const UnitScan = require('./models/scan-unit.js');
+const JumpGateProbe = require('./models/scan-jumpgate.js');
+const PlanetDump = require('./models/planet-dump.js');
+const GalaxyDump = require('./models/galaxy-dump.js');
+const AllianceDump = require('./models/alliance-dump.js');
+const Planet = require('./models/planet.js');
+const Galaxy = require('./models/galaxy.js');
+const Cluster = require('./models/cluster.js');
+const Alliance = require('./models/alliance.js');
+const Applicant = require('./models/applicant.js');
+const GalMate = require('./models/galmate.js');
+
 
 Mordor.connection.once("open", async() => {
-  let stream = await getStream(config.pa.dumps.ship_stats);
-  let json = JSON.parse(xmlParser.toJson(stream));
-  await load_ships(json["stats"]["ship"]); // {"stats": { "ship": [ ... ]}}
+  await clear_database();
+  await load_ships();
   await load_ticks();
   await setup_admins();
+
   process.exit(0);
 });
 
 
-let load_ships = async(ships) => {
-  // remove all the ships first
+let clear_database = async() => {
+  await Tick.deleteMany({});
   await Ship.deleteMany({});
+  await AttackTargetClaim.deleteMany({});
+  await AttackTarget.deleteMany({});
+  await Attack.deleteMany({});
+  await BotMessage.deleteMany({});
+  await Intel.deleteMany({});
+  await ScanRequest.deleteMany({});
+  await Scan.deleteMany({});
+  await PlanetScan.deleteMany({});
+  await DevelopmentScan.deleteMany({});
+  await UnitScan.deleteMany({});
+  await JumpGateProbe.deleteMany({});
+  await PlanetDump.deleteMany({});
+  await GalaxyDump.deleteMany({});
+  await AllianceDump.deleteMany({});
+  await Planet.deleteMany({});
+  await Galaxy.deleteMany({});
+  await Cluster.deleteMany({});
+  await Alliance.deleteMany({});
+  await Applicant.deleteMany({});
+  await GalMate.deleteMany({});
 
+  await Member.updateMany({}, {planet_id:""})
+};
+
+let load_ships = async() => {
+  let stream = await getStream(config.pa.dumps.ship_stats);
+  let json = JSON.parse(xmlParser.toJson(stream));
   // load each one
   let ship_id = 0;
-  for (let json_ship of ships) {
+  for (let json_ship of json["stats"]["ship"]) {
     let ship = new Ship(json_ship);
     ship.id = ship_id++; // set primary key
     let saved = await ship.save();
@@ -60,7 +106,7 @@ let load_ships = async(ships) => {
 let load_ticks = async() => {
   let ticks = await Tick.find();
   if (!ticks || ticks.length == 0) {
-    await Tick.insertMany([{id: 0}]);
+    await Tick.insert({id: 0});
     console.log("Added first tick!");
   } else {
     console.log("First tick already exists!")
