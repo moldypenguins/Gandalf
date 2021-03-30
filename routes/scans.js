@@ -52,7 +52,7 @@ router.get('/', async (req, res, next) => {
     scnrs[i].planet = await Planet.findOne({id:scnrs[i].planet_id});
     scnrs[i].scans = {};
     scnrs[i].scans.d = await Scan.findOne({planet_id:scnrs[i].planet_id, scantype:3}).sort({tick:-1, _id:-1});
-    if(scnrs[i].scans.d !== undefined) { scnrs[i].scans.d.scan = await DevelopmentScan.findOne({scan_id:scnrs[i].scans.d.id}); }
+    if(scnrs[i].scans.d !== null) { scnrs[i].scans.d.scan = await DevelopmentScan.findOne({scan_id:scnrs[i].scans.d.id}); }
     if(scnrs[i].timezone !== undefined) { scnrs[i].currenttime = moment().tz(scnrs[i].timezone).format('LT'); }
   }
   scnrs.sort(compareAmps);
@@ -63,7 +63,7 @@ router.get('/', async (req, res, next) => {
 
 
 router.get('/parse', access.webScannerRequired, async (req, res, next) => {
-  if(req.query.url == undefined) {
+  if(req.query.url === undefined) {
     next(createError(400));
   } else {
     const start_time = Date.now();
