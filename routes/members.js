@@ -201,7 +201,7 @@ router.get('/:id', access.webHighCommandRequired, async (req, res, next) => {
       mem.planet = await Planet.findOne({id:mem.planet_id});
     }
     //console.log('PLANET: ' + util.inspect(plnt, false, null, true));
-    res.render('profile', { site_title: config.alliance.name, page_title: 'Edit Member', page: 'member', post_action: '/mem/' + mem.id, profile: mem, themes: await Theme.find(), timezones: moment.tz.names() });
+    res.render('profile', { site_title: config.alliance.name, page_title: 'Edit Member', page: 'member', post_action: '/mem/' + mem.id, profile: mem, themes: config.web.themes, timezones: moment.tz.names() });
   } else {
     next(createError(400));
   }
