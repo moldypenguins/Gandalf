@@ -106,7 +106,7 @@ let load_ships = async() => {
 let load_ticks = async() => {
   let ticks = await Tick.find();
   if (!ticks || ticks.length == 0) {
-    await Tick.insertOne({id: 0});
+    await Tick.insertMany([{id: 0}]);
     console.log("Added first tick!");
   } else {
     console.log("First tick already exists!")
