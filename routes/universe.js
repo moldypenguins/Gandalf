@@ -32,16 +32,11 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get('/a', function(req, res, next) {
-  Alliance.find().then((allys) => {
-    if(allys) {
-      res.render('universe', { page: 'a', alliances: allys });
-    } else {
-      next(createError(400));
-    }
-  });
+router.get('/a', async (req, res, next) => {
+  let allys = await Alliance.find().sort({score: -1}).limit(5);
+  res.render('universe', { page: 'a', alliances: allys });
 });
-router.get('/a/:alliance', function(req, res, next) {
+router.get('/a/:alliance', async (req, res, next) => {
   Alliance.findOne({alias: req.params.alliance}).then((ally) => {
     if(ally) {
       res.render('universe', { page: 'a', alliance: ally });
