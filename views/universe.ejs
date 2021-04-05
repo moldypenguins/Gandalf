@@ -232,7 +232,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <% for(var a = 0; i < alliances.length; i++) { %>
+                            <% for(var a = 0; a < alliances.length; a++) { %>
                                 <tr>
                                     <td><%= alliances[a].name %></td>
                                     <td><%= alliances[a].size %></td>
@@ -261,7 +261,38 @@
                 <div class="col-lg-6 col-md-12">
                     <div class="content">
                         <h2>Planets</h2>
-
+                        <table id="table-planets" class="table table-sm table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col">X</th>
+                                <th scope="col">Y</th>
+                                <th scope="col">Z</th>
+                                <th scope="col">Planet Name</th>
+                                <th scope="col">Ruler Name</th>
+                                <th scope="col">Race</th>
+                                <th scope="col">Size</th>
+                                <th scope="col">Score</th>
+                                <th scope="col">Value</th>
+                                <th scope="col">XP</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% for(var p = 0; p < planets.length; p++) { %>
+                                <tr>
+                                    <td><%= planets[p].x %></td>
+                                    <td><%= planets[p].y %></td>
+                                    <td><%= planets[p].z %></td>
+                                    <td><%= planets[p].planetname %></td>
+                                    <td><%= planets[p].rulername %></td>
+                                    <td class="<%= planets[p].race ? planets[p].race.toLowerCase() : '' %>"><%= planets[p].race %></td>
+                                    <td><%= planets[p].size %></td>
+                                    <td><%= planets[p].score %></td>
+                                    <td><%= planets[p].value %></td>
+                                    <td><%= planets[p].xp %></td>
+                                </tr>
+                            <% } %>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
