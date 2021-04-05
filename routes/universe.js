@@ -27,13 +27,15 @@ const express = require('express');
 let router = express.Router();
 const util = require('util');
 
-router.get('/', function(req, res, next) {
-  res.render('universe', { page: 'u' });
+router.get('/', async (req, res, next) => {
+  let allys = await Alliance.find().sort({score: -1}).limit(5);
+
+  res.render('universe', { page: 'u', alliances: allys });
 });
 
 
 router.get('/a', async (req, res, next) => {
-  let allys = await Alliance.find().sort({score: -1}).limit(5);
+  let allys = await Alliance.find().sort({score: -1});
   res.render('universe', { page: 'a', alliances: allys });
 });
 router.get('/a/:alliance', async (req, res, next) => {
