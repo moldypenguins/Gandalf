@@ -28,11 +28,12 @@ let router = express.Router();
 const util = require('util');
 
 router.get('/', async (req, res, next) => {
-  let allys = await Alliance.find().sort({score: -1}).limit(5);
-
+  let allys = await Alliance.find().sort({score: -1}).limit(10);
+  let clusts = await Cluster.find().sort({score: -1}).limit(5);
+  let gals = await Galaxy.find().sort({score: -1}).limit(50);
   let plnts = await Planet.find().sort({score: -1}).limit(100);
 
-  res.render('universe', { page: 'u', alliances: allys, planets: plnts });
+  res.render('universe', { page: 'u', alliances: allys, clusters: clusts, galaxies: gals, planets: plnts });
 });
 
 

@@ -219,7 +219,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <div class="content">
-                        <h2>Alliances</h2>
+                        <h2>Top 10 Alliances</h2>
                         <table id="table-alliance" class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
@@ -248,19 +248,65 @@
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <div class="content">
-                        <h2>Clusters</h2>
-
+                        <h2>Top 5 Clusters</h2>
+                        <table id="table-cluster" class="table table-sm table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col">X</th>
+                                <th scope="col">Size</th>
+                                <th scope="col">Score</th>
+                                <th scope="col">Value</th>
+                                <th scope="col">XP</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% for(var c = 0; c < clusters.length; c++) { %>
+                                <tr>
+                                    <td><%= clusters[c].x %></td>
+                                    <td><%= clusters[c].size %></td>
+                                    <td><%= clusters[c].score %></td>
+                                    <td><%= clusters[c].value %></td>
+                                    <td><%= clusters[c].xp %></td>
+                                </tr>
+                            <% } %>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <div class="content">
-                        <h2>Galaxies</h2>
-
+                        <h2>Top 50 Galaxies</h2>
+                        <table id="table-galaxy" class="table table-sm table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col">X</th>
+                                <th scope="col">Y</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Size</th>
+                                <th scope="col">Score</th>
+                                <th scope="col">Value</th>
+                                <th scope="col">XP</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% for(var g = 0; g < galaxies.length; g++) { %>
+                                <tr>
+                                    <td><%= galaxies[g].x %></td>
+                                    <td><%= galaxies[g].y %></td>
+                                    <td><%= galaxies[g].name %></td>
+                                    <td><%= galaxies[g].size %></td>
+                                    <td><%= galaxies[g].score %></td>
+                                    <td><%= galaxies[g].value %></td>
+                                    <td><%= galaxies[g].xp %></td>
+                                </tr>
+                            <% } %>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <div class="content">
-                        <h2>Planets</h2>
+                        <h2>Top 100 Planets</h2>
                         <table id="table-planets" class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
