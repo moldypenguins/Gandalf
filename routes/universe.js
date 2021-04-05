@@ -30,7 +30,9 @@ const util = require('util');
 router.get('/', async (req, res, next) => {
   let allys = await Alliance.find().sort({score: -1}).limit(5);
 
-  res.render('universe', { page: 'u', alliances: allys });
+  let plnts = await Planet.find().sort({score: -1}).limit(100);
+
+  res.render('universe', { page: 'u', alliances: allys, planets: plnts });
 });
 
 
