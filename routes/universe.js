@@ -91,14 +91,9 @@ router.get('/g/:x/:y', function(req, res, next) {
 });
 
 
-router.get('/p', function(req, res, next) {
-  Planet.find().then((plnts) => {
-    if(plnts) {
-      res.render('universe', { page: 'p', planets: plnts });
-    } else {
-      next(createError(400));
-    }
-  });
+router.get('/p', async (req, res, next) => {
+  let plnts = await Planet.find().sort({score: -1});
+  res.render('universe', { page: 'p', planets: plnts });
 });
 router.get('/p/:x/:y/:z', function(req, res, next) {
   Planet.findOne({x: req.params.x, y: req.params.y, z: req.params.z}).then((plnt) => {
