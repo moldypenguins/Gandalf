@@ -140,7 +140,9 @@
                                 <th scope="col">Username (<%= inactives.length %>)</th>
                                 <th scope="col">First Name</th>
                                 <th scope="col">Last Name</th>
-                                <th scope="col">PA Nick</th>
+                                <th data-sortable="true" data-field="panick" scope="col">PA Nick</th>
+                                <th data-field="phone" scope="col">Phone</th>
+                                <th data-field="email" scope="col">Email</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -173,6 +175,27 @@
                                     <td><%= inactives[i].first_name %></td>
                                     <td><%= inactives[i].last_name %></td>
                                     <td><%= inactives[i].panick %></td>
+                                    <td class="no-wrap">
+                                        <% if(inactives[i].phone) { %>
+                                            <% if(member.isADM) { %>
+                                                <form class="d-inline-block" name="callMember" method='POST' action="/mem/call/<%= inactives[i].id %>">
+                                                    <div class="btn-group btn-group-sm position-static" role="group">
+                                                        <button type="submit" name="submitcall" value="<%= inactives[i].phone %>" class="btn btn-info"><i class="fas fa-phone" aria-hidden="true"></i></button>
+                                                    </div>
+                                                </form>
+                                            <% } %>
+                                            <a href="tel:<%= inactives[i].phone %>">
+                                                <%= inactives[i].phone %>
+                                            </a>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if(inactives[i].email) { %>
+                                            <a href="mailto:<%= inactives[i].email %>">
+                                                <%= inactives[i].email %>
+                                            </a>
+                                        <% } %>
+                                    </td>
                                 </tr>
                             <% } %>
                             </tbody>
