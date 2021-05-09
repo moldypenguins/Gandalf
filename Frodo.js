@@ -129,10 +129,11 @@ Mordor.connection.once("open", async () => {
 
 
 let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, start_time) => {
+  //get current tick time
   let tick_time = moment();
   let remainder = tick_time.minute() % (havoc ? 15 : 60);
   tick_time.add(remainder, 'minutes');
-
+  //add tick to db
   let new_tick = new Tick({
     id: planet_dump[3].match(/\d+/g).map(Number)[0],
     timestamp: tick_time

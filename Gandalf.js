@@ -255,8 +255,9 @@ Mordor.connection.once("open", () => {
         //console.log('Message: ' + util.inspect(msgs[msg], false, null, true));
         let res = await BotMessage.updateOne({id:msgs[msg].id}, {sent:true});
         if(res) {
-          //console.log('Sent: ' + util.inspect(res, false, null, true));
-          await bot.telegram.sendMessage(`${msgs[msg].group_id}`, `${msgs[msg].message}`, { parse_mode: 'HTML' });
+          //console.log('Message: ' + util.inspect(res, false, null, true));
+          let msgsnt = await bot.telegram.sendMessage(`${msgs[msg].group_id}`, `${msgs[msg].message}`, { parse_mode: 'HTML' });
+          console.log('Sent: ' + util.inspect(msgsnt, false, null, true));
         }
       }
     }
