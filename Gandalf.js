@@ -241,15 +241,15 @@ Mordor.connection.once("open", () => {
     }
   });
 
-  console.log('Informing Gandalf.');
+  console.log("Informing Gandalf of Sauron's return.");
   bot.launch().then(r => {});
   
-  
+  //check for messages from Frodo and Sauron
   setInterval(async () => {
     //console.log("Peering into Palantír.");
-    let msgs = await BotMessage.find({sent:false});
-    //console.log('Messages: ' + util.inspect(msgs, false, null, true));
-    if(msgs) {
+    if(await BotMessage.exists({sent:false})) {
+      let msgs = await BotMessage.find({sent:false});
+      //console.log('Messages: ' + util.inspect(msgs, false, null, true));
       for(let msg in msgs) {
 
         //console.log('Message: ' + util.inspect(msgs[msg], false, null, true));
