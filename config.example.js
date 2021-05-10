@@ -90,7 +90,7 @@ module.exports = {
       start:0,
       shuffle:12,
       protection:24,
-      end:1167
+      end:1176
     },
     numbers:{
       tag_total:60,

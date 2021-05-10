@@ -159,6 +159,7 @@
 
     function menu_updateMenu() {
         //Add Remaining Ticks
+        /*
         var rTicksDiv = doc.createElement("DIV");
         rTicksDiv.id = 'header_remaining';
         rTicksDiv.appendChild(doc.getElementById('header_tick').childNodes[0].cloneNode());
@@ -173,9 +174,13 @@
         rTicksDiv.appendChild(rTicksValue);
         rTicksDiv.appendChild(doc.getElementById('header_tick').childNodes[4].cloneNode());
         doc.getElementById('header').insertBefore(rTicksDiv, doc.getElementById('header_metal'));
+        */
+        doc.querySelector('div#header_tick span.textlabel').innerHTML += ' | Left';
+        let remain = ((w.PA.round_end - w.PA.round_start) / (60 * 60 * 1000)) - w.PA.last_tick;
+        doc.querySelector('div#header_tick span.textvalue').innerHTML += ' | ' +  remain;
 
         //addAllianceLinks
-        var rand = Math.floor((Math.random() * 9999999999) + 1000000000);
+        let rand = Math.floor((Math.random() * 9999999999) + 1000000000);
         $j('#menu_alliance').append('<ul>' + '<li><a href="alliance_fund.pl?rn=' + rand + '">Fund</a></li>' + '<li><a href="alliance_attacks.pl?rn=' + rand + '">Attacks</a></li>' + '<li><a href="alliance_defence.pl?rn=' + rand + '">Defence</a></li>' + '<li><a href="alliance_fleets.pl?rn=' + rand + '">Fleets</a></li>' + '<li><a href="alliance_messages.pl?rn=' + rand + '">Messages</a></li>' + '<li><a href="alliance_scans.pl?rn=' + rand + '">Scans</a></li>' + '<li><a href="alliance_intel.pl?rn=' + rand + '">Intel</a></li>' + '<li><a href="alliance_members.pl?rn=' + rand + '&order=cscore">Members</a></li>' + '</ul>');
     }
 
