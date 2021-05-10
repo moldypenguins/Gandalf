@@ -257,8 +257,10 @@ Mordor.connection.once("open", () => {
         if(res) {
           //console.log('Message: ' + util.inspect(res, false, null, true));
           try {
-            await bot.telegram.sendMessage(`${msgs[msg].group_id !== '0' ? msgs[msg].group_id : config.groups.admin}`, `${msgs[msg].message}`, { parse_mode: 'HTML' });
-            if(msgs[msg].group_id !== '0' && msgs[msg].group_id !== config.groups.admin) {
+            if(msgs[msg].group_id !== '0') {
+              await bot.telegram.sendMessage(`${msgs[msg].group_id}`, `${msgs[msg].message}`, {parse_mode: 'HTML'});
+            }
+            if(msgs[msg].group_id !== config.groups.admin) {
               await bot.telegram.sendMessage(`${config.groups.admin}`, `${msgs[msg].message}`, { parse_mode: 'HTML' });
             }
           } catch(err) {
