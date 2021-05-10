@@ -257,7 +257,7 @@ Mordor.connection.once("open", () => {
         if(res) {
           //console.log('Message: ' + util.inspect(res, false, null, true));
           try {
-            if(msgs[msg].group_id !== '0') {
+            if(msgs[msg].group_id !== 0) {
               await bot.telegram.sendMessage(`${msgs[msg].group_id}`, `${msgs[msg].message}`, {parse_mode: 'HTML'});
             }
             if(msgs[msg].group_id !== config.groups.admin) {
