@@ -243,7 +243,11 @@ Mordor.connection.once("open", () => {
 
   console.log("Informing Gandalf of Sauron's return.");
   bot.launch().then(r => {});
-  
+
+  //enable graceful stop
+  process.once('SIGINT', () => bot.stop('SIGINT'))
+  process.once('SIGTERM', () => bot.stop('SIGTERM'))
+
   //check for messages from Frodo and Sauron
   setInterval(async () => {
     //console.log("Peering into Palantír.");
