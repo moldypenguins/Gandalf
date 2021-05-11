@@ -121,7 +121,7 @@ Mordor.connection.once("open", () => {
   });
   //add session objects to locals
   app.use(async (req, res, next) => {
-    res.locals.site_theme = config.web.default_theme.toLowerCase() ? config.web.default_theme.toLowerCase() : 'affleck';
+    res.locals.site_theme = config.web.themes[config.web.default_theme.toLowerCase()] ? config.web.themes[config.web.default_theme.toLowerCase()] : config.web.themes['affleck'];
     res.locals.site_url = config.web.uri;
     res.locals.alliance_name = config.alliance.name;
     res.locals.bot_name = config.bot.username;
@@ -136,7 +136,7 @@ Mordor.connection.once("open", () => {
     //console.log('MEMBER: ' + util.inspect(req.session.member, false, null, true));
     if(req.session?.member !== undefined && req.session.member != null) {
       if(req.session.member.site_theme !== undefined && req.session.member.site_theme !== 'default' && config.web.themes[req.session.member.site_theme]) {
-        res.locals.site_theme = req.session.member.site_theme;
+        res.locals.site_theme = config.web.themes[req.session.member.site_theme];
       }
       res.locals.member.isADM = req.session.member.access === 5;
       res.locals.member.isHC = req.session.member.access >= 3 && (req.session.member.roles & 16) !== 0;
