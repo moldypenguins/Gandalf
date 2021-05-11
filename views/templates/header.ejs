@@ -2,7 +2,6 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            SITE THEME: <%= site_theme %>
             <nav class="navbar navbar-expand-lg navbar-<%= site_theme && site_theme.navbar ? site_theme.navbar : 'brand' %>">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="/"><img class="navbar-logo" src="/images/logo/<%= site_theme && site_theme.key ? site_theme.key : 'default' %>.png" width="30" height="30" alt=""/><%= alliance_name %></a>
