@@ -1,4 +1,6 @@
 body {
   background-color: $col-background;
   background-image: url('../images/bg/matrix.gif');
+  background-repeat: repeat-x;
+  background-size: contain;
 }
