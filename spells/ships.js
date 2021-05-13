@@ -59,12 +59,12 @@ let Ships_eff = (args) => {
           message += ` will destroy ${numeral(damage / 50).format('0,0')} structures`;
           break;
         default:
-          message += ` will ${config.pa.ships.damagetypes[ship.type.toLowerCase()]}:`;
+          message += ` will ${config.pa.ships.damagetypes[ship.type.toLowerCase()]}:\n`;
           for(let t in config.pa.ships.targets) {
             let target = config.pa.ships.targets[t];
             //console.log("TARGET: " + util.inspect(target, false, null, true));
             if (ship[target] !== '-') {
-              message += `\n<i>${t}: ${ship[target]}s (${config.pa.ships.targeteffs[target] * 100}%)</i>\n`;
+              message += `<i>${t}: ${ship[target]}s (${config.pa.ships.targeteffs[target] * 100}%)</i>\n`;
               let shiptargets = await Ship.find({class: ship[target]});
               //console.log("TARGETED SHIPS: " + util.inspect(shiptargets, false, null, true));
               if (shiptargets) {
