@@ -35,14 +35,15 @@ let Ships_eff = (args) => {
     let _ship = args[1];
     //let _target = args[2] ? args[2] : 't1';
     //console.log(`ARGS: number=${_number}, ship=${_ship}, target=${_target}`);
+    console.log(`ARGS: number=${_number}, ship=${_ship}`);
 
     let number = numeral(_number).value();
     if(number == null) { reject(`${_number} is not a valid number`); }
     //if(!Object.keys(config.pa.ships.targets).includes(_target.toLowerCase())) { reject(`${_target} is not a valid target`); }
     //let target = config.pa.ships.targets[_target.toLowerCase()];
 
-    let ship = await Ship.find({$where:`this.name.toLowerCase().startsWith(${_ship.toLowerCase()})`});
-    //console.log(ships);
+    let ship = await Ship.find({$where:`this.name.toLowerCase().startsWith("${_ship.toLowerCase()}")`});
+    console.log("SHIP: " + util.inspect(ship, false, null, true));
     //let ship = ships.find(s => s.name.toLowerCase().startsWith(_ship.toLowerCase()) );
     if(!ship) {
       reject(`Cannot find ship ${_ship}`);
