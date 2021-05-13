@@ -64,7 +64,7 @@ let Ships_eff = (args) => {
             let target = config.pa.ships.targets[t];
             //console.log("TARGET: " + util.inspect(target, false, null, true));
             if (ship[target] !== '-') {
-              message += `\n<i>${t}: ${ship[target]}s (${config.pa.ships.targeteffs[target]}%)</i>\n`;
+              message += `\n<i>${t}: ${ship[target]}s (${config.pa.ships.targeteffs[target] * 100}%)</i>\n`;
               let shiptargets = await Ship.find({class: ship[target]});
               //console.log("TARGETED SHIPS: " + util.inspect(shiptargets, false, null, true));
               if (shiptargets) {
