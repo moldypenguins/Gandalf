@@ -169,6 +169,9 @@
                         case 'Defend':
                             $j(obj).children('td').addClass('mission_defend');
                             break;
+                        case 'Return':
+                            $j(obj).children('td').addClass('mission_return');
+                            break;
                     }
                 }
             }
