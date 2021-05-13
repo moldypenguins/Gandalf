@@ -42,8 +42,8 @@ let Ships_eff = (args) => {
     //if(!Object.keys(config.pa.ships.targets).includes(_target.toLowerCase())) { reject(`${_target} is not a valid target`); }
     //let target = config.pa.ships.targets[_target.toLowerCase()];
 
-    let ship = await Ship.find({$where:`this.name.toLowerCase().startsWith("${_ship.toLowerCase()}")`});
-    console.log("SHIP: " + util.inspect(ship, false, null, true));
+    let ship = await Ship.findOne({$where:`this.name.toLowerCase().startsWith("${_ship.toLowerCase()}")`});
+    //console.log("SHIP: " + util.inspect(ship, false, null, true));
     //let ship = ships.find(s => s.name.toLowerCase().startsWith(_ship.toLowerCase()) );
     if(!ship) {
       reject(`Cannot find ship ${_ship}`);
