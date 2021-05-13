@@ -32,13 +32,13 @@ let Ships_eff = (args) => {
     if (!Array.isArray(args) || args.length < 2) { reject(Ships_eff_usage); }
     let _number = args[0];
     let _ship = args[1];
-    let _target = args[2] ? args[2] : 't1';
+    //let _target = args[2] ? args[2] : 't1';
     //console.log(`ARGS: number=${_number}, ship=${_ship}, target=${_target}`);
 
     let number = numeral(_number).value();
     if(number == null) { reject(`${_number} is not a valid number`); }
-    if(!Object.keys(config.pa.ships.targets).includes(_target.toLowerCase())) { reject(`${_target} is not a valid target`); }
-    let target = config.pa.ships.targets[_target.toLowerCase()];
+    //if(!Object.keys(config.pa.ships.targets).includes(_target.toLowerCase())) { reject(`${_target} is not a valid target`); }
+    //let target = config.pa.ships.targets[_target.toLowerCase()];
 
     let ship = await Ship.find({$where:`this.name.toLowerCase().startsWith(${_ship.toLowerCase()})`});
     //console.log(ships);
@@ -49,7 +49,7 @@ let Ships_eff = (args) => {
       let damage = ship.damage !== '-' ? numeral(ship.damage).value() * number : 0
       let message = `<b>${numeral(number).format('0a')} ${ship.name} (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / config.pa.numbers.ship_value).format('0a') })</b><br>`;
 
-      for(let targ in config.pa.ships.targets) {
+      for(let target in config.pa.ships.targets) {
         if(ship[target] !== '-') {
           message += `${target}: ${ship[target]}<br>`;
         }
