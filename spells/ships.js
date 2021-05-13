@@ -35,7 +35,7 @@ let Ships_eff = (args) => {
     let _ship = args[1];
     //let _target = args[2] ? args[2] : 't1';
     //console.log(`ARGS: number=${_number}, ship=${_ship}, target=${_target}`);
-    console.log(`ARGS: number=${_number}, ship=${_ship}`);
+    //console.log(`ARGS: number=${_number}, ship=${_ship}`);
 
     let number = numeral(_number).value();
     if(number == null) { reject(`${_number} is not a valid number`); }
@@ -43,16 +43,19 @@ let Ships_eff = (args) => {
     //let target = config.pa.ships.targets[_target.toLowerCase()];
 
     let ship = await Ship.find({$where:`this.name.toLowerCase().startsWith("${_ship.toLowerCase()}")`});
-    console.log("SHIP: " + util.inspect(ship, false, null, true));
+    //console.log("SHIP: " + util.inspect(ship, false, null, true));
     //let ship = ships.find(s => s.name.toLowerCase().startsWith(_ship.toLowerCase()) );
     if(!ship) {
       reject(`Cannot find ship ${_ship}`);
     } else {
       let damage = ship.damage !== '-' ? numeral(ship.damage).value() * number : 0
       let message = `<b>${numeral(number).format('0a')} ${ship.name} (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / config.pa.numbers.ship_value).format('0a') })</b>\n`;
+      console.log("TARGETS: " + util.inspect(config.pa.ships.targets, false, null, true));
 
       for(let t=0; t < config.pa.ships.targets.length; t++) {
         let target = config.pa.ships.targets[t];
+        console.log("TARGET: " + util.inspect(target, false, null, true));
+
         if(ship[target] !== '-') {
           message += `${target}: ${ship[target]}\n`;
         }
