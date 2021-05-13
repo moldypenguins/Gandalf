@@ -155,7 +155,7 @@
                 if (parseInt($j(obj).children('td')[3].innerText) == currETA) {
                     $j(obj).addClass(currStyle);
                 } else {
-                    obj.before('<tr><td colspan="' + $j(obj).children('td') + '"></td></tr>');
+                    if(ind !== 0) {$('<tr><td colspan="' + $j(obj).children('td') + '"></td></tr>').insertBefore(obj);}
                     currETA = parseInt($j(obj).children('td')[3].innerText);
                     currStyle = currStyle == '' ? 'fleet_alt' : '';
                     $j(obj).addClass(currStyle);
