@@ -50,7 +50,7 @@ let Ships_eff = (args) => {
     } else {
       let damage = ship.damage !== '-' ? numeral(ship.damage).value() * number : 0
       let message = `<b>${numeral(number).format('0a')} ${ship.name} (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / config.pa.numbers.ship_value).format('0a') })</b>\n`;
-      console.log("TARGETS: " + util.inspect(config.pa.ships.targets, false, null, true));
+      console.log("TARGETS: " + config.pa.ships.targets.length);
 
       for(let t=0; t < config.pa.ships.targets.length; t++) {
         let target = config.pa.ships.targets[t];
