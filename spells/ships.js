@@ -49,7 +49,7 @@ let Ships_eff = (args) => {
       reject(`Cannot find ship ${_ship}`);
     } else {
       let damage = ship.damage !== '-' ? numeral(ship.damage).value() * number : 0
-      let message = `<b>${numeral(number).format('0a')} ${ship.name} (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / config.pa.numbers.ship_value).format('0a') })</b>\n`;
+      let message = `<b>${numeral(number).format('0a')} ${ship.name} (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / config.pa.numbers.ship_value).format('0a') })</b>`;
 
       switch (ship.type.toLowerCase()) {
         case 'pod':
@@ -59,11 +59,12 @@ let Ships_eff = (args) => {
           message += ` will destroy ${numeral(damage / 50).format('0,0')} structures`;
           break;
         default:
+          message += ` will ${config.pa.ships.damagetypes[ship.type.toLowerCase()]}:\n`;
           for(let t in config.pa.ships.targets) {
             let target = config.pa.ships.targets[t];
             //console.log("TARGET: " + util.inspect(target, false, null, true));
             if (ship[target] !== '-') {
-              message += ` hitting <i>${ship[target].toLowerCase()}</i> will ${config.pa.ships.damagetypes[ship.type.toLowerCase()]}:\n`;
+              message += `<i>${ship[target]}</i>`;
               let shiptargets = await Ship.find({class: ship[target]});
               //console.log("TARGETED SHIPS: " + util.inspect(shiptargets, false, null, true));
               if (shiptargets) {
