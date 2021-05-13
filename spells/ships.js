@@ -51,41 +51,39 @@ let Ships_eff = (args) => {
       let damage = ship.damage !== '-' ? numeral(ship.damage).value() * number : 0
       let message = `<b>${numeral(number).format('0a')} ${ship.name} (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / config.pa.numbers.ship_value).format('0a') })</b>\n`;
 
-      for(let t in config.pa.ships.targets) {
-        let target = config.pa.ships.targets[t];
-        console.log("TARGET: " + util.inspect(target, false, null, true));
-
-        if(ship[target] !== '-') {
-          message += `${target}: ${ship[target]}\n`;
-        }
-        switch(ship.type.toLowerCase()) {
-          case 'pod':
-            message += ` will capture ${numeral(damage / 50).format('0,0')} roids`;
-            break;
-          case 'structure':
-            message += ` will destroy ${numeral(damage / 50).format('0,0')} structures`;
-            break;
-          default:
-            message += ` hitting <i>${ship[target].toLowerCase()}</i> will ${config.pa.ships.damagetypes[ship.type.toLowerCase()]}:\n`;
-            let shiptargets = await Ship.find({class: ship[target]});
-            console.log("TARGETED SHIPS: " + util.inspect(shiptargets, false, null, true));
-            if(shiptargets) {
-              var results = shiptargets.map(function(shiptarget) {
-                switch(ship.type.toLowerCase()) {
-                  case 'emp':
-                    let empnumber = Math.trunc(config.pa.ships.targeteffs[target] * ship.guns * number * (100 - shiptarget.empres) / 100);
-                    return (`${numeral(empnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(empnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / config.pa.numbers.ship_value).format('0a') })`);
-                    break;
-                  default:
-                    let targetnumber = Math.trunc(config.pa.ships.targeteffs[target] * damage / shiptarget.armor);
-                    return (`${numeral(targetnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(targetnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / config.pa.numbers.ship_value).format('0a') })`);
-                    break;
-                }
-              });
-              message += results.join('; ');
+      switch (ship.type.toLowerCase()) {
+        case 'pod':
+          message += ` will capture ${numeral(damage / 50).format('0,0')} roids`;
+          break;
+        case 'structure':
+          message += ` will destroy ${numeral(damage / 50).format('0,0')} structures`;
+          break;
+        default:
+          for(let t in config.pa.ships.targets) {
+            let target = config.pa.ships.targets[t];
+            //console.log("TARGET: " + util.inspect(target, false, null, true));
+            if (ship[target] !== '-') {
+              message += ` hitting <i>${ship[target].toLowerCase()}</i> will ${config.pa.ships.damagetypes[ship.type.toLowerCase()]}:\n`;
+              let shiptargets = await Ship.find({class: ship[target]});
+              //console.log("TARGETED SHIPS: " + util.inspect(shiptargets, false, null, true));
+              if (shiptargets) {
+                var results = shiptargets.map(function (shiptarget) {
+                  switch (ship.type.toLowerCase()) {
+                    case 'emp':
+                      let empnumber = Math.trunc(config.pa.ships.targeteffs[target] * ship.guns * number * (100 - shiptarget.empres) / 100);
+                      return (`${numeral(empnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(empnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / config.pa.numbers.ship_value).format('0a')})`);
+                      break;
+                    default:
+                      let targetnumber = Math.trunc(config.pa.ships.targeteffs[target] * damage / shiptarget.armor);
+                      return (`${numeral(targetnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(targetnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / config.pa.numbers.ship_value).format('0a')})`);
+                      break;
+                  }
+                });
+                message += results.join('; ');
+              }
             }
-            break;
-        }
+          }
+          break;
       }
       resolve(message);
     }
