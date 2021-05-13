@@ -67,7 +67,8 @@ let Ships_eff = (args) => {
             break;
           default:
             message += ` hitting <i>${ship[target].toLowerCase()}</i> will ${config.pa.ships.damagetypes[ship.type.toLowerCase()]}:\n`;
-            var shiptargets = ships.filter(s => s.class == ship[target]);
+            let shiptargets = await Ship.find({class: ship[target]});
+            console.log("TARGETED SHIPS: " + util.inspect(shiptargets, false, null, true));
             if(shiptargets) {
               var results = shiptargets.map(function(shiptarget) {
                 switch(ship.type.toLowerCase()) {
