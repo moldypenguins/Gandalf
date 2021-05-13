@@ -49,12 +49,12 @@ let Ships_eff = (args) => {
       reject(`Cannot find ship ${_ship}`);
     } else {
       let damage = ship.damage !== '-' ? numeral(ship.damage).value() * number : 0
-      let message = `<b>${numeral(number).format('0a')} ${ship.name} (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / config.pa.numbers.ship_value).format('0a') })</b><br>`;
+      let message = `<b>${numeral(number).format('0a')} ${ship.name} (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / config.pa.numbers.ship_value).format('0a') })</b>\n`;
 
       for(let t=0; t < config.pa.ships.targets.length; t++) {
         let target = config.pa.ships.targets[t];
         if(ship[target] !== '-') {
-          message += `${target}: ${ship[target]}<br>`;
+          message += `${target}: ${ship[target]}\n`;
         }
         switch(ship.type.toLowerCase()) {
           case 'pod':
