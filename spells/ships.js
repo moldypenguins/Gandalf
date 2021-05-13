@@ -25,11 +25,12 @@ const Ship = require('../models/ship');
 const Tick = require('../models/tick');
 
 
-let Ships_eff_usage = he.encode('!eff <number> <ship> [t1|t2|t3]');
+//let Ships_eff_usage = he.encode('!eff <number> <ship> [t1|t2|t3]');
+let Ships_eff_usage = he.encode('!eff <number> <ship>');
 let Ships_eff_desc = 'Calculates the efficiency of the specified number of ships.';
 let Ships_eff = (args) => {
   return new Promise(async (resolve, reject) => {
-    if (!Array.isArray(args) || args.length < 2) { reject(Ships_eff_usage); }
+    if (!Array.isArray(args) || args.length < 1) { reject(Ships_eff_usage); }
     let _number = args[0];
     let _ship = args[1];
     //let _target = args[2] ? args[2] : 't1';
