@@ -145,12 +145,16 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
   await AllianceDump.deleteMany();
   console.log(`Deleted old dumps in: ${(new Date()) - start_time}ms`);
 
+  //DEPRECATED: we now have planet id's
+  /*
   if (new_tick.id < config.pa.tick.shuffle) {
     console.log('Pre-shuffle dumps detected, dumping data.');
     planet_dump = undefined;
     galaxy_dump = undefined;
     alliance_dump = undefined;
   }
+  */
+
   //Planets
   if (planet_dump !== undefined && planet_dump != null) {
     for (let i = 8; i <= planet_dump.length; i++) {
@@ -234,10 +238,10 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
   //##############
   //Clusters
   //##############
+  //set all clusters to active
   await Cluster.updateMany({}, {active: true});
 
   let clusters = await Cluster.find({}, 'x');
-
   let cluster_temp = await GalaxyDump.find({x: {$nin: clusters.map(c => c.x)}}, 'x').distinct('x');
   for (let ckey in cluster_temp) {
     //console.log(util.inspect(ckey, false, null, true));
