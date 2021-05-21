@@ -97,4 +97,4 @@ Copyright © 2020 Craig Roberts, Braden Edmunds, Alex High
 Licensed under the GNU General Public License Version 3  
 See [LICENSE.md](LICENSE.md) or [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html) for more details  
 *** 
-[![JetBrains](https://img.shields.io/badge/Developed%20Using-JetBrains%20Developer%20Tools-000000?style=for-the-badge&logo=JetBrains)](https://www.jetbrains.com/)
+[![JetBrains](https://img.shields.io/badge/Developed%20Using-JetBrains%20Tools-000000?style=for-the-badge&logo=JetBrains)](https://www.jetbrains.com/)
