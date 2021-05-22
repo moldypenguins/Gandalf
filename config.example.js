@@ -1,23 +1,23 @@
 module.exports = {
   admin:{
-    id:123456789 //[Telegram ID]
+    id:123456789 //Telegram ID
   },
   alliance:{
-    name:"[Alliance Name]",
+    name:"Alliance Name", //used somewhere
     attack:{
-      default_waves:3,
-      after_land_ticks:2,
-      max_claims: 0  //0 for unlimited
+      default_waves:3, //default number of waves on an attack
+      after_land_ticks:2, //how many ticks to keep attack open after landing
+      max_claims:0  //maximum allowed claims per member - 0 for unlimited
     }
   },
   bot:{
     token:"[Telegram bot token]",
     username:"[Telegram bot username]",
-    private_cmd:".",
-    public_cmd:"!",
-    modules:['admin', 'ships', 'calcs', 'comms', 'intel', 'fun', 'attacks', 'scans'],
-    message_interval:5, //seconds
-    tick_alert:true
+    private_cmd:".", //character to use for bot to reply in pm
+    public_cmd:"!", //character to use for bot to reply in public
+    modules:['admin', 'ships', 'calcs', 'comms', 'intel', 'fun', 'attacks', 'scans'], //active modules
+    message_interval:5, //how often to check for messages in seconds
+    tick_alert:true //whether the bot should message private channel on every tick
   },
   twilio:{
     url:"[Twilio url]", //TwiML instructions url
