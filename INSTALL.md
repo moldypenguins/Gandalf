@@ -2,12 +2,12 @@
 
 ```shell script
 [HOSTNAME] = domain.com
-[USERNAME] = pauser
-[USEREMAIL] = pauser@domain.com
-[BOTNAME] = Gandalf
-[DATABASENAME] = padb
-[DATABASEUSER] = pauser
-[DATABASEPASS] = G@nda1fr
+[USERNAME] = administrator
+[USEREMAIL] = administrator@domain.com
+[BOTNAME] = Somebot
+[DATABASENAME] = Mordor
+[DATABASEUSER] = administrator
+[DATABASEPASS] = abcd1234
 ```
 
 ## Server Setup
@@ -103,9 +103,7 @@
   nodejs -v
   sudo apt install npm
   npm -v
-  #sudo apt install build-essential  #unknown if needed
-  #sudo npm install -g npx           #unknown if needed
-  #sudo npm install -g nodemon       #is now in package.json
+  sudo npm install -g nodemon
 ```
 
 
@@ -113,7 +111,7 @@
 ```shell script
   git https://github.com/moldypenguins/Gandalf MiddleEarth
   cd MiddleEarth
-  sudo npm install
+  npm install
   #create config.js
   cp config.example.js config.js
   vi config.js
@@ -125,7 +123,7 @@
 
 ### Bilbo
 ```shell script
-  sudo nodejs bilbo.js
+  nodejs bilbo.js
   #Wait for the script to finish
   #Press Ctrl+C
 ```
@@ -134,9 +132,9 @@
 ```shell script
   screen -dmS Frodo
   screen -r Frodo
-  sudo nodejs Frodo.js
+  nodejs Frodo.js
   #if using nodemon
-  sudo nodemon Frodo.js
+  nodemon Frodo.js
   #Press Ctrl+A+D
 ```
 
@@ -144,29 +142,29 @@
 ```shell script
   screen -dmS Gandalf
   screen -r Gandalf
-  sudo nodejs Gandalf.js
+  nodejs Gandalf.js
   #if using nodemon
-  sudo nodemon Gandalf.js
+  nodemon Gandalf.js
   #Press Ctrl+A+D
 ```
 
 ### Sauron
 ```shell script
   #@fortawesome/fontawesome-free
-  ln -s node_modules/@fortawesome/fontawesome-free/webfonts/ public/
-  ln -s node_modules/@fortawesome/fontawesome-free/css/all.min.css public/styles/
+  #ln -s node_modules/@fortawesome/fontawesome-free/webfonts/ public/
+  #ln -s node_modules/@fortawesome/fontawesome-free/css/all.min.css public/styles/
   #clipboard
-  ln -s node_modules/clipboard/dist/clipboard.min.js public/scripts/
+  #ln -s node_modules/clipboard/dist/clipboard.min.js public/scripts/
   #jquery
-
+  #
   #bootstrap
-
-
+  #
+  
   screen -dmS Sauron
   screen -r Sauron
-  sudo nodejs Sauron.js
+  nodejs Sauron.js
   #if using nodemon
-  sudo nodemon Sauron.js
+  nodemon Sauron.js
   #Press Ctrl+A+D
 ```
 
