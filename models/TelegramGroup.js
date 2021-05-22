@@ -14,13 +14,18 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name TelegramGroup.js
+ * @version 2021/05/22
+ * @summary Mongoose Model
  **/
 const Mordor = require('../Mordor');
 
-let chatSchema = Mordor.Schema({
-  id: {type:String, unique:true, required:true},
-  title: {type:String},
-  type: {type:String}
+let TelegramGroupSchema = new Mordor.Schema({
+  _id:      {type:Mordor.Schema.Types.ObjectId, required:true},
+  group_id: {type:String, unique:true, required:true},
+  title:    {type:String},
+  type:     {type:String},
 });
 
-module.exports = Mordor.model('Chat', chatSchema, 'Chats');
+module.exports = Mordor.model('TelegramGroup', TelegramGroupSchema, 'TelegramGroups');

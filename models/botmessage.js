@@ -14,15 +14,19 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name BotMessage.js
+ * @version 2021/05/22
+ * @summary Mongoose Model
  **/
 const Mordor = require('../Mordor');
 
-let botmessageSchema = Mordor.Schema({
-  id:        String,
-  group_id:  Number,
-  message:   String,
-  sent:      Boolean
+let BotMessageSchema = new Mordor.Schema({
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
+  message_id: {type:String, unique:true, required:true},
+  group_id:   {type:Number},
+  message:    {type:String},
+  sent:       {type:Boolean},
 });
 
-module.exports = Mordor.model('BotMessage', botmessageSchema, 'BotMessages');
-
+module.exports = Mordor.model('BotMessage', BotMessageSchema, 'BotMessages');

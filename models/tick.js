@@ -14,22 +14,27 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name Tick.js
+ * @version 2021/05/22
+ * @summary Mongoose Model
  **/
 const Mordor = require('../Mordor');
 
-let tickSchema = Mordor.Schema({
-  id:         Number,
-  galaxies:   Number,
-  planets:    Number,
-  alliances:  Number,
-  timestamp:  Date,
-  clusters:   Number,
-  c200:       Number,
-  ter:        Number,
-  cat:        Number,
-  xan:        Number,
-  zik:        Number,
-  etd:        Number
+let TickSchema = new Mordor.Schema({
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
+  tick_id:    {type:Number, unique:true, required:true},
+  galaxies:   {type:Number},
+  planets:    {type:Number},
+  alliances:  {type:Number},
+  timestamp:  {type:Date},
+  clusters:   {type:Number},
+  c200:       {type:Number},
+  ter:        {type:Number},
+  cat:        {type:Number},
+  xan:        {type:Number},
+  zik:        {type:Number},
+  etd:        {type:Number},
 });
 
-module.exports = Mordor.model('Tick', tickSchema, 'Ticks');
+module.exports = Mordor.model('Tick', TickSchema, 'Ticks');
