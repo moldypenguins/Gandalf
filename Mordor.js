@@ -20,16 +20,16 @@
  * @summary Database
  **/
 const config = require('./config');
-const mongoose = require("mongoose");
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
-mongoose.set('useUnifiedTopology', true);
-mongoose.connect(config.db.uri + '/' + config.db.name).catch(err => console.log(err.reason));
-mongoose.connection.on("error", () => {
+const Mordor = require("mongoose");
+Mordor.set('useNewUrlParser', true);
+Mordor.set('useFindAndModify', false);
+Mordor.set('useCreateIndex', true);
+Mordor.set('useUnifiedTopology', true);
+Mordor.connect(config.db.uri + '/' + config.db.name).catch(err => console.log(err.reason));
+Mordor.connection.on("error", () => {
   console.log("Error: database connection failed.");
 });
-mongoose.connection.once("connected", () => {
+Mordor.connection.once("connected", () => {
   console.log("Evil is stirring in Mordor.");
 });
-module.exports = mongoose;
+module.exports = Mordor;

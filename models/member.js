@@ -15,25 +15,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  **/
+const config = require('../config');
 const Mordor = require('../Mordor');
 
-let memberSchema = Mordor.Schema({
-  id:          {type:Number, unique:true, required:true},
-  username:    {type:String},
-  first_name:  {type:String},
-  last_name:   {type:String},
-  photo_url:   {type:String},
-  panick:      {type:String, index:true},
-  email:       {type:String},
-  phone:       {type:String},
-  access:      {type:Number, default: 0},
-  roles:       {type:Number, default: 0},
-  sponsor:     {type:String},
-  planet_id:   {type:String},
-  last_access: {type:Date},
-  site_theme:  {type:String, default:'default'},
-  site_navigation: {type:String, default:'iconstext'},
-  timezone:    {type:String}
+let MemberSchema = new Mordor.Schema({
+  _id:             {type:Mordor.Schema.Types.ObjectId, required:true},
+  telegram_user:   {type:Mordor.Schema.Types.ObjectId, reference:'TelegramUser', required:true},
+  //telegram_id:   {type:Number, unique:true, required:true},
+  //username:      {type:String},
+  //first_name:    {type:String, required:true},
+  //last_name:     {type:String},
+  //photo_url:     {type:String, default:config.web.uri + '/' + config.web.default_profile_pic},
+  pa_nick:         {type:String, unique:true, required:true},
+  access:          {type:Number, default:0, required:true},
+  roles:           {type:Number, default:0, required:true},
+  parent:          {type:Mordor.Schema.Types.ObjectId, reference:'Member', required:true},
+  birthed:         {type:Date, default:Date.now(), required:true},
+  site_theme:      {type:String, default:'default', required:true},
+  site_navigation: {type:String, default:'iconstext', required:true},
+  last_access:     {type:Date},
+  timezone:        {type:String},
+  email:           {type:String},
+  phone:           {type:String},
+  planet:          {type:Mordor.Schema.Types.ObjectId, reference:'Planet'},
+  //planet_id:     {type:String},
 });
 
-module.exports = Mordor.model('Member', memberSchema, 'Members');
+module.exports = Mordor.model('Member', MemberSchema, 'Members');

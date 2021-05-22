@@ -63,3 +63,33 @@ module.exports = {
 	"PLANET_COORD_TYPE": PLANET_COORD_TYPE,
 	"GALAXY_COORD_TYPE": GALAXY_COORD_TYPE
 };
+
+
+
+
+//var id = require('mongodb').ObjectID(doc._id);
+//.findOne({_id: new ObjectId(id)}
+//.findById("5e12d86186d564bd4487658c", function(err, result) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
