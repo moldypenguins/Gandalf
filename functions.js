@@ -22,7 +22,7 @@
 'use strict';
 
 
-const Planet = require('./models/planet');
+const Planet = require('./models/Planet');
 
 
 
