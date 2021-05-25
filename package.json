@@ -77,11 +77,13 @@
     "http-errors": "~1.8.0",
     "intl-tel-input": "^17.0.12",
     "jquery": "^3.6.0",
+    "minimist": "^1.2.5",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.33",
     "mongoose": "^5.12.10",
     "morgan": "~1.10.0",
     "node-schedule": "^2.0.0",
+    "nodemon": "^2.0.7",
     "numeral": "^2.0.6",
     "socket.io": "^4.1.2",
     "telegraf": "^4.3.0",
@@ -104,7 +106,6 @@
     "gulp-sass": "^4.1.0",
     "gulp-sass-lint": "^1.4.0",
     "gulp-sourcemaps": "^3.0.0",
-    "gulp-uglify": "^3.0.2",
-    "nodemon": "^2.0.7"
+    "gulp-uglify": "^3.0.2"
   }
 }
