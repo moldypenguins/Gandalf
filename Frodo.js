@@ -19,35 +19,61 @@
  * @version 2020/11/19
  * @summary Ticker
 **/
+'use strict';
+
 const Mordor = require('./Mordor');
 const config = require('./config');
-const Ship = require('./models/ship');
-const Member = require('./models/member');
-const Tick = require('./models/tick');
-const PlanetDump = require('./models/planet-dump');
-const GalaxyDump = require('./models/galaxy-dump');
-const AllianceDump = require('./models/alliance-dump');
+const Ship = require('./models/Ship');
+const Member = require('./models/Member');
+const Tick = require('./models/Tick');
+const PlanetDump = require('./models/PlanetDump');
+const GalaxyDump = require('./models/GalaxyDump');
+const AllianceDump = require('./models/AllianceDump');
 const Cluster = require('./models/cluster');
 const Galaxy = require('./models/galaxy');
 const Planet = require('./models/planet');
 const Alliance = require('./models/alliance');
 const BotMessage = require('./models/botmessage');
 const Attack = require('./models/attack');
-const path = require("path");
-const fs = require('fs');
+const moment = require('moment');
 const bent = require('bent');
 const getStream = bent('string');
-const moment = require('moment');
-const util = require('util');
-const crypto = require('crypto');
 const schedule = require('node-schedule');
 const rule = new schedule.RecurrenceRule();
+const minimist = require('minimist');
+const util = require('util');
+const crypto = require('crypto');
 
 
-//use command line args for havoc flag
-const havoc = false;
 
-if(havoc) {
+let argv = minimist(process.argv.slice(2), {
+  string: [],
+  boolean: ['havoc'],
+  alias: {h:'havoc'},
+  default: {'havoc':false},
+  unknown: false
+});
+
+
+if(argv.help) {
+  console.log('Usage: myprog [options]\n' +
+    '\n' +
+    'Short description\n' +
+    '\n' +
+    'Options:\n' +
+    '  --lang <lang>       sets the language\n' +
+    '  --version           output the version number\n' +
+    '  -h, --help          output usage information');
+  process.exit(0);
+}
+
+
+
+
+
+
+
+if(argv.havoc) {
   rule.minute = [0, 15, 30, 45];
   rule.second = 30;
 } else {
@@ -71,11 +97,11 @@ Mordor.connection.once("open", async () => {
       let iteration_start = new Date();
       try {
         //get last tick
-        let lasttick = await Tick.findOne().sort({id: -1});
-        if(typeof(lasttick) == 'undefined') {
+        let last_tick = await Tick.findOne().sort({id: -1});
+        if(typeof(last_tick) == 'undefined') {
           console.log('No ticks.');
         } else {
-          console.log('Last tick: ' + lasttick.id);
+          console.log('Last tick: ' + last_tick.id);
           console.log('Getting dump files...');
           //get dump files
           let planet_dump = await getStream(config.pa.dumps.planet);
@@ -133,7 +159,8 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
   let tick_time = moment();
   let remainder = tick_time.minute() % (havoc ? 15 : 60);
   tick_time.add(remainder, 'minutes');
-  //add tick to db
+
+  //create new tick to db
   let new_tick = new Tick({
     id: planet_dump[3].match(/\d+/g).map(Number)[0],
     timestamp: tick_time
@@ -145,15 +172,6 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
   await AllianceDump.deleteMany();
   console.log(`Deleted old dumps in: ${(new Date()) - start_time}ms`);
 
-  //DEPRECATED: we now have planet id's
-  /*
-  if (new_tick.id < config.pa.tick.shuffle) {
-    console.log('Pre-shuffle dumps detected, dumping data.');
-    planet_dump = undefined;
-    galaxy_dump = undefined;
-    alliance_dump = undefined;
-  }
-  */
 
   //Planets
   if (planet_dump !== undefined && planet_dump != null) {
