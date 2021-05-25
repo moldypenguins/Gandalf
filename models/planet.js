@@ -22,9 +22,9 @@
 const Mordor = require('../Mordor');
 
 let planetSchema = Mordor.Schema({
-  _id:{type:Mordor.Schema.Types.ObjectId, required:true},
+  _id:       {type:Mordor.Schema.Types.ObjectId, required:true},
   planet_id: {type: String, index: true},
-  active: Boolean,
+  active:    {type:Boolean},
   age: Number,
   x: {type:Number, index:true},
   y: {type:Number, index:true},
@@ -36,6 +36,7 @@ let planetSchema = Mordor.Schema({
   score: Number,
   value: Number,
   xp: Number,
+  /*
   ratio: Number,
   size_rank: Number,
   score_rank: Number,
@@ -129,6 +130,7 @@ let planetSchema = Mordor.Schema({
   xp_highest_rank_tick: Number,
   xp_lowest_rank: Number,
   xp_lowest_rank_tick: Number,
+  */
 });
 
 module.exports = Mordor.model('Planet', planetSchema, 'Planets');

@@ -1,13 +1,13 @@
 module.exports = {
   admin:{
-    id:123456789 //Telegram ID
+    id:123456789, //Telegram ID
   },
   alliance:{
     name:"Alliance Name", //used somewhere
     attack:{
       default_waves:3, //default number of waves on an attack
       after_land_ticks:2, //how many ticks to keep attack open after landing
-      max_claims:0  //maximum allowed claims per member - 0 for unlimited
+      max_claims:0,  //maximum allowed claims per member - 0 for unlimited
     }
   },
   bot:{
@@ -17,21 +17,21 @@ module.exports = {
     public_cmd:"!", //character to use for bot to reply in public
     modules:['admin', 'ships', 'calcs', 'comms', 'intel', 'fun', 'attacks', 'scans'], //active modules
     message_interval:5, //how often to check for messages in seconds
-    tick_alert:true //whether the bot should message private channel on every tick
+    tick_alert:true, //whether the bot should message private channel on every tick
   },
   twilio:{
     url:"[Twilio url]", //TwiML instructions url
     sid:"[Twilio sid]",
     secret:"[Twilio secret]",
     number:+12345554367, //[Twilio phone]
-    ring_timeout:20 //seconds
+    ring_timeout:20, //seconds
   },
   groups:{
     admin:0, //[Telegram channel bot output],
     scans:0, //[Telegram channel alliance scans],
     private:0, //[Telegram channel alliance private],
     public:0, //[Telegram channel alliance public],
-    galaxy:0 //[Telegram channel galaxy channel]
+    galaxy:0, //[Telegram channel galaxy channel]
   },
   web:{
     uri:"[Website URL]",

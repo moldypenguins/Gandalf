@@ -109,7 +109,7 @@
 
 ## Bot Setup
 ```shell script
-  git https://github.com/moldypenguins/Gandalf MiddleEarth
+  git clone https://github.com/moldypenguins/Gandalf MiddleEarth
   cd MiddleEarth
   npm install
   #create config.js

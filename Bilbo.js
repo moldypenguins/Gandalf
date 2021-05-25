@@ -19,35 +19,46 @@
  * @version 2020/11/27
  * @summary Initialization
  **/
+'use strict';
+
 const Mordor = require('./Mordor');
 const config = require('./config');
+const functions = require('./functions');
 const bent = require('bent');
 const getStream = bent('string');
 const xmlParser = require('xml2json');
-const Ship = require('./models/ship.js');
-const Member = require('./models/member.js');
-const Tick = require('./models/tick.js');
-const AttackTargetClaim = require('./models/attack-target-claim.js');
-const AttackTarget = require('./models/attack-target.js');
-const Attack = require('./models/attack.js');
-const BotMessage = require('./models/botmessage.js');
-const Intel = require('./models/intel.js');
-const Scan = require('./models/scan.js');
-const ScanRequest = require('./models/scan-request.js');
-const PlanetScan = require('./models/scan-planet.js');
-const DevelopmentScan = require('./models/scan-development.js');
-const UnitScan = require('./models/scan-unit.js');
-const JumpGateProbe = require('./models/scan-jumpgate.js');
-const PlanetDump = require('./models/planet-dump.js');
-const GalaxyDump = require('./models/galaxy-dump.js');
-const AllianceDump = require('./models/alliance-dump.js');
-const Planet = require('./models/planet.js');
-const Galaxy = require('./models/galaxy.js');
-const Cluster = require('./models/cluster.js');
-const Alliance = require('./models/alliance.js');
-const Applicant = require('./models/applicant.js');
-const GalMate = require('./models/galmate.js');
+const Ship = require('./models/Ship');
+const Member = require('./models/Member');
+const Tick = require('./models/Tick');
+const AttackTargetClaim = require('./models/AttackTargetClaim');
+const AttackTarget = require('./models/AttackTarget');
+const Attack = require('./models/Attack');
+const BotMessage = require('./models/BotMessage');
+const Intel = require('./models/Intel');
+const Scan = require('./models/Scan');
+const ScanRequest = require('./models/ScanRequest');
+const PlanetScan = require('./models/ScanPlanet');
+const DevelopmentScan = require('./models/ScanDevelopment');
+const UnitScan = require('./models/ScanUnit');
+const JumpGateProbe = require('./models/ScanJumpgate');
+const PlanetDump = require('./models/PlanetDump');
+const GalaxyDump = require('./models/GalaxyDump');
+const AllianceDump = require('./models/AllianceDump');
+const Planet = require('./models/Planet');
+const Galaxy = require('./models/Galaxy');
+const Cluster = require('./models/Cluster');
+const Alliance = require('./models/Alliance');
+const Applicant = require('./models/Applicant');
+const GalMate = require('./models/Galmate');
+const minimist = require('minimist');
 
+
+let argv = minimist(process.argv.slice(2), {
+  string: ['start'],
+  boolean: [],
+  alias: {s:'start'},
+  unknown: false
+});
 
 Mordor.connection.once("open", async() => {
   await clear_database();
@@ -83,7 +94,7 @@ let clear_database = async() => {
   await Applicant.deleteMany({});
   await GalMate.deleteMany({});
 
-  await Member.updateMany({}, {planet_id:""})
+  await Member.updateMany({}, {$unset:{planet:""}})
 };
 
 let load_ships = async() => {
@@ -104,9 +115,8 @@ let load_ships = async() => {
 };
 
 let load_ticks = async() => {
-  let ticks = await Tick.find();
-  if (!ticks || ticks.length == 0) {
-    await Tick.insertMany([{id: 0}]);
+  if (!await Tick.exists({})) {
+    await new Tick({tick:0, timestamp:functions.isValidDate(argv.start) ? argv.start : null}).save();
     console.log("Added first tick!");
   } else {
     console.log("First tick already exists!")
@@ -124,3 +134,4 @@ let setup_admins = async() => {
     console.log(`User id ${config.admin.id} already exists.`);
   }
 };
+

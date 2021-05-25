@@ -19,11 +19,12 @@
  * @version 2021/05/22
  * @summary Mongoose Model
  **/
+'use strict';
 const Mordor = require('../Mordor');
 
 let TickSchema = new Mordor.Schema({
   _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
-  tick_id:    {type:Number, unique:true, required:true},
+  tick:       {type:Number, unique:true, required:true},
   galaxies:   {type:Number},
   planets:    {type:Number},
   alliances:  {type:Number},

@@ -1,5 +1,32 @@
+/**
+ * Gandalf
+ * Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name functions.js
+ * @version 2021/05/25
+ * @summary utility functions
+ **/
+'use strict';
+
+
 const Planet = require('./models/planet');
 
+
+
+/*
 let patterns = [ //Note these are order dependent xyz has to come before xy
 	    /([\d]+)\.([\d]+)\.([\d]+)/, //dots
 	    /([\d]+):([\d]+):([\d]+)/, // :
@@ -56,13 +83,9 @@ function formatInvalidResponse(str) {
   return `Sorry I don't know who ${str} or they don't have coords set.`;
 }
 
-module.exports = {
-	"parseCoords": parseCoords,
-	"coordsToPlanetLookup": coordsToPlanetLookup,
-	"coordType": coordType,
-	"PLANET_COORD_TYPE": PLANET_COORD_TYPE,
-	"GALAXY_COORD_TYPE": GALAXY_COORD_TYPE
-};
+*/
+
+
 
 
 
@@ -73,23 +96,12 @@ module.exports = {
 
 
 
+let isValidDate = function(d) {
+	return Object.prototype.toString.call(d) === '[object Date]' && isFinite(d)
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports = {
+	"isValidDate": isValidDate
+};

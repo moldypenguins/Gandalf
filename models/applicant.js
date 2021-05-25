@@ -21,14 +21,15 @@
  **/
 const Mordor = require('../Mordor');
 
-let applicantSchema = Mordor.Schema({
-  id:         Number,
-  username:   String,
-  first_name: String,
-  last_name:  String,
-  photo_url:  String,
-  rejected:   Boolean
+let ApplicantSchema = new Mordor.Schema({
+  _id:                    {type:Mordor.Schema.Types.ObjectId, required:true},
+  telegram_id:            {type:Number, unique:true, required:true},
+  telegram_first_name:    {type:String},
+  telegram_last_name:     {type:String},
+  telegram_username:      {type:String},
+  telegram_photo_url:     {type:String, default:config.web.uri + '/' + config.web.default_profile_pic},
+  telegram_language_code: {type:String},
+  rejected:               {type:Boolean},
 });
 
-module.exports = Mordor.model('Applicant', applicantSchema, 'Applicants');
-
+module.exports = Mordor.model('Applicant', ApplicantSchema, 'Applicants');

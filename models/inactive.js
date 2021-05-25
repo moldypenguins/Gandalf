@@ -21,17 +21,20 @@
  **/
 const Mordor = require('../Mordor');
 
-let inactiveSchema = Mordor.Schema({
-  id:          {type:Number, unique:true, required:true},
-  username:    {type:String},
-  first_name:  {type:String},
-  last_name:   {type:String},
-  photo_url:   {type:String},
-  panick:      {type:String, index:true},
-  email:       {type:String},
-  phone:       {type:String},
-  sponsor:     {type:String},
-  timezone:    {type:String}
+let InactiveSchema = new Mordor.Schema({
+  _id:                    {type:Mordor.Schema.Types.ObjectId, required:true},
+  telegram_id:            {type:Number, unique:true, required:true},
+  telegram_first_name:    {type:String},
+  telegram_last_name:     {type:String},
+  telegram_username:      {type:String},
+  telegram_photo_url:     {type:String, default:config.web.uri + '/' + config.web.default_profile_pic},
+  telegram_language_code: {type:String},
+  pa_nick:                {type:String, index:true},
+  parent:                 {type:String},
+  birthed:                {type:Date},
+  timezone:               {type:String},
+  email:                  {type:String},
+  phone:                  {type:String},
 });
 
-module.exports = Mordor.model('Inactive', inactiveSchema, 'Inactives');
+module.exports = Mordor.model('Inactive', InactiveSchema, 'Inactives');

@@ -23,12 +23,12 @@ const config = require('../config');
 const Mordor = require('../Mordor');
 
 let TelegramUserSchema = new Mordor.Schema({
-  _id:           {type:Mordor.Schema.Types.ObjectId, required:true},
-  telegram_id:   {type:Number, unique:true, required:true},
-  first_name:    {type:String},
-  last_name:     {type:String},
-  username:      {type:String},
-  language_code: {type:String},
+  _id:                    {type:Mordor.Schema.Types.ObjectId, required:true},
+  telegram_id:            {type:Number, unique:true, required:true},
+  telegram_first_name:    {type:String},
+  telegram_last_name:     {type:String},
+  telegram_username:      {type:String},
+  telegram_language_code: {type:String},
 });
 
 module.exports = Mordor.model('TelegramUser', TelegramUserSchema, 'TelegramUsers');
