@@ -19,6 +19,8 @@
  * @version 2020/11/19
  * @summary Telegram Bot
  **/
+'use strict';
+
 const Mordor = require('./Mordor');
 const config = require('./config');
 const Member = require('./models/member');
