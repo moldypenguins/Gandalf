@@ -16,8 +16,9 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Bilbo.js
- * @version 2020/11/27
+ * @version 2021/05/25
  * @summary Initialization
+ * @param {string} -s,--start tick start date
  **/
 'use strict';
 

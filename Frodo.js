@@ -16,8 +16,9 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Frodo.js
- * @version 2020/11/19
+ * @version 2021/05/22
  * @summary Ticker
+ * @param {string} -h,--havoc start Frodo in havoc mode
 **/
 'use strict';
 
