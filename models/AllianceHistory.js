@@ -14,10 +14,16 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name AllianceHistory.js
+ * @version 2021/05/25
+ * @summary Mongoose Model
  **/
+'use strict';
+
 const Mordor = require('../Mordor');
 
-let allianceHistorySchema = Mordor.Schema({
+let AllianceHistorySchema = new Mordor.Schema({
   tick: Number,
   hour: Number,
   timestamp: Date,
@@ -31,6 +37,7 @@ let allianceHistorySchema = Mordor.Schema({
   score: Number,
   points: Number,
   ratio: Number,
+  /*
   size_rank: Number,
   members_rank: Number,
   score_rank: Number,
@@ -118,6 +125,7 @@ let allianceHistorySchema = Mordor.Schema({
   points_avg_highest_rank_tick: Number,
   points_avg_lowest_rank: Number,
   points_avg_lowest_rank_tick: Number,
+*/
 });
 
-module.exports = Mordor.model('AllianceHistory', allianceHistorySchema, 'AllianceHistories');
+module.exports = Mordor.model('AllianceHistory', AllianceHistorySchema, 'AllianceHistories');

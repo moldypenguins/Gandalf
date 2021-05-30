@@ -16,11 +16,12 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Applicant.js
- * @version 2021/05/22
+ * @version 2021/05/25
  * @summary Mongoose Model
  **/
 'use strict';
 
+const config = require('../config');
 const Mordor = require('../Mordor');
 
 let ApplicantSchema = new Mordor.Schema({

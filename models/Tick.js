@@ -20,6 +20,7 @@
  * @summary Mongoose Model
  **/
 'use strict';
+
 const Mordor = require('../Mordor');
 
 let TickSchema = new Mordor.Schema({

@@ -14,20 +14,27 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name Alliance.js
+ * @version 2021/05/25
+ * @summary Mongoose Model
  **/
+'use strict';
+
 const Mordor = require('../Mordor');
 
-let allianceSchema = Mordor.Schema({
-  id: Number,
-  active: Boolean,
-  age: Number,
-  name: String,
-  alias: String,
-  size: Number,
-  members: Number,
-  score: Number,
-  points: Number,
-  ratio: Number,
+let AllianceSchema = new Mordor.Schema({
+  id:      {type:Mordor.Schema.Types.ObjectId, required:true},
+  active:  {type:Boolean},
+  age:     {type:Number},
+  name:    {type:String, trim:true},
+  alias:   {type:String, trim:true},
+  size:    {type:Number},
+  members: {type:Number},
+  score:   {type:Number},
+  points:  {type:Number},
+  ratio:   {type:Number},
+  /*
   size_rank: Number,
   members_rank: Number,
   score_rank: Number,
@@ -115,15 +122,14 @@ let allianceSchema = Mordor.Schema({
   points_avg_highest_rank_tick: Number,
   points_avg_lowest_rank: Number,
   points_avg_lowest_rank_tick: Number
+  */
 });
 
-allianceSchema.statics.findByName = function (name, cb) {
+AllianceSchema.statics.findByName = function (name, cb) {
   return this.find(a =>
     a.name.toLowerCase().startsWith(name.toLowerCase()) ||
     a.name.toLowerCase().includes(name.toLowerCase()) ||
     (a.alias !== undefined && a.alias.toLowerCase() === name.toLowerCase()), cb);
 }
 
-module.exports = Mordor.model('Alliance', allianceSchema, 'Alliances');
-
-
+module.exports = Mordor.model('Alliance', AllianceSchema, 'Alliances');

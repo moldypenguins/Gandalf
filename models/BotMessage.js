@@ -19,6 +19,8 @@
  * @version 2021/05/22
  * @summary Mongoose Model
  **/
+'use strict';
+
 const Mordor = require('../Mordor');
 
 let BotMessageSchema = new Mordor.Schema({

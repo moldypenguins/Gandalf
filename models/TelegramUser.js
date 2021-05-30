@@ -19,7 +19,8 @@
  * @version 2021/05/22
  * @summary Mongoose Model
  **/
-const config = require('../config');
+'use strict';
+
 const Mordor = require('../Mordor');
 
 let TelegramUserSchema = new Mordor.Schema({

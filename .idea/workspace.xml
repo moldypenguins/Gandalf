@@ -24,7 +24,38 @@
   <component name="ChangeListManager">
     <list default="true" id="318793aa-8048-4f80-892e-a688e801ce15" name="Default Changelist" comment="updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Alliance.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Alliance.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/AllianceDump.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/AllianceDump.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/AllianceHistory.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/AllianceHistory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Applicant.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Applicant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Attack.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Attack.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/AttackTarget.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/AttackTarget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/AttackTargetClaim.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/AttackTargetClaim.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/BotMessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/BotMessage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Cluster.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Cluster.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/ClusterHistory.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/ClusterHistory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Galaxy.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Galaxy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/GalaxyDump.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/GalaxyDump.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/GalaxyHistory.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/GalaxyHistory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Galmate.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Galmate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Inactive.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Inactive.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Intel.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Intel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Planet.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Planet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/PlanetDump.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/PlanetDump.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/PlanetExile.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/PlanetExile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/PlanetHistory.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/PlanetHistory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/PlanetNewIds.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/PlanetNewIds.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/PlanetOldIds.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/PlanetOldIds.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Scan.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Scan.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/ScanDevelopment.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/ScanDevelopment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/ScanJumpgate.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/ScanJumpgate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/ScanPlanet.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/ScanPlanet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/ScanRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/ScanRequest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/ScanUnit.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/ScanUnit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Ship.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Ship.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/TelegramGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/TelegramGroup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/TelegramUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/TelegramUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Tick.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Tick.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +84,7 @@
     </file-type-list>
   </component>
   <component name="GitToolBoxStore">
-    <option name="projectConfigVersion" value="2" />
+    <option name="projectConfigVersion" value="3" />
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -79,7 +110,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="true&#10;D:/Source/GitHub/MiddleEarth/config.js" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.15.0" />
-    <property name="javascript.nodejs.core.library.typings.version" value="14.14.10" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.14.37" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="$PROJECT_DIR$/node_modules/gulp" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/scss/components/affleck" />
     <property name="node.js.detected.package.stylelint" value="true" />
@@ -87,7 +118,7 @@
     <property name="node.js.selected.package.stylelint" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="discord-application" />
     <property name="ts.external.directory.path" value="D:\Program Files\JetBrains\WebStorm 2020.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -186,7 +217,27 @@
       <workItem from="1611812861227" duration="12839000" />
       <workItem from="1612226265335" duration="1048000" />
       <workItem from="1612227423172" duration="7449000" />
-      <workItem from="1613469446183" duration="2019000" />
+      <workItem from="1613469446183" duration="9116000" />
+      <workItem from="1617071382422" duration="5411000" />
+      <workItem from="1617570369304" duration="1422000" />
+      <workItem from="1617575412946" duration="6969000" />
+      <workItem from="1617955773660" duration="1012000" />
+      <workItem from="1617956921337" duration="1690000" />
+      <workItem from="1619444452089" duration="410000" />
+      <workItem from="1620509475675" duration="4424000" />
+      <workItem from="1620514712135" duration="9607000" />
+      <workItem from="1620596103099" duration="18935000" />
+      <workItem from="1620701551776" duration="15404000" />
+      <workItem from="1620893396690" duration="12744000" />
+      <workItem from="1621258166629" duration="1236000" />
+      <workItem from="1621582361643" duration="2414000" />
+      <workItem from="1621585727105" duration="19000" />
+      <workItem from="1621585795281" duration="2887000" />
+      <workItem from="1621653763822" duration="6528000" />
+      <workItem from="1621667829646" duration="61000" />
+      <workItem from="1621667909513" duration="300000" />
+      <workItem from="1621668234803" duration="33288000" />
+      <workItem from="1622409906711" duration="403000" />
     </task>
     <task id="LOCAL-00001" summary="update Frodo.js">
       <created>1605165325612</created>

@@ -14,10 +14,16 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name Attack.js
+ * @version 2021/05/25
+ * @summary Mongoose Model
  **/
+'use strict';
+
 const Mordor = require('../Mordor');
 
-let attackSchema = Mordor.Schema({
+let AttackSchema = new Mordor.Schema({
   id: Number,
   hash: String,
   landtick: Number,
@@ -29,5 +35,5 @@ let attackSchema = Mordor.Schema({
   commander_id: Number
 });
 
-module.exports = Mordor.model('Attack', attackSchema, 'Attacks');
+module.exports = Mordor.model('Attack', AttackSchema, 'Attacks');
 
