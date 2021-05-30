@@ -49,30 +49,11 @@ const crypto = require('crypto');
 
 let argv = minimist(process.argv.slice(2), {
   string: [],
-  boolean: ['havoc'],
-  alias: {h:'havoc'},
-  default: {'havoc':false},
+  boolean: ['havoc', 'force'],
+  alias: {h:'havoc', f:'force'},
+  default: {'havoc':false, 'force':false},
   unknown: false
 });
-
-
-if(argv.help) {
-  console.log('Usage: myprog [options]\n' +
-    '\n' +
-    'Short description\n' +
-    '\n' +
-    'Options:\n' +
-    '  --lang <lang>       sets the language\n' +
-    '  --version           output the version number\n' +
-    '  -h, --help          output usage information');
-  process.exit(0);
-}
-
-
-
-
-
-
 
 if(argv.havoc) {
   rule.minute = [0, 15, 30, 45];
@@ -86,9 +67,8 @@ const sleep = (ms) => {
   return new Promise(r => setTimeout(r, ms))
 }
 
-
 Mordor.connection.once("open", async () => {
-  let j = schedule.scheduleJob(rule, async () => {
+  schedule.scheduleJob(rule, async () => {
     const start_time = new Date();
     console.log('Frodo Embarking on The Quest Of The Ring.');
     console.log(`Start Time: ${moment(start_time).format('YYYY-MM-DD H:mm:ss')}`);
@@ -116,15 +96,13 @@ Mordor.connection.once("open", async () => {
             galaxy_dump = galaxy_dump.split('\n');
             alliance_dump = alliance_dump.split('\n');
             user_dump = user_dump.split('\n');
-            
-            //let tick_time = moment.utc().set({minute:(Math.floor(moment().minutes() / 15) * 15),second:0,millisecond:0});
-            
+
             if(planet_dump[3] !== galaxy_dump[3] || galaxy_dump[3] !== alliance_dump[3] || planet_dump[3] !== alliance_dump[3]) {
               console.log(`Varying ticks found - planet: ${planet_dump[3].match(/\d+/g).map(Number)[0]} - galaxy: ${galaxy_dump[3].match(/\d+/g).map(Number)[0]} - alliance: ${alliance_dump[3].match(/\d+/g).map(Number)[0]}.`);
             } else {
               let dump_tick = planet_dump[3].match(/\d+/g).map(Number)[0];
               
-              if(dump_tick <= lasttick.id) {
+              if(!argv.force && dump_tick <= last_tick.id) {
                 console.log(`Stale tick found (pt${dump_tick})`);
                 return;
               } else {
@@ -142,7 +120,7 @@ Mordor.connection.once("open", async () => {
         while((new Date()).getTime() - iteration_start.getTime() < 15) { //wait 15 seconds between each try
           await sleep(5 * 1000); //sleep for 5 seconds
         }
-        if((new Date()).getTime() - start_time.getTime() < (havoc ? start_time.getMinutes() + 10 : 55) * 60) { //give up after 55 minutes past the hour - havoc 10 minutes past the 15
+        if((new Date()).getTime() - start_time.getTime() < (argv.havoc ? start_time.getMinutes() + 10 : 55) * 60) { //give up after 55 minutes past the hour - havoc 10 minutes past the 15
           console.log(`Reached timeout without a successful dump, giving up!`);
           stop_trying = true;
         }
@@ -160,6 +138,8 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
   let tick_time = moment();
   let remainder = tick_time.minute() % (havoc ? 15 : 60);
   tick_time.add(remainder, 'minutes');
+
+  //let tick_time = moment.utc().set({minute:(Math.floor(moment().minutes() / 15) * 15),second:0,millisecond:0});
 
   //create new tick to db
   let new_tick = new Tick({

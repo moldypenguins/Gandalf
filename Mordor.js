@@ -19,6 +19,8 @@
  * @version 2021/05/22
  * @summary Database
  **/
+'use strict';
+
 const config = require('./config');
 const Mordor = require("mongoose");
 Mordor.set('useNewUrlParser', true);
