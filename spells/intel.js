@@ -15,22 +15,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Intel.js
+ * @name intel.js
  * @version 2021/05/30
- * @summary Gandalf spell (bot plugin)
+ * @summary Gandalf spell (bot command plugin)
  **/
 'use strict';
 
 const config = require('../config');
-const access = require('../access');
-const numeral = require('numeral');
-const moment = require('moment');
-const he = require('he');
-
+const Access = require('../Access');
 const Functions = require('../Functions');
 const Intel = require('../models/Intel');
 const Planet = require('../models/Planet');
 const Alliance = require('../models/Alliance');
+
+const numeral = require('numeral');
+const moment = require('moment');
+const he = require('he');
 
 const INTEL_ACTION_DISPLAY = 0, INTEL_ACTION_SET = 1
 
@@ -41,7 +41,7 @@ let type = Functions.coordType(coords);
 let rval = {coords: coords, type: type};
 
 // display
-if (args.length == 1) {
+if (args.length === 1) {
 return Object.assign(rval, {action:INTEL_ACTION_DISPLAY});
 }
 
@@ -189,33 +189,48 @@ resolve(response);
 let Intel_spamset_usage = he.encode('!spamset <alliance> <coords list>');
 let Intel_spamset_desc = 'Set of alliance for multiple coords at once';
 let Intel_spamset = (args) => {
-return new Promise(async (resolve, reject) => {
-if (args.length < 2) {
-reject(Intel_spamset_usage);
-return;
-}
+  return new Promise(async (resolve, reject) => {
+    if (args.length < 2) {
+    reject(Intel_spamset_usage);
+    return;
+    }
 
-let alliance = await Alliance.findOne({"name": new RegExp(args[0], 'i')});
-for(let i = 1; i < args.length; i++) {
-let planet = await Utils.coordsToPlanetLookup(args[i]);
-console.log(planet);
-let intel = await Intel.findOne({planet_id: planet.id});
-if (!intel) {
-console.log(`creating new intel`);
-intel = new Intel({planet_id: planet.id});
-}
+    let alliance = await Alliance.findOne({"name": new RegExp(args[0], 'i')});
+    for(let i = 1; i < args.length; i++) {
+    let planet = await Utils.coordsToPlanetLookup(args[i]);
+    console.log(planet);
+    let intel = await Intel.findOne({planet_id: planet.id});
+    if (!intel) {
+    console.log(`creating new intel`);
+    intel = new Intel({planet_id: planet.id});
+    }
 
-intel.alliance_id = alliance._id;
-await intel.save();
-console.log(`intel saved for ${intel}`);
-}
-resolve(`Spam for <b>${alliance.name}</b> set.\n`);
-});
+    intel.alliance_id = alliance._id;
+    await intel.save();
+    console.log(`intel saved for ${intel}`);
+    }
+    resolve(`Spam for <b>${alliance.name}</b> set.\n`);
+  });
 };
 
+
+
+let Intel_oomph_usage = he.encode('!oomph <alliance> <ship class>');
+let Intel_oomph_desc = 'List alliance ships';
+let Intel_oomph = (args) => {
+  return new Promise(async (resolve, reject) => {
+    //`${alliance} (49 members, 50 in intel, 50 with fresh scans) has 86m oommph against Corvette: 141 Harpy 315k Spider 189k Phantom 156k Recluse 198k Ghost`
+  });
+};
+
+
+
+
+
 module.exports = {
-"intel": { usage: Intel_usage, description: Intel_desc, cast: Intel_fn },
-"spam": { usage: Intel_spam_usage, description: Intel_spam_desc, cast: Intel_spam },
-"spamset": { usage: Intel_spamset_usage, description: Intel_spamset_desc, access: access.botCommandRequired, cast: Intel_spamset }
+  "intel": { usage: Intel_usage, description: Intel_desc, cast: Intel_fn },
+  "spam": { usage: Intel_spam_usage, description: Intel_spam_desc, cast: Intel_spam },
+  "spamset": { usage: Intel_spamset_usage, description: Intel_spamset_desc, access: access.botCommandRequired, cast: Intel_spamset },
+  //"oomph": { usage: Intel_oomph_usage, description: Intel_oomph_desc, cast: Intel_oomph },
 };
 
