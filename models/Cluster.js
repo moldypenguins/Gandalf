@@ -15,24 +15,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Member.js
- * @version 2021/05/22
+ * @name Cluster.js
+ * @version 2021/05/30
  * @summary Mongoose Model
  **/
 'use strict';
 
 const Mordor = require('../Mordor');
 
-let clusterSchema = Mordor.Schema({
-  x: Number,
-  active: Boolean,
-  age: Number,
-  size: Number,
-  score: Number,
-  value: Number,
-  xp: Number,
-  members: Number,
-  ratio: Number,
+let ClusterSchema = new Mordor.Schema({
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
+  x:          {type:Number, required: true },
+  size:       {type:Number},
+  score:      {type:Number},
+  value:      {type:Number},
+  xp:         {type:Number},
+  active:     {type:Boolean},
+  age:        {type:Number},
+  members:    {type:Number},
+  ratio:      {type:Number},
+  /*
   size_rank: Number,
   score_rank: Number,
   value_rank: Number,
@@ -91,7 +93,7 @@ let clusterSchema = Mordor.Schema({
   xp_highest_rank_tick: Number,
   xp_lowest_rank: Number,
   xp_lowest_rank_tick: Number
+  */
 });
 
-module.exports = Mordor.model('Cluster', clusterSchema, 'Clusters');
-
+module.exports = Mordor.model('Cluster', ClusterSchema, 'Clusters');

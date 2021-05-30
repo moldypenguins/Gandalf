@@ -153,34 +153,33 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
   await AllianceDump.deleteMany();
   console.log(`Deleted old dumps in: ${(new Date()) - start_time}ms`);
 
-  //Planets
-  if (planet_dump !== undefined && planet_dump != null) {
-    for (let i = 8; i <= planet_dump.length; i++) {
-      if (planet_dump[i] === 'EndOfPlanetarionDumpFile') {
+  //Planet Dumps
+  if(planet_dump !== undefined && planet_dump != null) {
+    for(let i = 8; i <= planet_dump.length; i++) {
+      if(planet_dump[i] === 'EndOfPlanetarionDumpFile') {
         break;
       } else {
         let p = planet_dump[i].split('\t');
         //console.log(util.inspect(p, false, null, true));
-        let p_dump = new PlanetDump({
-          id: p[0],
+        await new PlanetDump({
+          planet_id: p[0],
           x: Number(p[1]),
           y: Number(p[2]),
           z: Number(p[3]),
-          planetname: p[4].replace(/\"/g, ''),
-          rulername: p[5].replace(/\"/g, ''),
+          planetname: p[4].replace(/"/g, ''),
+          rulername: p[5].replace(/"/g, ''),
           race: p[6],
           size: Number(p[7] !== undefined ? p[7] : 0),
           score: Number(p[8] !== undefined ? p[8] : 0),
           value: Number(p[9] !== undefined ? p[9] : 0),
           xp: Number(p[10] !== undefined ? p[10] : 0)
-        });
-        await p_dump.save();
+        }).save();
       }
     }
     planet_dump = undefined;
     //console.log('Planet dumps inserted in: ${(new Date()) - start_time}ms');
   }
-  //Galaxies
+  //Galaxy Dumps
   if (galaxy_dump !== undefined && galaxy_dump != null) {
     for (let i = 8; i <= galaxy_dump.length; i++) {
       if (galaxy_dump[i] === 'EndOfPlanetarionDumpFile') {
@@ -188,7 +187,7 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
       } else {
         let g = galaxy_dump[i].split('\t');
         //console.log(util.inspect(g, false, null, true));
-        let g_dump = new GalaxyDump({
+        await new GalaxyDump({
           x: Number(g[0]),
           y: Number(g[1]),
           name: g[2].replace(/\"/g, ''),
@@ -196,14 +195,13 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
           score: Number(g[4] !== undefined ? g[4] : 0),
           value: Number(g[5] !== undefined ? g[5] : 0),
           xp: Number(g[6] !== undefined ? g[6] : 0)
-        });
-        await g_dump.save();
+        }).save();
       }
     }
     galaxy_dump = undefined;
     //console.log('Galaxy dumps inserted in: ${(new Date()) - start_time}ms');
   }
-  //Alliances
+  //Alliance Dumps
   if (alliance_dump !== undefined && alliance_dump != null) {
     for (let i = 8; i <= alliance_dump.length; i++) {
       if (alliance_dump[i] === 'EndOfPlanetarionDumpFile') {
@@ -232,6 +230,20 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
   user_dump = undefined; //not used
 
   console.log(`Inserted dumps in: ${(new Date()) - start_time}ms`);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   //##############
   //Clusters

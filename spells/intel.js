@@ -17,7 +17,7 @@
  *
  * @name intel.js
  * @version 2021/05/30
- * @summary Gandalf spell (bot command plugin)
+ * @summary Gandalf Spell (bot command plugin)
  **/
 'use strict';
 

@@ -16,30 +16,30 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Planet.js
- * @version 2021/05/22
+ * @version 2021/05/30
  * @summary Mongoose Model
  **/
 'use strict';
 
 const Mordor = require('../Mordor');
 
-let planetSchema = Mordor.Schema({
-  _id:       {type:Mordor.Schema.Types.ObjectId, required:true},
-  planet_id: {type: String, index: true},
-  active:    {type:Boolean},
-  age: Number,
-  x: {type:Number, index:true},
-  y: {type:Number, index:true},
-  z: {type:Number, index:true},
-  planetname: String,
-  rulername: String,
-  race: String,
-  size: Number,
-  score: Number,
-  value: Number,
-  xp: Number,
+let PlanetSchema = new Mordor.Schema({
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
+  planet_id:  {type:String, index:true},
+  x:          {type:Number, required:true},
+  y:          {type:Number, required:true},
+  z:          {type:Number, required:true},
+  planetname: {type:String},
+  rulername:  {type:String},
+  race:       {type:String},
+  size:       {type:Number},
+  score:      {type:Number},
+  value:      {type:Number},
+  xp:         {type:Number},
+  active:     {type:Boolean},
+  age:        {type:Number},
+  ratio:      {type:Number},
   /*
-  ratio: Number,
   size_rank: Number,
   score_rank: Number,
   value_rank: Number,
@@ -135,5 +135,4 @@ let planetSchema = Mordor.Schema({
   */
 });
 
-module.exports = Mordor.model('Planet', planetSchema, 'Planets');
-
+module.exports = Mordor.model('Planet', PlanetSchema, 'Planets');
