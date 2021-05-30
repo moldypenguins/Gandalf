@@ -24,8 +24,8 @@
 
 const Mordor = require('./Mordor');
 const config = require('./config');
-const Ship = require('./models/Ship');
-const Member = require('./models/Member');
+//const Ship = require('./models/Ship');
+//const Member = require('./models/Member');
 const Tick = require('./models/Tick');
 const PlanetDump = require('./models/PlanetDump');
 const GalaxyDump = require('./models/GalaxyDump');
@@ -82,7 +82,7 @@ Mordor.connection.once("open", async () => {
         if(typeof(last_tick) == 'undefined') {
           console.log('No ticks.');
         } else {
-          console.log('Last tick: ' + last_tick.id);
+          console.log('Last tick: ' + last_tick.tick);
           console.log('Getting dump files...');
           //get dump files
           let planet_dump = await getStream(config.pa.dumps.planet);
@@ -102,7 +102,7 @@ Mordor.connection.once("open", async () => {
             } else {
               let dump_tick = planet_dump[3].match(/\d+/g).map(Number)[0];
               
-              if(!argv.force && dump_tick <= last_tick.id) {
+              if(!argv.force && dump_tick <= last_tick.tick) {
                 console.log(`Stale tick found (pt${dump_tick})`);
                 return;
               } else {
@@ -136,23 +136,22 @@ Mordor.connection.once("open", async () => {
 let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, start_time) => {
   //get current tick time
   let tick_time = moment();
-  let remainder = tick_time.minute() % (havoc ? 15 : 60);
+  let remainder = tick_time.minute() % (argv.havoc ? 15 : 60);
   tick_time.add(remainder, 'minutes');
-
   //let tick_time = moment.utc().set({minute:(Math.floor(moment().minutes() / 15) * 15),second:0,millisecond:0});
 
-  //create new tick to db
+  //create new tick
   let new_tick = new Tick({
-    id: planet_dump[3].match(/\d+/g).map(Number)[0],
+    tick: planet_dump[3].match(/\d+/g).map(Number)[0],
     timestamp: tick_time
   });
+  console.log(`Creating Tick: pt${new_tick.tick} - ${new_tick.timestamp}`);
 
   //delete dump tables
   await PlanetDump.deleteMany();
   await GalaxyDump.deleteMany();
   await AllianceDump.deleteMany();
   console.log(`Deleted old dumps in: ${(new Date()) - start_time}ms`);
-
 
   //Planets
   if (planet_dump !== undefined && planet_dump != null) {
@@ -385,7 +384,7 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
 
 
   //shuffle tick
-  if (new_tick.id === config.pa.tick.shuffle) {
+  if (new_tick.tick === config.pa.tick.shuffle) {
 
   }
 
