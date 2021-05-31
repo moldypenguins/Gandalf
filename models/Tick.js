@@ -39,4 +39,8 @@ let TickSchema = new Mordor.Schema({
   etd:        {type:Number},
 });
 
+TickSchema.statics.findLastTick = function () {
+  return this.findOne().sort({id: -1});
+}
+
 module.exports = Mordor.model('Tick', TickSchema, 'Ticks');
