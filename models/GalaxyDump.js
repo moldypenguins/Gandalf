@@ -25,9 +25,9 @@ const Mordor = require('../Mordor');
 
 let GalaxyDumpSchema = new Mordor.Schema({
   _id:       {type:Mordor.Schema.Types.ObjectId, required:true},
-  x:         {type:Number, required: true },
-  y:         {type:Number, required: true },
-  name:      {type:String},
+  x:         {type:Number, required:true},
+  y:         {type:Number, required:true},
+  name:      {type:String, required:true, trim:true},
   size:      {type:Number},
   score:     {type:Number},
   value:     {type:Number},

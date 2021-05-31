@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name AllianceDump.js
- * @version 2021/05/25
+ * @version 2021/05/30
  * @summary Mongoose Model
  **/
 'use strict';
@@ -24,17 +24,16 @@
 const Mordor = require('../Mordor');
 
 let AllianceDumpSchema = new Mordor.Schema({
-  alliance_id: {type: Mordor.Schema.Types.ObjectId, ref:'Alliance'},
-  name: { type: String, required: true },
-  size: { type: Number },
-  members: { type: Number },
-  score: { type: Number },
-  points: { type: Number },
-  score_rank: { type: Number },
-  size_avg: { type: Number },
-  score_avg: { type: Number },
-  points_avg: { type: Number }
+  _id:        {type:Mordor.Schema.Types.ObjectId},
+  name:       {type:String, required:true, trim:true},
+  size:       {type:Number},
+  members:    {type:Number},
+  score:      {type:Number},
+  points:     {type:Number},
+  score_rank: {type:Number},
+  size_avg:   {type:Number},
+  score_avg:  {type:Number},
+  points_avg: {type:Number},
 });
 
 module.exports = Mordor.model('AllianceDump', AllianceDumpSchema, 'AllianceDumps');
-

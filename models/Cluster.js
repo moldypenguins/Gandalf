@@ -24,16 +24,17 @@
 const Mordor = require('../Mordor');
 
 let ClusterSchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
-  x:          {type:Number, required: true },
-  size:       {type:Number},
-  score:      {type:Number},
-  value:      {type:Number},
-  xp:         {type:Number},
-  active:     {type:Boolean},
-  age:        {type:Number},
-  members:    {type:Number},
-  ratio:      {type:Number},
+  _id:      {type:Mordor.Schema.Types.ObjectId, required:true},
+  x:        {type:Number, required:true},
+  size:     {type:Number, default:0},
+  score:    {type:Number, default:0},
+  value:    {type:Number, default:0},
+  xp:       {type:Number, default:0},
+  active:   {type:Boolean, default:true},
+  age:      {type:Number, default:0},
+  galaxies: {type:Number, default:0},
+  planets:  {type:Number, default:0},
+  ratio:    {type:Number, default:0},
   /*
   size_rank: Number,
   score_rank: Number,

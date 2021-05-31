@@ -180,7 +180,7 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
     //console.log('Planet dumps inserted in: ${(new Date()) - start_time}ms');
   }
   //Galaxy Dumps
-  if (galaxy_dump !== undefined && galaxy_dump != null) {
+  if(galaxy_dump !== undefined && galaxy_dump != null) {
     for (let i = 8; i <= galaxy_dump.length; i++) {
       if (galaxy_dump[i] === 'EndOfPlanetarionDumpFile') {
         break;
@@ -190,7 +190,7 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
         await new GalaxyDump({
           x: Number(g[0]),
           y: Number(g[1]),
-          name: g[2].replace(/\"/g, ''),
+          name: g[2].replace(/"/g, ''),
           size: Number(g[3] !== undefined ? g[3] : 0),
           score: Number(g[4] !== undefined ? g[4] : 0),
           value: Number(g[5] !== undefined ? g[5] : 0),
@@ -202,16 +202,16 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
     //console.log('Galaxy dumps inserted in: ${(new Date()) - start_time}ms');
   }
   //Alliance Dumps
-  if (alliance_dump !== undefined && alliance_dump != null) {
+  if(alliance_dump !== undefined && alliance_dump != null) {
     for (let i = 8; i <= alliance_dump.length; i++) {
       if (alliance_dump[i] === 'EndOfPlanetarionDumpFile') {
         break;
       } else {
         let a = alliance_dump[i].split('\t');
         //console.log(util.inspect(a, false, null, true));
-        let a_dump = new AllianceDump({
+        await new AllianceDump({
           score_rank: Number(a[0]),
-          name: a[1].replace(/\"/g, ''),
+          name: a[1].replace(/"/g, ''),
           size: Number(a[2] !== undefined ? a[2] : 0),
           members: Number(a[3] !== undefined ? a[3] : 1),
           score: Number(a[4] !== undefined ? a[4] : 0),
@@ -219,15 +219,14 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
           size_avg: Number(a[2] !== undefined ? a[2] : 0) / Number(a[3] !== undefined ? a[3] : 1),
           score_avg: Number(a[4] !== undefined ? a[4] : 0) / Math.min(Number(a[3] !== undefined ? a[3] : 1), config.pa.numbers.tag_total),
           points_avg: Number(a[5] !== undefined ? a[5] : 0) / Number(a[3] !== undefined ? a[3] : 1)
-        });
-        await a_dump.save();
+        }).save();
       }
     }
     alliance_dump = undefined;
     //console.log('Alliance dumps inserted in: ${(new Date()) - start_time}ms');
   }
 
-  user_dump = undefined; //not used
+  user_dump = undefined; //not currently used
 
   console.log(`Inserted dumps in: ${(new Date()) - start_time}ms`);
 
@@ -245,32 +244,18 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
 
 
 
-  //##############
+  //####################################################################################################################
   //Clusters
-  //##############
-  //set all clusters to active
-  await Cluster.updateMany({}, {active: true});
+  //####################################################################################################################
 
-  let clusters = await Cluster.find({}, 'x');
-  let cluster_temp = await GalaxyDump.find({x: {$nin: clusters.map(c => c.x)}}, 'x').distinct('x');
-  for (let ckey in cluster_temp) {
-    //console.log(util.inspect(ckey, false, null, true));
-    let clstr = new Cluster({
-      x: cluster_temp[ckey],
-      active: true
-    });
-    await clstr.save();
-  }
+  //set all clusters to inactive
+  await Cluster.updateMany({}, {$set:{active:false}, $unset:{size:null, score:null, value:null, xp:null, galaxies:null, planets:null, ratio:null}});
 
-  cluster_temp = await GalaxyDump.find();
-  let cupdcount = await Cluster.updateMany({x: {$nin: cluster_temp.map(c => c.x)}}, {active: false});
-  //console.log('Clusters set inactive: ' + util.inspect(cupdcount, false, null, true));
-
-  clusters = await Cluster.find({active: true});
-  for (let ckey in clusters) {
-    //console.log(util.inspect(c, false, null, true));
-    let t = await PlanetDump.aggregate([
-      {$match: {x: clusters[ckey].x}},
+  //loop through distinct x in galaxies
+  let clusters = await GalaxyDump.find({}, {x:1}).distinct('x');
+  for(let c in clusters) {
+    let g = await GalaxyDump.aggregate([
+      {$match: {x: c.x}},
       {
         $group: {
           _id: null,
@@ -282,56 +267,62 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
         }
       }
     ]);
-    await Cluster.updateOne({x: ckey.x}, {
-      age: Number(typeof (clusters[ckey].age) != 'undefined' ? clusters[ckey].age + 1 : 1),
-      size: t[0].size,
-      score: t[0].score,
-      value: t[0].value,
-      xp: t[0].xp,
-      ratio: t[0].value !== 0 ? 10000.0 * t[0].size / t[0].value : 0,
-      members: t[0].members
-    });
+    let p = await PlanetDump.aggregate([
+      {$match: {x: c.x}},
+      {
+        $group: {
+          _id: null,
+          members: {$sum: 1}
+        }
+      }
+    ]);
+
+  //TODO: add remaining fields
+    await Cluster.findOneAndUpdate({x:c.x}, {
+      $set: {
+        size: g[0].size,
+        score: g[0].score,
+        value: g[0].value,
+        xp: g[0].xp,
+        active: true,
+        galaxies: g[0].members,
+        planets: p[0].members,
+        ratio: g[0].value !== 0 ? 10000.0 * g[0].size / g[0].value : 0,
+      },
+      $inc:{
+        age: 1
+      }
+    }, {setDefaultsOnInsert:true, upsert:true});
   }
-  //TODO:ADD REMAINING FIELDS ABOVE
-  //##########################
-
-
+  //####################################################################################################################
   console.log(`Updated clusters in: ${(new Date()) - start_time}ms`);
-  //##############
-  //Galaxies
-  //##############
-  let galaxies = await Galaxy.find();
-  for (let gkey in galaxies) {
-    await GalaxyDump.updateOne({
-      x: galaxies[gkey].x,
-      y: galaxies[gkey].y
-    }, {
-      galaxy_id: galaxies[gkey]._id
-    });
-  }
 
+
+
+  //####################################################################################################################
+  //Galaxies
+  //####################################################################################################################
+  //set all galaxies to active
   await Galaxy.updateMany({}, {active: true});
 
-  let galaxy_temp = await GalaxyDump.find({galaxy_id: undefined});
-  for (let gkey in galaxy_temp) {
+  //add new galaxies
+  //let galaxy_temp = await GalaxyDump.find({galaxy_id: undefined});
+  let galaxies = await Galaxy.find({}, 'x');
+  let galaxy_temp = await GalaxyDump.find({$and:[{x:{$nin: galaxies.map(g => g.x)}}, {y:{$nin: galaxies.map(g => g.y)}}]}, {x:1, y:1});
+  for(let gkey in galaxy_temp) {
     //console.log(util.inspect(g, false, null, true));
-    let gal = new Galaxy({
+    await new Galaxy({
       x: galaxy_temp[gkey].x,
       y: galaxy_temp[gkey].y,
       active: true
-    });
-    let saved = await gal.save();
-    await GalaxyDump.updateOne({
-      x: galaxy_temp[gkey].x,
-      y: galaxy_temp[gkey].y
-    }, {galaxy_id: saved._id});
+    }).save();
   }
 
-
+  //update inactive galaxies
   galaxy_temp = await GalaxyDump.find({galaxy_id: {$ne: undefined}}, 'galaxy_id');
-  let gupdcount = await Galaxy.updateMany({_id: {$nin: galaxy_temp.map(g => g.galaxy_id)}}, {active: false});
-  //console.log('Galaxies set inactive: ' + util.inspect(gupdcount, false, null, true));
+  await Galaxy.updateMany({_id: {$nin: galaxy_temp.map(g => g.galaxy_id)}}, {active: false});
 
+  //update active galaxies data
   galaxies = await Galaxy.find({active: true});
   for (let gkey in galaxies) {
     //console.log(util.inspect(g, false, null, true));
@@ -381,12 +372,14 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
       members: t[0].members
     });
   }
-
+  //####################################################################################################################
   console.log(`Updated galaxies in: ${(new Date()) - start_time}ms`);
-  //##############
-  //Planets
-  //##############
 
+
+
+  //####################################################################################################################
+  //Planets
+  //####################################################################################################################
   let planets = await Planet.find();
   for (let pkey in planets) {
     await PlanetDump.updateOne({id: planets[pkey].id}, {
@@ -468,11 +461,15 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
 
   //landed on
 
-
+  //####################################################################################################################
   console.log(`Updated planets in: ${(new Date()) - start_time}ms`);
-  //##############
+
+
+
+
+  //####################################################################################################################
   //Alliances
-  //##############
+  //####################################################################################################################
   let alliances = await Alliance.find();
   for (let akey in alliances) {
     await AllianceDump.updateOne({name: alliances[akey].name}, {
@@ -528,11 +525,15 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
     });
   }
 
-
+  //####################################################################################################################
   console.log(`Updated alliances in: ${(new Date()) - start_time}ms`);
-  //##############
+
+
+
+
+  //####################################################################################################################
   //History
-  //##############
+  //####################################################################################################################
   let cluster_count = await Cluster.aggregate([
     {$match: {active: {$eq: true}}},
     {
@@ -668,25 +669,23 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
   });
 
 
-  //##############
+  //####################################################################################################################
   //Dicks
-  //##############
+  //####################################################################################################################
 
 
   console.log(`Updated pt${new_tick.id} stats in: ${(new Date()) - start_time}ms\n`);
 
 
-  //##############
+  //####################################################################################################################
   //Save Tick
-  //##############
+  //####################################################################################################################
   let thistick = await new_tick.save();
 
   if (thistick != null) {
     console.log(`pt${thistick.id} saved to Ticks collection.`);
 
-    //##############
     //Send Message
-    //##############
     let txt = `pt<b>${thistick.id}</b> ${moment(thistick.timestamp).utc().format('H:mm')} <i>GMT</i>`;
     let atts = await Attack.find({releasetick: thistick.id});
     for (let m = 0; m < atts.length; m++) {
@@ -694,14 +693,13 @@ let process_tick = async (planet_dump, galaxy_dump, alliance_dump, user_dump, st
     }
     //console.log(util.inspect('TEXT: ' + txt, false, null, true));
     if (config.bot.tick_alert || atts.length > 0) {
-      let msg = new BotMessage({
+      await new BotMessage({
         id: crypto.randomBytes(8).toString("hex"),
         group_id: config.groups.private,
         message: txt,
         sent: false
-      });
-      let msgsaved = await msg.save();
-      console.log(`Sent Message: "${msgsaved.message}"`);
+      }).save();
+      console.log(`Sent Message: "${txt}"`);
     }
   }
 }
