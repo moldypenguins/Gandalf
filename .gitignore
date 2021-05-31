@@ -9,7 +9,6 @@
 !/views/content/*.example.html
 
 #ignore ssl files
-/ssl/*.crt
-/ssl/*.key
-!/ssl/*.example.crt
-!/ssl/*.example.key
+/ssl/
+!/ssl/*.example.*
+
