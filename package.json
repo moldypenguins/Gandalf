@@ -75,7 +75,7 @@
     "express-slow-down": "^1.4.0",
     "he": "^1.2.0",
     "http-errors": "~1.8.0",
-    "intl-tel-input": "^17.0.12",
+    "intl-tel-input": "^17.0.13",
     "jquery": "^3.6.0",
     "minimist": "^1.2.5",
     "moment": "^2.24.0",
