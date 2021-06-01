@@ -15,24 +15,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Member.js
- * @version 2021/05/22
+ * @name PlanetTrack.js
+ * @version 2021/05/31
  * @summary Mongoose Model
  **/
 'use strict';
 
 const Mordor = require('../Mordor');
 
-let planetExileSchema = Mordor.Schema({
-  hour: Number,
-  tick: Number,
-  id: Number,
-  oldx: Number,
-  oldy: Number,
-  oldz: Number,
-  newx: Number,
-  newy: Number,
-  newz: Number,
+let PlanetTrackSchema = new Mordor.Schema({
+  _id:       {type:Mordor.Schema.Types.ObjectId, required:true},
+  //planet:  {type:Mordor.Schema.Types.ObjectId, ref:'Planet'},
+  planet_id: {type:String},
+  //tick:    {type:Mordor.Schema.Types.ObjectId, ref:'Tick'},
+  tick:      {type:Number},
+  old_x:     {type:Number},
+  old_y:     {type:Number},
+  old_z:     {type:Number},
+  new_x:     {type:Number},
+  new_y:     {type:Number},
+  new_z:     {type:Number},
 });
 
-module.exports = Mordor.model('PlanetExile', planetExileSchema, 'PlanetExiles');
+module.exports = Mordor.model('PlanetTrack', PlanetTrackSchema, 'PlanetTracks');

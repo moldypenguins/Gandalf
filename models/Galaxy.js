@@ -35,7 +35,7 @@ let GalaxySchema = new Mordor.Schema({
   active:     {type:Boolean},
   age:        {type:Number},
   real_score: {type:Number},
-  members:    {type:Number},
+  planets:    {type:Number},
   ratio:      {type:Number},
   /*
   size_rank: Number,
