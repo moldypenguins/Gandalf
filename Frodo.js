@@ -26,6 +26,7 @@ const Mordor = require('./Mordor');
 const config = require('./config');
 const Tick = require('./models/Tick');
 const Cluster = require('./models/cluster');
+const ClusterHistory = require('./models/PlanetHistory');
 const Galaxy = require('./models/galaxy');
 const GalaxyDump = require('./models/GalaxyDump');
 const GalaxyHistory = require('./models/PlanetHistory');
@@ -251,13 +252,13 @@ let process_tick = async (last_tick, start_time) => {
         }
 
 
-        //################################################################################################################
+        //##############################################################################################################
         console.log(`Inserted dumps in: ${(new Date()) - start_time}ms`);
 
 
-        //################################################################################################################
+        //##############################################################################################################
         //Clusters
-        //################################################################################################################
+        //##############################################################################################################
 
         //set all clusters to inactive
         await Cluster.updateMany({}, {active: false, size: 0, score: 0, value: 0, xp: 0, galaxies: 0, planets: 0, ratio: 0});
@@ -312,13 +313,13 @@ let process_tick = async (last_tick, start_time) => {
 
           });
         }
-        //################################################################################################################
+        //##############################################################################################################
         console.log(`Updated clusters in: ${(new Date()) - start_time}ms`);
 
 
-        //################################################################################################################
+        //##############################################################################################################
         //Galaxies
-        //################################################################################################################
+        //##############################################################################################################
 
         //set all galaxies to inactive
         await Galaxy.updateMany({}, {active: false, size: 0, score: 0, value: 0, xp: 0, planets: 0, ratio: 0});
@@ -359,13 +360,13 @@ let process_tick = async (last_tick, start_time) => {
 
           });
         }
-        //################################################################################################################
+        //##############################################################################################################
         console.log(`Updated galaxies in: ${(new Date()) - start_time}ms`);
 
 
-        //################################################################################################################
+        //##############################################################################################################
         //Planets
-        //################################################################################################################
+        //##############################################################################################################
 
         //set all planets to inactive
         await Planet.updateMany({}, {active: false, size: 0, score: 0, value: 0, xp: 0, ratio: 0});
@@ -432,13 +433,13 @@ let process_tick = async (last_tick, start_time) => {
 
         //landed on
 
-        //################################################################################################################
+        //##############################################################################################################
         console.log(`Updated planets in: ${(new Date()) - start_time}ms`);
 
 
-        //################################################################################################################
+        //##############################################################################################################
         //Alliances
-        //################################################################################################################
+        //##############################################################################################################
 
         //set all alliances to inactive
         await Alliance.updateMany({}, {active: false, size: 0, score: 0, members: 0, points: 0, ratio: 0});
@@ -467,134 +468,54 @@ let process_tick = async (last_tick, start_time) => {
 
           });
         }
-        //################################################################################################################
+        //##############################################################################################################
         console.log(`Updated alliances in: ${(new Date()) - start_time}ms`);
 
 
-        //################################################################################################################
-        //History
-        //################################################################################################################
+
+        //##############################################################################################################
+        //Save Tick
+        //##############################################################################################################
         let cluster_count = await Cluster.aggregate([
           {$match: {active: {$eq: true}}},
-          {
-            $group: {
-              _id: null,
-              count: {$sum: 1}
-            }
-          }
+          {$group: {_id: null, count: {$sum: 1}}}
         ]);
         let galaxy_count = await Galaxy.aggregate([
           {$match: {active: {$eq: true}}},
-          {
-            $group: {
-              _id: null,
-              count: {$sum: 1}
-            }
-          }
+          {$group: {_id: null, count: {$sum: 1}}}
         ]);
         let planet_count = await Planet.aggregate([
           {$match: {active: {$eq: true}}},
-          {
-            $group: {
-              _id: null,
-              count: {$sum: 1}
-            }
-          }
+          {$group: {_id: null, count: {$sum: 1}}}
         ]);
         let alliance_count = await Alliance.aggregate([
           {$match: {active: {$eq: true}}},
-          {
-            $group: {
-              _id: null,
-              count: {$sum: 1}
-            }
-          }
+          {$group: {_id: null, count: {$sum: 1}}}
         ]);
         let c200_count = await Planet.aggregate([
-          {
-            $match: {
-              active: {$eq: true},
-              x: {$eq: 200}
-            }
-          },
-          {
-            $group: {
-              _id: null,
-              count: {$sum: 1}
-            }
-          }
+          {$match: {active: {$eq: true}, x: {$eq: 200}}},
+          {$group: {_id: null, count: {$sum: 1}}}
         ]);
         let ter_count = await Planet.aggregate([
-          {
-            $match: {
-              active: {$eq: true},
-              race: {$regex: /^ter$/i}
-            }
-          },
-          {
-            $group: {
-              _id: null,
-              count: {$sum: 1}
-            }
-          }
+          {$match: {active: {$eq: true}, race: {$regex: /^ter$/i}}},
+          {$group: {_id: null, count: {$sum: 1}}}
         ]);
         let cat_count = await Planet.aggregate([
-          {
-            $match: {
-              active: {$eq: true},
-              race: {$regex: /^cat$/i}
-            }
-          },
-          {
-            $group: {
-              _id: null,
-              count: {$sum: 1}
-            }
-          }
+          {$match: {active: {$eq: true}, race: {$regex: /^cat$/i}}},
+          {$group: {_id: null, count: {$sum: 1}}}
         ]);
         let xan_count = await Planet.aggregate([
-          {
-            $match: {
-              active: {$eq: true},
-              race: {$regex: /^xan$/i}
-            }
-          },
-          {
-            $group: {
-              _id: null,
-              count: {$sum: 1}
-            }
-          }
+          {$match: {active: {$eq: true}, race: {$regex: /^xan$/i}}},
+          {$group: {_id: null, count: {$sum: 1}}}
         ]);
         let zik_count = await Planet.aggregate([
-          {
-            $match: {
-              active: {$eq: true},
-              race: {$regex: /^zik$/i}
-            }
-          },
-          {
-            $group: {
-              _id: null,
-              count: {$sum: 1}
-            }
-          }
+          {$match: {active: {$eq: true}, race: {$regex: /^zik$/i}}},
+          {$group: {_id: null, count: {$sum: 1}}}
         ]);
         let etd_count = await Planet.aggregate([
-          {
-            $match: {
-              active: {$eq: true},
-              race: {$regex: /^etd$/i}
-            }
-          },
-          {
-            $group: {
-              _id: null,
-              count: {$sum: 1}
-            }
-          }
+          {$match: {active: {$eq: true}, race: {$regex: /^etd$/i}}},
+          {$group: {_id: null, count: {$sum: 1}}}
         ]);
-
 
         new_tick.clusters = typeof (cluster_count[0]) != 'undefined' ? cluster_count[0].count : 0;
         new_tick.galaxies = typeof (galaxy_count[0]) != 'undefined' ? galaxy_count[0].count : 0;
@@ -606,43 +527,108 @@ let process_tick = async (last_tick, start_time) => {
         new_tick.xan = typeof (xan_count[0]) != 'undefined' ? xan_count[0].count : 0;
         new_tick.zik = typeof (zik_count[0]) != 'undefined' ? zik_count[0].count : 0;
         new_tick.etd = typeof (etd_count[0]) != 'undefined' ? etd_count[0].count : 0;
-        let thistick = await new_tick.save();
+
+        let this_tick = await new_tick.save();
+        //##############################################################################################################
+        console.log(`pt${this_tick.id} saved to Ticks collection.`);
 
 
-        //####################################################################################################################
+
+        //##############################################################################################################
+        //History
+        //##############################################################################################################
+        clusters = await Cluster.find({active: true});
+        for(let c in clusters) {
+          await new ClusterHistory({
+            tick: this_tick._id,
+            x:c.x,
+            size:c.size,
+            score:c.score,
+            value:c.value,
+            xp:c.xp,
+            active:c.active,
+            age:c.age,
+            galaxies:c.galaxies,
+            planets:c.planets,
+            ratio:c.ratio,
+          });
+        }
+        galaxies = await Galaxy.find({active: true});
+        for(let g in galaxies) {
+          await new GalaxyHistory({
+            tick: this_tick._id,
+            x:c.x,
+            size:c.size,
+            score:c.score,
+            value:c.value,
+            xp:c.xp,
+            active:c.active,
+            age:c.age,
+            galaxies:c.galaxies,
+            planets:c.planets,
+            ratio:c.ratio,
+          });
+        }
+        planets = await Planet.find({active: true});
+        for(let p in planets) {
+          await new PlanetHistory({
+            tick: this_tick._id,
+            x:c.x,
+            size:c.size,
+            score:c.score,
+            value:c.value,
+            xp:c.xp,
+            active:c.active,
+            age:c.age,
+            galaxies:c.galaxies,
+            planets:c.planets,
+            ratio:c.ratio,
+          });
+        }
+        alliances = await Alliance.find({active: true});
+        for(let a in alliances) {
+          await new AllianceHistory({
+            tick: this_tick._id,
+            name:a.name,
+            size:a.size,
+            score:a.score,
+            points:a.points,
+            active:a.active,
+            age:a.age,
+            alias: a.alias,
+            members:a.members,
+            ratio:a.ratio,
+          });
+        }
+
+
+        //##############################################################################################################
         //Dicks
-        //####################################################################################################################
+        //##############################################################################################################
 
 
         console.log(`Updated pt${new_tick.id} stats in: ${(new Date()) - start_time}ms\n`);
 
 
-        //####################################################################################################################
-        //Save Tick
-        //####################################################################################################################
-
-
-        if (thistick != null) {
-          console.log(`pt${thistick.id} saved to Ticks collection.`);
-
-          //Send Message
-          let txt = `pt<b>${thistick.id}</b> ${moment(thistick.timestamp).utc().format('H:mm')} <i>GMT</i>`;
-          let atts = await Attack.find({releasetick: thistick.id});
-          for (let m = 0; m < atts.length; m++) {
-            txt += `\n<b>Attack ${atts[m].id}</b> released. <a href="${config.web.uri}/att/${atts[m].hash}">Claim Targets</a>`;
-          }
-          //console.log(util.inspect('TEXT: ' + txt, false, null, true));
-          if (config.bot.tick_alert || atts.length > 0) {
-            await new BotMessage({
-              id: crypto.randomBytes(8).toString("hex"),
-              group_id: config.groups.private,
-              message: txt,
-              sent: false
-            }).save();
-            console.log(`Sent Message: "${txt}"`);
-          }
-          success = true;
+        //##############################################################################################################
+        //Send Message
+        //##############################################################################################################
+        let txt = `pt<b>${this_tick.id}</b> ${moment(this_tick.timestamp).utc().format('H:mm')} <i>GMT</i>`;
+        let atts = await Attack.find({releasetick: this_tick.id});
+        for (let m = 0; m < atts.length; m++) {
+          txt += `\n<b>Attack ${atts[m].id}</b> released. <a href="${config.web.uri}/att/${atts[m].hash}">Claim Targets</a>`;
         }
+        //console.log(util.inspect('TEXT: ' + txt, false, null, true));
+        if (config.bot.tick_alert || atts.length > 0) {
+          await new BotMessage({
+            id: crypto.randomBytes(8).toString("hex"),
+            group_id: config.groups.private,
+            message: txt,
+            sent: false
+          }).save();
+          console.log(`Sent Message: "${txt}"`);
+        }
+        success = true;
       }
     }
   }

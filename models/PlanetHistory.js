@@ -15,32 +15,32 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Member.js
- * @version 2021/05/22
+ * @name PlanetHistory.js
+ * @version 2021/06/01
  * @summary Mongoose Model
  **/
 'use strict';
 
 const Mordor = require('../Mordor');
 
-let planetHistorySchema = Mordor.Schema({
-  tick: Number,
-  hour: Number,
-  timestamp: Date,
-  id: String,
-  active: Boolean,
-  age: Number,
-  x: Number,
-  y: Number,
-  z: Number,
-  planetname: String,
-  rulername: String,
-  race: String,
-  size: Number,
-  score: Number,
-  value: Number,
-  xp: Number,
-  ratio: Number,
+let PlanetHistorySchema = new Mordor.Schema({
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
+  tick:       {type:Mordor.Schema.Types.ObjectId, required:true, reference:'Tick'},
+  planet_id:  {type:String, index:true, required:true},
+  x:          {type:Number, required:true},
+  y:          {type:Number, required:true},
+  z:          {type:Number, required:true},
+  planetname: {type:String, required:true, trim:true},
+  rulername:  {type:String, required:true, trim:true},
+  race:       {type:String},
+  size:       {type:Number},
+  score:      {type:Number},
+  value:      {type:Number},
+  xp:         {type:Number},
+  active:     {type:Boolean},
+  age:        {type:Number},
+  ratio:      {type:Number},
+  /*
   size_rank: Number,
   score_rank: Number,
   value_rank: Number,
@@ -133,6 +133,7 @@ let planetHistorySchema = Mordor.Schema({
   xp_highest_rank_tick: Number,
   xp_lowest_rank: Number,
   xp_lowest_rank_tick: Number,
+  */
 });
 
-module.exports = Mordor.model('PlanetHistory', planetHistorySchema, 'PlanetHistories');
+module.exports = Mordor.model('PlanetHistory', PlanetHistorySchema, 'PlanetHistories');

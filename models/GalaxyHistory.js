@@ -15,31 +15,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Member.js
- * @version 2021/05/22
+ * @name GalaxyHistory.js
+ * @version 2021/06/01
  * @summary Mongoose Model
  **/
 'use strict';
 
 const Mordor = require('../Mordor');
 
-let galaxyHistorySchema = Mordor.Schema({
-  tick: Number,
-  hour: Number,
-  timestamp: Date,
-  id: Number,
-  active: Boolean,
-  age: Number,
-  x: Number,
-  y: Number,
-  name: String,
-  size: Number,
-  score: Number,
-  real_score: Number,
-  value: Number,
-  xp: Number,
-  members: Number,
-  ratio: Number,
+let GalaxyHistorySchema = new Mordor.Schema({
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
+  tick:       {type:Mordor.Schema.Types.ObjectId, required:true, reference:'Tick'},
+  x:          {type:Number, required:true},
+  y:          {type:Number, required:true},
+  name:       {type:String, required:true, trim:true},
+  size:       {type:Number},
+  score:      {type:Number},
+  value:      {type:Number},
+  xp:         {type:Number},
+  active:     {type:Boolean},
+  age:        {type:Number},
+  real_score: {type:Number},
+  planets:    {type:Number},
+  ratio:      {type:Number},
+  /*
   size_rank: Number,
   score_rank: Number,
   real_score_rank: Number,
@@ -109,7 +108,7 @@ let galaxyHistorySchema = Mordor.Schema({
   xp_lowest_rank: Number,
   xp_lowest_rank_tick: Number,
   private: Boolean
+  */
 });
 
-module.exports = Mordor.model('GalaxyHistory', galaxyHistorySchema, 'GalaxyHistories');
-
+module.exports = Mordor.model('GalaxyHistory', GalaxyHistorySchema, 'GalaxyHistories');

@@ -15,27 +15,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Member.js
- * @version 2021/05/22
+ * @name ClusterHistory.js
+ * @version 2021/06/01
  * @summary Mongoose Model
  **/
 'use strict';
 
 const Mordor = require('../Mordor');
 
-let clusterHistorySchema = Mordor.Schema({
-  tick: Number,
-  hour: Number,
-  timestamp: Date,
-  x: Number,
-  active: Boolean,
-  age: Number,
-  size: Number,
-  score: Number,
-  value: Number,
-  xp: Number,
-  members: Number,
-  ratio: Number,
+let ClusterHistorySchema = new Mordor.Schema({
+  _id:      {type:Mordor.Schema.Types.ObjectId, required:true},
+  tick:     {type:Mordor.Schema.Types.ObjectId, required:true, reference:'Tick'},
+  x:        {type:Number, required:true},
+  size:     {type:Number, default:0},
+  score:    {type:Number, default:0},
+  value:    {type:Number, default:0},
+  xp:       {type:Number, default:0},
+  active:   {type:Boolean, default:true},
+  age:      {type:Number, default:0},
+  galaxies: {type:Number, default:0},
+  planets:  {type:Number, default:0},
+  ratio:    {type:Number, default:0},
+  /*
   size_rank: Number,
   score_rank: Number,
   value_rank: Number,
@@ -94,7 +95,7 @@ let clusterHistorySchema = Mordor.Schema({
   xp_highest_rank_tick: Number,
   xp_lowest_rank: Number,
   xp_lowest_rank_tick: Number
+  */
 });
 
-module.exports = Mordor.model('ClusterHistory', clusterHistorySchema, 'ClusterHistories');
-
+module.exports = Mordor.model('ClusterHistory', ClusterHistorySchema, 'ClusterHistories');

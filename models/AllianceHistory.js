@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name AllianceHistory.js
- * @version 2021/05/25
+ * @version 2021/06/01
  * @summary Mongoose Model
  **/
 'use strict';
@@ -24,19 +24,21 @@
 const Mordor = require('../Mordor');
 
 let AllianceHistorySchema = new Mordor.Schema({
-  tick: Number,
-  hour: Number,
-  timestamp: Date,
-  id: Number,
-  active: Boolean,
-  age: Number,
-  name: String,
-  alias: String,
-  size: Number,
-  members: Number,
-  score: Number,
-  points: Number,
-  ratio: Number,
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
+  tick:       {type:Mordor.Schema.Types.ObjectId, required:true, reference:'Tick'},
+  name:       {type:String, required:true, trim:true},
+  size:       {type:Number},
+  members:    {type:Number},
+  score:      {type:Number},
+  points:     {type:Number},
+  score_rank: {type:Number},
+  size_avg:   {type:Number},
+  score_avg:  {type:Number},
+  points_avg: {type:Number},
+  alias:      {type:String, trim:true},
+  active:     {type:Boolean},
+  age:        {type:Number},
+  ratio:      {type:Number},
   /*
   size_rank: Number,
   members_rank: Number,
