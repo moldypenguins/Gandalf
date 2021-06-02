@@ -259,7 +259,6 @@ let process_tick = async (last_tick, start_time) => {
         //##############################################################################################################
         //Clusters
         //##############################################################################################################
-
         //set all clusters to inactive
         await Cluster.updateMany({}, {active: false, size: 0, score: 0, value: 0, xp: 0, galaxies: 0, planets: 0, ratio: 0});
 
@@ -320,7 +319,6 @@ let process_tick = async (last_tick, start_time) => {
         //##############################################################################################################
         //Galaxies
         //##############################################################################################################
-
         //set all galaxies to inactive
         await Galaxy.updateMany({}, {active: false, size: 0, score: 0, value: 0, xp: 0, planets: 0, ratio: 0});
 
@@ -367,7 +365,6 @@ let process_tick = async (last_tick, start_time) => {
         //##############################################################################################################
         //Planets
         //##############################################################################################################
-
         //set all planets to inactive
         await Planet.updateMany({}, {active: false, size: 0, score: 0, value: 0, xp: 0, ratio: 0});
 
@@ -440,7 +437,6 @@ let process_tick = async (last_tick, start_time) => {
         //##############################################################################################################
         //Alliances
         //##############################################################################################################
-
         //set all alliances to inactive
         await Alliance.updateMany({}, {active: false, size: 0, score: 0, members: 0, points: 0, ratio: 0});
 
@@ -530,6 +526,7 @@ let process_tick = async (last_tick, start_time) => {
 
         let this_tick = await new_tick.save();
         //##############################################################################################################
+        console.log(`Updated tick stats in: ${(new Date()) - start_time}ms\n`);
         console.log(`pt${this_tick.id} saved to Ticks collection.`);
 
 
@@ -557,32 +554,36 @@ let process_tick = async (last_tick, start_time) => {
         for(let g in galaxies) {
           await new GalaxyHistory({
             tick: this_tick._id,
-            x:c.x,
-            size:c.size,
-            score:c.score,
-            value:c.value,
-            xp:c.xp,
-            active:c.active,
-            age:c.age,
-            galaxies:c.galaxies,
-            planets:c.planets,
-            ratio:c.ratio,
+            x:g.x,
+            y:g.y,
+            name:g.name,
+            size:g.size,
+            score:g.score,
+            value:g.value,
+            xp:g.xp,
+            active:g.active,
+            age:g.age,
+            planets:g.planets,
+            ratio:g.ratio,
           });
         }
         planets = await Planet.find({active: true});
         for(let p in planets) {
           await new PlanetHistory({
             tick: this_tick._id,
-            x:c.x,
-            size:c.size,
-            score:c.score,
-            value:c.value,
-            xp:c.xp,
-            active:c.active,
-            age:c.age,
-            galaxies:c.galaxies,
-            planets:c.planets,
-            ratio:c.ratio,
+            x:p.x,
+            y:p.y,
+            z:p.z,
+            name:p.name,
+            size:p.size,
+            score:p.score,
+            value:p.value,
+            xp:p.xp,
+            active:p.active,
+            age:p.age,
+            galaxies:p.galaxies,
+            planets:p.planets,
+            ratio:p.ratio,
           });
         }
         alliances = await Alliance.find({active: true});
@@ -600,6 +601,9 @@ let process_tick = async (last_tick, start_time) => {
             ratio:a.ratio,
           });
         }
+        //##############################################################################################################
+        console.log(`Updated history in: ${(new Date()) - start_time}ms`);
+
 
 
         //##############################################################################################################
@@ -607,7 +611,10 @@ let process_tick = async (last_tick, start_time) => {
         //##############################################################################################################
 
 
-        console.log(`Updated pt${new_tick.id} stats in: ${(new Date()) - start_time}ms\n`);
+
+        //##############################################################################################################
+        console.log(`Total time on dicks: ${(new Date()) - start_time}ms`);
+
 
 
         //##############################################################################################################
