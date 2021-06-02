@@ -15,23 +15,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  **/
-const config = require('../config');
-const Member = require('../models/member');
-const Ship = require('../models/ship');
-const Attack = require('../models/attack');
-const AttackTarget = require('../models/attack-target');
-const AttackTargetClaim = require('../models/attack-target-claim');
-const Planet = require('../models/planet');
-const Scan = require('../models/scan');
-const PlanetScan = require('../models/scan-planet');
-const DevelopmentScan = require('../models/scan-development');
-const UnitScan = require('../models/scan-unit');
-const Intel = require('../models/intel');
-const Alliance = require('../models/alliance');
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
+const Member = require('../models/Member');
+const Ship = require('../models/Ship');
+const Attack = require('../models/Attack');
+const AttackTarget = require('../models/AttackTarget');
+const AttackTargetClaim = require('../models/AttackTargetClaim');
+const Planet = require('../models/Planet');
+const Scan = require('../models/Scan');
+const PlanetScan = require('../models/ScanPlanet');
+const DevelopmentScan = require('../models/ScanDevelopment');
+const UnitScan = require('../models/ScanUnit');
+const Intel = require('../models/Intel');
+const Alliance = require('../models/Alliance');
 const createError = require('http-errors');
 const express = require('express');
 let router = express.Router();
-const access = require('../access');
+
 const crypto = require("crypto");
 const numeral = require('numeral');
 const util = require('util');
@@ -69,10 +71,10 @@ router.get('/new', access.webCommandRequired, async (req, res, next) => {
 
 router.post('/new', access.webCommandRequired, async (req, res, next) => {
   if(req.body.save != undefined) {
-    let lastatt = await Attack.findOne().sort({id: -1});
-    lastatt = lastatt ? lastatt.id : 0;
+    //let lastatt = await Attack.findOne().sort({id: -1});
+    //lastatt = lastatt ? lastatt.id : 0;
     
-    let att = new Attack({
+    let att = await new Attack({
       id: lastatt + 1,
       hash: crypto.randomBytes(16).toString('hex'),
       landtick: req.body.landtick,
@@ -82,10 +84,16 @@ router.post('/new', access.webCommandRequired, async (req, res, next) => {
       comment: req.body.comment,
       createtick: res.locals.tick.id,
       commander_id: res.locals.member.id
-    });
-    let saved = await att.save();
-    if(saved) {
-      //console.log("Attack #" + saved.id + " saved to Attacks collection.");
+    }).save();
+    if(att) {
+      att.setNext('number', function(err, attack) {
+        if(err) {
+          console.log('Cannot increment the rank because ',err);
+        } else {
+          console.log("Attack #" + att.number + " saved to Attacks collection.");
+        }
+      });
+
       res.redirect(`/att/edit/${saved.hash}`);
     } else {
       next(createError(400));

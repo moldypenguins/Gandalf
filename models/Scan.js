@@ -21,30 +21,30 @@
  **/
 'use strict';
 
-const Mordor = require('../Mordor');
 const config = require('../config');
-const Planet = require('./planet');
-const PlanetScan = require('./scan-planet');
-const DevelopmentScan = require('./scan-development');
-const UnitScan = require('./scan-unit');
-const ScanRequest = require('./scan-request');
-const Ship = require('./ship');
-const BotMessage = require('./botmessage');
+const Mordor = require('../Mordor');
+const Planet = require('./Planet');
+const PlanetScan = require('./ScanPlanet');
+const DevelopmentScan = require('./ScanDevelopment');
+const UnitScan = require('./ScanUnit');
+const ScanRequest = require('./ScanRequest');
+const Ship = require('./Ship');
+const BotMessage = require('./BotMessage');
 const numeral = require('numeral');
-const util = require('util');
 const crypto = require("crypto");
 
-let scanSchema = Mordor.Schema({
-  id: {type:String, unique:true, required:true},
+let ScanSchema = new Mordor.Schema({
+  _id:      {type:Mordor.Schema.Types.ObjectId},
+  scan_id:  {type:String, unique:true, required:true},
   group_id: {type:String},
-  planet_id: {type: String, index: true, required:true},
+  planet:   {type:Mordor.Schema.Types.ObjectId, reference:'Planet', required:true, index:true},
   scantype: {type:Number, required:true},
-  tick: {type:Number, required:true},
-  scanner_id: {type:Number, required:true}
+  tick:     {type:Number, required:true},
+  scanner:  {type:Number, required:true}
 });
 
 
-scanSchema.statics.parse = async (member_id, scan_id, group_id, page_content) => {
+ScanSchema.statics.parse = async (member_id, scan_id, group_id, page_content) => {
   var rslt = null;
   var m = page_content.match(/>([^>]+) on (\d+)\:(\d+)\:(\d+) in tick (\d+)/i);
   if(m == null) {
@@ -181,6 +181,6 @@ scanSchema.statics.parse = async (member_id, scan_id, group_id, page_content) =>
   return rslt;
 }
 
-let Scan = Mordor.model('Scan', scanSchema, 'Scans');
+let Scan = Mordor.model('Scan', ScanSchema, 'Scans');
 
 module.exports = Scan;

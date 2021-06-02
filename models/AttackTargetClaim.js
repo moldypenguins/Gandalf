@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Member.js
+ * @name AttackTargetClaim.js
  * @version 2021/05/22
  * @summary Mongoose Model
  **/
@@ -23,14 +23,15 @@
 
 const Mordor = require('../Mordor');
 
-let attackTargetClaimSchema = Mordor.Schema({
-  member_id: Number,
-  attack_id: Number,
-  planet_id: String,
-  wave: Number
+let AttackTargetClaimSchema = new Mordor.Schema({
+  _id:    {type:Mordor.Schema.Types.ObjectId},
+  member: {type:Mordor.Schema.Types.ObjectId, reference:'Member'},
+  attack: {type:Mordor.Schema.Types.ObjectId, reference:'Attack'},
+  planet: {type:Mordor.Schema.Types.ObjectId, reference:'Planet'},
+  wave:   {type:Number},
 });
 
-attackTargetClaimSchema.index({attack_id:1, planet_id:1, wave:1}, {unique:true});
+AttackTargetClaimSchema.index({attack_id:1, planet_id:1, wave:1}, {unique:true});
 
-module.exports = Mordor.model('AttackTargetClaim', attackTargetClaimSchema, 'AttackTargetClaims');
+module.exports = Mordor.model('AttackTargetClaim', AttackTargetClaimSchema, 'AttackTargetClaims');
 

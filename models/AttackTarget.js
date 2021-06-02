@@ -16,17 +16,17 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name AttackTarget.js
- * @version 2021/05/22
+ * @version 2021/06/02
  * @summary Mongoose Model
  **/
 'use strict';
 
 const Mordor = require('../Mordor');
 
-let AttackTargetSchema = Mordor.Schema({
-  attack_id: Number,
-  planet_id: String
+let AttackTargetSchema = new Mordor.Schema({
+  _id:    {type:Mordor.Schema.Types.ObjectId},
+  attack: {type:Mordor.Schema.Types.ObjectId, reference:'Attack'},
+  planet: {type:Mordor.Schema.Types.ObjectId, reference:'Planet'},
 });
 
 module.exports = Mordor.model('AttackTarget', AttackTargetSchema, 'AttackTargets');
-

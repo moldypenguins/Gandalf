@@ -15,28 +15,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Member.js
- * @version 2021/05/22
+ * @name Intel.js
+ * @version 2021/06/02
  * @summary Mongoose Model
  **/
 'use strict';
 
 const Mordor = require('../Mordor');
 
-let intelSchema = Mordor.Schema({
-  planet_id: String,
-  alliance_id: String,
-  nick: String,
-  fakenick: String,
-  defwhore: Boolean,
-  covop: Boolean,
-  amps: Number,
-  dists: Number,
-  bg: String,
-  gov: String,
-  relay: Boolean,
-  reportchan: String,
-  comment: String
+let IntelSchema = new Mordor.Schema({
+  _id:         {type:Mordor.Schema.Types.ObjectId},
+  planet_id:   {type:Mordor.Schema.Types.ObjectId, reference:'Planet'},
+  alliance_id: {type:Mordor.Schema.Types.ObjectId, reference:'Alliance'},
+  nick:        {type:String},
+  fakenick:    {type:String},
+  defwhore:    {type:Boolean},
+  covop:       {type:Boolean},
+  amps:        {type:Number},
+  dists:       {type:Number},
+  bg:          {type:String},
+  gov:         {type:String},
+  relay:       {type:Boolean},
+  reportchan:  {type:String},
+  comment:     {type:String},
 });
 
-module.exports = Mordor.model('Intel', intelSchema, 'Intels');
+module.exports = Mordor.model('Intel', IntelSchema, 'Intels');

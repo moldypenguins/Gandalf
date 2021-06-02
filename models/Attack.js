@@ -16,24 +16,27 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Attack.js
- * @version 2021/05/25
+ * @version 2021/06/02
  * @summary Mongoose Model
  **/
 'use strict';
 
 const Mordor = require('../Mordor');
+const AutoIncrement = require('mongoose-sequence')(Mordor);
 
 let AttackSchema = new Mordor.Schema({
-  id: Number,
-  hash: String,
-  landtick: Number,
-  waves: Number,
-  releasetick: Number,
-  title: String,
-  comment: String,
-  createtick: Number,
-  commander_id: Number
+  _id:          {type:Mordor.Schema.Types.ObjectId},
+  number:       {type:Number, unique:true, required:true},
+  hash:         {type:String},
+  landtick:     {type:Number},
+  waves:        {type:Number},
+  releasetick:  {type:Number},
+  title:        {type:String},
+  comment:      {type:String},
+  createtick:   {type:Number},
+  commander:    {type:Mordor.Schema.Types.ObjectId, reference:'Member'}
 });
 
-module.exports = Mordor.model('Attack', AttackSchema, 'Attacks');
+AttackSchema.plugin(AutoIncrement, {inc_field:'number'});
 
+module.exports = Mordor.model('Attack', AttackSchema, 'Attacks');
