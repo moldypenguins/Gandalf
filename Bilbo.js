@@ -129,11 +129,11 @@ let load_ticks = async() => {
 };
 
 let setup_admins = async() => {
-  if (!await Member.exists({id: CFG.admin.id})) {
+  if (!await Member.exists({telegram_id: CFG.admin.id})) {
     if (await new Member({_id:Mordor.Types.ObjectId(), telegram_id: CFG.admin.id, access: 5, active: true, pa_nick:CFG.admin.pa_nick}).save()) {
-      console.log(`User id ${CFG.admin.id} saved to Members collection.`);
+      console.log(`Added ${CFG.admin.pa_nick} as admin to Members collection.`);
     } else {
-      console.log(`Could not add admin to Members collection.`)
+      console.log(`Could not add ${CFG.admin.pa_nick} as admin to Members collection.`);
     }
   } else {
     console.log(`User id ${CFG.admin.id} already exists.`);
