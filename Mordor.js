@@ -21,17 +21,20 @@
  **/
 'use strict';
 
-const config = require('./config');
+const CFG = require('./Config');
 const Mordor = require("mongoose");
+
 Mordor.set('useNewUrlParser', true);
 Mordor.set('useFindAndModify', false);
 Mordor.set('useCreateIndex', true);
 Mordor.set('useUnifiedTopology', true);
-Mordor.connect(config.db.uri + '/' + config.db.name).catch(err => console.log(err.reason));
+Mordor.connect(CFG.db.uri + '/' + CFG.db.name).catch(err => console.log(err.reason));
 Mordor.connection.on("error", () => {
   console.log("Error: database connection failed.");
 });
 Mordor.connection.once("connected", () => {
   console.log("Evil is stirring in Mordor.");
 });
+
+
 module.exports = Mordor;
