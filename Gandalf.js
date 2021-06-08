@@ -16,26 +16,30 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Gandalf.js
- * @version 2020/11/19
+ * @version 2021/06/07
  * @summary Telegram Bot
  **/
 'use strict';
 
+const CFG = require('./Config');
+const PA = require('./PA');
 const Mordor = require('./Mordor');
-const config = require('./config');
-const Member = require('./models/member');
-const Inactive = require('./models/inactive');
-const Tick = require('./models/tick');
-const GalMate = require('./models/galmate');
-const BotMessage = require('./models/botmessage');
-const Scan = require('./models/scan');
-const Chat = require('./models/chat');
-const User = require('./models/user');
+
+const Member = require('./models/Member');
+const Inactive = require('./models/Inactive');
+const Tick = require('./models/Tick');
+const GalMate = require('./models/GalMate');
+const BotMessage = require('./models/BotMessage');
+const Scan = require('./models/Scan');
+const Chat = require('./models/TelegramGroup');
+const User = require('./models/TelegramUser');
+
 const moment = require('moment');
 const util = require('util');
 const url = require('url');
 const bent = require('bent');
 const getStream = bent('string');
+
 
 let spells = {};
 Object.assign(spells, require(`./spells/admin`));

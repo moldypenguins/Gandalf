@@ -14,9 +14,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name Access.js
+ * @version 2021/06/07
+ * @summary Database
  **/
-const config = require('./config');
+'use strict';
+
+const CFG = require('./Config');
+
 const createError = require('http-errors');
+
 
 const webAdminRequired = (req, res, next) => {
   if(res.locals.member.access === 5) {
@@ -105,7 +113,7 @@ const botMemberRequired = (mem) => {
 }
 
 const botChannelScannerPrivate = (chat) => {
-  return (chat.type === 'private' || chat.id === config.groups.scans);
+  return (chat.type === 'private' || chat.id === CFG.groups.scans);
 }
 
 

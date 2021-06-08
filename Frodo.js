@@ -16,29 +16,33 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Frodo.js
- * @version 2021/05/22
+ * @version 2021/06/07
  * @summary Ticker
  * @param {string} -h,--havoc start Frodo in havoc mode
 **/
 'use strict';
 
+const CFG = require('./Config');
+const PA = require('./PA');
+const Functions = require('./Functions');
 const Mordor = require('./Mordor');
-const config = require('./config');
+
 const Tick = require('./models/Tick');
-const Cluster = require('./models/cluster');
+const Cluster = require('./models/Cluster');
 const ClusterHistory = require('./models/PlanetHistory');
-const Galaxy = require('./models/galaxy');
+const Galaxy = require('./models/Galaxy');
 const GalaxyDump = require('./models/GalaxyDump');
 const GalaxyHistory = require('./models/PlanetHistory');
-const Planet = require('./models/planet');
+const Planet = require('./models/Planet');
 const PlanetDump = require('./models/PlanetDump');
 const PlanetHistory = require('./models/PlanetHistory');
 const PlanetTrack = require('./models/PlanetTrack');
-const Alliance = require('./models/alliance');
+const Alliance = require('./models/Alliance');
 const AllianceDump = require('./models/AllianceDump');
 const AllianceHistory = require('./models/PlanetHistory');
-const BotMessage = require('./models/botmessage');
-const Attack = require('./models/attack');
+const BotMessage = require('./models/BotMessage');
+const Attack = require('./models/Attack');
+
 const moment = require('moment');
 const bent = require('bent');
 const getStream = bent('string');
@@ -47,7 +51,6 @@ const rule = new schedule.RecurrenceRule();
 const minimist = require('minimist');
 const util = require('util');
 const crypto = require('crypto');
-
 
 
 let argv = minimist(process.argv.slice(2), {
@@ -116,10 +119,10 @@ let process_tick = async (last_tick, start_time) => {
 
   //get dump files
   console.log('Getting dump files...');
-  let planet_dump = await getStream(config.pa.dumps.planet);
-  let galaxy_dump = await getStream(config.pa.dumps.galaxy);
-  let alliance_dump = await getStream(config.pa.dumps.alliance);
-  let user_dump = await getStream(config.pa.dumps.user);
+  let planet_dump = await getStream(PA.dumps.planet);
+  let galaxy_dump = await getStream(PA.dumps.galaxy);
+  let alliance_dump = await getStream(PA.dumps.alliance);
+  let user_dump = await getStream(PA.dumps.user);
   console.log(`Loaded dumps from webserver in: ${(new Date()) - start_time}ms`);
 
   if(planet_dump !== undefined && galaxy_dump !== undefined && alliance_dump !== undefined && user_dump !== undefined) {
@@ -223,7 +226,7 @@ let process_tick = async (last_tick, start_time) => {
                 score: Number(a[4] !== undefined ? a[4] : 0),
                 points: Number(a[5] !== undefined ? a[5] : 0),
                 size_avg: Number(a[2] !== undefined ? a[2] : 0) / Number(a[3] !== undefined ? a[3] : 1),
-                score_avg: Number(a[4] !== undefined ? a[4] : 0) / Math.min(Number(a[3] !== undefined ? a[3] : 1), config.pa.numbers.tag_total),
+                score_avg: Number(a[4] !== undefined ? a[4] : 0) / Math.min(Number(a[3] !== undefined ? a[3] : 1), PA.numbers.tag_total),
                 points_avg: Number(a[5] !== undefined ? a[5] : 0) / Number(a[3] !== undefined ? a[3] : 1)
               }).save();
             }
@@ -623,13 +626,13 @@ let process_tick = async (last_tick, start_time) => {
         let txt = `pt<b>${this_tick.id}</b> ${moment(this_tick.timestamp).utc().format('H:mm')} <i>GMT</i>`;
         let atts = await Attack.find({releasetick: this_tick.id});
         for (let m = 0; m < atts.length; m++) {
-          txt += `\n<b>Attack ${atts[m].id}</b> released. <a href="${config.web.uri}/att/${atts[m].hash}">Claim Targets</a>`;
+          txt += `\n<b>Attack ${atts[m].id}</b> released. <a href="${CFG.web.uri}/att/${atts[m].hash}">Claim Targets</a>`;
         }
         //console.log(util.inspect('TEXT: ' + txt, false, null, true));
-        if (config.bot.tick_alert || atts.length > 0) {
+        if (CFG.bot.tick_alert || atts.length > 0) {
           await new BotMessage({
             id: crypto.randomBytes(8).toString("hex"),
-            group_id: config.groups.private,
+            group_id: CFG.groups.private,
             message: txt,
             sent: false
           }).save();

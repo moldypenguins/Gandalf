@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Mordor.js
- * @version 2021/05/22
+ * @version 2021/06/07
  * @summary Database
  **/
 'use strict';

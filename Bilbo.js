@@ -16,18 +16,17 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Bilbo.js
- * @version 2021/05/25
+ * @version 2021/06/07
  * @summary Initialization
  * @param {string} -s,--start tick start date
  **/
 'use strict';
 
+const CFG = require('./Config');
+const PA = require('./PA');
+const Functions = require('./Functions');
 const Mordor = require('./Mordor');
-const config = require('./config');
-const functions = require('./functions');
-const bent = require('bent');
-const getStream = bent('string');
-const xmlParser = require('xml2json');
+
 const Ship = require('./models/Ship');
 const Member = require('./models/Member');
 const Tick = require('./models/Tick');
@@ -51,6 +50,10 @@ const Cluster = require('./models/Cluster');
 const Alliance = require('./models/Alliance');
 const Applicant = require('./models/Applicant');
 const GalMate = require('./models/Galmate');
+
+const bent = require('bent');
+const getStream = bent('string');
+const xmlParser = require('xml2json');
 const minimist = require('minimist');
 
 
@@ -99,7 +102,7 @@ let clear_database = async() => {
 };
 
 let load_ships = async() => {
-  let stream = await getStream(config.pa.dumps.ship_stats);
+  let stream = await getStream(PA.dumps.ship_stats);
   let json = JSON.parse(xmlParser.toJson(stream));
   // load each one
   let ship_id = 0;
@@ -117,7 +120,7 @@ let load_ships = async() => {
 
 let load_ticks = async() => {
   if (!await Tick.exists({})) {
-    await new Tick({tick:0, timestamp:functions.isValidDate(argv.start) ? argv.start : null}).save();
+    await new Tick({tick:0, timestamp:Functions.isValidDate(argv.start) ? argv.start : null}).save();
     console.log("Added first tick!");
   } else {
     console.log("First tick already exists!")
@@ -125,14 +128,14 @@ let load_ticks = async() => {
 };
 
 let setup_admins = async() => {
-  if (!await Member.exists({id: config.admin.id})) {
-    if (await new Member({id: config.admin.id, access: 5, active: true}).save()) {
-      console.log(`User id ${config.admin.id} saved to Members collection.`);
+  if (!await Member.exists({id: CFG.admin.id})) {
+    if (await new Member({id: CFG.admin.id, access: 5, active: true}).save()) {
+      console.log(`User id ${CFG.admin.id} saved to Members collection.`);
     } else {
       console.log(`Could not add admin to Members collection.`)
     }
   } else {
-    console.log(`User id ${config.admin.id} already exists.`);
+    console.log(`User id ${CFG.admin.id} already exists.`);
   }
 };
 

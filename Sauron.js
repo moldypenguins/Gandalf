@@ -16,20 +16,23 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Sauron.js
- * @version 2020/11/19
+ * @version 2021/06/07
  * @summary Website
  **/
 'use strict';
 
+const CFG = require('./Config');
+const PA = require('./PA');
 const Mordor = require('./Mordor');
-const config = require('./config');
-const Tick = require('./models/tick');
-const Member = require('./models/member');
-const Planet = require('./models/planet');
-const Ship = require('./models/ship');
-const Scan = require('./models/scan');
-const UnitScan = require('./models/scan-unit');
-const DevelopmentScan = require('./models/scan-development');
+
+const Tick = require('./models/Tick');
+const Member = require('./models/Member');
+const Planet = require('./models/Planet');
+const Ship = require('./models/Ship');
+const Scan = require('./models/Scan');
+const UnitScan = require('./models/ScanUnit');
+const DevelopmentScan = require('./models/ScanDevelopment');
+
 const createError = require('http-errors');
 const express = require('express');
 const cors = require('cors');
@@ -84,7 +87,7 @@ let loginRequired = async (req, res, next) => {
         protocol: req.protocol, host: req.get('host'), pathname: req.originalUrl
       });
     }
-    return res.status(401).render('unauthorized', {site_title: config.alliance.name, page_title: config.alliance.name});
+    return res.status(401).render('unauthorized', {site_title: CFG.alliance.name, page_title: CFG.alliance.name});
   } else {
     let updated = await Member.updateOne({id: res.locals.member.id}, {last_access: Date.now()});
     if (req.session.req_url !== undefined) {
@@ -107,7 +110,7 @@ Mordor.connection.once("open", () => {
   app.use(express.urlencoded({extended: false}));
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(session({
-    secret: config.web.session, resave: true, saveUninitialized: false, cookie: {sameSite: 'none', secure: true}
+    secret: CFG.web.session, resave: true, saveUninitialized: false, cookie: {sameSite: 'none', secure: true}
   }));
   //redirect to https
   app.use((req, res, next) => {
@@ -123,13 +126,13 @@ Mordor.connection.once("open", () => {
   });
   //add session objects to locals
   app.use(async (req, res, next) => {
-    res.locals.site_theme_name = config.web.default_theme.toLowerCase() ? config.web.default_theme.toLowerCase() : 'affleck';
-    res.locals.site_theme = config.web.themes[config.web.default_theme.toLowerCase()] ? config.web.themes[config.web.default_theme.toLowerCase()] : config.web.themes['affleck'];
+    res.locals.site_theme_name = CFG.web.default_theme.toLowerCase() ? CFG.web.default_theme.toLowerCase() : 'affleck';
+    res.locals.site_theme = CFG.web.themes[CFG.web.default_theme.toLowerCase()] ? CFG.web.themes[CFG.web.default_theme.toLowerCase()] : CFG.web.themes['affleck'];
 
-    res.locals.site_url = config.web.uri;
-    res.locals.alliance_name = config.alliance.name;
-    res.locals.bot_name = config.bot.username;
-    res.locals.default_profile_pic = config.web.default_profile_pic;
+    res.locals.site_url = CFG.web.uri;
+    res.locals.alliance_name = CFG.alliance.name;
+    res.locals.bot_name = CFG.bot.username;
+    res.locals.default_profile_pic = CFG.web.default_profile_pic;
 
     res.locals.tick = await Tick.findOne().sort({id: -1});
 
@@ -139,9 +142,9 @@ Mordor.connection.once("open", () => {
 
     //console.log('MEMBER: ' + util.inspect(req.session.member, false, null, true));
     if(req.session?.member !== undefined && req.session.member != null) {
-      if(req.session.member.site_theme !== undefined && req.session.member.site_theme !== 'default' && config.web.themes[req.session.member.site_theme]) {
+      if(req.session.member.site_theme !== undefined && req.session.member.site_theme !== 'default' && CFG.web.themes[req.session.member.site_theme]) {
         res.locals.site_theme_name = req.session.member.site_theme;
-        res.locals.site_theme = config.web.themes[req.session.member.site_theme];
+        res.locals.site_theme = CFG.web.themes[req.session.member.site_theme];
       }
       res.locals.member.isADM = req.session.member.access === 5;
       res.locals.member.isHC = req.session.member.access >= 3 && (req.session.member.roles & 16) !== 0;
@@ -203,7 +206,7 @@ Mordor.connection.once("open", () => {
       res.locals.message = err.message;
       res.locals.error = req.app.get('env') === 'development' ? err : {};
       res.status(err.status || 500);
-      res.render('error', {alliance_name: config.alliance.name, site_title: config.alliance.name, page_title: 'Error', site_theme: config.web.themes['affleck'], bot_name: config.bot.username});
+      res.render('error', {alliance_name: CFG.alliance.name, site_title: CFG.alliance.name, page_title: 'Error', site_theme: CFG.web.themes['affleck'], bot_name: CFG.bot.username});
     }
   });
   //start listening
