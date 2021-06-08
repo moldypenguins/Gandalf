@@ -55,9 +55,9 @@ const crypto = require('crypto');
 
 let argv = minimist(process.argv.slice(2), {
   string: [],
-  boolean: ['havoc', 'force'],
-  alias: {c:'havoc', f:'force'},
-  default: {'havoc':false, 'force':false},
+  boolean: ['havoc', 'overwrite'],
+  alias: {c:'havoc', o:'overwrite'},
+  default: {'havoc':false, 'overwrite':false},
   unknown: false
 });
 
@@ -75,7 +75,7 @@ const sleep = (ms) => {
 
 Mordor.connection.once("open", async () => {
   if(argv.havoc) { console.log("Havoc mode enabled."); }
-  if(argv.force) { console.log("Overwrite enabled."); }
+  if(argv.overwrite) { console.log("Overwrite enabled."); }
   schedule.scheduleJob(rule, async () => {
     const start_time = new Date();
     console.log('Frodo Embarking on The Quest Of The Ring.');
@@ -139,7 +139,7 @@ let process_tick = async (last_tick, start_time) => {
     } else {
       let dump_tick = planet_dump[3].match(/\d+/g).map(Number)[0];
 
-      if (!argv.force && dump_tick <= last_tick) {
+      if (!argv.overwrite && dump_tick <= last_tick) {
         throw new Error(`Stale tick found: pt${dump_tick}`);
       } else {
         //get current tick time
