@@ -30,7 +30,7 @@ let MemberSchema = new Mordor.Schema({
   telegram_first_name:    {type:String},
   telegram_last_name:     {type:String},
   telegram_username:      {type:String},
-  telegram_photo_url:     {type:String, default:config.web.uri + '/' + config.web.default_profile_pic},
+  telegram_photo_url:     {type:String, default:CFG.web.uri + '/' + CFG.web.default_profile_pic},
   telegram_language_code: {type:String},
   pa_nick:                {type:String, trim:true, unique:true, required:true},
   access:                 {type:Number, default:0, required:true},
