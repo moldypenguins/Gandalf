@@ -97,9 +97,9 @@ function formatInvalidResponse(str) {
 
 
 let isValidDate = function(d) {
-	return Object.prototype.toString.call(d) === '[object Date]' && isFinite(d)
+	//return Object.prototype.toString.call(d) === '[object Date]' && isFinite(d);
+	return d instanceof Date && !isNaN(d);
 }
-
 
 
 module.exports = {
