@@ -120,7 +120,7 @@ let load_ships = async() => {
 
 let load_ticks = async() => {
   if (!await Tick.exists({})) {
-    await new Tick({_id: Mordor.Schema.Types.ObjectId, tick:0, timestamp:Functions.isValidDate(argv.start) ? argv.start : null}).save();
+    await new Tick({tick:0, timestamp:Functions.isValidDate(argv.start) ? argv.start : null}).save();
     console.log("Added first tick!");
   } else {
     console.log("First tick already exists!");
