@@ -21,7 +21,7 @@
  **/
 'use strict';
 
-const config = require('../config');
+const CFG = require('../Config');
 const Mordor = require('../Mordor');
 
 let ApplicantSchema = new Mordor.Schema({
@@ -30,7 +30,7 @@ let ApplicantSchema = new Mordor.Schema({
   telegram_first_name:    {type:String},
   telegram_last_name:     {type:String},
   telegram_username:      {type:String},
-  telegram_photo_url:     {type:String, default:config.web.uri + '/' + config.web.default_profile_pic},
+  telegram_photo_url:     {type:String, default:CFG.web.uri + '/' + CFG.web.default_profile_pic},
   telegram_language_code: {type:String},
   rejected:               {type:Boolean},
 });
