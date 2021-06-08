@@ -11,8 +11,8 @@ module.exports = {
     }
   },
   bot:{
-    token:"[Telegram bot token]",
-    username:"[Telegram bot username]",
+    token:"659859082:AAEsAhslMPJpSatAzbgZiPNabn0l44nprnA", //Telegram bot token
+    username:"TelegramBot", //Telegram bot name
     private_cmd:".", //character to use for bot to reply in pm
     public_cmd:"!", //character to use for bot to reply in public
     modules:['admin', 'ships', 'calcs', 'comms', 'intel', 'fun', 'attacks', 'scans'], //active modules
@@ -20,10 +20,10 @@ module.exports = {
     tick_alert:true, //whether the bot should message private channel on every tick
   },
   twilio:{
-    url:"[Twilio url]", //TwiML instructions url
-    sid:"[Twilio sid]",
-    secret:"[Twilio secret]",
-    number:+12345554367, //[Twilio phone]
+    url:"https://demo.twilio.com/welcome/voice/", //TwiML instructions url
+    sid:"AC83a89587725757444879fb3156a6738c", //Twilio sid
+    secret:"05b47244d936373c6e62c9d797b352ee", //Twilio secret
+    number:+12345554367, //Twilio phone number
     ring_timeout:20, //seconds
   },
   groups:{
