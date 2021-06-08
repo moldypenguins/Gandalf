@@ -82,7 +82,7 @@ Mordor.connection.once("open", async () => {
     console.log(`Start Time: ${moment(start_time).format('YYYY-MM-DD H:mm:ss')}`);
 
     //get last tick
-    let last_tick = await Tick.findLastTick()?.tick;
+    let last_tick = (await Tick.findOne().sort({id: -1})).tick; //.findLastTick().tick;
     console.log('LAST_TICK: ' + util.inspect(last_tick, false, null, true));
     if(typeof(last_tick) !== 'undefined' || last_tick == null) {
       console.log('No ticks found in the database.');
@@ -96,7 +96,7 @@ Mordor.connection.once("open", async () => {
     while(!stop_trying) {
       let iteration_start = new Date();
       try {
-        stop_trying = await process_tick(last_tick.tick, start_time);
+        stop_trying = await process_tick(last_tick, start_time);
       } catch(error) {
         console.log(util.inspect(error, false, null, true));
         //break; //stop_trying = true;???
