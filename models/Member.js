@@ -21,7 +21,7 @@
  **/
 'use strict';
 
-const config = require('../config');
+const CFG = require('../Config');
 const Mordor = require('../Mordor');
 
 let MemberSchema = new Mordor.Schema({
