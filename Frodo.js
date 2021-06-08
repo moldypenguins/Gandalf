@@ -74,6 +74,8 @@ const sleep = (ms) => {
 }
 
 Mordor.connection.once("open", async () => {
+  if(argv.havoc) { console.log("Havoc mode enabled."); }
+  if(argv.force) { console.log("Overwrite enabled."); }
   schedule.scheduleJob(rule, async () => {
     const start_time = new Date();
     console.log('Frodo Embarking on The Quest Of The Ring.');
