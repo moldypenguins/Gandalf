@@ -21,8 +21,10 @@
  **/
 'use strict';
 
-const config = require('../config');
+const CFG = require('../Config');
+const PA = require('../PA');
 const Mordor = require('../Mordor');
+
 const Planet = require('./Planet');
 const PlanetScan = require('./ScanPlanet');
 const DevelopmentScan = require('./ScanDevelopment');
@@ -30,6 +32,7 @@ const UnitScan = require('./ScanUnit');
 const ScanRequest = require('./ScanRequest');
 const Ship = require('./Ship');
 const BotMessage = require('./BotMessage');
+
 const numeral = require('numeral');
 const crypto = require("crypto");
 
@@ -50,7 +53,7 @@ ScanSchema.statics.parse = async (member_id, scan_id, group_id, page_content) =>
   if(m == null) {
     console.log(`Expired/non-matchinng scan (id: ${scan_id})`);
   } else {
-    let scan_type = Object.keys(config.pa.scantypes).find(key => config.pa.scantypes[key].charAt(0).toUpperCase() === m[1].charAt(0).toUpperCase()) * 1;
+    let scan_type = Object.keys(PA.scantypes).find(key => PA.scantypes[key].charAt(0).toUpperCase() === m[1].charAt(0).toUpperCase()) * 1;
     let x = numeral(m[2]).value();
     let y = numeral(m[3]).value();
     let z = numeral(m[4]).value();
@@ -158,7 +161,7 @@ ScanSchema.statics.parse = async (member_id, scan_id, group_id, page_content) =>
               let planet = await Planet.findOne({id: request.planet_id});
               if (planet && planet.id) {
                 console.log(`found planet for scan request ${planet.x}:${planet.y}:${planet.z}`);
-                let text = `Your ${config.pa.scantypes[saved.scantype]} request for ${planet.x}:${planet.y}:${planet.z} has been fullfilled: https://game.planetarion.com/showscan.pl?scan_id=${saved.id}`;
+                let text = `Your ${PA.scantypes[saved.scantype]} request for ${planet.x}:${planet.y}:${planet.z} has been fullfilled: https://game.planetarion.com/showscan.pl?scan_id=${saved.id}`;
                 console.log(`sending text: ${text}`);
                 let msg = new BotMessage({id:crypto.randomBytes(8).toString("hex"), group_id: request.requester_id, message: text, sent: false});
                 await msg.save();
