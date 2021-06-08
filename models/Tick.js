@@ -24,7 +24,7 @@
 const Mordor = require('../Mordor');
 
 let TickSchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId},
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
   tick:       {type:Number, unique:true, required:true},
   timestamp:  {type:Date},
   galaxies:   {type:Number},

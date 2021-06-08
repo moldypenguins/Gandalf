@@ -35,7 +35,7 @@ let MemberSchema = new Mordor.Schema({
   pa_nick:                {type:String, trim:true, unique:true, required:true},
   access:                 {type:Number, default:0, required:true},
   roles:                  {type:Number, default:0, required:true},
-  parent:                 {type:Mordor.Schema.Types.ObjectId, reference:'Member', required:true},
+  parent:                 {type:Mordor.Schema.Types.ObjectId, reference:'Member'},
   birthed:                {type:Date, default:Date.now(), required:true},
   site_theme:             {type:String, default:'default', required:true},
   site_navigation:        {type:String, default:'iconstext', required:true},
