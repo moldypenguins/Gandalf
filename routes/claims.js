@@ -14,7 +14,16 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name claims.js
+ * @version 2021/06/07
+ * @summary Express Route
  **/
+'use strict';
+
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
 const Attack = require('../models/attack');
 const Planet = require('../models/planet');
 const AttackTargetClaim = require('../models/attack-target-claim');

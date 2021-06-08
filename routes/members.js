@@ -14,8 +14,16 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name members.js
+ * @version 2021/06/07
+ * @summary Express Route
  **/
-const config = require('../config');
+'use strict';
+
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
 const Member = require('../models/member');
 const Inactive = require('../models/inactive');
 const Applicant = require('../models/applicant');
@@ -27,10 +35,10 @@ let router = express.Router();
 const access = require('../access');
 const moment = require('moment');
 const util = require('util');
-const client = require('twilio')(config.twilio.sid, config.twilio.secret);
+const client = require('twilio')(CFG.twilio.sid, CFG.twilio.secret);
 //var VoiceResponse = twilio.twiml.VoiceResponse;
 
-router.get('/', access.webMemberRequired, async (req, res, next) => {
+router.get('/', AXS.webMemberRequired, async (req, res, next) => {
   let mems = await Member.find();
   let inact = await Inactive.find();
   let plnts = await Planet.find();
@@ -70,11 +78,11 @@ router.get('/', access.webMemberRequired, async (req, res, next) => {
     m.accessRoles = rolesString.join(', ');
   });
   let apps = await Applicant.find();
-  res.render('members', { members: mems, inactives: inact, applicants: apps, galmates: glm8s, access: config.access, moment: moment });
+  res.render('members', { members: mems, inactives: inact, applicants: apps, galmates: glm8s, access: CFG.access, moment: moment });
 });
 
 
-router.post('/', access.webHighCommandRequired, async(req, res, next) => {
+router.post('/', AXS.webHighCommandRequired, async(req, res, next) => {
   //console.log('BODY: ' + util.inspect(req.body, false, null, true));
   if(req.body.deactivate !== undefined) {
     let mbr = await Member.findOne({id: req.body.deactivate});
@@ -107,7 +115,7 @@ router.post('/', access.webHighCommandRequired, async(req, res, next) => {
 });
 
 
-router.post('/applicants', access.webHighCommandRequired, async (req, res, next) => {
+router.post('/applicants', AXS.webHighCommandRequired, async (req, res, next) => {
   console.log(util.inspect(req.body, false, null, true));
   if(req.body.accept !== undefined) {
     Applicant.findOne({id: req.body.accept}).then((applcnt) => {
@@ -121,8 +129,8 @@ router.post('/applicants', access.webHighCommandRequired, async (req, res, next)
           photo_url: applcnt.photo_url,
           access: 0,
           roles:0,
-          site_navigation: config.web.default_navigation,
-          site_theme: config.web.default_theme
+          site_navigation: CFG.web.default_navigation,
+          site_theme: CFG.web.default_theme
         });
         mem.save(function (err, saved) {
           if(err) {
@@ -155,7 +163,7 @@ router.post('/applicants', access.webHighCommandRequired, async (req, res, next)
 });
 
 
-router.post('/inactives', access.webHighCommandRequired, async (req, res, next) => {
+router.post('/inactives', AXS.webHighCommandRequired, async (req, res, next) => {
   if(req.body.activate !== undefined) {
     let inact = await Inactive.findOne({id: req.body.activate});
     if(inact != null) {
@@ -193,7 +201,7 @@ router.post('/inactives', access.webHighCommandRequired, async (req, res, next) 
 });
 
 
-router.get('/:id', access.webHighCommandRequired, async (req, res, next) => {
+router.get('/:id', AXS.webHighCommandRequired, async (req, res, next) => {
   let mem = await Member.findOne({id:req.params.id});
   //console.log('PLANET: ' + util.inspect(mem, false, null, true));
   if(mem) {
@@ -201,14 +209,14 @@ router.get('/:id', access.webHighCommandRequired, async (req, res, next) => {
       mem.planet = await Planet.findOne({id:mem.planet_id});
     }
     //console.log('PLANET: ' + util.inspect(plnt, false, null, true));
-    res.render('profile', { site_title: config.alliance.name, page_title: 'Edit Member', page: 'member', post_action: '/mem/' + mem.id, profile: mem, themes: config.web.themes, timezones: moment.tz.names() });
+    res.render('profile', { site_title: CFG.alliance.name, page_title: 'Edit Member', page: 'member', post_action: '/mem/' + mem.id, profile: mem, themes: CFG.web.themes, timezones: moment.tz.names() });
   } else {
     next(createError(400));
   }
 });
 
 
-router.post('/:id', access.webHighCommandRequired, async (req, res, next) => {
+router.post('/:id', AXS.webHighCommandRequired, async (req, res, next) => {
   if(req.body !== undefined) {
     console.log('BODY: ' + util.inspect(req.body, false, null, true));
     let mem = await Member.findOne({id: req.params.id});
@@ -238,7 +246,7 @@ router.post('/:id', access.webHighCommandRequired, async (req, res, next) => {
 });
 
 
-router.post('/galmate', access.webAdminRequired, async (req, res, next) => {
+router.post('/galmate', AXS.webAdminRequired, async (req, res, next) => {
   if(req.body !== undefined && req.body.delete !== undefined) {
     let gm = await GalMate.deleteOne({id: req.body.delete});
     console.log(req.body.delete + " deleted.");
@@ -249,7 +257,7 @@ router.post('/galmate', access.webAdminRequired, async (req, res, next) => {
 });
 
 
-router.get('/call/:id', access.webCommandRequired, async (req, res, next) => {
+router.get('/call/:id', AXS.webCommandRequired, async (req, res, next) => {
   comms.callMember(req.params.id).then((response) => {
       console.log(message.responseText);
       response.send({
@@ -262,8 +270,4 @@ router.get('/call/:id', access.webCommandRequired, async (req, res, next) => {
 });
 
 
-
-
-
 module.exports = router;
-

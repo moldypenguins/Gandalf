@@ -14,16 +14,22 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name profile.js
+ * @version 2021/06/07
+ * @summary Express Route
  **/
-const config = require('../config');
+'use strict';
+
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
 const Member = require('../models/member');
 const Applicant = require('../models/applicant');
 const Planet = require('../models/planet');
 const express = require('express');
 let router = express.Router();
 const util = require('util');
-const fs = require('fs');
-const csrf = require('csurf')
 const moment = require('moment-timezone');
 const createError = require("http-errors");
 
@@ -34,7 +40,7 @@ router.get('/', async (req, res, next) => {
   if(mem) {
     mem.planet = await Planet.findOne({id: req.session.member.planet_id});
   }
-  res.render('profile', { page: 'profile', post_action: '/profile', profile: req.session.member, themes: config.web.themes, timezones: moment.tz.names() });
+  res.render('profile', { page: 'profile', post_action: '/profile', profile: req.session.member, themes: CFG.web.themes, timezones: moment.tz.names() });
 });
 
 router.post('/', async (req, res, next) => {

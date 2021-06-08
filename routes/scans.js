@@ -14,8 +14,16 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name scans.js
+ * @version 2021/06/07
+ * @summary Express Route
  **/
-const config = require('../config');
+'use strict';
+
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
 const Scan = require('../models/scan');
 const ScanRequest = require('../models/scan-request');
 const PlanetScan = require('../models/scan-planet');
@@ -57,12 +65,12 @@ router.get('/', async (req, res, next) => {
   }
   scnrs.sort(compareAmps);
   let reqs = await ScanRequest.find({active: true});
-  //console.log('SCANTYPES: ' + util.inspect(config.pa.scantypes, false, null, true));
-  res.render('scans', { scanners: scnrs, requests: reqs, scantypes:config.pa.scantypes });
+  //console.log('SCANTYPES: ' + util.inspect(PA.scantypes, false, null, true));
+  res.render('scans', { scanners: scnrs, requests: reqs, scantypes:PA.scantypes });
 });
 
 
-router.get('/parse', access.webScannerRequired, async (req, res, next) => {
+router.get('/parse', AXS.webScannerRequired, async (req, res, next) => {
   if(req.query.url === undefined) {
     next(createError(400));
   } else {
@@ -110,7 +118,7 @@ router.get('/parse', access.webScannerRequired, async (req, res, next) => {
 });
 
 
-router.post('/parse', access.webScannerRequired, async (req, res, next) => {
+router.post('/parse', AXS.webScannerRequired, async (req, res, next) => {
   if(req.body.scan_ids !== undefined && req.body.scan_ids.length > 0) {
     const start_time = Date.now();
     console.log('Sauron Forging The One Ring.');
@@ -119,7 +127,7 @@ router.post('/parse', access.webScannerRequired, async (req, res, next) => {
 
     for(var j = 0; j < req.body.scan_ids.length; j++) {
       if(!await Scan.exists({id:req.body.scan_ids[j]})) {
-          let scanurl = url.parse(config.pa.links.scans + '?scan_id=' + req.body.scan_ids[j], true);
+          let scanurl = url.parse(PA.links.scans + '?scan_id=' + req.body.scan_ids[j], true);
           let page_content = await getStream(scanurl.href);
           console.log(`Loaded scan from webserver in: ${Date.now() - start_time}ms`);
 
@@ -150,7 +158,7 @@ router.post('/parse', access.webScannerRequired, async (req, res, next) => {
   }
 });
 
-router.get('/requests', access.webScannerRequired, async (req, res) => {
+router.get('/requests', AXS.webScannerRequired, async (req, res) => {
   let requests = await ScanRequest.find({active: true});
   res.send(requests);
 });
@@ -182,9 +190,9 @@ router.post('/request', async(req, res, next) => {
 
         let msg = new BotMessage({
           id: crypto.randomBytes(8).toString("hex"),
-          group_id: config.groups.scans,
+          group_id: CFG.groups.scans,
           message: `[${scanreq.id}] ${res.locals.member.panick} ` +
-          `requested a ${config.pa.scantypes[scanreq.scantype]} Scan of ${scanreq.x}:${scanreq.y}:${scanreq.z} ` +
+          `requested a ${PA.scantypes[scanreq.scantype]} Scan of ${scanreq.x}:${scanreq.y}:${scanreq.z} ` +
           `Dists(i:${dev != null ? dev.wave_distorter : "?"}/r:${typeof(scanreq.dists) != 'undefined' ? scanreq.dists : "?"})\n` +
           `https://game.planetarion.com/waves.pl?id=${scanreq.scantype}&x=${scanreq.x}&y=${scanreq.y}&z=${scanreq.z}`,
           sent: false
@@ -196,7 +204,5 @@ router.post('/request', async(req, res, next) => {
   res.redirect('/scans');
 });
 
+
 module.exports = router;
-
-
-

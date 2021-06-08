@@ -14,7 +14,13 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name attacks.js
+ * @version 2021/06/07
+ * @summary Express Route
  **/
+'use strict';
+
 const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
@@ -57,19 +63,19 @@ const attackLimiter = slowDown({
 });
 
 router.get('/', async (req, res, next) => {
-  var attacks = await Attack.find().sort({id: -1});
-  res.render('attacks', { page: 'all', attacks: attacks, after_land_ticks: config.alliance.attack.after_land_ticks });
+  let attacks = await Attack.find().sort({id: -1});
+  res.render('attacks', { page: 'all', attacks: attacks, after_land_ticks: CFG.alliance.attack.after_land_ticks });
 });
 
-router.get('/new', access.webCommandRequired, async (req, res, next) => {
+router.get('/new', AXS.webCommandRequired, async (req, res, next) => {
   let tks = [];
-  for(let i = res.locals.tick.id; i <= config.pa.tick.end; i++) {
+  for(let i = res.locals.tick.id; i <= PA.tick.end; i++) {
     tks.push(i);
   }
-  res.render('attacks', { page: 'new', ticks: tks, waves: config.alliance.attack.default_waves, min_uni_eta: config.pa.ships.min_uni_eta });
+  res.render('attacks', { page: 'new', ticks: tks, waves: CFG.alliance.attack.default_waves, min_uni_eta: PA.ships.min_uni_eta });
 });
 
-router.post('/new', access.webCommandRequired, async (req, res, next) => {
+router.post('/new', AXS.webCommandRequired, async (req, res, next) => {
   if(req.body.save != undefined) {
     //let lastatt = await Attack.findOne().sort({id: -1});
     //lastatt = lastatt ? lastatt.id : 0;
@@ -121,7 +127,7 @@ let addIntel = async (target) => {
 }
 
 
-router.get('/edit/:hash', access.webCommandRequired, async (req, res, next) => {
+router.get('/edit/:hash', AXS.webCommandRequired, async (req, res, next) => {
   var att = await Attack.findOne({hash:req.params.hash});
   var atttarg = await AttackTarget.find({attack_id:att.id});
   var targs = await Planet.find({id:{$in:atttarg.map(at => at.planet_id)}});
@@ -129,13 +135,13 @@ router.get('/edit/:hash', access.webCommandRequired, async (req, res, next) => {
     await addIntel(target);
   }
   let tks = [];
-  for(let i = att.createtick; i <= config.pa.tick.end; i++) {
+  for(let i = att.createtick; i <= PA.tick.end; i++) {
     tks.push(i);
   }
-  res.render('attacks', { page: 'edit', attack: att, targets: targs, ticks: tks, waves: config.alliance.attack.default_waves, min_uni_eta: config.pa.ships.min_uni_eta, numeral: numeral });
+  res.render('attacks', { page: 'edit', attack: att, targets: targs, ticks: tks, waves: CFG.alliance.attack.default_waves, min_uni_eta: PA.ships.min_uni_eta, numeral: numeral });
 });
 
-router.post('/edit/:hash', access.webCommandRequired, async (req, res, next) => {
+router.post('/edit/:hash', AXS.webCommandRequired, async (req, res, next) => {
   await Attack.updateOne({hash:req.params.hash}, {
     landtick: req.body.landtick,
     waves: req.body.waves,
@@ -146,7 +152,7 @@ router.post('/edit/:hash', access.webCommandRequired, async (req, res, next) => 
   res.redirect(`/att/${req.params.hash}`);
 });
 
-router.post('/edit/targ/:hash', access.webCommandRequired, async (req, res, next) => {
+router.post('/edit/targ/:hash', AXS.webCommandRequired, async (req, res, next) => {
   let att = await Attack.findOne({hash:req.params.hash});
   if(req.body.add !== undefined && req.body.coords !== undefined){
     let inCoords = req.body.coords.split(' ');
@@ -207,7 +213,7 @@ router.post('/edit/targ/:hash', access.webCommandRequired, async (req, res, next
 });
 
 
-router.post('/delete/:hash', access.webCommandRequired, async (req, res, next) => {
+router.post('/delete/:hash', AXS.webCommandRequired, async (req, res, next) => {
   let att = await Attack.findOne({hash:req.params.hash});
   if(req.body.delete !== undefined) {
     let claims = await AttackTargetClaim.deleteMany({ attack_id:att.id });
@@ -257,12 +263,12 @@ router.get('/:hash', attackLimiter, async (req, res, next) => {
       targs[i].anti.cr = !!targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() === "cruiser" || shp.ship.target2.toLowerCase() === "cruiser" || shp.ship.target3.toLowerCase() === "cruiser"));
       targs[i].anti.bs = !!targs[i].scans.a.scan.find(shp => shp.ship != null && (shp.ship.target1.toLowerCase() === "battleship" || shp.ship.target2.toLowerCase() === "battleship" || shp.ship.target3.toLowerCase() === "battleship"));
     }
-    targs[i].bashlimit = targs[i].value <= req.session.member.planet.value * config.pa.bash.value && targs[i].score <= req.session.member.planet.score * config.pa.bash.score;
+    targs[i].bashlimit = targs[i].value <= req.session.member.planet.value * PA.bash.value && targs[i].score <= req.session.member.planet.score * PA.bash.score;
 
   }
   const sortedTargs = [...targs].sort((a, b) => { return a.x - b.x || a.y - b.y || a.z -b.z; });
   //console.log('MEMBERS: ' + util.inspect(mems, false, null, true));
-  res.render('attacks', { page: 'att', attack: att, races:config.pa.races, targets: sortedTargs, claims: clms, numeral: numeral, scanurl: config.pa.links.scans, bcalcurl: config.pa.links.bcalc, expiries: config.pa.scans, members:mems, scantypes:config.pa.scantypes });
+  res.render('attacks', { page: 'att', attack: att, races:PA.races, targets: sortedTargs, claims: clms, numeral: numeral, scanurl: PA.links.scans, bcalcurl: PA.links.bcalc, expiries: PA.scans, members:mems, scantypes:PA.scantypes });
 });
 
 router.post('/:hash', async (req, res, next) => {
@@ -276,7 +282,7 @@ router.post('/:hash', async (req, res, next) => {
       let claim_count = claims.filter(c => c.member_id == req.session.member.id).length;
       //console.log(`claim count ${claim_count}`);
       let exists = await AttackTargetClaim.findOne({ member_id: req.session.member.id, attack_id: att.id, planet_id: req.body.target, wave: req.body.claim });
-      if (config.alliance.attack.max_claims > 0 && claim_count >= config.alliance.attack.max_claims) {
+      if (CFG.alliance.attack.max_claims > 0 && claim_count >= CFG.alliance.attack.max_claims) {
         //console.log(`rejecting new claim, over limit`);
         next(createError(403, `Only ${max_claims} claims is allowed!!`));
       } else if(exists == null) {
@@ -306,5 +312,5 @@ router.post('/:hash', async (req, res, next) => {
   }
 });
 
-module.exports = router;
 
+module.exports = router;

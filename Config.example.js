@@ -75,5 +75,4 @@ module.exports = {
     0x8:"Defence Commander", //gives access to: DC shit (must be at least commander)
     0x16:"High Commander"    //gives access to: HC shit (must be at least commander)
   },
-}
-
+};

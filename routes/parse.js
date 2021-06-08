@@ -14,8 +14,16 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name parse.js
+ * @version 2021/06/07
+ * @summary Express Route
  **/
-const config = require('../config');
+'use strict';
+
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
 const Scan = require('../models/scan');
 const BotMessage = require('../models/botmessage');
 const Planet = require('../models/planet');
@@ -41,7 +49,7 @@ router.post('/scans', async (req, res, next) => {
 
       for(var j = 0; j < req.body.scan_ids.length; j++) {
         if(!await Scan.exists({id:req.body.scan_ids[j]})) {
-          let scanurl = url.parse(config.pa.links.scans + '?scan_id=' + req.body.scan_ids[j], true);
+          let scanurl = url.parse(PA.links.scans + '?scan_id=' + req.body.scan_ids[j], true);
           let page_content = await getStream(scanurl.href);
           console.log(`Loaded scan from webserver in: ${Date.now() - start_time}ms`);
 

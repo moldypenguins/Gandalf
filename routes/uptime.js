@@ -14,13 +14,23 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name uptime.js
+ * @version 2021/06/07
+ * @summary Express Route
  **/
-const config = require('../config');
+'use strict';
+
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
 const express = require('express');
 let router = express.Router();
+
 
 router.get("/", async (req, res, next) => {
   res.status(204).send();
 })
+
 
 module.exports = router;

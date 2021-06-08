@@ -14,10 +14,18 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name authorize.js
+ * @version 2021/06/07
+ * @summary Express Route
  **/
-const config = require('../config');
-const Member = require('../models/member');
-const Applicant = require('../models/applicant');
+'use strict';
+
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
+const Member = require('../models/Member');
+const Applicant = require('../models/Applicant');
 const crypto = require('crypto');
 const express = require('express');
 let router = express.Router();
@@ -26,7 +34,7 @@ const util = require('util');
 
 function checkSignature({ hash, ...data }) {
   const secret = crypto.createHash('sha256')
-    .update(config.bot.token)
+    .update(CFG.bot.token)
     .digest();
   const checkString = Object.keys(data)
     .sort()
@@ -69,4 +77,3 @@ router.get("/", async (req, res, next) => {
 
 
 module.exports = router;
-
