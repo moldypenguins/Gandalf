@@ -1,7 +1,7 @@
 # Installation
 
 ```shell script
-[HOSTNAME] = domain.com http://lucky7pa.uk/
+[HOSTNAME] = domain.com
 [ROOTUSER] = root
 [USERNAME] = administrator
 [USEREMAIL] = administrator@domain.com
@@ -147,7 +147,7 @@
 
 ### Bilbo
 ```shell script
-  nodejs bilbo.js
+  node Bilbo.js -s 2021-06-04T20:00:00.000Z
   #Wait for the script to finish
   #Press Ctrl+C
 ```
@@ -156,8 +156,6 @@
 ```shell script
   screen -dmS Frodo
   screen -r Frodo
-  nodejs Frodo.js
-  #if using nodemon
   nodemon Frodo.js
   #Press Ctrl+A+D
 ```
@@ -166,28 +164,15 @@
 ```shell script
   screen -dmS Gandalf
   screen -r Gandalf
-  nodejs Gandalf.js
-  #if using nodemon
   nodemon Gandalf.js
   #Press Ctrl+A+D
 ```
 
 ### Sauron
 ```shell script
-  #@fortawesome/fontawesome-free
   #ln -s node_modules/@fortawesome/fontawesome-free/webfonts/ public/
-  #ln -s node_modules/@fortawesome/fontawesome-free/css/all.min.css public/styles/
-  #clipboard
-  #ln -s node_modules/clipboard/dist/clipboard.min.js public/scripts/
-  #jquery
-  #
-  #bootstrap
-  #
-  
   screen -dmS Sauron
   screen -r Sauron
-  nodejs Sauron.js
-  #if using nodemon
   nodemon Sauron.js
   #Press Ctrl+A+D
 ```
