@@ -56,7 +56,7 @@ const crypto = require('crypto');
 let argv = minimist(process.argv.slice(2), {
   string: [],
   boolean: ['havoc', 'force'],
-  alias: {h:'havoc', f:'force'},
+  alias: {c:'havoc', f:'force'},
   default: {'havoc':false, 'force':false},
   unknown: false
 });
