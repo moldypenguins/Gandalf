@@ -49,7 +49,7 @@ const Galaxy = require('./models/Galaxy');
 const Cluster = require('./models/Cluster');
 const Alliance = require('./models/Alliance');
 const Applicant = require('./models/Applicant');
-const GalMate = require('./models/Galmate');
+const GalMate = require('./models/GalMate');
 
 const bent = require('bent');
 const getStream = bent('string');
