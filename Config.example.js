@@ -45,12 +45,12 @@ module.exports = {
       matrix:{name: 'The Matrix', navbar: 'dark'},
       shamrock:{name: 'Shamrock', navbar: 'light'},
       telegram:{name: 'Telegram', navbar: 'light'},
-      ultimate:{name: 'Ultimate', navbar: 'dark'}
+      ultimate:{name: 'Ultimate', navbar: 'dark'},
     }
   },
   db:{
     uri:"mongodb://localhost:27017",
-    name:"Mordor"
+    name:"Mordor",
   },
   access:{
     0:"Recruit",        //gives access to: 
@@ -65,7 +65,7 @@ module.exports = {
                           //scanner role
     3:"Commander",      //gives access to: 
                           //commander roles
-    5:"Administrator"   //gives access to: 
+    5:"Administrator",  //gives access to:
                           //everything
   },
   roles:{

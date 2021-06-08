@@ -1,0 +1,18 @@
+header {
+  background: $col-secondary;
+  border: 1px solid transparent;
+  box-shadow: 0 0 8px 2px rgba(0,0,0,0.25);
+}
+
+nav {
+  .navbar-brand {
+    color: white !important;
+
+  }
+  .navbar-nav .nav-link {
+    color: white !important;
+    i {
+      color: black;
+    }
+  }
+}
