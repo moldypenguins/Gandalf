@@ -150,6 +150,7 @@ let process_tick = async (last_tick, start_time) => {
 
         //create new tick
         let new_tick = await new Tick({
+          _id:Mordor.Types.ObjectId(),
           tick: dump_tick,
           timestamp: tick_time
         });
