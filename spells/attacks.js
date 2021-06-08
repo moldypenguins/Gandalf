@@ -14,19 +14,28 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name attacks.js
+ * @version 2021/06/07
+ * @summary Gandalf Spells
  **/
-const config = require('../config');
-const access = require('../access');
+'use strict';
+
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
+
+const Attack = require('../models/Attack');
+const AttackTargetClaims = require('../models/AttackTargetClaim');
+const Scan = require('../models/Scan')
+const DevelopmentScan = require('../models/ScanDevelopment')
+const Planet = require('../models/Planet');
+const Tick = require('../models/Tick');
+
 const numeral = require('numeral');
 const moment = require('moment');
 const he = require('he');
 const util = require('util');
-const Attack = require('../models/attack');
-const AttackTargetClaims = require('../models/attack-target-claim');
-const Scan = require('../models/scan')
-const DevelopmentScan = require('../models/scan-development')
-const Planet = require('../models/planet');
-const Tick = require('../models/tick');
 
 
 let Attacks_claims_usage = he.encode('!claims [attack number]');

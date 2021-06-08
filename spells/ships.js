@@ -14,15 +14,24 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name ships.js
+ * @version 2021/06/07
+ * @summary Gandalf Spells
  **/
-const config = require('../config');
-const access = require('../access');
+'use strict';
+
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
+
+const Ship = require('../models/Ship');
+const Tick = require('../models/Tick');
+
 const numeral = require('numeral');
 const moment = require('moment');
 const he = require('he');
 const util = require('util');
-const Ship = require('../models/ship');
-const Tick = require('../models/tick');
 
 
 //let Ships_eff_usage = he.encode('!eff <number> <ship> [t1|t2|t3]');
@@ -39,8 +48,8 @@ let Ships_eff = (args) => {
 
     let number = numeral(_number).value();
     if(number == null) { reject(`${_number} is not a valid number`); }
-    //if(!Object.keys(config.pa.ships.targets).includes(_target.toLowerCase())) { reject(`${_target} is not a valid target`); }
-    //let target = config.pa.ships.targets[_target.toLowerCase()];
+    //if(!Object.keys(PA.ships.targets).includes(_target.toLowerCase())) { reject(`${_target} is not a valid target`); }
+    //let target = PA.ships.targets[_target.toLowerCase()];
 
     let ship = await Ship.findOne({$where:`this.name.toLowerCase().startsWith("${_ship.toLowerCase()}")`});
     //console.log("SHIP: " + util.inspect(ship, false, null, true));
@@ -49,7 +58,7 @@ let Ships_eff = (args) => {
       reject(`Cannot find ship ${_ship}`);
     } else {
       let damage = ship.damage !== '-' ? numeral(ship.damage).value() * number : 0
-      let message = `<b>${numeral(number).format('0,0')} ${ship.name} (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / config.pa.numbers.ship_value).format('0a') })</b>`;
+      let message = `<b>${numeral(number).format('0,0')} ${ship.name} (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / PA.numbers.ship_value).format('0a') })</b>`;
 
       switch (ship.type.toLowerCase()) {
         case 'pod':
@@ -59,24 +68,24 @@ let Ships_eff = (args) => {
           message += ` will destroy ${numeral(damage / 50).format('0,0')} structures`;
           break;
         default:
-          message += ` will ${config.pa.ships.damagetypes[ship.type.toLowerCase()]}:\n`;
-          for(let t in config.pa.ships.targets) {
-            let target = config.pa.ships.targets[t];
+          message += ` will ${PA.ships.damagetypes[ship.type.toLowerCase()]}:\n`;
+          for(let t in PA.ships.targets) {
+            let target = PA.ships.targets[t];
             //console.log("TARGET: " + util.inspect(target, false, null, true));
             if (ship[target] !== '-') {
-              message += `<i>${t}: ${ship[target]}s (${config.pa.ships.targeteffs[target] * 100}%)</i>\n`;
+              message += `<i>${t}: ${ship[target]}s (${PA.ships.targeteffs[target] * 100}%)</i>\n`;
               let shiptargets = await Ship.find({class: ship[target]});
               //console.log("TARGETED SHIPS: " + util.inspect(shiptargets, false, null, true));
               if (shiptargets) {
                 var results = shiptargets.map(function (shiptarget) {
                   switch (ship.type.toLowerCase()) {
                     case 'emp':
-                      let empnumber = Math.trunc(config.pa.ships.targeteffs[target] * ship.guns * number * (100 - shiptarget.empres) / 100);
-                      return (`${numeral(empnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(empnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / config.pa.numbers.ship_value).format('0a')})`);
+                      let empnumber = Math.trunc(PA.ships.targeteffs[target] * ship.guns * number * (100 - shiptarget.empres) / 100);
+                      return (`${numeral(empnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(empnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / PA.numbers.ship_value).format('0a')})`);
                       break;
                     default:
-                      let targetnumber = Math.trunc(config.pa.ships.targeteffs[target] * damage / shiptarget.armor);
-                      return (`${numeral(targetnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(targetnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / config.pa.numbers.ship_value).format('0a')})`);
+                      let targetnumber = Math.trunc(PA.ships.targeteffs[target] * damage / shiptarget.armor);
+                      return (`${numeral(targetnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(targetnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / PA.numbers.ship_value).format('0a')})`);
                       break;
                   }
                 });
@@ -110,21 +119,21 @@ var Ships_stop = (args) => {
 
       // TODO: stop structure killers / roiders
       var ships_who_target_class = ships.filter(s => s.target1 == ship.class || s.target2 == ship.class || s.target3 == ship.class);
-      var message = `To stop <b>${numeral(number).format('0a')} ${ship.name}</b> (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / config.pa.numbers.ship_value).format('0a') }) you'll need:\n`;
+      var message = `To stop <b>${numeral(number).format('0a')} ${ship.name}</b> (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / PA.numbers.ship_value).format('0a') }) you'll need:\n`;
       if(ships_who_target_class) {
         var results = ships_who_target_class.map(function(shiptarget) {
           let target = shiptarget.target1 == ship.class ? "target1" : shiptarget.target2 == ship.class ? "target2" : "target3";
-          let efficiency = config.pa.ships.targeteffs[target];
+          let efficiency = PA.ships.targeteffs[target];
           switch(shiptarget.type.toLowerCase()) {
             case 'emp':
 	            let empnumber = Math.trunc((Math.ceil(number/((100-(+ship.empres))/100)/(+shiptarget.guns)))/efficiency);
-              return (`${numeral(empnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(empnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / config.pa.numbers.ship_value).format('0a') })`);
+              return (`${numeral(empnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(empnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / PA.numbers.ship_value).format('0a') })`);
             default:
               let targetnumber = Math.trunc((ship.armor * number) / shiptarget.damage / efficiency);
               if (shiptarget.initiative > ship.initiative) {
                 targetnumber += Math.trunc(efficiency * shiptarget.damage / ship.armor);
               }
-              return (`${numeral(targetnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(targetnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / config.pa.numbers.ship_value).format('0a') })`);
+              return (`${numeral(targetnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(targetnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / PA.numbers.ship_value).format('0a') })`);
           }
         });
       }

@@ -24,12 +24,14 @@
 const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
-const Member = require('../models/member');
-const Applicant = require('../models/applicant');
-const Alliance = require('../models/alliance');
-const Cluster = require('../models/cluster');
-const Galaxy = require('../models/galaxy');
-const Planet = require('../models/planet');
+
+const Member = require('../models/Member');
+const Applicant = require('../models/Applicant');
+const Alliance = require('../models/Alliance');
+const Cluster = require('../models/Cluster');
+const Galaxy = require('../models/Galaxy');
+const Planet = require('../models/Planet');
+
 const createError = require('http-errors');
 const express = require('express');
 let router = express.Router();

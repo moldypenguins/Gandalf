@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Galmate.js
+ * @name GalMate.js
  * @version 2021/05/22
  * @summary Mongoose Model
  **/
@@ -23,7 +23,7 @@
 
 const Mordor = require('../Mordor');
 
-let galmateSchema = Mordor.Schema({
+let GalMateSchema = Mordor.Schema({
   _id:                    {type:Mordor.Schema.Types.ObjectId, required:true},
   telegram_id:            {type:Number, unique:true, required:true},
   telegram_first_name:    {type:String},
@@ -32,5 +32,4 @@ let galmateSchema = Mordor.Schema({
   telegram_language_code: {type:String},
 });
 
-module.exports = Mordor.model('GalMate', galmateSchema, 'GalMates');
-
+module.exports = Mordor.model('GalMate', GalMateSchema, 'GalMates');

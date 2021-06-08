@@ -26,6 +26,9 @@ module.exports = {
     number:+12345554367, //Twilio phone number
     ring_timeout:20, //seconds
   },
+  giphy:{
+    key:"",
+  },
   groups:{
     admin:0, //[Telegram channel bot output],
     scans:0, //[Telegram channel alliance scans],

@@ -14,18 +14,26 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name calcs.js
+ * @version 2021/06/07
+ * @summary Gandalf Spells
  **/
-const config = require('../config');
-const access = require('../access');
+'use strict';
+
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
+const Functions = require('../Functions');
+
+const Tick = require('../models/Tick');
+const Members = require('../models/Member');
+const Planets = require('../models/Planet');
+
 const numeral = require('numeral');
 //const moment = require('moment');
 const moment = require('moment-timezone');
 const he = require('he');
-
-const Tick = require('../models/tick');
-const Members = require('../models/member');
-const Planets = require('../models/planet');
-const Utils = require('../utils');
 
 
 var Calcs_exile_usage = he.encode('!exile');
@@ -50,7 +58,7 @@ var Calcs_bonusmining = (args) => {
 
       let resource_bonus = 10000 + (tick * 4800);
       let roids = Math.trunc(6 + (tick * 0.15));
-      let mining = config.pa.roids.mining;
+      let mining = PA.roids.mining;
       let mining_bonus = mining * ((bonus + 100) / 100);
       let reply = `Resource Bonus at tick ${tick}: <b>${resource_bonus}</b>\nRoid bonus at tick ${tick}: <b>${roids}</b>\nMining Bonus: <b>${mining_bonus}</b>\n`;
       let ticks = resource_bonus / (roids * mining_bonus);
@@ -90,16 +98,16 @@ var Calcs_roidcost = (args) => {
     let roids = numeral(args[0]).value();
     let cost = numeral(args[1]).value();
     let bonus = args.length == 3 ? numeral(args[2]).value() : numeral(0).value();
-    let mining = config.pa.roids.mining;
+    let mining = PA.roids.mining;
     mining = mining * ((bonus + 100) / 100);
     console.log(`roids: ${roids}`);
     console.log(`cost: ${cost}`);
     console.log(`bonus: ${bonus}`);
     console.log(`mining: ${mining}`);
-    let ticks = (cost * config.pa.numbers.ship_value) / (roids * mining);
+    let ticks = (cost * PA.numbers.ship_value) / (roids * mining);
     console.log(`ticks: ${ticks}`);
     let reply = `Capping <b>${roids}</b> roids at <b>${cost}</b> value with <b>${bonus}</b> bonus will repay in <b>${ticks}</b> ticks (${Math.trunc(ticks / 24)} days)`;
-    let goverments = config.pa.governments;
+    let goverments = PA.governments;
     for (var gov in goverments) {
       let goverment = goverments[gov];
       bonus = goverment.prodcost;
@@ -161,7 +169,7 @@ var Calcs_lookup = (args, current_member) => {
       if (!planet) {
         // try coord lookup
         console.log(`trying coord lookup: ${args[0]}`);
-        planet = await Utils.coordsToPlanetLookup(args[0]);
+        planet = await Functions.coordsToPlanetLookup(args[0]);
       }
     }
 
@@ -196,7 +204,7 @@ var Calcs_refsvsfcs = (args) =>{
     let gov_bonus = 0; // args[5]
     let population = numeral(args[6]).value() / 100;
     let cores = numeral(args[7]).value();
-    let goverments = config.pa.governments;
+    let goverments = PA.governments;
     for (var gov in goverments) {
       let goverment = goverments[gov];
       console.log(`goverment ${JSON.stringify(goverment)}`);
@@ -210,16 +218,16 @@ var Calcs_refsvsfcs = (args) =>{
 
     let now = await Tick.findOne().sort({ id: -1 }); 
     console.log(`now.id ${now.id}`); 
-    let ticksLeft = 1157 - now.id;//numeral(config.pa.tick.end).value() - numeral(now.id).value();
+    let ticksLeft = 1157 - now.id;//numeral(PA.tick.end).value() - numeral(now.id).value();
     console.log(`ticks left ${ticksLeft}`);
 
     // Assume they will build the cheapest refinery next. This is always the most efficient thing to do for maxing income anyway.
     let lowestRef = Math.min(metal_ref, crystal_ref, eon_ref); 
-    let baseRefCost = config.pa.construction.baseRefCost;
-    let baseFCCost = config.pa.construction.baseFCCost;
-    let fcBonus = config.pa.construction.fcBonus;
-    let roidIncome = config.pa.roids.mining;
-    let refIncome = config.pa.construction.refIncome;
+    let baseRefCost = PA.construction.baseRefCost;
+    let baseFCCost = PA.construction.baseFCCost;
+    let fcBonus = PA.construction.fcBonus;
+    let roidIncome = PA.roids.mining;
+    let refIncome = PA.construction.refIncome;
 
     // Calculate stats requied for comparison
     // "base cost of each resource * (((# of this type of structure + 1)^1.25)/1000 + 1) * (# of this type of structure + 1)"
@@ -247,8 +255,8 @@ var Calcs_refsvsfcs = (args) =>{
     console.log(`eorFCGen: ${eorFCGen}`);
 
     // Get the value of potential extra resources per construction unit
-    var eorRefGenCU = Math.round(eorRefGen / config.pa.construction.refCU);
-    var eorFCGenCU = Math.round(eorFCGen / config.pa.construction.fcCU);
+    var eorRefGenCU = Math.round(eorRefGen / PA.construction.refCU);
+    var eorFCGenCU = Math.round(eorFCGen / PA.construction.fcCU);
 
     // return results
     if (eorRefGenCU >= eorFCGenCU) {
@@ -291,7 +299,7 @@ function formatInvalidResponse(str) {
 function coordsToPlanetLookup(coordstr) {
   return new Promise(async (resolve, reject) => {
     // try coord lookup
-    var coords = Utils.parseCoords(coordstr);
+    var coords = Functions.parseCoords(coordstr);
     if (!coords) {
       reject(formatInvalidResponse(coordstr));
       return;

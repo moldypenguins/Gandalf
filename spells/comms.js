@@ -14,15 +14,23 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name comms.js
+ * @version 2021/06/07
+ * @summary Gandalf Spells
  **/
-const config = require('../config');
-const access = require('../access');
+'use strict';
+
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
+const Comms = require('../Comms');
+
+const Members = require('../models/Member');
+
 const numeral = require('numeral');
 const moment = require('moment');
 const he = require('he');
-
-const comms = require('../comms');
-const Members = require('../models/member');
 const util = require("util");
 
 let Comms_call_usage = he.encode('!call <user>');
@@ -45,7 +53,7 @@ let Comms_call = (args, ctx) => {
         if (mem == null) {
             reject(`Sorry I don't know who ${args[0]} is`);
         } else {
-            comms.callMember(mem).then(() => {
+            Comms.callMember(mem).then(() => {
                 resolve(`Successfully called <a href="tg://user?id=${mem.id}">${mem.panick != null ? mem.panick : mem.username}</a>`);
             }, (error) => {
                 reject(error);
@@ -72,6 +80,6 @@ let Comms_contact = (args, ctx) => {
 };
 
 module.exports = {
-    "call": { usage: Comms_call_usage, description: Comms_call_desc, access: access.botMemberRequired, cast: Comms_call, include_ctx: true },
-    "contact": { usage: Comms_contact_usage, description: Comms_contact_desc, access: access.botMemberRequired, cast: Comms_contact, include_ctx: true }
+    "call": { usage: Comms_call_usage, description: Comms_call_desc, access: AXS.botMemberRequired, cast: Comms_call, include_ctx: true },
+    "contact": { usage: Comms_contact_usage, description: Comms_contact_desc, access: AXS.botMemberRequired, cast: Comms_contact, include_ctx: true }
 };

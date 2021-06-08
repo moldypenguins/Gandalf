@@ -14,9 +14,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name fun.js
+ * @version 2021/06/07
+ * @summary Gandalf Spells
  **/
-const config = require('../config');
-const access = require('../access');
+'use strict';
+
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
+
 const numeral = require('numeral');
 const moment = require('moment');
 const he = require('he');
@@ -50,7 +58,7 @@ let Fun_gif_desc = 'Finds a random gifphy using your phrase';
 let Fun_gif = (args) => {
   return new Promise(async (resolve, reject) => {
     if (!Array.isArray(args) || args.length < 1) { reject(Fun_gif_desc); }
-    resolve(await search(args.join('+'), config.giphy.key));
+    resolve(await search(args.join('+'), CFG.giphy.key));
   });
 };
 

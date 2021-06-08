@@ -24,17 +24,18 @@
 const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
-const Scan = require('../models/scan');
-const ScanRequest = require('../models/scan-request');
-const PlanetScan = require('../models/scan-planet');
-const DevelopmentScan = require('../models/scan-development');
-const BotMessage = require('../models/botmessage');
-const Planet = require('../models/planet');
-const Member = require('../models/member');
+
+const Scan = require('../models/Scan');
+const ScanRequest = require('../models/ScanRequest');
+const PlanetScan = require('../models/ScanPlanet');
+const DevelopmentScan = require('../models/ScanDevelopment');
+const BotMessage = require('../models/BotMessage');
+const Planet = require('../models/Planet');
+const Member = require('../models/Member');
+
 const createError = require('http-errors');
 const express = require('express');
 let router = express.Router();
-const access = require('../access');
 const url = require("url");
 const moment = require('moment-timezone');
 const util = require('util');

@@ -24,11 +24,13 @@
 const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
-const Member = require('../models/member');
-const Inactive = require('../models/inactive');
-const Applicant = require('../models/applicant');
-const Planet = require('../models/planet');
-const GalMate = require('../models/galmate');
+
+const Member = require('../models/Member');
+const Inactive = require('../models/Inactive');
+const Applicant = require('../models/Applicant');
+const Planet = require('../models/Planet');
+const GalMate = require('../models/GalMate');
+
 const createError = require('http-errors');
 const express = require('express');
 let router = express.Router();

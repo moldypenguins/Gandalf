@@ -24,14 +24,15 @@
 const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
-const Scan = require('../models/scan');
-const BotMessage = require('../models/botmessage');
-const Planet = require('../models/planet');
-const ScanRequests = require('../models/scan-request');
+
+const Scan = require('../models/Scan');
+const BotMessage = require('../models/BotMessage');
+const Planet = require('../models/Planet');
+const ScanRequests = require('../models/ScanRequest');
+
 const createError = require('http-errors');
 const express = require('express');
 const router = express.Router();
-const access = require('../access');
 const url = require("url");
 const moment = require('moment');
 const util = require('util');

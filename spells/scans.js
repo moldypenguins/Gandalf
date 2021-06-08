@@ -14,21 +14,29 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name scans.js
+ * @version 2021/06/07
+ * @summary Gandalf Spells
  **/
-const config = require('../config');
-const access = require('../access');
+'use strict';
+
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
+const Functions = require('../Functions');
+
+const Scan = require('../models/Scan');
+const ScanRequest = require('../models/ScanRequest');
+const DevelopmentScan = require('../models/ScanDevelopment');
+const Planet = require('../models/Planet');
+const Member = require('../models/Member');
+const Tick = require('../models/Tick');
+const BotMessage = require('../models/BotMessage');
+
 const numeral = require('numeral');
 const moment = require('moment');
 const he = require('he');
-
-const Utils = require('../utils');
-const Scan = require('../models/scan');
-const ScanRequest = require('../models/scan-request');
-const DevelopmentScan = require('../models/scan-development');
-const Planet = require('../models/planet');
-const Member = require('../models/member');
-const Tick = require('../models/tick');
-const BotMessage = require('../models/botmessage');
 const crypto = require('crypto');
 
 
@@ -40,12 +48,12 @@ var Scans_req = (args, current_member) => {
     var coords = args[0];
     var scan_types = args[1];
     Tick.findOne().sort({ id: -1 }).then(async (last_tick) => {
-      Utils.coordsToPlanetLookup(coords).then(async (planet) => {
+      Functions.coordsToPlanetLookup(coords).then(async (planet) => {
         if (planet) {
           let reply = `Scan request for <b>${planet.x}:${planet.y}:${planet.z}</b> has been submitted for:\n`;
           for (let type of scan_types) {
             console.log(type);
-            var number_type = Object.keys(config.pa.scantypes).find(key => config.pa.scantypes[key].charAt(0).toUpperCase() === type.toUpperCase());
+            var number_type = Object.keys(PA.scantypes).find(key => PA.scantypes[key].charAt(0).toUpperCase() === type.toUpperCase());
             console.log(number_type);
             let scanreq = new ScanRequest({ id:crypto.randomBytes(4).toString("hex"), planet_id: planet.id, x: planet.x, y: planet.y, z: planet.z, scantype: number_type, active: true, tick: last_tick.id, requester_id: current_member.id });
             scanreq = await scanreq.save();
@@ -57,11 +65,11 @@ var Scans_req = (args, current_member) => {
             }
             //######################################################################################
             let txt = `[${scanreq.id}] ${current_member.panick} ` + 
-              `requested a ${config.pa.scantypes[scanreq.scantype]} Scan of ${scanreq.x}:${scanreq.y}:${scanreq.z} ` + 
+              `requested a ${PA.scantypes[scanreq.scantype]} Scan of ${scanreq.x}:${scanreq.y}:${scanreq.z} ` +
               `Dists(i:${dev != null ? dev.wave_distorter : "?"}/r:${typeof(scanreq.dists) != 'undefined' ? scanreq.dists : "?"})\n` + 
               `https://game.planetarion.com/waves.pl?id=${scanreq.scantype}&x=${scanreq.x}&y=${scanreq.y}&z=${scanreq.z}`;
 
-            let msg = new BotMessage({ id:crypto.randomBytes(8).toString("hex"), group_id: config.groups.scans, 
+            let msg = new BotMessage({ id:crypto.randomBytes(8).toString("hex"), group_id: CFG.groups.scans,
               message: txt, 
               sent: false 
             });
@@ -70,7 +78,7 @@ var Scans_req = (args, current_member) => {
             console.log(`Sent Message: "${msgsaved.message}"`);
             //######################################################################################
             
-            reply += `${config.pa.scantypes[number_type].charAt(0).toUpperCase()}:${scanreq.id}\n`;
+            reply += `${PA.scantypes[number_type].charAt(0).toUpperCase()}:${scanreq.id}\n`;
           }
           resolve(reply);
         } else {
@@ -91,19 +99,19 @@ var Scans_findscan = (args) => {
     if (!Array.isArray(args) || args.length < 2) { reject(Scans_scan_usage); }
     let coords = args[0];
     let scan_types = args[1];
-    let planet = await Utils.coordsToPlanetLookup(coords);
+    let planet = await Functions.coordsToPlanetLookup(coords);
     if (!planet) {
       reject(`Planet not found!`);
       return;
     }
     let reply = `Found scans for ${planet.x}:${planet.y}:${planet.z}:\n`
     for (let type of scan_types) {
-      let scan_type = Object.keys(config.pa.scantypes).find(key => config.pa.scantypes[key].charAt(0).toUpperCase() === type.toUpperCase());
+      let scan_type = Object.keys(PA.scantypes).find(key => PA.scantypes[key].charAt(0).toUpperCase() === type.toUpperCase());
       reply += `${type.toUpperCase()}:\n`
       let scans = await Scan.find({planet_id: planet.id, scantype: scan_type}).sort({tick: -1}).limit(3);
       if (scans && scans.length > 0) {
         for (let scan of scans) {
-          reply += `${config.pa.links.scans}?scan_id=${scan.id}\n`
+          reply += `${PA.links.scans}?scan_id=${scan.id}\n`
         }
       } else {
         reply += `<i>None found</i>\n`
@@ -150,6 +158,6 @@ module.exports = {
   "reqscan": { usage: Scans_req_usage, description: Scans_req_desc, cast: Scans_req, include_member: true },
   "findscan": { usage: Scans_findscan_usage, description: Scans_findscan_desc, cast: Scans_findscan },
   "reqcancel": { usage: Scans_cancel_usage, description: Scans_cancel_desc, cast: Scans_cancel, include_member: true },
-  "reqlinks" : { usage: Scans_links_usage, description: Scans_links_desc, access: access.botScannerRequired, channel: access.botChannelScannerPrivate, cast: Scans_links }
+  "reqlinks" : { usage: Scans_links_usage, description: Scans_links_desc, access: AXS.botScannerRequired, channel: AXS.botChannelScannerPrivate, cast: Scans_links }
 };
 

@@ -24,9 +24,11 @@
 const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
-const Attack = require('../models/attack');
-const Planet = require('../models/planet');
-const AttackTargetClaim = require('../models/attack-target-claim');
+
+const Attack = require('../models/Attack');
+const Planet = require('../models/Planet');
+const AttackTargetClaim = require('../models/AttackTargetClaim');
+
 const express = require('express');
 let router = express.Router();
 const rateLimit = require("express-rate-limit");

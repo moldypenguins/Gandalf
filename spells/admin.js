@@ -14,17 +14,25 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @name admin.js
+ * @version 2021/06/07
+ * @summary Gandalf Spells
  **/
-const config = require('../config');
-const access = require('../access');
-const Chat = require('../models/chat');
-const GalMate = require('../models/galmate');
+'use strict';
+
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
+
+const TelegramGroup = require('../models/TelegramGroup');
+const GalMate = require('../models/GalMate');
+
 const numeral = require('numeral');
 const moment = require('moment');
 const he = require('he');
 const util = require('util');
-const bent = require('bent');
-const getStream = bent('string');
+
 
 let Admin_leavechat_usage = he.encode('!leavechat [chat id]');
 let Admin_leavechat_desc = 'Leaves a group, supergroup, or channel.';
@@ -40,7 +48,7 @@ let Admin_leavechat = (args, ctx) => {
     if(!chatid) {reject(Admin_leavechat_usage);}
     ctx.telegram.leaveChat(chatid).then(async(result) => {
       //console.log('RESULT:' + util.inspect(result, false, null, true));
-      await Chat.deleteOne({id: chatid});
+      await TelegramGroup.deleteOne({id: chatid});
       resolve(`left the group ${chatid}`);
     }).catch((error) => {
       reject(`unable to leave the group ${chatid}.\n${error}`)
@@ -53,7 +61,7 @@ let Admin_listchats_usage = he.encode('!listchats');
 let Admin_listchats_desc = 'Lists chats bot is a member of.';
 let Admin_listchats = (args) => {
   return new Promise(async (resolve, reject) => {
-    let chats = await Chat.find();
+    let chats = await TelegramGroup.find();
     console.log('CHATS:' + util.inspect(chats, false, null, true));
     for(let i = 0; i<chats.length; i++) {
       console.log(chats[i].name);
@@ -71,8 +79,8 @@ let Admin_tickalert = (args) => {
       if (!mode) {
         reject(Admin_tickalert_usage);
       }
-      config.bot.tick_alert = mode.toLowerCase() === 'on';
-      if(config.bot.tick_alert === (mode.toLowerCase() === 'on')) {
+      CFG.bot.tick_alert = mode.toLowerCase() === 'on';
+      if(CFG.bot.tick_alert === (mode.toLowerCase() === 'on')) {
         //console.log('RESULT:' + util.inspect(result, false, null, true));
         resolve(`tick alerts turned ${mode}`);
       } else {
@@ -124,8 +132,8 @@ let Admin_addgalmate = (args, ctx) => {
 
 
 module.exports = {
-  "leavechat": { usage: Admin_leavechat_usage, description: Admin_leavechat_desc, access: access.botAdminRequired, cast: Admin_leavechat, include_ctx: true, private_reply: true },
-  "listchats": { usage: Admin_listchats_usage, description: Admin_listchats_desc, access: access.botAdminRequired, cast: Admin_listchats, private_reply: true },
-  "tickalert": { usage: Admin_tickalert_usage, description: Admin_tickalert_desc, access: access.botAdminRequired, cast: Admin_tickalert, private_reply: true },
-  "addgalmate": { usage: Admin_addgalmate_usage, description: Admin_addgalmate_desc, access: access.botAdminRequired, cast: Admin_addgalmate, include_ctx: true },
+  "leavechat": { usage: Admin_leavechat_usage, description: Admin_leavechat_desc, access: AXS.botAdminRequired, cast: Admin_leavechat, include_ctx: true, private_reply: true },
+  "listchats": { usage: Admin_listchats_usage, description: Admin_listchats_desc, access: AXS.botAdminRequired, cast: Admin_listchats, private_reply: true },
+  "tickalert": { usage: Admin_tickalert_usage, description: Admin_tickalert_desc, access: AXS.botAdminRequired, cast: Admin_tickalert, private_reply: true },
+  "addgalmate": { usage: Admin_addgalmate_usage, description: Admin_addgalmate_desc, access: AXS.botAdminRequired, cast: Admin_addgalmate, include_ctx: true },
 };

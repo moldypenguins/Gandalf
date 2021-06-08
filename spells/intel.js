@@ -16,14 +16,16 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name intel.js
- * @version 2021/05/30
- * @summary Gandalf Spell (bot command plugin)
+ * @version 2021/06/07
+ * @summary Gandalf Spells
  **/
 'use strict';
 
-const config = require('../config');
-const Access = require('../Access');
+const CFG = require('../Config');
+const PA = require('../PA');
+const AXS = require('../Access');
 const Functions = require('../Functions');
+
 const Intel = require('../models/Intel');
 const Planet = require('../models/Planet');
 const Alliance = require('../models/Alliance');
@@ -230,7 +232,7 @@ let Intel_oomph = (args) => {
 module.exports = {
   "intel": { usage: Intel_usage, description: Intel_desc, cast: Intel_fn },
   "spam": { usage: Intel_spam_usage, description: Intel_spam_desc, cast: Intel_spam },
-  "spamset": { usage: Intel_spamset_usage, description: Intel_spamset_desc, access: access.botCommandRequired, cast: Intel_spamset },
+  "spamset": { usage: Intel_spamset_usage, description: Intel_spamset_desc, access: AXS.botCommandRequired, cast: Intel_spamset },
   //"oomph": { usage: Intel_oomph_usage, description: Intel_oomph_desc, cast: Intel_oomph },
 };
 

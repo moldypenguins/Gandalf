@@ -24,8 +24,10 @@
 const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
-const Member = require('../models/member');
-const Applicant = require('../models/applicant');
+
+const Member = require('../models/Member');
+const Applicant = require('../models/Applicant');
+
 const express = require('express');
 let router = express.Router();
 const util = require('util');
