@@ -147,7 +147,7 @@
 
 ### Bilbo
 ```shell script
-  node Bilbo.js -s 2021-06-04T20:00:00.000Z
+  node Bilbo.js [-s|--start YYYYMMDDThhZ]
   #Wait for the script to finish
   #Press Ctrl+C
 ```
@@ -156,7 +156,7 @@
 ```shell script
   screen -dmS Frodo
   screen -r Frodo
-  nodemon Frodo.js
+  nodemon Frodo.js [-c|--havoc] [-o|--overwrite]
   #Press Ctrl+A+D
 ```
 
