@@ -120,6 +120,7 @@ let load_ships = async() => {
 
 let load_ticks = async() => {
   if (!await Tick.exists({})) {
+    //TODO: fix argv.start
     await new Tick({_id:Mordor.Types.ObjectId(), tick:0, timestamp:Functions.isValidDate(argv.start) ? argv.start : null}).save();
     console.log("Added first tick!");
   } else {
