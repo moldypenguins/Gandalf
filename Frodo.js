@@ -81,6 +81,7 @@ Mordor.connection.once("open", async () => {
 
     //get last tick
     let last_tick = await Tick.findLastTick()?.tick;
+    console.log('LAST_TICK: ' + util.inspect(last_tick, false, null, true));
     if(typeof(last_tick) !== 'undefined' || last_tick == null) {
       console.log('No ticks found in the database.');
       process.exit(0);
