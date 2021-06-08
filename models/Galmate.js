@@ -23,7 +23,7 @@
 
 const Mordor = require('../Mordor');
 
-let GalMateSchema = Mordor.Schema({
+let GalMateSchema = new Mordor.Schema({
   _id:                    {type:Mordor.Schema.Types.ObjectId, required:true},
   telegram_id:            {type:Number, unique:true, required:true},
   telegram_first_name:    {type:String},
