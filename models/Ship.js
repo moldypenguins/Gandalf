@@ -15,34 +15,35 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Member.js
- * @version 2021/05/22
+ * @name Ship.js
+ * @version 2021/06/12
  * @summary Mongoose Model
  **/
 'use strict';
 
 const Mordor = require('../Mordor');
 
-let ShipSchema = Mordor.Schema({
-  id:         {type:Number, unique:true, required:true},
-  name:       {type:String, index:true},
-  race:       String,
-  class:      String,
-  target1:    String,
-  target2:    String,
-  target3:    String,
-  type:       String,
-  initiative: String,
-  guns:       String,
-  armor:      String,
-  damage:     String,
-  empres:     String,
-  metal:      String,
-  crystal:    String,
-  eonium:     String,
-  armorcost:  String,
-  damagecost: String,
-  baseeta:    String
+let ShipSchema = new Mordor.Schema({
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true, default:Mordor.Types.ObjectId()},
+  ship_id:    {type:Number, unique:true, required:true},
+  name:       {type:String, index:true, required:true},
+  race:       {type:String, required:true},
+  class:      {type:String, required:true},
+  target1:    {type:String},
+  target2:    {type:String},
+  target3:    {type:String},
+  type:       {type:String},
+  initiative: {type:String},
+  guns:       {type:String},
+  armor:      {type:String},
+  damage:     {type:String},
+  empres:     {type:String},
+  metal:      {type:String},
+  crystal:    {type:String},
+  eonium:     {type:String},
+  armorcost:  {type:String},
+  damagecost: {type:String},
+  baseeta:    {type:String}
 });
 
 module.exports = Mordor.model('Ship', ShipSchema, 'Ships');

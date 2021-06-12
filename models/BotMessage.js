@@ -24,7 +24,7 @@
 const Mordor = require('../Mordor');
 
 let BotMessageSchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true, default:Mordor.Types.ObjectId()},
   message_id: {type:String, unique:true, required:true},
   group_id:   {type:Number},
   message:    {type:String},

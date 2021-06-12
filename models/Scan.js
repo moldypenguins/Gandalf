@@ -37,7 +37,7 @@ const numeral = require('numeral');
 const crypto = require("crypto");
 
 let ScanSchema = new Mordor.Schema({
-  _id:      {type:Mordor.Schema.Types.ObjectId},
+  _id:      {type:Mordor.Schema.Types.ObjectId, required:true, default:Mordor.Types.ObjectId()},
   scan_id:  {type:String, unique:true, required:true},
   group_id: {type:String},
   planet:   {type:Mordor.Schema.Types.ObjectId, reference:'Planet', required:true, index:true},

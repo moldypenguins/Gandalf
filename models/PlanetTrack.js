@@ -24,7 +24,7 @@
 const Mordor = require('../Mordor');
 
 let PlanetTrackSchema = new Mordor.Schema({
-  _id:         {type:Mordor.Schema.Types.ObjectId, required:true},
+  _id:         {type:Mordor.Schema.Types.ObjectId, required:true, default:Mordor.Types.ObjectId()},
   planet:      {type:Mordor.Schema.Types.ObjectId, ref:'Planet'},
   //planet_id: {type:String},
   tick:        {type:Mordor.Schema.Types.ObjectId, ref:'Tick'},

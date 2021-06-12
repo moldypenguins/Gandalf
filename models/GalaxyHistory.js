@@ -24,7 +24,7 @@
 const Mordor = require('../Mordor');
 
 let GalaxyHistorySchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true, default:Mordor.Types.ObjectId()},
   tick:       {type:Mordor.Schema.Types.ObjectId, required:true, reference:'Tick'},
   x:          {type:Number, required:true},
   y:          {type:Number, required:true},

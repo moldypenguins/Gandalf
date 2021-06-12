@@ -24,7 +24,7 @@
 const Mordor = require('../Mordor');
 
 let AttackTargetClaimSchema = new Mordor.Schema({
-  _id:    {type:Mordor.Schema.Types.ObjectId},
+  _id:    {type:Mordor.Schema.Types.ObjectId, required:true, default:Mordor.Types.ObjectId()},
   member: {type:Mordor.Schema.Types.ObjectId, reference:'Member'},
   attack: {type:Mordor.Schema.Types.ObjectId, reference:'Attack'},
   planet: {type:Mordor.Schema.Types.ObjectId, reference:'Planet'},

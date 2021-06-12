@@ -24,7 +24,7 @@
 const Mordor = require('../Mordor');
 
 let AllianceDumpSchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId},
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true, default:Mordor.Types.ObjectId()},
   name:       {type:String, required:true, trim:true},
   size:       {type:Number},
   members:    {type:Number},

@@ -24,7 +24,7 @@
 const Mordor = require('../Mordor');
 
 let ClusterSchema = new Mordor.Schema({
-  _id:      {type:Mordor.Schema.Types.ObjectId, required:true},
+  _id:      {type:Mordor.Schema.Types.ObjectId, required:true, default:Mordor.Types.ObjectId()},
   x:        {type:Number, required:true},
   size:     {type:Number, default:0},
   score:    {type:Number, default:0},

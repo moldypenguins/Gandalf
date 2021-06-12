@@ -24,7 +24,7 @@
 const Mordor = require('../Mordor');
 
 let GalMateSchema = new Mordor.Schema({
-  _id:                    {type:Mordor.Schema.Types.ObjectId, required:true},
+  _id:                    {type:Mordor.Schema.Types.ObjectId, required:true, default:Mordor.Types.ObjectId()},
   telegram_id:            {type:Number, unique:true, required:true},
   telegram_first_name:    {type:String},
   telegram_last_name:     {type:String},

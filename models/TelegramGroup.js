@@ -24,7 +24,7 @@
 const Mordor = require('../Mordor');
 
 let TelegramGroupSchema = new Mordor.Schema({
-  _id:      {type:Mordor.Schema.Types.ObjectId, required:true},
+  _id:      {type:Mordor.Schema.Types.ObjectId, required:true, default:Mordor.Types.ObjectId()},
   group_id: {type:String, unique:true, required:true},
   title:    {type:String},
   type:     {type:String},
