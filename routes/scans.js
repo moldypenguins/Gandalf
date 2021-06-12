@@ -79,7 +79,7 @@ router.get('/parse', AXS.webScannerRequired, async (req, res, next) => {
     console.log('Sauron Forging The One Ring.');
     console.log(`Start Time: ${moment(start_time).format('YYYY-MM-DD H:mm:ss')}`);
 
-    var scanurl = url.parse(req.query.url, true);
+    let scanurl = url.parse(req.query.url, true);
     //console.log('SCAN_ID: ' + scanurl.query.scan_id);
     //console.log('SCAN_GRP: ' + scanurl.query.scan_grp);
 
