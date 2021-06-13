@@ -284,7 +284,7 @@ let process_tick = async (last_tick, start_time) => {
 
           //get cluster
           let cluster = await Cluster.findOne({x: clusters[c_temp]});
-          console.log(`CLUSTER: ` + util.inspect(cluster, true, null, true));
+          //console.log(`CLUSTER: ` + util.inspect(cluster, true, null, true));
 
           //aggregate galaxies
           let g = await GalaxyDump.aggregate([
@@ -338,9 +338,11 @@ let process_tick = async (last_tick, start_time) => {
 
         //loop through galaxies
         let galaxies = await GalaxyDump.find({});
-        console.log(`GALAXIES: ` + util.inspect(galaxies, true, null, true));
+        //console.log(`GALAXIES: ` + util.inspect(galaxies, true, null, true));
 
         for (let g_temp in galaxies) {
+          console.log(`g_temp: ` + util.inspect(g_temp, true, null, true));
+
           //create galaxy if not exists
           if (!await Galaxy.exists({x: g_temp.x, y: g_temp.y})) {
             await new Galaxy({_id:Mordor.Types.ObjectId(), x: g_temp.x, y: g_temp.y}).save();
