@@ -149,12 +149,19 @@ let process_tick = async (last_tick, start_time) => {
         let tick_time = moment.utc().set({minute: (Math.floor(moment().minutes() / (argv.havoc ? 15 : 60)) * (argv.havoc ? 15 : 60)), second: 0, millisecond: 0});
 
         //create new tick
-        let new_tick = await new Tick({
-          _id:Mordor.Types.ObjectId(),
-          tick: dump_tick,
-          timestamp: tick_time
-        });
-        console.log(`Creating Tick: pt${new_tick.tick} - ${new_tick.timestamp}`);
+        let new_tick;
+        if(dump_tick <= last_tick) {
+          new_tick = await Tick.findOne({tick: dump_tick});
+          console.log(`Updating Tick: pt${new_tick.tick} - ${new_tick.timestamp}`);
+        } else {
+          new_tick = await new Tick({
+            _id: Mordor.Types.ObjectId(),
+            tick: dump_tick,
+            timestamp: tick_time
+          });
+          console.log(`Creating Tick: pt${new_tick.tick} - ${new_tick.timestamp}`);
+        }
+
 
         //##############################################################################################################
         //Dumps
