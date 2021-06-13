@@ -283,6 +283,7 @@ let process_tick = async (last_tick, start_time) => {
           }
           //get cluster
           let cluster = await Cluster.findOne({x: c_temp});
+          console.log(`CLUSTER: ` + util.inspect(cluster, true, null, true));
 
           //aggregate galaxies
           let g = await GalaxyDump.aggregate([
@@ -337,7 +338,7 @@ let process_tick = async (last_tick, start_time) => {
         //loop through galaxies
         let galaxies = await GalaxyDump.find({});
         console.log(`GALAXIES: ` + util.inspect(galaxies, true, null, true));
-        
+
         for (let g_temp in galaxies) {
           //create galaxy if not exists
           if (!await Galaxy.exists({x: g_temp.x, y: g_temp.y})) {
