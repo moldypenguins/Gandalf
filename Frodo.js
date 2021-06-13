@@ -277,18 +277,13 @@ let process_tick = async (last_tick, start_time) => {
         //console.log(`CLUSTERS: ` + util.inspect(clusters, true, null, true));
 
         for (let c_temp in clusters) {
-
-          console.log(`c_temp: ` + util.inspect(clusters[c_temp], true, null, true));
-
           //create cluster if not exists
-          if (!await Cluster.exists({x: c_temp})) {
-            await new Cluster({_id:Mordor.Types.ObjectId(), x: c_temp}).save();
+          if (!await Cluster.exists({x: clusters[c_temp]})) {
+            await new Cluster({_id:Mordor.Types.ObjectId(), x: clusters[c_temp]}).save();
           }
 
-
-
           //get cluster
-          let cluster = await Cluster.findOne({x: c_temp});
+          let cluster = await Cluster.findOne({x: clusters[c_temp]});
           console.log(`CLUSTER: ` + util.inspect(cluster, true, null, true));
 
           //aggregate galaxies
