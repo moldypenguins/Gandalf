@@ -277,12 +277,15 @@ let process_tick = async (last_tick, start_time) => {
         //console.log(`CLUSTERS: ` + util.inspect(clusters, true, null, true));
 
         for (let c_temp in clusters) {
+
+          console.log(`c_temp: ` + util.inspect(clusters[c_temp], true, null, true));
+
           //create cluster if not exists
           if (!await Cluster.exists({x: c_temp})) {
             await new Cluster({_id:Mordor.Types.ObjectId(), x: c_temp}).save();
           }
 
-          console.log(`c_temp: ` + util.inspect(c_temp, true, null, true));
+
 
           //get cluster
           let cluster = await Cluster.findOne({x: c_temp});
