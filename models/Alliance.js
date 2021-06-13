@@ -36,7 +36,7 @@ let AllianceSchema = new Mordor.Schema({
   points_avg: {type:Number},
   alias:      {type:String, trim:true},
   active:     {type:Boolean},
-  age:        {type:Number},
+  age:        {type:Number, default:0},
   ratio:      {type:Number},
   /*
   size_rank: Number,
