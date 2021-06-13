@@ -108,6 +108,7 @@ let load_ships = async() => {
   let ship_id = 0;
   for (let json_ship of json["stats"]["ship"]) {
     let ship = new Ship(json_ship);
+    ship._id = Mordor.Types.ObjectId();
     ship.ship_id = ship_id++; // set primary key
     let saved = await ship.save();
     if (saved) {
