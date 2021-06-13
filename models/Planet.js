@@ -37,7 +37,7 @@ let PlanetSchema = new Mordor.Schema({
   value:      {type:Number},
   xp:         {type:Number},
   active:     {type:Boolean},
-  age:        {type:Number},
+  age:        {type:Number, default:0},
   ratio:      {type:Number},
   /*
   size_rank: Number,
