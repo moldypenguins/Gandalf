@@ -274,8 +274,10 @@ let process_tick = async (last_tick, start_time) => {
 
         //loop through distinct x in galaxies
         let clusters = await GalaxyDump.find({}, {x: 1}).distinct('x');
+
+        console.log(`CLUSTERS: ` + util.inspect(clusters, true, null, true));
+
         for (let c_temp in clusters) {
-          console.log(`CLUSTER: ` + util.inspect(c_temp, true, null, true));
           //create cluster if not exists
           if (!await Cluster.exists({x: c_temp.x})) {
             await new Cluster({_id:Mordor.Types.ObjectId(), x: c_temp.x}).save();
