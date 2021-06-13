@@ -281,6 +281,9 @@ let process_tick = async (last_tick, start_time) => {
           if (!await Cluster.exists({x: c_temp})) {
             await new Cluster({_id:Mordor.Types.ObjectId(), x: c_temp}).save();
           }
+
+          console.log(`c_temp: ` + util.inspect(c_temp, true, null, true));
+
           //get cluster
           let cluster = await Cluster.findOne({x: c_temp});
           console.log(`CLUSTER: ` + util.inspect(cluster, true, null, true));
