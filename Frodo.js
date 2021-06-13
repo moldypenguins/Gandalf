@@ -341,14 +341,12 @@ let process_tick = async (last_tick, start_time) => {
         //console.log(`GALAXIES: ` + util.inspect(galaxies, true, null, true));
 
         for (let g_temp in galaxies) {
-          console.log(`g_temp: ` + util.inspect(g_temp, true, null, true));
-
           //create galaxy if not exists
-          if (!await Galaxy.exists({x: g_temp.x, y: g_temp.y})) {
-            await new Galaxy({_id:Mordor.Types.ObjectId(), x: g_temp.x, y: g_temp.y}).save();
+          if (!await Galaxy.exists({x: galaxies[g_temp].x, y: galaxies[g_temp].y})) {
+            await new Galaxy({_id:Mordor.Types.ObjectId(), x: galaxies[g_temp].x, y: galaxies[g_temp].y}).save();
           }
           //get galaxy
-          let galaxy = await Galaxy.findOne({x: g_temp.x, y: g_temp.y});
+          let galaxy = await Galaxy.findOne({x: galaxies[g_temp].x, y: galaxies[g_temp].y});
 
           //aggregate planets
           let p = await PlanetDump.aggregate([
@@ -363,14 +361,14 @@ let process_tick = async (last_tick, start_time) => {
 
           //update galaxy
           await Galaxy.updateOne({x: galaxy.x, y: galaxy.y}, {
-            size: g_temp.size,
-            score: g_temp.score,
-            value: g_temp.value,
-            xp: g_temp.xp,
+            size: galaxies[g_temp].size,
+            score: galaxies[g_temp].score,
+            value: galaxies[g_temp].value,
+            xp: galaxies[g_temp].xp,
             active: true,
             age: galaxy.age + 1 ?? 1,
             planets: p[0].members,
-            ratio: g_temp.value !== 0 ? 10000.0 * g_temp.size / g_temp.value : 0,
+            ratio: galaxies[g_temp].value !== 0 ? 10000.0 * galaxies[g_temp].size / galaxies[g_temp].value : 0,
 
             //TODO: add remaining fields
 
@@ -388,41 +386,43 @@ let process_tick = async (last_tick, start_time) => {
 
         //loop through planets
         let planets = await PlanetDump.find({});
+        //console.log(`PLANETS: ` + util.inspect(planets, true, null, true));
+
         for (let p_temp in planets) {
           //create planet if not exists
-          if (!await Planet.exists({planet_id: p_temp.planet_id})) {
-            await new Planet({_id:Mordor.Types.ObjectId(), planet_id: p_temp.planet_id, x: p_temp.x, y: p_temp.y, z: p_temp.z, planetname: p_temp.planetname, rulername: p_temp.rulername, race: p_temp.race}).save();
+          if (!await Planet.exists({planet_id: planets[p_temp].planet_id})) {
+            await new Planet({_id:Mordor.Types.ObjectId(), planet_id: planets[p_temp].planet_id, x: planets[p_temp].x, y: planets[p_temp].y, z: planets[p_temp].z, planetname: planets[p_temp].planetname, rulername: planets[p_temp].rulername, race: planets[p_temp].race}).save();
             //track new planet
-            await new PlanetTrack({_id:Mordor.Types.ObjectId(), planet_id: p_temp.planet_id, new_x: p_temp.x, new_y: p_temp.y, new_z: p_temp.z}).save();
+            await new PlanetTrack({_id:Mordor.Types.ObjectId(), planet_id: planets[p_temp].planet_id, new_x: planets[p_temp].x, new_y: planets[p_temp].y, new_z: planets[p_temp].z}).save();
           }
           //get planet
-          let planet = await Planet.findOne({planet_id: p_temp.planet_id});
+          let planet = await Planet.findOne({planet_id: planets[p_temp].planet_id});
 
           //track renamed planet
-          if (planet.rulername !== p_temp.rulername || planet.planetname !== p_temp.planetname) {
-            await new PlanetTrack({_id:Mordor.Types.ObjectId(), planet_id: planet.planet_id, old_x: planet.x, old_y: planet.y, old_z: planet.z, new_x: p_temp.x, new_y: p_temp.y, new_z: p_temp.z}).save();
+          if (planet.rulername !== planets[p_temp].rulername || planet.planetname !== planets[p_temp].planetname) {
+            await new PlanetTrack({_id:Mordor.Types.ObjectId(), planet_id: planet.planet_id, old_x: planet.x, old_y: planet.y, old_z: planet.z, new_x: planets[p_temp].x, new_y: planets[p_temp].y, new_z: planets[p_temp].z}).save();
           }
 
           //track exiled planet
-          if (planet.x !== p_temp.x || planet.y !== p_temp.y || planet.z !== p_temp.z) {
-            await new PlanetTrack({_id:Mordor.Types.ObjectId(), planet_id: planet.planet_id, old_x: planet.x, old_y: planet.y, old_z: planet.z, new_x: p_temp.x, new_y: p_temp.y, new_z: p_temp.z}).save();
+          if (planet.x !== planets[p_temp].x || planet.y !== planets[p_temp].y || planet.z !== planets[p_temp].z) {
+            await new PlanetTrack({_id:Mordor.Types.ObjectId(), planet_id: planet.planet_id, old_x: planet.x, old_y: planet.y, old_z: planet.z, new_x: planets[p_temp].x, new_y: planets[p_temp].y, new_z: planets[p_temp].z}).save();
           }
 
           //update planet
           await Planet.updateOne({planet_id: planet.planet_id}, {
-            x: p_temp.x,
-            y: p_temp.y,
-            z: p_temp.z,
-            planetname: p_temp.planetname,
-            rulername: p_temp.rulername,
-            race: p_temp.race,
-            size: p_temp.size,
-            score: p_temp.score,
-            value: p_temp.value,
-            xp: p_temp.xp,
+            x: planets[p_temp].x,
+            y: planets[p_temp].y,
+            z: planets[p_temp].z,
+            planetname: planets[p_temp].planetname,
+            rulername: planets[p_temp].rulername,
+            race: planets[p_temp].race,
+            size: planets[p_temp].size,
+            score: planets[p_temp].score,
+            value: planets[p_temp].value,
+            xp: planets[p_temp].xp,
             active: true,
             age: planet.age + 1 ?? 1,
-            ratio: p_temp.value !== 0 ? 10000.0 * p_temp.size / p_temp.value : 0,
+            ratio: planets[p_temp].value !== 0 ? 10000.0 * planets[p_temp].size / planets[p_temp].value : 0,
 
             //TODO: add remaining fields
 
@@ -462,21 +462,21 @@ let process_tick = async (last_tick, start_time) => {
         let alliances = await AllianceDump.find({});
         for (let a_temp in alliances) {
           //create alliance if not exists
-          if (!await Alliance.exists({name: a_temp.name.trim()})) {
-            await new Alliance({_id:Mordor.Types.ObjectId(), name: a_temp.name.trim()}).save();
+          if (!await Alliance.exists({name: alliances[a_temp].name.trim()})) {
+            await new Alliance({_id:Mordor.Types.ObjectId(), name: alliances[a_temp].name.trim()}).save();
           }
           //get alliance
-          let alliance = await Alliance.findOne({name: a_temp.name.trim()});
+          let alliance = await Alliance.findOne({name: alliances[a_temp].name.trim()});
 
           //update alliance
           await Alliance.updateOne({name: alliance.name}, {
-            size: a_temp.size,
-            score: a_temp.score,
-            members: a_temp.members,
-            points: a_temp.points,
+            size: alliances[a_temp].size,
+            score: alliances[a_temp].score,
+            members: alliances[a_temp].members,
+            points: alliances[a_temp].points,
             active: true,
             age: alliance.age + 1 ?? 1,
-            ratio: a_temp.score !== 0 ? 10000.0 * a_temp.size / a_temp.score : 0,
+            ratio: alliances[a_temp].score !== 0 ? 10000.0 * alliances[a_temp].size / alliances[a_temp].score : 0,
 
             //TODO: add remaining fields
 
