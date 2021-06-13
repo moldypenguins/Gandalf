@@ -274,16 +274,15 @@ let process_tick = async (last_tick, start_time) => {
 
         //loop through distinct x in galaxies
         let clusters = await GalaxyDump.find({}, {x: 1}).distinct('x');
-
-        console.log(`CLUSTERS: ` + util.inspect(clusters, true, null, true));
+        //console.log(`CLUSTERS: ` + util.inspect(clusters, true, null, true));
 
         for (let c_temp in clusters) {
           //create cluster if not exists
-          if (!await Cluster.exists({x: clusters[c_temp].x})) {
-            await new Cluster({_id:Mordor.Types.ObjectId(), x: clusters[c_temp].x}).save();
+          if (!await Cluster.exists({x: c_temp})) {
+            await new Cluster({_id:Mordor.Types.ObjectId(), x: c_temp}).save();
           }
           //get cluster
-          let cluster = await Cluster.findOne({x: clusters[c_temp].x});
+          let cluster = await Cluster.findOne({x: c_temp});
 
           //aggregate galaxies
           let g = await GalaxyDump.aggregate([
@@ -337,13 +336,15 @@ let process_tick = async (last_tick, start_time) => {
 
         //loop through galaxies
         let galaxies = await GalaxyDump.find({});
+        console.log(`GALAXIES: ` + util.inspect(galaxies, true, null, true));
+        
         for (let g_temp in galaxies) {
           //create galaxy if not exists
-          if (!await Galaxy.exists({x: galaxies[g_temp].x, y: galaxies[g_temp].y})) {
-            await new Galaxy({_id:Mordor.Types.ObjectId(), x: galaxies[g_temp].x, y: galaxies[g_temp].y}).save();
+          if (!await Galaxy.exists({x: g_temp.x, y: g_temp.y})) {
+            await new Galaxy({_id:Mordor.Types.ObjectId(), x: g_temp.x, y: g_temp.y}).save();
           }
           //get galaxy
-          let galaxy = await Galaxy.findOne({x: galaxies[g_temp].x, y: galaxies[g_temp].y});
+          let galaxy = await Galaxy.findOne({x: g_temp.x, y: g_temp.y});
 
           //aggregate planets
           let p = await PlanetDump.aggregate([
@@ -358,14 +359,14 @@ let process_tick = async (last_tick, start_time) => {
 
           //update galaxy
           await Galaxy.updateOne({x: galaxy.x, y: galaxy.y}, {
-            size: galaxies[g_temp].size,
-            score: galaxies[g_temp].score,
-            value: galaxies[g_temp].value,
-            xp: galaxies[g_temp].xp,
+            size: g_temp.size,
+            score: g_temp.score,
+            value: g_temp.value,
+            xp: g_temp.xp,
             active: true,
             age: galaxy.age + 1 ?? 1,
             planets: p[0].members,
-            ratio: galaxies[g_temp].value !== 0 ? 10000.0 * g_temp.size / g_temp.value : 0,
+            ratio: g_temp.value !== 0 ? 10000.0 * g_temp.size / g_temp.value : 0,
 
             //TODO: add remaining fields
 
