@@ -359,7 +359,7 @@ let process_tick = async (last_tick, start_time) => {
             }
           ]);
 
-          console.log(`GALAXY: ` + util.inspect(galaxy, true, null, true));
+          //console.log(`GALAXY: ` + util.inspect(galaxy, true, null, true));
 
           //update galaxy
           await Galaxy.updateOne({x: galaxy.x, y: galaxy.y}, {
