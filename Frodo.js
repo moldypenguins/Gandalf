@@ -342,8 +342,8 @@ let process_tick = async (last_tick, start_time) => {
 
         for (let g_temp in galaxies) {
           //create galaxy if not exists
-          if (!await Galaxy.exists({x: galaxies[g_temp].x, y: galaxies[g_temp].y})) {
-            await new Galaxy({_id:Mordor.Types.ObjectId(), x: galaxies[g_temp].x, y: galaxies[g_temp].y}).save();
+          if (!await Galaxy.exists({x:galaxies[g_temp].x, y:galaxies[g_temp].y})) {
+            await new Galaxy({_id:Mordor.Types.ObjectId(), x:galaxies[g_temp].x, y:galaxies[g_temp].y, name:galaxies[g_temp].name}).save();
           }
           //get galaxy
           let galaxy = await Galaxy.findOne({x: galaxies[g_temp].x, y: galaxies[g_temp].y});
@@ -361,6 +361,7 @@ let process_tick = async (last_tick, start_time) => {
 
           //update galaxy
           await Galaxy.updateOne({x: galaxy.x, y: galaxy.y}, {
+            name: galaxies[g_temp].name,
             size: galaxies[g_temp].size,
             score: galaxies[g_temp].score,
             value: galaxies[g_temp].value,
