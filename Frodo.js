@@ -150,6 +150,7 @@ let process_tick = async (last_tick, start_time) => {
 
         //create new tick
         let new_tick = await new Tick({
+          _id:Mordor.Types.ObjectId(),
           tick: dump_tick,
           timestamp: tick_time
         });
@@ -174,6 +175,7 @@ let process_tick = async (last_tick, start_time) => {
               let p = planet_dump[i].split('\t');
               //console.log(util.inspect(p, false, null, true));
               await new PlanetDump({
+                _id:Mordor.Types.ObjectId(),
                 planet_id: p[0],
                 x: Number(p[1]),
                 y: Number(p[2]),
@@ -200,6 +202,7 @@ let process_tick = async (last_tick, start_time) => {
               let g = galaxy_dump[i].split('\t');
               //console.log(util.inspect(g, false, null, true));
               await new GalaxyDump({
+                _id:Mordor.Types.ObjectId(),
                 x: Number(g[0]),
                 y: Number(g[1]),
                 name: g[2].replace(/"/g, ''),
@@ -222,6 +225,7 @@ let process_tick = async (last_tick, start_time) => {
               let a = alliance_dump[i].split('\t');
               //console.log(util.inspect(a, false, null, true));
               await new AllianceDump({
+                _id:Mordor.Types.ObjectId(),
                 score_rank: Number(a[0]),
                 name: a[1].replace(/"/g, ''),
                 size: Number(a[2] !== undefined ? a[2] : 0),
@@ -247,7 +251,7 @@ let process_tick = async (last_tick, start_time) => {
               let a = user_dump[i].split('\t');
               //console.log(util.inspect(a, false, null, true));
               await new UserDump({
-
+                _id:Mordor.Types.ObjectId(),
               //TODO: add user dump handling
 
               }).save();
@@ -273,7 +277,7 @@ let process_tick = async (last_tick, start_time) => {
         for (let c_temp in clusters) {
           //create cluster if not exists
           if (!await Cluster.exists({x: c_temp.x})) {
-            await new Cluster({x: c_temp.x}).save();
+            await new Cluster({_id:Mordor.Types.ObjectId(), x: c_temp.x}).save();
           }
           //get cluster
           let cluster = await Cluster.findOne({x: c_temp.x});
@@ -333,7 +337,7 @@ let process_tick = async (last_tick, start_time) => {
         for (let g_temp in galaxies) {
           //create galaxy if not exists
           if (!await Galaxy.exists({x: g_temp.x, y: g_temp.y})) {
-            await new Galaxy({x: g_temp.x, y: g_temp.y}).save();
+            await new Galaxy({_id:Mordor.Types.ObjectId(), x: g_temp.x, y: g_temp.y}).save();
           }
           //get galaxy
           let galaxy = await Galaxy.findOne({x: g_temp.x, y: g_temp.y});
@@ -379,21 +383,21 @@ let process_tick = async (last_tick, start_time) => {
         for (let p_temp in planets) {
           //create planet if not exists
           if (!await Planet.exists({planet_id: p_temp.planet_id})) {
-            await new Planet({planet_id: p_temp.planet_id, x: p_temp.x, y: p_temp.y, z: p_temp.z, planetname: p_temp.planetname, rulername: p_temp.rulername, race: p_temp.race}).save();
+            await new Planet({_id:Mordor.Types.ObjectId(), planet_id: p_temp.planet_id, x: p_temp.x, y: p_temp.y, z: p_temp.z, planetname: p_temp.planetname, rulername: p_temp.rulername, race: p_temp.race}).save();
             //track new planet
-            await new PlanetTrack({planet_id: p_temp.planet_id, new_x: p_temp.x, new_y: p_temp.y, new_z: p_temp.z}).save();
+            await new PlanetTrack({_id:Mordor.Types.ObjectId(), planet_id: p_temp.planet_id, new_x: p_temp.x, new_y: p_temp.y, new_z: p_temp.z}).save();
           }
           //get planet
           let planet = await Planet.findOne({planet_id: p_temp.planet_id});
 
           //track renamed planet
           if (planet.rulername !== p_temp.rulername || planet.planetname !== p_temp.planetname) {
-            await new PlanetTrack({planet_id: planet.planet_id, old_x: planet.x, old_y: planet.y, old_z: planet.z, new_x: p_temp.x, new_y: p_temp.y, new_z: p_temp.z}).save();
+            await new PlanetTrack({_id:Mordor.Types.ObjectId(), planet_id: planet.planet_id, old_x: planet.x, old_y: planet.y, old_z: planet.z, new_x: p_temp.x, new_y: p_temp.y, new_z: p_temp.z}).save();
           }
 
           //track exiled planet
           if (planet.x !== p_temp.x || planet.y !== p_temp.y || planet.z !== p_temp.z) {
-            await new PlanetTrack({planet_id: planet.planet_id, old_x: planet.x, old_y: planet.y, old_z: planet.z, new_x: p_temp.x, new_y: p_temp.y, new_z: p_temp.z}).save();
+            await new PlanetTrack({_id:Mordor.Types.ObjectId(), planet_id: planet.planet_id, old_x: planet.x, old_y: planet.y, old_z: planet.z, new_x: p_temp.x, new_y: p_temp.y, new_z: p_temp.z}).save();
           }
 
           //update planet
@@ -420,7 +424,7 @@ let process_tick = async (last_tick, start_time) => {
         //track deleted planets
         let deleted_planets = await Planet.find({active: false});
         for (let dp in deleted_planets) {
-          await new PlanetTrack({planet_id: dp.planet_id, old_x: dp.x, old_y: dp.y, old_z: dp.z}).save();
+          await new PlanetTrack({_id:Mordor.Types.ObjectId(), planet_id: dp.planet_id, old_x: dp.x, old_y: dp.y, old_z: dp.z}).save();
           await Planet.deleteOne({planet_id: dp.planet_id});
         }
 
@@ -451,7 +455,7 @@ let process_tick = async (last_tick, start_time) => {
         for (let a_temp in alliances) {
           //create alliance if not exists
           if (!await Alliance.exists({name: a_temp.name.trim()})) {
-            await new Alliance({name: a_temp.name.trim()}).save();
+            await new Alliance({_id:Mordor.Types.ObjectId(), name: a_temp.name.trim()}).save();
           }
           //get alliance
           let alliance = await Alliance.findOne({name: a_temp.name.trim()});
@@ -543,6 +547,7 @@ let process_tick = async (last_tick, start_time) => {
         clusters = await Cluster.find({active: true});
         for(let c in clusters) {
           await new ClusterHistory({
+            _id:Mordor.Types.ObjectId(),
             tick: this_tick._id,
             x:c.x,
             size:c.size,
@@ -559,6 +564,7 @@ let process_tick = async (last_tick, start_time) => {
         galaxies = await Galaxy.find({active: true});
         for(let g in galaxies) {
           await new GalaxyHistory({
+            _id:Mordor.Types.ObjectId(),
             tick: this_tick._id,
             x:g.x,
             y:g.y,
@@ -576,6 +582,7 @@ let process_tick = async (last_tick, start_time) => {
         planets = await Planet.find({active: true});
         for(let p in planets) {
           await new PlanetHistory({
+            _id:Mordor.Types.ObjectId(),
             tick: this_tick._id,
             x:p.x,
             y:p.y,
@@ -595,6 +602,7 @@ let process_tick = async (last_tick, start_time) => {
         alliances = await Alliance.find({active: true});
         for(let a in alliances) {
           await new AllianceHistory({
+            _id:Mordor.Types.ObjectId(),
             tick: this_tick._id,
             name:a.name,
             size:a.size,
@@ -634,6 +642,7 @@ let process_tick = async (last_tick, start_time) => {
         //console.log(util.inspect('TEXT: ' + txt, false, null, true));
         if (CFG.bot.tick_alert || atts.length > 0) {
           await new BotMessage({
+            _id:Mordor.Types.ObjectId(),
             message_id: crypto.randomBytes(8).toString("hex"),
             group_id: CFG.groups.private,
             message: txt,
