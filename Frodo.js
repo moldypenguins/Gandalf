@@ -548,7 +548,7 @@ let process_tick = async (last_tick, start_time) => {
         let this_tick = await new_tick.save();
         //##############################################################################################################
         console.log(`Updated tick stats in: ${(new Date()) - start_time}ms\n`);
-        console.log(`pt${this_tick.id} saved to Ticks collection.`);
+        console.log(`pt${this_tick.tick} saved to Ticks collection.`);
 
 
 
@@ -645,8 +645,8 @@ let process_tick = async (last_tick, start_time) => {
         //##############################################################################################################
         //Send Message
         //##############################################################################################################
-        let txt = `pt<b>${this_tick.id}</b> ${moment(this_tick.timestamp).utc().format('H:mm')} <i>GMT</i>`;
-        let atts = await Attack.find({releasetick: this_tick.id});
+        let txt = `pt<b>${this_tick.tick}</b> ${moment(this_tick.timestamp).utc().format('H:mm')} <i>GMT</i>`;
+        let atts = await Attack.find({releasetick: this_tick.tick});
         for (let m = 0; m < atts.length; m++) {
           txt += `\n<b>Attack ${atts[m].id}</b> released. <a href="${CFG.web.uri}/att/${atts[m].hash}">Claim Targets</a>`;
         }
