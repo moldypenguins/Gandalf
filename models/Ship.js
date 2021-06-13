@@ -24,7 +24,7 @@
 const Mordor = require('../Mordor');
 
 let ShipSchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId},
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
   ship_id:    {type:Number, unique:true, required:true},
   name:       {type:String, index:true, required:true},
   race:       {type:String, required:true},
