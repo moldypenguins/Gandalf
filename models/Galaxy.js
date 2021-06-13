@@ -24,7 +24,7 @@
 const Mordor = require('../Mordor');
 
 let GalaxySchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId, required:true, default:Mordor.Types.ObjectId()},
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
   x:          {type:Number, required:true},
   y:          {type:Number, required:true},
   name:       {type:String, required:true, trim:true},

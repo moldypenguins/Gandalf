@@ -24,7 +24,7 @@
 const Mordor = require('../Mordor');
 
 let IntelSchema = new Mordor.Schema({
-  _id:         {type:Mordor.Schema.Types.ObjectId, required:true, default:Mordor.Types.ObjectId()},
+  _id:         {type:Mordor.Schema.Types.ObjectId, required:true},
   planet_id:   {type:Mordor.Schema.Types.ObjectId, reference:'Planet'},
   alliance_id: {type:Mordor.Schema.Types.ObjectId, reference:'Alliance'},
   nick:        {type:String},

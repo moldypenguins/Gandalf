@@ -24,7 +24,7 @@
 const Mordor = require('../Mordor');
 
 let AllianceHistorySchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId, required:true, default:Mordor.Types.ObjectId()},
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
   tick:       {type:Mordor.Schema.Types.ObjectId, required:true, reference:'Tick'},
   name:       {type:String, required:true, trim:true},
   size:       {type:Number},

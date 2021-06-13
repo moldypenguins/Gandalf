@@ -25,7 +25,7 @@ const Mordor = require('../Mordor');
 const AutoIncrement = require('mongoose-sequence')(Mordor);
 
 let AttackSchema = new Mordor.Schema({
-  _id:          {type:Mordor.Schema.Types.ObjectId, required:true, default:Mordor.Types.ObjectId()},
+  _id:          {type:Mordor.Schema.Types.ObjectId, required:true},
   number:       {type:Number, unique:true, required:true},
   hash:         {type:String},
   landtick:     {type:Number},

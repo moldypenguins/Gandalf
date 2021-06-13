@@ -24,7 +24,7 @@
 const Mordor = require('../Mordor');
 
 let InactiveSchema = new Mordor.Schema({
-  _id:                    {type:Mordor.Schema.Types.ObjectId, required:true, default:Mordor.Types.ObjectId()},
+  _id:                    {type:Mordor.Schema.Types.ObjectId, required:true},
   telegram_id:            {type:Number, unique:true, required:true},
   telegram_first_name:    {type:String},
   telegram_last_name:     {type:String},
