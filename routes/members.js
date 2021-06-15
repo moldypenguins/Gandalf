@@ -34,7 +34,6 @@ const GalMate = require('../models/GalMate');
 const createError = require('http-errors');
 const express = require('express');
 let router = express.Router();
-const access = require('../access');
 const moment = require('moment');
 const util = require('util');
 const client = require('twilio')(CFG.twilio.sid, CFG.twilio.secret);
