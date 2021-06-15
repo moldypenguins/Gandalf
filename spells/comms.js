@@ -63,25 +63,6 @@ let Comms_call = (args, ctx) => {
 };
 
 
-//TODO: move to members spell
-let Comms_contact_usage = he.encode('!contact <user>');
-let Comms_contact_desc = 'Displays a users TG username';
-let Comms_contact = (args, ctx) => {
-    return new Promise(function (resolve, reject) {
-        if (!Array.isArray(args) || args.length < 1) { reject(Comms_contact_usage); }
-        Members.find().then((members) => {
-            var username = args[0].toLowerCase();
-            var member = members.find(m => (m.panick != null && m.panick.toLowerCase().startsWith(username)) || (m.first_name != null && m.first_name.toLowerCase().startsWith(username)));
-            if (member == null) {
-                reject(`Sorry I don't know who ${args[0]} is`);
-                return;
-            }
-            resolve(`Contact: <a href="tg://user?id=${member.id}">${member.panick != null ? member.panick : member.username}</a>`);
-        });
-    });
-};
-
 module.exports = {
     "call": { usage: Comms_call_usage, description: Comms_call_desc, access: AXS.botMemberRequired, cast: Comms_call, include_ctx: true },
-    "contact": { usage: Comms_contact_usage, description: Comms_contact_desc, access: AXS.botMemberRequired, cast: Comms_contact, include_ctx: true }
 };

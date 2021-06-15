@@ -144,47 +144,7 @@ var Calcs_tick = (args) => {
   });
 };
 
-var Calcs_lookup_usage = he.encode('!lookup <nick|coords|default=user>');
-var Calcs_lookup_desc = 'Lookup a current users stats (score/value/xp/size)';
-var Calcs_lookup = (args, current_member) => {
-  return new Promise(async (resolve, reject) => {
-    console.log(args);
-    console.log(current_member);
-    let planet = null;
-    if (args == null || args.length === 0) {
-      console.log(`Looking up via TG user who made command: ${current_member.panick}`);
-      planet = await Planets.findOne({id:current_member.planet_id});
-      console.log(planet);
-      if (!planet) {
-        reject(formatInvalidResponse(username));
-        return;
-      }
-    } else if (args.length > 0) {
-      console.log(`Looking up via argument: ${args[0]}`);
-      // try username lookup
-      planet = await memberToPlanetLookup(args[0]);
-      console.log(`username planet lookup ${planet}`);
-      if (!planet) {
-        // try coord lookup
-        console.log(`trying coord lookup: ${args[0]}`);
-        planet = await Functions.coordsToPlanetLookup(args[0]);
-      }
-    }
 
-    if (!planet) {
-      reject(formatInvalidResponse(args[0]));
-      return;
-    }
-
-    // now that we have a planet do the stats
-    let score_rank = await getRank(planet.score, 'score', planet.id);
-    let value_rank = await getRank(planet.value, 'value', planet.id);
-    let xp_rank = await getRank(planet.xp, 'xp', planet.id);
-    let size_rank = await getRank(planet.size, 'size', planet.id);
-    let coords_name = `${planet.x}:${planet.y}:${planet.z} (${planet.race}) '${planet.rulername}' of '${planet.planetname}'`
-    resolve(`<b>${coords_name}</b> ${score_rank} ${value_rank} ${xp_rank} ${size_rank}`);
-  });
-};
 
 var Calcs_refsvsfcs_usage = he.encode('!refsvsfcs <roids> <metal ref #> <crystal ref #> <eonium ref #> <FC #> <gov> <mining population> <cores>');
 var Calcs_refsvsfcs_desc = 'Calculates if you should be building refs or fcs based on inputs';
@@ -265,83 +225,6 @@ var Calcs_refsvsfcs = (args) =>{
   })
 };
 
-function getRank(value, type, planet_id) {
-  var sort = {}
-  sort[type] = 'desc';
-  return new Promise(async (resolve) => {
-    let rank = await getRankBySort(sort, planet_id);
-    let title = type == 'xp' ? type.toUpperCase() : type[0].toUpperCase() + type.substring(1);
-    resolve(`<b>${title}</b>: ${value} (${rank})`);
-  });
-}
-
-function getRankBySort(sort, planet_id) {
-  return new Promise(async (resolve) => {
-    var planet_not_null = (p) => p && p.score && p.value && p.xp && p.size && p.id;
-    var ranked = await Planets.find(planet_not_null).sort(sort);
-
-    // this will be super inefficient until we get the rank supplied by Frodo during planet loading
-    for (var rank = 1; rank < ranked.length; rank++) {
-      var planet = ranked[rank - 1];
-      if (planet.id == planet_id) {
-        resolve(rank);
-      }
-    }
-  });
-}
-
-function formatInvalidResponse(str) {
-  return `Sorry I don't know who ${str} or they don't have coords set.`;
-}
-
-function coordsToPlanetLookup(coordstr) {
-  return new Promise(async (resolve, reject) => {
-    // try coord lookup
-    var coords = Functions.parseCoords(coordstr);
-    if (!coords) {
-      reject(formatInvalidResponse(coordstr));
-      return;
-    }
-
-    Planets.find().then((planets) => {
-      console.log(`planet length ${planets.length}`);
-      var planet = planets.find(p => p && p.x && p.y && p.z && p.x == coords.x && p.y == coords.y && p.z == coords.z);
-      console.log(planet);
-      if (!planet) {
-        reject(null);
-        return;
-      }
-      resolve(planet);
-    });
-  });
-}
-
-function memberToPlanetLookup(username) {
-  return new Promise(async (resolve, reject) => {
-    Members.find().then((members) => {
-      console.log(members.length);
-      var member = members.find(m => (m.username != null && m.username.toLowerCase().startsWith(username)) || (m.panick != null && m.panick.toLowerCase().startsWith(username)) || (m.first_name != null && m.first_name.toLowerCase().startsWith(username)));
-      //var member = members.find(m => m.username == "blanq4");
-      if (member) {
-        console.log(member);
-        Planets.find().then((planets) => {
-          if (planets) {
-            planet = planets.find(p => p.id == member.planet_id);
-            if (!planet || !planet.x || !planet.y || !planet.z) {
-              resolve(null);
-            } else {
-              console.log(planet);
-              resolve(planet);
-            }
-          }
-        });
-      } else {
-        console.log(`couldn't find member planet`);
-        resolve(null);
-      }
-    });
-  });
-}
 
 function coresIncValue(cores) {
   if (cores == 0) {
@@ -361,7 +244,6 @@ module.exports = {
   "exile": { usage: Calcs_exile_usage, description: Calcs_exile_desc, cast: Calcs_exile },
   "roidcost": { usage: Calcs_roidcost_usage, description: Calcs_roidcost_desc, cast: Calcs_roidcost },
   "tick": { usage: Calcs_tick_usage, description: Calcs_tick_desc, cast: Calcs_tick },
-  "lookup": { usage: Calcs_lookup_usage, description: Calcs_lookup_desc, cast: Calcs_lookup, include_member: true },
   "bonus": { usage: Calcs_bonus_usage, description: Calcs_bonus_desc, cast: Calcs_bonus },
   "bonusmining": { usage: Calcs_bonusmining_usage, description: Calcs_bonusmining_desc, cast: Calcs_bonusmining },
   "refsvsfcs": { usage: Calcs_refsvsfcs_usage, description: Calcs_refsvsfcs_desc, cast: Calcs_refsvsfcs },
