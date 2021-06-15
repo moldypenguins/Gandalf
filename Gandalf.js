@@ -263,7 +263,7 @@ Mordor.connection.once("open", () => {
       for(let msg in msgs) {
 
         //console.log('Message: ' + util.inspect(msgs[msg], false, null, true));
-        let res = await BotMessage.updateOne({id:msgs[msg].id}, {sent:true});
+        let res = await BotMessage.updateOne({_id:msgs[msg]._id}, {sent:true});
         if(res) {
           //console.log('Message: ' + util.inspect(res, false, null, true));
           try {
