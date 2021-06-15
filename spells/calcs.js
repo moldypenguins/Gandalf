@@ -52,7 +52,7 @@ var Calcs_bonusmining = (args) => {
     if (Array.isArray(args) && args.length > 0) {
       tick = numeral(args[0]).value();
     }
-    bonus = 1.0 + (args.length == 2 ? (numeral(args[1]).value() / 100) : 0);
+    let bonus = 1.0 + (args.length == 2 ? (numeral(args[1]).value() / 100) : 0);
     Tick.findOne().sort({ id: -1 }).then((last_tick) => {
       tick = tick == null ? last_tick.id : tick;
 
@@ -97,7 +97,7 @@ var Calcs_roidcost = (args) => {
     if (!Array.isArray(args) || args.length < 1) reject(Calcs_roidcost_usage);
     let roids = numeral(args[0]).value();
     let cost = numeral(args[1]).value();
-    let bonus = args.length == 3 ? numeral(args[2]).value() : numeral(0).value();
+    let bonus = args.length === 3 ? numeral(args[2]).value() : numeral(0).value();
     let mining = PA.roids.mining;
     mining = mining * ((bonus + 100) / 100);
     console.log(`roids: ${roids}`);
@@ -107,13 +107,11 @@ var Calcs_roidcost = (args) => {
     let ticks = (cost * PA.numbers.ship_value) / (roids * mining);
     console.log(`ticks: ${ticks}`);
     let reply = `Capping <b>${roids}</b> roids at <b>${cost}</b> value with <b>${bonus}</b> bonus will repay in <b>${ticks}</b> ticks (${Math.trunc(ticks / 24)} days)`;
-    let goverments = PA.governments;
-    for (var gov in goverments) {
-      let goverment = goverments[gov];
-      bonus = goverment.prodcost;
-      if (bonus == 0) continue;
-      ticks_b = ticks * (1 + bonus);
-      reply += ` <b>${goverment.name}</b>: <b>${ticks_b}</b> ticks (${Math.trunc(ticks_b/24)} days)`
+    for (let gov in PA.governments) {
+      bonus = PA.governments[gov].prodcost;
+      if (bonus === 0) continue;
+      let ticks_b = ticks * (1 + bonus);
+      reply += ` <b>${PA.governments[gov].name}</b>: <b>${ticks_b}</b> ticks (${Math.trunc(ticks_b/24)} days)`
     }
 
     resolve(reply);
@@ -125,20 +123,20 @@ var Calcs_tick_desc = 'Calculate when a tick will occur.';
 var Calcs_tick = (args) => {
   return new Promise(async (resolve, reject) => {
     let now = await Tick.findOne().sort({ id: -1 });
-    var tick = numeral(args.length > 0 ? args[0] : now.id).value()
+    let tick = numeral(args.length > 0 ? args[0] : now.tick).value()
     if (tick == null) reject(`tick provided must be a number`);
-    var timezone = args.length > 1 ? args[1] : "GMT";
+    let timezone = args.length > 1 ? args[1] : "GMT";
     if (moment.tz.zone(timezone) == null) reject(`invalid timezone: ${timezone}`);
 
     let dt = moment(now.timestamp);
-    let diff = tick - now.id;
-    if (tick == now.id) diff = 0; //why this line?
+    let diff = tick - now.tick;
+    if (tick === now.tick) diff = 0; //why this line?
     dt = dt.add(diff, 'hours');
     dt = dt.tz(timezone);
 
-    var reply;
+    let reply;
     if (diff == 0) {
-      reply = `It is currently tick ${now.id} (${dt.format('ddd')} ${dt.format('D')}/${dt.format('MM')} ${dt.format('HH')}:${dt.format('mm')} <i>${timezone.toUpperCase()}</i>)`;
+      reply = `It is currently tick ${now.tick} (${dt.format('ddd')} ${dt.format('D')}/${dt.format('MM')} ${dt.format('HH')}:${dt.format('mm')} <i>${timezone.toUpperCase()}</i>)`;
     } else {
       reply = `Tick <b>${tick}</b> is expected to happen in ${diff} ticks (${dt.format('ddd')} ${dt.format('D')}/${dt.format('MM')} ${dt.format('HH')}:00 <i>${timezone.toUpperCase()}</i>)`;
     }
@@ -217,8 +215,8 @@ var Calcs_refsvsfcs = (args) =>{
     console.log(`gov bonus: ${gov_bonus}`);
 
     let now = await Tick.findOne().sort({ id: -1 }); 
-    console.log(`now.id ${now.id}`); 
-    let ticksLeft = 1157 - now.id;//numeral(PA.tick.end).value() - numeral(now.id).value();
+    console.log(`now.tick ${now.tick}`);
+    let ticksLeft = 1157 - now.tick;//numeral(PA.tick.end).value() - numeral(now.tick).value();
     console.log(`ticks left ${ticksLeft}`);
 
     // Assume they will build the cheapest refinery next. This is always the most efficient thing to do for maxing income anyway.
