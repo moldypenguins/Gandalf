@@ -122,7 +122,7 @@ var Calcs_tick_usage = he.encode('!tick <tick=NOW> <timezone=GMT>');
 var Calcs_tick_desc = 'Calculate when a tick will occur.';
 var Calcs_tick = (args) => {
   return new Promise(async (resolve, reject) => {
-    let now = await Tick.findOne().sort({ id: -1 });
+    let now = await Tick.findOne().sort({ tick: -1 });
     let tick = numeral(args.length > 0 ? args[0] : now.tick).value()
     if (tick == null) reject(`tick provided must be a number`);
     let timezone = args.length > 1 ? args[1] : "GMT";
