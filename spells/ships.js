@@ -246,15 +246,15 @@ var Ships_launch = (args) => {
 
       let lt = numeral(_lt).value();
       if (lt == null) reject(`LT must be a valid number.`);
-      Tick.findOne().sort({id: -1}).then((tick) => {
+      Tick.findOne().sort({id: -1}).then((now) => {
         if (tick == null) reject(`Somethings wrong with getting ticks.`);
         let current_time = moment.utc();
         let launch_tick = lt - eta;
-        let launch_time = current_time.add(launch_tick - tick.id, 'hours');
+        let launch_time = current_time.add(launch_tick - now.tick, 'hours');
         let prelaunch_tick = lt - eta + 1;
-        let prelaunch_mod = launch_tick - tick.id;
-        let reply = `eta ${eta} landing pt ${lt} (currently ${tick.id}) must launch at pt ${launch_tick} (${launch_time.format('MM-dd H:55')}), or with prelaunch tick ${prelaunch_tick} (currently +${prelaunch_mod})`;        
-	resolve(reply)
+        let prelaunch_mod = launch_tick - now.tick;
+        let reply = `eta ${eta} landing pt ${lt} (currently ${now.tick}) must launch at pt ${launch_tick} (${launch_time.format('MM-dd H:55')}), or with prelaunch tick ${prelaunch_tick} (currently +${prelaunch_mod})`;
+        resolve(reply)
       })
     });
   });

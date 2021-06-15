@@ -135,7 +135,7 @@ var Calcs_tick = (args) => {
     dt = dt.tz(timezone);
 
     let reply;
-    if (diff == 0) {
+    if (diff === 0) {
       reply = `It is currently tick ${now.tick} (${dt.format('ddd')} ${dt.format('D')}/${dt.format('MM')} ${dt.format('HH')}:${dt.format('mm')} <i>${timezone.toUpperCase()}</i>)`;
     } else {
       reply = `Tick <b>${tick}</b> is expected to happen in ${diff} ticks (${dt.format('ddd')} ${dt.format('D')}/${dt.format('MM')} ${dt.format('HH')}:00 <i>${timezone.toUpperCase()}</i>)`;
@@ -151,7 +151,7 @@ var Calcs_lookup = (args, current_member) => {
     console.log(args);
     console.log(current_member);
     let planet = null;
-    if (args == null || args.length == 0) {
+    if (args == null || args.length === 0) {
       console.log(`Looking up via TG user who made command: ${current_member.panick}`);
       planet = await Planets.findOne({id:current_member.planet_id});
       console.log(planet);
