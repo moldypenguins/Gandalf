@@ -31,8 +31,8 @@ const Tick = require('./models/Tick');
 const GalMate = require('./models/GalMate');
 const BotMessage = require('./models/BotMessage');
 const Scan = require('./models/Scan');
-const Chat = require('./models/TelegramGroup');
-const User = require('./models/TelegramUser');
+const TelegramGroup = require('./models/TelegramGroup');
+const TelegramUser = require('./models/TelegramUser');
 
 const moment = require('moment');
 const util = require('util');
@@ -71,12 +71,12 @@ Mordor.connection.once("open", () => {
   bot.use(async(ctx, next) => {
     //console.log('CHAT: id=' + ctx.message.chat.id + ' title=' + ctx.message.chat.title);
     //parse channel
-    if(ctx?.message?.chat !== undefined && ctx.message.chat.type !== 'private' && !await Chat.exists({id:ctx.message.chat.id.toString()})) {
-      await new Chat({id: ctx.message.chat.id.toString(), title: ctx.message.chat.title, type: ctx.message.chat.type}).save();
+    if(ctx?.message?.chat !== undefined && ctx.message.chat.type !== 'private' && !await TelegramGroup.exists({group_id:ctx.message.chat.id.toString()})) {
+      await new TelegramGroup({group_id: ctx.message.chat.id.toString(), title: ctx.message.chat.title, type: ctx.message.chat.type}).save();
     }
     //parse user
-    if(ctx?.message?.from !== undefined && !ctx.message.from.is_bot && !await User.exists({id:ctx.message.from.id})) {
-      await new User({id: ctx.message.from.id, first_name: ctx.message.from.first_name, last_name: ctx.message.from.last_name, username: ctx.message.from.username, language_code: ctx.message.from.language_code}).save();
+    if(ctx?.message?.from !== undefined && !ctx.message.from.is_bot && !await TelegramUser.exists({telegram_id:ctx.message.from.id})) {
+      await new TelegramUser({telegram_id: ctx.message.from.id, first_name: ctx.message.from.first_name, last_name: ctx.message.from.last_name, username: ctx.message.from.username, language_code: ctx.message.from.language_code}).save();
     }
     next();
   });
