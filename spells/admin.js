@@ -138,8 +138,8 @@ let Admin_addgalmate = (args, ctx) => {
 
 
 module.exports = {
-  "leavechat": { usage: Admin_leavegroup_usage, description: Admin_leavegroup_desc, access: AXS.botAdminRequired, cast: Admin_leavegroup, include_ctx: true, private_reply: true },
-  "listchats": { usage: Admin_listgroups_usage, description: Admin_listgroups_desc, access: AXS.botAdminRequired, cast: Admin_listgroups, private_reply: true },
+  "leavegroup": { usage: Admin_leavegroup_usage, description: Admin_leavegroup_desc, access: AXS.botAdminRequired, cast: Admin_leavegroup, include_ctx: true, private_reply: true },
+  "listgroups": { usage: Admin_listgroups_usage, description: Admin_listgroups_desc, access: AXS.botAdminRequired, cast: Admin_listgroups, private_reply: true },
   //"tickalert": { usage: Admin_tickalert_usage, description: Admin_tickalert_desc, access: AXS.botAdminRequired, cast: Admin_tickalert, private_reply: true },
   "addgalmate": { usage: Admin_addgalmate_usage, description: Admin_addgalmate_desc, access: AXS.botAdminRequired, cast: Admin_addgalmate, include_ctx: true },
 };
