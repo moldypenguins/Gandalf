@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  **/
-const config = require('./config');
+const CFG = require('./Config');
 const util = require('util');
-const client = require('twilio')(config.twilio.sid, config.twilio.secret);
+const client = require('twilio')(CFG.twilio.sid, CFG.twilio.secret);
 
 let callMember = (member) => {
   return new Promise((resolve, reject) => {
@@ -27,8 +27,8 @@ let callMember = (member) => {
     } else {
       let options = {
         to: '+' + member.phone,
-        from: config.twilio.number,
-        url: config.twilio.url,
+        from: CFG.twilio.number,
+        url: CFG.twilio.url,
       };
       console.log('Calling ' + member.panick);
       client.calls.create(options).then((call) => {
@@ -37,7 +37,7 @@ let callMember = (member) => {
           //TODO: insert into BotCalls - save call.id and message.id
           setTimeout(async () => {
               await call.update({status:'completed'});
-          }, config.twilio.ring_timeout * 1000);
+          }, CFG.twilio.ring_timeout * 1000);
           resolve();
       });
     }

@@ -62,6 +62,8 @@ let Comms_call = (args, ctx) => {
     });
 };
 
+
+//TODO: move to members spell
 let Comms_contact_usage = he.encode('!contact <user>');
 let Comms_contact_desc = 'Displays a users TG username';
 let Comms_contact = (args, ctx) => {
