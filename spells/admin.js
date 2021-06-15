@@ -34,39 +34,45 @@ const he = require('he');
 const util = require('util');
 
 
-let Admin_leavechat_usage = he.encode('!leavechat [chat id]');
-let Admin_leavechat_desc = 'Leaves a group, supergroup, or channel.';
-let Admin_leavechat = (args, ctx) => {
+let Admin_leavegroup_usage = he.encode('!leavegroup [group id]');
+let Admin_leavegroup_desc = 'Leaves a group, supergroup, or channel.';
+let Admin_leavegroup = (args, ctx) => {
   return new Promise(async (resolve, reject) => {
-    let chatid;
+    let groupid;
     if (args == null || args.length === 0) {
-      chatid = ctx.chat.id;
+      groupid = ctx.chat.id;
     } else if (args.length > 0) {
-      chatid = args[0];
+      groupid = args[0];
     }
     //console.log('CHATID:' + util.inspect(chatid, false, null, true));
-    if(!chatid) {reject(Admin_leavechat_usage);}
-    ctx.telegram.leaveChat(chatid).then(async(result) => {
+    if(!groupid) {reject(Admin_leavegroup_usage);}
+    ctx.telegram.leaveChat(groupid).then(async(result) => {
       //console.log('RESULT:' + util.inspect(result, false, null, true));
-      await TelegramGroup.deleteOne({id: chatid});
-      resolve(`left the group ${chatid}`);
+      await TelegramGroup.deleteOne({id: groupid});
+      resolve(`left the group ${groupid}`);
     }).catch((error) => {
-      reject(`unable to leave the group ${chatid}.\n${error}`)
+      reject(`unable to leave the group ${groupid}.\n${error}`)
     });
     
   });
 }
 
-let Admin_listchats_usage = he.encode('!listchats');
-let Admin_listchats_desc = 'Lists chats bot is a member of.';
-let Admin_listchats = (args) => {
+let Admin_listgroups_usage = he.encode('!listgroups');
+let Admin_listgroups_desc = 'Lists groups bot is a member of.';
+let Admin_listgroups = (args) => {
   return new Promise(async (resolve, reject) => {
-    let chats = await TelegramGroup.find();
-    console.log('CHATS:' + util.inspect(chats, false, null, true));
-    for(let i = 0; i<chats.length; i++) {
-      console.log(chats[i].name);
+    let groups = await TelegramGroup.find();
+    console.log('CHATS:' + util.inspect(groups, false, null, true));
+    for (let i = 0; i < groups.length; i++) {
+      console.log(groups[i].name);
     }
-    resolve(chats.map(function(chat) { return `id: ${chat.id}, type: ${chat.type}, title: ${chat.title}`; }).join('\n'));
+    if(groups.length <= 0) {
+      resolve('No groups.');
+    } else {
+      resolve(groups.map(function (chat) {
+        return `id: ${chat.id}, type: ${chat.type}, title: ${chat.title}`;
+      }).join('\n'));
+    }
   });
 }
 
@@ -132,8 +138,8 @@ let Admin_addgalmate = (args, ctx) => {
 
 
 module.exports = {
-  "leavechat": { usage: Admin_leavechat_usage, description: Admin_leavechat_desc, access: AXS.botAdminRequired, cast: Admin_leavechat, include_ctx: true, private_reply: true },
-  "listchats": { usage: Admin_listchats_usage, description: Admin_listchats_desc, access: AXS.botAdminRequired, cast: Admin_listchats, private_reply: true },
-  "tickalert": { usage: Admin_tickalert_usage, description: Admin_tickalert_desc, access: AXS.botAdminRequired, cast: Admin_tickalert, private_reply: true },
+  "leavechat": { usage: Admin_leavegroup_usage, description: Admin_leavegroup_desc, access: AXS.botAdminRequired, cast: Admin_leavegroup, include_ctx: true, private_reply: true },
+  "listchats": { usage: Admin_listgroups_usage, description: Admin_listgroups_desc, access: AXS.botAdminRequired, cast: Admin_listgroups, private_reply: true },
+  //"tickalert": { usage: Admin_tickalert_usage, description: Admin_tickalert_desc, access: AXS.botAdminRequired, cast: Admin_tickalert, private_reply: true },
   "addgalmate": { usage: Admin_addgalmate_usage, description: Admin_addgalmate_desc, access: AXS.botAdminRequired, cast: Admin_addgalmate, include_ctx: true },
 };
