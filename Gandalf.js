@@ -43,7 +43,7 @@ const getStream = bent('string');
 
 let spells = {};
 Object.assign(spells, require(`./spells/admin`));
-config.bot.modules.forEach(function(name) {
+CFG.bot.modules.forEach(function(name) {
   let spell = require(`./spells/${name}`);
   Object.assign(spells, spell);
 });
@@ -56,7 +56,7 @@ const limitConfig = {
   window: 3000,
   limit: 1,
   keyGenerator: (ctx) => {
-    if(ctx.message && ctx.message.text && (ctx.message.text.startsWith(config.bot.private_cmd) || ctx.message.text.startsWith(config.bot.public_cmd))) {
+    if(ctx.message && ctx.message.text && (ctx.message.text.startsWith(CFG.bot.private_cmd) || ctx.message.text.startsWith(CFG.bot.public_cmd))) {
       return ctx.from.id
     }
   },
@@ -65,7 +65,7 @@ const limitConfig = {
 
 
 Mordor.connection.once("open", () => {
-  let bot = new Telegraf(config.bot.token, { telegram: { agent: null, webhookReply: false }, username: config.bot.username });
+  let bot = new Telegraf(CFG.bot.token, { telegram: { agent: null, webhookReply: false }, username: CFG.bot.username });
   bot.use(rateLimit(limitConfig));
 
   bot.use(async(ctx, next) => {
@@ -123,7 +123,7 @@ Mordor.connection.once("open", () => {
     }
   }
 
-  bot.start((ctx) => ctx.replyWithHTML(`Sign up: <a href="${config.web.uri}">${config.alliance.name}</a>`));
+  bot.start((ctx) => ctx.replyWithHTML(`Sign up: <a href="${CFG.web.uri}">${CFG.alliance.name}</a>`));
   
   bot.catch((err, ctx) => {
     console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)
@@ -143,8 +143,8 @@ Mordor.connection.once("open", () => {
   }
   
   function links(ctx) {
-    ctx.replyWithHTML(`<a href="${config.web.uri}">${config.alliance.name}</a>\n` + 
-      `<a href="https://status.${config.web.uri.substring(config.web.uri.indexOf('//') + 2)}">Web/Bot Status</a>\n` + 
+    ctx.replyWithHTML(`<a href="${CFG.web.uri}">${CFG.alliance.name}</a>\n` + 
+      `<a href="https://status.${CFG.web.uri.substring(CFG.web.uri.indexOf('//') + 2)}">Web/Bot Status</a>\n` + 
       `<a href="https://game.planetarion.com/">Planetarion</a>`);
   }
   
@@ -189,7 +189,7 @@ Mordor.connection.once("open", () => {
     }
     
     //parse commands
-    if(ctx.message && ctx.message.text && (ctx.message.text.startsWith(config.bot.private_cmd) || ctx.message.text.startsWith(config.bot.public_cmd))) {
+    if(ctx.message && ctx.message.text && (ctx.message.text.startsWith(CFG.bot.private_cmd) || ctx.message.text.startsWith(CFG.bot.public_cmd))) {
       let mem = await Member.findOne({id: ctx.from.id});
       let gm8 = await GalMate.findOne({id: ctx.from.id});
       
@@ -222,13 +222,13 @@ Mordor.connection.once("open", () => {
             promise.then((message) => {
               console.log(`Reply: ${message.toString()}`);
               if(typeof(spells[cmd].no_reply) == 'undefined') {
-                  if ((typeof (spells[cmd].private_reply) == 'undefined' || !spells[cmd].private_reply) && ctx.message.text.startsWith(config.bot.public_cmd)) {
+                  if ((typeof (spells[cmd].private_reply) == 'undefined' || !spells[cmd].private_reply) && ctx.message.text.startsWith(CFG.bot.public_cmd)) {
                       if (spells[cmd].send_as_video) {
                           ctx.telegram.sendVideo(ctx.chat.id, message);
                       } else {
                           ctx.replyWithHTML(message.toString(), {reply_to_message_id:ctx.message.message_id});
                       }
-                  } else if (spells[cmd].private_reply || ctx.message.text.startsWith(config.bot.private_cmd)) {
+                  } else if (spells[cmd].private_reply || ctx.message.text.startsWith(CFG.bot.private_cmd)) {
                       if (spells[cmd].send_as_video) {
                           ctx.telegram.sendVideo(ctx.message.from.id, message);
                       } else {
@@ -270,8 +270,8 @@ Mordor.connection.once("open", () => {
             if(msgs[msg].group_id !== 0) {
               await bot.telegram.sendMessage(`${msgs[msg].group_id}`, `${msgs[msg].message}`, {parse_mode: 'HTML'});
             }
-            if(msgs[msg].group_id !== config.groups.admin) {
-              await bot.telegram.sendMessage(`${config.groups.admin}`, `${msgs[msg].message}`, { parse_mode: 'HTML' });
+            if(msgs[msg].group_id !== CFG.groups.admin) {
+              await bot.telegram.sendMessage(`${CFG.groups.admin}`, `${msgs[msg].message}`, { parse_mode: 'HTML' });
             }
           } catch(err) {
             console.log('Error: ' + util.inspect(err, false, null, true));
@@ -279,7 +279,7 @@ Mordor.connection.once("open", () => {
         }
       }
     }
-  }, config.bot.message_interval * 1000);
+  }, CFG.bot.message_interval * 1000);
 
 });
 
