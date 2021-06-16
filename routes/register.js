@@ -39,10 +39,10 @@ const util = require('util');
  */
 router.get("/", async (req, res, next) => {
   if(typeof(req.session.visitor) !== 'undefined') {
-    console.log('REGISTER VISITOR: ' + req.session.visitor);
+    console.log('SESSION VISITOR: ' + util.inspect(req.session.visitor, false, null, true));
     res.render('register', {});
   } else if(typeof(req.session.applicant) !== 'undefined') {
-    console.log('REGISTER APPLICANT: ' + req.session.applicant);
+    console.log('SESSION APPLICANT: ' + util.inspect(req.session.visitor, false, null, true));
     res.render('register', {});
   } else {
     next(400);
@@ -53,8 +53,7 @@ router.get("/", async (req, res, next) => {
  * POST /reg
  */
 router.post("/", async (req, res, next) => {
-  console.log('SESSION VISITOR: ' + util.inspect(req.session.visitor, false, null, true));
-  console.log('POST BODY APPLICANT: ' + util.inspect(req.body, false, null, true));
+  console.log('POST VISITOR: ' + util.inspect(req.session.visitor, false, null, true));
   let applcnt = await new Applicant({
     _id: Mordor.Types.ObjectId(),
     telegram_id: req.session.visitor.id,
@@ -65,8 +64,9 @@ router.post("/", async (req, res, next) => {
   });
   await applcnt.save();
   console.log(applcnt.telegram_id + " saved to Applicants collection.");
+  req.session.visitor = undefined;
   req.session.applicant = applcnt;
-  res.render('register', { applicant: applcnt });
+  res.render('register', {});
 });
 
 
