@@ -41,7 +41,7 @@ router.get("/", async (req, res, next) => {
   if(typeof(req.session.visitor) !== 'undefined') {
     console.log('REGISTER VISITOR: ' + req.session.visitor);
     res.render('register', {});
-  } else if(typeof(req.session.applicant) === 'undefined') {
+  } else if(typeof(req.session.applicant) !== 'undefined') {
     console.log('REGISTER APPLICANT: ' + req.session.applicant);
     res.render('register', {});
   } else {
