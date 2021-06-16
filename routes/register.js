@@ -25,7 +25,6 @@ const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
 
-const Mordor = require('../Mordor');
 const Member = require('../models/Member');
 const Applicant = require('../models/Applicant');
 
@@ -56,7 +55,7 @@ router.post("/", async (req, res, next) => {
   console.log('SESSION VISITOR: ' + util.inspect(req.session.visitor, false, null, true));
   console.log('POST BODY APPLICANT: ' + util.inspect(req.body, false, null, true));
   let applcnt = await new Applicant({
-    _id: Mordor.types.ObjectId(),
+    _id: Mordor.Types.ObjectId(),
     telegram_id: req.session.visitor.id,
     telegram_username: req.session.visitor.username,
     telegram_first_name: req.session.visitor.first_name,
