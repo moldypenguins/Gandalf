@@ -25,6 +25,7 @@ const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
 
+const Mordor = require('../Mordor');
 const Member = require('../models/Member');
 const Applicant = require('../models/Applicant');
 
@@ -32,32 +33,40 @@ const express = require('express');
 let router = express.Router();
 const util = require('util');
 
-router.get("/", (req, res, next) => {
-  if (typeof(req.session.applicant) == 'undefined' && typeof(req.session.visitor) == 'undefined') {
-    next(400); 
-  } else { 
-    //console.log('REGISTER VISITOR: ' + req.session.visitor);
-    res.render('register', { });
+
+/**
+ * GET /reg
+ */
+router.get("/", async (req, res, next) => {
+  if(typeof(req.session.visitor) !== 'undefined') {
+    console.log('REGISTER VISITOR: ' + req.session.visitor);
+    res.render('register', {});
+  } else if(typeof(req.session.applicant) === 'undefined') {
+    console.log('REGISTER APPLICANT: ' + req.session.applicant);
+    res.render('register', {});
+  } else {
+    next(400);
   }
 });
 
-
-router.post("/", (req, res, next) => {
+/**
+ * POST /reg
+ */
+router.post("/", async (req, res, next) => {
   console.log('SESSION VISITOR: ' + util.inspect(req.session.visitor, false, null, true));
   console.log('POST BODY APPLICANT: ' + util.inspect(req.body, false, null, true));
-  let applcnt = new Applicant({ 
-    id: req.session.visitor.id, 
-    username: req.session.visitor.username,
-    first_name: req.session.visitor.first_name, 
-    last_name: req.session.visitor.last_name, 
-    photo_url: req.session.visitor.photo_url != undefined ? req.session.visitor.photo_url : '/images/member.jpg'
+  let applcnt = await new Applicant({
+    _id: Mordor.types.ObjectId(),
+    telegram_id: req.session.visitor.id,
+    telegram_username: req.session.visitor.username,
+    telegram_first_name: req.session.visitor.first_name,
+    telegram_last_name: req.session.visitor.last_name,
+    telegram_photo_url: req.session.visitor.photo_url !== undefined ? req.session.visitor.photo_url : '/images/member.jpg'
   });
-  applcnt.save(function (err, saved) {
-    if (err) return console.error(err);
-    console.log(saved.id + " saved to Applicants collection.");
-    req.session.applicant = saved;
-    res.render('register', { applicant: saved });
-  });
+  await applcnt.save();
+  console.log(applcnt.telegram_id + " saved to Applicants collection.");
+  req.session.applicant = applcnt;
+  res.render('register', { applicant: applcnt });
 });
 
 

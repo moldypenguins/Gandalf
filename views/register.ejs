@@ -13,12 +13,12 @@
             <div class="col-12">
                 <div class="content">
                     <h2>Register</h2>
-                    <% if(visitor != undefined) { %>
+                    <% if(visitor !== undefined) { %>
                     <form method='POST' action='/reg'>
                         <% } %>
                         <div class="justify-content-center">
-                            <% if(visitor != undefined) { %>
-                                <img src="<%= visitor.photo_url %>" width="30" height="30" class="profile"/>
+                            <% if(visitor !== undefined) { %>
+                                <img src="<%= visitor.photo_url %>" alt="profile" width="30" height="30" class="profile"/>
                                 <% if(visitor.username) { %>
                                     <a href="https://t.me/<%= visitor.username %>"><%= visitor.username %></a>
                                 <% } else if(visitor.last_name) { %>
@@ -26,8 +26,8 @@
                                 <% } else { %>
                                     <%= visitor.first_name %>
                                 <% } %>
-                            <% } else if(applicant != undefined) { %>
-                                <img src="<%= applicant.photo_url %>" width="30" height="30" class="profile"/>
+                            <% } else if(applicant !== undefined) { %>
+                                <img src="<%= applicant.photo_url %>" alt="profile" width="30" height="30" class="profile"/>
                                 <% if(applicant.username) { %>
                                     <a href="https://t.me/<%= applicant.username %>"><%= applicant.username %></a>
                                 <% } else if(applicant.last_name) { %>
@@ -38,13 +38,13 @@
                             <% } %>
                         </div>
                         <div class="justify-content-center">
-                            <% if(visitor != undefined) { %>
+                            <% if(visitor !== undefined) { %>
                                 <button class="tg-btn" type="submit">Register</button>
-                            <% } else if(applicant.rejected) { %>
+                            <% } else if(applicant !== undefined && applicant.rejected) { %>
                                 Your application has been rejected.
                             <% } %>
                         </div>
-                        <% if(visitor != undefined) { %>
+                        <% if(visitor !== undefined) { %>
                     </form>
                     <% } %>
                 </div>

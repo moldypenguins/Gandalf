@@ -15,9 +15,9 @@
                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStrategy" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %>
+                                    <% if(member.site_navigation === 'icons' || member.site_navigation === 'iconstext') { %>
                                     <i class="fas fa-chess" aria-hidden="true"></i>
-                                    <% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>
+                                    <% } if(member.site_navigation === 'iconstext' || member.site_navigation === 'text') { %>
                                         Strategy
                                     <% } %>
                                     </a>
@@ -35,13 +35,13 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/mem"><% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %><i class="fas fa-user-friends" aria-hidden="true"></i><% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>Members<% } %></a>
+                                    <a class="nav-link" href="/mem"><% if(member.site_navigation === 'icons' || member.site_navigation === 'iconstext') { %><i class="fas fa-user-friends" aria-hidden="true"></i><% } if(member.site_navigation === 'iconstext' || member.site_navigation === 'text') { %>Members<% } %></a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUniverse" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %>
+                                    <% if(member.site_navigation === 'icons' || member.site_navigation === 'iconstext') { %>
                                         <i class="fas fa-star-and-crescent" aria-hidden="true"></i>
-                                    <% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>
+                                    <% } if(member.site_navigation === 'iconstext' || member.site_navigation === 'text') { %>
                                         Universe
                                     <% } %>
                                     </a>
@@ -54,13 +54,13 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/scans"><% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %><i class="fas fa-satellite-dish" aria-hidden="true"></i><% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>Scans<% } %></a>
+                                    <a class="nav-link" href="/scans"><% if(member.site_navigation === 'icons' || member.site_navigation === 'iconstext') { %><i class="fas fa-satellite-dish" aria-hidden="true"></i><% } if(member.site_navigation === 'iconstext' || member.site_navigation === 'text') { %>Scans<% } %></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/att"><% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %><i class="fas fa-rocket" aria-hidden="true"></i><% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>Attacks<% } %></a>
+                                    <a class="nav-link" href="/att"><% if(member.site_navigation === 'icons' || member.site_navigation === 'iconstext') { %><i class="fas fa-rocket" aria-hidden="true"></i><% } if(member.site_navigation === 'iconstext' || member.site_navigation === 'text') { %>Attacks<% } %></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/logout"><% if(member.site_navigation == 'icons' || member.site_navigation == 'iconstext') { %><i class="fas fa-sign-out-alt" aria-hidden="true"></i><% } if(member.site_navigation == 'iconstext' || member.site_navigation == 'text') { %>Logout<% } %></a>
+                                    <a class="nav-link" href="/logout"><% if(member.site_navigation === 'icons' || member.site_navigation === 'iconstext') { %><i class="fas fa-sign-out-alt" aria-hidden="true"></i><% } if(member.site_navigation === 'iconstext' || member.site_navigation === 'text') { %>Logout<% } %></a>
                                 </li>
                             </ul>
                         </div>
