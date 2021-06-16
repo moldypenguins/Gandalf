@@ -24,6 +24,7 @@
 const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
+const Mordor = require('../Mordor');
 
 const Member = require('../models/Member');
 const Applicant = require('../models/Applicant');
