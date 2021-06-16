@@ -65,7 +65,9 @@ router.post("/", async (req, res, next) => {
   await applcnt.save();
   console.log(applcnt.telegram_id + " saved to Applicants collection.");
   req.session.visitor = undefined;
+  res.locals.visitor = undefined;
   req.session.applicant = applcnt;
+  res.locals.applicant = applcnt;
   res.render('register', {});
 });
 
