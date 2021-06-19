@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name authorize.js
- * @version 2021/06/07
+ * @version 2021/06/19
  * @summary Express Route
  **/
 'use strict';
@@ -53,14 +53,14 @@ router.get("/", async (req, res, next) => {
   if(checkSignature(req.query)) {
     //successful login
     var params = JSON.parse(JSON.stringify(req.query));
-    var member = await Member.findOne({id: params.id});
+    var member = await Member.findOne({telegram_id: params.id});
     if(member) {
       console.log('Is Member');
-      await Member.updateOne({id: params.id}, {username: params.username, first_name: params.first_name, last_name: params.last_name, photo_url: params.photo_url});
+      await Member.updateOne({telegram_id: params.id}, {username: params.username, first_name: params.first_name, last_name: params.last_name, photo_url: params.photo_url});
       req.session.member = member;
       res.redirect("/");
     } else {
-      var applicant = await Applicant.findOne({id: params.id});
+      var applicant = await Applicant.findOne({telegram_id: params.id});
       if(applicant) {
         console.log('Is Applicant');
         req.session.applicant = applicant;
