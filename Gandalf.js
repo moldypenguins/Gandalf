@@ -95,7 +95,7 @@ Mordor.connection.once("open", () => {
             if(inact != null) {
               mentions.push(inact);
             } else {
-              let usr = await User.findOne({username: text.replace('@', '')});
+              let usr = await TelegramUser.findOne({username: text.replace('@', '')});
               if(usr != null) {
                 mentions.push(usr);
               }
@@ -111,7 +111,7 @@ Mordor.connection.once("open", () => {
             if(inact != null) {
               mentions.push(inact);
             } else {
-              let usr = await User.findOne({first_name: message.entities[i].user.first_name, last_name: message.entities[i].user.last_name});
+              let usr = await TelegramUser.findOne({first_name: message.entities[i].user.first_name, last_name: message.entities[i].user.last_name});
               if(usr != null) {
                 mentions.push(usr);
               }
