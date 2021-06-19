@@ -79,7 +79,7 @@ const util = require('util');
 let loginRequired = async (req, res, next) => {
   //console.log('LOCALS: ' + util.inspect(res.locals, false, null, true));
   //console.log('SESSION: ' + util.inspect(req.session, false, null, true));
-  if (typeof (res.locals.member) == 'undefined') {
+  if (typeof(req.session.member) == 'undefined') {
     //req var to forward
     //console.log('REQ URL: ' + req.originalUrl);
     if (req.originalUrl !== '/') {
@@ -89,7 +89,7 @@ let loginRequired = async (req, res, next) => {
     }
     return res.status(401).render('unauthorized', {site_title: CFG.alliance.name, page_title: CFG.alliance.name});
   } else {
-    let updated = await Member.updateOne({id: res.locals.member.id}, {last_access: Date.now()});
+    req.session.member = await Member.updateOne({telegram_id: res.locals.member.telegram_id}, {last_access: Date.now()});
     if (req.session.req_url !== undefined) {
       let req_url = req.session.req_url;
       req.session.req_url = undefined;
