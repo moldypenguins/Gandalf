@@ -40,7 +40,7 @@ const createError = require("http-errors");
  * GET /profile
  */
 router.get('/', async (req, res, next) => {
-  //console.log('PLANET: ' + util.inspect(req.session.member, false, null, true));
+  console.log('MEMBER: ' + util.inspect(req.session.member, false, null, true));
   let mem = req.session.member;
   if(mem) {
     mem.planet = await Planet.findOne({id: req.session.member.planet_id});
@@ -59,7 +59,7 @@ router.post('/', async (req, res, next) => {
     if(req.body.planet_x !== undefined && req.body.planet_y !== undefined && req.body.planet_z !== undefined) {
       plnt = await Planet.findOne({x: req.body.planet_x, y: req.body.planet_y, z: req.body.planet_z});
     }
-    console.log('PLANET: ' + util.inspect(plnt, false, null, true));
+    //console.log('PLANET: ' + util.inspect(plnt, false, null, true));
     let upd = await Member.updateOne({id: req.session.member.id}, {
       site_theme: req.body.site_theme,
       site_navigation: req.body.site_navigation,
