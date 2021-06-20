@@ -27,7 +27,7 @@ const Mordor = require('../Mordor');
 let MemberSchema = new Mordor.Schema({
   _id:                    {type:Mordor.Schema.Types.ObjectId, required:true},
   telegram_id:            {type:Number, unique:true, required:true},
-  telegram_first_name:    {type:String},
+  telegram_first_name:    {type:String, required:true},
   telegram_last_name:     {type:String},
   telegram_username:      {type:String},
   telegram_photo_url:     {type:String, default:CFG.web.uri + '/' + CFG.web.default_profile_pic},
