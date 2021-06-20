@@ -90,7 +90,7 @@ let loginRequired = async (req, res, next) => {
     return res.status(401).render('unauthorized', {site_title: CFG.alliance.name, page_title: CFG.alliance.name});
   } else {
     let updated = await Member.updateOne({telegram_id: res.locals.member.telegram_id}, {last_access: Date.now()});
-    console.log('MEMBER: ' + util.inspect(updated, false, null, true));
+    //console.log('MEMBER: ' + util.inspect(updated, false, null, true));
     if (req.session.req_url !== undefined) {
       let req_url = req.session.req_url;
       req.session.req_url = undefined;
