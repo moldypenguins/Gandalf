@@ -24,7 +24,7 @@
 const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
-const Functions = require('../Functions');
+const FNCS = require('../Functions');
 
 const Scan = require('../models/Scan');
 const ScanRequest = require('../models/ScanRequest');
@@ -48,7 +48,7 @@ var Scans_req = (args, current_member) => {
     var coords = args[0];
     var scan_types = args[1];
     Tick.findOne().sort({ id: -1 }).then(async (last_tick) => {
-      Functions.coordsToPlanetLookup(coords).then(async (planet) => {
+      FNCS.coordsToPlanetLookup(coords).then(async (planet) => {
         if (planet) {
           let reply = `Scan request for <b>${planet.x}:${planet.y}:${planet.z}</b> has been submitted for:\n`;
           for (let type of scan_types) {
@@ -99,7 +99,7 @@ var Scans_findscan = (args) => {
     if (!Array.isArray(args) || args.length < 2) { reject(Scans_scan_usage); }
     let coords = args[0];
     let scan_types = args[1];
-    let planet = await Functions.coordsToPlanetLookup(coords);
+    let planet = await FNCS.coordsToPlanetLookup(coords);
     if (!planet) {
       reject(`Planet not found!`);
       return;

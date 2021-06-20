@@ -24,7 +24,7 @@
 
 const CFG = require('./Config');
 const PA = require('./PA');
-const Functions = require('./Functions');
+const FNCS = require('./Functions');
 const Mordor = require('./Mordor');
 
 const Tick = require('./models/Tick');

@@ -96,12 +96,38 @@ function formatInvalidResponse(str) {
 
 
 
+
+
+
+
+
+
+
+
+
+
 let isValidDate = function(d) {
 	//return Object.prototype.toString.call(d) === '[object Date]' && isFinite(d);
 	return d instanceof Date && !isNaN(d);
-}
+};
+
+
+let getTelegramMentionName = function(m) {
+	let result = m.first_name;
+	if(m.username) {
+		result = m.username;
+	} else if(m.last_name) {
+		result = `${m.first_name} ${m.last_name}`;
+	}
+	return result;
+};
+
+
+
+
 
 
 module.exports = {
-	"isValidDate": isValidDate
+	"isValidDate": isValidDate,
+	"getTelegramMentionName": getTelegramMentionName,
 };

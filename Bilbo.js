@@ -24,7 +24,7 @@
 
 const CFG = require('./Config');
 const PA = require('./PA');
-const Functions = require('./Functions');
+const FNCS = require('./Functions');
 const Mordor = require('./Mordor');
 
 const Ship = require('./models/Ship');
@@ -124,7 +124,7 @@ let load_ticks = async() => {
     //TODO: fix argv.start
     let start = new Date(argv.start);
     console.log(`START: ${start}`);
-    await new Tick({_id:Mordor.Types.ObjectId(), tick:0, timestamp:Functions.isValidDate(start) ? start : null}).save();
+    await new Tick({_id:Mordor.Types.ObjectId(), tick:0, timestamp:FNCS.isValidDate(start) ? start : null}).save();
     console.log("Added first tick!");
   } else {
     console.log("First tick already exists!");

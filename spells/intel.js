@@ -24,7 +24,7 @@
 const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
-const Functions = require('../Functions');
+const FNCS = require('../Functions');
 
 const Intel = require('../models/Intel');
 const Planet = require('../models/Planet');
@@ -38,8 +38,8 @@ const INTEL_ACTION_DISPLAY = 0, INTEL_ACTION_SET = 1
 
 function parseArgs(args) {
 // coords will always be 0
-let coords = Functions.parseCoords(args[0]); // may be gal 1.2.* or planet 1.2.3
-let type = Functions.coordType(coords);
+let coords = FNCS.parseCoords(args[0]); // may be gal 1.2.* or planet 1.2.3
+let type = FNCS.coordType(coords);
 let rval = {coords: coords, type: type};
 
 // display

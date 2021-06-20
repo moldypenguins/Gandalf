@@ -24,7 +24,7 @@
 const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
-const Functions = require('../Functions');
+const FNCS = require('../Functions');
 
 const Tick = require('../models/Tick');
 const Members = require('../models/Member');
