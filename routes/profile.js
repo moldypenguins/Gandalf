@@ -41,10 +41,6 @@ const createError = require("http-errors");
  */
 router.get('/', async (req, res, next) => {
   //console.log('MEMBER: ' + util.inspect(res.locals.member, false, null, true));
-  let mem = req.session.member;
-  if(mem) {
-    //mem.planet = await Planet.findOne({id: req.session.member.planet_id});
-  }
   res.render('profile', { page: 'profile', post_action: '/profile', profile: res.locals.member, themes: CFG.web.themes, timezones: moment.tz.names() });
 });
 
