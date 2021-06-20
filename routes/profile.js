@@ -54,7 +54,7 @@ router.get('/', async (req, res, next) => {
  */
 router.post('/', async (req, res, next) => {
   if(req.session.member !== undefined) {
-    console.log('REQBODY: ' + util.inspect(req.body, true, null, true));
+    //console.log('REQBODY: ' + util.inspect(req.body, true, null, true));
     let plnt;
     if(req.body.planet_x !== undefined && req.body.planet_y !== undefined && req.body.planet_z !== undefined) {
       plnt = await Planet.findOne({x: req.body.planet_x, y: req.body.planet_y, z: req.body.planet_z});
@@ -63,7 +63,7 @@ router.post('/', async (req, res, next) => {
     let upd = await Member.updateOne({id: req.session.member.id}, {
       site_theme: req.body.site_theme,
       site_navigation: req.body.site_navigation,
-      pa_nick: req.body.panick,
+      pa_nick: req.body.pa_nick,
       timezone: req.body.timezone,
       phone: req.body.full_phone,
       email: req.body.email,
