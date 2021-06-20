@@ -58,7 +58,7 @@ router.get("/", async (req, res, next) => {
     if(member) {
       console.log('Is Member');
       let updated = await Member.updateOne({telegram_id: params.id},
-      {telegram_username: params.username, telegram_first_name: params.first_name, telegram_last_name: params.last_name, telegram_photo_url: params.photo_url}
+        {telegram_username: params.username, telegram_first_name: params.first_name, telegram_last_name: params.last_name, telegram_photo_url: params.photo_url}
       );
       console.log('UPDATED: ' + util.inspect(updated, false, null, true));
       req.session.member = member;
