@@ -77,7 +77,7 @@ const claimsRoute = require('./routes/claims');
 const util = require('util');
 
 let loginRequired = async (req, res, next) => {
-  console.log('LOCALS: ' + util.inspect(res.locals, false, null, true));
+  //console.log('LOCALS: ' + util.inspect(res.locals, false, null, true));
   //console.log('SESSION: ' + util.inspect(req.session, false, null, true));
   if(typeof(req.session.member) == 'undefined') {
     //req var to forward
