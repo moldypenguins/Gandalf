@@ -24,7 +24,7 @@
 const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
-const FNCS = require('../Functions');
+
 
 
 const Member = require('../models/Member');
@@ -47,7 +47,7 @@ router.get('/', async (req, res, next) => {
   if(mem) {
     mem.planet = await Planet.findOne({id: req.session.member.planet_id});
   }
-  res.render('profile', { page: 'profile', post_action: '/profile', profile: req.session.member, telegram_name: FNCS.getTelegramName(req.session.member), themes: CFG.web.themes, timezones: moment.tz.names() });
+  res.render('profile', { page: 'profile', post_action: '/profile', profile: res.locals.member, themes: CFG.web.themes, timezones: moment.tz.names() });
 });
 
 
