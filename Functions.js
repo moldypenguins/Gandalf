@@ -113,15 +113,12 @@ let isValidDate = function(d) {
 
 
 let getTelegramName = function(m) {
-	console.log('MEMBER:' + util.inspect(m, false, null, true));
-
 	let result = m.telegram_first_name;
 	if(m.telegram_username) {
 		result = `<a href="https://t.me/${m.telegram_username}">${m.telegram_username}</a>`;
 	} else if(m.telegram_last_name) {
 		result = `${m.telegram_first_name} ${m.telegram_last_name}`;
 	}
-	console.log(`TG NAME: ${result}`);
 	return result;
 };
 
