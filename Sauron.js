@@ -78,7 +78,7 @@ const util = require('util');
 
 let loginRequired = async (req, res, next) => {
   console.log('LOCALS: ' + util.inspect(res.locals, false, null, true));
-  console.log('SESSION: ' + util.inspect(req.session, false, null, true));
+  //console.log('SESSION: ' + util.inspect(req.session, false, null, true));
   if(typeof(req.session.member) == 'undefined') {
     //req var to forward
     //console.log('REQ URL: ' + req.originalUrl);
@@ -134,7 +134,7 @@ Mordor.connection.once("open", () => {
     res.locals.bot_name = CFG.bot.username;
     res.locals.default_profile_pic = CFG.web.default_profile_pic;
 
-    res.locals.tick = await Tick.findOne().sort({id: -1});
+    res.locals.tick = await Tick.findOne().sort({tick: -1});
 
     res.locals.member = req.session.member;
     res.locals.applicant = req.session.applicant;
