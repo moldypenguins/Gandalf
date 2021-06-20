@@ -156,9 +156,9 @@ Mordor.connection.once("open", () => {
       res.locals.member.isSCNR = req.session.member.access >= 1 && (req.session.member.roles & 2) !== 0;
       res.locals.member.isMEM = req.session.member.access >= 1;
       let plnt = await Planet.findById(req.session.member.planet);
-      //res.locals.member.planet = plnt;
+      res.locals.member.planet = plnt;
       console.log('PLANET: ' + util.inspect(req.session.member.planet, false, null, true));
-      console.log('PLANET: ' + util.inspect(plnt, false, null, true));
+      console.log('PLANET: ' + util.inspect(res.locals.member.planet, false, null, true));
       res.locals.member.scans = {};
       res.locals.member.scans.d = await Scan.findOne({planet_id: res.locals.member.planet_id, scantype: 3}).sort({tick: -1, _id: -1});
       if (typeof (res.locals.member.scans.d) != 'undefined' && res.locals.member.scans.d != null) {
