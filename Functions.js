@@ -119,6 +119,7 @@ let getTelegramName = function(m) {
 	} else if(m.last_name) {
 		result = `${m.first_name} ${m.last_name}`;
 	}
+	console.log(`TG NAME: ${result}`);
 	return result;
 };
 
