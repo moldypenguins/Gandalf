@@ -252,7 +252,7 @@
                         <% if(member.isADM || member.isHC || member.isBC) { %>
                             <div class="btn-box">
                                 <form method="POST" action="/att/delete/<%= attack.hash %>">
-                                    <div class="btn-group btn-group-sm position-static w-100" role="group" aria-label="Ships">
+                                    <div class="btn-group btn-group-sm position-static w-100" role="group" aria-label="Buttons">
                                         <a class="btn btn-sm btn-warning" href="/att/edit/<%= attack.hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
                                         <button class="btn btn-danger" type="submit" name="delete" value="<%= attack.hash %>"><i class="fas fa-times" aria-hidden="true"></i></button>
                                     </div>
