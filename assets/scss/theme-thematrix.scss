@@ -8,7 +8,7 @@
 @import "components/global/global";
 @import "components/global/constants";
 @import "components/global/buttons";
-@import "components/matrix/global";
+@import "components/thematrix/global";
 
 body {
   @import "components/affleck/typography-links";
@@ -21,7 +21,7 @@ body {
   @import "components/affleck/footer";
 
   // theme
-  @import "components/matrix/typography-links";
-  @import "components/matrix/header-navigation";
-  @import "components/matrix/footer";
+  @import "components/thematrix/typography-links";
+  @import "components/thematrix/header-navigation";
+  @import "components/thematrix/footer";
 }
