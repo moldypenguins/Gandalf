@@ -56,14 +56,15 @@ router.get("/", async (req, res, next) => {
   if(checkSignature(req.query)) {
     //successful login
     let params = JSON.parse(JSON.stringify(req.query));
-    let member = await Member.findOne({telegram_id: params.id});
+    let member = await Member.findOne({telegram_id: params.id}).populate('planet');
+    //console.log('PARAMS: ' + util.inspect(params, false, null, true));
     //console.log('PARAMS: ' + util.inspect(params, false, null, true));
     if(member) {
       console.log('Is Member');
       let updated = await Member.updateOne({telegram_id: params.id},
         {telegram_username: params.username, telegram_first_name: params.first_name, telegram_last_name: params.last_name, telegram_photo_url: params.photo_url}
       );
-      console.log('UPDATED: ' + util.inspect(updated, false, null, true));
+      //console.log('UPDATED: ' + util.inspect(updated, false, null, true));
       req.session.member = member;
       res.redirect("/");
     } else {
