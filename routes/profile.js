@@ -66,7 +66,7 @@ router.post('/', async (req, res, next) => {
       timezone: req.body.timezone,
       phone: req.body.full_phone,
       email: req.body.email,
-      planet_id: plnt ? plnt.id : null
+      planet: plnt
     });
     let saved = await Member.findOne({id: req.session.member.id});
     console.log(saved.id + " profile updated.");
