@@ -40,7 +40,7 @@ const createError = require("http-errors");
  * GET /profile
  */
 router.get('/', async (req, res, next) => {
-  console.log('MEMBER: ' + util.inspect(res.locals.member, false, null, true));
+  //console.log('MEMBER: ' + util.inspect(res.locals.member, false, null, true));
   let mem = req.session.member;
   if(mem) {
     mem.planet = await Planet.findOne({id: req.session.member.planet_id});
