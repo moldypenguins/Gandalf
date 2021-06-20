@@ -46,9 +46,9 @@ module.exports = {
     default_navigation:'iconstext',
     themes:{
       affleck:{name:'Affleck', navbar:'light'},
-      matrix:{name: 'The Matrix', navbar: 'dark'},
       shamrock:{name: 'Shamrock', navbar: 'light'},
       telegram:{name: 'Telegram', navbar: 'light'},
+      thematrix:{name: 'The Matrix', navbar: 'dark'},
       ultimate:{name: 'Ultimate', navbar: 'dark'},
     }
   },
