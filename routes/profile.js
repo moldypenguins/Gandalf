@@ -25,8 +25,6 @@ const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
 
-
-
 const Member = require('../models/Member');
 const Applicant = require('../models/Applicant');
 const Planet = require('../models/Planet');
