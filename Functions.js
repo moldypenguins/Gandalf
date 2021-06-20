@@ -24,7 +24,7 @@
 
 const Planet = require('./models/Planet');
 
-
+const util = require('util');
 
 /*
 let patterns = [ //Note these are order dependent xyz has to come before xy
@@ -113,6 +113,8 @@ let isValidDate = function(d) {
 
 
 let getTelegramName = function(m) {
+	console.log('MEMBER:' + util.inspect(m, false, null, true));
+
 	let result = m.first_name;
 	if(m.username) {
 		result = `<a href="https://t.me/${m.username}">${m.username}</a>`;
