@@ -54,12 +54,10 @@ router.get("/", async (req, res, next) => {
     //successful login
     let params = JSON.parse(JSON.stringify(req.query));
     let member = await Member.findOne({telegram_id: params.id});
-
-    console.log('PARAMS: ' + util.inspect(params, false, null, true));
-
+    //console.log('PARAMS: ' + util.inspect(params, false, null, true));
     if(member) {
       console.log('Is Member');
-      await Member.updateOne({telegram_id: params.id}, {username: params.username, first_name: params.first_name, last_name: params.last_name, photo_url: params.photo_url});
+      await Member.updateOne({telegram_id: params.id}, {telegram_username: params.username, telegram_first_name: params.first_name, telegram_last_name: params.last_name, telegram_photo_url: params.photo_url});
       req.session.member = member;
       res.redirect("/");
     } else {
