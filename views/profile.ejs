@@ -135,7 +135,7 @@
                                                 <span id="label-planet" class="input-group-text">Planet</span>
                                             </div>
 
-                                            <%= profile %>
+                                            <%= profile.planet %>
 
                                             <input type="number" name="planet_x" id="planet_x" class="form-control" placeholder="X" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.x %><% } %>"/>
                                             <input type="number" name="planet_y" id="planet_y" class="form-control" placeholder="Y" value="<% if(typeof (profile.planet) != "undefined" && profile.planet != null) { %><%= profile.planet.y %><% } %>"/>
