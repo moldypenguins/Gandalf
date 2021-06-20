@@ -56,7 +56,7 @@ router.get("/", async (req, res, next) => {
   if(checkSignature(req.query)) {
     //successful login
     let params = JSON.parse(JSON.stringify(req.query));
-    let member = await Member.findOne({telegram_id: params.id}).populate('planet');
+    let member = await Member.findOne({telegram_id: params.id}).populate('Planet');
     //console.log('PARAMS: ' + util.inspect(params, false, null, true));
     //console.log('PARAMS: ' + util.inspect(params, false, null, true));
     if(member) {
