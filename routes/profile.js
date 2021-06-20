@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name profile.js
- * @version 2021/06/07
+ * @version 2021/06/20
  * @summary Express Route
  **/
 'use strict';
@@ -36,6 +36,9 @@ const moment = require('moment-timezone');
 const createError = require("http-errors");
 
 
+/**
+ * GET /profile
+ */
 router.get('/', async (req, res, next) => {
   //console.log('PLANET: ' + util.inspect(req.session.member, false, null, true));
   let mem = req.session.member;
@@ -45,6 +48,10 @@ router.get('/', async (req, res, next) => {
   res.render('profile', { page: 'profile', post_action: '/profile', profile: req.session.member, themes: CFG.web.themes, timezones: moment.tz.names() });
 });
 
+
+/**
+ * POST /profile
+ */
 router.post('/', async (req, res, next) => {
   if(req.session.member !== undefined) {
     //console.log('REQBODY: ' + util.inspect(req.body, true, null, true));
@@ -72,4 +79,3 @@ router.post('/', async (req, res, next) => {
 
 
 module.exports = router;
-

@@ -112,10 +112,10 @@ let isValidDate = function(d) {
 };
 
 
-let getTelegramMentionName = function(m) {
+let getTelegramName = function(m) {
 	let result = m.first_name;
 	if(m.username) {
-		result = m.username;
+		result = `<a href="https://t.me/${m.username}">${m.username}</a>`;
 	} else if(m.last_name) {
 		result = `${m.first_name} ${m.last_name}`;
 	}
@@ -129,5 +129,5 @@ let getTelegramMentionName = function(m) {
 
 module.exports = {
 	"isValidDate": isValidDate,
-	"getTelegramMentionName": getTelegramMentionName,
+	"getTelegramName": getTelegramName,
 };

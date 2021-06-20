@@ -49,6 +49,9 @@ function checkSignature({ hash, ...data }) {
 }
 
 
+/**
+ * GET /auth
+ */
 router.get("/", async (req, res, next) => {
   if(checkSignature(req.query)) {
     //successful login
