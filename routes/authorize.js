@@ -52,15 +52,18 @@ function checkSignature({ hash, ...data }) {
 router.get("/", async (req, res, next) => {
   if(checkSignature(req.query)) {
     //successful login
-    var params = JSON.parse(JSON.stringify(req.query));
-    var member = await Member.findOne({telegram_id: params.id});
+    let params = JSON.parse(JSON.stringify(req.query));
+    let member = await Member.findOne({telegram_id: params.id});
+
+    console.log('PARAMS: ' + util.inspect(params, false, null, true));
+
     if(member) {
       console.log('Is Member');
       await Member.updateOne({telegram_id: params.id}, {username: params.username, first_name: params.first_name, last_name: params.last_name, photo_url: params.photo_url});
       req.session.member = member;
       res.redirect("/");
     } else {
-      var applicant = await Applicant.findOne({telegram_id: params.id});
+      let applicant = await Applicant.findOne({telegram_id: params.id});
       if(applicant) {
         console.log('Is Applicant');
         req.session.applicant = applicant;
