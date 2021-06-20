@@ -155,7 +155,7 @@ Mordor.connection.once("open", () => {
       res.locals.member.isCMDR = req.session.member.access >= 3;
       res.locals.member.isSCNR = req.session.member.access >= 1 && (req.session.member.roles & 2) !== 0;
       res.locals.member.isMEM = req.session.member.access >= 1;
-      let plnt = = await Planet.findById(req.session.member.planet);
+      let plnt = await Planet.findById(req.session.member.planet);
       //res.locals.member.planet = plnt;
       console.log('PLANET: ' + util.inspect(req.session.member.planet, false, null, true));
       console.log('PLANET: ' + util.inspect(plnt, false, null, true));
