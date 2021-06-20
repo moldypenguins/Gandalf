@@ -25,19 +25,14 @@ const CFG = require('../Config');
 const Mordor = require('../Mordor');
 
 let InactiveSchema = new Mordor.Schema({
-  _id:                    {type:Mordor.Schema.Types.ObjectId, required:true},
-  telegram_id:            {type:Number, unique:true, required:true},
-  telegram_first_name:    {type:String},
-  telegram_last_name:     {type:String},
-  telegram_username:      {type:String},
-  telegram_photo_url:     {type:String, default:CFG.web.uri + '/' + CFG.web.default_profile_pic},
-  telegram_language_code: {type:String},
-  pa_nick:                {type:String, index:true},
-  parent:                 {type:String},
-  birthed:                {type:Date},
-  timezone:               {type:String},
-  email:                  {type:String},
-  phone:                  {type:String},
+  _id:            {type:Mordor.Schema.Types.ObjectId, required:true},
+  telegram_user:  {type:Mordor.Schema.Types.ObjectId, ref:'TelegramUser'},
+  pa_nick:        {type:String, index:true},
+  parent:         {type:String},
+  birthed:        {type:Date},
+  timezone:       {type:String},
+  email:          {type:String},
+  phone:          {type:String},
 });
 
 module.exports = Mordor.model('Inactive', InactiveSchema, 'Inactives');

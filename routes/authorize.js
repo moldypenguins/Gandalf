@@ -24,9 +24,11 @@
 const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
+const Mordor = require('../Mordor');
 
 const Member = require('../models/Member');
 const Applicant = require('../models/Applicant');
+const TelegramUser = require('../models/TelegramUser');
 
 const crypto = require('crypto');
 const express = require('express');
@@ -56,20 +58,26 @@ router.get("/", async (req, res, next) => {
   if(checkSignature(req.query)) {
     //successful login
     let params = JSON.parse(JSON.stringify(req.query));
-    let member = await Member.findOne({telegram_id: params.id}).populate('Planet');
+
+    let telegramUser = await TelegramUser.findOneAndUpdate({telegram_id: params.id},{
+      telegram_first_name:params.first_name,
+      telegram_last_name:params.last_name,
+      telegram_username:params.username,
+      telegram_photo_url:params.photo_url,
+    },{upsert:true, new:true});
+
+    console.log('TGUSER: ' + util.inspect(telegramUser, false, null, true));
+
+    let member = await Member.findOne({telegram_user: telegramUser._id});
     //console.log('PARAMS: ' + util.inspect(params, false, null, true));
     //console.log('PARAMS: ' + util.inspect(params, false, null, true));
-    if(member) {
+    if (member) {
       console.log('Is Member');
-      let updated = await Member.updateOne({telegram_id: params.id},
-        {telegram_username: params.username, telegram_first_name: params.first_name, telegram_last_name: params.last_name, telegram_photo_url: params.photo_url}
-      );
-      //console.log('UPDATED: ' + util.inspect(updated, false, null, true));
       req.session.member = member;
       res.redirect("/");
     } else {
-      let applicant = await Applicant.findOne({telegram_id: params.id});
-      if(applicant) {
+      let applicant = await Applicant.findOne({telegram_user: telegramUser._id});
+      if (applicant) {
         console.log('Is Applicant');
         req.session.applicant = applicant;
       } else {
