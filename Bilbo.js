@@ -132,6 +132,9 @@ let load_ticks = async() => {
 };
 
 let setup_admins = async() => {
+
+
+
   if (!await Member.exists({telegram_id: CFG.admin.id})) {
     if (await new Member({_id:Mordor.Types.ObjectId(), telegram_id: CFG.admin.id, access: 5, active: true, pa_nick:CFG.admin.pa_nick}).save()) {
       console.log(`Added ${CFG.admin.pa_nick} as admin to Members collection.`);
