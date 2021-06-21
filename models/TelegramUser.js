@@ -21,6 +21,7 @@
  **/
 'use strict';
 
+const CFG = require('../Config');
 const Mordor = require('../Mordor');
 
 let TelegramUserSchema = new Mordor.Schema({
