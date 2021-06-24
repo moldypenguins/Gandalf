@@ -1,6 +1,6 @@
 module.exports = {
   admin:{
-    id:123456789, //Telegram ID
+    telegram_id:123456789, //Telegram ID
     pa_nick:"moldypenguins",
   },
   alliance:{

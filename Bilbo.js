@@ -29,6 +29,7 @@ const Mordor = require('./Mordor');
 
 const Ship = require('./models/Ship');
 const Member = require('./models/Member');
+const TelegramUser = require('./models/TelegramUser');
 const Tick = require('./models/Tick');
 const AttackTargetClaim = require('./models/AttackTargetClaim');
 const AttackTarget = require('./models/AttackTarget');
@@ -55,6 +56,7 @@ const bent = require('bent');
 const getStream = bent('string');
 const xmlParser = require('xml2json');
 const minimist = require('minimist');
+const util = require('util');
 
 
 let argv = minimist(process.argv.slice(2), {
@@ -133,15 +135,19 @@ let load_ticks = async() => {
 
 let setup_admins = async() => {
 
+  if(!await TelegramUser.exists({telegram_id:CFG.admin.telegram_id})) {
+    await new TelegramUser({telegram_id:CFG.admin.telegram_id}).save();
+  }
+  let tg_user = await TelegramUser.findOne({telegram_id:CFG.admin.telegram_id});
+  console.log('TGUSER: ' + util.inspect(tg_user, false, null, true));
 
-
-  if (!await Member.exists({telegram_id: CFG.admin.id})) {
-    if (await new Member({_id:Mordor.Types.ObjectId(), telegram_id: CFG.admin.id, access: 5, active: true, pa_nick:CFG.admin.pa_nick}).save()) {
+  if (!await Member.exists({telegram_user:Mordor.Types.ObjectId(tg_user._id)})) {
+    if (await new Member({_id:Mordor.Types.ObjectId(), telegram_user:Mordor.Types.ObjectId(tg_user._id), access: 5, pa_nick:CFG.admin.pa_nick}).save()) {
       console.log(`Added ${CFG.admin.pa_nick} as admin to Members collection.`);
     } else {
       console.log(`Could not add ${CFG.admin.pa_nick} as admin to Members collection.`);
     }
   } else {
-    console.log(`User id ${CFG.admin.id} already exists.`);
+    console.log(`Member ${CFG.admin.pa_nick} already exists.`);
   }
 };

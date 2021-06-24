@@ -68,7 +68,7 @@ router.get("/", async (req, res, next) => {
 
     console.log('TGUSER: ' + util.inspect(Mordor.Types.ObjectId(telegramUser._id), false, null, true));
 
-    let member = await Member.findOne({telegram_user: Mordor.Types.ObjectId(telegramUser._id)});
+    let member = await Member.findOne({telegram_user: new Mordor.Types.ObjectId(telegramUser._id)});
     console.log('MEMBER: ' + util.inspect(member, false, null, true));
     //console.log('PARAMS: ' + util.inspect(params, false, null, true));
     if (member) {
