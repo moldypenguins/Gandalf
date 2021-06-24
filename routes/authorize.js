@@ -66,7 +66,7 @@ router.get("/", async (req, res, next) => {
       telegram_photo_url:params.photo_url,
     },{upsert:true, new:true});
 
-    console.log('TGUSER: ' + util.inspect(telegramUser, false, null, true));
+    console.log('TGUSER: ' + util.inspect(Mordor.Types.ObjectId(telegramUser._id), false, null, true));
 
     let member = await Member.findOne({telegram_user: Mordor.Types.ObjectId(telegramUser._id)});
     console.log('MEMBER: ' + util.inspect(member, false, null, true));
