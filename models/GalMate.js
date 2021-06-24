@@ -24,12 +24,8 @@
 const Mordor = require('../Mordor');
 
 let GalMateSchema = new Mordor.Schema({
-  _id:                    {type:Mordor.Schema.Types.ObjectId, required:true},
-  telegram_id:            {type:Number, unique:true, required:true},
-  telegram_first_name:    {type:String},
-  telegram_last_name:     {type:String},
-  telegram_username:      {type:String},
-  telegram_language_code: {type:String},
+  _id:           {type:Mordor.Schema.Types.ObjectId, required:true},
+  telegram_user: {type:Mordor.Schema.Types.ObjectId, ref:'TelegramUser'},
 });
 
 module.exports = Mordor.model('GalMate', GalMateSchema, 'GalMates');
