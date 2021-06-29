@@ -41,6 +41,17 @@ let MemberSchema = new Mordor.Schema({
   email:           {type:String},
   phone:           {type:String},
   planet:          {type:Mordor.Schema.Types.ObjectId, reference:'Planet'},
+},
+{
+  toJSON: { virtuals: true }
+});
+
+
+// Virtual populate
+MemberSchema.virtual("TelegramUsers", {
+  ref: "TelegramUser",
+  foreignField: "_id",
+  localField: "telegram_user"
 });
 
 
