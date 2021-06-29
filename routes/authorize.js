@@ -68,8 +68,8 @@ router.get("/", async (req, res, next) => {
 
     console.log('TGUSER: ' + util.inspect(Mordor.Types.ObjectId(telegramUser._id), false, null, true));
 
-    let member = await Member.findByTelegramUser(telegramUser);
-    console.log('MEMBER: ' + util.inspect(member, false, null, true));
+    let members = await Member.find().populate(['TelegramUsers']);
+    console.log('MEMBER: ' + util.inspect(members, false, null, true));
     //console.log('PARAMS: ' + util.inspect(params, false, null, true));
     if (member) {
       console.log('Is Member');
