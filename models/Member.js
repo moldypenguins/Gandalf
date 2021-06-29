@@ -55,8 +55,8 @@ MemberSchema.virtual("TelegramUsers", {
 });
 
 
-MemberSchema.statics.findByTelegramUser = async function(telegram_user_id) {
-  return await this.findOne({telegram_user: new Mordor.Types.ObjectId(telegram_user_id)});
+MemberSchema.statics.findByTelegramUser = async function(telegram_user) {
+  return await this.findOne({telegram_user: telegram_user._id});
 }
 
 module.exports = Mordor.model('Member', MemberSchema, 'Members');
