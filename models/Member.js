@@ -44,7 +44,7 @@ let MemberSchema = new Mordor.Schema({
 });
 
 
-MemberSchema.statics.findByTelegramUser = async(telegram_user_id) => {
+MemberSchema.methods.findByTelegramUser = async(telegram_user_id) => {
   return await this.findOne({telegram_user: new Mordor.Types.ObjectId(telegram_user_id)});
 }
 
