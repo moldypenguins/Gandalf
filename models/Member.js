@@ -43,4 +43,9 @@ let MemberSchema = new Mordor.Schema({
   planet:          {type:Mordor.Schema.Types.ObjectId, reference:'Planet'},
 });
 
+
+MemberSchema.statics.findByTelegramUser = async(telegram_user_id) => {
+  return await this.findOne({telegram_user: new Mordor.Types.ObjectId(telegram_user_id)});
+}
+
 module.exports = Mordor.model('Member', MemberSchema, 'Members');
