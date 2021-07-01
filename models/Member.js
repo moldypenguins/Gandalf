@@ -27,11 +27,11 @@ const Mordor = require('../Mordor');
 let MemberSchema = new Mordor.Schema({
   _id:             {type:Mordor.Schema.Types.ObjectId, required:true},
   pa_nick:         {type:String, trim:true, unique:true, index:true, required:true},
-  telegram_user:   {type:String, ref:'TelegramUser'},
-  discord_user:    {type:String, ref:'DiscordUser'},
+  telegram_user:   {type:Mordor.Schema.Types.ObjectId, ref:'TelegramUser'},
+  discord_user:    {type:Mordor.Schema.Types.ObjectId, ref:'DiscordUser'},
   access:          {type:Number, default:0, required:true},
   roles:           {type:Number, default:0, required:true},
-  parent:          {type:String, reference:'Member'},
+  parent:          {type:Mordor.Schema.Types.ObjectId, ref:'Member'},
   birthed:         {type:Date, default:Date.now(), required:true},
   photo_url:       {type:String, default:CFG.web.uri + '/' + CFG.web.default_profile_pic},
   site_theme:      {type:String, default:'default', required:true},
@@ -40,7 +40,7 @@ let MemberSchema = new Mordor.Schema({
   timezone:        {type:String},
   email:           {type:String},
   phone:           {type:String},
-  planet:          {type:String, reference:'Planet'},
+  planet:          {type:String, ref:'Planet'},
 },
 {
   toJSON: { virtuals: true }
