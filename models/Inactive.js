@@ -26,10 +26,12 @@ const Mordor = require('../Mordor');
 
 let InactiveSchema = new Mordor.Schema({
   _id:            {type:Mordor.Schema.Types.ObjectId, required:true},
-  telegram_user:  {type:String, ref:'TelegramUser'},
   pa_nick:        {type:String, index:true},
+  telegram_user:  {type:String, ref:'TelegramUser'},
+  discord_user:   {type:String, ref:'DiscordUser'},
   parent:         {type:String},
   birthed:        {type:Date},
+  photo_url:      {type:String, default:CFG.web.uri + '/' + CFG.web.default_profile_pic},
   timezone:       {type:String},
   email:          {type:String},
   phone:          {type:String},
