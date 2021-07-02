@@ -69,13 +69,13 @@ See [Gandalf Wiki - Installation](https://github.com/moldypenguins/Gandalf/wiki/
 
 
 ## Issues / Support
-See [Gandalf Wiki](https://github.com/moldypenguins/Gandalf/wiki).
-Join [Gandalf Support](https://t.me/joinchat/HPVnlgHnFUShtg_D) on Telegram.
-See [SECURITY.md](SECURITY.md) for feature requests or bug reports  
+See [Gandalf Wiki](https://github.com/moldypenguins/Gandalf/wiki).  
+Join [Gandalf Support](https://t.me/joinchat/HPVnlgHnFUShtg_D) on Telegram.  
+See [SECURITY.md](SECURITY.md) for feature requests or bug reports.
 
 
 ## Contributing
-See [CONTRIBUTING.md](CONTRIBUTING.md) for more information
+See [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
 
 
 ## Code of Conduct
