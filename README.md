@@ -65,12 +65,13 @@ See [CHANGELOG.md](CHANGELOG.md) for changes.
 
 
 ## Setup / Installation
-See [Gandalf Wiki](https://github.com/moldypenguins/Gandalf/wiki) for setup guide.
+See [Gandalf Wiki - Installation](https://github.com/moldypenguins/Gandalf/wiki/Installation) for guide.
 
 
 ## Issues / Support
+See [Gandalf Wiki](https://github.com/moldypenguins/Gandalf/wiki).
+Join [Gandalf Support](https://t.me/joinchat/HPVnlgHnFUShtg_D) on Telegram.
 See [SECURITY.md](SECURITY.md) for feature requests or bug reports  
-Join [Gandalf Support](https://t.me/joinchat/HPVnlgHnFUShtg_D) on Telegram
 
 
 ## Contributing
