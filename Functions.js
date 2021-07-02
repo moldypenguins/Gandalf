@@ -60,28 +60,7 @@ function coordType(coords) {
 	}
 }
 
-function coordsToPlanetLookup(input) {
-	return new Promise(async (resolve, reject) => {
-		let coords = parseCoords(input);
-		if (!coords) {
-			reject(formatInvalidResponse(input));
-			return;
-		}
 
-		Planet.find().then((planets) => {
-			let planet = planets.find(p => p && p.x && p.y && p.z && p.x == coords.x && p.y == coords.y && p.z == coords.z);
-			if (!planet) {
-				resolve(null);
-				return;
-			}
-			resolve(planet);
-		});
-	});
-}
-    
-function formatInvalidResponse(str) {
-  return `Sorry I don't know who ${str} or they don't have coords set.`;
-}
 
 */
 

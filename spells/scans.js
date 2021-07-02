@@ -122,11 +122,11 @@ var Scans_findscan = (args) => {
   });
 };
 
-var Scans_cancel_usage = he.encode('!cancel <id>');
-var Scans_cancel_desc = 'Cancel a scan request given the id';
-var Scans_cancel = (args, current_member) => {
+var Scans_reqcancel_usage = he.encode('!reqcancel <id>');
+var Scans_reqcancel_desc = 'Cancel a scan request given the id';
+var Scans_reqcancel = (args, current_member) => {
   return new Promise(async (resolve, reject) => {
-    if (!Array.isArray(args) || args.length < 1) { reject(Scans_cancel_usage); }
+    if (!Array.isArray(args) || args.length < 1) { reject(Scans_reqcancel_usage); }
     let id = args[0];
     let reply = ``;
     let request = await ScanRequest.findOne({id:id,requester_id:current_member.id,active:true});
@@ -141,9 +141,9 @@ var Scans_cancel = (args, current_member) => {
   });
 };
 
-let Scans_links_usage = he.encode('!links');
-let Scans_links_desc = 'Shows a list of scan requests';
-let Scans_links = (args) => {
+let Scans_reqlinks_usage = he.encode('!reqlinks');
+let Scans_reqlinks_desc = 'Shows a list of scan requests';
+let Scans_reqlinks = (args) => {
   return new Promise(async (resolve, reject) => {
     let requests = await ScanRequest.find({active:true});
     let msg = '';
@@ -157,7 +157,7 @@ let Scans_links = (args) => {
 module.exports = {
   "reqscan": { usage: Scans_req_usage, description: Scans_req_desc, cast: Scans_req, include_member: true },
   "findscan": { usage: Scans_findscan_usage, description: Scans_findscan_desc, cast: Scans_findscan },
-  "reqcancel": { usage: Scans_cancel_usage, description: Scans_cancel_desc, cast: Scans_cancel, include_member: true },
-  "reqlinks" : { usage: Scans_links_usage, description: Scans_links_desc, access: AXS.botScannerRequired, channel: AXS.botChannelScannerPrivate, cast: Scans_links }
+  "reqcancel": { usage: Scans_reqcancel_usage, description: Scans_reqcancel_desc, cast: Scans_reqcancel, include_member: true },
+  "reqlinks" : { usage: Scans_reqlinks_usage, description: Scans_reqlinks_desc, access: AXS.botScannerRequired, channel: AXS.botChannelScannerPrivate, cast: Scans_reqlinks }
 };
 

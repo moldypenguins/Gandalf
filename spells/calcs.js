@@ -44,7 +44,7 @@ var Calcs_exile = (args) => {
   });
 };
 
-var Calcs_bonusmining_usage = he.encode('!bonusmining <tick=NOW> <bonus=0>');
+var Calcs_bonusmining_usage = he.encode('!bonusmining [tick=NOW] [bonus=0]');
 var Calcs_bonusmining_desc = 'Calculates how many ticks you need to keep the bonus roids to be worth it vs accepting resources';
 var Calcs_bonusmining = (args) => {
   return new Promise(async (resolve, reject) => {
@@ -68,7 +68,7 @@ var Calcs_bonusmining = (args) => {
   });
 };
 
-var Calcs_bonus_usage = he.encode('!bonus <tick=NOW> <bonus=0>');
+var Calcs_bonus_usage = he.encode('!bonus [tick=NOW] [bonus=0]');
 var Calcs_bonus_desc = 'Calculates the bonus for a given tick (bonus argument is provided by PA bonus screen 3% etc.)';
 var Calcs_bonus = (args) => {
   return new Promise(async (resolve, reject) => {
@@ -118,7 +118,7 @@ var Calcs_roidcost = (args) => {
   });
 };
 
-var Calcs_tick_usage = he.encode('!tick <tick=NOW> <timezone=GMT>');
+var Calcs_tick_usage = he.encode('!tick [tick=NOW] [timezone=GMT]');
 var Calcs_tick_desc = 'Calculate when a tick will occur.';
 var Calcs_tick = (args) => {
   return new Promise(async (resolve, reject) => {

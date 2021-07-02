@@ -29,12 +29,14 @@ const FNCS = require('../Functions');
 const Intel = require('../models/Intel');
 const Planet = require('../models/Planet');
 const Alliance = require('../models/Alliance');
+const Member = require('../models/Member');
 
 const numeral = require('numeral');
 const moment = require('moment');
 const he = require('he');
 
 const INTEL_ACTION_DISPLAY = 0, INTEL_ACTION_SET = 1
+const PLANET_COORD_TYPE = 0, GALAXY_COORD_TYPE = 1;
 
 function parseArgs(args) {
 // coords will always be 0
@@ -100,9 +102,9 @@ return response;
 
 async function intelDisplay(args) {
 switch(args.type) {
-case Utils.GALAXY_COORD_TYPE:
+case GALAXY_COORD_TYPE:
 return await intelDisplayGalaxy(args.coords);
-case Utils.PLANET_COORD_TYPE:
+case PLANET_COORD_TYPE:
 let response = await intelDisplayPlanet(args.coords);
 if (!response) {
 response = `No intel found for planet ${args.coords.x}:${args.coords.y}:${args.coords.z}`;
@@ -111,8 +113,31 @@ return response;
 }
 }
 
+function coordsToPlanetLookup(input) {
+  return new Promise(async (resolve, reject) => {
+    let coords = parseCoords(input);
+    if (!coords) {
+      reject(formatInvalidResponse(input));
+      return;
+    }
+
+    Planet.find().then((planets) => {
+      let planet = planets.find(p => p && p.x && p.y && p.z && p.x == coords.x && p.y == coords.y && p.z == coords.z);
+      if (!planet) {
+        resolve(null);
+        return;
+      }
+      resolve(planet);
+    });
+  });
+}
+
+function formatInvalidResponse(str) {
+  return `Sorry I don't know who ${str} or they don't have coords set.`;
+}
+
 async function intelSet(args) {
-if (args.type == Utils.GALAXY_COORD_TYPE) {
+if (args.type === GALAXY_COORD_TYPE) {
 return `You can't set intel for an entire galaxy gtfo.`;
 }
 
@@ -151,7 +176,7 @@ return `Intel saved for ${coords.x}:${coords.y}:${coords.z} ${alliance.name}/${i
 }
 
 let Intel_usage = he.encode('!intel <coords> <alliance> <nick>');
-let Intel_desc = 'Displays or sets a coords';
+let Intel_desc = 'Displays or sets intel for given coords.';
 let Intel_fn = (args) => {
 return new Promise(async (resolve) => {
 let parsed = parseArgs(args);
@@ -171,7 +196,7 @@ let Intel_spam_usage = he.encode('!spam <alliance>');
 let Intel_spam_desc = 'Displays a set of coords based on alliance';
 let Intel_spam = (args) => {
 return new Promise(async (resolve, reject) => {
-if (args.length == 0) {
+if (args.length === 0) {
 reject(Intel_spam_usage);
 return;
 }
@@ -189,7 +214,7 @@ resolve(response);
 };
 
 let Intel_spamset_usage = he.encode('!spamset <alliance> <coords list>');
-let Intel_spamset_desc = 'Set of alliance for multiple coords at once';
+let Intel_spamset_desc = 'Set alliance for multiple coords at once';
 let Intel_spamset = (args) => {
   return new Promise(async (resolve, reject) => {
     if (args.length < 2) {
@@ -199,7 +224,7 @@ let Intel_spamset = (args) => {
 
     let alliance = await Alliance.findOne({"name": new RegExp(args[0], 'i')});
     for(let i = 1; i < args.length; i++) {
-    let planet = await Utils.coordsToPlanetLookup(args[i]);
+    let planet = await coordsToPlanetLookup(args[i]);
     console.log(planet);
     let intel = await Intel.findOne({planet_id: planet.id});
     if (!intel) {
@@ -218,10 +243,54 @@ let Intel_spamset = (args) => {
 
 
 let Intel_oomph_usage = he.encode('!oomph <alliance> <ship class>');
-let Intel_oomph_desc = 'List alliance ships';
+let Intel_oomph_desc = 'List alliance ship counts versus given ship class.';
 let Intel_oomph = (args) => {
   return new Promise(async (resolve, reject) => {
+    resolve('Coming Soon');
     //`${alliance} (49 members, 50 in intel, 50 with fresh scans) has 86m oommph against Corvette: 141 Harpy 315k Spider 189k Phantom 156k Recluse 198k Ghost`
+  });
+};
+
+
+let Intel_lookup_usage = he.encode('!lookup <nick|coords|default=user>');
+let Intel_lookup_desc = 'Lookup a current users stats (score/value/xp/size)';
+let Intel_lookup = (args, current_member) => {
+  return new Promise(async (resolve, reject) => {
+    console.log(args);
+    console.log(current_member);
+    let planet = null;
+    if (args == null || args.length === 0) {
+      console.log(`Looking up via TG user who made command: ${current_member.panick}`);
+      planet = await Planets.findOne({id:current_member.planet_id});
+      console.log(planet);
+      if (!planet) {
+        reject(formatInvalidResponse(username));
+        return;
+      }
+    } else if (args.length > 0) {
+      console.log(`Looking up via argument: ${args[0]}`);
+      // try username lookup
+      planet = await memberToPlanetLookup(args[0]);
+      console.log(`username planet lookup ${planet}`);
+      if (!planet) {
+        // try coord lookup
+        console.log(`trying coord lookup: ${args[0]}`);
+        planet = await Functions.coordsToPlanetLookup(args[0]);
+      }
+    }
+
+    if (!planet) {
+      reject(formatInvalidResponse(args[0]));
+      return;
+    }
+
+    // now that we have a planet do the stats
+    let score_rank = await getRank(planet.score, 'score', planet.id);
+    let value_rank = await getRank(planet.value, 'value', planet.id);
+    let xp_rank = await getRank(planet.xp, 'xp', planet.id);
+    let size_rank = await getRank(planet.size, 'size', planet.id);
+    let coords_name = `${planet.x}:${planet.y}:${planet.z} (${planet.race}) '${planet.rulername}' of '${planet.planetname}'`
+    resolve(`<b>${coords_name}</b> ${score_rank} ${value_rank} ${xp_rank} ${size_rank}`);
   });
 };
 
@@ -229,10 +298,70 @@ let Intel_oomph = (args) => {
 
 
 
+
+//######################################################################################################################
+//TODO: replace below functions either with mongoose models or Functions - const FNC = require('../Functions');
+
+function getRank(value, type, planet_id) {
+  var sort = {};
+  sort[type] = 'desc';
+  return new Promise(async (resolve) => {
+    let rank = await getRankBySort(sort, planet_id);
+    let title = type === 'xp' ? type.toUpperCase() : type[0].toUpperCase() + type.substring(1);
+    resolve(`<b>${title}</b>: ${value} (${rank})`);
+  });
+}
+
+function getRankBySort(sort, planet_id) {
+  return new Promise(async (resolve) => {
+    var planet_not_null = (p) => p && p.score && p.value && p.xp && p.size && p.id;
+    var ranked = await Planets.find(planet_not_null).sort(sort);
+
+    // this will be super inefficient until we get the rank supplied by Frodo during planet loading
+    for (var rank = 1; rank < ranked.length; rank++) {
+      var planet = ranked[rank - 1];
+      if (planet.id === planet_id) {
+        resolve(rank);
+      }
+    }
+  });
+}
+
+function memberToPlanetLookup(username) {
+  return new Promise(async (resolve, reject) => {
+    Member.find().then((members) => {
+      console.log(members.length);
+      var member = members.find(m => (m.username != null && m.username.toLowerCase().startsWith(username)) || (m.panick != null && m.panick.toLowerCase().startsWith(username)) || (m.first_name != null && m.first_name.toLowerCase().startsWith(username)));
+      //var member = members.find(m => m.username == "blanq4");
+      if (member) {
+        console.log(member);
+        Planets.find().then((planets) => {
+          if (planets) {
+            let planet = planets.find(p => p.id === member.planet_id);
+            if (!planet || !planet.x || !planet.y || !planet.z) {
+              resolve(null);
+            } else {
+              console.log(planet);
+              resolve(planet);
+            }
+          }
+        });
+      } else {
+        console.log(`couldn't find member planet`);
+        resolve(null);
+      }
+    });
+  });
+}
+
+//######################################################################################################################
+
+
 module.exports = {
+  "lookup": { usage: Intel_lookup_usage, description: Intel_lookup_desc, cast: Intel_lookup, include_member: true },
   "intel": { usage: Intel_usage, description: Intel_desc, cast: Intel_fn },
   "spam": { usage: Intel_spam_usage, description: Intel_spam_desc, cast: Intel_spam },
   "spamset": { usage: Intel_spamset_usage, description: Intel_spamset_desc, access: AXS.botCommandRequired, cast: Intel_spamset },
-  //"oomph": { usage: Intel_oomph_usage, description: Intel_oomph_desc, cast: Intel_oomph },
+  "oomph": { usage: Intel_oomph_usage, description: Intel_oomph_desc, cast: Intel_oomph },
 };
 

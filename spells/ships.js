@@ -101,7 +101,7 @@ let Ships_eff = (args) => {
 };
 
 var Ships_stop_usage = he.encode('!stop <number> <ship>');
-var Ships_stop_desc = 'Calculates the required defence to the specified number of ships.';
+var Ships_stop_desc = 'Calculates the required defense to the specified number of ships.';
 var Ships_stop = (args) => {
   return new Promise(function(resolve, reject) {
     if (!Array.isArray(args) || args.length < 2) { reject(Ships_stop_usage); }
