@@ -1,4 +1,4 @@
-# Gandalf
+# ![Imgur](https://imgur.com/SNQjhh4.png) Gandalf
 ![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge)
 ![Release](https://img.shields.io/github/v/release/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub&include_prereleases)
 ![Release Date](https://img.shields.io/github/release-date-pre/moldypenguins/Gandalf?logo=GitHub&style=for-the-badge)  
@@ -17,7 +17,7 @@
 ## Table of Contents
 * [Requirements](#requirements)
 * [Change Log](#change-log)
-* [Installation](#installation)
+* [Setup / Installation](#setup-/-installation)
 * [Issues / Support](#issues-/-support)
 * [Contributing](#contributing)
 * [Code of Conduct](#code-of-conduct)
@@ -64,8 +64,8 @@
 See [CHANGELOG.md](CHANGELOG.md) for changes.
 
 
-## Installation
-See [INSTALL.md](INSTALL.md) for setup guide.
+## Setup / Installation
+See [Gandalf Wiki](https://github.com/moldypenguins/Gandalf/wiki) for setup guide.
 
 
 ## Issues / Support
@@ -78,7 +78,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for more information
 
 
 ## Code of Conduct
-See [CODEOFCONDUCT.md](CODEOFCONDUCT.md)
+See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 
 ## Related Projects
