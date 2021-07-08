@@ -100,9 +100,6 @@ Mordor.connection.once("open", () => {
           }
         }
       }
-
-      console.log('MENTIONS: ' + util.inspect(mentions, false, null, true));
-
       return mentions;
     }
   }
