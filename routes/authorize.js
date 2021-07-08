@@ -36,7 +36,7 @@ let router = express.Router();
 const util = require('util');
 
 
-function checkSignature({ hash, ...data }) {
+function checkSignature({hash, ...data}) {
   const secret = crypto.createHash('sha256')
     .update(CFG.bot.token)
     .digest();
@@ -67,7 +67,7 @@ router.get("/", async (req, res, next) => {
     },{upsert:true, new:true});
     console.log('TGUSER: ' + util.inspect(telegramUser), false, null, true);
 
-    let member = await Member.findOne({telegram_user:Mordor.Types.ObjectId(telegramUser._id)}).populate({path:'telegram_user'});
+    let member = await Member.findOne({telegram_user:telegramUser._id});
     console.log('MEMBER: ' + util.inspect(member, false, null, true));
 
     //console.log('PARAMS: ' + util.inspect(params, false, null, true));
