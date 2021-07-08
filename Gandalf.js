@@ -71,7 +71,7 @@ Mordor.connection.once("open", () => {
   bot.use(async(ctx, next) => {
     //console.log('CHAT: id=' + ctx.message.chat.id + ' title=' + ctx.message.chat.title);
     //parse channel
-    if(ctx?.message?.chat !== undefined && ctx.message.chat.type !== 'private' && !await TelegramGroup.exists({group_id:ctx.message.chat.id.toString()})) {
+    if(ctx?.message?.chat !== undefined && ctx.message.chat.type !== 'private' && !await TelegramGroup.exists({telegram_group_id:ctx.message.chat.id.toString()})) {
       await new TelegramGroup({_id:Mordor.Types.ObjectId(), telegram_group_id: ctx.message.chat.id.toString(), telegram_title: ctx.message.chat.title, telegram_type: ctx.message.chat.type}).save();
     }
     //parse user
