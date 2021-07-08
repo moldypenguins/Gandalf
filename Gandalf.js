@@ -86,13 +86,13 @@ Mordor.connection.once("open", () => {
       let mentions = [];
       if(message.entities !== undefined) {
         for (let i = 0; i < message.entities.filter(e => e.type === 'mention').length; i++) {
-          let usr = await TelegramUser.findOne({username: message.text.substr(message.entities[i].offset, message.entities[i].length).replace('@', '')});
+          let usr = await TelegramUser.findOne({telegram_username: message.text.substr(message.entities[i].offset, message.entities[i].length).replace('@', '')});
           if(usr != null) {
             mentions.push(usr);
           }
         }
         for (let i = 0; i < message.entities.filter(e => e.type === 'text_mention').length; i++) {
-          let usr = await TelegramUser.findOne({first_name: message.entities[i].user.first_name, last_name: message.entities[i].user.last_name});
+          let usr = await TelegramUser.findOne({telegram_first_name: message.entities[i].user.first_name, telegram_last_name: message.entities[i].user.last_name});
           if(usr != null) {
             mentions.push(usr);
           }
