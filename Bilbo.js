@@ -136,7 +136,7 @@ let load_ticks = async() => {
 let setup_admins = async() => {
 
   if(!await TelegramUser.exists({telegram_id:CFG.admin.telegram_id})) {
-    await new TelegramUser({telegram_id:CFG.admin.telegram_id}).save();
+    await new TelegramUser({_id:Mordor.Types.ObjectId(), telegram_id:CFG.admin.telegram_id}).save();
   }
   let tg_user = await TelegramUser.findOne({telegram_id:CFG.admin.telegram_id});
   console.log('TGUSER: ' + util.inspect(tg_user, false, null, true));
