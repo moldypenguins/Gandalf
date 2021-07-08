@@ -56,7 +56,7 @@ router.post('/', async (req, res, next) => {
       plnt = await Planet.findOne({x: req.body.planet_x, y: req.body.planet_y, z: req.body.planet_z});
     }
     //console.log('PLANET: ' + util.inspect(plnt, false, null, true));
-    let upd = await Member.updateOne({id: req.session.member.id}, {
+    let upd = await Member.findByIdAndUpdate(req.session.member._id, {
       site_theme: req.body.site_theme,
       site_navigation: req.body.site_navigation,
       pa_nick: req.body.pa_nick,
@@ -65,10 +65,14 @@ router.post('/', async (req, res, next) => {
       email: req.body.email,
       planet: plnt
     });
-    let saved = await Member.findOne({id: req.session.member.id}).populate('telegram_user').populate('planet');
-    console.log(saved.id + " profile updated.");
-    req.session.member = saved;
-    res.redirect('/profile');
+    let saved = await Member.findById(req.session.member._id).populate('telegram_user').populate('planet');
+    if(saved) {
+      console.log(saved.pa_nick + " profile updated.");
+      req.session.member = saved;
+      res.redirect('/profile');
+    } else {
+      next(createError(400));
+    }
   } else {
     next(createError(400));
   }
