@@ -109,7 +109,7 @@ let Admin_addgalmate = (args, ctx) => {
 
 
       console.log('ctx.message: ' + util.inspect(ctx.message, false, null, true));
-      console.log('ctx.mentions: ' + util.inspect(ctx.mentions, false, null, true));
+      console.log('ctx.mentions: ' + util.inspect(await ctx.mentions.get(ctx.message), false, null, true));
 
       let mentions = await ctx.mentions.get(ctx.message);
       console.log('MENTIONS: ' + util.inspect(mentions, false, null, true));
