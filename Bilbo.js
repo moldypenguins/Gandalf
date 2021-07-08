@@ -141,8 +141,8 @@ let setup_admins = async() => {
   let tg_user = await TelegramUser.findOne({telegram_id:CFG.admin.telegram_id});
   console.log('TGUSER: ' + util.inspect(tg_user, false, null, true));
 
-  if (!await Member.exists({telegram_user:tg_user._id})) {
-    if (await new Member({_id:Mordor.Types.ObjectId(), telegram_user:tg_user._id, access: 5, pa_nick:CFG.admin.pa_nick}).save()) {
+  if (!await Member.exists({telegram_user:tg_user})) {
+    if (await new Member({_id:Mordor.Types.ObjectId(), telegram_user:tg_user, access: 5, pa_nick:CFG.admin.pa_nick}).save()) {
       console.log(`Added ${CFG.admin.pa_nick} as admin to Members collection.`);
     } else {
       console.log(`Could not add ${CFG.admin.pa_nick} as admin to Members collection.`);
