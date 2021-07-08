@@ -65,7 +65,7 @@ router.post('/', async (req, res, next) => {
       email: req.body.email,
       planet: plnt
     });
-    let saved = await Member.findOne({id: req.session.member.id});
+    let saved = await Member.findOne({id: req.session.member.id}).populate('telegram_user').populate('planet');
     console.log(saved.id + " profile updated.");
     req.session.member = saved;
     res.redirect('/profile');
