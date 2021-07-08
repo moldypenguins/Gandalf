@@ -67,7 +67,7 @@ router.get("/", async (req, res, next) => {
     },{upsert:true, new:true});
     console.log('TGUSER: ' + util.inspect(telegramUser), false, null, true);
 
-    let member = await Member.findOne({'telegram_user._id':telegramUser._id});
+    let member = await Member.findOne({telegram_user:telegramUser});
     console.log('MEMBER: ' + util.inspect(member, false, null, true));
 
     //console.log('PARAMS: ' + util.inspect(params, false, null, true));
@@ -76,7 +76,7 @@ router.get("/", async (req, res, next) => {
       req.session.member = member;
       res.redirect("/");
     } else {
-      let applicant = await Applicant.findOne({telegram_user: telegramUser._id});
+      let applicant = await Applicant.findOne({telegram_user:telegramUser});
       if (applicant) {
         console.log('Is Applicant');
         req.session.applicant = applicant;
