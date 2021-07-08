@@ -72,11 +72,11 @@ Mordor.connection.once("open", () => {
     //console.log('CHAT: id=' + ctx.message.chat.id + ' title=' + ctx.message.chat.title);
     //parse channel
     if(ctx?.message?.chat !== undefined && ctx.message.chat.type !== 'private') {
-      await TelegramGroup.findOneAndUpdate({telegram_group_id: ctx.message.chat.id.toString()}, {telegram_title: ctx.message.chat.title, telegram_type: ctx.message.chat.type});
+      await TelegramGroup.findOneAndUpdate({telegram_group_id: ctx.message.chat.id.toString()}, {telegram_title: ctx.message.chat.title, telegram_type: ctx.message.chat.type}, {upsert:true, new:true});
     }
     //parse user
     if(ctx?.message?.from !== undefined && !ctx.message.from.is_bot) {
-      await TelegramUser.findOneAndUpdate({telegram_id: ctx.message.from.id}, {telegram_first_name: ctx.message.from.first_name, telegram_last_name: ctx.message.from.last_name, telegram_username: ctx.message.from.username, telegram_language_code: ctx.message.from.language_code});
+      await TelegramUser.findOneAndUpdate({telegram_id: ctx.message.from.id}, {telegram_first_name: ctx.message.from.first_name, telegram_last_name: ctx.message.from.last_name, telegram_username: ctx.message.from.username, telegram_language_code: ctx.message.from.language_code}, {upsert:true, new:true});
     }
     next();
   });
