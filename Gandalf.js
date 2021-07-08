@@ -86,7 +86,9 @@ Mordor.connection.once("open", () => {
       let mentions = [];
       if(message.entities !== undefined) {
         for (let i = 0; i < message.entities.filter(e => e.type === 'mention').length; i++) {
-          let usr = await TelegramUser.findOne({telegram_username: message.text.substr(message.entities[i].offset, message.entities[i].length).replace('@', '')});
+          let usrnm = message.text.substr(message.entities[i].offset, message.entities[i].length);
+          console.log('usrnm: ' + util.inspect(usrnm, false, null, true));
+          let usr = await TelegramUser.findOne({telegram_username: usrnm.replace('@', '')});
           if(usr != null) {
             mentions.push(usr);
           }
