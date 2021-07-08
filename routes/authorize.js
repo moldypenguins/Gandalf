@@ -65,13 +65,13 @@ router.get("/", async (req, res, next) => {
       telegram_username:params.username,
       telegram_photo_url:params.photo_url,
     },{upsert:true, new:true});
-    console.log('TGUSER: ' + util.inspect(telegramUser), false, null, true);
+    //console.log('TGUSER: ' + util.inspect(telegramUser), false, null, true);
 
     let member = await Member.findOne({telegram_user:telegramUser});
-    console.log('MEMBER: ' + util.inspect(member, false, null, true));
+    //console.log('MEMBER: ' + util.inspect(member, false, null, true));
 
     //console.log('PARAMS: ' + util.inspect(params, false, null, true));
-    if (member && false) {
+    if (member) {
       console.log('Is Member');
       req.session.member = member;
       res.redirect("/");
