@@ -24,10 +24,10 @@
 const Mordor = require('../Mordor');
 
 let TelegramGroupSchema = new Mordor.Schema({
-  _id:      {type:Mordor.Schema.Types.ObjectId, required:true},
-  group_id: {type:String, unique:true, required:true},
-  title:    {type:String},
-  type:     {type:String},
+  _id:               {type:Mordor.Schema.Types.ObjectId, required:true},
+  telegram_group_id: {type:String, unique:true, required:true},
+  telegram_title:    {type:String},
+  telegram_type:     {type:String},
 });
 
 module.exports = Mordor.model('TelegramGroup', TelegramGroupSchema, 'TelegramGroups');
