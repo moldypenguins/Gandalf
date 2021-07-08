@@ -64,7 +64,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <a class="navbar-profile" href="/profile"><img src="<% if(member.telegram_photo_url) { %><%= member.telegram_photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" alt=""/></a>
+                        <a class="navbar-profile" href="/profile"><img src="<% if(member.telegram_user.telegram_photo_url) { %><%= member.telegram_user.telegram_photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" alt=""/></a>
                     <% } %>
                 </div>
             </nav>
