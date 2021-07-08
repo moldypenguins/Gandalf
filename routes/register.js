@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name register.js
- * @version 2021/06/07
+ * @version 2021/07/08
  * @summary Express Route
  **/
 'use strict';
@@ -55,6 +55,9 @@ router.get("/", async (req, res, next) => {
  */
 router.post("/", async (req, res, next) => {
   console.log('POST VISITOR: ' + util.inspect(req.session.visitor, false, null, true));
+
+  //TODO: fix applicants so only 1 can exist
+  //let applicant = await Applicant.findOne({telegram_user:telegramUser});
   let applcnt = await new Applicant({
     _id: Mordor.Types.ObjectId(),
     telegram_id: req.session.visitor.id,

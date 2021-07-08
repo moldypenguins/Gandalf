@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name TelegramGroup.js
- * @version 2021/05/22
+ * @version 2021/07/08
  * @summary Mongoose Model
  **/
 'use strict';

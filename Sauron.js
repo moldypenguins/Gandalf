@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Sauron.js
- * @version 2021/06/19
+ * @version 2021/07/08
  * @summary Website
  **/
 'use strict';
@@ -90,7 +90,7 @@ let loginRequired = async (req, res, next) => {
     }
     return res.status(401).render('unauthorized', {site_title: CFG.alliance.name, page_title: CFG.alliance.name});
   } else {
-    await Member.updateOne({telegram_id: res.locals.member.telegram_id}, {last_access: Date.now()});
+    await Member.updateOne({telegram_user: res.locals.member.telegram_user}, {last_access: Date.now()});
     if (req.session.req_url !== undefined) {
       let req_url = req.session.req_url;
       req.session.req_url = undefined;
