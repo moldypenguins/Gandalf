@@ -40,7 +40,7 @@ let MemberSchema = new Mordor.Schema({
   timezone:        {type:String},
   email:           {type:String},
   phone:           {type:String},
-  planet:          {type:String, ref:'Planet'},
+  planet:          {type:Mordor.Schema.Types.ObjectId, ref:'Planet'},
 },
 {
   toJSON: { virtuals: true }
