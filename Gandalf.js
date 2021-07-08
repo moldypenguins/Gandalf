@@ -72,11 +72,11 @@ Mordor.connection.once("open", () => {
     //console.log('CHAT: id=' + ctx.message.chat.id + ' title=' + ctx.message.chat.title);
     //parse channel
     if(ctx?.message?.chat !== undefined && ctx.message.chat.type !== 'private' && !await TelegramGroup.exists({group_id:ctx.message.chat.id.toString()})) {
-      await new TelegramGroup({_id:Mordor.Types.ObjectId(), group_id: ctx.message.chat.id.toString(), title: ctx.message.chat.title, type: ctx.message.chat.type}).save();
+      await new TelegramGroup({_id:Mordor.Types.ObjectId(), telegram_group_id: ctx.message.chat.id.toString(), telegram_title: ctx.message.chat.title, telegram_type: ctx.message.chat.type}).save();
     }
     //parse user
     if(ctx?.message?.from !== undefined && !ctx.message.from.is_bot && !await TelegramUser.exists({telegram_id:ctx.message.from.id})) {
-      await new TelegramUser({_id:Mordor.Types.ObjectId(), telegram_id: ctx.message.from.id, first_name: ctx.message.from.first_name, last_name: ctx.message.from.last_name, username: ctx.message.from.username, language_code: ctx.message.from.language_code}).save();
+      await new TelegramUser({_id:Mordor.Types.ObjectId(), telegram_id: ctx.message.from.id, telegram_first_name: ctx.message.from.first_name, telegram_last_name: ctx.message.from.last_name, telegram_username: ctx.message.from.username, telegram_language_code: ctx.message.from.language_code}).save();
     }
     next();
   });
