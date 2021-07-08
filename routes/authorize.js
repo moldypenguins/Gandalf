@@ -68,7 +68,7 @@ router.get("/", async (req, res, next) => {
     //console.log('TGUSER: ' + util.inspect(telegramUser), false, null, true);
 
     let member = await Member.findOne({telegram_user:telegramUser}).populate('telegram_user');
-    //console.log('MEMBER: ' + util.inspect(member, false, null, true));
+    console.log('MEMBER: ' + util.inspect(member, false, null, true));
 
     //console.log('PARAMS: ' + util.inspect(params, false, null, true));
     if (member) {
