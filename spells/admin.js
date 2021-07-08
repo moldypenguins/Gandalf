@@ -21,6 +21,7 @@
  **/
 'use strict';
 
+const Mordor = require("../Mordor");
 const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
@@ -32,6 +33,7 @@ const numeral = require('numeral');
 const moment = require('moment');
 const he = require('he');
 const util = require('util');
+
 
 
 let Admin_leavegroup_usage = he.encode('!leavegroup [group id]');
@@ -111,12 +113,10 @@ let Admin_addgalmate = (args, ctx) => {
       if(mentions.length <= 0) {
         reject(`User ${tguser} not found.`);
       } else {
-        if (!await GalMate.exists({id: mentions[0].id})) {
-          let galm8 = new GalMate({
-            id: mentions[0].id,
-            first_name: mentions[0].first_name,
-            last_name: mentions[0].last_name,
-            username: mentions[0].username
+        if (!await GalMate.exists({telegram_user: mentions[0]})) {
+          let galm8 = await new GalMate({
+            _id: Mordor.Types.ObjectId(),
+            telegram_user: mentions[0]
           });
           let saved = await galm8.save();
           if (saved != null) {
