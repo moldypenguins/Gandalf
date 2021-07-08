@@ -190,8 +190,10 @@ Mordor.connection.once("open", () => {
     
     //parse commands
     if(ctx.message && ctx.message.text && (ctx.message.text.startsWith(CFG.bot.private_cmd) || ctx.message.text.startsWith(CFG.bot.public_cmd))) {
-      let mem = await Member.findOne({'telegram_user.telegram_id': ctx.from.id});
-      let gm8 = await GalMate.findOne({'telegram_user.telegram_id': ctx.from.id});
+      let tgUser = await TelegramUser.findOne({telegram_id: ctx.from.id});
+
+      let mem = await Member.findOne({telegram_user: tgUser});
+      let gm8 = await GalMate.findOne({telegram_user: tgUser});
       
       if(!mem && !gm8) {
         ctx.replyWithHTML('<i>Access denied!</i>', {reply_to_message_id: ctx.message.message_id});
