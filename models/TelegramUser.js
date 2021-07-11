@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name TelegramUser.js
- * @version 2021/05/22
+ * @version 2021/07/11
  * @summary Mongoose Model
  **/
 'use strict';
@@ -33,5 +33,15 @@ let TelegramUserSchema = new Mordor.Schema({
   telegram_photo_url:     {type:String, default:CFG.web.uri + '/' + CFG.web.default_profile_pic},
   telegram_language_code: {type:String},
 });
+
+TelegramUserSchema.methods.getMentionName = async() => {
+  let mention_name = this.telegram_first_name;
+  if(this.telegram_username) {
+    mention_name = this.telegram_username;
+  } else if(this.telegram_last_name) {
+    mention_name = `${this.telegram_first_name} ${this.telegram_last_name}`;
+  }
+  return mention_name;
+}
 
 module.exports = Mordor.model('TelegramUser', TelegramUserSchema, 'TelegramUsers');

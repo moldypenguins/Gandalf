@@ -41,20 +41,22 @@ let MemberSchema = new Mordor.Schema({
   email:           {type:String},
   phone:           {type:String},
   planet:          {type:Mordor.Schema.Types.ObjectId, ref:'Planet'},
-},
+}/*,
 {
   toJSON: { virtuals: true }
-});
+}
+*/);
 
 
 // Virtual populate
+/*
 MemberSchema.virtual("TelegramUsers", {
   ref: "TelegramUser",
   foreignField: "telegram_id",
   localField: "telegram_user",
   justOne: true
 });
-
+*/
 
 MemberSchema.statics.findByTelegramUser = async function(telegram_user) {
   return await this.findOne({telegram_user: telegram_user._id});

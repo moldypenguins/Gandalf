@@ -91,15 +91,6 @@ let isValidDate = function(d) {
 };
 
 
-let getTelegramName = function(m) {
-	let result = m.telegram_user.telegram_first_name;
-	if(m.telegram_user.telegram_username) {
-		result = `<a href="https://t.me/${m.telegram_user.telegram_username}">${m.telegram_user.telegram_username}</a>`;
-	} else if(m.telegram_user.telegram_last_name) {
-		result = `${m.telegram_user.telegram_first_name} ${m.telegram_user.telegram_last_name}`;
-	}
-	return result;
-};
 
 
 
@@ -108,5 +99,5 @@ let getTelegramName = function(m) {
 
 module.exports = {
 	"isValidDate": isValidDate,
-	"getTelegramName": getTelegramName,
+
 };

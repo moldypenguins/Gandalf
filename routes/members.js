@@ -234,7 +234,7 @@ router.post('/:id', AXS.webHighCommandRequired, async (req, res, next) => {
     if(req.body.full_phone !== undefined) { mem.phone = req.body.full_phone; }
     if(req.body.email !== undefined) { mem.email = req.body.email; }
     if(req.body.planet_x !== undefined && req.body.planet_y !== undefined && req.body.planet_z !== undefined) {
-      plnt = await Planet.findOne({x: req.body.planet_x, y: req.body.planet_y, z: req.body.planet_z});
+      let plnt = await Planet.findOne({x: req.body.planet_x, y: req.body.planet_y, z: req.body.planet_z});
       mem.planet_id = plnt ? plnt.id : null;
     }
     let upd = await mem.save();
