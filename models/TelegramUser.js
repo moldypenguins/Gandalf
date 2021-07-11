@@ -42,6 +42,6 @@ TelegramUserSchema.methods.getMentionName = async() => {
     mention_name = `${this.telegram_first_name} ${this.telegram_last_name}`;
   }
   return mention_name;
-}
+};
 
 module.exports = Mordor.model('TelegramUser', TelegramUserSchema, 'TelegramUsers');
