@@ -41,12 +41,14 @@ let MemberSchema = new Mordor.Schema({
   email:           {type:String},
   phone:           {type:String},
   planet:          {type:Mordor.Schema.Types.ObjectId, ref:'Planet'},
-}/*,
+});
+
+
+/*
 {
   toJSON: { virtuals: true }
 }
-*/);
-
+*/
 
 // Virtual populate
 /*
@@ -61,5 +63,11 @@ MemberSchema.virtual("TelegramUsers", {
 MemberSchema.statics.findByTelegramUser = async function(telegram_user) {
   return await this.findOne({telegram_user: telegram_user._id});
 }
+
+
+MemberSchema.pre('find', function() {
+  this.populate('telegram_user').populate('parent').populate('planet');
+});
+
 
 module.exports = Mordor.model('Member', MemberSchema, 'Members');
