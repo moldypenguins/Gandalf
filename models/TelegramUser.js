@@ -34,7 +34,7 @@ let TelegramUserSchema = new Mordor.Schema({
   telegram_language_code: {type:String},
 });
 
-TelegramUserSchema.methods.getMentionName = () => {
+TelegramUserSchema.methods.getMentionName = async() => {
   let mention_name = this.telegram_first_name;
   if(this.telegram_username) {
     mention_name = this.telegram_username;

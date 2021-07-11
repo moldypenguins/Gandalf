@@ -46,7 +46,7 @@
                                     </td>
                                     <th scope="row" class="no-wrap">
                                         <img class="tg-pic" src="<% if(members[i].photo_url) { %><%= members[i].photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" alt=""/>
-                                        <a href="tg://user?id=<%= members[i].telegram_user.telegram_id %>"><%= members[i].telegram_user.getMentionName() %></a>
+                                        <a href="tg://user?id=<%= members[i].telegram_user.telegram_id %>"><%= members[i].telegram_name %></a>
                                     </th>
                                     <td class="no-wrap"><%= members[i].pa_nick %></td>
                                     <td class="pr-3 no-wrap">
