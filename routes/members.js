@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name members.js
- * @version 2021/06/07
+ * @version 2021/07/11
  * @summary Express Route
  **/
 'use strict';
@@ -40,34 +40,34 @@ const client = require('twilio')(CFG.twilio.sid, CFG.twilio.secret);
 //var VoiceResponse = twilio.twiml.VoiceResponse;
 
 router.get('/', AXS.webMemberRequired, async (req, res, next) => {
-  let mems = await Member.find();
+  let mems = await Member.find().populate('telegram_user').populate('planet');
+  //let plnts = await Planet.find();
   let inact = await Inactive.find();
-  let plnts = await Planet.find();
+  let apps = await Applicant.find();
   let glm8s = await GalMate.find();
   mems.forEach((m) => {
-    if(m.planet_id !== undefined && plnts.some(p => p.id == m.planet_id)) {
-      m.planet = plnts.find(p => p.id == m.planet_id);
-    }
-    var rolesString = [];
-    if(m.access == 5) {
+    //if(m.planet_id !== undefined && plnts.some(p => p.id === m.planet_id)) { m.planet = plnts.find(p => p.id === m.planet_id); }
+    //TODO: add below to model member.getRank()
+    let rolesString = [];
+    if(m.access === 5) {
       rolesString.push("ADM");
     }
-    if(m.access >= 3 && (m.roles & 16) != 0) {
+    if(m.access >= 3 && (m.roles & 16) !== 0) {
       rolesString.push("HC");
     }
-    if(m.access >= 3 && (m.roles & 8) != 0) {
+    if(m.access >= 3 && (m.roles & 8) !== 0) {
       rolesString.push("DC");
     }
-    if(m.access >= 3 && (m.roles & 4) != 0) {
+    if(m.access >= 3 && (m.roles & 4) !== 0) {
       rolesString.push("BC");
     }
     if(m.access >= 3 && rolesString.length <= 0) {
       rolesString.push("CMDR");
     }
-    if(m.access >= 1 && (m.roles & 2) != 0) {
+    if(m.access >= 1 && (m.roles & 2) !== 0) {
       rolesString.push("SCNR");
     } 
-    if(m.access >= 1 && (m.roles & 1) != 0) {
+    if(m.access >= 1 && (m.roles & 1) !== 0) {
       rolesString.push("OOT");
     } 
     if(m.access >= 1 && rolesString.length <= 0) {
@@ -78,7 +78,6 @@ router.get('/', AXS.webMemberRequired, async (req, res, next) => {
     }
     m.accessRoles = rolesString.join(', ');
   });
-  let apps = await Applicant.find();
   res.render('members', { members: mems, inactives: inact, applicants: apps, galmates: glm8s, access: CFG.access, moment: moment });
 });
 
