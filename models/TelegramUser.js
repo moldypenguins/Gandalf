@@ -34,7 +34,7 @@ let TelegramUserSchema = new Mordor.Schema({
   telegram_language_code: {type:String},
 });
 
-TelegramUserSchema.methods.getMentionName = function() {
+TelegramUserSchema.method('getMentionName', function() {
   let mention_name = this.telegram_first_name;
   if(this.telegram_username) {
     mention_name = this.telegram_username;
@@ -42,6 +42,6 @@ TelegramUserSchema.methods.getMentionName = function() {
     mention_name = `${this.telegram_first_name} ${this.telegram_last_name}`;
   }
   return mention_name;
-};
+});
 
 module.exports = Mordor.model('TelegramUser', TelegramUserSchema, 'TelegramUsers');
