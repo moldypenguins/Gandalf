@@ -93,7 +93,7 @@ router.post('/', AXS.webHighCommandRequired, async(req, res, next) => {
         first_name: mbr.first_name,
         last_name: mbr.last_name,
         photo_url: mbr.photo_url,
-        panick: mbr.panick,
+        pa_nick: mbr.pa_nick,
         email: mbr.email,
         phone: mbr.phone,
         sponsor: mbr.sponsor,
@@ -173,7 +173,7 @@ router.post('/inactives', AXS.webHighCommandRequired, async (req, res, next) => 
         first_name: inact.first_name,
         last_name: inact.last_name,
         photo_url: inact.photo_url,
-        panick: inact.panick,
+        pa_nick: inact.pa_nick,
         email: inact.email,
         phone: inact.phone,
         sponsor: inact.sponsor,
@@ -220,7 +220,7 @@ router.post('/:id', AXS.webHighCommandRequired, async (req, res, next) => {
   if(req.body !== undefined) {
     console.log('BODY: ' + util.inspect(req.body, false, null, true));
     let mem = await Member.findOne({id: req.params.id});
-    if(req.body.panick !== undefined) { mem.panick = req.body.panick; }
+    if(req.body.pa_nick !== undefined) { mem.pa_nick = req.body.pa_nick; }
     if(req.body.access !== undefined) { mem.access = req.body.access; }
     if(req.body.role1 !== undefined || req.body.role2 !== undefined || req.body.role4 !== undefined || req.body.role8 !== undefined || req.body.role16 !== undefined) {
       mem.roles = 

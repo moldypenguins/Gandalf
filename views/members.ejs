@@ -19,7 +19,7 @@
                                 <tr>
                                     <th scope="col" class="btn-col"></th>
                                     <th data-sortable="true" data-field="member" scope="col">Member (<%= members.length %>)</th>
-                                    <th data-sortable="true" data-field="panick" scope="col">PA Nick</th>
+                                    <th data-sortable="true" data-field="pa_nick" scope="col">PA Nick</th>
                                     <th data-sortable="true" data-field="access" scope="col">Access</th>
                                     <th data-sortable="true" data-field="coords" scope="col">Coords</th>
                                     <th data-field="phone" scope="col">Phone</th>
@@ -54,7 +54,7 @@
                                             <%= members[i].first_name %>
                                         <% } %>
                                     </th>
-                                    <td class="no-wrap"><%= members[i].panick %></td>
+                                    <td class="no-wrap"><%= members[i].pa_nick %></td>
                                     <td class="pr-3 no-wrap">
                                         <% if(member.isADM || (member.isHC && !members[i].isADM && !members[i].isHC)) { %>
                                             <form method="POST" action="/mem/<%= members[i].id %>">
@@ -140,7 +140,7 @@
                                 <th scope="col">Username (<%= inactives.length %>)</th>
                                 <th scope="col">First Name</th>
                                 <th scope="col">Last Name</th>
-                                <th data-sortable="true" data-field="panick" scope="col">PA Nick</th>
+                                <th data-sortable="true" data-field="pa_nick" scope="col">PA Nick</th>
                                 <th data-field="phone" scope="col">Phone</th>
                                 <th data-field="email" scope="col">Email</th>
                             </tr>
@@ -174,7 +174,7 @@
                                     </th>
                                     <td><%= inactives[i].first_name %></td>
                                     <td><%= inactives[i].last_name %></td>
-                                    <td><%= inactives[i].panick %></td>
+                                    <td><%= inactives[i].pa_nick %></td>
                                     <td class="no-wrap">
                                         <% if(inactives[i].phone) { %>
                                             <% if(member.isADM) { %>
