@@ -27,7 +27,7 @@ const Mordor = require('../Mordor');
 let MemberSchema = new Mordor.Schema({
   _id:             {type:Mordor.Schema.Types.ObjectId, required:true},
   pa_nick:         {type:String, trim:true, unique:true, index:true, required:true},
-  telegram_user:   {type:Mordor.Schema.Types.ObjectId, ref:'TelegramUser'},
+  telegram_user:   {type:Mordor.Schema.Types.ObjectId, ref:'TelegramUser', autopopulate: true},
   discord_user:    {type:Mordor.Schema.Types.ObjectId, ref:'DiscordUser'},
   access:          {type:Number, default:0, required:true},
   roles:           {type:Number, default:0, required:true},
@@ -40,34 +40,13 @@ let MemberSchema = new Mordor.Schema({
   timezone:        {type:String},
   email:           {type:String},
   phone:           {type:String},
-  planet:          {type:Mordor.Schema.Types.ObjectId, ref:'Planet'},
+  planet:          {type:Mordor.Schema.Types.ObjectId, ref:'Planet', autopopulate: true},
 });
-
-
-/*
-{
-  toJSON: { virtuals: true }
-}
-*/
-
-// Virtual populate
-/*
-MemberSchema.virtual("TelegramUsers", {
-  ref: "TelegramUser",
-  foreignField: "telegram_id",
-  localField: "telegram_user",
-  justOne: true
-});
-*/
 
 MemberSchema.statics.findByTelegramUser = async function(telegram_user) {
   return await this.findOne({telegram_user: telegram_user._id});
 }
 
-
-MemberSchema.pre('find', function() {
-  this.populate('telegram_user').populate('parent').populate('planet');
-});
-
+MemberSchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = Mordor.model('Member', MemberSchema, 'Members');
