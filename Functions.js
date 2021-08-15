@@ -60,28 +60,12 @@ function coordType(coords) {
 	}
 }
 
-
-
 */
-
-
-
-
 
 
 //var id = require('mongodb').ObjectID(doc._id);
 //.findOne({_id: new ObjectId(id)}
 //.findById("5e12d86186d564bd4487658c", function(err, result) {
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -91,9 +75,7 @@ let isValidDate = function(d) {
 };
 
 let getTelegramName = async(u) => {
-
-	console.log('telegram_name: ' + util.inspect(u, false, null, true));
-
+	//console.log('u: ' + util.inspect(u, false, null, true));
 	let mention_name = u.telegram_first_name;
 	if(u.telegram_username) {
 		mention_name = u.telegram_username;
@@ -102,9 +84,6 @@ let getTelegramName = async(u) => {
 	}
 	return mention_name;
 };
-
-
-
 
 
 
