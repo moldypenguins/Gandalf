@@ -28,6 +28,7 @@ const Mordor = require('./Mordor');
 
 const Tick = require('./models/Tick');
 const Member = require('./models/Member');
+const TelegramUser = require('./models/TelegramUser');
 const Planet = require('./models/Planet');
 const Ship = require('./models/Ship');
 const Scan = require('./models/Scan');
@@ -144,8 +145,8 @@ Mordor.connection.once("open", () => {
     console.log('MEMBER: ' + util.inspect(req.session.member, false, null, true));
     if(req.session?.member !== undefined && req.session.member != null) {
 
-      let testmem = await Member.findOne({pa_nick:req.session.member.pa_nick});
-      console.log('MEMBER: ' + util.inspect(testmem, false, null, true));
+      let tguser = await TelegramUser.findOne({telegram_id:req.session.member.telegram_user.telegram_id});
+      console.log('MEMBER: ' + util.inspect(tguser, false, null, true));
 
       if(req.session.member.site_theme !== undefined && req.session.member.site_theme !== 'default' && CFG.web.themes[req.session.member.site_theme]) {
         res.locals.site_theme_name = req.session.member.site_theme;
