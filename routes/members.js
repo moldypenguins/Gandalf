@@ -36,6 +36,7 @@ const express = require('express');
 let router = express.Router();
 const moment = require('moment');
 const util = require('util');
+const FNCS = require("./Functions");
 const client = require('twilio')(CFG.twilio.sid, CFG.twilio.secret);
 //var VoiceResponse = twilio.twiml.VoiceResponse;
 
@@ -46,6 +47,9 @@ router.get('/', AXS.webMemberRequired, async (req, res, next) => {
   let apps = await Applicant.find();
   let glm8s = await GalMate.find();
   mems.forEach((m) => {
+    if(m.telegram_user) {
+      m.telegram_user.telegram_name = FNCS.getTelegramName(m.telegram_user);
+    }
     //if(m.planet_id !== undefined && plnts.some(p => p.id === m.planet_id)) { m.planet = plnts.find(p => p.id === m.planet_id); }
     //TODO: add below to model member.getRank()
     let rolesString = [];
