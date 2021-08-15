@@ -34,6 +34,7 @@ let TelegramUserSchema = new Mordor.Schema({
   telegram_language_code: {type:String},
 });
 
+/*
 TelegramUserSchema.virtual('telegram_name')
 .get(function() {
   let mention_name = this.telegram_first_name;
@@ -44,5 +45,6 @@ TelegramUserSchema.virtual('telegram_name')
   }
   return mention_name;
 });
+*/
 
 module.exports = Mordor.model('TelegramUser', TelegramUserSchema, 'TelegramUsers');
