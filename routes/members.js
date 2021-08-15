@@ -82,6 +82,12 @@ router.get('/', AXS.webMemberRequired, async (req, res, next) => {
     }
     m.accessRoles = rolesString.join(', ');
   });
+  glm8s.forEach((gm8) => {
+    if(gm8.telegram_user) {
+      gm8.telegram_user.telegram_name = FNCS.getTelegramName(gm8.telegram_user);
+    }
+  });
+
   res.render('members', { members: mems, inactives: inact, applicants: apps, galmates: glm8s, access: CFG.access, moment: moment });
 });
 
