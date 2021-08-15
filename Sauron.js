@@ -148,7 +148,11 @@ Mordor.connection.once("open", () => {
         res.locals.site_theme_name = req.session.member.site_theme;
         res.locals.site_theme = CFG.web.themes[req.session.member.site_theme];
       }
-      res.locals.member.telegram_user.telegram_name = await FNCS.getTelegramName(res.locals.member);
+
+      res.locals.member.telegram_name = await FNCS.getTelegramName(res.locals.member);
+      console.log('telegram_name: ' + util.inspect(res.locals.member.telegram_name, false, null, true));
+
+
       res.locals.member.isADM = req.session.member.access === 5;
       res.locals.member.isHC = req.session.member.access >= 3 && (req.session.member.roles & 16) !== 0;
       res.locals.member.isDC = req.session.member.access >= 3 && (req.session.member.roles & 8) !== 0;
