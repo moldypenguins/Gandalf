@@ -90,11 +90,11 @@ let isValidDate = function(d) {
 	return d instanceof Date && !isNaN(d);
 };
 
-let getTelegramName = function(u) {
+let getTelegramName = async(u) => {
 	let mention_name = u.telegram_first_name;
 	if(u.telegram_username) {
 		mention_name = u.telegram_username;
-	} else if(this.telegram_last_name) {
+	} else if(u.telegram_last_name) {
 		mention_name = `${u.telegram_first_name} ${u.telegram_last_name}`;
 	}
 	return mention_name;
