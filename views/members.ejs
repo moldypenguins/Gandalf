@@ -279,13 +279,7 @@
                                     </td>
                                     <th scope="row">
                                         <img src="<%= default_profile_pic %>" width="30" height="30" class="tg-pic"/>
-                                        <% if(galmates[i].username) { %>
-                                            <a href="https://t.me/<%= galmates[i].username %>"><%= galmates[i].username %></a>
-                                        <% } else if(galmates[i].last_name) { %>
-                                            <%= galmates[i].first_name %> <%= galmates[i].last_name %>
-                                        <% } else { %>
-                                            <%= galmates[i].first_name %>
-                                        <% } %>
+                                        <%= galmates[i].telegram_user.telegram_name %>
                                     </th>
                                 </tr>
                             <% } %>
