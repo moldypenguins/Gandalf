@@ -74,7 +74,7 @@ let isValidDate = function(d) {
 	return d instanceof Date && !isNaN(d);
 };
 
-let getTelegramName = async(u) => {
+let getTelegramName = function(u) {
 	//console.log('u: ' + util.inspect(u, false, null, true));
 	let mention_name = u.telegram_first_name;
 	if(u.telegram_username) {
