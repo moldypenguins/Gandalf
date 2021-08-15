@@ -36,7 +36,7 @@ const express = require('express');
 let router = express.Router();
 const moment = require('moment');
 const util = require('util');
-const FNCS = require("./Functions");
+const FNCS = require("Functions");
 const client = require('twilio')(CFG.twilio.sid, CFG.twilio.secret);
 //var VoiceResponse = twilio.twiml.VoiceResponse;
 
