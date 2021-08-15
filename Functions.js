@@ -91,6 +91,9 @@ let isValidDate = function(d) {
 };
 
 let getTelegramName = async(u) => {
+
+	console.log('telegram_name: ' + util.inspect(u, false, null, true));
+
 	let mention_name = u.telegram_first_name;
 	if(u.telegram_username) {
 		mention_name = u.telegram_username;
