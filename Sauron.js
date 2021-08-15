@@ -143,6 +143,10 @@ Mordor.connection.once("open", () => {
 
     console.log('MEMBER: ' + util.inspect(req.session.member, false, null, true));
     if(req.session?.member !== undefined && req.session.member != null) {
+
+      let testmem = await Member.findOne({pa_nick:req.session.member.pa_nick});
+      console.log('MEMBER: ' + util.inspect(testmem, false, null, true));
+
       if(req.session.member.site_theme !== undefined && req.session.member.site_theme !== 'default' && CFG.web.themes[req.session.member.site_theme]) {
         res.locals.site_theme_name = req.session.member.site_theme;
         res.locals.site_theme = CFG.web.themes[req.session.member.site_theme];
