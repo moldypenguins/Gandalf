@@ -58,7 +58,7 @@ let Calcs_exile = (args) => {
     for(let g in galaxy_groups) {
       if(g < galaxy_groups.length - 1) {
         //TODO: lookup gals
-        message += `\n${galaxy_groups[g].galaxies}` + galaxy_groups[g].galaxies > 1 ? 'galaxies' : 'galaxy' + ` with ${galaxy_groups[g]._id} planets`;
+        message += `\n${galaxy_groups[g].galaxies} ${galaxy_groups[g].galaxies > 1 ? 'galaxies' : 'galaxy'} with ${galaxy_groups[g]._id} planets`;
       } else {
         let max_planet_gal_count = await Galaxy.countDocuments({active: true, planets: {$eq: galaxy_groups[g]._id}});
         message += `\n${galaxy_groups[g].galaxies} out of ${max_planet_gal_count} galaxies with ${galaxy_groups[g]._id} planets`;
