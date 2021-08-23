@@ -41,7 +41,11 @@ let Calcs_exile_desc = 'Shows information regarding chances of landing in desire
 let Calcs_exile = (args) => {
   return new Promise(async(resolve, reject) => {
     let galaxy_count = await Galaxy.countDocuments({active: true, $and: [{x: {$ne: 200}},{or: [{x: {$ne: 1}},{y: {$ne: 1}}]}]});
+    console.log(`galaxy_count: ${galaxy_count}`);
+
     let galaxy_limit = Math.ceil(galaxy_count * 0.2);
+    console.log(`galaxy_limit: ${galaxy_limit}`);
+
     let galaxies = await Galaxy.aggregate([
       {$match: {active: true, $and: [{x: {$ne: 200}},{or: [{x: {$ne: 1}},{y: {$ne: 1}}]}]}},
       {$sort: {planets: 1}},
