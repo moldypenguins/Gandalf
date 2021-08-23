@@ -27,8 +27,8 @@ const AXS = require('../Access');
 const FNCS = require('../Functions');
 
 const Tick = require('../models/Tick');
-const Members = require('../models/Member');
-const Planets = require('../models/Planet');
+const Galaxy = require('../models/Galaxy');
+const Planet = require('../models/Planet');
 
 const numeral = require('numeral');
 //const moment = require('moment');
@@ -36,10 +36,24 @@ const moment = require('moment-timezone');
 const he = require('he');
 
 
-var Calcs_exile_usage = he.encode('!exile');
-var Calcs_exile_desc = 'Shows information regarding chances of landing in desired galaxies.';
-var Calcs_exile = (args) => {
-  return new Promise(function (resolve, reject) {
+let Calcs_exile_usage = he.encode('!exile');
+let Calcs_exile_desc = 'Shows information regarding chances of landing in desired galaxies.';
+let Calcs_exile = (args) => {
+  return new Promise(async(resolve, reject) => {
+    let load_galaxies = await Galaxy.find();
+    let load_planets = await Planet.find();
+
+    let gals = 0;
+    let bracket = 0;
+    let base_bracket_gals = 0;
+    let max_planets = 0;
+
+    gals += load_galaxies.count();
+
+
+
+
+
     resolve('Coming Soon');
   });
 };
