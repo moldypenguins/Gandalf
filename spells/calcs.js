@@ -48,21 +48,19 @@ let Calcs_exile = (args) => {
 
     let galaxies = await Galaxy.aggregate([
       {$match: {active: true, $and:[{x: {$ne: 200}},{$or: [{x: {$ne: 1}},{y: {$ne: 1}}]}]}},
-      //{$sort: {planets: 1}},
-      //{$limit: galaxy_limit},
-      {$group: {planets: '$planets', galaxies: {$sum: 1}}}
-    ]).sort({planets: 1});
+      {$sort: {planets: 1}},
+      {$limit: galaxy_limit},
+      {$group: {_id: '$planets', galaxies: {$sum: 1}}}
+    ]).sort({_id: 1});
     console.log('GALAXIES: ' + util.inspect(galaxies, false, null, true));
 
 
+    let message = `Total galaxies: ${galaxy_count}`;
 
 
 
-
-
-    resolve(`Total galaxies: ${galaxy_count}`);
+    resolve(message);
     //resolve(`Total galaxies: ${gals} | ${base_bracket_gals} galaxies with a maximum of ${max_planets} planets guaranteed to be in the exile bracket`);
-
   });
 };
 
