@@ -57,18 +57,20 @@ let Calcs_exile = (args) => {
     let message = `Exile Bracket: ${galaxy_limit} of ${galaxy_count} galaxies.`;
     for(let g in galaxy_groups) {
       if(g < galaxy_groups.length - 1) {
-        //TODO: lookup gals
         message += `\n${galaxy_groups[g].galaxies} ${galaxy_groups[g].galaxies > 1 ? 'galaxies' : 'galaxy'} with ${galaxy_groups[g]._id} planets`;
+        message += ' (';
+        let planet_gals = await Galaxy.find({active: true, $and:[{x: {$ne: 200}},{$or: [{x: {$ne: 1}},{y: {$ne: 1}}]}], planets: {$eq: galaxy_groups[g]._id}});
+        for(let p in planet_gals) {
+          message += `${planet_gals[p].x}:${planet_gals[p].y}`
+        }
+        message += ')';
       } else {
-        let max_planet_gal_count = await Galaxy.countDocuments({active: true, planets: {$eq: galaxy_groups[g]._id}});
+        let max_planet_gal_count = await Galaxy.countDocuments({active: true, $and:[{x: {$ne: 200}},{$or: [{x: {$ne: 1}},{y: {$ne: 1}}]}], planets: {$eq: galaxy_groups[g]._id}});
         message += `\n${galaxy_groups[g].galaxies} out of ${max_planet_gal_count} galaxies with ${galaxy_groups[g]._id} planets`;
       }
       console.log('GALAXY_GROUP: ' + util.inspect(galaxy_groups[g], false, null, true));
     }
-
-
     resolve(message);
-    //resolve(`Total galaxies: ${gals} | ${base_bracket_gals} galaxies with a maximum of ${max_planets} planets guaranteed to be in the exile bracket`);
   });
 };
 
