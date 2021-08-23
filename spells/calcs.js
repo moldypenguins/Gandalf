@@ -52,11 +52,14 @@ let Calcs_exile = (args) => {
       {$limit: galaxy_limit},
       {$group: {_id: '$planets', galaxies: {$sum: 1}}}
     ]).sort({_id: 1});
-    //console.log('GALAXY_GROUPS: ' + util.inspect(galaxy_groups, false, null, true));
+    console.log('GALAXY_GROUPS: ' + util.inspect(galaxy_groups.count(), false, null, true));
 
 
-    let message = `Exile Bracket: ${galaxy_limit} of ${galaxy_count} galaxies.<br>`;
+    let max_planet_gal_count = await Galaxy.countDocuments({$match:{active: true, planets: {$eq: 6}}});
+
+    let message = `Exile Bracket: ${galaxy_limit} of ${galaxy_count} galaxies.`;
     for(let g in galaxy_groups) {
+      message += `\n${galaxy_groups[g].galaxies} galaxies with ${galaxy_groups[g].galaxies} planets`;
       console.log('GALAXY_GROUP: ' + util.inspect(galaxy_groups[g], false, null, true));
     }
 
