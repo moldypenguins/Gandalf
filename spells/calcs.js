@@ -43,7 +43,7 @@ let Calcs_exile = (args) => {
     let galaxy_count = await Galaxy.countDocuments({active: true, $and:[{x: {$ne: 200}},{$or: [{x: {$ne: 1}},{y: {$ne: 1}}]}]});
     console.log(`galaxy_count: ${galaxy_count}`);
 
-    let galaxy_limit = Math.ceil(galaxy_count * 0.2);
+    let galaxy_limit = Math.trunc(galaxy_count * 0.2);
     console.log(`galaxy_limit: ${galaxy_limit}`);
 
     let galaxy_groups = await Galaxy.aggregate([
@@ -55,7 +55,7 @@ let Calcs_exile = (args) => {
     //console.log('GALAXY_GROUPS: ' + util.inspect(galaxy_groups, false, null, true));
 
 
-    let message = `Total galaxies: ${galaxy_count}`;
+    let message = `Exile Bracket: ${galaxy_limit} of ${galaxy_count} galaxies.<br>`;
     for(let g in galaxy_groups) {
       console.log('GALAXY_GROUP: ' + util.inspect(galaxy_groups[g], false, null, true));
     }
