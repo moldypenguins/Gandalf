@@ -110,7 +110,10 @@ Mordor.connection.once("open", () => {
     console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)
   });
 
-  function help(ctx, mem) {
+  function help(ctx, args, mem) {
+
+
+
     let commands = '<b>Commands:</b>\n' +
       '<b>help:</b> <i>Shows list of commands</i>\n' + 
       '<b>links:</b> <i>Shows web links</i>\n';
@@ -132,7 +135,7 @@ Mordor.connection.once("open", () => {
   //bot.help(help);
   //bot.settings((ctx) => {});
   //bot.command('links', (ctx) => links(ctx));
-  bot.on('text', async (ctx) => {
+  bot.on('text', async(ctx) => {
     console.log(ctx.message);
     //parse scans
     if(ctx.message && ctx.message.text && ctx.message.entities && Array.isArray(ctx.message.entities)) {
@@ -185,7 +188,7 @@ Mordor.connection.once("open", () => {
         //console.log('Command: ' + cmd);
         
         if (cmd === "help") {
-          help(ctx, mem);
+          help(ctx, args, mem);
         } else if (cmd === "links") {
           links(ctx);
         } else if(cmd in spells && typeof(spells[cmd].cast) == 'function') {
