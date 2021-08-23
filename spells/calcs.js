@@ -56,8 +56,8 @@ let Calcs_exile = (args) => {
 
 
     let message = `Total galaxies: ${galaxy_count}`;
-    for(let gal_group in galaxy_groups) {
-      console.log('GALAXY_GROUP: ' + util.inspect(gal_group, false, null, true));
+    for(let g in galaxy_groups) {
+      console.log('GALAXY_GROUP: ' + util.inspect(galaxy_groups[g], false, null, true));
     }
 
 
