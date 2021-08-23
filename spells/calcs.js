@@ -50,8 +50,8 @@ let Calcs_exile = (args) => {
       {$match: {active: true, $and:[{x: {$ne: 200}},{$or: [{x: {$ne: 1}},{y: {$ne: 1}}]}]}},
       //{$sort: {planets: 1}},
       //{$limit: galaxy_limit},
-      {$group: {_id: '$planets', galaxies: {$sum: 1}}}
-    ]).sort({_id: 1});
+      {$group: {planets: '$planets', galaxies: {$sum: 1}}}
+    ]).sort({planets: 1});
     console.log('GALAXIES: ' + util.inspect(galaxies, false, null, true));
 
 
