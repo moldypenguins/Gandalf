@@ -47,7 +47,7 @@ let Calcs_exile = (args) => {
     console.log(`galaxy_limit: ${galaxy_limit}`);
 
     let galaxies = await Galaxy.aggregate([
-      {$project: {coords: {$concat:['$x',':','$y']}}},
+      {$project: {coords: {$concat:[{$toString: '$x'},':',{$toString: '$y'}]}}},
       {$match: {active: true, $and:[{x: {$ne: 200}},{$or: [{x: {$ne: 1}},{y: {$ne: 1}}]}]}},
       //{$sort: {planets: 1}},
       //{$limit: galaxy_limit},
