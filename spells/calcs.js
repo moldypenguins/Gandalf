@@ -42,7 +42,12 @@ let Calcs_exile = (args) => {
   return new Promise(async(resolve, reject) => {
 
     let galaxy_count = Galaxy.count({active: 1});
+    console.log(`galaxy_count: ${galaxy_count}`);
+
     let galaxy_limit = Math.ceil(galaxy_count * 0.2);
+    console.log(`galaxy_limit: ${galaxy_limit}`);
+
+
     let galaxies = await Galaxy.aggregate([
       {$match: {active: 1}},
       {$sort: {planets: 1}},
