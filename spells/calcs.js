@@ -40,7 +40,7 @@ let Calcs_exile_usage = he.encode('!exile');
 let Calcs_exile_desc = 'Shows information regarding chances of landing in desired galaxies.';
 let Calcs_exile = (args) => {
   return new Promise(async(resolve, reject) => {
-    let galaxy_count = await Galaxy.countDocuments({active: true, $and:[{x: {$ne: 200}},{x: {$ne: 1}}]});
+    let galaxy_count = await Galaxy.countDocuments({active: true, $and:[{x: {$ne: 200}},{$or: [{x: {$ne: 1}},{y: {$ne: 1}}]}]});
     console.log(`galaxy_count: ${galaxy_count}`);
 
     let galaxy_limit = Math.ceil(galaxy_count * 0.2);
