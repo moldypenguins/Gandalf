@@ -46,7 +46,7 @@ let Calcs_exile = (args) => {
       {$match: {active: true}},
       {$sort: {planets: 1}},
       {$limit: galaxy_limit},
-      {$group: {_id: null, min_planets: {$min: '$planets'}}}
+      {$group: {_id: null, planets: '$planets'}}
     ]);
 
     console.log('GALAXIES: ' + util.inspect(galaxies, false, null, true));
