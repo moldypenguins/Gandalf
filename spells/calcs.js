@@ -60,7 +60,7 @@ let Calcs_exile = (args) => {
     let message = `Exile Bracket: ${galaxy_limit} of ${galaxy_count} galaxies.`;
     for(let g in galaxy_groups) {
       if(g < galaxy_groups.length - 1) {
-        message += `\n${galaxy_groups[g].galaxies} galaxies with ${galaxy_groups[g]._id} planets`;
+        message += `\n${galaxy_groups[g].galaxies}` + galaxy_groups[g].galaxies > 1 ? 'galaxies' : 'galaxy' + ` with ${galaxy_groups[g]._id} planets`;
       } else {
         message += `\n${galaxy_groups[g].galaxies} out of ${max_planet_gal_count} galaxies with ${galaxy_groups[g]._id} planets`;
       }
