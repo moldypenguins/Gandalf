@@ -54,14 +54,13 @@ let Calcs_exile = (args) => {
     ]).sort({_id: 1});
     console.log('GALAXY_GROUPS: ' + util.inspect(galaxy_groups.length, false, null, true));
 
-
-    let max_planet_gal_count = await Galaxy.countDocuments({active: true, planets: {$eq: galaxy_groups[galaxy_groups.length - 1]._id}});
-
     let message = `Exile Bracket: ${galaxy_limit} of ${galaxy_count} galaxies.`;
     for(let g in galaxy_groups) {
       if(g < galaxy_groups.length - 1) {
+        //TODO: lookup gals
         message += `\n${galaxy_groups[g].galaxies}` + galaxy_groups[g].galaxies > 1 ? 'galaxies' : 'galaxy' + ` with ${galaxy_groups[g]._id} planets`;
       } else {
+        let max_planet_gal_count = await Galaxy.countDocuments({active: true, planets: {$eq: galaxy_groups[g]._id}});
         message += `\n${galaxy_groups[g].galaxies} out of ${max_planet_gal_count} galaxies with ${galaxy_groups[g]._id} planets`;
       }
       console.log('GALAXY_GROUP: ' + util.inspect(galaxy_groups[g], false, null, true));
