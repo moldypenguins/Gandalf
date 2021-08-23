@@ -41,10 +41,9 @@ let Calcs_exile_desc = 'Shows information regarding chances of landing in desire
 let Calcs_exile = (args) => {
   return new Promise(async(resolve, reject) => {
     let galaxy_count = await Galaxy.countDocuments({active: true, $and:[{x: {$ne: 200}},{$or: [{x: {$ne: 1}},{y: {$ne: 1}}]}]});
-    console.log(`galaxy_count: ${galaxy_count}`);
-
+    //console.log(`galaxy_count: ${galaxy_count}`);
     let galaxy_limit = Math.trunc(galaxy_count * 0.2);
-    console.log(`galaxy_limit: ${galaxy_limit}`);
+    //console.log(`galaxy_limit: ${galaxy_limit}`);
 
     let galaxy_groups = await Galaxy.aggregate([
       {$match: {active: true, $and:[{x: {$ne: 200}},{$or: [{x: {$ne: 1}},{y: {$ne: 1}}]}]}},
@@ -52,7 +51,7 @@ let Calcs_exile = (args) => {
       {$limit: galaxy_limit},
       {$group: {_id: '$planets', galaxies: {$sum: 1}}}
     ]).sort({_id: 1});
-    console.log('GALAXY_GROUPS: ' + util.inspect(galaxy_groups.length, false, null, true));
+    //console.log('GALAXY_GROUPS: ' + util.inspect(galaxy_groups.length, false, null, true));
 
     let message = `Exile Bracket: ${galaxy_limit} of ${galaxy_count} galaxies.`;
     for(let g in galaxy_groups) {
@@ -63,12 +62,12 @@ let Calcs_exile = (args) => {
         for(let p in planet_gals) {
           coords.push(`${planet_gals[p].x}:${planet_gals[p].y}`);
         }
-        message += `(${coords.join(' ')})`;
+        message += `(${coords.join(', ')})`;
       } else {
         let max_planet_gal_count = await Galaxy.countDocuments({active: true, $and:[{x: {$ne: 200}},{$or: [{x: {$ne: 1}},{y: {$ne: 1}}]}], planets: {$eq: galaxy_groups[g]._id}});
         message += `\n${galaxy_groups[g].galaxies} out of ${max_planet_gal_count} galaxies with ${galaxy_groups[g]._id} planets`;
       }
-      console.log('GALAXY_GROUP: ' + util.inspect(galaxy_groups[g], false, null, true));
+      //console.log('GALAXY_GROUP: ' + util.inspect(galaxy_groups[g], false, null, true));
     }
     resolve(message);
   });
