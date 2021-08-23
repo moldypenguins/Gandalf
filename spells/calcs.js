@@ -34,27 +34,28 @@ const numeral = require('numeral');
 //const moment = require('moment');
 const moment = require('moment-timezone');
 const he = require('he');
-
+const util = require('util');
 
 let Calcs_exile_usage = he.encode('!exile');
 let Calcs_exile_desc = 'Shows information regarding chances of landing in desired galaxies.';
 let Calcs_exile = (args) => {
   return new Promise(async(resolve, reject) => {
-    let load_galaxies = await Galaxy.find();
-    let load_planets = await Planet.find();
 
-    let gals = 0;
-    let bracket = 0;
-    let base_bracket_gals = 0;
-    let max_planets = 0;
+    let galaxy_count = Galaxy.count({active: 1});
+    let galaxy_limit = Math.ceil(galaxy_count * 0.2);
+    let galaxies = await Galaxy.aggregate([
+      {$match: {active: 1}},
+      {$sort: {planets: 1}},
+      {$limit: galaxy_limit},
+      {$group: {_id: null, planets: {$sum: 1}}}
+    ]);
 
-    gals += load_galaxies.count();
+    console.log('GALAXIES: ' + util.inspect(galaxies, false, null, true));
 
 
+    resolve(`Total galaxies: ${galaxy_count}`);
+    //resolve(`Total galaxies: ${gals} | ${base_bracket_gals} galaxies with a maximum of ${max_planets} planets guaranteed to be in the exile bracket`);
 
-
-
-    resolve('Coming Soon');
   });
 };
 
