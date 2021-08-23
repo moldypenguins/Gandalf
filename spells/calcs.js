@@ -47,10 +47,11 @@ let Calcs_exile = (args) => {
     console.log(`galaxy_limit: ${galaxy_limit}`);
 
     let galaxies = await Galaxy.aggregate([
+      {$project: {coords: {$concat:['$x',':','$y']}}},
       {$match: {active: true, $and:[{x: {$ne: 200}},{$or: [{x: {$ne: 1}},{y: {$ne: 1}}]}]}},
       //{$sort: {planets: 1}},
       //{$limit: galaxy_limit},
-      {$group: {_id: '$planets', galaxies: {$sum: 1}, coords: {$concat: ['$x',':','$y']}}}
+      {$group: {_id: '$planets', galaxies: {$sum: 1}, coords: {''}}}
     ]);
     console.log('GALAXIES: ' + util.inspect(galaxies, false, null, true));
 
