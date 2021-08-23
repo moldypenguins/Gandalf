@@ -52,7 +52,7 @@ let Calcs_exile = (args) => {
       {$limit: galaxy_limit},
       {$group: {_id: '$planets', galaxies: {$sum: 1}}}
     ]).sort({_id: 1});
-    console.log('GALAXY_GROUPS: ' + util.inspect(galaxy_groups.count(), false, null, true));
+    console.log('GALAXY_GROUPS: ' + util.inspect(galaxy_groups.length, false, null, true));
 
 
     let max_planet_gal_count = await Galaxy.countDocuments({$match:{active: true, planets: {$eq: 6}}});
