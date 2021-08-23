@@ -46,17 +46,19 @@ let Calcs_exile = (args) => {
     let galaxy_limit = Math.ceil(galaxy_count * 0.2);
     console.log(`galaxy_limit: ${galaxy_limit}`);
 
-    let galaxies = await Galaxy.aggregate([
+    let galaxy_groups = await Galaxy.aggregate([
       {$match: {active: true, $and:[{x: {$ne: 200}},{$or: [{x: {$ne: 1}},{y: {$ne: 1}}]}]}},
       {$sort: {planets: 1}},
       {$limit: galaxy_limit},
       {$group: {_id: '$planets', galaxies: {$sum: 1}}}
     ]).sort({_id: 1});
-    console.log('GALAXIES: ' + util.inspect(galaxies, false, null, true));
+    //console.log('GALAXY_GROUPS: ' + util.inspect(galaxy_groups, false, null, true));
 
 
     let message = `Total galaxies: ${galaxy_count}`;
-
+    for(let gal_group in galaxy_groups) {
+      console.log('GALAXY_GROUP: ' + util.inspect(gal_group, false, null, true));
+    }
 
 
     resolve(message);
