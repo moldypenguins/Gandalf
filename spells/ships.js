@@ -255,8 +255,7 @@ var Ships_launch = (args) => {
     let prelaunch_tick = lt - eta + 1;
     let prelaunch_mod = launch_tick - now.tick;
     let reply = `eta ${eta} landing pt ${lt} (currently ${now.tick}) must launch at pt ${launch_tick} (${launch_time.format('MM-dd H:55')}), or with prelaunch tick ${prelaunch_tick} (currently +${prelaunch_mod})`;
-    resolve(reply)
-
+    resolve(reply);
   });
 };
 
