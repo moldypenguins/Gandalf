@@ -62,7 +62,7 @@ let Calcs_exile = (args) => {
         for(let p in planet_gals) {
           coords.push(`${planet_gals[p].x}:${planet_gals[p].y}`);
         }
-        message += `(${coords.join(', ')})`;
+        message += ` (${coords.join(', ')})`;
       } else {
         let max_planet_gal_count = await Galaxy.countDocuments({active: true, $and:[{x: {$ne: 200}},{$or: [{x: {$ne: 1}},{y: {$ne: 1}}]}], planets: {$eq: galaxy_groups[g]._id}});
         message += `\n${galaxy_groups[g].galaxies} out of ${max_planet_gal_count} galaxies with ${galaxy_groups[g]._id} planets`;
