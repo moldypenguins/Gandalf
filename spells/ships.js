@@ -218,45 +218,45 @@ eta 10 landing pt 1800 (currently 1553) must launch at pt 1790 (05-24 20:55), or
 var Ships_launch_usage = he.encode('!launch <class|eta> <LT>');
 var Ships_launch_desc = 'When ships should be launch to land at LT.';
 var Ships_launch = (args) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async(resolve, reject) => {
     if (!Array.isArray(args) || args.length < 2) { reject(Ships_launch_usage); }
-    var class_or_eta = args[0];
-    var _lt = args[1];
-    var eta = numeral(class_or_eta).value();
-    Ship.find().then((ships) => {
-      if(eta == null) {
-        // check to see if it's a class (bs, fr, cr, fi, co, de)
-        switch(class_or_eta) {
-          case 'bs':
-            eta = 10; break;
-          case 'cr':
-            eta = 10; break;
-          case 'fr':
-            eta = 9; break;
-          case 'de':
-            eta = 9; break;
-          case 'fi':
-            eta = 8; break;
-          case 'co':
-            eta = 8; break;
-          default:
-            reject(`Class or eta not provided.`);         
-        }      
-      }
 
-      let lt = numeral(_lt).value();
-      if (lt == null) reject(`LT must be a valid number.`);
-      Tick.findOne().sort({id: -1}).then((now) => {
-        if (now == null) reject(`Somethings wrong with getting ticks.`);
-        let current_time = moment.utc();
-        let launch_tick = lt - eta;
-        let launch_time = current_time.add(launch_tick - now.tick, 'hours');
-        let prelaunch_tick = lt - eta + 1;
-        let prelaunch_mod = launch_tick - now.tick;
-        let reply = `eta ${eta} landing pt ${lt} (currently ${now.tick}) must launch at pt ${launch_tick} (${launch_time.format('MM-dd H:55')}), or with prelaunch tick ${prelaunch_tick} (currently +${prelaunch_mod})`;
-        resolve(reply)
-      })
-    });
+
+
+    let class_or_eta = args[0];
+    let eta = numeral(class_or_eta).value();
+    let _lt = args[1];
+    let lt = numeral(_lt).value();
+    if (lt == null) reject(`LT must be a valid number.`);
+
+    if(eta == null) {
+      // check to see if it's a class (bs, fr, cr, fi, co, de)
+      switch(class_or_eta) {
+        case 'bs':
+        case 'cr':
+          eta = 10; break;
+        case 'fr':
+        case 'de':
+          eta = 9; break;
+        case 'fi':
+        case 'co':
+          eta = 8; break;
+        default:
+          reject(`Class or eta not provided.`);
+      }
+    }
+
+    let now = await Tick.findOne().sort({tick:-1});
+    if (now == null) reject(`Somethings wrong with getting ticks.`);
+
+    let current_time = moment.utc();
+    let launch_tick = lt - eta;
+    let launch_time = current_time.add(launch_tick - now.tick, 'hours');
+    let prelaunch_tick = lt - eta + 1;
+    let prelaunch_mod = launch_tick - now.tick;
+    let reply = `eta ${eta} landing pt ${lt} (currently ${now.tick}) must launch at pt ${launch_tick} (${launch_time.format('MM-dd H:55')}), or with prelaunch tick ${prelaunch_tick} (currently +${prelaunch_mod})`;
+    resolve(reply)
+
   });
 };
 
