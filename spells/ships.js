@@ -247,7 +247,7 @@ var Ships_launch = (args) => {
       let lt = numeral(_lt).value();
       if (lt == null) reject(`LT must be a valid number.`);
       Tick.findOne().sort({id: -1}).then((now) => {
-        if (tick == null) reject(`Somethings wrong with getting ticks.`);
+        if (now == null) reject(`Somethings wrong with getting ticks.`);
         let current_time = moment.utc();
         let launch_tick = lt - eta;
         let launch_time = current_time.add(launch_tick - now.tick, 'hours');
