@@ -256,14 +256,20 @@ let Intel_lookup_usage = he.encode('!lookup <nick|coords|default=user>');
 let Intel_lookup_desc = 'Lookup a current users stats (score/value/xp/size)';
 let Intel_lookup = (args, current_member) => {
   return new Promise(async (resolve, reject) => {
+    console.log(`args: ${args}`);
+
+
+
+
+
     if (!current_member.planet) {
-      reject(formatInvalidResponse(args[0]));
+      reject(`You don't have your coords set.`);
     } else {
-      let score_rank = await getRank(planet.score, 'score', planet.id);
-      let value_rank = await getRank(planet.value, 'value', planet.id);
-      let xp_rank = await getRank(planet.xp, 'xp', planet.id);
-      let size_rank = await getRank(planet.size, 'size', planet.id);
-      let coords_name = `${planet.x}:${planet.y}:${planet.z} (${planet.race}) '${planet.rulername}' of '${planet.planetname}'`
+      let score_rank = await getRank(current_member.planet.score, 'score', current_member.planet.planet_id);
+      let value_rank = await getRank(current_member.planet.value, 'value', current_member.planet.planet_id);
+      let xp_rank = await getRank(current_member.planet.xp, 'xp', current_member.planet.planet_id);
+      let size_rank = await getRank(current_member.planet.size, 'size', current_member.planet.planet_id);
+      let coords_name = `${current_member.planet.x}:${current_member.planet.y}:${current_member.planet.z} (${current_member.planet.race}) '${current_member.planet.rulername}' of '${current_member.planet.planetname}'`
       resolve(`<b>${coords_name}</b> ${score_rank} ${value_rank} ${xp_rank} ${size_rank}`);
     }
   });
@@ -299,33 +305,6 @@ function getRankBySort(sort, planet_id) {
         resolve(rank);
       }
     }
-  });
-}
-
-function memberToPlanetLookup(username) {
-  return new Promise(async (resolve, reject) => {
-    Member.find().then((members) => {
-      console.log(members.length);
-      var member = members.find(m => (m.username != null && m.username.toLowerCase().startsWith(username)) || (m.panick != null && m.panick.toLowerCase().startsWith(username)) || (m.first_name != null && m.first_name.toLowerCase().startsWith(username)));
-      //var member = members.find(m => m.username == "blanq4");
-      if (member) {
-        console.log(member);
-        Planet.find().then((planets) => {
-          if (planets) {
-            let planet = planets.find(p => p.id === member.planet_id);
-            if (!planet || !planet.x || !planet.y || !planet.z) {
-              resolve(null);
-            } else {
-              console.log(planet);
-              resolve(planet);
-            }
-          }
-        });
-      } else {
-        console.log(`couldn't find member planet`);
-        resolve(null);
-      }
-    });
   });
 }
 
