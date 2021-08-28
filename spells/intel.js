@@ -258,7 +258,7 @@ let Intel_lookup = (args, current_member) => {
   return new Promise(async (resolve, reject) => {
     let planet = null;
     if(args[0]) {
-      console.log(`args: ${args}`);
+      //console.log(`args: ${args}`);
       let coords = FNCS.coordsToXYZ(args[0]);
       if(coords.length >= 3) {
         planet = await Planet.findOne({x:coords[0], y:coords[1], z:coords[2]});
@@ -271,7 +271,7 @@ let Intel_lookup = (args, current_member) => {
         }
       }
     } else {
-      console.log(`current_member.planet: ${current_member.planet}`);
+      //console.log(`current_member.planet: ${current_member.planet}`);
       if(!current_member.planet) {
         reject(`You don't have your coords set.`);
       } else {
@@ -279,7 +279,8 @@ let Intel_lookup = (args, current_member) => {
       }
     }
 
-    if (planet) {
+    console.log(`planet: ${planet}`);
+    if(planet) {
       let score_rank = await getRank(current_member.planet.score, 'score', current_member.planet.planet_id);
       let value_rank = await getRank(current_member.planet.value, 'value', current_member.planet.planet_id);
       let xp_rank = await getRank(current_member.planet.xp, 'xp', current_member.planet.planet_id);
