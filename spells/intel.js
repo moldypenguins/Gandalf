@@ -281,12 +281,17 @@ let Intel_lookup = (args, current_member) => {
 
     if(planet) {
       //console.log(`planet: ${planet}`);
+      console.log(`here0`);
       let score_rank = await getRank(planet.score, 'score', planet.planet_id);
+      console.log(`here1`);
       let value_rank = await getRank(planet.value, 'value', planet.planet_id);
+      console.log(`here2`);
       let xp_rank = await getRank(planet.xp, 'xp', planet.planet_id);
+      console.log(`here3`);
       let size_rank = await getRank(planet.size, 'size', planet.planet_id);
+      console.log(`here4`);
       let coords_name = `${planet.x}:${planet.y}:${planet.z} (${planet.race}) '${planet.rulername}' of '${planet.planetname}'`;
-      console.log(`<b>${coords_name}</b> ${score_rank} ${value_rank} ${xp_rank} ${size_rank}`);
+      //console.log(`<b>${coords_name}</b> ${score_rank} ${value_rank} ${xp_rank} ${size_rank}`);
       resolve(`<b>${coords_name}</b> ${score_rank} ${value_rank} ${xp_rank} ${size_rank}`);
     }
   });
