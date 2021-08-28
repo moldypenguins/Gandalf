@@ -315,7 +315,7 @@ function getRank(value, type, planet_id) {
 function getRankBySort(sort, planet_id) {
   return new Promise(async (resolve) => {
     var planet_not_null = (p) => p && p.score && p.value && p.xp && p.size && p.id;
-    var ranked = await Planets.find(planet_not_null).sort(sort);
+    var ranked = await Planet.find(planet_not_null).sort(sort);
 
     // this will be super inefficient until we get the rank supplied by Frodo during planet loading
     for (var rank = 1; rank < ranked.length; rank++) {
@@ -335,7 +335,7 @@ function memberToPlanetLookup(username) {
       //var member = members.find(m => m.username == "blanq4");
       if (member) {
         console.log(member);
-        Planets.find().then((planets) => {
+        Planet.find().then((planets) => {
           if (planets) {
             let planet = planets.find(p => p.id === member.planet_id);
             if (!planet || !planet.x || !planet.y || !planet.z) {
