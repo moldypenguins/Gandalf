@@ -256,41 +256,16 @@ let Intel_lookup_usage = he.encode('!lookup <nick|coords|default=user>');
 let Intel_lookup_desc = 'Lookup a current users stats (score/value/xp/size)';
 let Intel_lookup = (args, current_member) => {
   return new Promise(async (resolve, reject) => {
-    console.log(args);
-    console.log(current_member);
-    let planet = null;
-    if (args == null || args.length === 0) {
-      console.log(`Looking up via TG user who made command: ${current_member.panick}`);
-      planet = await Planet.findOne({id:current_member.planet_id});
-      console.log(planet);
-      if (!planet) {
-        reject(formatInvalidResponse(username));
-        return;
-      }
-    } else if (args.length > 0) {
-      console.log(`Looking up via argument: ${args[0]}`);
-      // try username lookup
-      planet = await memberToPlanetLookup(args[0]);
-      console.log(`username planet lookup ${planet}`);
-      if (!planet) {
-        // try coord lookup
-        console.log(`trying coord lookup: ${args[0]}`);
-        planet = await coordsToPlanetLookup(args[0]);
-      }
-    }
-
-    if (!planet) {
+    if (!current_member.planet) {
       reject(formatInvalidResponse(args[0]));
-      return;
+    } else {
+      let score_rank = await getRank(planet.score, 'score', planet.id);
+      let value_rank = await getRank(planet.value, 'value', planet.id);
+      let xp_rank = await getRank(planet.xp, 'xp', planet.id);
+      let size_rank = await getRank(planet.size, 'size', planet.id);
+      let coords_name = `${planet.x}:${planet.y}:${planet.z} (${planet.race}) '${planet.rulername}' of '${planet.planetname}'`
+      resolve(`<b>${coords_name}</b> ${score_rank} ${value_rank} ${xp_rank} ${size_rank}`);
     }
-
-    // now that we have a planet do the stats
-    let score_rank = await getRank(planet.score, 'score', planet.id);
-    let value_rank = await getRank(planet.value, 'value', planet.id);
-    let xp_rank = await getRank(planet.xp, 'xp', planet.id);
-    let size_rank = await getRank(planet.size, 'size', planet.id);
-    let coords_name = `${planet.x}:${planet.y}:${planet.z} (${planet.race}) '${planet.rulername}' of '${planet.planetname}'`
-    resolve(`<b>${coords_name}</b> ${score_rank} ${value_rank} ${xp_rank} ${size_rank}`);
   });
 };
 
@@ -300,7 +275,7 @@ let Intel_lookup = (args, current_member) => {
 
 
 //######################################################################################################################
-//TODO: replace below functions either with mongoose models or Functions - const FNC = require('../Functions');
+//TODO: replace below functions either with mongoose models or Functions - const FNCS = require('../Functions');
 
 function getRank(value, type, planet_id) {
   var sort = {};
