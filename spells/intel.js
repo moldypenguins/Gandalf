@@ -278,9 +278,10 @@ let Intel_lookup = (args, current_member) => {
         planet = current_member.planet;
       }
     }
-
-    console.log(`planet: ${planet}`);
+    
     if(planet) {
+      console.log(`planet: ${planet}`);
+
       let score_rank = await getRank(current_member.planet.score, 'score', current_member.planet.planet_id);
       let value_rank = await getRank(current_member.planet.value, 'value', current_member.planet.planet_id);
       let xp_rank = await getRank(current_member.planet.xp, 'xp', current_member.planet.planet_id);
