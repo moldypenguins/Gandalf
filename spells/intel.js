@@ -259,8 +259,9 @@ let Intel_lookup = (args, current_member) => {
     let planet = null;
     if(args[0]) {
       console.log(`args: ${args}`);
-      if(await Planet.verifyCoords(args[0])) {
-        planet = await Planet.find
+      let coords = FNCS.coordsToXYZ(args[0]);
+      if(coords.length >= 3) {
+        planet = await Planet.findOne({x:coords[0], y:coords[1], z:coords[2]});
       } else {
         let mem = await Member.findOne({pa_nick: args[0]});
         if (!planet) {
