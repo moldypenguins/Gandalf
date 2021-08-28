@@ -261,7 +261,7 @@ let Intel_lookup = (args, current_member) => {
     let planet = null;
     if (args == null || args.length === 0) {
       console.log(`Looking up via TG user who made command: ${current_member.panick}`);
-      planet = await Planets.findOne({id:current_member.planet_id});
+      planet = await Planet.findOne({id:current_member.planet_id});
       console.log(planet);
       if (!planet) {
         reject(formatInvalidResponse(username));
@@ -275,7 +275,7 @@ let Intel_lookup = (args, current_member) => {
       if (!planet) {
         // try coord lookup
         console.log(`trying coord lookup: ${args[0]}`);
-        planet = await Functions.coordsToPlanetLookup(args[0]);
+        planet = await coordsToPlanetLookup(args[0]);
       }
     }
 
