@@ -86,9 +86,7 @@ let getTelegramName = function(u) {
 };
 
 let coordsToXYZ = function(c) {
-	let xyz = c.match(/(\d+)[:.](\d+)[:.](\d+)/);
-	console.log('XYZ: ' + util.inspect(xyz, false, null, true));
-	return xyz;
+	return c.match(/(\d+)[:.](\d+)[:.](\d+)/);
 };
 
 module.exports = {
