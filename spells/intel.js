@@ -271,6 +271,7 @@ let Intel_lookup = (args, current_member) => {
         }
       }
     } else {
+      console.log(`current_member.planet: ${current_member.planet}`);
       if(!current_member.planet) {
         reject(`You don't have your coords set.`);
       } else {
