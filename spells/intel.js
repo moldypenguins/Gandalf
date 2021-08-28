@@ -242,7 +242,7 @@ let Intel_spamset = (args) => {
 
 
 
-let Intel_oomph_usage = he.encode('!oomph <alliance> <ship class>');
+let Intel_oomph_usage = he.encode('!oomph <alliance> <ship_class>');
 let Intel_oomph_desc = 'List alliance ship counts versus given ship class.';
 let Intel_oomph = (args) => {
   return new Promise(async (resolve, reject) => {
@@ -252,19 +252,32 @@ let Intel_oomph = (args) => {
 };
 
 
-let Intel_lookup_usage = he.encode('!lookup <nick|coords|default=user>');
+let Intel_lookup_usage = he.encode('!lookup <nick|coords|default=self>');
 let Intel_lookup_desc = 'Lookup a current users stats (score/value/xp/size)';
 let Intel_lookup = (args, current_member) => {
   return new Promise(async (resolve, reject) => {
-    console.log(`args: ${args}`);
-
-
-
-
-
-    if (!current_member.planet) {
-      reject(`You don't have your coords set.`);
+    let planet = null;
+    if(args[0]) {
+      console.log(`args: ${args}`);
+      if(await Planet.verifyCoords(args[0])) {
+        planet = await Planet.find
+      } else {
+        let mem = await Member.findOne({pa_nick: args[0]});
+        if (!planet) {
+          reject(`Sorry, I don't know who ${str} or they don't have coords set.`);
+        } else {
+          planet = mem.planet;
+        }
+      }
     } else {
+      if(!current_member.planet) {
+        reject(`You don't have your coords set.`);
+      } else {
+        planet = current_member.planet;
+      }
+    }
+
+    if (planet) {
       let score_rank = await getRank(current_member.planet.score, 'score', current_member.planet.planet_id);
       let value_rank = await getRank(current_member.planet.value, 'value', current_member.planet.planet_id);
       let xp_rank = await getRank(current_member.planet.xp, 'xp', current_member.planet.planet_id);

@@ -22,6 +22,7 @@
 'use strict';
 
 const Mordor = require('../Mordor');
+const util = require("util");
 
 let PlanetSchema = new Mordor.Schema({
   _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
@@ -134,5 +135,12 @@ let PlanetSchema = new Mordor.Schema({
   xp_lowest_rank_tick: Number,
   */
 });
+
+
+PlanetSchema.statics.findByCoords = function(coords) {
+  let xyz = coords.match(/(\d+)[:.](\d+)[:.](\d+)/);
+  console.log('XYZ: ' + util.inspect(xyz, false, null, true));
+  return null;
+};
 
 module.exports = Mordor.model('Planet', PlanetSchema, 'Planets');

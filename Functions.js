@@ -85,10 +85,15 @@ let getTelegramName = function(u) {
 	return mention_name;
 };
 
-
+let coordsToXYZ = function(c) {
+	let xyz = c.match(/(\d+)[:.](\d+)[:.](\d+)/);
+	console.log('XYZ: ' + util.inspect(xyz, false, null, true));
+	return xyz;
+};
 
 module.exports = {
 	"isValidDate": isValidDate,
 	"getTelegramName": getTelegramName,
+	"coordsToXYZ": coordsToXYZ,
 
 };
