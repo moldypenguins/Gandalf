@@ -399,6 +399,8 @@ let process_tick = async (last_tick, start_time) => {
         //console.log(`PLANETS: ` + util.inspect(planets, true, null, true));
 
         for (let p_temp in planets) {
+          console.log('PTEMP: ' + util.inspect(planets[p_temp], true, null, true));
+
           //create planet if not exists
           if (!await Planet.exists({planet_id: planets[p_temp].planet_id})) {
             await new Planet({_id:Mordor.Types.ObjectId(), planet_id: planets[p_temp].planet_id, x: planets[p_temp].x, y: planets[p_temp].y, z: planets[p_temp].z, planetname: planets[p_temp].planetname, rulername: planets[p_temp].rulername, race: planets[p_temp].race}).save();
