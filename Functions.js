@@ -16,57 +16,13 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name functions.js
- * @version 2021/05/25
+ * @version 2021/08/29
  * @summary utility functions
  **/
 'use strict';
 
-
 const Planet = require('./models/Planet');
-
 const util = require('util');
-
-/*
-let patterns = [ //Note these are order dependent xyz has to come before xy
-	    /([\d]+)\.([\d]+)\.([\d]+)/, //dots
-	    /([\d]+):([\d]+):([\d]+)/, // :
-	    /([\d]+)\s([\d]+)\s([\d]+)/, // spaces
-	    /([\d]+)\.([\d]+)/, //galaxy dots
-	    /([\d]+):([\d]+)/, //galaxy :
-	    /([\d]+)\s([\d]+)/, //galaxy spaces
-];
-
-function parseCoords(input) {
-	for (let regex of patterns) {
-		let matches = regex.exec(input);
-		if (matches) {
-			if (matches.length == 4) {
-				return {x: +matches[1], y: +matches[2], z: +matches[3]};
-			} else if (matches.length == 3) {
-				return {x: +matches[1], y: +matches[2]};
-			}
-		}
-	}
-	return null;
-}
-
-const PLANET_COORD_TYPE = 0, GALAXY_COORD_TYPE = 1;
-
-function coordType(coords) {
-	if (coords.x && coords.y && coords.z) {
-		return PLANET_COORD_TYPE;
-	} else {
-		return GALAXY_COORD_TYPE;
-	}
-}
-
-*/
-
-
-//var id = require('mongodb').ObjectID(doc._id);
-//.findOne({_id: new ObjectId(id)}
-//.findById("5e12d86186d564bd4487658c", function(err, result) {
-
 
 
 let isValidDate = function(d) {
@@ -86,12 +42,19 @@ let getTelegramName = function(u) {
 };
 
 let parseCoords = function(c) {
-	return c.match(/(\d+)[:.](\d+)[:.](\d+)/);
+	let matches = c.match(/(\d+)[:.](\d+)[:.](\d+)/);
+	if (matches) {
+		if (matches.length === 4) {
+			return {x: +matches[1], y: +matches[2], z: +matches[3]};
+		} else if (matches.length === 3) {
+			return {x: +matches[1], y: +matches[2]};
+		}
+	}
 };
+
 
 module.exports = {
 	"isValidDate": isValidDate,
 	"getTelegramName": getTelegramName,
 	"parseCoords": parseCoords,
-
 };
