@@ -82,7 +82,7 @@ Mordor.connection.once("open", async () => {
     console.log(`Start Time: ${moment(start_time).format('YYYY-MM-DD H:mm:ss')}`);
 
     //get last tick
-    let last_tick = (await Tick.findOne().sort({id: -1})).tick; //.findLastTick().tick;
+    let last_tick = (await Tick.findOne().sort({tick: -1})).tick; //.findLastTick().tick;
     console.log('LAST_TICK: ' + util.inspect(last_tick, false, null, true));
     if(typeof(last_tick) === 'undefined' || last_tick == null) {
       console.log('No ticks found in the database.');
@@ -433,10 +433,10 @@ let process_tick = async (last_tick, start_time) => {
             active: true,
             age: planet.age + 1 ?? 1,
             ratio: planets[p_temp].value !== 0 ? 10000.0 * planets[p_temp].size / planets[p_temp].value : 0,
-            size_rank:  await PlanetDump.find({size:{$lt:planets[p_temp].size}}).count(),
-            score_rank: await PlanetDump.find({score:{$lt:planets[p_temp].size}}).count(),
-            value_rank: await PlanetDump.find({value:{$lt:planets[p_temp].size}}).count(),
-            xp_rank:    await PlanetDump.find({xp:{$lt:planets[p_temp].size}}).count(),
+            size_rank:  await PlanetDump.find({size:{$lt:planets[p_temp].size}}).countDocuments(),
+            score_rank: await PlanetDump.find({score:{$lt:planets[p_temp].size}}).countDocuments(),
+            value_rank: await PlanetDump.find({value:{$lt:planets[p_temp].size}}).countDocuments(),
+            xp_rank:    await PlanetDump.find({xp:{$lt:planets[p_temp].size}}).countDocuments(),
 
             //TODO: add remaining fields
 
