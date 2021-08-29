@@ -85,13 +85,13 @@ let getTelegramName = function(u) {
 	return mention_name;
 };
 
-let coordsToXYZ = function(c) {
+let parseCoords = function(c) {
 	return c.match(/(\d+)[:.](\d+)[:.](\d+)/);
 };
 
 module.exports = {
 	"isValidDate": isValidDate,
 	"getTelegramName": getTelegramName,
-	"coordsToXYZ": coordsToXYZ,
+	"parseCoords": parseCoords,
 
 };
