@@ -402,7 +402,7 @@ let process_tick = async (last_tick, start_time) => {
         //console.log(`PLANETS: ` + util.inspect(planets, true, null, true));
 
         for (let p_temp in planets) {
-          console.log('PTEMP: ' + util.inspect(planets[p_temp], true, null, true));
+          //console.log('PTEMP: ' + util.inspect(planets[p_temp], true, null, true));
 
           //create planet if not exists
           if (!await Planet.exists({planet_id: planets[p_temp].planet_id})) {
