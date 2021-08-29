@@ -42,14 +42,17 @@ let getTelegramName = function(u) {
 };
 
 let parseCoords = function(c) {
+	let coords = {};
 	let matches = c.match(/(\d+)[:.](\d+)[:.](\d+)/);
 	if (matches) {
 		if (matches.length === 4) {
-			return {x: +matches[1], y: +matches[2], z: +matches[3]};
+			coords = {x: +matches[1], y: +matches[2], z: +matches[3]};
 		} else if (matches.length === 3) {
-			return {x: +matches[1], y: +matches[2]};
+			coords = {x: +matches[1], y: +matches[2]};
 		}
+
 	}
+	return coords;
 };
 
 
