@@ -284,23 +284,6 @@ let Intel_lookup = (args, current_member) => {
       console.log(`here0`);
       let score_rank = await Planet.find().sort({score:-1});
       console.log(`score_rank: ${score_rank}`);
-      let SR = await Planet.aggregate([
-        { $match: { score: { $gte: 0 } } },
-        { $sort: { score: -1 } },
-        {
-          $group: {
-            _id: null,
-            docs: { $push: "$$ROOT" }
-          }
-        },
-        {
-          $unwind: {
-            path: "$docs",
-            includeArrayIndex: "position"
-          }
-        }
-      ]);
-      console.log(`SR: ${score_rank}`);
 
 
       //await getRank(planet.score, 'score', planet.planet_id);
