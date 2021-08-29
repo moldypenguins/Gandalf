@@ -34,6 +34,40 @@ const Member = require('../models/Member');
 const numeral = require('numeral');
 const moment = require('moment');
 const he = require('he');
+const util = require('util');
+
+
+
+
+//######################################################################################################################
+//TODO: replace below functions either with mongoose models or Functions - const FNCS = require('../Functions');
+
+function getRank(value, type, planet_id) {
+  var sort = {};
+  sort[type] = 'desc';
+  return new Promise(async (resolve) => {
+    let rank = await getRankBySort(sort, planet_id);
+    let title = type === 'xp' ? type.toUpperCase() : type[0].toUpperCase() + type.substring(1);
+    resolve(`<b>${title}</b>: ${value} (${rank})`);
+  });
+}
+
+function getRankBySort(sort, planet_id) {
+  return new Promise(async (resolve) => {
+    var planet_not_null = (p) => p && p.score && p.value && p.xp && p.size && p.id;
+    var ranked = await Planet.find(planet_not_null).sort(sort);
+
+    // this will be super inefficient until we get the rank supplied by Frodo during planet loading
+    for (var rank = 1; rank < ranked.length; rank++) {
+      var planet = ranked[rank - 1];
+      if (planet.id === planet_id) {
+        resolve(rank);
+      }
+    }
+  });
+}
+
+
 
 const INTEL_ACTION_DISPLAY = 0, INTEL_ACTION_SET = 1
 const PLANET_COORD_TYPE = 0, GALAXY_COORD_TYPE = 1;
@@ -191,26 +225,29 @@ resolve(await intelSet(parsed));
 });
 };
 
+//######################################################################################################################
+
+
 
 let Intel_spam_usage = he.encode('!spam <alliance>');
 let Intel_spam_desc = 'Displays a set of coords based on alliance';
 let Intel_spam = (args) => {
-return new Promise(async (resolve, reject) => {
-if (args.length === 0) {
-reject(Intel_spam_usage);
-return;
-}
+  return new Promise(async (resolve, reject) => {
+    if (args.length === 0) {
+      reject(Intel_spam_usage);
+    }
 
-let alliance = await Alliance.findOne({"name": new RegExp(args[0], 'i')});
-let response = `Spam for <b>${alliance.name}</b>\n`;
-let intels = await Intel.find({alliance_id: alliance._id});
-for(let intel of intels) {
-let planet = await Planet.findOne({id: intel.planet_id});
-if (planet && planet.x && planet.y && planet.z)
-response += `${planet.x}:${planet.y}:${planet.z} `;
-}
-resolve(response);
-});
+    let alliance = await Alliance.findOne({"name": new RegExp(args[0], 'i')});
+    let response = `Spam for <b>${alliance.name}</b>\n`;
+    let intels = await Intel.find({alliance_id: alliance._id});
+    for(let intel of intels) {
+      let planet = await Planet.findOne({id: intel.planet_id});
+      if (planet && planet.x && planet.y && planet.z) {
+        response += `${planet.x}:${planet.y}:${planet.z} `;
+      }
+    }
+    resolve(response);
+  });
 };
 
 let Intel_spamset_usage = he.encode('!spamset <alliance> <coords list>');
@@ -218,23 +255,21 @@ let Intel_spamset_desc = 'Set alliance for multiple coords at once';
 let Intel_spamset = (args) => {
   return new Promise(async (resolve, reject) => {
     if (args.length < 2) {
-    reject(Intel_spamset_usage);
-    return;
+      reject(Intel_spamset_usage);
     }
 
     let alliance = await Alliance.findOne({"name": new RegExp(args[0], 'i')});
     for(let i = 1; i < args.length; i++) {
-    let planet = await coordsToPlanetLookup(args[i]);
-    console.log(planet);
-    let intel = await Intel.findOne({planet_id: planet.id});
-    if (!intel) {
-    console.log(`creating new intel`);
-    intel = new Intel({planet_id: planet.id});
-    }
-
-    intel.alliance_id = alliance._id;
-    await intel.save();
-    console.log(`intel saved for ${intel}`);
+      let planet = await coordsToPlanetLookup(args[i]);
+      console.log(planet);
+      let intel = await Intel.findOne({planet_id: planet.id});
+      if (!intel) {
+        console.log(`creating new intel`);
+        intel = new Intel({planet_id: planet.id});
+      }
+      intel.alliance_id = alliance._id;
+      await intel.save();
+      console.log(`intel saved for ${intel}`);
     }
     resolve(`Spam for <b>${alliance.name}</b> set.\n`);
   });
@@ -278,7 +313,8 @@ let Intel_lookup = (args, current_member) => {
         planet = current_member.planet;
       }
     }
-    resolve(`<b>${planet.x}:${planet.y}:${planet.z} (${planet.race}) '${planet.rulername}' of '${planet.planetname}'</b>\n` + 
+    console.log();
+    resolve(`<b>${planet.x}:${planet.y}:${planet.z} (${planet.race}) '${planet.rulername}' of '${planet.planetname}'</b>\n` +
     `<b>Score:</b> ${planet.score}(${planet.score_rank}) <b>Value:</b> ${planet.value}(${planet.value_rank}) <b>XP:</b> ${planet.xp}(${planet.xp_rank}) <b>Size:</b> ${planet.size}(${planet.size_rank})`);
   });
 };
@@ -288,35 +324,7 @@ let Intel_lookup = (args, current_member) => {
 
 
 
-//######################################################################################################################
-//TODO: replace below functions either with mongoose models or Functions - const FNCS = require('../Functions');
 
-function getRank(value, type, planet_id) {
-  var sort = {};
-  sort[type] = 'desc';
-  return new Promise(async (resolve) => {
-    let rank = await getRankBySort(sort, planet_id);
-    let title = type === 'xp' ? type.toUpperCase() : type[0].toUpperCase() + type.substring(1);
-    resolve(`<b>${title}</b>: ${value} (${rank})`);
-  });
-}
-
-function getRankBySort(sort, planet_id) {
-  return new Promise(async (resolve) => {
-    var planet_not_null = (p) => p && p.score && p.value && p.xp && p.size && p.id;
-    var ranked = await Planet.find(planet_not_null).sort(sort);
-
-    // this will be super inefficient until we get the rank supplied by Frodo during planet loading
-    for (var rank = 1; rank < ranked.length; rank++) {
-      var planet = ranked[rank - 1];
-      if (planet.id === planet_id) {
-        resolve(rank);
-      }
-    }
-  });
-}
-
-//######################################################################################################################
 
 
 module.exports = {
