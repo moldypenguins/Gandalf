@@ -265,7 +265,7 @@ let Intel_lookup = (args, current_member) => {
       } else {
         let mem = await Member.findOne({pa_nick: {$regex: args[0]}});
         if (!mem) {
-          reject(`Sorry, I don't know who ${str} or they don't have coords set.`);
+          reject(`Sorry, I don't know ${str} or they don't have coords set.`);
         } else {
           planet = mem.planet;
         }
