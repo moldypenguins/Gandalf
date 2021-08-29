@@ -259,12 +259,12 @@ let Intel_lookup = (args, current_member) => {
     let planet = null;
     if(args[0]) {
       //console.log(`args: ${args}`);
-      let coords = FNCS.coordsToXYZ(args[0]);
+      let coords = FNCS.parseCoords(args[0]);
       if(coords.length >= 4) {
         planet = await Planet.findOne({x:coords[1], y:coords[2], z:coords[3]});
       } else {
         let mem = await Member.findOne({pa_nick: args[0]});
-        if (!planet) {
+        if (!mem) {
           reject(`Sorry, I don't know who ${str} or they don't have coords set.`);
         } else {
           planet = mem.planet;
@@ -280,23 +280,9 @@ let Intel_lookup = (args, current_member) => {
     }
 
     if(planet) {
-      //console.log(`planet: ${planet}`);
-      console.log(`here0`);
-      let score_rank = await Planet.find().sort({score:-1});
-      console.log(`score_rank: ${score_rank}`);
-
-
-      //await getRank(planet.score, 'score', planet.planet_id);
-      console.log(`here1`);
-      let value_rank = await getRank(planet.value, 'value', planet.planet_id);
-      console.log(`here2`);
-      let xp_rank = await getRank(planet.xp, 'xp', planet.planet_id);
-      console.log(`here3`);
-      let size_rank = await getRank(planet.size, 'size', planet.planet_id);
-      console.log(`here4`);
       let coords_name = `${planet.x}:${planet.y}:${planet.z} (${planet.race}) '${planet.rulername}' of '${planet.planetname}'`;
-      //console.log(`<b>${coords_name}</b> ${score_rank} ${value_rank} ${xp_rank} ${size_rank}`);
-      resolve(`<b>${coords_name}</b> ${score_rank} ${value_rank} ${xp_rank} ${size_rank}`);
+      //console.log(`<b>${coords_name}</b> ${planet.score_rank} ${planet.value_rank} ${planet.xp_rank} ${planet.size_rank}`);
+      resolve(`<b>${coords_name}</b> ${planet.score_rank} ${planet.value_rank} ${planet.xp_rank} ${planet.size_rank}`);
     }
   });
 };
