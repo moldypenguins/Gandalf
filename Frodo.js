@@ -77,7 +77,7 @@ Mordor.connection.once("open", async () => {
   if(argv.havoc) { console.log("Havoc enabled."); }
   if(argv.force) { console.log("Force enabled."); }
   if(argv.overwrite) { console.log("Overwrite enabled."); }
-  schedule.scheduleJob(argv.force ? new Date() : rule, async (fire_time) => {
+  schedule.scheduleJob(argv.force ? new moment().add(10, 'seconds') : rule, async (fire_time) => {
     const start_time = new Date();
     console.log('Frodo Embarking on The Quest Of The Ring.');
     console.log(`Job Time: ${moment(fire_time).format('YYYY-MM-DD H:mm:ss')}`);
