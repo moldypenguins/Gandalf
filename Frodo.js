@@ -560,7 +560,7 @@ let process_tick = async (last_tick, start_time) => {
 
         let this_tick = await new_tick.save();
         //##############################################################################################################
-        console.log(`Updated tick stats in: ${(new Date()) - start_time}ms\n`);
+        console.log(`Updated tick stats in: ${(new Date()) - start_time}ms`);
         console.log(`pt${this_tick.tick} saved to Ticks collection.`);
 
 
@@ -674,6 +674,8 @@ let process_tick = async (last_tick, start_time) => {
           }).save();
           console.log(`Sent Message: "${txt}"`);
         }
+
+        console.log(`\n\n`);
         success = true;
       }
     }
