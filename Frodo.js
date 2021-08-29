@@ -75,9 +75,10 @@ const sleep = (ms) => {
 
 Mordor.connection.once("open", async () => {
   if(argv.havoc) { console.log("Havoc enabled."); }
-  if(argv.force) { console.log("Force enabled." + new moment().add(10, 'seconds')); }
+  if(argv.force) { console.log("Force enabled."); argv.force = new Date(); argv.force.setSeconds(argv.force.getSeconds() + 15); }
   if(argv.overwrite) { console.log("Overwrite enabled."); }
-  schedule.scheduleJob(argv.force ? new moment().add(10, 'seconds') : rule, async (fire_time) => {
+
+  schedule.scheduleJob(argv.force ? argv.force : rule, async (fire_time) => {
     const start_time = new Date();
     console.log('Frodo Embarking on The Quest Of The Ring.');
     console.log(`Job Time: ${moment(fire_time).format('YYYY-MM-DD H:mm:ss')}`);
