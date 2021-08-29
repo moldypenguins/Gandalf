@@ -315,7 +315,10 @@ let Intel_lookup = (args, current_member) => {
     }
     console.log();
     resolve(`<b>${planet.x}:${planet.y}:${planet.z} (${planet.race}) '${planet.rulername}' of '${planet.planetname}'</b>\n` +
-    `<b>Score:</b> ${numeral(planet.score).format('0,0')} (${planet.score_rank}) <b>Value:</b> ${numeral(planet.value).format('0,0')} (${planet.value_rank}) <b>XP:</b> ${numeral(planet.xp).format('0,0')} (${planet.xp_rank}) <b>Size:</b> ${numeral(planet.size).format('0,0')} (${planet.size_rank})`);
+    `<b>Score:</b> ${numeral(planet.score).format('0,0')} (${planet.score_rank})\n` +
+    `<b>Value:</b> ${numeral(planet.value).format('0,0')} (${planet.value_rank})\n` +
+    `<b>XP:</b> ${numeral(planet.xp).format('0,0')} (${planet.xp_rank})\n` +
+    `<b>Size:</b> ${numeral(planet.size).format('0,0')} (${planet.size_rank})`);
   });
 };
 
