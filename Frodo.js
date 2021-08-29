@@ -55,9 +55,9 @@ const crypto = require('crypto');
 
 let argv = minimist(process.argv.slice(2), {
   string: [],
-  boolean: ['havoc', 'overwrite'],
-  alias: {c:'havoc', o:'overwrite'},
-  default: {'havoc':false, 'overwrite':false},
+  boolean: ['havoc', 'force', 'overwrite'],
+  alias: {c:'havoc', f:'force', o:'overwrite'},
+  default: {'havoc':false, 'force':false, 'overwrite':false},
   unknown: false
 });
 
@@ -74,9 +74,10 @@ const sleep = (ms) => {
 }
 
 Mordor.connection.once("open", async () => {
-  if(argv.havoc) { console.log("Havoc mode enabled."); }
+  if(argv.havoc) { console.log("Havoc enabled."); }
+  if(argv.force) { console.log("Force enabled."); }
   if(argv.overwrite) { console.log("Overwrite enabled."); }
-  schedule.scheduleJob(rule, async () => {
+  schedule.scheduleJob(argv.force ? new Date() : rule, async () => {
     const start_time = new Date();
     console.log('Frodo Embarking on The Quest Of The Ring.');
     console.log(`Start Time: ${moment(start_time).format('YYYY-MM-DD H:mm:ss')}`);
