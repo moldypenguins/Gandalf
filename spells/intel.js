@@ -278,12 +278,7 @@ let Intel_lookup = (args, current_member) => {
         planet = current_member.planet;
       }
     }
-
-    if(planet) {
-      let coords_name = `${planet.x}:${planet.y}:${planet.z} (${planet.race}) '${planet.rulername}' of '${planet.planetname}'`;
-      //console.log(`<b>${coords_name}</b> ${planet.score_rank} ${planet.value_rank} ${planet.xp_rank} ${planet.size_rank}`);
-      resolve(`<b>${coords_name}</b> ${planet.score_rank} ${planet.value_rank} ${planet.xp_rank} ${planet.size_rank}`);
-    }
+    resolve(`<b>${planet.x}:${planet.y}:${planet.z} (${planet.race}) '${planet.rulername}' of '${planet.planetname}'</b> Score: ${planet.score}(${planet.score_rank}) Value: ${planet.value}(${planet.value_rank}) XP: ${planet.xp}(${planet.xp_rank}) Size: ${planet.size}(${planet.size_rank})`);
   });
 };
 
