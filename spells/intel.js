@@ -260,10 +260,10 @@ let Intel_lookup = (args, current_member) => {
     if(args[0]) {
       //console.log(`args: ${args}`);
       let coords = FNCS.parseCoords(args[0]);
-      if(coords.length >= 4) {
+      if(coords?.length >= 4) {
         planet = await Planet.findOne({x:coords[1], y:coords[2], z:coords[3]});
       } else {
-        let mem = await Member.findOne({pa_nick: args[0]});
+        let mem = await Member.findOne({pa_nick: {$regex: args[0]}});
         if (!mem) {
           reject(`Sorry, I don't know who ${str} or they don't have coords set.`);
         } else {
