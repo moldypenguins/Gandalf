@@ -32,10 +32,10 @@ let PlanetDumpSchema = new Mordor.Schema({
   planetname: {type:String, required:true, trim:true},
   rulername:  {type:String, required:true, trim:true},
   race:       {type:String},
-  size:       {type:Number},
-  score:      {type:Number},
-  value:      {type:Number},
-  xp:         {type:Number},
+  size:       {type:Number, index:true},
+  score:      {type:Number, index:true},
+  value:      {type:Number, index:true},
+  xp:         {type:Number, index:true},
 });
 
 module.exports = Mordor.model('PlanetDump', PlanetDumpSchema, 'PlanetDumps');
