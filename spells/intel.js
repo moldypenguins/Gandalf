@@ -278,7 +278,8 @@ let Intel_lookup = (args, current_member) => {
         planet = current_member.planet;
       }
     }
-    resolve(`<b>${planet.x}:${planet.y}:${planet.z} (${planet.race}) '${planet.rulername}' of '${planet.planetname}'</b> Score: ${planet.score}(${planet.score_rank}) Value: ${planet.value}(${planet.value_rank}) XP: ${planet.xp}(${planet.xp_rank}) Size: ${planet.size}(${planet.size_rank})`);
+    resolve(`<b>${planet.x}:${planet.y}:${planet.z} (${planet.race}) '${planet.rulername}' of '${planet.planetname}'</b>\n`
+    `<b>Score:</b> ${planet.score}(${planet.score_rank}) <b>Value:</b> ${planet.value}(${planet.value_rank}) <b>XP:</b> ${planet.xp}(${planet.xp_rank}) <b>Size:</b> ${planet.size}(${planet.size_rank})`);
   });
 };
 
