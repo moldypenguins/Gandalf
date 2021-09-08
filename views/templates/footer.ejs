@@ -4,8 +4,12 @@
         <div class="col-4">
             <i class="fas fa-clock" aria-hidden="true"></i><% if(tick !== undefined) { %>&nbsp;<b><%= tick.tick %></b><% } %>
         </div>
-        <div class="col-4"></div>
-        <div class="col-4"></div>
+        <div class="col-4">
+            <i class="fas fa-crosshairs" aria-hidden="true"></i><% if(att !== undefined) { %>&nbsp;<b><%= att.id %></b><% } %>
+        </div>
+        <div class="col-4">
+            <i class="fas fa-globe-americas" aria-hidden="true"></i><% if(member !== undefined) { %>&nbsp;<b><%= member.x %></b><% } %>
+        </div>
     </div>
 
     <!--
