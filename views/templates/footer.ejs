@@ -1,17 +1,22 @@
 <!-- views/partials/footer.ejs -->
 <div class="container">
-    <% if(tick !== undefined) { %>
-        <div class="row">
-            <div class="col-12">
-                It is currently tick <b><%= tick.tick %></b>
-            </div>
+    <div class="row">
+        <div class="col-4">
+            <% if(tick !== undefined) { %>
+            pt<b><%= tick.tick %></b>
+            <% } %>
         </div>
-    <% } %>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+    </div>
+
+    <!--
     <div class="row">
         <div class="col-12">
             Copyright &copy; 2020-<%= new Date().getFullYear(); %> <a href="https://t.me/moldypenguins" target="_blank">@moldypenguins</a>, <a href="https://t.me/blanq4" target="_blank">@blanq4</a>, <a href="https://t.me/UltimateNewbie" target="_blank">@UltimateNewbie</a>
         </div>
     </div>
+    -->
 </div>
 <script>
 	$(document).ready(function () {
