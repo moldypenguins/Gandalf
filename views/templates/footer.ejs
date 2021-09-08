@@ -2,9 +2,7 @@
 <div class="container">
     <div class="row">
         <div class="col-4">
-            <% if(tick !== undefined) { %>
-            pt<b><%= tick.tick %></b>
-            <% } %>
+            <i class="fas fa-clock" aria-hidden="true"></i><% if(tick !== undefined) { %>&nbsp;<b><%= tick.tick %></b><% } %>
         </div>
         <div class="col-4"></div>
         <div class="col-4"></div>
