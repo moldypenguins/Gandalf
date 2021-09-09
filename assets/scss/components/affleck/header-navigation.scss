@@ -33,15 +33,20 @@ nav {
   }
 
   .navbar-profile {
-    height: 40px;
-    width: 40px;
-    padding: 0 !important;
-    margin-left: 0.5rem;
-
-    img {
+    width: auto;
+    padding-left: 10px;
+    
+    a {
       height: 40px;
       width: 40px;
-      border-radius: 20px;
+      padding: 0 !important;
+      margin-left: 0.5rem;
+
+      img {
+        height: 40px;
+        width: 40px;
+        border-radius: 20px;
+      }
     }
   }
 
