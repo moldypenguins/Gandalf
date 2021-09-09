@@ -8,11 +8,11 @@
                     <% if(typeof(member) === 'undefined' || (typeof(member) !== 'undefined' && member == null)) { %>
                         <div class="navbar-nav ml-auto"><script async src="https://telegram.org/js/telegram-widget.js?12" data-telegram-login="<%= bot_name %>" data-size="large" data-auth-url="<%= site_url %>/auth" data-request-access="write"></script></div>
                     <% } else { %>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <ul class="navbar-nav ms-auto">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStrategy" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <% if(member.site_navigation === 'icons' || member.site_navigation === 'iconstext') { %>
@@ -73,15 +73,15 @@
                                         <li><a class="dropdown-item" href="/uni/c">About</a></li>
                                     </ul>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link navbar-profile" href="#" id="navbarDropdownProfile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="<% if(member.telegram_user.telegram_photo_url) { %><%= member.telegram_user.telegram_photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="40" height="40" alt=""/>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownProfile">
-                                        <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                                        <li><a class="dropdown-item" href="/logout">Log Out</a></li>
-                                    </ul>
-                                </li>
+                            </ul>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <a class="nav-link navbar-profile" href="#" id="navbarDropdownProfile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="<% if(member.telegram_user.telegram_photo_url) { %><%= member.telegram_user.telegram_photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="40" height="40" alt=""/>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownProfile">
+                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                                <li><a class="dropdown-item" href="/logout">Log Out</a></li>
                             </ul>
                         </div>
                     <% } %>
