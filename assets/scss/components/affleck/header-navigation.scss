@@ -33,13 +33,10 @@ nav {
   }
 
   .navbar-profile {
-    display: inline-block;
-    vertical-align: top;
     height: 40px;
     width: 40px;
-    position: absolute;
-    top: .5rem;
-    right: 1rem;
+    padding: 0 !important;
+    margin-left: 0.5rem;
 
     img {
       height: 40px;
