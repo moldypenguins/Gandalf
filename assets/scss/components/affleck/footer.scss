@@ -32,8 +32,7 @@ footer {
   }
   .text-center {
     .footer-tab {
-      left: 50%;
-      transform: translate(0, -50%);
+      transform: translate(-50%);
     }
   }
   .text-end {
