@@ -11,19 +11,24 @@ header {
 
 /*# NAVIGATION ELEMENTS ##########################################################################*/
 nav {
+  padding-bottom: .25rem;
+
   .container-fluid {
     padding: 0;
   }
 
   .navbar-brand {
     font-family: $font-default;
+    padding-top: 0;
+    padding-bottom: 0;
 
     .navbar-logo {
       display: inline-block;
-      vertical-align: top;
-      height: 30px;
-      width: 30px;
+      vertical-align: middle;
+      height: 40px;
+      width: 40px;
       margin-right: 5px;
+      margin-bottom: 5px;
     }
   }
 

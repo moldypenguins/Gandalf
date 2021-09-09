@@ -3,7 +3,7 @@
 // $ npm install
 const {src, dest, watch, series, parallel} = require('gulp');
 const gulp = require('gulp');
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('node-sass'));
 const autoprefixer = require('gulp-autoprefixer');
 const plumber = require('gulp-plumber');
 const sasslint = require('gulp-sass-lint');
