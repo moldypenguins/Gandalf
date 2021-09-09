@@ -10,6 +10,17 @@ footer {
   left: 0;
   z-index: 1030;
 
+  .text-start {
+    .footer-tab {
+      left: 0.5rem;
+    }
+  }
+  .text-end {
+    .footer-tab {
+      right: 0.5rem;
+    }
+  }
+
   .footer-tab {
     display: inline-block;
     padding: 0.5rem 0.75rem 0 0.75rem;
