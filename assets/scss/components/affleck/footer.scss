@@ -11,8 +11,6 @@ footer {
   z-index: 1030;
 
   .footer-tab {
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: inline-block;
     padding: 0.5rem 0.75rem 0 0.75rem;
     background-color: #FF9933;
@@ -30,6 +28,12 @@ footer {
   .text-start {
     .footer-tab {
       left: 0.5rem;
+    }
+  }
+  .text-center {
+    .footer-tab {
+      left: 50%;
+      transform: translate(0, -50%);
     }
   }
   .text-end {
