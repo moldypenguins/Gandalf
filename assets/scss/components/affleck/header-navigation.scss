@@ -21,14 +21,14 @@ nav {
     font-family: $font-default;
     padding-top: 0;
     padding-bottom: 0;
+    line-height: 2.5rem;
 
     .navbar-logo {
       display: inline-block;
-      vertical-align: middle;
+      vertical-align: top;
       height: 40px;
       width: 40px;
       margin-right: 5px;
-      margin-bottom: 5px;
     }
   }
 
