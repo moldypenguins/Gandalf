@@ -13,7 +13,12 @@
         </div>
         <div class="col-4 text-end">
             <div class="footer-tab">
-                <i class="fas fa-globe-americas" aria-hidden="true"></i><% if(member?.planet !== undefined) { %>&nbsp;<b><%= member.planet.x %>:<%= member.planet.y %>:<%= member.planet.z %></b><% } %>
+                <div class="footer-tab-section">
+                    <i class="fas fa-globe-americas" aria-hidden="true"></i><% if(member?.planet !== undefined) { %>&nbsp;<a href="/uni/p/<%= member.planet.x %>/<%= member.planet.y %>"><b><%= member.planet.x %>:<%= member.planet.y %></b></a><% } %>
+                </div>
+                <div class="footer-tab-section">
+                    <% if(member?.planet !== undefined) { %><a href="/uni/p/<%= member.planet.x %>/<%= member.planet.y %>/<%= member.planet.z %>"><b>:<%= member.planet.z %></b></a><% } %>
+                </div>
             </div>
         </div>
     </div>
