@@ -62,7 +62,7 @@ router.get('/', async (req, res, next) => {
     scnrs[i].scans = {};
     scnrs[i].scans.d = await Scan.findOne({planet_id:scnrs[i].planet_id, scantype:3}).sort({tick:-1, _id:-1});
     if(scnrs[i].scans.d !== null) { scnrs[i].scans.d.scan = await DevelopmentScan.findOne({scan_id:scnrs[i].scans.d.id}); }
-    if(scnrs[i].timezone !== undefined && scnrs[i].timezone !== null) { scnrs[i].currenttime = moment().tz(scnrs[i].timezone).format('LT'); }
+    if(scnrs[i].timezone !== undefined) { let tz = moment().tz(scnrs[i].timezone); scnrs[i].currenttime = tz !== undefined ? tz.format('LT') : null; }
   }
   scnrs.sort(compareAmps);
   let reqs = await ScanRequest.find({active: true});
