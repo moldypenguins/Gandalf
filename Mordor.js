@@ -24,10 +24,11 @@
 const CFG = require('./Config');
 const Mordor = require("mongoose");
 
-Mordor.set('useNewUrlParser', true);
-Mordor.set('useFindAndModify', false);
-Mordor.set('useCreateIndex', true);
-Mordor.set('useUnifiedTopology', true);
+//options no longer supported as of Mongoose 6
+//Mordor.set('useNewUrlParser', true);
+//Mordor.set('useFindAndModify', false);
+//Mordor.set('useCreateIndex', true);
+//Mordor.set('useUnifiedTopology', true);
 Mordor.connect(CFG.db.uri + '/' + CFG.db.name).catch(err => console.log(err.reason));
 Mordor.connection.on("error", () => {
   console.log("Error: database connection failed.");
