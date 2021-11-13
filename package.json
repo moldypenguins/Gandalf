@@ -79,7 +79,7 @@
     "jquery": "^3.6.0",
     "minimist": "^1.2.5",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.33",
+    "moment-timezone": "^0.5.34",
     "mongoose": "^6.0.12",
     "mongoose-autopopulate": "^0.14.0",
     "mongoose-sequence": "^5.3.1",
