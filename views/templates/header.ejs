@@ -75,14 +75,13 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="nav-item dropdown navbar-profile">
-                            <a class="nav-link" href="#" id="navbarDropdownProfile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="<% if(member.telegram_user.telegram_photo_url) { %><%= member.telegram_user.telegram_photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="40" height="40" alt=""/>
+                        <div class="nav-item navbar-profile">
+                            <a class="nav-link" href="/profile">
+                                <img src="<% if(member.telegram_user.telegram_photo_url) { %><%= member.telegram_user.telegram_photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="40" height="40" alt="" />
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownProfile">
-                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                                <li><a class="dropdown-item" href="/logout">Log Out</a></li>
-                            </ul>
+                        </div>
+                        <div class="nav-item">
+                            <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt" aria-hidden="true"></i></a>
                         </div>
                     <% } %>
                 </div>
