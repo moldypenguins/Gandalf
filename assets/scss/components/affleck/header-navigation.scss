@@ -49,6 +49,20 @@ nav {
     }
   }
 
+  .navbar-logout {
+    padding: 5px 0 0 10px;
+
+    i {
+      font-size: 1.5rem;
+      opacity: 0.85;
+    }
+    &:hover {
+      i {
+        opacity: 1;
+      }
+    }
+  }
+
   .navbar-nav {
     background: transparent;
 
