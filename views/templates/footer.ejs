@@ -8,13 +8,15 @@
         </div>
         <div class="col-4 text-center">
             <div class="footer-tab">
+                <% if(member !== undefined && member !== null) { %>
                 <i class="fas fa-crosshairs" aria-hidden="true"></i><% if(tick !== undefined) { %>&nbsp;<b>13</b><% } %>
+                <% } %>
             </div>
         </div>
         <div class="col-4 text-end">
             <div class="footer-tab">
                 <div class="footer-tab-section">
-                    <i class="fas fa-globe-americas" aria-hidden="true"></i><% if(member?.planet !== undefined && member.planet !== null) { %>&nbsp;<a href="/uni/p/<%= member.planet.x %>/<%= member.planet.y %>"><b><%= member.planet.x %>:<%= member.planet.y %></b></a><% } %>
+                    <% if(member?.planet !== undefined && member.planet !== null) { %><i class="fas fa-globe-americas" aria-hidden="true"></i>&nbsp;<a href="/uni/p/<%= member.planet.x %>/<%= member.planet.y %>"><b><%= member.planet.x %>:<%= member.planet.y %></b></a><% } %>
                 </div>
                 <div class="footer-tab-section">
                     <% if(member?.planet !== undefined && member.planet !== null) { %><a href="/uni/p/<%= member.planet.x %>/<%= member.planet.y %>/<%= member.planet.z %>"><b>:<%= member.planet.z %></b></a><% } %>
