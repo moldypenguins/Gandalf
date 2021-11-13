@@ -54,7 +54,7 @@
     "postinstall": "npm run symlink-jquery-js && npm run symlink-popper-js && npm run symlink-popper-js-map && npm run symlink-popper-js-flow && npm run symlink-bootstrap-js && npm run symlink-bootstrap-js-map && npm run symlink-bootstrap-css && npm run symlink-bootstrap-css-map && npm run symlink-bootstrap-table-js && npm run symlink-bootstrap-table-css && npm run symlink-fontawesome-fonts && npm run symlink-fontawesome-css && npm run symlink-clipboard-js && npm run symlink-intltelinput-css && npm run symlink-intltelinput-js && npm run symlink-intltelinput-utils && npm run symlink-intltelinput-flags"
   },
   "dependencies": {
-    "@awaitjs/express": "^0.7.2",
+    "@awaitjs/express": "^0.9.0",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@popperjs/core": "^2.9.2",
     "@types/express": "^4.17.12",
