@@ -59,9 +59,9 @@ router.get('/', async (req, res, next) => {
   let scnrs = await Member.find({$where:`this.access >= 1 && (this.roles & 2) !== 0`});
   for(let i = 0; i < scnrs.length; i++) {
     //scnrs[i].planet = await Planet.findOne({id:scnrs[i].planet_id});
-    //scnrs[i].scans = {};
-    //scnrs[i].scans.d = await Scan.findOne({planet_id:scnrs[i].planet_id, scantype:3}).sort({tick:-1, _id:-1});
-    //if(scnrs[i].scans.d !== null) { scnrs[i].scans.d.scan = await DevelopmentScan.findOne({scan_id:scnrs[i].scans.d.id}); }
+    scnrs[i].scans = {};
+    scnrs[i].scans.d = await Scan.findOne({planet_id:scnrs[i].planet_id, scantype:3}).sort({tick:-1, _id:-1});
+    if(scnrs[i].scans.d !== null) { scnrs[i].scans.d.scan = await DevelopmentScan.findOne({scan_id:scnrs[i].scans.d.id}); }
     //if(scnrs[i].timezone !== undefined) { let tz = moment().tz(scnrs[i].timezone); scnrs[i].currenttime = tz !== undefined ? tz.format('LT') : null; }
   }
   scnrs.sort(compareAmps);
