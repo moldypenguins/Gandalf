@@ -16,7 +16,7 @@
                     <div class="content">
                         <% if(typeof (planet) != "undefined") { %>
                             <% var race = planet.race ? planet.race : ""; %>
-                            <% var raceClass = planet.race ? " class=" + racenames[planet.race.toLowerCase()] : ""; %>
+                            <% var raceClass = planet.race ? " class=" + racenames[planet.race.toLowerCase()].toUpperCase() : ""; %>
                             <h2><%= planet.rulername %> of <%= planet.planetname %> (<%= planet.x %>:<%= planet.y %>:<%= planet.z %>) (<span<%= raceClass %>><%= race %></span>)</h2>
                             <p></p>
                         <% } else { %>
