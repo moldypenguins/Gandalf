@@ -10,14 +10,31 @@
 <main>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xxl-1 col-xl-0"></div>
-            <div class="col-xxl-10 col-xl-12">
-                <div class="content">
-                    <h2>Help</h2>
-                    <p>Page: <%= help %></p>
+            <% if(help === "strategy") { %>
+                <div class="col-12">
+                    <div class="content">
+                        <h2>Bot Commands</h2>
+                        <p>!help</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xxl-1 col-xl-0"></div>
+            <% } else if(help === "downloads") { %>
+                <div class="col-12">
+                    <div class="content">
+                        <h2>Downloads</h2>
+                        <p>User Script</p>
+                    </div>
+                </div>
+            <% } else if(help === "about") { %>
+                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
+                <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
+                    <div class="content">
+                        <h2>About</h2>
+                        <p>Version: 0.4.5</p>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
+            <% } %>
         </div>
     </div>
 </main>
