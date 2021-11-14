@@ -81,17 +81,14 @@ main {
 
 
 
-.bootstrap-table .fixed-table-container .fixed-table-body {
-  overflow-y: visible;
-}
 
 .dropdown-header {
   padding: 0.25rem 0.5rem 0.5rem 0.5rem !important;
 }
-
 .dropdown-divider {
   margin: 0.75rem 0 !important;
 }
-
-
+.dropdown-item {
+  padding: 0.25rem 0.5rem !important;
+}
 
