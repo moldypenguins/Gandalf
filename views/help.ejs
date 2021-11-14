@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("templates/head", {page_title: "Dashboard", page_description: "Dashboard"}); %>
+</head>
+<body class="page-dashboard">
+<header>
+    <%- include("templates/header"); %>
+</header>
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xxl-1 col-xl-0"></div>
+            <div class="col-xxl-10 col-xl-12">
+                <div class="content">
+                    <h2>Dashboard</h2>
+                    <p>Greetings, <%= member.pa_nick %>! Welcome to <%= alliance_name %>.</p>
+                    <% if(content_exists && member.isMEM) { %>
+                        <%- include("content/dashboard.html"); %>
+                    <% } %>
+                </div>
+            </div>
+            <div class="col-xxl-1 col-xl-0"></div>
+        </div>
+    </div>
+</main>
+<footer>
+    <%- include("templates/footer"); %>
+</footer>
+</body>
+</html>
