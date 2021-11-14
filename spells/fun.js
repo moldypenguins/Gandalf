@@ -53,15 +53,25 @@ async function search(phrase, key) {
   return search('404', key);
 }
 
-let Fun_gif_usage = he.encode('!giphy <phrase>');
-let Fun_gif_desc = 'Finds a random gifphy using your phrase';
-let Fun_gif = (args) => {
+let Fun_gief_usage = he.encode('!gief');
+let Fun_gief_desc = 'Finds a random gifphy using your phrase';
+let Fun_gief = (args) => {
   return new Promise(async (resolve, reject) => {
-    if (!Array.isArray(args) || args.length < 1) { reject(Fun_gif_desc); }
+    if (!Array.isArray(args) || args.length < 1) { reject(Fun_gief_desc); }
+    resolve('boobs', CFG.giphy.key);
+  });
+};
+
+let Fun_giphy_usage = he.encode('!giphy <phrase>');
+let Fun_giphy_desc = 'Finds a random giphy using your phrase';
+let Fun_giphy = (args) => {
+  return new Promise(async (resolve, reject) => {
+    if (!Array.isArray(args) || args.length < 1) { reject(Fun_giphy_desc); }
     resolve(await search(args.join('+'), CFG.giphy.key));
   });
 };
 
 module.exports = {
-  "gief": { usage: Fun_gif_usage, description: Fun_gif_desc, cast: Fun_gif, send_as_video: true },
+  "gief": { usage: Fun_gief_usage, description: Fun_gief_desc, cast: Fun_gief, send_as_video: true },
+  "giphy": { usage: Fun_giphy_usage, description: Fun_giphy_desc, cast: Fun_giphy, send_as_video: true },
 };
