@@ -220,125 +220,133 @@
                 <div class="col-lg-6 col-md-12">
                     <div class="content">
                         <h2>Top 10 Alliances</h2>
-                        <table id="table-alliance" class="table table-sm table-striped table-bordered">
-                            <thead>
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Size</th>
-                                <th scope="col">Members</th>
-                                <th scope="col">Points</th>
-                                <th scope="col">Avg. Score</th>
-                                <th scope="col">Score</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <% for(var a = 0; a < alliances.length; a++) { %>
+                        <div class="table-responsive">
+                            <table id="table-alliance" class="table table-sm table-striped table-bordered">
+                                <thead>
                                 <tr>
-                                    <td><%= alliances[a].name %></td>
-                                    <td><%= alliances[a].size %></td>
-                                    <td><%= alliances[a].members %></td>
-                                    <td><%= alliances[a].points %></td>
-                                    <td><%= alliances[a].score_avg %></td>
-                                    <td><%= alliances[a].score %></td>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Size</th>
+                                    <th scope="col">Members</th>
+                                    <th scope="col">Points</th>
+                                    <th scope="col">Avg. Score</th>
+                                    <th scope="col">Score</th>
                                 </tr>
-                            <% } %>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                <% for(var a = 0; a < alliances.length; a++) { %>
+                                    <tr>
+                                        <td><%= alliances[a].name %></td>
+                                        <td><%= alliances[a].size %></td>
+                                        <td><%= alliances[a].members %></td>
+                                        <td><%= alliances[a].points %></td>
+                                        <td><%= alliances[a].score_avg %></td>
+                                        <td><%= alliances[a].score %></td>
+                                    </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <div class="content">
                         <h2>Top 5 Clusters</h2>
-                        <table id="table-cluster" class="table table-sm table-striped table-bordered">
-                            <thead>
-                            <tr>
-                                <th scope="col">X</th>
-                                <th scope="col">Size</th>
-                                <th scope="col">Score</th>
-                                <th scope="col">Value</th>
-                                <th scope="col">XP</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <% for(var c = 0; c < clusters.length; c++) { %>
+                        <div class="table-responsive">
+                            <table id="table-cluster" class="table table-sm table-striped table-bordered">
+                                <thead>
                                 <tr>
-                                    <td><%= clusters[c].x %></td>
-                                    <td><%= clusters[c].size %></td>
-                                    <td><%= clusters[c].score %></td>
-                                    <td><%= clusters[c].value %></td>
-                                    <td><%= clusters[c].xp %></td>
+                                    <th scope="col">X</th>
+                                    <th scope="col">Size</th>
+                                    <th scope="col">Score</th>
+                                    <th scope="col">Value</th>
+                                    <th scope="col">XP</th>
                                 </tr>
-                            <% } %>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                <% for(var c = 0; c < clusters.length; c++) { %>
+                                    <tr>
+                                        <td><%= clusters[c].x %></td>
+                                        <td><%= clusters[c].size %></td>
+                                        <td><%= clusters[c].score %></td>
+                                        <td><%= clusters[c].value %></td>
+                                        <td><%= clusters[c].xp %></td>
+                                    </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <div class="content">
                         <h2>Top 50 Galaxies</h2>
-                        <table id="table-galaxy" class="table table-sm table-striped table-bordered">
-                            <thead>
-                            <tr>
-                                <th scope="col">X</th>
-                                <th scope="col">Y</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Size</th>
-                                <th scope="col">Score</th>
-                                <th scope="col">Value</th>
-                                <th scope="col">XP</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <% for(var g = 0; g < galaxies.length; g++) { %>
+                        <div class="table-responsive">
+                            <table id="table-galaxy" class="table table-sm table-striped table-bordered">
+                                <thead>
                                 <tr>
-                                    <td><%= galaxies[g].x %></td>
-                                    <td><%= galaxies[g].y %></td>
-                                    <td><%= galaxies[g].name %></td>
-                                    <td><%= galaxies[g].size %></td>
-                                    <td><%= galaxies[g].score %></td>
-                                    <td><%= galaxies[g].value %></td>
-                                    <td><%= galaxies[g].xp %></td>
+                                    <th scope="col">X</th>
+                                    <th scope="col">Y</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Size</th>
+                                    <th scope="col">Score</th>
+                                    <th scope="col">Value</th>
+                                    <th scope="col">XP</th>
                                 </tr>
-                            <% } %>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                <% for(var g = 0; g < galaxies.length; g++) { %>
+                                    <tr>
+                                        <td><%= galaxies[g].x %></td>
+                                        <td><%= galaxies[g].y %></td>
+                                        <td><%= galaxies[g].name %></td>
+                                        <td><%= galaxies[g].size %></td>
+                                        <td><%= galaxies[g].score %></td>
+                                        <td><%= galaxies[g].value %></td>
+                                        <td><%= galaxies[g].xp %></td>
+                                    </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <div class="content">
                         <h2>Top 100 Planets</h2>
-                        <table id="table-planets" class="table table-sm table-striped table-bordered">
-                            <thead>
-                            <tr>
-                                <th scope="col">X</th>
-                                <th scope="col">Y</th>
-                                <th scope="col">Z</th>
-                                <th scope="col">Planet Name</th>
-                                <th scope="col">Ruler Name</th>
-                                <th scope="col">Race</th>
-                                <th scope="col">Size</th>
-                                <th scope="col">Score</th>
-                                <th scope="col">Value</th>
-                                <th scope="col">XP</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <% for(var p = 0; p < planets.length; p++) { %>
+                        <div class="table-responsive">
+                            <table id="table-planets" class="table table-sm table-striped table-bordered">
+                                <thead>
                                 <tr>
-                                    <td><%= planets[p].x %></td>
-                                    <td><%= planets[p].y %></td>
-                                    <td><%= planets[p].z %></td>
-                                    <td><%= planets[p].planetname %></td>
-                                    <td><%= planets[p].rulername %></td>
-                                    <td class="<%= planets[p].race ? planets[p].race.toLowerCase() : '' %>"><%= planets[p].race %></td>
-                                    <td><%= planets[p].size %></td>
-                                    <td><%= planets[p].score %></td>
-                                    <td><%= planets[p].value %></td>
-                                    <td><%= planets[p].xp %></td>
+                                    <th scope="col">X</th>
+                                    <th scope="col">Y</th>
+                                    <th scope="col">Z</th>
+                                    <th scope="col">Planet Name</th>
+                                    <th scope="col">Ruler Name</th>
+                                    <th scope="col">Race</th>
+                                    <th scope="col">Size</th>
+                                    <th scope="col">Score</th>
+                                    <th scope="col">Value</th>
+                                    <th scope="col">XP</th>
                                 </tr>
-                            <% } %>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                <% for(var p = 0; p < planets.length; p++) { %>
+                                    <tr>
+                                        <td><%= planets[p].x %></td>
+                                        <td><%= planets[p].y %></td>
+                                        <td><%= planets[p].z %></td>
+                                        <td><%= planets[p].planetname %></td>
+                                        <td><%= planets[p].rulername %></td>
+                                        <td class="<%= planets[p].race ? planets[p].race.toLowerCase() : '' %>"><%= planets[p].race %></td>
+                                        <td><%= planets[p].size %></td>
+                                        <td><%= planets[p].score %></td>
+                                        <td><%= planets[p].value %></td>
+                                        <td><%= planets[p].xp %></td>
+                                    </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
