@@ -17,6 +17,16 @@ nav {
     padding: 0;
   }
 
+  @media (max-width: 991px) {
+    .navbar-collapse {
+      position: absolute;
+      top: calc(42px + 1rem);
+      background: rgb(255, 255, 255);
+      padding: 10px 20px;
+      width: 100%;
+    }
+  }
+
   .navbar-brand {
     font-family: $font-default;
     padding-top: 0;
