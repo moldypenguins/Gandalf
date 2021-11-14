@@ -75,12 +75,12 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="nav-item navbar-profile">
+                        <div class="nav-item navbar-profile d-flex">
                             <a class="nav-link" href="/profile">
                                 <img src="<% if(member.telegram_user.telegram_photo_url) { %><%= member.telegram_user.telegram_photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="40" height="40" alt="" />
                             </a>
                         </div>
-                        <div class="nav-item navbar-logout">
+                        <div class="nav-item navbar-logout d-flex">
                             <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt" aria-hidden="true"></i></a>
                         </div>
                     <% } %>
