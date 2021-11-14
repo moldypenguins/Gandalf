@@ -70,6 +70,7 @@ const covertoperationsRoute = require('./routes/covertoperations');
 const profileRoute = require('./routes/profile');
 const strategyRoute = require('./routes/strategy');
 const membersRoute = require('./routes/members');
+const helpRoute = require('./routes/help');
 const scansRoute = require('./routes/scans');
 const parseRoute = require('./routes/parse');
 const attacksRoute = require('./routes/attacks');
@@ -175,6 +176,8 @@ Mordor.connection.once("open", () => {
   });
   //non-csrf routes
   app.use('/uptime', uptimeRoute);
+
+  //#TODO: check these routes for efficiency and security
   app.use('/parse', cors(corsOptions), parseRoute);
   app.use('/reject', cors(corsOptions), parseRoute);
   app.use('/claims', cors(corsOptions), claimsRoute);
@@ -196,6 +199,7 @@ Mordor.connection.once("open", () => {
   app.use('/mem', loginRequired, membersRoute);
   app.use('/scans', loginRequired, cors(corsOptions), scansRoute);
   app.use('/att', loginRequired, attacksRoute);
+  app.use('/help', loginRequired, helpRoute);
   //errors
   app.use(async(req, res, next) => {
     next(createError(404));

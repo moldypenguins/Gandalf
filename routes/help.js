@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name strategy.js
- * @version 2021/06/07
+ * @name help.js
+ * @version 2021/11/13
  * @summary Express Route
  **/
 'use strict';
@@ -30,102 +30,17 @@ let router = express.Router();
 const fs = require('fs');
 
 
-router.get('/', AXS.webMemberRequired, function(req, res, next) {
-  fs.access('views/content/strat.html', fs.constants.F_OK, (err) => {
-    res.render('strategy', { content_exists: err ? false : true, strategy: 'strategy' });
-  });
+router.get('/commands', AXS.webMemberRequired, function(req, res, next) {
+  res.render('help', { help: 'commands' });
 });
 
 
-router.get('/ship', AXS.webMemberRequired, function(req, res, next) {
-  fs.access('views/content/strat_ship.html', fs.constants.F_OK, (err) => {
-    res.render('strategy', { content_exists: err ? false : true, strategy: 'ship' });
-  });
+router.get('/downloads', AXS.webMemberRequired, function(req, res, next) {
+  res.render('help', { help: 'downloads' });
 });
 
-router.get('/tickplan', AXS.webMemberRequired, function(req, res, next) {
-  fs.access('views/content/strat_tickplan.html', fs.constants.F_OK, (err) => {
-    res.render('strategy', { content_exists: err ? false : true, strategy: 'tickplan' });
-  });
-});
-
-router.get('/tickplan/ter', AXS.webMemberRequired, function(req, res, next) {
-  fs.access('views/content/strat_tickplan_ter.html', fs.constants.F_OK, (err) => {
-    res.render('tickplan', { content_exists: err ? false : true, race: 'ter' });
-  });
-});
-
-router.get('/tickplan/cat', AXS.webMemberRequired, function(req, res, next) {
-  fs.access('views/content/strat_tickplan_cat.html', fs.constants.F_OK, (err) => {
-    res.render('tickplan', { content_exists: err ? false : true, race: 'cat' });
-  });
-});
-
-router.get('/tickplan/xan', AXS.webMemberRequired, function(req, res, next) {
-  fs.access('views/content/strat_tickplan_xan.html', fs.constants.F_OK, (err) => {
-    res.render('tickplan', { content_exists: err ? false : true, race: 'xan' });
-  });
-});
-
-router.get('/tickplan/zik', AXS.webMemberRequired, function(req, res, next) {
-  fs.access('views/content/strat_tickplan_zik.html', fs.constants.F_OK, (err) => {
-    res.render('tickplan', { content_exists: err ? false : true, race: 'zik' });
-  });
-});
-
-router.get('/tickplan/etd', AXS.webMemberRequired, function(req, res, next) {
-  fs.access('views/content/strat_tickplan_etd.html', fs.constants.F_OK, (err) => {
-    res.render('tickplan', { content_exists: err ? false : true, race: 'etd' });
-  });
-});
-
-
-router.get('/forting', AXS.webMemberRequired, function(req, res, next) {
-  fs.access('views/content/strat_forting.html', fs.constants.F_OK, (err) => {
-    res.render('strategy', { content_exists: err ? false : true, strategy: 'forting' });
-  });
-});
-
-
-router.get('/startup', AXS.webMemberRequired, function(req, res, next) {
-  fs.access('views/content/strat_startup.html', fs.constants.F_OK, (err) => {
-    res.render('strategy', { content_exists: err ? false : true, strategy: 'startup' });
-  });
-});
-
-
-router.get('/quests', AXS.webMemberRequired, function(req, res, next) {
-  fs.access('views/content/strat_quests.html', fs.constants.F_OK, (err) => {
-    res.render('strategy', { content_exists: err ? false : true, strategy: 'quests' });
-  });
-});
-
-
-router.get('/scans', AXS.webMemberRequired, function(req, res, next) {
-  fs.access('views/content/strat_scans.html', fs.constants.F_OK, (err) => {
-    res.render('strategy', { content_exists: err ? false : true, strategy: 'scans' });
-  });
-});
-
-
-router.get('/attack', AXS.webMemberRequired, function(req, res, next) {
-  fs.access('views/content/strat_attack.html', fs.constants.F_OK, (err) => {
-    res.render('strategy', { content_exists: err ? false : true, strategy: 'attack' });
-  });
-});
-
-
-router.get('/defence', AXS.webMemberRequired, function(req, res, next) {
-  fs.access('views/content/strat_defence.html', fs.constants.F_OK, (err) => {
-    res.render('strategy', { content_exists: err ? false : true, strategy: 'defence' });
-  });
-});
-
-
-router.get('/complaints', AXS.webMemberRequired, function(req, res, next) {
-  fs.access('views/content/strat_complaints.html', fs.constants.F_OK, (err) => {
-    res.render('strategy', { content_exists: err ? false : true, strategy: 'complaints' });
-  });
+router.get('/about', AXS.webMemberRequired, function(req, res, next) {
+  res.render('help', { help: 'about' });
 });
 
 

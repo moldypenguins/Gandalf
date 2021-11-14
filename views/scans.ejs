@@ -32,7 +32,7 @@
                     <% var tech = scanners[i].scans.d && scanners[i].scans.d.scan ? scantypes[scanners[i].scans.d.scan.waves + 1] : "Unknown"; %>
                     <% var amps = scanners[i].scans.d && scanners[i].scans.d.scan ? scanners[i].scans.d.scan.wave_amplifier : "Unknown"; %>
                     <tr>
-                      <td><%= scanners[i].panick %></td>
+                      <td><%= scanners[i].pa_nick %></td>
                       <td><%= scanners[i].timezone %></td>
                       <td><% if(scanners[i].currenttime !== undefined) { %><%= scanners[i].currenttime; %><% } %></td>
                       <td<%= raceClass %>><%= race %></td>
