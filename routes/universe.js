@@ -109,7 +109,7 @@ router.get('/p', async (req, res, next) => {
 router.get('/p/:x/:y/:z', function(req, res, next) {
   Planet.findOne({x: req.params.x, y: req.params.y, z: req.params.z}).then((plnt) => {
     if(plnt) {
-      res.render('universe', { page: 'p', planet: plnt });
+      res.render('universe', { page: 'p', planet: plnt, racenames: PA.racenames });
     } else {
       next(createError(400));
     }

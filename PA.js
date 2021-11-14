@@ -32,6 +32,13 @@ module.exports = {
     zik:4,
     etd:5,
   },
+  racenames:{
+    ter: "Terran",
+    cat: "Cathaar",
+    xan: "Xandathrii",
+    zik: "Zikonian",
+    etd: "Eitraides",
+  },
   scantypes:{
     1: "Planet Scan",
     2: "Landing Scan",
