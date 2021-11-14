@@ -22,6 +22,7 @@
                                 <tr><td><code>!links</code></td><td>Displays links</td></tr>
                             </tbody>
                         </table>
+                        <% if(member.isADM) { %>
                         <h3>Admin</h3>
                         <table class="table table-sm table-striped table-hover table-bordered">
                             <tbody>
@@ -30,6 +31,7 @@
                                 <tr><td><code>!addgalmate <@GalMate></code></td><td>Adds a TG user as a GalMate.</td></tr>
                             </tbody>
                         </table>
+                        <% } %>
                         <h3>Attacks</h3>
                         <h3>Calcs</h3>
                         <h3>Comms</h3>
