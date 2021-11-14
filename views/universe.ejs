@@ -14,8 +14,10 @@
                 <div class="col-xl-2 col-lg-1 col-md-0"></div>
                 <div class="col-xl-8 col-lg-10 col-md-12">
                     <div class="content">
-                        <% if(typeof (planet) != "undefined") { %>
-                            <h2><%= planet.rulername %> of <%= planet.planetname %> (<%= planet.x %> : <%= planet.y %> : <%= planet.z %>) (<%= planet.race %>)</h2>
+                        <% if(typeof (planet) != "undefined") { %>\
+                            <% var race = scanners[i].planet && scanners[i].planet.race ? scanners[i].planet.race : "Unknown"; %>
+                            <% var raceClass = scanners[i].planet ? " class=" + scanners[i].planet.race.toLowerCase() : ""; %>
+                            <h2><%= planet.rulername %> of <%= planet.planetname %> (<%= planet.x %>:<%= planet.y %>:<%= planet.z %>) (<span<%= raceClass %>><%= race %></span>)</h2>
                             <p></p>
                         <% } else { %>
                             <h2>Planets</h2>
