@@ -13,10 +13,11 @@
             <div class="row">
                 <div class="col-xl-2 col-lg-1 col-md-0"></div>
                 <div class="col-xl-8 col-lg-10 col-md-12">
-                    <div class="content">
-                        <% if(typeof (planet) != "undefined") { %>
-                            <% var race = planet.race ? racenames[planet.race.toLowerCase()] : ""; %>
-                            <% var raceClass = planet.race ? " class=" + planet.race.toLowerCase() : ""; %>
+
+                    <% if(typeof (planet) != "undefined") { %>
+                        <% var race = planet.race ? racenames[planet.race.toLowerCase()] : ""; %>
+                        <% var raceClass = planet.race ? " class=" + planet.race.toLowerCase() : ""; %>
+                        <div class="content">
                             <h2><%= planet.rulername %> of <%= planet.planetname %> (<%= planet.x %>:<%= planet.y %>:<%= planet.z %>) (<span<%= raceClass %>><%= race %></span>)</h2>
                             <div class="d-flex justify-content-center mb-2">
                                 <div class="flex-fill">Rank: <%= numeral(planet.score_rank).format("0,0") %></div>
@@ -27,16 +28,20 @@
                                 <div class="flex-fill small">XP: <%= numeral(planet.xp).format("0,0") %></div>
                                 <div class="flex-fill small">Size: <%= numeral(planet.size).format("0,0") %></div>
                             </div>
-                            <h3>Growth</h3>
-                            <div class="d-flex justify-content-center mb-2">
-                                
-                            </div>
                             <h3>Intel</h3>
-                            <div class="d-flex justify-content-center mb-2">
-
+                            <div class="d-flex justify-content-evenly my-2">
+                                <div class="flex-fill small">Name: </div>
+                                <div class="flex-fill small">Alliance: </div>
                             </div>
-                            <p></p>
-                        <% } else { %>
+                        </div>
+                        <div class="content">
+                            <h2>Growth</h2>
+                            <div class="d-flex justify-content-center mb-2">
+                                <div class="flex-fill small">[Graph Goes Here]</div>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div class="content">
                             <h2>Planets</h2>
                             <table id="table-planets" class="table table-sm table-striped table-bordered">
                                 <thead>
@@ -82,8 +87,9 @@
                                 table.page.len(10).draw();
                               });
                             </script>
-                        <% } %>
-                    </div>
+                        </div>
+                    <% } %>
+
                 </div>
                 <div class="col-xl-2 col-lg-1 col-md-0"></div>
             </div>
