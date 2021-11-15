@@ -27,16 +27,11 @@
 
 .btn,.btn-sm {
   padding: .25rem;
-  font-size: .6rem;
+  font-size: 1rem;
   line-height: 1;
-  @include respond-above(xs) {
-    padding: .375rem;
-    font-size: .8rem;
-    line-height: 1.125;
-  }
   @include respond-above(md) {
-    padding: .5rem;
-    font-size: 1rem;
+    padding: .375rem;
+    font-size: 1.25rem;
     line-height: 1.25;
   }
 }
