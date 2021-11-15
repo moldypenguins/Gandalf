@@ -18,11 +18,14 @@
                             <% var race = planet.race ? racenames[planet.race.toLowerCase()] : ""; %>
                             <% var raceClass = planet.race ? " class=" + planet.race.toLowerCase() : ""; %>
                             <h2><%= planet.rulername %> of <%= planet.planetname %> (<%= planet.x %>:<%= planet.y %>:<%= planet.z %>) (<span<%= raceClass %>><%= race %></span>)</h2>
+                            <div class="d-flex justify-right">
+                                <div class="flex-fill small">Rank: <%= numeral(planet.score_rank).format("0,0") %></div>
+                            </div>
                             <div class="d-flex justify-content-evenly">
-                                <div class="flex-fill small">Score: <%= planet.score %></div>
-                                <div class="flex-fill small">Value: <%= planet.value %></div>
-                                <div class="flex-fill small">XP: <%= planet.xp %></div>
-                                <div class="flex-fill small">Rank: <%= planet.score_rank %></div>
+                                <div class="flex-fill small">Score: <%= numeral(planet.score).format("0,0") %></div>
+                                <div class="flex-fill small">Value: <%= numeral(planet.value).format("0,0") %></div>
+                                <div class="flex-fill small">XP: <%= numeral(planet.xp).format("0,0") %></div>
+                                <div class="flex-fill small">Size: <%= numeral(planet.size).format("0,0") %></div>
                             </div>
                         <% } else { %>
                             <h2>Planets</h2>

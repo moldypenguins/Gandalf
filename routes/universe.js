@@ -35,6 +35,7 @@ const Planet = require('../models/Planet');
 const createError = require('http-errors');
 const express = require('express');
 let router = express.Router();
+const numeral = require('numeral');
 const util = require('util');
 
 router.get('/', async (req, res, next) => {
@@ -109,7 +110,7 @@ router.get('/p', async (req, res, next) => {
 router.get('/p/:x/:y/:z', function(req, res, next) {
   Planet.findOne({x: req.params.x, y: req.params.y, z: req.params.z}).then((plnt) => {
     if(plnt) {
-      res.render('universe', { page: 'p', planet: plnt, racenames: PA.racenames });
+      res.render('universe', { page: 'p', planet: plnt, racenames: PA.racenames, numeral: numeral });
     } else {
       next(createError(400));
     }
