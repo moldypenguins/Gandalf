@@ -9,11 +9,10 @@
 </header>
 <main>
     <div class="container-fluid">
-        <% if(page == "p") { %>
+        <% if(page === "p") { %>
             <div class="row">
                 <div class="col-xl-2 col-lg-1 col-md-0"></div>
                 <div class="col-xl-8 col-lg-10 col-md-12">
-
                     <% if(typeof (planet) != "undefined") { %>
                         <% var race = planet.race ? racenames[planet.race.toLowerCase()] : ""; %>
                         <% var raceClass = planet.race ? " class=" + planet.race.toLowerCase() : ""; %>
@@ -59,18 +58,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <% for(var i = 0; i < planets.length; i++) { %>
+                                <% for(var p = 0; p < planets.length; p++) { %>
                                     <tr>
-                                        <td><%= planets[i].x %></td>
-                                        <td><%= planets[i].y %></td>
-                                        <td><%= planets[i].z %></td>
-                                        <td><%= planets[i].planetname %></td>
-                                        <td><%= planets[i].rulername %></td>
-                                        <td class="<%= planets[i].race ? planets[i].race.toLowerCase() : '' %>"><%= planets[i].race %></td>
-                                        <td><%= planets[i].size %></td>
-                                        <td><%= planets[i].score %></td>
-                                        <td><%= planets[i].value %></td>
-                                        <td><%= planets[i].xp %></td>
+                                        <td><%= planets[p].x %></td>
+                                        <td><%= planets[p].y %></td>
+                                        <td><%= planets[p].z %></td>
+                                        <td><%= planets[p].planetname %></td>
+                                        <td><%= planets[p].rulername %></td>
+                                        <td class="<%= planets[p].race ? planets[p].race.toLowerCase() : '' %>"><%= planets[p].race %></td>
+                                        <td><%= planets[p].size %></td>
+                                        <td><%= planets[p].score %></td>
+                                        <td><%= planets[p].value %></td>
+                                        <td><%= planets[p].xp %></td>
                                     </tr>
                                 <% } %>
                                 </tbody>
@@ -89,7 +88,6 @@
                             </script>
                         </div>
                     <% } %>
-
                 </div>
                 <div class="col-xl-2 col-lg-1 col-md-0"></div>
             </div>
@@ -97,10 +95,12 @@
             <div class="row">
                 <div class="col-xl-2 col-lg-1 col-md-0"></div>
                 <div class="col-xl-8 col-lg-10 col-md-12">
-                    <div class="content">
-                        <% if(typeof (galaxy) != "undefined") { %>
+                    <% if(typeof (galaxy) != "undefined") { %>
+                        <div class="content">
                             <h2><%= galaxy.name %></h2>
-                        <% } else { %>
+                        </div>
+                    <% } else { %>
+                        <div class="content">
                             <h2>Galaxies</h2>
                             <table id="table-galaxy" class="table table-sm table-striped table-bordered">
                                 <thead>
@@ -115,15 +115,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <% for(var i = 0; i < galaxies.length; i++) { %>
+                                <% for(var g = 0; g < galaxies.length; g++) { %>
                                     <tr>
-                                        <td><%= galaxies[i].x %></td>
-                                        <td><%= galaxies[i].y %></td>
-                                        <td><%= galaxies[i].name %></td>
-                                        <td><%= galaxies[i].size %></td>
-                                        <td><%= galaxies[i].score %></td>
-                                        <td><%= galaxies[i].value %></td>
-                                        <td><%= galaxies[i].xp %></td>
+                                        <td><%= galaxies[g].x %></td>
+                                        <td><%= galaxies[g].y %></td>
+                                        <td><%= galaxies[g].name %></td>
+                                        <td><%= galaxies[g].size %></td>
+                                        <td><%= galaxies[g].score %></td>
+                                        <td><%= galaxies[g].value %></td>
+                                        <td><%= galaxies[g].xp %></td>
                                     </tr>
                                 <% } %>
                                 </tbody>
@@ -140,8 +140,8 @@
                                 table.page.len(10).draw();
                               });
                             </script>
-                        <% } %>
-                    </div>
+                        </div>
+                    <% } %>
                 </div>
                 <div class="col-xl-2 col-lg-1 col-md-0"></div>
             </div>
@@ -149,10 +149,12 @@
             <div class="row">
                 <div class="col-xl-2 col-lg-1 col-md-0"></div>
                 <div class="col-xl-8 col-lg-10 col-md-12">
-                    <div class="content">
-                        <% if(typeof (cluster) != "undefined") { %>
+                    <% if(typeof (cluster) != "undefined") { %>
+                        <div class="content">
                             <h2>Cluster <%= cluster.x %></h2>
-                        <% } else { %>
+                        </div>
+                    <% } else { %>
+                        <div class="content">
                             <h2>Clusters</h2>
                             <table id="table-cluster" class="table table-sm table-striped table-bordered">
                                 <thead>
@@ -165,13 +167,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <% for(var i = 0; i < clusters.length; i++) { %>
+                                <% for(var c = 0; c < clusters.length; c++) { %>
                                     <tr>
-                                        <td><%= clusters[i].x %></td>
-                                        <td><%= clusters[i].size %></td>
-                                        <td><%= clusters[i].score %></td>
-                                        <td><%= clusters[i].value %></td>
-                                        <td><%= clusters[i].xp %></td>
+                                        <td><%= clusters[c].x %></td>
+                                        <td><%= clusters[c].size %></td>
+                                        <td><%= clusters[c].score %></td>
+                                        <td><%= clusters[c].value %></td>
+                                        <td><%= clusters[c].xp %></td>
                                     </tr>
                                 <% } %>
                                 </tbody>
@@ -187,8 +189,8 @@
                                 });
                               });
                             </script>
-                        <% } %>
-                    </div>
+                        </div>
+                    <% } %>
                 </div>
                 <div class="col-xl-2 col-lg-1 col-md-0"></div>
             </div>
@@ -196,57 +198,13 @@
             <div class="row">
                 <div class="col-xl-2 col-lg-1 col-md-0"></div>
                 <div class="col-xl-8 col-lg-10 col-md-12">
-                    <div class="content">
-                        <% if(typeof (alliance) != "undefined") { %>
+                    <% if(typeof (alliance) != "undefined") { %>
+                        <div class="content">
                             <h2><%= alliance.name %></h2>
-                        <% } else { %>
+                        </div>
+                    <% } else { %>
+                        <div class="content">
                             <h2>Alliances</h2>
-                            <table id="table-alliance" class="table table-sm table-striped table-bordered">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Size</th>
-                                    <th scope="col">Members</th>
-                                    <th scope="col">Points</th>
-                                    <th scope="col">Avg. Score</th>
-                                    <th scope="col">Score</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <% for(var i = 0; i < alliances.length; i++) { %>
-                                    <tr>
-                                        <td><%= alliances[i].name %></td>
-                                        <td><%= alliances[i].size %></td>
-                                        <td><%= alliances[i].members %></td>
-                                        <td><%= alliances[i].points %></td>
-                                        <td><%= alliances[i].score_avg %></td>
-                                        <td><%= alliances[i].score %></td>
-                                    </tr>
-                                <% } %>
-                                </tbody>
-                            </table>
-                            <script>
-                              $(function () {
-                                $('#table-alliance').DataTable({
-                                  "paging": false,
-                                  "info": false,
-                                });
-                                language: {
-                                  searchPlaceholder: "Search.."
-                                }
-                              });
-                            </script>
-                        <% } %>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-lg-1 col-md-0"></div>
-            </div>
-        <% } else { %>
-            <div class="row">
-                <div class="col-lg-6 col-md-12">
-                    <div class="content">
-                        <h2>Top 10 Alliances</h2>
-                        <div class="table-responsive">
                             <table id="table-alliance" class="table table-sm table-striped table-bordered">
                                 <thead>
                                 <tr>
@@ -271,6 +229,52 @@
                                 <% } %>
                                 </tbody>
                             </table>
+                            <script>
+                              $(function () {
+                                $('#table-alliance').DataTable({
+                                  "paging": false,
+                                  "info": false,
+                                });
+                                language: {
+                                  searchPlaceholder: "Search.."
+                                }
+                              });
+                            </script>
+                        </div>
+                    <% } %>
+                </div>
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
+            </div>
+        <% } else { %>
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="content">
+                        <h2>Top 10 Alliances</h2>
+                        <div class="table-responsive">
+                            <table id="table-alliance" class="table table-sm table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Size</th>
+                                    <th scope="col">Members</th>
+                                    <th scope="col">Points</th>
+                                    <th scope="col">Avg. Score</th>
+                                    <th scope="col">Score</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <% for(var ta = 0; ta < alliances.length; ta++) { %>
+                                    <tr>
+                                        <td><%= alliances[ta].name %></td>
+                                        <td><%= alliances[ta].size %></td>
+                                        <td><%= alliances[ta].members %></td>
+                                        <td><%= alliances[ta].points %></td>
+                                        <td><%= alliances[ta].score_avg %></td>
+                                        <td><%= alliances[ta].score %></td>
+                                    </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -289,13 +293,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <% for(var c = 0; c < clusters.length; c++) { %>
+                                <% for(var tc = 0; tc < clusters.length; tc++) { %>
                                     <tr>
-                                        <td><%= clusters[c].x %></td>
-                                        <td><%= clusters[c].size %></td>
-                                        <td><%= clusters[c].score %></td>
-                                        <td><%= clusters[c].value %></td>
-                                        <td><%= clusters[c].xp %></td>
+                                        <td><%= clusters[tc].x %></td>
+                                        <td><%= clusters[tc].size %></td>
+                                        <td><%= clusters[tc].score %></td>
+                                        <td><%= clusters[tc].value %></td>
+                                        <td><%= clusters[tc].xp %></td>
                                     </tr>
                                 <% } %>
                                 </tbody>
@@ -320,15 +324,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <% for(var g = 0; g < galaxies.length; g++) { %>
+                                <% for(var tg = 0; tg < galaxies.length; tg++) { %>
                                     <tr>
-                                        <td><%= galaxies[g].x %></td>
-                                        <td><%= galaxies[g].y %></td>
-                                        <td><%= galaxies[g].name %></td>
-                                        <td><%= galaxies[g].size %></td>
-                                        <td><%= galaxies[g].score %></td>
-                                        <td><%= galaxies[g].value %></td>
-                                        <td><%= galaxies[g].xp %></td>
+                                        <td><%= galaxies[tg].x %></td>
+                                        <td><%= galaxies[tg].y %></td>
+                                        <td><%= galaxies[tg].name %></td>
+                                        <td><%= galaxies[tg].size %></td>
+                                        <td><%= galaxies[tg].score %></td>
+                                        <td><%= galaxies[tg].value %></td>
+                                        <td><%= galaxies[tg].xp %></td>
                                     </tr>
                                 <% } %>
                                 </tbody>
@@ -356,18 +360,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <% for(var p = 0; p < planets.length; p++) { %>
+                                <% for(var tp = 0; tp < planets.length; tp++) { %>
                                     <tr>
-                                        <td><%= planets[p].x %></td>
-                                        <td><%= planets[p].y %></td>
-                                        <td><%= planets[p].z %></td>
-                                        <td><%= planets[p].planetname %></td>
-                                        <td><%= planets[p].rulername %></td>
-                                        <td class="<%= planets[p].race ? planets[p].race.toLowerCase() : '' %>"><%= planets[p].race %></td>
-                                        <td><%= planets[p].size %></td>
-                                        <td><%= planets[p].score %></td>
-                                        <td><%= planets[p].value %></td>
-                                        <td><%= planets[p].xp %></td>
+                                        <td><%= planets[tp].x %></td>
+                                        <td><%= planets[tp].y %></td>
+                                        <td><%= planets[tp].z %></td>
+                                        <td><%= planets[tp].planetname %></td>
+                                        <td><%= planets[tp].rulername %></td>
+                                        <td class="<%= planets[tp].race ? planets[tp].race.toLowerCase() : '' %>"><%= planets[tp].race %></td>
+                                        <td><%= planets[tp].size %></td>
+                                        <td><%= planets[tp].score %></td>
+                                        <td><%= planets[tp].value %></td>
+                                        <td><%= planets[tp].xp %></td>
                                     </tr>
                                 <% } %>
                                 </tbody>
