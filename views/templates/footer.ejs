@@ -16,12 +16,7 @@
         <div class="col-4 text-end">
             <% if(member?.planet !== undefined && member.planet !== null) { %>
             <div class="footer-tab">
-                <div class="footer-tab-section">
-                    <i class="fas fa-globe-americas" aria-hidden="true"></i>&nbsp;<a href="/uni/g/<%= member.planet.x %>/<%= member.planet.y %>"><b><%= member.planet.x %>&nbsp;:&nbsp;<%= member.planet.y %></b></a>
-                </div>
-                <div class="footer-tab-section">
-                    <a href="/uni/p/<%= member.planet.x %>/<%= member.planet.y %>/<%= member.planet.z %>"><b>:&nbsp;<%= member.planet.z %></b></a>
-                </div>
+                <i class="fas fa-globe-americas" aria-hidden="true"></i>&nbsp;<a href="/uni/c/<%= member.planet.x %>"><b><%= member.planet.x %></b></a>:<a href="/uni/g/<%= member.planet.x %>/<%= member.planet.y %>"><b><%= member.planet.x %><%= member.planet.y %></b></a>:<a href="/uni/p/<%= member.planet.x %>/<%= member.planet.y %>/<%= member.planet.z %>"><b><%= member.planet.z %></b></a>
             </div>
             <% } %>
         </div>
