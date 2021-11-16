@@ -192,6 +192,7 @@ router.post('/request', async(req, res, next) => {
         }
 
         let msg = new BotMessage({
+          _id:Mordor.Types.ObjectId(),
           message_id: crypto.randomBytes(8).toString("hex"),
           group_id: CFG.groups.scans,
           message: `[${scanreq.id}] ${res.locals.member.panick} ` +
