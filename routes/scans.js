@@ -62,12 +62,12 @@ router.get('/', async (req, res, next) => {
     //scnrs[i].planet = await Planet.findOne({id:scnrs[i].planet_id});
     scnrs[i].scans = {};
     scnrs[i].scans.d = await Scan.findOne({planet_id:scnrs[i].planet.planet_id, scantype:3}).sort({tick:-1, _id:-1});
+    //console.log('D SCAN: ' + util.inspect(PA.scnrs[i].scans.d, false, null, true));
     if(scnrs[i].scans.d !== null) { scnrs[i].scans.d.scan = await DevelopmentScan.findOne({scan_id:scnrs[i].scans.d.scan_id}); }
     if(scnrs[i].timezone !== undefined) { let tz = moment().tz(scnrs[i].timezone); scnrs[i].currenttime = tz !== undefined ? tz.format('LT') : null; }
   }
   scnrs.sort(compareAmps);
   let reqs = await ScanRequest.find({active: true});
-  //console.log('SCANTYPES: ' + util.inspect(PA.scantypes, false, null, true));
   res.render('scans', { scanners: scnrs, requests: reqs, scantypes:PA.scantypes });
 });
 
@@ -181,7 +181,7 @@ router.post('/request', async(req, res, next) => {
         scantype: req.body.scantype,
         active: true,
         tick: res.locals.tick.tick,
-        requester_id: res.locals.member.telegram_user.id
+        requester_id: res.locals.member.telegram_user.telegram_id
       });
       scanreq = await scanreq.save();
       if(scanreq != null){
