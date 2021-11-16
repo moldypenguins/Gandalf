@@ -142,6 +142,8 @@ Mordor.connection.once("open", () => {
       for(let entity in ctx.message.entities) {
         if(ctx.message.entities[entity].type === 'url') {
           let scanurl = new URL(ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length));
+          console.log('SCANURL: ' + util.inspect(scanurl, true, null, true));
+
           //let scanurl = url.parse(ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length), true);
           let page_content = await getStream(scanurl.href);
           if(scanurl.query.scan_id !== undefined && !await Scan.exists({scan_id:scanurl.query.scan_id})) {
