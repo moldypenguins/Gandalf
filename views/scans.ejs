@@ -103,7 +103,10 @@
                       <td><%= requests[i].scan_id %></td>
                       <td><%= requests[i].x %>:<%= requests[i].y %>:<%= requests[i].z %></td>
                       <td><%= scantypes[requests[i].scantype] %></td>
-                      <td><a class="btn btn-success" target="_blank" href="https://game.planetarion.com/waves.pl?id=<%= requests[i].scantype %>&x=<%= requests[i].x %>&y=<%= requests[i].y %>&z=<%= requests[i].z %>"><i class="fas fa-satellite-dish" aria-hidden="true"></i></a></td>
+                      <td>
+                        <a class="btn btn-sm btn-success" target="_blank" href="https://game.planetarion.com/waves.pl?id=<%= requests[i].scantype %>&x=<%= requests[i].x %>&y=<%= requests[i].y %>&z=<%= requests[i].z %>"><i class="fas fa-satellite-dish" aria-hidden="true"></i></a>
+                        <a class="btn btn-sm btn-danger" target="_blank" href="#"><i class="fas fa-trash" aria-hidden="true"></i></a>
+                      </td>
                     </tr>
                   <% } %>
                   </tbody>
