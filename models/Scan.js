@@ -37,13 +37,13 @@ const numeral = require('numeral');
 const crypto = require("crypto");
 
 let ScanSchema = new Mordor.Schema({
-  _id:      {type:Mordor.Schema.Types.ObjectId, required:true},
-  scan_id:  {type:String, unique:true, required:true},
-  group_id: {type:String},
-  planet:   {type:Mordor.Schema.Types.ObjectId, reference:'Planet', required:true, index:true},
-  scantype: {type:Number, required:true},
-  tick:     {type:Number, required:true},
-  scanner:  {type:Number, required:true}
+  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
+  scan_id:    {type:String, unique:true, required:true},
+  group_id:   {type:String},
+  planet:     {type:Mordor.Schema.Types.ObjectId, reference:'Planet', required:true, index:true},
+  scantype:   {type:Number, required:true},
+  tick:       {type:Number, required:true},
+  scanner_id: {type:Number, required:true}
 });
 
 
@@ -71,7 +71,7 @@ ScanSchema.statics.parse = async (member_id, scan_id, group_id, page_content) =>
           planet:planet,
           scantype:scan_type,
           tick:tick,
-          scanner:member_id
+          scanner_id:member_id
         });
         let saved = await scn.save();
         if(saved !== undefined) {

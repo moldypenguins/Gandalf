@@ -24,17 +24,18 @@
 const Mordor = require('../Mordor');
 
 let scanRequestSchema = Mordor.Schema({
-  id: String,
-  x: Number,
-  y: Number,
-  z: Number,
-  requester_id: Number,
-  planet_id: String,
-  scantype: Number,
-  dists: Number,
-  scan_id: Number,
-  active: Boolean,
-  tick: Number
+  _id:          {type:Mordor.Schema.Types.ObjectId, required:true},
+  request_id:   {type:String, unique:true, required:true},
+  x:            {type:Number, required:true},
+  y:            {type:Number, required:true},
+  z:            {type:Number, required:true},
+  requester_id: {type:Number, required:true},
+  planet_id:    {type:String, required:true},
+  scantype:     {type:Number, required:true},
+  dists:        {type:Number},
+  scan_id:      {type:Number},
+  active:       {type:Boolean},
+  tick:         {type:Number},
 });
 
 module.exports = Mordor.model('ScanRequest', scanRequestSchema, 'ScanRequests');

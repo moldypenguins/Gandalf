@@ -23,6 +23,7 @@
 
 const CFG = require('../Config');
 const PA = require('../PA');
+const Mordor = require('../Mordor');
 const AXS = require('../Access');
 
 const Scan = require('../models/Scan');
@@ -171,7 +172,8 @@ router.post('/request', async(req, res, next) => {
       next(createError(400));
     } else {
       let scanreq = new ScanRequest({
-        id: crypto.randomBytes(4).toString("hex"),
+        _id: Mordor.Types.ObjectId(),
+        request_id: crypto.randomBytes(8).toString("hex"),
         planet_id: plnt.planet_id,
         x: plnt.x,
         y: plnt.y,
