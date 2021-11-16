@@ -65,19 +65,20 @@ ScanSchema.statics.parse = async (member_id, scan_id, group_id, page_content) =>
       //console.log('SCANTYPE: ' + util.inspect(scantype, false, null, true));
       try {
         let scn = new Scan({
+          _id:Mordor.Types.ObjectId(),
           scan_id:scan_id,
           group_id:group_id,
           planet:planet,
           scantype:scan_type,
           tick:tick,
-          scanner_id:member_id
+          scanner:member_id
         });
         let saved = await scn.save();
         if(saved !== undefined) {
           console.log(`SCANTYPE: ${scan_type} (${typeof(scan_type)})`);
           switch(scan_type) {
             case 1:
-              let pscan = new PlanetScan({scan_id:saved.scan_id});
+              let pscan = new PlanetScan({_id:Mordor.Types.ObjectId(), scan_id:saved.scan_id});
               let mt = page_content.match(/<tr><td[^>]*>Metal<\/td><td[^>]*>([,\d]+)<\/td><td[^>]*>([,\d]+)<\/td><\/tr>/i);
               pscan.roid_metal = mt[1].replace(/,/g, '');
               pscan.res_metal = mt[2].replace(/,/g, '');
@@ -103,7 +104,7 @@ ScanSchema.statics.parse = async (member_id, scan_id, group_id, page_content) =>
               await pscan.save();
               break;
             case 3:
-              let dscan = new DevelopmentScan({scan_id:saved.scan_id});
+              let dscan = new DevelopmentScan({_id:Mordor.Types.ObjectId(), scan_id:saved.scan_id});
               let cons = page_content.match(/<tr><td[^>]*>Light\s+Factory<\/td><td[^>]*>([,\d]*)<\/td><\/tr>\n\t<tr><td[^>]*>Medium\s+Factory<\/td><td[^>]*>([,\d]*)<\/td><\/tr>\n\t<tr><td[^>]*>Heavy\s+Factory<\/td><td[^>]*>([,\d]*)<\/td><\/tr>\n\t<tr><td[^>]*>Wave\s+Amplifier<\/td><td[^>]*>([,\d]*)<\/td><\/tr>\n\t<tr><td[^>]*>Wave\s+Distorter<\/td><td[^>]*>([,\d]*)<\/td><\/tr>\n\t<tr><td[^>]*>Metal\s+Refinery<\/td><td[^>]*>([,\d]*)<\/td><\/tr>\n\t<tr><td[^>]*>Crystal\s+Refinery<\/td><td[^>]*>([,\d]*)<\/td><\/tr>\n\t<tr><td[^>]*>Eonium\s+Refinery<\/td><td[^>]*>([,\d]*)<\/td><\/tr>\n\t<tr><td[^>]*>Research\s+Laboratory<\/td><td[^>]*>([,\d]*)<\/td><\/tr>\n\t<tr><td[^>]*>Finance\s+Centre<\/td><td[^>]*>([,\d]*)<\/td><\/tr>\n\t<tr><td[^>]*>Military\s+Centre<\/td><td[^>]*>([,\d]*)<\/td><\/tr>\n\t<tr><td[^>]*>Security\s+Centre<\/td><td[^>]*>([,\d]*)<\/td><\/tr>\n\t<tr><td[^>]*>Structure\s+Defence<\/td><td[^>]*>([,\d]*)<\/td><\/tr>/i);
               dscan.light_factory = cons[1];
               dscan.medium_factory = cons[2];
@@ -139,7 +140,7 @@ ScanSchema.statics.parse = async (member_id, scan_id, group_id, page_content) =>
                   if(match) {
                     let ship = await Ship.findOne({name:match[1]});
                     if(ship !== undefined) {
-                      let uscan = new UnitScan({scan_id:saved.scan_id, ship_id:ship.ship_id, amount:match[2].replace(',','')});
+                      let uscan = new UnitScan({_id:Mordor.Types.ObjectId(), scan_id:saved.scan_id, ship_id:ship.ship_id, amount:match[2].replace(',','')});
                       let svd = await uscan.save();
                       //console.log("SAVED: " + util.inspect(svd,false,null,true));
                     }
@@ -162,7 +163,7 @@ ScanSchema.statics.parse = async (member_id, scan_id, group_id, page_content) =>
                 console.log(`found planet for scan request ${planet.x}:${planet.y}:${planet.z}`);
                 let text = `Your ${PA.scantypes[saved.scantype]} request for ${planet.x}:${planet.y}:${planet.z} has been fullfilled: https://game.planetarion.com/showscan.pl?scan_id=${saved.scan_id}`;
                 console.log(`sending text: ${text}`);
-                let msg = new BotMessage({message_id:crypto.randomBytes(8).toString("hex"), group_id: request.requester_id, message: text, sent: false});
+                let msg = new BotMessage({_id:Mordor.Types.ObjectId(), message_id:crypto.randomBytes(8).toString("hex"), group_id: request.requester_id, message: text, sent: false});
                 await msg.save();
                 // turn it off
                 request.active = false;
