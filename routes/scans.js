@@ -86,7 +86,7 @@ router.get('/parse', AXS.webScannerRequired, async (req, res, next) => {
     let page_content = await getStream(scanurl.href);
     console.log(`Loaded scan from webserver in: ${Date.now() - start_time}ms`);
 
-    if(scanurl.query.scan_id != undefined) {
+    if(scanurl.query.scan_id !== undefined) {
       //scan
       try {
         let result = await Scan.parse(req.session.member.id, scanurl.query.scan_id, null, page_content);
@@ -96,7 +96,7 @@ router.get('/parse', AXS.webScannerRequired, async (req, res, next) => {
       }
     }
 
-    if(scanurl.query.scan_grp != undefined) {
+    if(scanurl.query.scan_grp !== undefined) {
       //group
       let scans = page_content.split("<hr>");
       for(let i = 1; i < scans.length; i++) {
@@ -132,7 +132,7 @@ router.post('/parse', AXS.webScannerRequired, async (req, res, next) => {
           let page_content = await getStream(scanurl.href);
           console.log(`Loaded scan from webserver in: ${Date.now() - start_time}ms`);
 
-          if(scanurl.query.scan_id != undefined) {
+          if(scanurl.query.scan_id !== undefined) {
             try {
               let result = await Scan.parse(res.locals.member.id, scanurl.query.scan_id, null, page_content);
               // check if any outstanding scan requests for this!!
@@ -172,25 +172,25 @@ router.post('/request', async(req, res, next) => {
     } else {
       let scanreq = new ScanRequest({
         id: crypto.randomBytes(4).toString("hex"),
-        planet_id: plnt.id,
+        planet_id: plnt.planet_id,
         x: plnt.x,
         y: plnt.y,
         z: plnt.z,
         scantype: req.body.scantype,
         active: true,
-        tick: res.locals.tick.id,
-        requester_id: res.locals.member.id
+        tick: res.locals.tick.tick,
+        requester_id: res.locals.member.telegram_user.id
       });
       scanreq = await scanreq.save();
       if(scanreq != null){
-        let dscan = await Scan.findOne({planet_id:plnt.id, scantype:3}).sort({tick:-1});
+        let dscan = await Scan.findOne({planet_id:plnt.planet_id, scantype:3}).sort({tick:-1});
         let dev = null;
         if(dscan != null) {
-          dev = await DevelopmentScan.findOne({scan_id:dscan.id});
+          dev = await DevelopmentScan.findOne({scan_id:dscan.scan_id});
         }
 
         let msg = new BotMessage({
-          id: crypto.randomBytes(8).toString("hex"),
+          message_id: crypto.randomBytes(8).toString("hex"),
           group_id: CFG.groups.scans,
           message: `[${scanreq.id}] ${res.locals.member.panick} ` +
           `requested a ${PA.scantypes[scanreq.scantype]} Scan of ${scanreq.x}:${scanreq.y}:${scanreq.z} ` +

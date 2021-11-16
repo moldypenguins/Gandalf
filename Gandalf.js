@@ -36,7 +36,7 @@ const TelegramUser = require('./models/TelegramUser');
 
 const moment = require('moment');
 const util = require('util');
-const url = require('url');
+//const url = require('url');
 const bent = require('bent');
 const getStream = bent('string');
 
@@ -141,9 +141,10 @@ Mordor.connection.once("open", () => {
     if(ctx.message && ctx.message.text && ctx.message.entities && Array.isArray(ctx.message.entities)) {
       for(let entity in ctx.message.entities) {
         if(ctx.message.entities[entity].type === 'url') {
-          let scanurl = url.parse(ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length), true);
+          let scanurl = new URL(ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length));
+          //let scanurl = url.parse(ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length), true);
           let page_content = await getStream(scanurl.href);
-          if(scanurl.query.scan_id !== undefined && !await Scan.exists({id:scanurl.query.scan_id})) {
+          if(scanurl.query.scan_id !== undefined && !await Scan.exists({scan_id:scanurl.query.scan_id})) {
             //scan
             try {
               let result = await Scan.parse(ctx.message.from.id, scanurl.query.scan_id, null, page_content);
@@ -157,7 +158,7 @@ Mordor.connection.once("open", () => {
             let scans = page_content.split("<hr>");
             for(let i = 1; i < scans.length; i++) {
               let m = scans[i].match(/scan_id=([0-9a-zA-Z]+)/i);
-              if(m != null  && !await Scan.exists({id:m[1]})) {
+              if(m != null  && !await Scan.exists({scan_id:m[1]})) {
                 //console.log('M: ' +  util.inspect(m, false, null, true));
                 try {
                   let result = await Scan.parse(ctx.message.from.id, m[1], scanurl.query.scan_grp, scans[i]);
