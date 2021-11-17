@@ -78,12 +78,12 @@ router.get('/new', AXS.webCommandRequired, async (req, res, next) => {
 });
 
 router.post('/new', AXS.webCommandRequired, async (req, res, next) => {
-  if(req.body.save != undefined) {
+  if(req.body.save !== undefined) {
     //let lastatt = await Attack.findOne().sort({id: -1});
     //lastatt = lastatt ? lastatt.id : 0;
     
     let att = await new Attack({
-      id: lastatt + 1,
+      //id: lastatt + 1,
       hash: crypto.randomBytes(16).toString('hex'),
       landtick: req.body.landtick,
       waves: req.body.waves,
@@ -94,15 +94,15 @@ router.post('/new', AXS.webCommandRequired, async (req, res, next) => {
       commander_id: res.locals.member.id
     }).save();
     if(att) {
-      att.setNext('number', function(err, attack) {
-        if(err) {
+      //att.setNext('number', function(err, attack) {
+        if(att.number) {
           console.log('Cannot increment the rank because ',err);
         } else {
           console.log("Attack #" + att.number + " saved to Attacks collection.");
         }
-      });
+      //});
 
-      res.redirect(`/att/edit/${saved.hash}`);
+      res.redirect(`/att/edit/${att.hash}`);
     } else {
       next(createError(400));
     }
@@ -278,10 +278,10 @@ router.post('/:hash', async (req, res, next) => {
   if(att.releasetick > res.locals.tick.tick) {
     next(createError(403));
   } else {
-    if (req.body.claim != undefined && req.body.target != undefined) {
+    if (req.body.claim !== undefined && req.body.target !== undefined) {
       let claims = await AttackTargetClaim.find({ attack_id: att.id });
       //console.log(`claims length: ${claims.length}`);
-      let claim_count = claims.filter(c => c.member_id == req.session.member.id).length;
+      let claim_count = claims.filter(c => c.member_id === req.session.member.id).length;
       //console.log(`claim count ${claim_count}`);
       let exists = await AttackTargetClaim.findOne({ member_id: req.session.member.id, attack_id: att.id, planet_id: req.body.target, wave: req.body.claim });
       if (CFG.alliance.attack.max_claims > 0 && claim_count >= CFG.alliance.attack.max_claims) {
@@ -304,7 +304,7 @@ router.post('/:hash', async (req, res, next) => {
           next(createError(409));
         }
       }
-    } else if(req.body.drop != undefined && req.body.target != undefined) { 
+    } else if(req.body.drop !== undefined && req.body.target !== undefined) {
       let deleted = await AttackTargetClaim.deleteOne({member_id:req.session.member.id, attack_id:att.id, planet_id:req.body.target, wave:req.body.drop});
       //console.log('DROP: ' + util.inspect(deleted, false, null, true));
       res.redirect(`/att/${att.hash}`);
