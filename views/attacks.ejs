@@ -396,11 +396,11 @@
                                     </td>
                                     <td class="sd no-sort">
                                         <% if(typeof (targets[i].scans) != "undefined" && typeof (targets[i].scans.p) != "undefined" && targets[i].scans.p != null && typeof (targets[i].scans.p.scan) != "undefined" && targets[i].scans.p.scan != null) { %>
-                                            <% if(targets[i].scans.p.scan.factory_usage_light.toLowerCase() == "high") { %>
+                                            <% if(targets[i].scans.p.scan.factory_usage_light.toLowerCase() === "high") { %>
                                                 <i class="fas fa-thermometer-full text-danger" aria-hidden="true"></i>
-                                            <% } else if(targets[i].scans.p.scan.factory_usage_light.toLowerCase() == "medium") { %>
+                                            <% } else if(targets[i].scans.p.scan.factory_usage_light.toLowerCase() === "medium") { %>
                                                 <i class="fas fa-thermometer-half text-warning" aria-hidden="true"></i>
-                                            <% } else if(targets[i].scans.p.scan.factory_usage_light.toLowerCase() == "low") { %>
+                                            <% } else if(targets[i].scans.p.scan.factory_usage_light.toLowerCase() === "low") { %>
                                                 <i class="fas fa-thermometer-empty text-success" aria-hidden="true"></i>
                                             <% } else { %>
                                                 <i class="fas fa-times text-secondary" aria-hidden="true"></i>
@@ -737,8 +737,8 @@
     <% } else { %>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
-                <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
+                <div class="col-xl-8 col-lg-10 col-md-12">
                     <div class="content">
                         <h2>Live Attacks</h2>
                         <% if(member.isADM || member.isHC || member.isBC) { %>
@@ -754,6 +754,7 @@
                                 <th scope="col">Number</th>
                                 <th scope="col">Land Tick</th>
                                 <th scope="col">Title</th>
+                                <th scope="col">Comments</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
@@ -765,14 +766,15 @@
                                             <td><%= attacks[i].id %></td>
                                             <td><%= attacks[i].landtick %></td>
                                             <td><%= attacks[i].title %></td>
-                                            <td class="no-wrap">Released:
-                                                pt<%= attacks[i].releasetick %></td>
+                                            <td><%= attacks[i].comments %></td>
+                                            <td class="no-wrap">Released: pt<%= attacks[i].releasetick %></td>
                                         </tr>
                                     <% } else if(attacks[i].releasetick <= tick.tick) { %>
                                         <tr data-href="/att/<%= attacks[i].hash %>">
                                             <td><%= attacks[i].id %></td>
                                             <td><%= attacks[i].landtick %></td>
                                             <td><%= attacks[i].title %></td>
+                                            <td><%= attacks[i].comments %></td>
                                             <td class="fit-content"></td>
                                         </tr>
                                     <% } %>
@@ -805,7 +807,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
             </div>
         </div>
     <% } %>
