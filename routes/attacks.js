@@ -23,6 +23,7 @@
 
 const CFG = require('../Config');
 const PA = require('../PA');
+const Mordor = require("../Mordor");
 const AXS = require('../Access');
 
 const Member = require('../models/Member');
@@ -83,6 +84,7 @@ router.post('/new', AXS.webCommandRequired, async (req, res, next) => {
     lastatt = lastatt ? lastatt.id : 0;
     
     let att = await new Attack({
+      _id: new Mordor.Types.ObjectId(),
       number: lastatt + 1,
       hash: crypto.randomBytes(16).toString('hex'),
       landtick: req.body.landtick,
