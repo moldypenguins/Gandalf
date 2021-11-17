@@ -658,7 +658,13 @@
                             </table>
                         </form>
                     </div>
-                    <% if(page === "edit") { %>
+                </div>
+                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
+            </div>
+            <% if(page === "edit") { %>
+                <div class="row">
+                    <div class="col-xl-2 col-lg-1 col-md-0"></div>
+                    <div class="col-8">
                         <div class="content">
                             <h2>
                                 Edit Attack <%= attack.id %> Targets
@@ -723,10 +729,10 @@
                                 </div>
                             </form>
                         </div>
-                    <% } %>
+                    </div>
+                    <div class="col-xl-2 col-lg-1 col-md-0"></div>
                 </div>
-                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
-            </div>
+            <% } %>
         </div>
     <% } else { %>
         <div class="container-fluid">
