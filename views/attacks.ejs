@@ -636,7 +636,7 @@
                                             <div class="input-group-prepend">
                                                 <span id="label-waves" class="input-group-waves">Waves</span>
                                             </div>
-                                            <input type="text" name="waves" id="waves" class="form-control" aria-describedby="label-waves" value="<% if(page === "edit") { %><%= attack.waves %><% } %>"/>
+                                            <input type="text" name="waves" id="waves" class="form-control" aria-describedby="label-waves" value="<% if(page === "edit") { %><%= attack.waves %><% } else { %><%= waves %><% } %>"/>
                                         </div>
                                     </td>
                                 </tr>
@@ -648,11 +648,7 @@
                                             </div>
                                             <select id="releasetick" class="custom-select" name="releasetick" aria-describedby="label-releasetick">
                                                 <% for(var i = 0; i < ticks.length; i++) { %>
-                                                    <option value="<%= ticks[i] %>"
-                                                    <% if(page === "edit" && ticks[i] === attack.releasetick) { %>
-                                                            selected="selected"
-                                                            <% } %>
-                                                    ><%= ticks[i] %></option>
+                                                    <option value="<%= ticks[i] %>"<% if(page === "edit" && ticks[i] === attack.releasetick) { %> selected="selected"<% } %>><%= ticks[i] %></option>
                                                 <% } %>
                                             </select>
                                         </div>
@@ -662,17 +658,10 @@
                             </table>
                         </form>
                     </div>
-                </div>
-                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
-            </div>
-            <% if(page === "edit") { %>
-                <div class="row">
-                    <div class="col-12">
+                    <% if(page === "edit") { %>
                         <div class="content">
                             <h2>
-                                <% if(page === "new") { %>Add Attack
-                                <% } else if(page === "edit") { %>Edit Attack <%= attack.id %>
-                                <% } %>
+                                Edit Attack <%= attack.id %> Targets
                             </h2>
                             <form method="POST" action="/att/edit/targ/<%= attack.hash %>">
                                 <table class="table table-sm table-transparent w-100">
@@ -734,9 +723,10 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    <% } %>
                 </div>
-            <% } %>
+                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
+            </div>
         </div>
     <% } else { %>
         <div class="container-fluid">
