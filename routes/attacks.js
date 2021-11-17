@@ -66,7 +66,7 @@ const attackLimiter = slowDown({
 });
 
 router.get('/', async (req, res, next) => {
-  let attacks = await Attack.find().sort({id: -1});
+  let attacks = await Attack.find().sort({number: -1});
   res.render('attacks', { page: 'all', attacks: attacks, after_land_ticks: CFG.alliance.attack.after_land_ticks });
 });
 
