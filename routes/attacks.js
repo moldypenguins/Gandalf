@@ -125,9 +125,9 @@ let addIntel = async (target) => {
 
 
 router.get('/edit/:hash', AXS.webCommandRequired, async (req, res, next) => {
-  var att = await Attack.findOne({hash:req.params.hash});
-  var atttarg = await AttackTarget.find({attack_id:att.id});
-  var targs = await Planet.find({id:{$in:atttarg.map(at => at.planet_id)}});
+  let att = await Attack.findOne({hash:req.params.hash});
+  let atttarg = await AttackTarget.find({attack:att});
+  let targs = await Planet.find({planet_id:{$in:atttarg.map(at => at.planet.planet_id)}});
   for(let target of targs) {
     await addIntel(target);
   }
@@ -162,7 +162,7 @@ router.post('/edit/targ/:hash', AXS.webCommandRequired, async (req, res, next) =
         let cds = inCoords[x].split(':');
         let plnts = await Planet.find({ x: cds[0], y: cds[1] });
         for (let i = 0; i < plnts.length; i++) {
-          let trg = new AttackTarget({ attack_id: att.id, planet_id: plnts[i].id });
+          let trg = new AttackTarget({_id: new Mordor.Types.ObjectId(), attack: att, planet: plnts[i] });
           let saved = await trg.save();
         }
       } else if (inCoords[x].match(/^\d+\.\d+\.\*$/g) != null) {
@@ -171,7 +171,7 @@ router.post('/edit/targ/:hash', AXS.webCommandRequired, async (req, res, next) =
         let cds = inCoords[x].split('.');
         let plnts = await Planet.find({ x: cds[0], y: cds[1] });
         for (let i = 0; i < plnts.length; i++) {
-          let trg = new AttackTarget({ attack_id: att.id, planet_id: plnts[i].id });
+          let trg = new AttackTarget({_id: new Mordor.Types.ObjectId(), attack: att, planet: plnts[i] });
           let saved = await trg.save();
         }
       } else if(inCoords[x].match(/^\d+:\d+:\d+-\d+$/g) != null) {
@@ -181,7 +181,7 @@ router.post('/edit/targ/:hash', AXS.webCommandRequired, async (req, res, next) =
         let pts = cds[2].split('-');
         var plnts = await Planet.find({x:cds[0], y:cds[1], z:{$gte:pts[0], $lte:pts[1]}});
         for(let i = 0; i < plnts.length; i++) {
-	        let trg = new AttackTarget({attack_id:att.id, planet_id:plnts[i].id});
+	        let trg = new AttackTarget({_id: new Mordor.Types.ObjectId(),attack:att, planet:plnts[i]});
           await trg.save();
         }
       } else if(inCoords[x].match(/^\d+:\d+:\d+$/g) != null) {
@@ -189,20 +189,21 @@ router.post('/edit/targ/:hash', AXS.webCommandRequired, async (req, res, next) =
         //console.log('PNT: ' + util.inspect(inCoords[x], false, null, true));
         let cds = inCoords[x].split(':');
         let plnt = await Planet.findOne({x:cds[0], y:cds[1], z:cds[2]});
-        let trg = new AttackTarget({attack_id:att.id, planet_id:plnt.id});
+        let trg = new AttackTarget({_id: new Mordor.Types.ObjectId(),attack:att, planet:plnt});
         await trg.save();
       } else if (inCoords[x].match(/^\d+\.\d+\.\d+$/g) != null) {
         let cds = inCoords[x].split('.');
         let plnt = await Planet.findOne({ x: cds[0], y: cds[1], z: cds[2] });
-        let trg = new AttackTarget({ attack_id: att.id, planet_id: plnt.id });
+        let trg = new AttackTarget({_id: new Mordor.Types.ObjectId(), attack: att, planet: plnt });
         await trg.save();
       }
     }
     res.redirect(`/att/edit/${req.params.hash}`);
   } else if(req.body.delete !== undefined) {
+    let plnt = await Planet.findOne({planet_id:req.body.delete});
     let att = await Attack.findOne({hash:req.params.hash});
-    let claims = await AttackTargetClaim.deleteMany({ attack_id:att.id, planet_id:req.body.delete });
-    let trg = await AttackTarget.deleteOne({attack_id:att.id, planet_id:req.body.delete});
+    let claims = await AttackTargetClaim.deleteMany({attack:att, planet:plnt});
+    let trg = await AttackTarget.deleteOne({attack:att, planet:plnt});
     res.redirect(`/att/edit/${req.params.hash}`);
   } else {
     next(createError(400));
@@ -227,9 +228,9 @@ router.post('/delete/:hash', AXS.webCommandRequired, async (req, res, next) => {
 router.get('/:hash', attackLimiter, async (req, res, next) => {
   let mems = await Member.find();
   let att = await Attack.findOne({hash:req.params.hash});
-  let atttarg = await AttackTarget.find({attack_id:att.id});
-  let targs = await Planet.find({id:{$in:atttarg.map(at => at.planet_id)}});
-  let clms = await AttackTargetClaim.find({attack_id:att.id});
+  let atttarg = await AttackTarget.find({attack:att});
+  let targs = await Planet.find({planet_id:{$in:atttarg.map(at => at.planet.planet_id)}});
+  let clms = await AttackTargetClaim.find({attack:att});
   for(let target of targs) {
     await addIntel(target);
   }
@@ -273,34 +274,36 @@ router.post('/:hash', async (req, res, next) => {
   if(att.releasetick > res.locals.tick.tick) {
     next(createError(403));
   } else {
+    let plnt = await Planet.findOne({planet_id: req.body.target});
     if (req.body.claim !== undefined && req.body.target !== undefined) {
-      let claims = await AttackTargetClaim.find({ attack_id: att.id });
+      let claims = await AttackTargetClaim.find({ attack: att });
       //console.log(`claims length: ${claims.length}`);
-      let claim_count = claims.filter(c => c.member_id === req.session.member.id).length;
+      let claim_count = claims.filter(c => c.member.pa_nick === req.session.member.pa_nick).length;
       //console.log(`claim count ${claim_count}`);
-      let exists = await AttackTargetClaim.findOne({ member_id: req.session.member.id, attack_id: att.id, planet_id: req.body.target, wave: req.body.claim });
+      let exists = await AttackTargetClaim.findOne({ member: req.session.member, attack: att, planet: plnt, wave: req.body.claim });
       if (CFG.alliance.attack.max_claims > 0 && claim_count >= CFG.alliance.attack.max_claims) {
         //console.log(`rejecting new claim, over limit`);
-        next(createError(403, `Only ${max_claims} claims is allowed!!`));
+        next(createError(403, `Only ${max_claims} claims allowed!!`));
       } else if(exists == null) {
         try {
-          var clm = new AttackTargetClaim({
-            member_id:req.session.member.id,
-            attack_id:att.id,
-            planet_id:req.body.target,
+          let clm = new AttackTargetClaim({
+            _id: new Mordor.Types.ObjectId(),
+            member:req.session.member,
+            attack:att,
+            planet:plnt,
             wave:req.body.claim
           });
           console.log(clm);
-		let saved = await clm.save();
+		      let saved = await clm.save();
           //console.log('CLAIM: ' + util.inspect(saved, false, null, true));
           res.redirect(`/att/${att.hash}`);
         } catch(err) {
-		console.log(err);
+		      console.log(err);
           next(createError(409));
         }
       }
     } else if(req.body.drop !== undefined && req.body.target !== undefined) {
-      let deleted = await AttackTargetClaim.deleteOne({member_id:req.session.member.id, attack_id:att.id, planet_id:req.body.target, wave:req.body.drop});
+      let deleted = await AttackTargetClaim.deleteOne({member:req.session.member, attack:att, planet:plnt, wave:req.body.drop});
       //console.log('DROP: ' + util.inspect(deleted, false, null, true));
       res.redirect(`/att/${att.hash}`);
     } else {
