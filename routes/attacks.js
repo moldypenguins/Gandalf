@@ -71,7 +71,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/new', AXS.webCommandRequired, async (req, res, next) => {
   let tks = [];
-  for(let i = res.locals.tick.id; i <= PA.tick.end; i++) {
+  for(let i = res.locals.tick.tick; i <= PA.tick.end; i++) {
     tks.push(i);
   }
   res.render('attacks', { page: 'new', ticks: tks, waves: CFG.alliance.attack.default_waves, min_uni_eta: PA.ships.min_uni_eta });
