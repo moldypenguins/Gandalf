@@ -584,9 +584,9 @@
                                 <% } %>
                             </h2>
                             <div class="btn-box">
-                                <button class="btn btn-sm btn-success" type="submit" name="save" value="save">
-                                    <i class="fas <% if(page === "new") { %>fa-plus<% } else if(page === "edit") { %>fa-save<% } %>" aria-hidden="true"></i>
-                                </button>
+                                <div class="btn-group w-100" role="group" aria-label="Buttons">
+                                    <button type="submit" name="save" id="save" class="btn btn-primary" value="save"><i class="far fa-save" aria-hidden="true"></i></button>
+                                </div>
                             </div>
                             <table class="table table-sm table-transparent">
                                 <tbody>
