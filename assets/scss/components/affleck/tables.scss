@@ -6,12 +6,6 @@ table,
   background: white;
   border: 1px solid rgba(black, .15);
 
-  tr {
-    &[data-href] {
-      cursor: pointer;
-    }
-  }
-
   th {
     white-space: nowrap;
     text-align: left;

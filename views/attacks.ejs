@@ -767,7 +767,8 @@
                                             <td class="fit-content"><%= attacks[i].landtick %></td>
                                             <td><%= attacks[i].title %></td>
                                             <td><%= attacks[i].comments %></td>
-                                            <td class="no-wrap">Released: pt<%= attacks[i].releasetick %></td>
+                                            <td class="fit-content">Released: pt<%= attacks[i].releasetick %></td>
+                                            <td class="fit-content"></td>
                                         </tr>
                                     <% } else if(attacks[i].releasetick <= tick.tick) { %>
                                         <tr data-href="/att/<%= attacks[i].hash %>">
@@ -776,6 +777,11 @@
                                             <td><%= attacks[i].title %></td>
                                             <td><%= attacks[i].comments %></td>
                                             <td class="fit-content"></td>
+                                            <td class="fit-content">
+                                                <div class="no-wrap">
+                                                    <a class="btn btn-sm btn-danger" target="_blank" href="#"><i class="fas fa-rocket" aria-hidden="true"></i></a>
+                                                </div>
+                                            </td>
                                         </tr>
                                     <% } %>
                                 <% } %>
@@ -798,6 +804,7 @@
                             <% for(var i = 0; i < attacks.length; i++) { %>
                                 <% if(attacks[i].landtick < tick.tick - after_land_ticks) { %>
                                     <tr data-href="/att/<%= attacks[i].hash %>">
+                                        <td><%= attacks[i].title %></td>
                                         <td class="fit-content"><%= attacks[i].number %></td>
                                         <td class="fit-content"><%= attacks[i].landtick %></td>
                                         <td><%= attacks[i].title %></td>
