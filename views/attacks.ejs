@@ -99,7 +99,7 @@
                                 <% var trg = targets.find(t => t.id === myClms[i].planet_id); %>
                                 <tr>
                                     <td><%= trg.x %>:<%= trg.y %>:<%= trg.z %></td>
-                                    <td><%= lt %> (<%= numeral(lt - tick.id).format("+0") %>)</td>
+                                    <td><%= lt %> (<%= numeral(lt - tick.tick).format("+0") %>)</td>
                                     <td class="<%= trg.race.toLowerCase() %>"><%= trg.race %></td>
                                     <td><%= trg.size %></td>
                                     <td class="no-wrap">
@@ -164,22 +164,22 @@
                                         <% if(trg && trg.scans) { %>
                                             <div class="btn-group btn-group-sm position-static" role="group" aria-label="Scans">
                                                 <% if(trg.scans.p && trg.scans.p.scan) { %>
-                                                    <a class="btn btn-scan <% if(trg.scans.p.tick > tick.id - expiries.P.bestbefore) { %>btn-success<% } else if(trg.scans.p.tick > tick.id - expiries.P.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.p.id %>" target="_blank">P</a>
+                                                    <a class="btn btn-scan <% if(trg.scans.p.tick > tick.tick - expiries.P.bestbefore) { %>btn-success<% } else if(trg.scans.p.tick > tick.tick - expiries.P.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.p.id %>" target="_blank">P</a>
                                                 <% } %>
                                                 <% if(trg.scans.d && trg.scans.d.scan) { %>
-                                                    <a class="btn btn-scan <% if(trg.scans.d.tick > tick.id - expiries.D.bestbefore) { %>btn-success<% } else if(trg.scans.d.tick > tick.id - expiries.D.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.d.id %>" target="_blank">D</a>
+                                                    <a class="btn btn-scan <% if(trg.scans.d.tick > tick.tick - expiries.D.bestbefore) { %>btn-success<% } else if(trg.scans.d.tick > tick.tick - expiries.D.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.d.id %>" target="_blank">D</a>
                                                 <% } %>
                                                 <% if(trg.scans.u && trg.scans.u.scan) { %>
-                                                    <a class="btn btn-scan <% if(trg.scans.u.tick > tick.id - expiries.U.bestbefore) { %>btn-success<% } else if(trg.scans.u.tick > tick.id - expiries.U.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.u.id %>" target="_blank">U</a>
+                                                    <a class="btn btn-scan <% if(trg.scans.u.tick > tick.tick - expiries.U.bestbefore) { %>btn-success<% } else if(trg.scans.u.tick > tick.tick - expiries.U.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.u.id %>" target="_blank">U</a>
                                                 <% } %>
                                                 <% if(trg.scans.n && trg.scans.n.scan) { %>
-                                                    <a class="btn btn-scan <% if(trg.scans.n.tick > tick.id - expiries.N.bestbefore) { %>btn-success<% } else if(trg.scans.n.tick > tick.id - expiries.N.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.n.id %>" target="_blank">N</a>
+                                                    <a class="btn btn-scan <% if(trg.scans.n.tick > tick.tick - expiries.N.bestbefore) { %>btn-success<% } else if(trg.scans.n.tick > tick.tick - expiries.N.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.n.id %>" target="_blank">N</a>
                                                 <% } %>
                                                 <% if(trg.scans.j !== undefined && trg.scans.j != null) { %>
-                                                    <a class="btn btn-scan <% if(trg.scans.j.tick > tick.id - expiries.J.bestbefore) { %>btn-success<% } else if(trg.scans.j.tick > tick.id - expiries.J.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.j.id %>" target="_blank">J</a>
+                                                    <a class="btn btn-scan <% if(trg.scans.j.tick > tick.tick - expiries.J.bestbefore) { %>btn-success<% } else if(trg.scans.j.tick > tick.tick - expiries.J.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.j.id %>" target="_blank">J</a>
                                                 <% } %>
                                                 <% if(trg.scans.a && trg.scans.a.scan) { %>
-                                                    <a class="btn btn-scan <% if(trg.scans.a.tick > tick.id - expiries.A.bestbefore) { %>btn-success<% } else if(trg.scans.a.tick > tick.id - expiries.A.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.a.id %>" target="_blank">A</a>
+                                                    <a class="btn btn-scan <% if(trg.scans.a.tick > tick.tick - expiries.A.bestbefore) { %>btn-success<% } else if(trg.scans.a.tick > tick.tick - expiries.A.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.a.id %>" target="_blank">A</a>
                                                 <% } %>
                                                 <% var query = "?def_coords_x_1=" + trg.x + "&def_coords_y_1=" + trg.y + "&def_coords_z_1=" + trg.z + "&def_planet_value_1=" + trg.value + "&def_planet_score_1=" + trg.score + "&def_1_race=" + races[trg.race.toLowerCase()]
                                                     if (trg.scans.p && trg.scans.p.scan) {
@@ -275,7 +275,7 @@
                                     <th rowspan="2" scope="col">Scans</th>
                                     <% for(var w = 0; w < attack.waves; w++) { %>
                                         <th rowspan="2" scope="col">LT <%= attack.landtick + w %>
-                                            (<%= numeral(attack.landtick + w - tick.id).format("+0") %>)
+                                            (<%= numeral(attack.landtick + w - tick.tick).format("+0") %>)
                                         </th>
                                     <% } %>
                                     <th rowspan="2" scope="col">Intel</th>
@@ -437,22 +437,22 @@
                                         <% if(typeof (targets[i].scans) != "undefined") { %>
                                             <div class="btn-group btn-group-sm position-static" role="group" aria-label="Scans">
                                                 <% if(typeof (targets[i].scans.p) != "undefined" && targets[i].scans.p != null) { %>
-                                                    <a class="btn btn-scan <% if(targets[i].scans.p.tick > tick.id - expiries.P.bestbefore) { %>btn-success<% } else if(targets[i].scans.p.tick > tick.id - expiries.P.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.p.id %>" target="_blank">P</a>
+                                                    <a class="btn btn-scan <% if(targets[i].scans.p.tick > tick.tick - expiries.P.bestbefore) { %>btn-success<% } else if(targets[i].scans.p.tick > tick.tick - expiries.P.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.p.id %>" target="_blank">P</a>
                                                 <% } %>
                                                 <% if(typeof (targets[i].scans.d) != "undefined" && targets[i].scans.d != null) { %>
-                                                    <a class="btn btn-scan <% if(targets[i].scans.d.tick > tick.id - expiries.D.bestbefore) { %>btn-success<% } else if(targets[i].scans.d.tick > tick.id - expiries.D.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.d.id %>" target="_blank">D</a>
+                                                    <a class="btn btn-scan <% if(targets[i].scans.d.tick > tick.tick - expiries.D.bestbefore) { %>btn-success<% } else if(targets[i].scans.d.tick > tick.tick - expiries.D.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.d.id %>" target="_blank">D</a>
                                                 <% } %>
                                                 <% if(typeof (targets[i].scans.u) != "undefined" && targets[i].scans.u != null) { %>
-                                                    <a class="btn btn-scan <% if(targets[i].scans.u.tick > tick.id - expiries.U.bestbefore) { %>btn-success<% } else if(targets[i].scans.u.tick > tick.id - expiries.U.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.u.id %>" target="_blank">U</a>
+                                                    <a class="btn btn-scan <% if(targets[i].scans.u.tick > tick.tick - expiries.U.bestbefore) { %>btn-success<% } else if(targets[i].scans.u.tick > tick.tick - expiries.U.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.u.id %>" target="_blank">U</a>
                                                 <% } %>
                                                 <% if(typeof (targets[i].scans.n) != "undefined" && targets[i].scans.n != null) { %>
-                                                    <a class="btn btn-scan <% if(targets[i].scans.n.tick > tick.id - expiries.N.bestbefore) { %>btn-success<% } else if(targets[i].scans.n.tick > tick.id - expiries.N.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.n.id %>" target="_blank">N</a>
+                                                    <a class="btn btn-scan <% if(targets[i].scans.n.tick > tick.tick - expiries.N.bestbefore) { %>btn-success<% } else if(targets[i].scans.n.tick > tick.tick - expiries.N.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.n.id %>" target="_blank">N</a>
                                                 <% } %>
                                                 <% if(targets[i].scans.j !== undefined && targets[i].scans.j != null) { %>
-                                                    <a class="btn btn-scan <% if(targets[i].scans.j.tick > tick.id - expiries.J.bestbefore) { %>btn-success<% } else if(targets[i].scans.j.tick > tick.id - expiries.J.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.j.id %>" target="_blank">J</a>
+                                                    <a class="btn btn-scan <% if(targets[i].scans.j.tick > tick.tick - expiries.J.bestbefore) { %>btn-success<% } else if(targets[i].scans.j.tick > tick.tick - expiries.J.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.j.id %>" target="_blank">J</a>
                                                 <% } %>
                                                 <% if(typeof (targets[i].scans.a) != "undefined" && targets[i].scans.a != null) { %>
-                                                    <a class="btn btn-scan <% if(targets[i].scans.a.tick > tick.id - expiries.A.bestbefore) { %>btn-success<% } else if(targets[i].scans.a.tick > tick.id - expiries.A.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.a.id %>" target="_blank">A</a>
+                                                    <a class="btn btn-scan <% if(targets[i].scans.a.tick > tick.tick - expiries.A.bestbefore) { %>btn-success<% } else if(targets[i].scans.a.tick > tick.tick - expiries.A.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.a.id %>" target="_blank">A</a>
                                                 <% } %>
                                                 <% var query = "?def_coords_x_1=" + targets[i].x + "&def_coords_y_1=" + targets[i].y + "&def_coords_z_1=" + targets[i].z + "&def_planet_value_1=" + targets[i].value + "&def_planet_score_1=" + targets[i].score + "&def_1_race=" + races[targets[i].race.toLowerCase()]
                                                     if (typeof (targets[i].scans.p) != "undefined" && targets[i].scans.p != null && typeof (targets[i].scans.p.scan) != "undefined" && targets[i].scans.p.scan != null) {
@@ -759,8 +759,8 @@
                             </thead>
                             <tbody>
                             <% for(var i = 0; i < attacks.length; i++) { %>
-                                <% if(attacks[i].landtick >= tick.id - after_land_ticks) { %>
-                                    <% if(attacks[i].releasetick > tick.id && member.isCMDR) { %>
+                                <% if(attacks[i].landtick >= tick.tick - after_land_ticks) { %>
+                                    <% if(attacks[i].releasetick > tick.tick && member.isCMDR) { %>
                                         <tr data-href="/att/<%= attacks[i].hash %>">
                                             <td><%= attacks[i].id %></td>
                                             <td><%= attacks[i].landtick %></td>
@@ -768,7 +768,7 @@
                                             <td class="no-wrap">Released:
                                                 pt<%= attacks[i].releasetick %></td>
                                         </tr>
-                                    <% } else if(attacks[i].releasetick <= tick.id) { %>
+                                    <% } else if(attacks[i].releasetick <= tick.tick) { %>
                                         <tr data-href="/att/<%= attacks[i].hash %>">
                                             <td><%= attacks[i].id %></td>
                                             <td><%= attacks[i].landtick %></td>
@@ -793,7 +793,7 @@
                             </thead>
                             <tbody>
                             <% for(var i = 0; i < attacks.length; i++) { %>
-                                <% if(attacks[i].landtick < tick.id - after_land_ticks) { %>
+                                <% if(attacks[i].landtick < tick.tick - after_land_ticks) { %>
                                     <tr data-href="/att/<%= attacks[i].hash %>">
                                         <td><%= attacks[i].id %></td>
                                         <td><%= attacks[i].landtick %></td>
