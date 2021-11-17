@@ -123,11 +123,11 @@
                                     </td>
                                     <td class="sd no-sort">
                                         <% if(trg && trg.scans && trg.scans.p && trg.scans.p.scan) { %>
-                                            <% if(trg.scans.p.scan.factory_usage_light.toLowerCase() == "high") { %>
+                                            <% if(trg.scans.p.scan.factory_usage_light.toLowerCase() === "high") { %>
                                                 <i class="fas fa-thermometer-full text-danger" aria-hidden="true"></i>
-                                            <% } else if(trg.scans.p.scan.factory_usage_light.toLowerCase() == "medium") { %>
+                                            <% } else if(trg.scans.p.scan.factory_usage_light.toLowerCase() === "medium") { %>
                                                 <i class="fas fa-thermometer-half text-warning" aria-hidden="true"></i>
-                                            <% } else if(trg.scans.p.scan.factory_usage_light.toLowerCase() == "low") { %>
+                                            <% } else if(trg.scans.p.scan.factory_usage_light.toLowerCase() === "low") { %>
                                                 <i class="fas fa-thermometer-empty text-success" aria-hidden="true"></i>
                                             <% } else { %>
                                                 <i class="fas fa-times text-secondary" aria-hidden="true"></i>
@@ -136,11 +136,11 @@
                                     </td>
                                     <td class="sd no-sort">
                                         <% if(trg && trg.scans && trg.scans.p && trg.scans.p.scan) { %>
-                                            <% if(trg.scans.p.scan.factory_usage_medium.toLowerCase() == "high") { %>
+                                            <% if(trg.scans.p.scan.factory_usage_medium.toLowerCase() === "high") { %>
                                                 <i class="fas fa-thermometer-full text-danger" aria-hidden="true"></i>
-                                            <% } else if(trg.scans.p.scan.factory_usage_medium.toLowerCase() == "medium") { %>
+                                            <% } else if(trg.scans.p.scan.factory_usage_medium.toLowerCase() === "medium") { %>
                                                 <i class="fas fa-thermometer-half text-warning" aria-hidden="true"></i>
-                                            <% } else if(trg.scans.p.scan.factory_usage_medium.toLowerCase() == "low") { %>
+                                            <% } else if(trg.scans.p.scan.factory_usage_medium.toLowerCase() === "low") { %>
                                                 <i class="fas fa-thermometer-empty text-success" aria-hidden="true"></i>
                                             <% } else { %>
                                                 <i class="fas fa-times text-secondary" aria-hidden="true"></i>
@@ -149,11 +149,11 @@
                                     </td>
                                     <td class="sd no-sort">
                                         <% if(trg && trg.scans && trg.scans.p && trg.scans.p.scan) { %>
-                                            <% if(trg.scans.p.scan.factory_usage_heavy.toLowerCase() == "high") { %>
+                                            <% if(trg.scans.p.scan.factory_usage_heavy.toLowerCase() === "high") { %>
                                                 <i class="fas fa-thermometer-full text-danger" aria-hidden="true"></i>
-                                            <% } else if(trg.scans.p.scan.factory_usage_heavy.toLowerCase() == "medium") { %>
+                                            <% } else if(trg.scans.p.scan.factory_usage_heavy.toLowerCase() === "medium") { %>
                                                 <i class="fas fa-thermometer-half text-warning" aria-hidden="true"></i>
-                                            <% } else if(trg.scans.p.scan.factory_usage_heavy.toLowerCase() == "low") { %>
+                                            <% } else if(trg.scans.p.scan.factory_usage_heavy.toLowerCase() === "low") { %>
                                                 <i class="fas fa-thermometer-empty text-success" aria-hidden="true"></i>
                                             <% } else { %>
                                                 <i class="fas fa-times text-secondary" aria-hidden="true"></i>
@@ -409,11 +409,11 @@
                                     </td>
                                     <td class="sd no-sort">
                                         <% if(typeof (targets[i].scans) != "undefined" && typeof (targets[i].scans.p) != "undefined" && targets[i].scans.p != null && typeof (targets[i].scans.p.scan) != "undefined" && targets[i].scans.p.scan != null) { %>
-                                            <% if(targets[i].scans.p.scan.factory_usage_medium.toLowerCase() == "high") { %>
+                                            <% if(targets[i].scans.p.scan.factory_usage_medium.toLowerCase() === "high") { %>
                                                 <i class="fas fa-thermometer-full text-danger" aria-hidden="true"></i>
-                                            <% } else if(targets[i].scans.p.scan.factory_usage_medium.toLowerCase() == "medium") { %>
+                                            <% } else if(targets[i].scans.p.scan.factory_usage_medium.toLowerCase() === "medium") { %>
                                                 <i class="fas fa-thermometer-half text-warning" aria-hidden="true"></i>
-                                            <% } else if(targets[i].scans.p.scan.factory_usage_medium.toLowerCase() == "low") { %>
+                                            <% } else if(targets[i].scans.p.scan.factory_usage_medium.toLowerCase() === "low") { %>
                                                 <i class="fas fa-thermometer-empty text-success" aria-hidden="true"></i>
                                             <% } else { %>
                                                 <i class="fas fa-times text-secondary" aria-hidden="true"></i>
@@ -422,11 +422,11 @@
                                     </td>
                                     <td class="sd no-sort">
                                         <% if(typeof (targets[i].scans) != "undefined" && typeof (targets[i].scans.p) != "undefined" && targets[i].scans.p != null && typeof (targets[i].scans.p.scan) != "undefined" && targets[i].scans.p.scan != null) { %>
-                                            <% if(targets[i].scans.p.scan.factory_usage_heavy.toLowerCase() == "high") { %>
+                                            <% if(targets[i].scans.p.scan.factory_usage_heavy.toLowerCase() === "high") { %>
                                                 <i class="fas fa-thermometer-full text-danger" aria-hidden="true"></i>
-                                            <% } else if(targets[i].scans.p.scan.factory_usage_heavy.toLowerCase() == "medium") { %>
+                                            <% } else if(targets[i].scans.p.scan.factory_usage_heavy.toLowerCase() === "medium") { %>
                                                 <i class="fas fa-thermometer-half text-warning" aria-hidden="true"></i>
-                                            <% } else if(targets[i].scans.p.scan.factory_usage_heavy.toLowerCase() == "low") { %>
+                                            <% } else if(targets[i].scans.p.scan.factory_usage_heavy.toLowerCase() === "low") { %>
                                                 <i class="fas fa-thermometer-empty text-success" aria-hidden="true"></i>
                                             <% } else { %>
                                                 <i class="fas fa-times text-secondary" aria-hidden="true"></i>
@@ -498,9 +498,9 @@
                                         <% } %>
                                     </td>
                                     <% for(var w = 0; w < attack.waves; w++) { %>
-                                        <% var clm = claims.filter(c => c.wave == w && c.planet_id == targets[i].id); %>
+                                        <% var clm = claims.filter(c => c.wave === w && c.planet_id === targets[i].id); %>
                                         <% if(clm.length > 0) { %>
-                                            <% if(clm[0].member_id == member.id) { %>
+                                            <% if(clm[0].member_id === member.id) { %>
                                                 <td class="no-sort">
                                                     <form method="POST" action="/att/<%= attack.hash %>">
                                                         <input type="hidden" name="target" value="<%= targets[i].id %>"/>
@@ -513,7 +513,7 @@
                                                 <td class="no-sort">
                                                     <% var memname = clm[0].member_id;
                                                         for (var m = 0; m < members.length; m++) {
-                                                            if (members[m].id == clm[0].member_id) {
+                                                            if (members[m].id === clm[0].member_id) {
                                                                 if (typeof (members[m].panick) != "undefined" && members[m].panick.length > 0) {
                                                                     memname = members[m].panick;
                                                                 }
@@ -571,20 +571,21 @@
             </div>
             <% } %>
         </div>
-    <% } else if(page == "new" || page == "edit") { %>
+    <% } else if(page === "new" || page === "edit") { %>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
+                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
+                <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
                     <div class="content">
-                        <form method="POST" action="<% if(page == "new") { %>/att/new<% } else if(page == "edit") { %>/att/edit/<%= attack.hash %><% } %>">
+                        <form method="POST" action="<% if(page === "new") { %>/att/new<% } else if(page === "edit") { %>/att/edit/<%= attack.hash %><% } %>">
                             <h2>
-                                <% if(page == "new") { %>Add Attack
-                                <% } else if(page == "edit") { %>Edit Attack <%= attack.id %>
+                                <% if(page === "new") { %>Add Attack
+                                <% } else if(page === "edit") { %>Edit Attack <%= attack.id %>
                                 <% } %>
                             </h2>
                             <div class="btn-box">
                                 <button class="btn btn-sm btn-success" type="submit" name="save" value="save">
-                                    <i class="fas <% if(page == "new") { %>fa-plus<% } else if(page == "edit") { %>fa-save<% } %>" aria-hidden="true"></i>
+                                    <i class="fas <% if(page === "new") { %>fa-plus<% } else if(page === "edit") { %>fa-save<% } %>" aria-hidden="true"></i>
                                 </button>
                             </div>
                             <table class="table table-sm table-transparent">
@@ -595,7 +596,7 @@
                                             <div class="input-group-prepend">
                                                 <span id="label-title" class="input-group-text">Title</span>
                                             </div>
-                                            <input type="text" name="title" id="title" class="form-control" aria-describedby="label-title" value="<% if(page == "edit") { %><%= attack.title %><% } %>"/>
+                                            <input type="text" name="title" id="title" class="form-control" aria-describedby="label-title" value="<% if(page === "edit") { %><%= attack.title %><% } %>"/>
                                         </div>
                                     </td>
                                 </tr>
@@ -605,7 +606,7 @@
                                             <div class="input-group-prepend">
                                                 <span id="label-comment" class="input-group-comment">Comment</span>
                                             </div>
-                                            <input type="text" name="comment" id="comment" class="form-control" aria-describedby="label-comment" value="<% if(page == "edit") { %><%= attack.comment %><% } %>"/>
+                                            <input type="text" name="comment" id="comment" class="form-control" aria-describedby="label-comment" value="<% if(page === "edit") { %><%= attack.comment %><% } %>"/>
                                         </div>
                                     </td>
                                 </tr>
@@ -619,7 +620,7 @@
                                                 <% for(var i = 0; i < ticks.length; i++) { %>
                                                     <% if(ticks[i] >= ticks[0] + min_uni_eta) { %>
                                                         <option value="<%= ticks[i] %>"
-                                                        <% if(page == "edit" && ticks[i] == attack.landtick) { %>
+                                                        <% if(page === "edit" && ticks[i] === attack.landtick) { %>
                                                                 selected="selected"
                                                                 <% } %>
                                                         ><%= ticks[i] %></option>
@@ -635,7 +636,7 @@
                                             <div class="input-group-prepend">
                                                 <span id="label-waves" class="input-group-waves">Waves</span>
                                             </div>
-                                            <input type="text" name="waves" id="waves" class="form-control" aria-describedby="label-waves" value="<% if(page == "edit") { %><%= attack.waves %><% } %>"/>
+                                            <input type="text" name="waves" id="waves" class="form-control" aria-describedby="label-waves" value="<% if(page === "edit") { %><%= attack.waves %><% } %>"/>
                                         </div>
                                     </td>
                                 </tr>
@@ -648,7 +649,7 @@
                                             <select id="releasetick" class="custom-select" name="releasetick" aria-describedby="label-releasetick">
                                                 <% for(var i = 0; i < ticks.length; i++) { %>
                                                     <option value="<%= ticks[i] %>"
-                                                    <% if(page == "edit" && ticks[i] == attack.releasetick) { %>
+                                                    <% if(page === "edit" && ticks[i] === attack.releasetick) { %>
                                                             selected="selected"
                                                             <% } %>
                                                     ><%= ticks[i] %></option>
@@ -662,14 +663,15 @@
                         </form>
                     </div>
                 </div>
+                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
             </div>
-            <% if(page == "edit") { %>
-            <div class="row">
-                <div class="col-12">
+            <% if(page === "edit") { %>
+                <div class="row">
+                    <div class="col-12">
                         <div class="content">
                             <h2>
-                                <% if(page == "new") { %>Add Attack
-                                <% } else if(page == "edit") { %>Edit Attack <%= attack.id %>
+                                <% if(page === "new") { %>Add Attack
+                                <% } else if(page === "edit") { %>Edit Attack <%= attack.id %>
                                 <% } %>
                             </h2>
                             <form method="POST" action="/att/edit/targ/<%= attack.hash %>">
@@ -733,7 +735,7 @@
                             </form>
                         </div>
                     </div>
-            </div>
+                </div>
             <% } %>
         </div>
     <% } else { %>
