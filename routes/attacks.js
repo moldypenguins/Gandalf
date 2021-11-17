@@ -90,7 +90,7 @@ router.post('/new', AXS.webCommandRequired, async (req, res, next) => {
       releasetick: req.body.releasetick,
       title: req.body.title,
       comment: req.body.comment,
-      createtick: res.locals.tick.id,
+      createtick: res.locals.tick.tick,
       commander_id: res.locals.member.id
     }).save();
     if(att) {
@@ -275,7 +275,7 @@ router.get('/:hash', attackLimiter, async (req, res, next) => {
 
 router.post('/:hash', async (req, res, next) => {
   let att = await Attack.findOne({hash:req.params.hash});
-  if(att.releasetick > res.locals.tick.id) {
+  if(att.releasetick > res.locals.tick.tick) {
     next(createError(403));
   } else {
     if (req.body.claim != undefined && req.body.target != undefined) {
