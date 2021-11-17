@@ -79,11 +79,11 @@ router.get('/new', AXS.webCommandRequired, async (req, res, next) => {
 
 router.post('/new', AXS.webCommandRequired, async (req, res, next) => {
   if(req.body.save !== undefined) {
-    //let lastatt = await Attack.findOne().sort({id: -1});
-    //lastatt = lastatt ? lastatt.id : 0;
+    let lastatt = await Attack.findOne().sort({id: -1});
+    lastatt = lastatt ? lastatt.id : 0;
     
     let att = await new Attack({
-      //number: lastatt + 1,
+      number: lastatt + 1,
       hash: crypto.randomBytes(16).toString('hex'),
       landtick: req.body.landtick,
       waves: req.body.waves,
@@ -94,14 +94,7 @@ router.post('/new', AXS.webCommandRequired, async (req, res, next) => {
       commander_id: res.locals.member.id
     }).save();
     if(att) {
-      //att.setNext('number', function(err, attack) {
-        if(att.number) {
-          console.log('Cannot increment the rank because ',err);
-        } else {
-          console.log("Attack #" + att.number + " saved to Attacks collection.");
-        }
-      //});
-
+      console.log("Attack #" + att.number + " saved to Attacks collection.");
       res.redirect(`/att/edit/${att.hash}`);
     } else {
       next(createError(400));

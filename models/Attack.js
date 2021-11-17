@@ -22,7 +22,6 @@
 'use strict';
 
 const Mordor = require('../Mordor');
-const AutoIncrement = require('mongoose-sequence')(Mordor);
 
 let AttackSchema = new Mordor.Schema({
   _id:          {type:Mordor.Schema.Types.ObjectId, required:true},
@@ -36,7 +35,5 @@ let AttackSchema = new Mordor.Schema({
   createtick:   {type:Number},
   commander:    {type:Mordor.Schema.Types.ObjectId, reference:'Member'}
 });
-
-AttackSchema.plugin(AutoIncrement, {id: 'attack_number', inc_field:'number'});
 
 module.exports = Mordor.model('Attack', AttackSchema, 'Attacks');
