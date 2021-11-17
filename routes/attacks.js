@@ -83,7 +83,7 @@ router.post('/new', AXS.webCommandRequired, async (req, res, next) => {
     //lastatt = lastatt ? lastatt.id : 0;
     
     let att = await new Attack({
-      //id: lastatt + 1,
+      //number: lastatt + 1,
       hash: crypto.randomBytes(16).toString('hex'),
       landtick: req.body.landtick,
       waves: req.body.waves,

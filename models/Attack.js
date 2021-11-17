@@ -37,6 +37,6 @@ let AttackSchema = new Mordor.Schema({
   commander:    {type:Mordor.Schema.Types.ObjectId, reference:'Member'}
 });
 
-AttackSchema.plugin(AutoIncrement, {inc_field:'number'});
+AttackSchema.plugin(AutoIncrement, {id: 'attack_number', inc_field:'number'});
 
 module.exports = Mordor.model('Attack', AttackSchema, 'Attacks');
