@@ -761,7 +761,7 @@
                             <tbody>
                             <% for(var i = 0; i < attacks.length; i++) { %>
                                 <% if(attacks[i].landtick >= tick.tick - after_land_ticks) { %>
-                                    if(attacks[i].releasetick <= tick.tick || (attacks[i].releasetick > tick.tick && member.isCMDR)) { %>
+                                    <%if(attacks[i].releasetick <= tick.tick || (attacks[i].releasetick > tick.tick && member.isCMDR)) { %>
                                         <tr data-href="">
                                             <td class="fit-content"><%= attacks[i].number %></td>
                                             <td class="fit-content"><%= attacks[i].landtick %></td>
