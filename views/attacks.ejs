@@ -96,7 +96,7 @@
                             <tbody>
                             <% for(var i = 0; i < myClms.length; i++) { %>
                                 <% var lt = attack.landtick + myClms[i].wave; %>
-                                <% var trg = targets.find(t => t.id == myClms[i].planet_id); %>
+                                <% var trg = targets.find(t => t.id === myClms[i].planet_id); %>
                                 <tr>
                                     <td><%= trg.x %>:<%= trg.y %>:<%= trg.z %></td>
                                     <td><%= lt %> (<%= numeral(lt - tick.id).format("+0") %>)</td>
@@ -745,9 +745,9 @@
                         <h2>Live Attacks</h2>
                         <% if(member.isADM || member.isHC || member.isBC) { %>
                             <div class="btn-box">
-                                <a class="btn btn-sm btn-success" href="/att/new">
-                                    <i class="fas fa-plus" aria-hidden="true"></i>
-                                </a>
+                                <div class="btn-group w-100" role="group" aria-label="Buttons">
+                                    <a class="btn btn-success" href="/att/new"><i class="fas fa-plus" aria-hidden="true"></i></a>
+                                </div>
                             </div>
                         <% } %>
                         <table class="table table-sm table-striped">
