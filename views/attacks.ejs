@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <% if(page === "att") { %>
-        <%- include("templates/head", {page_title: "Attack " + attack.id, page_description: "Attack " + attack.id}); %>
+        <%- include("templates/head", {page_title: "Attack " + attack.number, page_description: "Attack " + attack.number}); %>
     <% } else if(page === "new") { %>
         <%- include("templates/head", {page_title: "New Attack", page_description: "New Attack"}); %>
     <% } else if(page === "edit") { %>
-        <%- include("templates/head", {page_title: "Edit Attack " + attack.id, page_description: "Edit Attack " + attack.id}); %>
+        <%- include("templates/head", {page_title: "Edit Attack " + attack.number, page_description: "Edit Attack " + attack.number}); %>
     <% } else { %>
         <%- include("templates/head", {page_title: "Attacks", page_description: "Attacks"}); %>
     <% } %>
@@ -43,30 +43,30 @@
                 if (member.scans.a != null && typeof (member.scans.a.scan) != "undefined" && member.scans.a.scan != null) {
                     for (var j = 0; j < member.scans.a.scan.length; j++) {
                         if (typeof (member.scans.a.scan[j].ship) != "undefined" && member.scans.a.scan[j].ship != null) {
-                            allships += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                            allships += "&att_1_" + member.scans.a.scan[j].ship.ship_id + "=" + member.scans.a.scan[j].amount;
                             if (member.scans.a.scan[j].ship.class.toLowerCase() === "fighter") {
-                                allfi += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                                allfi += "&att_1_" + member.scans.a.scan[j].ship.ship_id + "=" + member.scans.a.scan[j].amount;
                             }
                             if (member.scans.a.scan[j].ship.class.toLowerCase() === "corvette") {
-                                allco += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                                allco += "&att_1_" + member.scans.a.scan[j].ship.ship_id + "=" + member.scans.a.scan[j].amount;
                             }
                             if (member.scans.a.scan[j].ship.class.toLowerCase() === "frigate") {
-                                allfr += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                                allfr += "&att_1_" + member.scans.a.scan[j].ship.ship_id + "=" + member.scans.a.scan[j].amount;
                             }
                             if (member.scans.a.scan[j].ship.class.toLowerCase() === "destroyer") {
-                                allde += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                                allde += "&att_1_" + member.scans.a.scan[j].ship.ship_id + "=" + member.scans.a.scan[j].amount;
                             }
                             if (member.scans.a.scan[j].ship.class.toLowerCase() === "cruiser") {
-                                allcr += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                                allcr += "&att_1_" + member.scans.a.scan[j].ship.ship_id + "=" + member.scans.a.scan[j].amount;
                             }
                             if (member.scans.a.scan[j].ship.class.toLowerCase() === "battleship") {
-                                allbs += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
+                                allbs += "&att_1_" + member.scans.a.scan[j].ship.ship_id + "=" + member.scans.a.scan[j].amount;
                             }
                         }
                     }
                 }
             %>
-            <% var myClms = claims.filter(c => c.member_id === member.id && c.attack_id === attack.id); %>
+            <% var myClms = claims.filter(c => c.member.pa_nick === member.pa_nick && c.attack.number === attack.number); %>
             <% if(typeof (myClms) != "undefined" && myClms.length > 0) { %>
             <div class="row">
                 <div class="col-12">
@@ -96,7 +96,7 @@
                             <tbody>
                             <% for(var i = 0; i < myClms.length; i++) { %>
                                 <% var lt = attack.landtick + myClms[i].wave; %>
-                                <% var trg = targets.find(t => t.id === myClms[i].planet_id); %>
+                                <% var trg = targets.find(t => t.planet.planet_id === myClms[i].planet.planet_id); %>
                                 <tr>
                                     <td><%= trg.x %>:<%= trg.y %>:<%= trg.z %></td>
                                     <td><%= lt %> (<%= numeral(lt - tick.tick).format("+0") %>)</td>
@@ -164,22 +164,22 @@
                                         <% if(trg && trg.scans) { %>
                                             <div class="btn-group btn-group-sm position-static" role="group" aria-label="Scans">
                                                 <% if(trg.scans.p && trg.scans.p.scan) { %>
-                                                    <a class="btn btn-scan <% if(trg.scans.p.tick > tick.tick - expiries.P.bestbefore) { %>btn-success<% } else if(trg.scans.p.tick > tick.tick - expiries.P.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.p.id %>" target="_blank">P</a>
+                                                    <a class="btn btn-scan <% if(trg.scans.p.tick > tick.tick - expiries.P.bestbefore) { %>btn-success<% } else if(trg.scans.p.tick > tick.tick - expiries.P.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.p.scan_id %>" target="_blank">P</a>
                                                 <% } %>
                                                 <% if(trg.scans.d && trg.scans.d.scan) { %>
-                                                    <a class="btn btn-scan <% if(trg.scans.d.tick > tick.tick - expiries.D.bestbefore) { %>btn-success<% } else if(trg.scans.d.tick > tick.tick - expiries.D.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.d.id %>" target="_blank">D</a>
+                                                    <a class="btn btn-scan <% if(trg.scans.d.tick > tick.tick - expiries.D.bestbefore) { %>btn-success<% } else if(trg.scans.d.tick > tick.tick - expiries.D.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.d.scan_id %>" target="_blank">D</a>
                                                 <% } %>
                                                 <% if(trg.scans.u && trg.scans.u.scan) { %>
-                                                    <a class="btn btn-scan <% if(trg.scans.u.tick > tick.tick - expiries.U.bestbefore) { %>btn-success<% } else if(trg.scans.u.tick > tick.tick - expiries.U.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.u.id %>" target="_blank">U</a>
+                                                    <a class="btn btn-scan <% if(trg.scans.u.tick > tick.tick - expiries.U.bestbefore) { %>btn-success<% } else if(trg.scans.u.tick > tick.tick - expiries.U.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.u.scan_id %>" target="_blank">U</a>
                                                 <% } %>
                                                 <% if(trg.scans.n && trg.scans.n.scan) { %>
-                                                    <a class="btn btn-scan <% if(trg.scans.n.tick > tick.tick - expiries.N.bestbefore) { %>btn-success<% } else if(trg.scans.n.tick > tick.tick - expiries.N.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.n.id %>" target="_blank">N</a>
+                                                    <a class="btn btn-scan <% if(trg.scans.n.tick > tick.tick - expiries.N.bestbefore) { %>btn-success<% } else if(trg.scans.n.tick > tick.tick - expiries.N.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.n.scan_id %>" target="_blank">N</a>
                                                 <% } %>
                                                 <% if(trg.scans.j !== undefined && trg.scans.j != null) { %>
-                                                    <a class="btn btn-scan <% if(trg.scans.j.tick > tick.tick - expiries.J.bestbefore) { %>btn-success<% } else if(trg.scans.j.tick > tick.tick - expiries.J.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.j.id %>" target="_blank">J</a>
+                                                    <a class="btn btn-scan <% if(trg.scans.j.tick > tick.tick - expiries.J.bestbefore) { %>btn-success<% } else if(trg.scans.j.tick > tick.tick - expiries.J.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.j.scan_id %>" target="_blank">J</a>
                                                 <% } %>
                                                 <% if(trg.scans.a && trg.scans.a.scan) { %>
-                                                    <a class="btn btn-scan <% if(trg.scans.a.tick > tick.tick - expiries.A.bestbefore) { %>btn-success<% } else if(trg.scans.a.tick > tick.tick - expiries.A.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.a.id %>" target="_blank">A</a>
+                                                    <a class="btn btn-scan <% if(trg.scans.a.tick > tick.tick - expiries.A.bestbefore) { %>btn-success<% } else if(trg.scans.a.tick > tick.tick - expiries.A.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= trg.scans.a.scan_id %>" target="_blank">A</a>
                                                 <% } %>
                                                 <% var query = "?def_coords_x_1=" + trg.x + "&def_coords_y_1=" + trg.y + "&def_coords_z_1=" + trg.z + "&def_planet_value_1=" + trg.value + "&def_planet_score_1=" + trg.score + "&def_1_race=" + races[trg.race.toLowerCase()]
                                                     if (trg.scans.p && trg.scans.p.scan) {
@@ -427,22 +427,22 @@
                                         <% if(typeof (targets[i].scans) != "undefined") { %>
                                             <div class="btn-group btn-group-sm position-static" role="group" aria-label="Scans">
                                                 <% if(typeof (targets[i].scans.p) != "undefined" && targets[i].scans.p != null) { %>
-                                                    <a class="btn btn-scan <% if(targets[i].scans.p.tick > tick.tick - expiries.P.bestbefore) { %>btn-success<% } else if(targets[i].scans.p.tick > tick.tick - expiries.P.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.p.id %>" target="_blank">P</a>
+                                                    <a class="btn btn-scan <% if(targets[i].scans.p.tick > tick.tick - expiries.P.bestbefore) { %>btn-success<% } else if(targets[i].scans.p.tick > tick.tick - expiries.P.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.p.scan_id %>" target="_blank">P</a>
                                                 <% } %>
                                                 <% if(typeof (targets[i].scans.d) != "undefined" && targets[i].scans.d != null) { %>
-                                                    <a class="btn btn-scan <% if(targets[i].scans.d.tick > tick.tick - expiries.D.bestbefore) { %>btn-success<% } else if(targets[i].scans.d.tick > tick.tick - expiries.D.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.d.id %>" target="_blank">D</a>
+                                                    <a class="btn btn-scan <% if(targets[i].scans.d.tick > tick.tick - expiries.D.bestbefore) { %>btn-success<% } else if(targets[i].scans.d.tick > tick.tick - expiries.D.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.d.scan_id %>" target="_blank">D</a>
                                                 <% } %>
                                                 <% if(typeof (targets[i].scans.u) != "undefined" && targets[i].scans.u != null) { %>
-                                                    <a class="btn btn-scan <% if(targets[i].scans.u.tick > tick.tick - expiries.U.bestbefore) { %>btn-success<% } else if(targets[i].scans.u.tick > tick.tick - expiries.U.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.u.id %>" target="_blank">U</a>
+                                                    <a class="btn btn-scan <% if(targets[i].scans.u.tick > tick.tick - expiries.U.bestbefore) { %>btn-success<% } else if(targets[i].scans.u.tick > tick.tick - expiries.U.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.u.scan_id %>" target="_blank">U</a>
                                                 <% } %>
                                                 <% if(typeof (targets[i].scans.n) != "undefined" && targets[i].scans.n != null) { %>
-                                                    <a class="btn btn-scan <% if(targets[i].scans.n.tick > tick.tick - expiries.N.bestbefore) { %>btn-success<% } else if(targets[i].scans.n.tick > tick.tick - expiries.N.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.n.id %>" target="_blank">N</a>
+                                                    <a class="btn btn-scan <% if(targets[i].scans.n.tick > tick.tick - expiries.N.bestbefore) { %>btn-success<% } else if(targets[i].scans.n.tick > tick.tick - expiries.N.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.n.scan_id %>" target="_blank">N</a>
                                                 <% } %>
                                                 <% if(targets[i].scans.j !== undefined && targets[i].scans.j != null) { %>
-                                                    <a class="btn btn-scan <% if(targets[i].scans.j.tick > tick.tick - expiries.J.bestbefore) { %>btn-success<% } else if(targets[i].scans.j.tick > tick.tick - expiries.J.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.j.id %>" target="_blank">J</a>
+                                                    <a class="btn btn-scan <% if(targets[i].scans.j.tick > tick.tick - expiries.J.bestbefore) { %>btn-success<% } else if(targets[i].scans.j.tick > tick.tick - expiries.J.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.j.scan_id %>" target="_blank">J</a>
                                                 <% } %>
                                                 <% if(typeof (targets[i].scans.a) != "undefined" && targets[i].scans.a != null) { %>
-                                                    <a class="btn btn-scan <% if(targets[i].scans.a.tick > tick.tick - expiries.A.bestbefore) { %>btn-success<% } else if(targets[i].scans.a.tick > tick.tick - expiries.A.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.a.id %>" target="_blank">A</a>
+                                                    <a class="btn btn-scan <% if(targets[i].scans.a.tick > tick.tick - expiries.A.bestbefore) { %>btn-success<% } else if(targets[i].scans.a.tick > tick.tick - expiries.A.expiry) { %>btn-warning<% } else { %>btn-danger<% } %>" href="<%= scanurl %>?scan_id=<%= targets[i].scans.a.scan_id %>" target="_blank">A</a>
                                                 <% } %>
                                                 <% var query = "?def_coords_x_1=" + targets[i].x + "&def_coords_y_1=" + targets[i].y + "&def_coords_z_1=" + targets[i].z + "&def_planet_value_1=" + targets[i].value + "&def_planet_score_1=" + targets[i].score + "&def_1_race=" + races[targets[i].race.toLowerCase()]
                                                     if (typeof (targets[i].scans.p) != "undefined" && targets[i].scans.p != null && typeof (targets[i].scans.p.scan) != "undefined" && targets[i].scans.p.scan != null) {
@@ -458,8 +458,8 @@
                                                         }
                                                     } %>
                                                 <div class="btn-group btn-group-sm position-static" role="group">
-                                                    <button class="btn btn-secondary dropdown-toggle" id="target_bcalc<%= targets[i].id %>" type="button" data-bs-toggle="dropdown"  data-bs-boundary="viewport" aria-expanded="false">C</button>
-                                                    <div class="dropdown-menu" aria-labelledby="target_bcalc<%= targets[i].id %>">
+                                                    <button class="btn btn-secondary dropdown-toggle" id="target_bcalc<%= targets[i].planet.planet_id %>" type="button" data-bs-toggle="dropdown"  data-bs-boundary="viewport" aria-expanded="false">C</button>
+                                                    <div class="dropdown-menu" aria-labelledby="target_bcalc<%= targets[i].planet.planet_id %>">
                                                         <a class="dropdown-item" href="<%= bcalcurl %><%= query %>" target="_blank">NONE</a>
                                                         <% if(allships.length > 0) { %>
                                                             <a class="dropdown-item" href="<%= bcalcurl %><%= query %><%= attacker %><%= allships %>" target="_blank">ALL</a>
@@ -488,12 +488,12 @@
                                         <% } %>
                                     </td>
                                     <% for(var w = 0; w < attack.waves; w++) { %>
-                                        <% var clm = claims.filter(c => c.wave === w && c.planet_id === targets[i].id); %>
+                                        <% var clm = claims.filter(c => c.wave === w && c.planet_id === targets[i].planet.planet_id); %>
                                         <% if(clm.length > 0) { %>
                                             <% if(clm[0].member_id === member.id) { %>
                                                 <td class="no-sort">
                                                     <form method="POST" action="/att/<%= attack.hash %>">
-                                                        <input type="hidden" name="target" value="<%= targets[i].id %>"/>
+                                                        <input type="hidden" name="target" value="<%= targets[i].planet.planet_id %>"/>
                                                         <div class="btn-group btn-group-sm position-static" role="group">
                                                             <button class="btn btn-sm btn-danger" type="submit" name="drop" value="<%= w %>"><i class="fas fa-plane-slash" aria-hidden="true"></i></button>
                                                         </div>
@@ -501,16 +501,7 @@
                                                 </td>
                                             <% } else if(member.isMEM) { %>
                                                 <td class="no-sort">
-                                                    <% var memname = clm[0].member_id;
-                                                        for (var m = 0; m < members.length; m++) {
-                                                            if (members[m].id === clm[0].member_id) {
-                                                                if (typeof (members[m].panick) != "undefined" && members[m].panick.length > 0) {
-                                                                    memname = members[m].panick;
-                                                                }
-                                                                break;
-                                                            }
-                                                        } %>
-                                                    <%= memname %>
+                                                    <%= clm[0].member.pa_nick %>
                                                 </td>
                                             <% } else { %>
                                                 <td class="claimed no-sort">
@@ -520,7 +511,7 @@
                                         <% } else { %>
                                             <td class="no-sort">
                                                 <form method="POST" action="/att/<%= attack.hash %>">
-                                                    <input type="hidden" name="target" value="<%= targets[i].id %>"/>
+                                                    <input type="hidden" name="target" value="<%= targets[i].planet.planet_id %>"/>
                                                     <div class="btn-group btn-group-sm position-static" role="group">
                                                         <button class="btn btn-sm btn-primary" type="submit" name="claim" value="<%= w %>"><i class="fas fa-plane-departure" aria-hidden="true"></i></button>
                                                     </div>
@@ -708,7 +699,7 @@
                                                 <td></td> <!-- stock/prod -->
                                                 <td><%= targets[i].intel.nick %>/<%= targets[i].intel.alliance %></td>
                                                 <td>
-                                                    <button type="submit" name="delete" id="delete" class="btn btn-sm btn-danger" value="<%= targets[i].id %>">
+                                                    <button type="submit" name="delete" id="delete" class="btn btn-sm btn-danger" value="<%= targets[i].planet.planet_id %>">
                                                         <i class="fas fa-trash-alt" aria-hidden="true"></i>
                                                     </button>
                                                 </td>
