@@ -68,20 +68,20 @@ router.get("/", async (req, res, next) => {
     //console.log('TGUSER: ' + util.inspect(telegramUser), false, null, true);
 
     let member = await Member.findOne({telegram_user:telegramUser});//.populate('telegram_user').populate('planet');
-    console.log('MEMBER: ' + util.inspect(member, false, null, true));
+    //console.log('MEMBER: ' + util.inspect(member, false, null, true));
 
     //console.log('PARAMS: ' + util.inspect(params, false, null, true));
     if (member) {
-      console.log('Is Member');
+      //console.log('Is Member');
       req.session.member = member;
       res.redirect("/");
     } else {
       let applicant = await Applicant.findOne({telegram_user:telegramUser});
       if (applicant) {
-        console.log('Is Applicant');
+        //console.log('Is Applicant');
         req.session.applicant = applicant;
       } else {
-        console.log('Is Visitor');
+        //console.log('Is Visitor');
         req.session.visitor = params;
       }
       res.redirect("/reg");
