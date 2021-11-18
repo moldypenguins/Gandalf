@@ -36,7 +36,7 @@
                                         <% if(member.isADM || (member.isHC && !members[i].isADM && !members[i].isHC)) { %>
                                             <button class="btn btn-sm btn-warning" onclick="window.location = '/mem/<%= members[i].id %>';"><i class="fas fa-pen" aria-hidden="true"></i></button>
                                             <form method="POST" action="/mem" class="d-inline-block">
-                                                <button type="submit" name="deactivate" value="<%= members[i].id %>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
+                                                <button type="submit" name="deactivate" value="<%= members[i].id %>" class="btn btn-sm btn-danger" onclick="if(!confirm('Are you sure?')) { return false; }"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
                                             </form>
                                         <% } %>
                                     </td>
