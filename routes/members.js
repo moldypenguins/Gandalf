@@ -212,7 +212,7 @@ router.post('/inactives', AXS.webHighCommandRequired, async (req, res, next) => 
 
 
 router.get('/:id', AXS.webHighCommandRequired, async (req, res, next) => {
-  let mem = await Member.findOne({pa_nick:req.params.pa_nick});
+  let mem = await Member.findById(req.params.id);
   //console.log('PLANET: ' + util.inspect(mem, false, null, true));
   if(mem) {
     mem.telegram_user.telegram_name = FNCS.getTelegramName(mem.telegram_user);
