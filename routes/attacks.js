@@ -186,9 +186,10 @@ router.post('/edit/targ/:hash', AXS.webCommandRequired, async (req, res, next) =
         }
       } else if(inCoords[x].match(/^\d+:\d+:\d+$/g) != null) {
         //planet
-        console.log('PNT: ' + util.inspect(inCoords[x], false, null, true));
+        //console.log('PNT: ' + util.inspect(inCoords[x], false, null, true));
         let cds = inCoords[x].split(':');
         let plnt = await Planet.findOne({x:cds[0], y:cds[1], z:cds[2]});
+        console.log('PLANET: ' + util.inspect(plnt, false, null, true));
         let trg = new AttackTarget({_id: new Mordor.Types.ObjectId(),attack:att, planet:plnt});
         await trg.save();
       } else if (inCoords[x].match(/^\d+\.\d+\.\d+$/g) != null) {
