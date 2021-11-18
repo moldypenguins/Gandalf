@@ -212,12 +212,12 @@ router.post('/inactives', AXS.webHighCommandRequired, async (req, res, next) => 
 
 
 router.get('/:id', AXS.webHighCommandRequired, async (req, res, next) => {
-  let mem = await Member.findOne({id:req.params.id});
+  let mem = await Member.findOne({pa_nick:req.params.pa_nick});
   //console.log('PLANET: ' + util.inspect(mem, false, null, true));
   if(mem) {
-    if(mem.planet_id !== undefined) {
-      mem.planet = await Planet.findOne({id:mem.planet_id});
-    }
+    //if(mem.planet_id !== undefined) {
+    //  mem.planet = await Planet.findOne({id:mem.planet_id});
+    //}
     //console.log('PLANET: ' + util.inspect(plnt, false, null, true));
     res.render('profile', { site_title: CFG.alliance.name, page_title: 'Edit Member', page: 'member', post_action: '/mem/' + mem.id, profile: mem, themes: CFG.web.themes, timezones: moment.tz.names() });
   } else {
