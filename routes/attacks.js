@@ -229,7 +229,7 @@ router.post('/delete/:hash', AXS.webCommandRequired, async (req, res, next) => {
 router.get('/:hash', attackLimiter, async (req, res, next) => {
   let mems = await Member.find();
   let att = await Attack.findOne({hash:req.params.hash});
-  let atttarg = await AttackTarget.find({attack:att});
+  let atttarg = await AttackTarget.find({attack:att}).populate('planet');
   let targs = await Planet.find({planet_id:{$in:atttarg.map(at => at.planet.planet_id)}});
   console.log('TARGET: ' + util.inspect(targs, false, null, true));
 
