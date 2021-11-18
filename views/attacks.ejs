@@ -44,29 +44,29 @@
                     for (var j = 0; j < member.scans.a.scan.length; j++) {
                         if (typeof (member.scans.a.scan[j].ship) != "undefined" && member.scans.a.scan[j].ship != null) {
                             allships += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
-                            if (member.scans.a.scan[j].ship.class.toLowerCase() == "fighter") {
+                            if (member.scans.a.scan[j].ship.class.toLowerCase() === "fighter") {
                                 allfi += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
                             }
-                            if (member.scans.a.scan[j].ship.class.toLowerCase() == "corvette") {
+                            if (member.scans.a.scan[j].ship.class.toLowerCase() === "corvette") {
                                 allco += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
                             }
-                            if (member.scans.a.scan[j].ship.class.toLowerCase() == "frigate") {
+                            if (member.scans.a.scan[j].ship.class.toLowerCase() === "frigate") {
                                 allfr += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
                             }
-                            if (member.scans.a.scan[j].ship.class.toLowerCase() == "destroyer") {
+                            if (member.scans.a.scan[j].ship.class.toLowerCase() === "destroyer") {
                                 allde += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
                             }
-                            if (member.scans.a.scan[j].ship.class.toLowerCase() == "cruiser") {
+                            if (member.scans.a.scan[j].ship.class.toLowerCase() === "cruiser") {
                                 allcr += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
                             }
-                            if (member.scans.a.scan[j].ship.class.toLowerCase() == "battleship") {
+                            if (member.scans.a.scan[j].ship.class.toLowerCase() === "battleship") {
                                 allbs += "&att_1_" + member.scans.a.scan[j].ship.id + "=" + member.scans.a.scan[j].amount;
                             }
                         }
                     }
                 }
             %>
-            <% var myClms = claims.filter(c => c.member_id == member.id && c.attack_id == attack.id); %>
+            <% var myClms = claims.filter(c => c.member_id === member.id && c.attack_id === attack.id); %>
             <% if(typeof (myClms) != "undefined" && myClms.length > 0) { %>
             <div class="row">
                 <div class="col-12">
@@ -248,7 +248,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="content">
-                        <h2>Attack <%= attack.id %></h2>
+                        <h2>Attack <%= attack.number %></h2>
                         <% if(member.isADM || member.isHC || member.isBC) { %>
                             <div class="btn-box">
                                 <form method="POST" action="/att/delete/<%= attack.hash %>">
@@ -580,7 +580,7 @@
                         <form method="POST" action="<% if(page === "new") { %>/att/new<% } else if(page === "edit") { %>/att/edit/<%= attack.hash %><% } %>">
                             <h2>
                                 <% if(page === "new") { %>Add Attack
-                                <% } else if(page === "edit") { %>Edit Attack <%= attack.id %>
+                                <% } else if(page === "edit") { %>Edit Attack <%= attack.number %>
                                 <% } %>
                             </h2>
                             <div class="btn-box">
@@ -667,7 +667,7 @@
                     <div class="col-8">
                         <div class="content">
                             <h2>
-                                Edit Attack <%= attack.id %> Targets
+                                Edit Attack <%= attack.number %> Targets
                             </h2>
                             <form method="POST" action="/att/edit/targ/<%= attack.hash %>">
                                 <table class="table table-sm table-transparent w-100">
