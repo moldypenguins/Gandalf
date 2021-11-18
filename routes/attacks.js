@@ -190,9 +190,8 @@ router.post('/edit/targ/:hash', AXS.webCommandRequired, async (req, res, next) =
         let cds = inCoords[x].split(':');
         let plnt = await Planet.findOne({x:cds[0], y:cds[1], z:cds[2]});
         let trg = new AttackTarget({_id: new Mordor.Types.ObjectId(),attack:att, planet:plnt});
-        console.log('BEFORE SAVE: ' + util.inspect(trg, false, null, true));
         await trg.save();
-        console.log('AFTER SAVE: ' + util.inspect(trg, false, null, true));
+        //console.log('TARGET: ' + util.inspect(trg, false, null, true));
       } else if (inCoords[x].match(/^\d+\.\d+\.\d+$/g) != null) {
         let cds = inCoords[x].split('.');
         let plnt = await Planet.findOne({ x: cds[0], y: cds[1], z: cds[2] });
@@ -231,6 +230,7 @@ router.get('/:hash', attackLimiter, async (req, res, next) => {
   let mems = await Member.find();
   let att = await Attack.findOne({hash:req.params.hash});
   let atttarg = await AttackTarget.find({attack:att});
+  console.log('TARGET: ' + util.inspect(atttarg, false, null, true));
   let targs = await Planet.find({planet_id:{$in:atttarg.map(at => at.planet.planet_id)}});
   let clms = await AttackTargetClaim.find({attack:att});
   for(let target of targs) {
