@@ -249,16 +249,6 @@
                 <div class="col-12">
                     <div class="content">
                         <h2>Attack <%= attack.number %></h2>
-                        <% if(member.isADM || member.isHC || member.isBC) { %>
-                            <div class="btn-box">
-                                <form method="POST" action="/att/delete/<%= attack.hash %>">
-                                    <div class="btn-group w-100" role="group" aria-label="Buttons">
-                                        <a class="btn btn-warning" href="/att/edit/<%= attack.hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
-                                        <button class="btn btn-danger" type="submit" name="delete" value="<%= attack.hash %>"><i class="fas fa-times" aria-hidden="true"></i></button>
-                                    </div>
-                                </form>
-                            </div>
-                        <% } %>
                         <table class="table table-sm table-striped table-bordered w-100" data-toggle="table" data-remember-order="true">
                             <thead>
                                 <tr>
@@ -670,7 +660,7 @@
                                 Edit Attack <%= attack.number %> Targets
                             </h2>
                             <form method="POST" action="/att/edit/targ/<%= attack.hash %>">
-                                <table class="table table-sm table-transparent w-100">
+                                <table class="table table-sm table-transparent w-100 table-align-middle">
                                     <tbody>
                                     <tr>
                                         <td>
@@ -690,7 +680,7 @@
                                     </tbody>
                                 </table>
                                 <div class="table-targets-outer">
-                                    <table class="table table-sm table-striped table-targets">
+                                    <table class="table table-sm table-striped table-align-middle">
                                         <thead>
                                         <tr>
                                             <th scope="col">Coords</th>
@@ -756,6 +746,7 @@
                                 <th scope="col" class="fit-content">Land Tick</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Comments</th>
+                                <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -764,13 +755,22 @@
                                     <%if(attacks[i].releasetick <= tick.tick || (attacks[i].releasetick > tick.tick && member.isCMDR)) { %>
                                         <tr>
                                             <td class="fit-content no-wrap">
-                                                <a class="btn btn-sm btn-danger" href="/att/<%= attacks[i].hash %>"><i class="fas fa-rocket" aria-hidden="true"></i></a>
+                                                <% if(member.isADM || member.isHC || member.isBC) { %>
+                                                    <a class="btn btn-warning" href="/att/edit/<%= attack.hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
+                                                    <form method="POST" action="/att/delete/<%= attack.hash %>">
+                                                        <button class="btn btn-danger" type="submit" name="delete" value="<%= attack.hash %>"><i class="fas fa-times" aria-hidden="true"></i></button>
+                                                    </form>
+                                                <% } %>
+                                                <a class="btn btn-sm btn-warning" href="/att/<%= attacks[i].hash %>"><i class="fas fa-edit" aria-hidden="true"></i></a>
                                             </td>
                                             <td class="fit-content"><%= attacks[i].number %></td>
                                             <td class="fit-content"><%= attacks[i].landtick %></td>
                                             <td><%= attacks[i].title %></td>
                                             <td><%= attacks[i].comments %></td>
                                             <td class="fit-content no-wrap"><% if(attacks[i].releasetick > tick.tick && member.isCMDR) { %>Released: pt<%= attacks[i].releasetick %><% } %></td>
+                                            <td class="fit-content no-wrap">
+                                                <a class="btn btn-sm btn-danger" href="/att/<%= attacks[i].hash %>"><i class="fas fa-rocket" aria-hidden="true"></i></a>
+                                            </td>
                                         </tr>
                                     <% } %>
                                 <% } %>
@@ -794,6 +794,7 @@
                                 <th scope="col" class="fit-content">Land Tick</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Comments</th>
+                                <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -801,13 +802,22 @@
                                 <% if(attacks[i].landtick < tick.tick - after_land_ticks) { %>
                                     <tr>
                                         <td class="fit-content no-wrap">
-                                            <a class="btn btn-sm btn-danger" href="/att/<%= attacks[i].hash %>"><i class="fas fa-rocket" aria-hidden="true"></i></a>
+                                            <% if(member.isADM || member.isHC || member.isBC) { %>
+                                                <a class="btn btn-warning" href="/att/edit/<%= attack.hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
+                                                <form method="POST" action="/att/delete/<%= attack.hash %>">
+                                                    <button class="btn btn-danger" type="submit" name="delete" value="<%= attack.hash %>"><i class="fas fa-times" aria-hidden="true"></i></button>
+                                                </form>
+                                            <% } %>
+                                            <a class="btn btn-sm btn-warning" href="/att/<%= attacks[i].hash %>"><i class="fas fa-edit" aria-hidden="true"></i></a>
                                         </td>
                                         <td><%= attacks[i].title %></td>
                                         <td class="fit-content"><%= attacks[i].number %></td>
                                         <td class="fit-content"><%= attacks[i].landtick %></td>
                                         <td><%= attacks[i].title %></td>
                                         <td><%= attacks[i].comments %></td>
+                                        <td class="fit-content no-wrap">
+                                            <a class="btn btn-sm btn-primary" href="/att/<%= attacks[i].hash %>"><i class="fas fa-rocket" aria-hidden="true"></i></a>
+                                        </td>
                                     </tr>
                                 <% } %>
                             <% } %>

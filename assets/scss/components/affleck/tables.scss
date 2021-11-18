@@ -15,6 +15,13 @@ table,
     text-align: left;
   }
 
+  &.table-align-middle {
+    td,
+    th {
+      vertical-align: middle;
+    }
+  }
+
   &.table-transparent {
     background: transparent;
     box-shadow: none;
