@@ -488,12 +488,12 @@
                                         <% } %>
                                     </td>
                                     <% for(var w = 0; w < attack.waves; w++) { %>
-                                        <% var clm = claims.filter(c => c.wave === w && c.planet_id === targets[i].planet.planet_id); %>
+                                        <% var clm = claims.filter(c => c.wave === w && c.planet_id === targets[i].planet_id); %>
                                         <% if(clm.length > 0) { %>
                                             <% if(clm[0].member_id === member.id) { %>
                                                 <td class="no-sort">
                                                     <form method="POST" action="/att/<%= attack.hash %>">
-                                                        <input type="hidden" name="target" value="<%= targets[i].planet.planet_id %>"/>
+                                                        <input type="hidden" name="target" value="<%= targets[i].planet_id %>"/>
                                                         <div class="btn-group btn-group-sm position-static" role="group">
                                                             <button class="btn btn-sm btn-danger" type="submit" name="drop" value="<%= w %>"><i class="fas fa-plane-slash" aria-hidden="true"></i></button>
                                                         </div>
@@ -511,7 +511,7 @@
                                         <% } else { %>
                                             <td class="no-sort">
                                                 <form method="POST" action="/att/<%= attack.hash %>">
-                                                    <input type="hidden" name="target" value="<%= targets[i].planet.planet_id %>"/>
+                                                    <input type="hidden" name="target" value="<%= targets[i].planet_id %>"/>
                                                     <div class="btn-group btn-group-sm position-static" role="group">
                                                         <button class="btn btn-sm btn-primary" type="submit" name="claim" value="<%= w %>"><i class="fas fa-plane-departure" aria-hidden="true"></i></button>
                                                     </div>
