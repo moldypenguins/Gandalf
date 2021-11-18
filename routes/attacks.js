@@ -230,7 +230,7 @@ router.get('/:hash', attackLimiter, async (req, res, next) => {
   let mems = await Member.find();
   let att = await Attack.findOne({hash:req.params.hash});
   let atttarg = await AttackTarget.find({attack:att}).populate('planet');
-  console.log('ATTTARGS: ' + util.inspect(targs, false, null, true));
+  console.log('ATTTARGS: ' + util.inspect(atttarg, false, null, true));
   let targs = await Planet.find({planet_id:{$in:atttarg.map(at => at.planet.planet_id)}});
   console.log('TARGETS: ' + util.inspect(targs, false, null, true));
 
