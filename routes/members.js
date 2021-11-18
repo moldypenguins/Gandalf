@@ -215,6 +215,7 @@ router.get('/:id', AXS.webHighCommandRequired, async (req, res, next) => {
   let mem = await Member.findOne({pa_nick:req.params.pa_nick});
   //console.log('PLANET: ' + util.inspect(mem, false, null, true));
   if(mem) {
+    mem.telegram_user.telegram_name = FNCS.getTelegramName(mem.telegram_user);
     //if(mem.planet_id !== undefined) {
     //  mem.planet = await Planet.findOne({id:mem.planet_id});
     //}
