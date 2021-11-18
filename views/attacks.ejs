@@ -756,9 +756,9 @@
                                         <tr>
                                             <td class="fit-content no-wrap">
                                                 <% if(member.isADM || member.isHC || member.isBC) { %>
-                                                    <a class="btn btn-warning" href="/att/edit/<%= attacks[actAtt].hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
-                                                    <form method="POST" action="/att/delete/<%= attacks[actAtt].hash %>">
-                                                        <button class="btn btn-danger" type="submit" name="delete" value="<%= attacks[actAtt].hash %>"><i class="fas fa-times" aria-hidden="true"></i></button>
+                                                    <a class="btn btn-sm btn-warning" href="/att/edit/<%= attacks[actAtt].hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
+                                                    <form method="POST" action="/att/delete/<%= attacks[actAtt].hash %>" class="d-inline-block">
+                                                        <button class="btn btn-sm btn-danger" type="submit" name="delete" value="<%= attacks[actAtt].hash %>"><i class="fas fa-times" aria-hidden="true"></i></button>
                                                     </form>
                                                 <% } %>
                                                 <a class="btn btn-sm btn-warning" href="/att/<%= attacks[actAtt].hash %>"><i class="fas fa-edit" aria-hidden="true"></i></a>
