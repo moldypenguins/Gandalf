@@ -751,26 +751,26 @@
                         <table class="table table-sm table-striped w-100">
                             <thead>
                             <tr>
+                                <th scope="col"></th>
                                 <th scope="col" class="fit-content">Number</th>
                                 <th scope="col" class="fit-content">Land Tick</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Comments</th>
-                                <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <% for(var i = 0; i < attacks.length; i++) { %>
                                 <% if(attacks[i].landtick >= tick.tick - after_land_ticks) { %>
                                     <%if(attacks[i].releasetick <= tick.tick || (attacks[i].releasetick > tick.tick && member.isCMDR)) { %>
-                                        <tr data-href="">
+                                        <tr>
+                                            <td class="fit-content no-wrap">
+                                                <a class="btn btn-sm btn-danger" href="/att/<%= attacks[i].hash %>"><i class="fas fa-rocket" aria-hidden="true"></i></a>
+                                            </td>
                                             <td class="fit-content"><%= attacks[i].number %></td>
                                             <td class="fit-content"><%= attacks[i].landtick %></td>
                                             <td><%= attacks[i].title %></td>
                                             <td><%= attacks[i].comments %></td>
                                             <td class="fit-content no-wrap"><% if(attacks[i].releasetick > tick.tick && member.isCMDR) { %>Released: pt<%= attacks[i].releasetick %><% } %></td>
-                                            <td class="fit-content no-wrap">
-                                                <a class="btn btn-sm btn-danger" href="/att/<%= attacks[i].hash %>"><i class="fas fa-rocket" aria-hidden="true"></i></a>
-                                            </td>
                                         </tr>
                                     <% } %>
                                 <% } %>
@@ -789,6 +789,7 @@
                         <table class="table table-sm table-striped w-100">
                             <thead>
                             <tr>
+                                <th scope="col"></th>
                                 <th scope="col" class="fit-content">Number</th>
                                 <th scope="col" class="fit-content">Land Tick</th>
                                 <th scope="col">Title</th>
@@ -798,7 +799,10 @@
                             <tbody>
                             <% for(var i = 0; i < attacks.length; i++) { %>
                                 <% if(attacks[i].landtick < tick.tick - after_land_ticks) { %>
-                                    <tr data-href="/att/<%= attacks[i].hash %>">
+                                    <tr>
+                                        <td class="fit-content no-wrap">
+                                            <a class="btn btn-sm btn-danger" href="/att/<%= attacks[i].hash %>"><i class="fas fa-rocket" aria-hidden="true"></i></a>
+                                        </td>
                                         <td><%= attacks[i].title %></td>
                                         <td class="fit-content"><%= attacks[i].number %></td>
                                         <td class="fit-content"><%= attacks[i].landtick %></td>
