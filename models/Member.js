@@ -44,7 +44,7 @@ let MemberSchema = new Mordor.Schema({
 });
 
 MemberSchema.statics.findByTelegramUser = async function(telegram_user) {
-  return await this.findOne({telegram_user: telegram_user._id});
+  return await this.findOne({telegram_user: telegram_user});
 }
 
 MemberSchema.plugin(require('mongoose-autopopulate'));

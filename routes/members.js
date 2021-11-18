@@ -216,7 +216,7 @@ router.get('/:id', AXS.webHighCommandRequired, async (req, res, next) => {
   //console.log('PLANET: ' + util.inspect(mem, false, null, true));
   if(mem) {
     mem.telegram_user.telegram_name = FNCS.getTelegramName(mem.telegram_user);
-    console.log('TG NAME: ' + util.inspect(mem.telegram_user.telegram_name, false, null, true));
+    //console.log('TG NAME: ' + util.inspect(mem.telegram_user.telegram_name, false, null, true));
     //if(mem.planet_id !== undefined) {
     //  mem.planet = await Planet.findOne({id:mem.planet_id});
     //}
@@ -230,8 +230,8 @@ router.get('/:id', AXS.webHighCommandRequired, async (req, res, next) => {
 
 router.post('/:id', AXS.webHighCommandRequired, async (req, res, next) => {
   if(req.body !== undefined) {
-    console.log('BODY: ' + util.inspect(req.body, false, null, true));
-    let mem = await Member.findOne({id: req.params.id});
+    //console.log('BODY: ' + util.inspect(req.body, false, null, true));
+    let mem = await Member.findById(req.params.id);
     if(req.body.pa_nick !== undefined) { mem.pa_nick = req.body.pa_nick; }
     if(req.body.access !== undefined) { mem.access = req.body.access; }
     if(req.body.role1 !== undefined || req.body.role2 !== undefined || req.body.role4 !== undefined || req.body.role8 !== undefined || req.body.role16 !== undefined) {
@@ -241,16 +241,16 @@ router.post('/:id', AXS.webHighCommandRequired, async (req, res, next) => {
         (req.body.role4 !== undefined ? 4 : 0) +
         (req.body.role8 !== undefined ? 8 : 0) +
         (req.body.role16 !== undefined ? 16 : 0);
-      console.log('ROLES: ' + util.inspect(mem.roles, false, null, true));
+      //console.log('ROLES: ' + util.inspect(mem.roles, false, null, true));
     }
     if(req.body.full_phone !== undefined) { mem.phone = req.body.full_phone; }
     if(req.body.email !== undefined) { mem.email = req.body.email; }
     if(req.body.planet_x !== undefined && req.body.planet_y !== undefined && req.body.planet_z !== undefined) {
       let plnt = await Planet.findOne({x: req.body.planet_x, y: req.body.planet_y, z: req.body.planet_z});
-      mem.planet_id = plnt ? plnt.id : null;
+      mem.planet = plnt ? plnt : null;
     }
     let upd = await mem.save();
-    console.log(mem.id + " profile updated.");
+    console.log(mem.pa_nick + " profile updated.");
     res.redirect('/mem');
   } else {
     next(createError(400));
