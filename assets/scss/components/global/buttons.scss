@@ -1,28 +1,10 @@
 
-.btn-box {
+.btn-toolbar {
   margin: 0.5rem 0 1rem 0;
 
-  & .btn-group>.btn {
-    border-radius: .2rem !important;
-  }
-
-  & .btn:not(:first-child) {
+  .btn-group:not(:first-child) {
     margin-left: 0.5%;
   }
-}
-
-.btn-col {
-  white-space: nowrap;
-  width: 1%;
-
-  form {
-    display: inline-block;
-  }
-}
-
-
-.btn-space {
-  margin-left: 5px;
 }
 
 .btn {
@@ -34,6 +16,7 @@
     font-size: 1.25rem;
   }
 }
+
 .btn-sm {
   padding: .25rem .375rem;
   font-size: 0.75rem;
@@ -42,5 +25,3 @@
     font-size: 1rem;
   }
 }
-
-

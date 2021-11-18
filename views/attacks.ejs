@@ -562,8 +562,8 @@
                             <h2>
                                 <% if(page === "new") { %>Add Attack<% } else if(page === "edit") { %>Edit Attack <%= attack.number %><% } %>
                             </h2>
-                            <div class="btn-box">
-                                <div class="btn-group w-100" role="group" aria-label="Buttons">
+                            <div class="btn-toolbar" role="toolbar" aria-label="Button Toolbar">
+                                <div class="btn-group flex-fill" role="group" aria-label="">
                                     <button type="submit" name="save" id="save" class="btn btn-primary" value="save"><i class="far fa-save" aria-hidden="true"></i></button>
                                 </div>
                             </div>
@@ -647,8 +647,8 @@
                         <div class="content">
                             <form method="POST" action="/att/edit/targ/<%= attack.hash %>">
                                 <h2>Edit Attack <%= attack.number %> Targets</h2>
-                                <div class="btn-box">
-                                    <div class="btn-group w-100" role="group" aria-label="Buttons">
+                                <div class="btn-toolbar" role="toolbar" aria-label="Button Toolbar">
+                                    <div class="btn-group flex-fill" role="group" aria-label="">
                                         <button type="submit" name="save" id="save" class="btn btn-success" value="save"><i class="fas fa-plus" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
@@ -719,8 +719,8 @@
                     <div class="content">
                         <h2>Live Attacks</h2>
                         <% if(member.isADM || member.isHC || member.isBC) { %>
-                            <div class="btn-box">
-                                <div class="btn-group w-100" role="group" aria-label="Buttons">
+                            <div class="btn-toolbar" role="toolbar" aria-label="Button Toolbar">
+                                <div class="btn-group flex-fill" role="group" aria-label="">
                                     <a class="btn btn-success" href="/att/new"><i class="fas fa-plus" aria-hidden="true"></i></a>
                                 </div>
                             </div>
