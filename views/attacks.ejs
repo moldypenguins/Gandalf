@@ -560,9 +560,7 @@
                     <div class="content">
                         <form method="POST" action="<% if(page === "new") { %>/att/new<% } else if(page === "edit") { %>/att/edit/<%= attack.hash %><% } %>">
                             <h2>
-                                <% if(page === "new") { %>Add Attack
-                                <% } else if(page === "edit") { %>Edit Attack <%= attack.number %>
-                                <% } %>
+                                <% if(page === "new") { %>Add Attack<% } else if(page === "edit") { %>Edit Attack <%= attack.number %><% } %>
                             </h2>
                             <div class="btn-box">
                                 <div class="btn-group w-100" role="group" aria-label="Buttons">
@@ -647,31 +645,29 @@
                     <div class="col-xl-2 col-lg-1 col-md-0"></div>
                     <div class="col-xl-8 col-lg-10 col-md-12">
                         <div class="content">
-                            <h2>
-                                Edit Attack <%= attack.number %> Targets
-                            </h2>
                             <form method="POST" action="/att/edit/targ/<%= attack.hash %>">
+                                <h2>Edit Attack <%= attack.number %> Targets</h2>
+                                <div class="btn-box">
+                                    <div class="btn-group w-100" role="group" aria-label="Buttons">
+                                        <button type="submit" name="save" id="save" class="btn btn-success" value="save"><i class="far fa-plus" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
                                 <table class="table table-sm table-transparent w-100 table-align-middle">
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="input-group input-group-sm">
-                                                <div class="input-group-prepend">
-                                                    <span id="label-coords" class="input-group-coords">Coords</span>
+                                        <tr>
+                                            <td>
+                                                <div class="input-group input-group-sm">
+                                                    <div class="input-group-prepend">
+                                                        <span id="label-coords" class="input-group-coords">Coords</span>
+                                                    </div>
+                                                    <input type="text" name="coords" id="coords" class="form-control" aria-describedby="label-coords"/>
                                                 </div>
-                                                <input type="text" name="coords" id="coords" class="form-control" aria-describedby="label-coords"/>
-                                                <div class="input-group-append">
-                                                    <button id="add" class="btn btn-success" type="submit" name="add">
-                                                        <i class="fas fa-plus" aria-hidden="true"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
-                                <div class="table-targets-outer">
-                                    <table class="table table-sm table-striped table-align-middle">
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-striped w-100 table-align-middle">
                                         <thead>
                                         <tr>
                                             <th scope="col">Coords</th>
