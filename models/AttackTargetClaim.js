@@ -25,13 +25,15 @@ const Mordor = require('../Mordor');
 
 let AttackTargetClaimSchema = new Mordor.Schema({
   _id:    {type:Mordor.Schema.Types.ObjectId, required:true},
-  member: {type:Mordor.Schema.Types.ObjectId, reference:'Member'},
+  member: {type:Mordor.Schema.Types.ObjectId, reference:'Member', autopopulate: true},
   attack: {type:Mordor.Schema.Types.ObjectId, reference:'Attack'},
-  planet: {type:Mordor.Schema.Types.ObjectId, reference:'Planet'},
+  planet: {type:Mordor.Schema.Types.ObjectId, reference:'Planet', autopopulate: true},
   wave:   {type:Number},
 });
 
 AttackTargetClaimSchema.index({attack_id:1, planet_id:1, wave:1}, {unique:true});
+
+AttackTargetClaimSchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = Mordor.model('AttackTargetClaim', AttackTargetClaimSchema, 'AttackTargetClaims');
 
