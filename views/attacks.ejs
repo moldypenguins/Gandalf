@@ -803,9 +803,9 @@
                                     <tr>
                                         <td class="fit-content no-wrap">
                                             <% if(member.isADM || member.isHC || member.isBC) { %>
-                                                <a class="btn btn-warning" href="/att/edit/<%= attack.hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
-                                                <form method="POST" action="/att/delete/<%= attack.hash %>">
-                                                    <button class="btn btn-danger" type="submit" name="delete" value="<%= attack.hash %>"><i class="fas fa-times" aria-hidden="true"></i></button>
+                                                <a class="btn btn-warning" href="/att/edit/<%= attacks[i].hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
+                                                <form method="POST" action="/att/delete/<%= attacks[i].hash %>">
+                                                    <button class="btn btn-danger" type="submit" name="delete" value="<%= attacks[i].hash %>"><i class="fas fa-times" aria-hidden="true"></i></button>
                                                 </form>
                                             <% } %>
                                             <a class="btn btn-sm btn-warning" href="/att/<%= attacks[i].hash %>"><i class="fas fa-edit" aria-hidden="true"></i></a>
