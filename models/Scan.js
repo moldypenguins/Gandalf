@@ -40,7 +40,7 @@ let ScanSchema = new Mordor.Schema({
   _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
   scan_id:    {type:String, unique:true, required:true},
   group_id:   {type:String},
-  planet:     {type:Mordor.Schema.Types.ObjectId, reference:'Planet', required:true, index:true},
+  planet:     {type:Mordor.Schema.Types.ObjectId, ref:'Planet', required:true, index:true},
   scantype:   {type:Number, required:true},
   tick:       {type:Number, required:true},
   scanner_id: {type:Number, required:true}

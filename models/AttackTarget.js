@@ -25,8 +25,8 @@ const Mordor = require('../Mordor');
 
 let AttackTargetSchema = new Mordor.Schema({
   _id:    {type:Mordor.Schema.Types.ObjectId, required:true},
-  attack: {type:Mordor.Schema.Types.ObjectId, reference:'Attack', autopopulate: true},
-  planet: {type:Mordor.Schema.Types.ObjectId, ref:'Planet', autopopulate: true},
+  attack: {type:Mordor.Schema.Types.ObjectId, ref:'Attack', autopopulate:true},
+  planet: {type:Mordor.Schema.Types.ObjectId, ref:'Planet', autopopulate:true},
 });
 
 AttackTargetSchema.plugin(require('mongoose-autopopulate'));

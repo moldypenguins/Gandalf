@@ -33,7 +33,7 @@ let AttackSchema = new Mordor.Schema({
   title:        {type:String},
   comment:      {type:String},
   createtick:   {type:Number},
-  commander:    {type:Mordor.Schema.Types.ObjectId, reference:'Member'}
+  commander:    {type:Mordor.Schema.Types.ObjectId, ref:'Member'}
 });
 
 module.exports = Mordor.model('Attack', AttackSchema, 'Attacks');

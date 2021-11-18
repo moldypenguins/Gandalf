@@ -25,7 +25,7 @@ const Mordor = require('../Mordor');
 
 let PlanetHistorySchema = new Mordor.Schema({
   _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
-  tick:       {type:Mordor.Schema.Types.ObjectId, required:true, reference:'Tick'},
+  tick:       {type:Mordor.Schema.Types.ObjectId, required:true, ref:'Tick'},
   planet_id:  {type:String, index:true, required:true},
   x:          {type:Number, required:true},
   y:          {type:Number, required:true},

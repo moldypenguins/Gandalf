@@ -25,7 +25,7 @@ const Mordor = require('../Mordor');
 
 let ClusterHistorySchema = new Mordor.Schema({
   _id:      {type:Mordor.Schema.Types.ObjectId, required:true},
-  tick:     {type:Mordor.Schema.Types.ObjectId, required:true, reference:'Tick'},
+  tick:     {type:Mordor.Schema.Types.ObjectId, required:true, ref:'Tick'},
   x:        {type:Number, required:true},
   size:     {type:Number, default:0},
   score:    {type:Number, default:0},
