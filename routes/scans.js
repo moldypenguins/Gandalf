@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name scans.js
- * @version 2021/06/07
+ * @version 2021/11/22
  * @summary Express Route
  **/
 'use strict';
