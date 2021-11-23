@@ -595,7 +595,7 @@
                                             <div class="input-group-prepend">
                                                 <span id="label-landtick" class="input-group-landtick">Land Tick</span>
                                             </div>
-                                            <select id="landtick" class="custom-select" name="landtick" aria-describedby="label-landtick">
+                                            <select id="landtick" class="form-select" name="landtick" aria-describedby="label-landtick">
                                                 <% for(var i = 0; i < ticks.length; i++) { %>
                                                     <% if(ticks[i] >= ticks[0] + min_uni_eta) { %>
                                                         <option value="<%= ticks[i] %>"
@@ -625,7 +625,7 @@
                                             <div class="input-group-prepend">
                                                 <span id="label-releasetick" class="input-group-releasetick">Release Tick</span>
                                             </div>
-                                            <select id="releasetick" class="custom-select" name="releasetick" aria-describedby="label-releasetick">
+                                            <select id="releasetick" class="form-select" name="releasetick" aria-describedby="label-releasetick">
                                                 <% for(var i = 0; i < ticks.length; i++) { %>
                                                     <option value="<%= ticks[i] %>"<% if(page === "edit" && ticks[i] === attack.releasetick) { %> selected="selected"<% } %>><%= ticks[i] %></option>
                                                 <% } %>

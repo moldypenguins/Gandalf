@@ -60,7 +60,7 @@
                                             <div class="input-group-prepend">
                                                 <span id="label-theme" class="input-group-text">Theme</span>
                                             </div>
-                                            <select id="site_theme" class="form-control custom-select" name="site_theme" aria-labelledby="label-theme">
+                                            <select id="site_theme" class="form-select" name="site_theme" aria-labelledby="label-theme">
                                                 <option value="default"<% if(profile.site_theme === 'default') { %> selected="selected"<% } %>>Default</option>
                                                 <% for(theme in themes) { %>
                                                 <option value="<%= theme %>"<% if(profile.site_theme === theme) { %> selected="selected"<% } %>><%= themes[theme].name %></option>
@@ -75,7 +75,7 @@
                                             <div class="input-group-prepend">
                                                 <span id="label-navigation" class="input-group-text">Navigation</span>
                                             </div>
-                                            <select id="site_navigation" class="form-control custom-select" name="site_navigation" aria-labelledby="label-navigation">
+                                            <select id="site_navigation" class="form-select" name="site_navigation" aria-labelledby="label-navigation">
                                                 <option value="icons"<% if(profile.site_navigation === 'icons') { %> selected="selected"<% } %>>Icons Only</option>
                                                 <option value="iconstext"<% if(profile.site_navigation === 'iconstext') { %> selected="selected"<% } %>>Icons / Text</option>
                                                 <option value="text"<% if(profile.site_navigation === 'text') { %> selected="selected"<% } %>>Text Only</option>
@@ -99,7 +99,7 @@
                                             <div class="input-group-prepend">
                                                 <span id="label-timezone" class="input-group-text">Time Zone</span>
                                             </div>
-                                            <select id="timezone" class="form-control custom-select" name="timezone">
+                                            <select id="timezone" class="form-select" name="timezone">
                                                 <option value=""<% if(profile.timezone === undefined) { %> selected="selected"<% } %>></option>
                                                 <% for(var tz = 0; tz < timezones.length; tz++) { %>
                                                     <option value="<%= timezones[tz] %>"<% if(profile.timezone === timezones[tz]) { %> selected="selected"<% } %>><%= timezones[tz] %></option>
