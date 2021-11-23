@@ -732,7 +732,7 @@
                                 <th scope="col" class="fit-content">Number</th>
                                 <th scope="col" class="fit-content">Land Tick</th>
                                 <th scope="col">Title</th>
-                                <th scope="col">Comments</th>
+                                <th scope="col">Comment</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
@@ -752,7 +752,7 @@
                                             <td class="fit-content"><%= attacks[actAtt].number %></td>
                                             <td class="fit-content"><%= attacks[actAtt].landtick %></td>
                                             <td><%= attacks[actAtt].title %></td>
-                                            <td><%= attacks[actAtt].comments %></td>
+                                            <td><%= attacks[actAtt].comment %></td>
                                             <td class="fit-content no-wrap"><% if(attacks[actAtt].releasetick > tick.tick && member.isCMDR) { %>Released: pt<%= attacks[actAtt].releasetick %><% } %></td>
                                             <td class="fit-content no-wrap">
                                                 <a class="btn btn-sm btn-primary" href="/att/<%= attacks[actAtt].hash %>"><i class="fas fa-rocket" aria-hidden="true"></i></a>
@@ -779,7 +779,7 @@
                                 <th scope="col" class="fit-content">Number</th>
                                 <th scope="col" class="fit-content">Land Tick</th>
                                 <th scope="col">Title</th>
-                                <th scope="col">Comments</th>
+                                <th scope="col">Comment</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
@@ -798,7 +798,7 @@
                                         <td class="fit-content"><%= attacks[histAtt].number %></td>
                                         <td class="fit-content"><%= attacks[histAtt].landtick %></td>
                                         <td><%= attacks[histAtt].title %></td>
-                                        <td><%= attacks[histAtt].comments %></td>
+                                        <td><%= attacks[histAtt].comment %></td>
                                         <td class="fit-content no-wrap">
                                             <a class="btn btn-sm btn-primary" href="/att/<%= attacks[histAtt].hash %>"><i class="fas fa-rocket" aria-hidden="true"></i></a>
                                         </td>
