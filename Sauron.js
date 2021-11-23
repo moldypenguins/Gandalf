@@ -27,6 +27,7 @@ const FNCS = require('./Functions');
 const Mordor = require('./Mordor');
 
 const Tick = require('./models/Tick');
+const Attack = require('./models/Attack');
 const Member = require('./models/Member');
 const TelegramUser = require('./models/TelegramUser');
 const Planet = require('./models/Planet');
@@ -170,6 +171,8 @@ Mordor.connection.once("open", () => {
           res.locals.member.scans.a.scan[j].ship = await Ship.findOne({id: res.locals.member.scans.a.scan[j].ship_id});
         }
       }
+
+      res.locals.active_attacks = await Attack.find({$where:`this.landtick >= ` + (res.locals.tick.tick - CFG.alliance.attack.after_land_ticks) + res.locals.member.isCMDR ? `` : ` && this.releasetick <= ` + res.locals.tick.tick}).sort({number: 1});
     }
 
     next();

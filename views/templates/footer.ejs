@@ -10,13 +10,14 @@
             <% if(member !== undefined && member !== null) { %>
             <div class="footer-tab">
                 <i class="fas fa-crosshairs" aria-hidden="true"></i><% if(tick !== undefined) { %>&nbsp;<b>13</b><% } %>
+                <a href="<%= member.planet.y %>"><%= member.planet.y %></a><span class="separator">:</span><a href="<%= member.planet.y %>"><%= member.planet.y %></a>
             </div>
             <% } %>
         </div>
         <div class="col-4 text-end">
             <% if(member?.planet !== undefined && member.planet !== null) { %>
             <div class="footer-tab">
-                <i class="fas fa-globe-americas" aria-hidden="true"></i>&nbsp;<strong><a href="/uni/c/<%= member.planet.x %>"><%= member.planet.x %></a><span class="coords-separator">:</span><a href="/uni/g/<%= member.planet.x %>/<%= member.planet.y %>"><%= member.planet.y %></a><span class="coords-separator">:</span><a href="/uni/p/<%= member.planet.x %>/<%= member.planet.y %>/<%= member.planet.z %>"><%= member.planet.z %></a></strong>
+                <i class="fas fa-globe-americas" aria-hidden="true"></i>&nbsp;<strong><a href="/uni/c/<%= member.planet.x %>"><%= member.planet.x %></a><span class="separator">:</span><a href="/uni/g/<%= member.planet.x %>/<%= member.planet.y %>"><%= member.planet.y %></a><span class="separator">:</span><a href="/uni/p/<%= member.planet.x %>/<%= member.planet.y %>/<%= member.planet.z %>"><%= member.planet.z %></a></strong>
             </div>
             <% } %>
         </div>

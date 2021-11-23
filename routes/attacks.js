@@ -80,8 +80,8 @@ router.get('/new', AXS.webCommandRequired, async (req, res, next) => {
 
 router.post('/new', AXS.webCommandRequired, async (req, res, next) => {
   if(req.body.save !== undefined) {
-    let lastatt = await Attack.findOne().sort({id: -1});
-    lastatt = lastatt ? lastatt.id : 0;
+    let lastatt = await Attack.findOne().sort({number: -1});
+    lastatt = lastatt ? lastatt.number : 0;
     
     let att = await new Attack({
       _id: new Mordor.Types.ObjectId(),
