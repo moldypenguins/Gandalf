@@ -171,8 +171,9 @@ Mordor.connection.once("open", () => {
           res.locals.member.scans.a.scan[j].ship = await Ship.findOne({id: res.locals.member.scans.a.scan[j].ship_id});
         }
       }
-
-      res.locals.active_attacks = await Attack.find({$where:`this.landtick >= ` + (res.locals.tick.tick - CFG.alliance.attack.after_land_ticks) + res.locals.member.isCMDR ? `` : ` && this.releasetick <= ` + res.locals.tick.tick}).sort({number: 1});
+      let w = 'this.landtick >= ' + (res.locals.tick.tick - CFG.alliance.attack.after_land_ticks) + res.locals.member.isCMDR ? '' : ' && this.releasetick <= ' + res.locals.tick.tick;
+      console.log('WHERE: ' + util.inspect(w, false, null, true));
+      res.locals.active_attacks = await Attack.find({$where:`${w}`}).sort({number: 1});
     }
 
     next();
