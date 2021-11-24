@@ -151,12 +151,9 @@ router.post('/edit/:hash', AXS.webCommandRequired, async (req, res, next) => {
 
 router.post('/edit/targ/:hash', AXS.webCommandRequired, async (req, res, next) => {
   let att = await Attack.findOne({hash:req.params.hash});
-
-  console.log('ATTACK: ' + util.inspect(att, false, null, true));
-  
   if(req.body.add !== undefined && req.body.coords !== undefined) {
     let inCoords = req.body.coords.split(' ');
-    //console.log('COORDS' + util.inspect(inCoords, false, null, true));
+    console.log('COORDS' + util.inspect(inCoords, false, null, true));
     for(let x = 0; x < inCoords.length; x++) {
       //console.log(`${x}: ` + util.inspect(inCoords[x], false, null, true));
       if (inCoords[x].match(/^\d+:\d+:\*$/g) != null) {
@@ -189,7 +186,7 @@ router.post('/edit/targ/:hash', AXS.webCommandRequired, async (req, res, next) =
         }
       } else if(inCoords[x].match(/^\d+:\d+:\d+$/g) != null) {
         //planet
-        //console.log('PNT: ' + util.inspect(inCoords[x], false, null, true));
+        console.log('PNT: ' + util.inspect(inCoords[x], false, null, true));
         let cds = inCoords[x].split(':');
         let plnt = await Planet.findOne({x:cds[0], y:cds[1], z:cds[2]});
         let trg = new AttackTarget({_id: new Mordor.Types.ObjectId(),attack:att, planet:plnt});
