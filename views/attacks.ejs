@@ -738,27 +738,25 @@
                             </thead>
                             <tbody>
                             <% for(var actAtt = 0; actAtt < attacks.length; actAtt++) { %>
-                                <% if(attacks[actAtt].landtick >= tick.tick - after_land_ticks) { %>
-                                    <%if(attacks[actAtt].releasetick <= tick.tick || (attacks[actAtt].releasetick > tick.tick && member.isCMDR)) { %>
-                                        <tr>
-                                            <td class="fit-content no-wrap">
-                                                <% if(member.isADM || member.isHC || member.isBC) { %>
-                                                    <a class="btn btn-sm btn-warning" href="/att/edit/<%= attacks[actAtt].hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
-                                                    <form method="POST" action="/att/delete/<%= attacks[actAtt].hash %>" class="d-inline-block">
-                                                        <button class="btn btn-sm btn-danger" type="submit" name="delete" value="<%= attacks[actAtt].hash %>"><i class="fas fa-times" aria-hidden="true"></i></button>
-                                                    </form>
-                                                <% } %>
-                                            </td>
-                                            <td class="fit-content"><%= attacks[actAtt].number %></td>
-                                            <td class="fit-content"><%= attacks[actAtt].landtick %></td>
-                                            <td><%= attacks[actAtt].title %></td>
-                                            <td><%= attacks[actAtt].comment %></td>
-                                            <td class="fit-content no-wrap"><% if(attacks[actAtt].releasetick > tick.tick && member.isCMDR) { %>Released: pt<%= attacks[actAtt].releasetick %><% } %></td>
-                                            <td class="fit-content no-wrap">
-                                                <a class="btn btn-sm btn-primary" href="/att/<%= attacks[actAtt].hash %>"><i class="fas fa-rocket" aria-hidden="true"></i></a>
-                                            </td>
-                                        </tr>
-                                    <% } %>
+                                <% if(attacks[actAtt].landtick + (attacks[actAtt].waves - 1) + after_land_ticks > tick.tick && (member.isCMDR || attacks[actAtt].releasetick <= tick.tick)) { %>
+                                    <tr>
+                                        <td class="fit-content no-wrap">
+                                            <% if(member.isADM || member.isHC || member.isBC) { %>
+                                                <a class="btn btn-sm btn-warning" href="/att/edit/<%= attacks[actAtt].hash %>"><i class="fas fa-pen" aria-hidden="true"></i></a>
+                                                <form method="POST" action="/att/delete/<%= attacks[actAtt].hash %>" class="d-inline-block">
+                                                    <button class="btn btn-sm btn-danger" type="submit" name="delete" value="<%= attacks[actAtt].hash %>"><i class="fas fa-times" aria-hidden="true"></i></button>
+                                                </form>
+                                            <% } %>
+                                        </td>
+                                        <td class="fit-content"><%= attacks[actAtt].number %></td>
+                                        <td class="fit-content"><%= attacks[actAtt].landtick %></td>
+                                        <td><%= attacks[actAtt].title %></td>
+                                        <td><%= attacks[actAtt].comment %></td>
+                                        <td class="fit-content no-wrap"><% if(attacks[actAtt].releasetick > tick.tick && member.isCMDR) { %>Released: pt<%= attacks[actAtt].releasetick %><% } %></td>
+                                        <td class="fit-content no-wrap">
+                                            <a class="btn btn-sm btn-primary" href="/att/<%= attacks[actAtt].hash %>"><i class="fas fa-rocket" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
                                 <% } %>
                             <% } %>
                             </tbody>
