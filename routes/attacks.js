@@ -151,7 +151,7 @@ router.post('/edit/:hash', AXS.webCommandRequired, async (req, res, next) => {
 
 router.post('/edit/targ/:hash', AXS.webCommandRequired, async (req, res, next) => {
   let att = await Attack.findOne({hash:req.params.hash});
-  if(req.body.add !== undefined && req.body.coords !== undefined) {
+  if(req.body.save !== undefined && req.body.coords !== undefined) {
     console.log('COORDS' + util.inspect(req.body.coords, false, null, true));
     let inCoords = req.body.coords.split(' ');
     for(let x = 0; x < inCoords.length; x++) {
