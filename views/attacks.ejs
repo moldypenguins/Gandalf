@@ -783,7 +783,7 @@
                             </thead>
                             <tbody>
                             <% for(var histAtt = 0; histAtt < attacks.length; histAtt++) { %>
-                                <% if(attacks[histAtt].landtick < tick.tick - after_land_ticks) { %>
+                                <% if(attacks[actAtt].landtick + (attacks[actAtt].waves - 1) + after_land_ticks > tick.tick) { %>
                                     <tr>
                                         <td class="fit-content no-wrap">
                                             <% if(member.isADM || member.isHC || member.isBC) { %>
