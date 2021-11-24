@@ -692,7 +692,11 @@
                                                 <td><%= targets[i].size %></td>
                                                 <td><%= numeral(targets[i].value).format("0,0") %></td>
                                                 <td><%= numeral(targets[i].score).format("0,0") %></td>
-                                                <td></td> <!-- stock/prod -->
+                                                <td>
+                                                    <% if(targets[i].scans?.p?.scan) { %>
+                                                        <%= numeral(targets[i].scans.p.scan.res_metal + targets[i].scans.p.scan.res_crystal + targets[i].scans.p.scan.res_eonium).format("0,0") %><strong> / </strong><%= numeral(targets[i].scans.p.scan.prod_res + targets[i].scans.p.scan.ships_sold_res).format("0,0") %>
+                                                    <% } %>
+                                                </td>
                                                 <td><%= targets[i].intel.nick %>/<%= targets[i].intel.alliance %></td>
                                                 <td>
                                                     <button type="submit" name="delete" id="delete" class="btn btn-sm btn-danger" value="<%= targets[i].planet_id %>">
