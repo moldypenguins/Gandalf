@@ -171,7 +171,7 @@ Mordor.connection.once("open", () => {
           res.locals.member.scans.a.scan[j].ship = await Ship.findOne({id: res.locals.member.scans.a.scan[j].ship_id});
         }
       }
-      let w = `this.landtick >= ${res.locals.tick.tick}`;// + (res.locals.tick.tick - CFG.alliance.attack.after_land_ticks).toString() + res.locals.member.isCMDR ? '' : ' && this.releasetick <= ' + res.locals.tick.tick.toString();
+      let w = `this.landtick + (this.waves - 1) + ${CFG.alliance.attack.after_land_ticks} < ${res.locals.tick.tick}`;// + (res.locals.tick.tick - CFG.alliance.attack.after_land_ticks).toString() + res.locals.member.isCMDR ? '' : ' && this.releasetick <= ' + res.locals.tick.tick.toString();
       console.log('WHERE: ' + util.inspect(w, false, null, true));
       res.locals.active_attacks = await Attack.find({$where:w}).sort({number: 1});
     }
