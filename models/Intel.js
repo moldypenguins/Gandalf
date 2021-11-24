@@ -25,8 +25,8 @@ const Mordor = require('../Mordor');
 
 let IntelSchema = new Mordor.Schema({
   _id:         {type:Mordor.Schema.Types.ObjectId, required:true},
-  planet:      {type:Mordor.Schema.Types.ObjectId, ref:'Planet'},
-  alliance:    {type:Mordor.Schema.Types.ObjectId, ref:'Alliance'},
+  planet:      {type:Mordor.Schema.Types.ObjectId, ref:'Planet', autopopulate: true},
+  alliance:    {type:Mordor.Schema.Types.ObjectId, ref:'Alliance', autopopulate: true},
   nick:        {type:String},
   fakenick:    {type:String},
   defwhore:    {type:Boolean},
@@ -39,5 +39,7 @@ let IntelSchema = new Mordor.Schema({
   reportchan:  {type:String},
   comment:     {type:String},
 });
+
+IntelSchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = Mordor.model('Intel', IntelSchema, 'Intels');

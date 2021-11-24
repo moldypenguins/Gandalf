@@ -106,22 +106,6 @@ router.post('/new', AXS.webCommandRequired, async (req, res, next) => {
   }
 });
 
-let addIntel = async (target) => {
-  let intel = await Intel.findOne({planet_id: target.id});
-  target.intel = {};
-  if (intel) {
-//    console.log(intel);
-    if (intel.alliance_id) {
-      let alliance = await Alliance.findOne({ _id: intel.alliance_id});
-  //    console.log(alliance)
-      target.intel.alliance = alliance.name;
-    } else {
-      target.intel.alliance = "-"
-    }
-    target.intel.nick = intel.nick ? intel.nick : '-';
-  }
-  return target;
-}
 
 
 router.get('/edit/:hash', AXS.webCommandRequired, async (req, res, next) => {
@@ -129,7 +113,10 @@ router.get('/edit/:hash', AXS.webCommandRequired, async (req, res, next) => {
   let atttarg = await AttackTarget.find({attack:att});
   let targs = await Planet.find({planet_id:{$in:atttarg.map(at => at.planet.planet_id)}});
   for(let target of targs) {
-    await addIntel(target);
+    target.intel = {};
+    let intel = await Intel.findOne({planet: target});
+    target.intel.alliance = intel?.alliance?.name ? intel.alliance.name : '';
+    target.intel.nick = intel?.nick ? intel.nick : '';
   }
   let tks = [];
   for(let i = att.createtick; i <= PA.tick.end; i++) {
@@ -233,7 +220,10 @@ router.get('/:hash', attackLimiter, async (req, res, next) => {
   let targs = await Planet.find({planet_id:{$in:atttarg.map(at => at.planet.planet_id)}});
   let clms = await AttackTargetClaim.find({attack:att});
   for(let target of targs) {
-    await addIntel(target);
+    target.intel = {};
+    let intel = await Intel.findOne({planet: target});
+    target.intel.alliance = intel?.alliance?.name ? intel.alliance.name : '';
+    target.intel.nick = intel?.nick ? intel.nick : '';
   }
   for(let i = 0; i < targs.length; i++) {
     targs[i].scans = {};
