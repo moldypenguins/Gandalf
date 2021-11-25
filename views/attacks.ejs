@@ -555,8 +555,8 @@
     <% } else if(page === "new" || page === "edit") { %>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
-                <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
+                <div class="col-xl-8 col-lg-10 col-md-12">
                     <div class="content">
                         <form method="POST" action="<% if(page === "new") { %>/att/new<% } else if(page === "edit") { %>/att/edit/<%= attack.hash %><% } %>">
                             <h2>
@@ -638,12 +638,12 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
+                <div class="col-xl-2 col-lg-1 col-md-0"></div>
             </div>
             <% if(page === "edit") { %>
                 <div class="row">
-                    <div class="col-xl-2 col-lg-1 col-md-0"></div>
-                    <div class="col-xl-8 col-lg-10 col-md-12">
+                    <div class="col-xl-1 col-lg-0"></div>
+                    <div class="col-xl-10 col-lg-12">
                         <div class="content">
                             <form method="POST" action="/att/edit/targ/<%= attack.hash %>">
                                 <h2>Edit Attack <%= attack.number %> Targets</h2>
@@ -711,7 +711,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-1 col-md-0"></div>
+                    <div class="col-xl-1 col-lg-0"></div>
                 </div>
             <% } %>
         </div>
