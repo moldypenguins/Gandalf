@@ -115,8 +115,8 @@ router.get('/edit/:hash', AXS.webCommandRequired, async (req, res, next) => {
   for(let i = 0; i < targs.length; i++) {
     targs[i].intel = {};
     let intel = await Intel.findOne({planet: targs[i]});
-    targs[i].intel.alliance = intel?.alliance?.name ? intel.alliance.name : '';
-    targs[i].intel.nick = intel?.nick ? intel.nick : '';
+    targs[i].intel.alliance = intel?.alliance?.name ? intel.alliance.name : 'Unknown';
+    targs[i].intel.nick = intel?.nick ? intel.nick : 'Unknown';
     targs[i].scans = {};
     targs[i].scans.p = await Scan.findOne({planet:targs[i], scantype:1}).sort({tick:-1, _id:-1});
     if(targs[i].scans.p != null) { targs[i].scans.p.scan = await PlanetScan.findOne({scan_id:targs[i].scans.p.scan_id}); }
