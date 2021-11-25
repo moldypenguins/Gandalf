@@ -677,7 +677,7 @@
                                             <th scope="col">Size</th>
                                             <th scope="col">Value</th>
                                             <th scope="col">Score</th>
-                                            <th scope="col">Stock/Prod</th>
+                                            <th scope="col">Stock / Prod</th>
                                             <th scope="col">Intel</th>
                                             <th scope="col"></th>
                                         </tr>
@@ -697,7 +697,7 @@
                                                         <%= numeral(targets[i].scans.p.scan.res_metal + targets[i].scans.p.scan.res_crystal + targets[i].scans.p.scan.res_eonium).format("0,0") %><strong> / </strong><%= numeral(targets[i].scans.p.scan.prod_res + targets[i].scans.p.scan.ships_sold_res).format("0,0") %>
                                                     <% } %>
                                                 </td>
-                                                <td class="no-wrap"><%= targets[i].intel.nick %>/<%= targets[i].intel.alliance %></td>
+                                                <td class="no-wrap"><%= targets[i].intel.nick %><strong> / </strong><%= targets[i].intel.alliance %></td>
                                                 <td class="fit-content no-wrap">
                                                     <button type="submit" name="delete" id="delete" class="btn btn-sm btn-danger" value="<%= targets[i].planet_id %>">
                                                         <i class="fas fa-trash-alt" aria-hidden="true"></i>
