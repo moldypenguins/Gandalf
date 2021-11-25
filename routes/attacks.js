@@ -227,8 +227,8 @@ router.get('/:hash', attackLimiter, async (req, res, next) => {
   for(let target of targs) {
     target.intel = {};
     let intel = await Intel.findOne({planet: target});
-    target.intel.alliance = intel?.alliance?.name ? intel.alliance.name : '';
-    target.intel.nick = intel?.nick ? intel.nick : '';
+    target.intel.alliance = intel?.alliance?.name ? intel.alliance.name : 'Unknown';
+    target.intel.nick = intel?.nick ? intel.nick : 'Unknown';
   }
   for(let i = 0; i < targs.length; i++) {
     targs[i].scans = {};
