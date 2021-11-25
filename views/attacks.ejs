@@ -690,15 +690,15 @@
                                                 <td><%= targets[i].planetname %></td>
                                                 <td class="<%= targets[i].race.toLowerCase() %>"><%= targets[i].race %></td>
                                                 <td><%= targets[i].size %></td>
-                                                <td><%= numeral(targets[i].value).format("0,0") %></td>
-                                                <td><%= numeral(targets[i].score).format("0,0") %></td>
-                                                <td>
+                                                <td class="no-wrap"><%= numeral(targets[i].value).format("0,0") %></td>
+                                                <td class="no-wrap"><%= numeral(targets[i].score).format("0,0") %></td>
+                                                <td class="no-wrap">
                                                     <% if(targets[i].scans?.p?.scan) { %>
                                                         <%= numeral(targets[i].scans.p.scan.res_metal + targets[i].scans.p.scan.res_crystal + targets[i].scans.p.scan.res_eonium).format("0,0") %><strong> / </strong><%= numeral(targets[i].scans.p.scan.prod_res + targets[i].scans.p.scan.ships_sold_res).format("0,0") %>
                                                     <% } %>
                                                 </td>
-                                                <td><%= targets[i].intel.nick %>/<%= targets[i].intel.alliance %></td>
-                                                <td>
+                                                <td class="no-wrap"><%= targets[i].intel.nick %>/<%= targets[i].intel.alliance %></td>
+                                                <td class="fit-content no-wrap">
                                                     <button type="submit" name="delete" id="delete" class="btn btn-sm btn-danger" value="<%= targets[i].planet_id %>">
                                                         <i class="fas fa-trash-alt" aria-hidden="true"></i>
                                                     </button>
