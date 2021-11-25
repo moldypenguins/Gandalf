@@ -538,14 +538,10 @@
                     <div id="coords-list" class="content">
                         <h2>Coordinates:</h2>
                         <div class="input-group input-group-sm">
-                            <input class="form-control" value="<% targets.forEach(function(trg) { %><%= trg.x %>:<%= trg.y %>:<%= trg.z %> <% }); %>" readonly="readonly" />
-                            <div class="input-group-append">
-                                <button class="btn btn-sm btn-primary clipboard-button" data-clipboard-target="#coords-list-content">
-                                    <i class="fas fa-clipboard"></i>
-                                </button>
-                            </div>
-                            <script>new ClipboardJS('.clipboard-button');</script>
+                            <input type="text" class="form-control" value="<% targets.forEach(function(trg) { %><%= trg.x %>:<%= trg.y %>:<%= trg.z %> <% }); %>" readonly="readonly" />
+                            <button type="button" id="clipboard-button" class="btn btn-primary" data-clipboard-target="#coords-list-content"><i class="fas fa-clipboard"></i></button>
                         </div>
+                        <script>new ClipboardJS('#clipboard-button');</script>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-1 col-md-0"></div>
