@@ -50,7 +50,7 @@
                                             <form method="POST" action="/mem/<%= members[i].id %>">
                                                 <div class="btn-group btn-group-sm position-static">
                                                     <div class="btn-group btn-group-sm position-static">
-                                                        <button type="button" id="btnGroupDrop1" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><%= members[i].accessRoles %></button>
+                                                        <button type="button" id="AccessRoles" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><%= members[i].accessRoles %></button>
                                                         <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                                             <li><h6 class="dropdown-header">Access</h6></li>
                                                             <li><label class="dropdown-item"><input name="access" type="radio" value="0"<% if(members[i].access === 0) { %> checked="checked"<% } %> /> Recruit</label></li>
@@ -58,21 +58,12 @@
                                                             <li><label class="dropdown-item"><input name="access" type="radio" value="3"<% if(members[i].access === 3) { %> checked="checked"<% } %> /> Commander</label></li>
                                                             <li><label class="dropdown-item"><input name="access" type="radio" value="5"<% if(members[i].access === 5) { %> checked="checked"<% } %> /> Admin</label></li>
                                                             <li><hr class="dropdown-divider" /></li>
-                                                            <li>
-                                                                <h6 class="dropdown-header">Roles</h6>
-                                                                <div class="btn-group-vertical btn-group-sm" role="group" aria-label="Basic radio toggle button group">
-                                                                    <input type="radio" class="btn-check" autocomplete="off" name="role1" id="role1_<%= members[i]._id %>" type="checkbox" value="1"<% if((members[i].roles & 1) !== 0) { %> checked="checked"<% } %> />
-                                                                    <label class="btn btn-primary" for="role1_<%= members[i]._id %>">OOT</label>
-                                                                    <input type="radio" class="btn-check" autocomplete="off" name="role2" id="role1_<%= members[i]._id %>" type="checkbox" value="1"<% if((members[i].roles & 2) !== 0) { %> checked="checked"<% } %> />
-                                                                    <label class="btn btn-primary" for="role2_<%= members[i]._id %>">Scanner</label>
-                                                                    <input type="radio" class="btn-check" autocomplete="off" name="role4" id="role1_<%= members[i]._id %>" type="checkbox" value="1"<% if((members[i].roles & 4) !== 0) { %> checked="checked"<% } %> />
-                                                                    <label class="btn btn-primary" for="role4_<%= members[i]._id %>">Battle Commander</label>
-                                                                    <input type="radio" class="btn-check" autocomplete="off" name="role8" id="role1_<%= members[i]._id %>" type="checkbox" value="1"<% if((members[i].roles & 8) !== 0) { %> checked="checked"<% } %> />
-                                                                    <label class="btn btn-primary" for="role8_<%= members[i]._id %>">Defence Commander</label>
-                                                                    <input type="radio" class="btn-check" autocomplete="off" name="role16" id="role1_<%= members[i]._id %>" type="checkbox" value="1"<% if((members[i].roles & 16) !== 0) { %> checked="checked"<% } %> />
-                                                                    <label class="btn btn-primary" for="role16_<%= members[i]._id %>">High Commander</label>
-                                                                </div>
-                                                            </li>
+                                                            <li><h6 class="dropdown-header">Roles</h6></li>
+                                                            <li><input id="role1_<%= members[i]._id %>" name="role1" type="checkbox" value="1"<% if((members[i].roles & 1) !== 0) { %> checked="checked"<% } %> /> <label class="dropdown-item" for="role1_<%= members[i]._id %>">OOT</label></li>
+                                                            <li><input id="role2_<%= members[i]._id %>" name="role2" type="checkbox" value="2"<% if((members[i].roles & 2) !== 0) { %> checked="checked"<% } %> /> <label for="role2_<%= members[i]._id %>">Scanner</label></li>
+                                                            <li><input id="role4_<%= members[i]._id %>" name="role4" type="checkbox" value="4"<% if((members[i].roles & 4) !== 0) { %> checked="checked"<% } %> /> <label for="role4_<%= members[i]._id %>">Battle Commander</label></li>
+                                                            <li><input id="role8_<%= members[i]._id %>" name="role8" type="checkbox" value="8"<% if((members[i].roles & 8) !== 0) { %> checked="checked"<% } %> /> <label for="role8_<%= members[i]._id %>">Defence Commander</label></li>
+                                                            <li><input id="role16_<%= members[i]._id %>" name="role16" type="checkbox" value="16"<% if((members[i].roles & 16) !== 0) { %> checked="checked"<% } %> /> <label for="role16_<%= members[i]._id %>">High Commander</label></li>
                                                         </ul>
                                                     </div>
                                                     <button type="submit" id="submitaccess<%= members[i].id %>>" name="submitaccess" class="btn btn-primary"><i class="fas fa-save" aria-hidden="true"></i></button>
