@@ -124,6 +124,24 @@
   }
 }
 
+
+.input-group-prepend {
+  width: 100px;
+
+}
+
+
+input,
+select,
+textarea {
+  &:focus {
+    border-color: $col-black !important;
+    outline: 0 !important;
+    box-shadow: inset 0 0 4px 0 rgba($col-black, .25) !important;
+  }
+}
+
+
 .dropdown {
   width: inherit;
 
@@ -149,20 +167,19 @@
   }
 }
 
-.input-group-prepend {
-  width: 100px;
 
+/*# DROPDOWNS ################################################################################*/
+
+
+.dropdown-header {
+  padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+}
+.dropdown-divider {
+  padding: 0.5rem 0.75rem;
+}
+.dropdown-item {
+  padding: 0 0.5rem;
 }
 
-
-input,
-select,
-textarea {
-  &:focus {
-    border-color: $col-black !important;
-    outline: 0 !important;
-    box-shadow: inset 0 0 4px 0 rgba($col-black, .25) !important;
-  }
-}
 
 
