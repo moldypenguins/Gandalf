@@ -52,13 +52,13 @@
                                                     <div class="btn-group btn-group-sm position-static">
                                                         <button type="button" id="btnAccessRoles" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><%= members[i].accessRoles %></button>
                                                         <ul class="dropdown-menu" aria-labelledby="btnAccessRoles">
-                                                            <li class="dropdown-header"><h6>Access</h6></li>
+                                                            <li class="dropdown-header">Access</li>
                                                             <li class="dropdown-item"><input id="access0_<%= members[i]._id %>" name="access" type="radio" value="0"<% if(members[i].access === 0) { %> checked="checked"<% } %> /> <label for="access0_<%= members[i]._id %>">Recruit</label></li>
                                                             <li class="dropdown-item"><input id="access1_<%= members[i]._id %>" name="access" type="radio" value="1"<% if(members[i].access === 1) { %> checked="checked"<% } %> /> <label for="access1_<%= members[i]._id %>">Member</label></li>
                                                             <li class="dropdown-item"><input id="access3_<%= members[i]._id %>" name="access" type="radio" value="3"<% if(members[i].access === 3) { %> checked="checked"<% } %> /> <label for="access3_<%= members[i]._id %>">Commander</label></li>
                                                             <li class="dropdown-item"><input id="access5_<%= members[i]._id %>" name="access" type="radio" value="5"<% if(members[i].access === 5) { %> checked="checked"<% } %> /> <label for="access5_<%= members[i]._id %>">Admin</label></li>
                                                             <li class="dropdown-divider"><hr /></li>
-                                                            <li class="dropdown-header"><h6>Roles</h6></li>
+                                                            <li class="dropdown-header">Roles</li>
                                                             <li class="dropdown-item"><input id="role1_<%= members[i]._id %>" name="role1" type="checkbox" value="1"<% if((members[i].roles & 1) !== 0) { %> checked="checked"<% } %> /> <label for="role1_<%= members[i]._id %>">OOT</label></li>
                                                             <li class="dropdown-item"><input id="role2_<%= members[i]._id %>" name="role2" type="checkbox" value="2"<% if((members[i].roles & 2) !== 0) { %> checked="checked"<% } %> /> <label for="role2_<%= members[i]._id %>">Scanner</label></li>
                                                             <li class="dropdown-item"><input id="role4_<%= members[i]._id %>" name="role4" type="checkbox" value="4"<% if((members[i].roles & 4) !== 0) { %> checked="checked"<% } %> /> <label for="role4_<%= members[i]._id %>">Battle Commander</label></li>
