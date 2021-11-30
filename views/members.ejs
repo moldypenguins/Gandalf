@@ -47,7 +47,7 @@
                                     <td class="no-wrap"><%= members[i].pa_nick %></td>
                                     <td class="pr-3 no-wrap">
                                         <% if(member.isADM || (member.isHC && !members[i].isADM && !members[i].isHC)) { %>
-                                            <form method="POST" action="/mem/<%= members[i].id %>">
+                                            <form method="POST" action="/mem/<%= members[i]._id %>">
                                                 <div class="btn-group btn-group-sm position-static">
                                                     <div class="btn-group btn-group-sm position-static">
                                                         <button type="button" id="btnAccessRoles" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><%= members[i].accessRoles %></button>
