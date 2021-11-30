@@ -44,12 +44,16 @@
                 </table>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12 mx-auto">
             <div class="content">
               <form method="POST" action="/scans/request">
                 <h2>Request A Scan</h2>
-                <div class="btn-box">
-                  <div class="btn-group w-100" role="group" aria-label="Buttons">
-                    <button type="submit" name="save" id="save" class="btn btn-success" value="save"><i class="fas fa-satellite-dish" aria-hidden="true"></i></button>
+                <div class="btn-toolbar" role="toolbar" aria-label="Button Toolbar">
+                  <div class="btn-group flex-fill" role="group" aria-label="">
+                    <button type="submit" name="save" id="save" class="btn btn-primary" value="save"><i class="fas fa-satellite-dish" aria-hidden="true"></i></button>
                   </div>
                 </div>
                 <table class="table table-sm table-transparent w-100">
@@ -84,8 +88,12 @@
                 </table>
               </form>
             </div>
-            <% if(member.isADM || member.isSCNR) {%>
-              <div class="content">
+          </div>
+        </div>
+        <% if(member.isADM || member.isSCNR) {%>
+        <div class="row">
+          <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12 mx-auto">
+            <div class="content">
                 <h2>Scan Requests</h2>
                 <table class="table table-sm w-100">
                   <thead>
@@ -113,9 +121,9 @@
                   </tbody>
                 </table>
               </div>
-            <% } %>
           </div>
         </div>
+        <% } %>
       </div>
     </main>
     <footer>
