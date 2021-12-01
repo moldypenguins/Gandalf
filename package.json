@@ -74,7 +74,7 @@
     "express-session": "^1.17.2",
     "express-slow-down": "^1.4.0",
     "he": "^1.2.0",
-    "http-errors": "~1.8.0",
+    "http-errors": "~1.8.1",
     "intl-tel-input": "^17.0.13",
     "jquery": "^3.6.0",
     "minimist": "^1.2.5",
