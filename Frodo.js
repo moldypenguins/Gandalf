@@ -438,10 +438,10 @@ let process_tick = async (last_tick, start_time) => {
             active: true,
             age: planet.age + 1 ?? 1,
             ratio: planets[p_temp].value !== 0 ? 10000.0 * planets[p_temp].size / planets[p_temp].value : 0,
-            size_rank:  await PlanetDump.find({size:{$gt:planets[p_temp].size}}).countDocuments(),
-            score_rank: await PlanetDump.find({score:{$gt:planets[p_temp].size}}).countDocuments(),
-            value_rank: await PlanetDump.find({value:{$gt:planets[p_temp].size}}).countDocuments(),
-            xp_rank:    await PlanetDump.find({xp:{$gt:planets[p_temp].size}}).countDocuments(),
+            size_rank:  await PlanetDump.find({size:{$gt:planets[p_temp].size},x:{$ne:200}}).countDocuments(),
+            score_rank: await PlanetDump.find({score:{$gt:planets[p_temp].size},x:{$ne:200}}).countDocuments(),
+            value_rank: await PlanetDump.find({value:{$gt:planets[p_temp].size},x:{$ne:200}}).countDocuments(),
+            xp_rank:    await PlanetDump.find({xp:{$gt:planets[p_temp].size},x:{$ne:200}}).countDocuments(),
 
             //TODO: add remaining fields
 
