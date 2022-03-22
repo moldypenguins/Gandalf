@@ -98,7 +98,7 @@ router.post('/', AXS.webHighCommandRequired, async(req, res, next) => {
     let mbr = await Member.findOne({id: req.body.deactivate});
     if(mbr != null) {
       let inatv = new Inactive({
-        id: mbr.id,
+        _id: mbr.id,
         username: mbr.username,
         first_name: mbr.first_name,
         last_name: mbr.last_name,
@@ -132,7 +132,7 @@ router.post('/applicants', AXS.webHighCommandRequired, async (req, res, next) =>
       console.log('applcnt: ' + applcnt);
       if(applcnt) {
         let mem = new Member({
-          id: applcnt.id,
+          _id: applcnt.id,
           username: applcnt.username,
           first_name: applcnt.first_name,
           last_name: applcnt.last_name,
@@ -178,7 +178,7 @@ router.post('/inactives', AXS.webHighCommandRequired, async (req, res, next) => 
     let inact = await Inactive.findOne({id: req.body.activate});
     if(inact != null) {
       let mbr = new Member({
-        id: inact.id,
+        _id: inact.id,
         username: inact.username,
         first_name: inact.first_name,
         last_name: inact.last_name,
