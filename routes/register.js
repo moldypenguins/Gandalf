@@ -75,14 +75,14 @@ router.post("/", async (req, res, next) => {
   let tg_user = await TelegramUser.findOne({telegram_id:req.session.visitor.id});
   console.log('TGUSER: ' + util.inspect(tg_user, false, null, true));
 
-  if (!await Member.exists({telegram_user:tg_user})) {
-    if (await new Member({_id:Mordor.Types.ObjectId(), telegram_user:tg_user, access: 0, pa_nick:req.body.pa_nick}).save()) {
-      console.log(`Added ${req.body.pa_nick} to Members collection.`);
+  if (!await Applicant.exists({telegram_user:tg_user})) {
+    if (await new Applicant({_id:Mordor.Types.ObjectId(), telegram_user:tg_user, access: 0, pa_nick:req.body.pa_nick}).save()) {
+      console.log(`Added ${req.body.pa_nick} to Applicants collection.`);
     } else {
-      console.log(`Could not add ${req.body.pa_nick} to Members collection.`);
+      console.log(`Could not add ${req.body.pa_nick} to Applicants collection.`);
     }
   } else {
-    console.log(`Member ${req.body.pa_nick} already exists.`);
+    console.log(`Applicant ${req.body.pa_nick} already exists.`);
   }
 
 
