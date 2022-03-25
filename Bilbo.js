@@ -134,7 +134,6 @@ let load_ticks = async() => {
 };
 
 let setup_admins = async() => {
-
   if(!await TelegramUser.exists({telegram_id:CFG.admin.telegram_id})) {
     await new TelegramUser({_id:Mordor.Types.ObjectId(), telegram_id:CFG.admin.telegram_id}).save();
   }

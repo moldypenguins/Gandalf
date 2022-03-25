@@ -37,11 +37,27 @@
                                 <% } %>
                             <% } %>
                         </div>
+
+                        <div class="justify-content-center">
+                            <% if(visitor !== undefined) { %>
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                        <span id="label-pa_nick" class="input-group-text">PA Nick</span>
+                                    </div>
+                                    <input type="text" name="pa_nick" id="pa_nick" class="form-control" />
+                                </div>
+                            <% } %>
+                        </div>
+
                         <div class="justify-content-center">
                             <% if(visitor !== undefined) { %>
                                 <button class="tg-btn" type="submit">Register</button>
-                            <% } else if(applicant !== undefined && applicant.rejected) { %>
-                                Your application has been rejected.
+                            <% } else if(applicant !== undefined) { %>
+                                <% if(applicant.rejected) { %>
+                                    Your application has been rejected.
+                                <% } else { %>
+                                    Your application has been received.
+                                <% } %>
                             <% } %>
                         </div>
                     <% if(visitor !== undefined) { %>

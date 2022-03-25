@@ -32,6 +32,7 @@ const Applicant = require('../models/Applicant');
 const express = require('express');
 let router = express.Router();
 const util = require('util');
+const TelegramUser = require("../models/TelegramUser");
 
 
 /**
@@ -42,8 +43,13 @@ router.get("/", async (req, res, next) => {
     console.log('SESSION VISITOR: ' + util.inspect(req.session.visitor, false, null, true));
     res.render('register', {});
   } else if(typeof(req.session.applicant) !== 'undefined') {
-    console.log('SESSION APPLICANT: ' + util.inspect(req.session.visitor, false, null, true));
-    res.render('register', {});
+    if(req.session.applicant.rejected !== true) {
+      console.log('SESSION APPLICANT: ' + util.inspect(req.session.visitor, false, null, true));
+      res.render('register', {});
+    } else {
+      console.log('SESSION REJECTED APPLICANT: ' + util.inspect(req.session.visitor, false, null, true));
+      res.render('register', {});
+    }
   } else {
     next(400);
   }
@@ -55,6 +61,33 @@ router.get("/", async (req, res, next) => {
  */
 router.post("/", async (req, res, next) => {
   console.log('POST VISITOR: ' + util.inspect(req.session.visitor, false, null, true));
+
+  if(!await TelegramUser.exists({telegram_id:req.session.visitor.id})) {
+    await new TelegramUser({
+      _id:Mordor.Types.ObjectId(),
+      telegram_id: req.session.visitor.id,
+      telegram_username: req.session.visitor.username,
+      telegram_first_name: req.session.visitor.first_name,
+      telegram_last_name: req.session.visitor.last_name,
+      telegram_photo_url: req.session.visitor.photo_url !== undefined ? req.session.visitor.photo_url : '/images/member.jpg'
+    }).save();
+  }
+  let tg_user = await TelegramUser.findOne({telegram_id:req.session.visitor.id});
+  console.log('TGUSER: ' + util.inspect(tg_user, false, null, true));
+
+  if (!await Member.exists({telegram_user:tg_user})) {
+    if (await new Member({_id:Mordor.Types.ObjectId(), telegram_user:tg_user, access: 0, pa_nick:req.body.pa_nick}).save()) {
+      console.log(`Added ${req.body.pa_nick} to Members collection.`);
+    } else {
+      console.log(`Could not add ${req.body.pa_nick} to Members collection.`);
+    }
+  } else {
+    console.log(`Member ${req.body.pa_nick} already exists.`);
+  }
+
+
+
+
 
   //TODO: fix applicants so only 1 can exist
   //let applicant = await Applicant.findOne({telegram_user:telegramUser});
