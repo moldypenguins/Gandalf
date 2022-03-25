@@ -96,7 +96,7 @@
   },
   "devDependencies": {
     "node-sass": "^7.0.1",
-    "clean-css": "^5.2.2",
+    "clean-css": "^5.2.4",
     "debug": "^4.3.4",
     "eslint": "^8.2.0",
     "gulp": "^4.0.2",
