@@ -24,7 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="318793aa-8048-4f80-892e-a688e801ce15" name="Default Changelist" comment="updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/register.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,12 +53,16 @@
     </file-type-list>
   </component>
   <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="4" />
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
     <exe-path />
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
@@ -76,7 +80,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="true&#10;D:/Source/GitHub/MiddleEarth/config.js&#10;D:/Source/GitHub/MiddleEarth/Config.js" />
+    <property name="add_unversioned_files" value="true&#10;D:/Source/GitHub/MiddleEarth/config.js&#10;D:/Source/GitHub/MiddleEarth/Config.js&#10;D:/CR/GitHub/MiddleEarth/Config.js" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.17.1" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.17.1" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="$PROJECT_DIR$/node_modules/gulp" />
@@ -213,6 +217,29 @@
       <workItem from="1623535044478" duration="6148000" />
       <workItem from="1625107718067" duration="900000" />
       <workItem from="1625115452201" duration="14691000" />
+      <workItem from="1625301976623" duration="3650000" />
+      <workItem from="1625712214717" duration="10194000" />
+      <workItem from="1626015098869" duration="7709000" />
+      <workItem from="1626214240126" duration="7045000" />
+      <workItem from="1627145757848" duration="667000" />
+      <workItem from="1627146796290" duration="3578000" />
+      <workItem from="1628988390188" duration="180000" />
+      <workItem from="1628988590564" duration="62000" />
+      <workItem from="1628988679777" duration="82000" />
+      <workItem from="1628988775344" duration="10467000" />
+      <workItem from="1629702697044" duration="24015000" />
+      <workItem from="1629987959303" duration="21050000" />
+      <workItem from="1631142359744" duration="14294000" />
+      <workItem from="1632357613144" duration="26000" />
+      <workItem from="1635391997155" duration="2460000" />
+      <workItem from="1636817457975" duration="20738000" />
+      <workItem from="1636911363374" duration="39595000" />
+      <workItem from="1637191383845" duration="8800000" />
+      <workItem from="1637206499574" duration="8961000" />
+      <workItem from="1637375755333" duration="41315000" />
+      <workItem from="1639270691696" duration="6814000" />
+      <workItem from="1647986741972" duration="3622000" />
+      <workItem from="1648187477218" duration="8579000" />
     </task>
     <task id="LOCAL-00001" summary="update Frodo.js">
       <created>1605165325612</created>
@@ -286,7 +313,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
