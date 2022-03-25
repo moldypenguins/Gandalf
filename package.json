@@ -98,7 +98,7 @@
     "node-sass": "^7.0.1",
     "clean-css": "^5.2.4",
     "debug": "^4.3.4",
-    "eslint": "^8.2.0",
+    "eslint": "^8.11.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-cached": "^1.1.1",
