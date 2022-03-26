@@ -53,7 +53,7 @@ const { Context, Telegraf } = require('telegraf');
 const rateLimit = require('telegraf-ratelimit');
 //Set limit to 1 message per 3 seconds
 const limitConfig = {
-  window: 3000,
+  window: 1000,
   limit: 1,
   keyGenerator: (ctx) => {
     if(ctx.message && ctx.message.text && (ctx.message.text.startsWith(CFG.bot.private_cmd) || ctx.message.text.startsWith(CFG.bot.public_cmd))) {
