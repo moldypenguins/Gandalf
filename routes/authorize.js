@@ -58,19 +58,16 @@ router.get("/", async (req, res, next) => {
   if(checkSignature(req.query)) {
     //successful login
     let params = JSON.parse(JSON.stringify(req.query));
-
+    //console.log('PARAMS: ' + util.inspect(params, false, null, true));
     let telegramUser = await TelegramUser.findOneAndUpdate({telegram_id: params.id},{
       telegram_first_name:params.first_name,
       telegram_last_name:params.last_name,
       telegram_username:params.username,
       telegram_photo_url:params.photo_url,
     },{upsert:true, new:true});
-    //console.log('TGUSER: ' + util.inspect(telegramUser), false, null, true);
-
+    console.log('TGUSER: ' + util.inspect(telegramUser), false, null, true);
     let member = await Member.findOne({telegram_user:telegramUser});//.populate('telegram_user').populate('planet');
     //console.log('MEMBER: ' + util.inspect(member, false, null, true));
-
-    //console.log('PARAMS: ' + util.inspect(params, false, null, true));
     if (member) {
       //console.log('Is Member');
       req.session.member = member;
