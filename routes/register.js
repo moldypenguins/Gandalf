@@ -61,7 +61,7 @@ router.get("/", async (req, res, next) => {
  */
 router.post("/", async (req, res, next) => {
   console.log('POST VISITOR: ' + util.inspect(req.session.visitor, false, null, true));
-  if(req.body?.pa_nick !== undefined) {
+  if(req.body?.pa_nick !== undefined && req.body.pa_nick !== '') {
     if (!await TelegramUser.exists({telegram_id: req.session.visitor.id})) {
       await new TelegramUser({
         _id: Mordor.Types.ObjectId(),
