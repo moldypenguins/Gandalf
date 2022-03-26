@@ -7,23 +7,18 @@ header {
 }
 
 
-.navbar-nav {
-  background: transparent;
-
+nav.navbar {
   .nav-item {
     .nav-link {
       color: $col-offwhite
-
       i {
         color: $col-offwhite
       }
-
       &:hover {
         i {
           color: $col-white
         }
       }
-
     }
   }
 }
