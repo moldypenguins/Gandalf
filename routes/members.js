@@ -133,6 +133,10 @@ router.post('/', AXS.webHighCommandRequired, async(req, res, next) => {
 router.post('/applicants', AXS.webHighCommandRequired, async (req, res, next) => {
   console.log(util.inspect(req.body, false, null, true));
   if(req.body.accept !== undefined) {
+
+
+
+
     Applicant.findOne({id: req.body.accept}).then((applcnt) => {
       console.log('applcnt: ' + applcnt);
       if(applcnt) {

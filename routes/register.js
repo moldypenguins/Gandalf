@@ -84,13 +84,8 @@ router.post("/", async (req, res, next) => {
   } else {
     console.log(`Applicant ${req.body.pa_nick} already exists.`);
   }
-
-
-
-
-
-  //TODO: fix applicants so only 1 can exist
   //let applicant = await Applicant.findOne({telegram_user:telegramUser});
+  /*
   let applcnt = await new Applicant({
     _id: Mordor.Types.ObjectId(),
     telegram_id: req.session.visitor.id,
@@ -101,6 +96,7 @@ router.post("/", async (req, res, next) => {
   });
   await applcnt.save();
   console.log(applcnt.telegram_id + " saved to Applicants collection.");
+  */
   res.locals.visitor = undefined;
   req.session.applicant = applcnt;
   res.render('register', { applicant: applcnt});
