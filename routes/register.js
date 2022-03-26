@@ -61,45 +61,35 @@ router.get("/", async (req, res, next) => {
  */
 router.post("/", async (req, res, next) => {
   console.log('POST VISITOR: ' + util.inspect(req.session.visitor, false, null, true));
-
-  if(!await TelegramUser.exists({telegram_id:req.session.visitor.id})) {
-    await new TelegramUser({
-      _id:Mordor.Types.ObjectId(),
-      telegram_id: req.session.visitor.id,
-      telegram_username: req.session.visitor.username,
-      telegram_first_name: req.session.visitor.first_name,
-      telegram_last_name: req.session.visitor.last_name,
-      telegram_photo_url: req.session.visitor.photo_url !== undefined ? req.session.visitor.photo_url : '/images/member.jpg'
-    }).save();
-  }
-  let tg_user = await TelegramUser.findOne({telegram_id:req.session.visitor.id});
-  console.log('TGUSER: ' + util.inspect(tg_user, false, null, true));
-
-  if (!await Applicant.exists({telegram_user:tg_user})) {
-    if (await new Applicant({_id:Mordor.Types.ObjectId(), telegram_user:tg_user, access: 0, pa_nick:req.body.pa_nick}).save()) {
-      console.log(`Added ${req.body.pa_nick} to Applicants collection.`);
-    } else {
-      console.log(`Could not add ${req.body.pa_nick} to Applicants collection.`);
+  if(req.body?.pa_nick !== undefined) {
+    if (!await TelegramUser.exists({telegram_id: req.session.visitor.id})) {
+      await new TelegramUser({
+        _id: Mordor.Types.ObjectId(),
+        telegram_id: req.session.visitor.id,
+        telegram_username: req.session.visitor.username,
+        telegram_first_name: req.session.visitor.first_name,
+        telegram_last_name: req.session.visitor.last_name,
+        telegram_photo_url: req.session.visitor.photo_url !== undefined ? req.session.visitor.photo_url : '/images/member.jpg'
+      }).save();
     }
+    let tg_user = await TelegramUser.findOne({telegram_id: req.session.visitor.id});
+    console.log('TGUSER: ' + util.inspect(tg_user, false, null, true));
+
+    if (!await Applicant.exists({telegram_user: tg_user})) {
+      if (await new Applicant({_id: Mordor.Types.ObjectId(), telegram_user: tg_user, access: 0, pa_nick: req.body.pa_nick}).save()) {
+        console.log(`Added ${req.body.pa_nick} to Applicants collection.`);
+      } else {
+        console.log(`Could not add ${req.body.pa_nick} to Applicants collection.`);
+      }
+    } else {
+      console.log(`Applicant ${req.body.pa_nick} already exists.`);
+    }
+    res.locals.visitor = undefined;
+    req.session.applicant = await Applicant.findOne({telegram_user:telegramUser});
+    res.render('register', {applicant: req.session.applicant});
   } else {
-    console.log(`Applicant ${req.body.pa_nick} already exists.`);
+    res.render('register', {visitor: req.session.visitor});
   }
-  //let applicant = await Applicant.findOne({telegram_user:telegramUser});
-  /*
-  let applcnt = await new Applicant({
-    _id: Mordor.Types.ObjectId(),
-    telegram_id: req.session.visitor.id,
-    telegram_username: req.session.visitor.username,
-    telegram_first_name: req.session.visitor.first_name,
-    telegram_last_name: req.session.visitor.last_name,
-    telegram_photo_url: req.session.visitor.photo_url !== undefined ? req.session.visitor.photo_url : '/images/member.jpg'
-  });
-  await applcnt.save();
-  console.log(applcnt.telegram_id + " saved to Applicants collection.");
-  */
-  res.locals.visitor = undefined;
-  req.session.applicant = applcnt;
-  res.render('register', { applicant: applcnt});
 });
 
 

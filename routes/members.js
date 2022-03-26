@@ -141,6 +141,7 @@ router.post('/applicants', AXS.webHighCommandRequired, async (req, res, next) =>
           _id: Mordor.Types.ObjectId(),
           pa_nick: applcnt.pa_nick,
           telegram_user: applcnt.telegram_user,
+          parent: req.session.member.telegram_user,
           access: 0,
           roles:0,
           site_navigation: CFG.web.default_navigation,
@@ -151,7 +152,7 @@ router.post('/applicants', AXS.webHighCommandRequired, async (req, res, next) =>
             console.log(err);
             return;
           }
-          console.log(saved.username + " saved to Members collection.");
+          console.log(saved.pa_nick + " saved to Members collection.");
           Applicant.deleteOne({_id: req.body.accept}, function(err) {
             if (err) return console.error(err);
             res.redirect('/mem');
