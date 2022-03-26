@@ -226,8 +226,8 @@
                                         <img class="tg-pic" src="<% if(applicants[i].photo_url) { %><%= applicants[i].photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" alt=""/>
                                         <a href="tg://user?id=<%= applicants[i].telegram_user.telegram_id %>"><%= applicants[i].telegram_user.telegram_name %></a>
                                     </th>
-                                    <td><%= applicants[i].telegram_user.first_name %></td>
-                                    <td><%= applicants[i].telegram_user.last_name %></td>
+                                    <td><%= applicants[i].telegram_user.telegram_first_name %></td>
+                                    <td><%= applicants[i].telegram_user.telegram_last_name %></td>
                                 </tr>
                             <% } %>
                             </tbody>
