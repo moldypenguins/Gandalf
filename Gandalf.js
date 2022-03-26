@@ -66,7 +66,7 @@ const limitConfig = {
 
 Mordor.connection.once("open", () => {
   let bot = new Telegraf(CFG.bot.token, { telegram: { agent: null, webhookReply: false }, username: CFG.bot.username });
-  bot.use(rateLimit(limitConfig));
+  //bot.use(rateLimit(limitConfig));
 
   bot.use(async(ctx, next) => {
     //console.log('CHAT: id=' + ctx.message.chat.id + ' title=' + ctx.message.chat.title);
