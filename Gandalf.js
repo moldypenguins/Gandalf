@@ -111,9 +111,6 @@ Mordor.connection.once("open", () => {
   });
 
   function help(ctx, args, mem) {
-
-
-
     let commands = '<b>Commands:</b>\n' +
       '<b>help:</b> <i>Shows list of commands</i>\n' + 
       '<b>links:</b> <i>Shows web links</i>\n';
@@ -128,8 +125,9 @@ Mordor.connection.once("open", () => {
   
   function links(ctx) {
     ctx.replyWithHTML(`<a href="${CFG.web.uri}">${CFG.alliance.name}</a>\n` + 
-      //`<a href="https://status.${CFG.web.uri.substring(CFG.web.uri.indexOf('//') + 2)}">Web/Bot Status</a>\n` +
+
       `<a href="https://game.planetarion.com/">Planetarion</a>`);
+    /* `<a href="https://status.${CFG.web.uri.substring(CFG.web.uri.indexOf('//') + 2)}">Web/Bot Status</a>\n` + */
   }
   
   //bot.help(help);
