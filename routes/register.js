@@ -44,10 +44,10 @@ router.get("/", async (req, res, next) => {
     res.render('register', {});
   } else if(typeof(req.session.applicant) !== 'undefined') {
     if(req.session.applicant.rejected !== true) {
-      console.log('SESSION APPLICANT: ' + util.inspect(req.session.visitor, false, null, true));
+      console.log('SESSION APPLICANT: ' + util.inspect(req.session.applicant, false, null, true));
       res.render('register', {});
     } else {
-      console.log('SESSION REJECTED APPLICANT: ' + util.inspect(req.session.visitor, false, null, true));
+      console.log('SESSION REJECTED APPLICANT: ' + util.inspect(req.session.applicant, false, null, true));
       res.render('register', {});
     }
   } else {
