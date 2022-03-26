@@ -17,7 +17,7 @@
                     <form method='POST' action='/reg'>
                     <% } %>
                         <h2>Register</h2>
-                        <div class="justify-content-center">
+                        <p class="justify-content-center">
                             <% if(visitor !== undefined) { %>
                                 <img src="<%= visitor.photo_url %>" alt="profile" width="30" height="30" class="profile"/>
                                 <% if(visitor.username) { %>
@@ -37,20 +37,18 @@
                                     <%= applicant.first_name %>
                                 <% } %>
                             <% } %>
-                        </div>
-
-                        <div class="justify-content-center">
-                            <% if(visitor !== undefined) { %>
-                                <div class="input-group input-group-sm">
+                        </p>
+                        <% if(visitor !== undefined) { %>
+                            <p>
+                                <div class="input-group input-group-sm mx-auto w-50">
                                     <div class="input-group-prepend">
                                         <span id="label-pa_nick" class="input-group-text">PA Nick</span>
                                     </div>
                                     <input type="text" name="pa_nick" id="pa_nick" class="form-control" />
                                 </div>
-                            <% } %>
-                        </div>
-
-                        <div class="justify-content-center">
+                            </p>
+                        <% } %>
+                        <p class="justify-content-center">
                             <% if(visitor !== undefined) { %>
                                 <button class="tg-btn" type="submit">Register</button>
                             <% } else if(applicant !== undefined) { %>
@@ -60,7 +58,7 @@
                                     Your application has been received.
                                 <% } %>
                             <% } %>
-                        </div>
+                        </p>
                     <% if(visitor !== undefined) { %>
                     </form>
                     <% } %>
