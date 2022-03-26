@@ -138,11 +138,12 @@ Mordor.connection.once("open", () => {
     if(ctx.message && ctx.message.text && ctx.message.entities && Array.isArray(ctx.message.entities)) {
       for(let entity in ctx.message.entities) {
         if(ctx.message.entities[entity].type === 'url') {
+          console.log('URL: ' + ctx.message.text.substring(ctx.message.entities[entity].offset, ctx.message.entities[entity].length));
           /*
           let scanurl = new URL(ctx.message.text.substring(ctx.message.entities[entity].offset, ctx.message.entities[entity].length));
           console.log('SCANURL: ' + util.inspect(scanurl.searchParams, true, null, true));
 
-          if(scanurl.hostname === 'planetarion.com') {
+          if(scanurl.hostname === 'game.planetarion.com') {
             //let scanurl = url.parse(ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length), true);
             let page_content = await getStream(scanurl.href);
             if (scanurl.searchParams.get('scan_id') !== undefined && !await Scan.exists({scan_id: scanurl.searchParams.get('scan_id')})) {
