@@ -88,7 +88,7 @@ router.post("/", async (req, res, next) => {
     req.session.applicant = await Applicant.findOne({telegram_user:tg_user});
     res.render('register', {applicant: req.session.applicant});
   } else {
-    res.render('register', {visitor: req.session.visitor});
+    res.render('register', {visitor: req.session.visitor, error: 'Please enter a PA Nickname.'});
   }
 });
 
