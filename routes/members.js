@@ -82,6 +82,11 @@ router.get('/', AXS.webMemberRequired, async (req, res, next) => {
     }
     m.accessRoles = rolesString.join(', ');
   });
+  apps.forEach((a) => {
+    if (a.telegram_user) {
+      a.telegram_user.telegram_name = FNCS.getTelegramName(a.telegram_user);
+    }
+  });
   glm8s.forEach((gm8) => {
     if(gm8.telegram_user) {
       gm8.telegram_user.telegram_name = FNCS.getTelegramName(gm8.telegram_user);
