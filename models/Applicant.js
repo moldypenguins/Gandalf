@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Applicant.js
- * @version 2021/05/25
+ * @version 2022/03/25
  * @summary Mongoose Model
  **/
 'use strict';
@@ -26,6 +26,7 @@ const Mordor = require('../Mordor');
 
 let ApplicantSchema = new Mordor.Schema({
   _id:           {type:Mordor.Schema.Types.ObjectId, required:true},
+  pa_nick:       {type:String, trim:true, required:true},
   telegram_user: {type:Mordor.Schema.Types.ObjectId, ref:'TelegramUser'},
   rejected:      {type:Boolean},
 });

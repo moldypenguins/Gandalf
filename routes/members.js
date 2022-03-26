@@ -37,6 +37,7 @@ let router = express.Router();
 const moment = require('moment');
 const util = require('util');
 const FNCS = require("../Functions");
+const Mordor = require("../Mordor");
 const client = require('twilio')(CFG.twilio.sid, CFG.twilio.secret);
 //var VoiceResponse = twilio.twiml.VoiceResponse;
 
@@ -44,7 +45,7 @@ router.get('/', AXS.webMemberRequired, async (req, res, next) => {
   let mems = await Member.find().populate('telegram_user').populate('planet');
   //let plnts = await Planet.find();
   let inact = await Inactive.find().populate('telegram_user');
-  let apps = await Applicant.find().populate('telegram_user');
+  let apps = await Applicant.find({rejected: {$ne: true}}).populate('telegram_user');
   let glm8s = await GalMate.find().populate('telegram_user');
   mems.forEach((m) => {
     if(m.telegram_user) {
@@ -133,19 +134,13 @@ router.post('/', AXS.webHighCommandRequired, async(req, res, next) => {
 router.post('/applicants', AXS.webHighCommandRequired, async (req, res, next) => {
   console.log(util.inspect(req.body, false, null, true));
   if(req.body.accept !== undefined) {
-
-
-
-
-    Applicant.findOne({id: req.body.accept}).then((applcnt) => {
+    Applicant.findById(req.body.accept).then((applcnt) => {
       console.log('applcnt: ' + applcnt);
       if(applcnt) {
         let mem = new Member({
-          _id: applcnt.id,
-          username: applcnt.username,
-          first_name: applcnt.first_name,
-          last_name: applcnt.last_name,
-          photo_url: applcnt.photo_url,
+          _id: Mordor.Types.ObjectId(),
+          pa_nick: applcnt.pa_nick,
+          telegram_user: applcnt.telegram_user,
           access: 0,
           roles:0,
           site_navigation: CFG.web.default_navigation,
@@ -157,7 +152,7 @@ router.post('/applicants', AXS.webHighCommandRequired, async (req, res, next) =>
             return;
           }
           console.log(saved.username + " saved to Members collection.");
-          Applicant.deleteOne({id: req.body.accept}, function(err) {
+          Applicant.deleteOne({_id: req.body.accept}, function(err) {
             if (err) return console.error(err);
             res.redirect('/mem');
           });
