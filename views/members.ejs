@@ -223,19 +223,11 @@
                                         </form>
                                     </td>
                                     <th scope="row">
-                                        <img src="<% if(applicants[i].photo_url) { %><%= applicants[i].photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" class="tg-pic"/>
-                                        <% if(applicants[i].username) { %>
-                                            <a href="https://t.me/<%= applicants[i].username %>">
-                                                <%= applicants[i].username %>
-                                            </a>
-                                        <% } else if(applicants[i].last_name) { %>
-                                            <%= applicants[i].first_name %> <%= applicants[i].last_name %>
-                                        <% } else { %>
-                                            <%= applicants[i].first_name %>
-                                        <% } %>
+                                        <img class="tg-pic" src="<% if(applicants[i].photo_url) { %><%= applicants[i].photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" alt=""/>
+                                        <a href="tg://user?id=<%= applicants[i].telegram_user.telegram_id %>"><%= applicants[i].telegram_user.telegram_name %></a>
                                     </th>
-                                    <td><%= applicants[i].first_name %></td>
-                                    <td><%= applicants[i].last_name %></td>
+                                    <td><%= applicants[i].telegram_user.first_name %></td>
+                                    <td><%= applicants[i].telegram_user.last_name %></td>
                                 </tr>
                             <% } %>
                             </tbody>
