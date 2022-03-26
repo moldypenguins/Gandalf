@@ -16,32 +16,20 @@
             <div class="col-xl-3 col-lg-2 col-md-1 col-sm-0"></div>
             <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12">
                 <div class="content">
-                    <% if(visitor !== undefined) { %>
+                    <% if(typeof(visitor) !== 'undefined') { %>
                     <form method='POST' action='/reg'>
                     <% } %>
                         <h2>Register</h2>
                         <p class="justify-content-center">
-                            <% if(visitor !== undefined) { %>
-                                <img src="<%= visitor.photo_url %>" alt="profile" width="30" height="30" class="profile"/>
-                                <% if(visitor.username) { %>
-                                    <a href="https://t.me/<%= visitor.username %>"><%= visitor.username %></a>
-                                <% } else if(visitor.last_name) { %>
-                                    <%= visitor.first_name %> <%= visitor.last_name %>
-                                <% } else { %>
-                                    <%= visitor.first_name %>
-                                <% } %>
-                            <% } else if(applicant !== undefined) { %>
-                                <img src="<%= applicant.photo_url %>" alt="profile" width="30" height="30" class="profile"/>
-                                <% if(applicant.username) { %>
-                                    <a href="https://t.me/<%= applicant.username %>"><%= applicant.username %></a>
-                                <% } else if(applicant.last_name) { %>
-                                    <%= applicant.first_name %> <%= applicant.last_name %>
-                                <% } else { %>
-                                    <%= applicant.first_name %>
-                                <% } %>
+                            <% if(typeof(visitor) !== 'undefined') { %>
+                                <img src="<%= visitor.telegram_user.telegram_photo_url %>" alt="profile" width="30" height="30" class="profile"/>
+                                <a href="tg://user?id=<%= visitor.telegram_user.telegram_id %>"><%= visitor.telegram_user.telegram_name %></a>
+                            <% } else if(typeof(applicant) !== 'undefined') { %>
+                                <img src="<%= applicant.telegram_user.telegram_photo_url %>" alt="profile" width="30" height="30" class="profile"/>
+                                <a href="tg://user?id=<%= applicant.telegram_user.telegram_id %>"><%= applicant.telegram_user.telegram_name %></a>
                             <% } %>
                         </p>
-                        <% if(visitor !== undefined) { %>
+                        <% if(typeof(visitor) !== 'undefined') { %>
                             <p>
                                 <div class="input-group input-group-sm mx-auto w-50">
                                     <div class="input-group-prepend">
@@ -52,9 +40,9 @@
                             </p>
                         <% } %>
                         <p class="justify-content-center">
-                            <% if(visitor !== undefined) { %>
+                            <% if(typeof(visitor) !== 'undefined') { %>
                                 <button class="tg-btn" type="submit">Register</button>
-                            <% } else if(applicant !== undefined) { %>
+                            <% } else if(typeof(applicant) !== 'undefined') { %>
                                 <% if(applicant.rejected) { %>
                                     Your application has been rejected.
                                 <% } else { %>
