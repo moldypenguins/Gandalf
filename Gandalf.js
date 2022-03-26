@@ -138,32 +138,33 @@ Mordor.connection.once("open", () => {
     if(ctx.message && ctx.message.text && ctx.message.entities && Array.isArray(ctx.message.entities)) {
       for(let entity in ctx.message.entities) {
         if(ctx.message.entities[entity].type === 'url') {
-          let scanurl = new URL(ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length));
+          let scanurl = new URL(ctx.message.text.substring(ctx.message.entities[entity].offset, ctx.message.entities[entity].length));
           console.log('SCANURL: ' + util.inspect(scanurl.searchParams, true, null, true));
-
-          //let scanurl = url.parse(ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length), true);
-          let page_content = await getStream(scanurl.href);
-          if(scanurl.searchParams.get('scan_id') !== undefined && !await Scan.exists({scan_id:scanurl.searchParams.get('scan_id')})) {
-            //scan
-            try {
-              let result = await Scan.parse(ctx.message.from.id, scanurl.searchParams.get('scan_id'), null, page_content);
-              //console.log('SUCCESS: ' + result);
-            } catch(err) {
-              console.log('ERROR: ' + err);
+          if(scanurl.hostname === 'planetarion.com') {
+            //let scanurl = url.parse(ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length), true);
+            let page_content = await getStream(scanurl.href);
+            if (scanurl.searchParams.get('scan_id') !== undefined && !await Scan.exists({scan_id: scanurl.searchParams.get('scan_id')})) {
+              //scan
+              try {
+                let result = await Scan.parse(ctx.message.from.id, scanurl.searchParams.get('scan_id'), null, page_content);
+                //console.log('SUCCESS: ' + result);
+              } catch (err) {
+                console.log('ERROR: ' + err);
+              }
             }
-          }
-          if(scanurl.searchParams.get('scan_grp') !== undefined) {
-            //group
-            let scans = page_content.split("<hr>");
-            for(let i = 1; i < scans.length; i++) {
-              let m = scans[i].match(/scan_id=([0-9a-zA-Z]+)/i);
-              if(m != null  && !await Scan.exists({scan_id:m[1]})) {
-                //console.log('M: ' +  util.inspect(m, false, null, true));
-                try {
-                  let result = await Scan.parse(ctx.message.from.id, m[1], scanurl.searchParams.get('scan_grp'), scans[i]);
-                  //console.log('SUCCESS: ' + result);
-                } catch(err) {
-                  console.log('ERROR: ' + err);
+            if (scanurl.searchParams.get('scan_grp') !== undefined) {
+              //group
+              let scans = page_content.split("<hr>");
+              for (let i = 1; i < scans.length; i++) {
+                let m = scans[i].match(/scan_id=([0-9a-zA-Z]+)/i);
+                if (m != null && !await Scan.exists({scan_id: m[1]})) {
+                  //console.log('M: ' +  util.inspect(m, false, null, true));
+                  try {
+                    let result = await Scan.parse(ctx.message.from.id, m[1], scanurl.searchParams.get('scan_grp'), scans[i]);
+                    //console.log('SUCCESS: ' + result);
+                  } catch (err) {
+                    console.log('ERROR: ' + err);
+                  }
                 }
               }
             }
