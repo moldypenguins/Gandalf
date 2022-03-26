@@ -27,8 +27,14 @@ const Mordor = require('../Mordor');
 let ApplicantSchema = new Mordor.Schema({
   _id:           {type:Mordor.Schema.Types.ObjectId, required:true},
   pa_nick:       {type:String, trim:true, required:true},
-  telegram_user: {type:Mordor.Schema.Types.ObjectId, ref:'TelegramUser'},
+  telegram_user: {type:Mordor.Schema.Types.ObjectId, ref:'TelegramUser', autopopulate:true},
   rejected:      {type:Boolean},
 });
+
+ApplicantSchema.statics.findByTelegramUser = async function(telegram_user) {
+  return await this.findOne({telegram_user: telegram_user});
+}
+
+ApplicantSchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = Mordor.model('Applicant', ApplicantSchema, 'Applicants');
