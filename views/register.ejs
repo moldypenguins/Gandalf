@@ -8,7 +8,7 @@
     <%- include("templates/header"); %>
 </header>
 <main>
-    <% if(error !== undefined && error !== '') { %>
+    <% if(typeof(error) !== 'undefined' && error !== '') { %>
         <div class="alert alert-danger" role="alert"><strong>Error:</strong> <%= error %>.</div>
     <% } %>
     <div class="container-fluid">
