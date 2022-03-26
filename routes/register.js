@@ -85,7 +85,7 @@ router.post("/", async (req, res, next) => {
       console.log(`Applicant ${req.body.pa_nick} already exists.`);
     }
     res.locals.visitor = undefined;
-    req.session.applicant = await Applicant.findOne({telegram_user:telegramUser});
+    req.session.applicant = await Applicant.findOne({telegram_user:tg_user});
     res.render('register', {applicant: req.session.applicant});
   } else {
     res.render('register', {visitor: req.session.visitor});
