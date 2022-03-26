@@ -140,6 +140,7 @@ Mordor.connection.once("open", () => {
         if(ctx.message.entities[entity].type === 'url') {
           let scanurl = new URL(ctx.message.text.substring(ctx.message.entities[entity].offset, ctx.message.entities[entity].length));
           console.log('SCANURL: ' + util.inspect(scanurl.searchParams, true, null, true));
+          /*
           if(scanurl.hostname === 'planetarion.com') {
             //let scanurl = url.parse(ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length), true);
             let page_content = await getStream(scanurl.href);
@@ -169,6 +170,7 @@ Mordor.connection.once("open", () => {
               }
             }
           }
+          */
         }
       }
     }
