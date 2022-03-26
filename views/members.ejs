@@ -203,6 +203,7 @@
                                 <th scope="col">Username (<%= applicants.length %>)</th>
                                 <th scope="col">First Name</th>
                                 <th scope="col">Last Name</th>
+                                <th scope="col">PA Nick</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -228,6 +229,7 @@
                                     </th>
                                     <td><%= applicants[i].telegram_user.telegram_first_name %></td>
                                     <td><%= applicants[i].telegram_user.telegram_last_name %></td>
+                                    <td><%= applicants[i].pa_nick %></td>
                                 </tr>
                             <% } %>
                             </tbody>
