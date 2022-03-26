@@ -53,7 +53,7 @@ const { Context, Telegraf } = require('telegraf');
 const rateLimit = require('telegraf-ratelimit');
 //Set limit to 1 message per 3 seconds
 const limitConfig = {
-  window: 1000,
+  window: 3000,
   limit: 1,
   keyGenerator: (ctx) => {
     if(ctx.message && ctx.message.text && (ctx.message.text.startsWith(CFG.bot.private_cmd) || ctx.message.text.startsWith(CFG.bot.public_cmd))) {
@@ -66,7 +66,7 @@ const limitConfig = {
 
 Mordor.connection.once("open", () => {
   let bot = new Telegraf(CFG.bot.token, { telegram: { agent: null, webhookReply: false }, username: CFG.bot.username });
-  //bot.use(rateLimit(limitConfig));
+  bot.use(rateLimit(limitConfig));
 
   bot.use(async(ctx, next) => {
     //console.log('CHAT: id=' + ctx.message.chat.id + ' title=' + ctx.message.chat.title);
