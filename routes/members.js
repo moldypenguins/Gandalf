@@ -45,7 +45,7 @@ router.get('/', AXS.webMemberRequired, async (req, res, next) => {
   let mems = await Member.find().populate('telegram_user').populate('planet');
   //let plnts = await Planet.find();
   let inact = await Inactive.find().populate('telegram_user');
-  let apps = await Applicant.find({rejected: {$ne: true}}).populate('telegram_user');
+  let apps = await Applicant.find().populate('telegram_user');
   let glm8s = await GalMate.find().populate('telegram_user');
   mems.forEach((m) => {
     if(m.telegram_user) {
