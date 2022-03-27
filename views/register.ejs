@@ -21,13 +21,7 @@
                     <% } %>
                         <h2>Register</h2>
                         <p class="justify-content-center">
-                            <% if(typeof(visitor) !== 'undefined') { %>
-                                <img src="<%= visitor.telegram_user.telegram_photo_url %>" alt="profile" width="30" height="30" class="profile"/>
-                                <a href="tg://user?id=<%= visitor.telegram_user.telegram_id %>"><%= visitor.telegram_user.telegram_name %></a>
-                            <% } else if(typeof(applicant) !== 'undefined') { %>
-                                <img src="<%= applicant.telegram_user.telegram_photo_url %>" alt="profile" width="30" height="30" class="profile"/>
-                                <a href="tg://user?id=<%= applicant.telegram_user.telegram_id %>"><%= applicant.telegram_user.telegram_name %></a>
-                            <% } %>
+
                         </p>
                         <% if(typeof(visitor) !== 'undefined') { %>
                             <p>
