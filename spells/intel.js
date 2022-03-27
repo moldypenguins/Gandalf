@@ -190,13 +190,13 @@ if (args.alliance) {
 console.log(`finding alliance by name ${args.alliance}`);
 // let alliance = await Alliance.findByName(args.alliance);
 let alliance = await Alliance.findOne({"name": new RegExp(args.alliance, 'i')});
-console.log(alliance._id);
-console.log(alliance.name);
+//console.log(alliance._id);
+//console.log(alliance.name);
 if (!alliance) {
 return `No alliance found for ${args.alliance}!!`;
 }
 
-intel.alliance_id = alliance._id;
+intel.alliance_id = 5;
 console.log(intel);
 }
 
