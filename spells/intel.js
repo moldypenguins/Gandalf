@@ -75,8 +75,8 @@ const PLANET_COORD_TYPE = 0, GALAXY_COORD_TYPE = 1;
 function parseArgs(args) {
 // coords will always be 0
 let coords = FNCS.parseCoords(args[0]); // may be gal 1.2.* or planet 1.2.3
-let type = FNCS.coordType(coords);
-let rval = {coords: coords, type: type};
+//let type = FNCS.coordType(coords);
+let rval = {coords: coords};//, type: type};
 
 // display
 if (args.length === 1) {
