@@ -111,38 +111,40 @@ var Ships_stop = (args) => {
     var number = numeral(_number).value();
     if(number == null) { reject(`${_number} is not a valid number`); }
 
-    if(typeof(_ship) === 'undefined' || _ship === '') { reject(`${_ship} is not a valid ship`); }
+    if(_ship === undefined || _ship === '')
+    {
+      reject(`${_ship} is not a valid ship`);
+    }else {
+      Ship.find().then((ships) => {
+        var ship = ships.find(s => s.name.toLowerCase().startsWith(_ship.toLowerCase()));
+        if (!ship) {
+          reject(`Cannot find ship ${_ship}`);
+        }
 
-
-    Ship.find().then((ships) => {
-      var ship = ships.find(s => s.name.toLowerCase().startsWith(_ship.toLowerCase()));
-      if (!ship) {
-        reject(`Cannot find ship ${_ship}`);
-      }
-
-      // TODO: stop structure killers / roiders
-      var ships_who_target_class = ships.filter(s => s.target1 == ship.class || s.target2 == ship.class || s.target3 == ship.class);
-      var message = `To stop <b>${numeral(number).format('0a')} ${ship.name}</b> (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / PA.numbers.ship_value).format('0a') }) you'll need:\n`;
-      if(ships_who_target_class) {
-        var results = ships_who_target_class.map(function(shiptarget) {
-          let target = shiptarget.target1 == ship.class ? "target1" : shiptarget.target2 == ship.class ? "target2" : "target3";
-          let efficiency = PA.ships.targeteffs[target];
-          switch(shiptarget.type.toLowerCase()) {
-            case 'emp':
-	            let empnumber = Math.trunc((Math.ceil(number/((100-(+ship.empres))/100)/(+shiptarget.guns)))/efficiency);
-              return (`${numeral(empnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(empnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / PA.numbers.ship_value).format('0a') })`);
-            default:
-              let targetnumber = Math.trunc((ship.armor * number) / shiptarget.damage / efficiency);
-              if (shiptarget.initiative > ship.initiative) {
-                targetnumber += Math.trunc(efficiency * shiptarget.damage / ship.armor);
-              }
-              return (`${numeral(targetnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(targetnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / PA.numbers.ship_value).format('0a') })`);
-          }
-        });
-      }
-      message += results.join("; ");
-      resolve(message);
-    });
+        // TODO: stop structure killers / roiders
+        var ships_who_target_class = ships.filter(s => s.target1 == ship.class || s.target2 == ship.class || s.target3 == ship.class);
+        var message = `To stop <b>${numeral(number).format('0a')} ${ship.name}</b> (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / PA.numbers.ship_value).format('0a')}) you'll need:\n`;
+        if (ships_who_target_class) {
+          var results = ships_who_target_class.map(function (shiptarget) {
+            let target = shiptarget.target1 == ship.class ? "target1" : shiptarget.target2 == ship.class ? "target2" : "target3";
+            let efficiency = PA.ships.targeteffs[target];
+            switch (shiptarget.type.toLowerCase()) {
+              case 'emp':
+                let empnumber = Math.trunc((Math.ceil(number / ((100 - (+ship.empres)) / 100) / (+shiptarget.guns))) / efficiency);
+                return (`${numeral(empnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(empnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / PA.numbers.ship_value).format('0a')})`);
+              default:
+                let targetnumber = Math.trunc((ship.armor * number) / shiptarget.damage / efficiency);
+                if (shiptarget.initiative > ship.initiative) {
+                  targetnumber += Math.trunc(efficiency * shiptarget.damage / ship.armor);
+                }
+                return (`${numeral(targetnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(targetnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / PA.numbers.ship_value).format('0a')})`);
+            }
+          });
+        }
+        message += results.join("; ");
+        resolve(message);
+      });
+    }
   });
 };
 
