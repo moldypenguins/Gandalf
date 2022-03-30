@@ -111,8 +111,11 @@ var Ships_stop = (args) => {
     var number = numeral(_number).value();
     if(number == null) { reject(`${_number} is not a valid number`); }
 
+    if(typeof(_ship) === 'undefined' || _ship === '') { reject(`${_ship} is not a valid ship`); }
+
+
     Ship.find().then((ships) => {
-      var ship = ships.find(s => s.name.toLowerCase().startsWith(_ship.toLowerCase()) );
+      var ship = ships.find(s => s.name.toLowerCase().startsWith(_ship.toLowerCase()));
       if (!ship) {
         reject(`Cannot find ship ${_ship}`);
       }
