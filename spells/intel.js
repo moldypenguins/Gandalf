@@ -178,7 +178,7 @@ return `You can't set intel for an entire galaxy gtfo.`;
 let coords = args.coords;
 let planet = await Planet.findOne({ x: coords.x, y: coords.y, z: coords.z});
 if (!planet) {
-return `No planet found for ${x}:${y}:${z}!!`;
+return `No planet found`; // for ${x}:${y}:${z}!!`;
 }
 
 let intel = await Intel.findOne({planet_id: planet.id});
