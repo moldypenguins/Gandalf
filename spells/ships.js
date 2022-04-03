@@ -50,7 +50,7 @@ let Ships_eff = (args) => {
     if(number == null) { reject(`${_number} is not a valid number`); }
     //if(!Object.keys(PA.ships.targets).includes(_target.toLowerCase())) { reject(`${_target} is not a valid target`); }
     //let target = PA.ships.targets[_target.toLowerCase()];
-
+    if(_ship == null) { reject(`${_ship} is not a valid ship`); }
     let ship = await Ship.findOne({$where:`this.name.toLowerCase().startsWith("${_ship.toLowerCase()}")`});
     //console.log("SHIP: " + util.inspect(ship, false, null, true));
     //let ship = ships.find(s => s.name.toLowerCase().startsWith(_ship.toLowerCase()) );
