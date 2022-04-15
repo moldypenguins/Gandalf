@@ -29,9 +29,9 @@
 ## Requirements
 [![Ubuntu](https://img.shields.io/static/v1?style=for-the-badge&logo=Ubuntu&label=Ubuntu&message=v20.04&color=E95420)](https://ubuntu.com/) 
 [![Fail2ban](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=Fail2ban&message=v0.11.1&color=FCC624)](https://www.fail2ban.org/) 
-[![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=v4.2&color=47A248)](https://www.mongodb.com/) 
-[![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=v16.13.0&color=339933)](https://nodejs.org/) 
-[![NPM](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=NPM&message=v8.1.0&color=CB3837)](https://www.npmjs.com/)  
+[![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=v5.0.7&color=47A248)](https://www.mongodb.com/) 
+[![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=v16.14.2&color=339933)](https://nodejs.org/) 
+[![NPM](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=NPM&message=v8.5.0&color=CB3837)](https://www.npmjs.com/)  
 
 ### Node Packages
 [![@awaitjs/express](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/@awaitjs/express?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/%40awaitjs/express)
