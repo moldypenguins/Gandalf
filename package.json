@@ -85,7 +85,7 @@
     "mongoose-sequence": "^5.3.1",
     "morgan": "~1.10.0",
     "node-schedule": "^2.1.0",
-    "nodemon": "^2.0.15",
+    "nodemon": "^2.0.16",
     "numeral": "^2.0.6",
     "socket.io": "^4.5.0",
     "telegraf": "^4.7.0",
