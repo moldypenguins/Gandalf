@@ -1,0 +1,18 @@
+header {
+  background: $col-background;
+  border-bottom: 1px solid rgba(green, .1);
+  box-shadow: 0 0 8px 2px rgba(0,0,0,0.25);
+}
+
+nav {
+  .navbar-brand {
+    color: green !important;
+
+  }
+  .navbar-nav .nav-link {
+    color: green !important;
+    i {
+      color: green;
+    }
+  }
+}

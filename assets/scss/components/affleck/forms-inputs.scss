@@ -1,0 +1,191 @@
+/*# PHONE FLAGS ################################################################################*/
+.iti__flag {
+  background-image: url("../flags/flags.png");
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag { background-image: url("../flags/flags@2x.png"); }
+}
+.iti--allow-dropdown {
+  flex: 1 1 auto !important;
+}
+.iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
+  background-color: #343a400d;
+}
+.iti__selected-flag:focus {
+  outline: none;
+  background-color: #343a4033 !important;
+}
+.iti input, .iti input[type=tel], .iti input[type=text] {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  font-size: .8rem;
+  line-height: 1rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+
+/*# FORM ELEMENTS ################################################################################*/
+.form-label {
+  position: relative;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  min-width: 0;
+  margin-bottom: 0;
+  display: block;
+  width: 100%;
+  /* height: calc(1.5em + .75rem + 2px); */
+  padding: .275rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.label {
+  margin: 0;
+}
+
+.input-group-sm {
+  > .form-select,
+  > .form-control {
+    font-size: .8rem;
+    line-height: 1rem;
+  }
+
+  > .input-group-append,
+  > .input-group-prepend {
+    > .btn,
+    > .input-group-text {
+      font-size: .6rem;
+      line-height: .8rem;
+      @include respond-above(xs) {
+        font-size: .8rem;
+        line-height: 1rem;
+      }
+      @include respond-above(md) {
+        font-size: .8rem;
+        line-height: 1rem;
+      }
+    }
+  }
+}
+
+.input-group {
+  flex-wrap: nowrap;
+
+  //> .input-group-append {
+  //&:last-child {
+  //  .input-group-text {
+  //	&:not(:last-child) {
+  //	  border-color: $col-black;
+  //	  background-color: #343a40;
+  //	  color: #fff;
+  //	}
+  //  }
+  //}
+  //
+  //&:not(:last-child) > [class^="input-group-"] {
+  //  border-color: $col-black;
+  //  background-color: #343a40;
+  //  color: #fff;
+  //}
+  //}
+
+  > .input-group-prepend {
+    > [class^="input-group-"] {
+      border: 1px solid $col-black;
+      background-color: #343a40;
+      color: #fff;
+      font-weight: bold;
+      width: 100%;
+      padding: .25rem .5rem;
+      border-radius: .2rem 0 0 .2rem;
+      display: flex;
+      align-items: center;
+      font-size: .6rem;
+      line-height: .8rem;
+      @include respond-above(xs) {
+        font-size: .8rem;
+        line-height: 1rem;
+      }
+      @include respond-above(md) {
+        font-size: .8rem;
+        line-height: 1rem;
+      }
+    }
+  }
+}
+
+
+.center-form {
+  width: 0;
+  @include respond-above(md) {
+    width: 15%;
+  }
+}
+
+
+.input-group-prepend {
+  width: 100px;
+
+}
+
+
+input,
+select,
+textarea {
+  &:focus {
+    border-color: $col-black !important;
+    outline: 0 !important;
+    box-shadow: inset 0 0 4px 0 rgba($col-black, .25) !important;
+  }
+}
+
+
+.dropdown {
+  width: inherit;
+
+  .btn {
+    width: 100%;
+    text-align: left;
+  }
+
+  .dropdown-toggle {
+    &:after {
+      float: right;
+      margin-top: 10px;
+      margin-left: unset;
+    }
+  }
+
+  .input-group-sm {
+    .dropdown-toggle {
+      &:after {
+        margin-top: 6px;
+      }
+    }
+  }
+}
+
+
+/*# DROPDOWNS ################################################################################*/
+
+
+.dropdown-header {
+  padding: 0 .5rem .5rem .5rem;
+  font-size: .875rem;
+}
+.dropdown-divider {
+  margin: .5rem .75rem;
+}
+.dropdown-item {
+  padding: 0 .5rem;
+  font-size: 0.875rem;
+
+  input {
+    vertical-align: middle;
+  }
+}
+
+
+

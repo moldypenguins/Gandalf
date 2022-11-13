@@ -1,0 +1,61 @@
+//
+// variables for the skin
+//
+$text-huge: 1.2rem;
+$text-large: 1rem;
+$text-default: .9rem;
+$text-medium: .8rem;
+$text-small: .75rem;
+//
+$font-default: "Droid Sans", Roboto, Arial, sans-serif;
+//
+$col-primary: #52a5f8;
+$col-primary-dark: darken($col-primary, 20%);
+$col-secondary: #54a9eb;
+$col-secondary-alt: darken($col-secondary, 3%);
+$col-accent:#FFD700;
+//
+$col-white: #fff;
+$col-offwhite: #ccc;
+$col-grey: #888;
+$col-black: #202020;
+$col-black-light: #4d5154;
+$col-black-medium: #384147;
+$col-black-dark: #010304;
+//
+$col-background: #1a222c;
+$col-links: $col-primary;
+$col-links-hover: $col-black;
+$col-text: $col-offwhite;
+$col-bg-th: #171e27;
+//
+
+//
+$col-progress-completed: #378059;
+$col-progress-expected: rgba(#FAC05E, .4);
+
+//
+$col-black: #454d55;
+//
+$col-terran: #a18181;
+$col-cathaar: #4d88bc;
+$col-xandathrii: #2ba87e;
+$col-zikonian: #c93716;
+$col-eitraides: #a76cc3;
+//
+$col-negative: red;
+$col-broken: red;
+$col-neutral: yellow;
+$col-positive: green;
+$col-own: blue;
+//
+$col-killed: #f44;
+$col-emp: #41c9ff;
+$col-stolen: orange;
+//
+$col-gc: #0080ff;
+$col-moc: #8081ff;
+$col-mow: #f44;
+$col-mod: #00b500;
+//
+$col-bash: orange;
