@@ -1,86 +1,305 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b4df756-377a-48de-bf3d-eae10a4430cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MiddleEarth.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/AllianceDump.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/DiscordGuild.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/DiscordUser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/GalaxyDump.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/Member.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/PlanetDump.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/TelegramChat.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/TelegramUser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/bg/affleck.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/bg/shamrock.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/bg/telegram.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/bg/thematrix.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/bg/ultimate.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/logo/affleck.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/logo/shamrock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/logo/telegram.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/logo/thematrix.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/logo/ultimate.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/member.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spells/launch.ds" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spells/launch.tg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bilbo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frodo.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frodo.js" afterDir="false" />
+    <list default="true" id="318793aa-8048-4f80-892e-a688e801ce15" name="Default Changelist" comment="updates">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gandalf.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/default.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/default.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Tick.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Tick.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spells/tick.ds" beforeDir="false" afterPath="$PROJECT_DIR$/spells/tick.ds" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spells/tick.tg" beforeDir="false" afterPath="$PROJECT_DIR$/spells/tick.tg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Applicant.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Applicant.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="4" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2GWrPEQVuGdYcij0jx5XbyUaIhd" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProjectId" id="1kA6aifW9LpawLbfzIcatuxQ3uO" />
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;16.18.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;16.18.0&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Other File Types&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\craig\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\222.4345.14\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  }
-}</component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="true&#10;D:/Source/GitHub/MiddleEarth/config.js&#10;D:/Source/GitHub/MiddleEarth/Config.js&#10;D:/CR/GitHub/MiddleEarth/Config.js" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.17.1" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.17.1" />
+    <property name="js.buildTools.gulp.gulp_package_dir" value="$PROJECT_DIR$/node_modules/gulp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.stylelint" value="true" />
+    <property name="node.js.path.for.package.stylelint" value="project" />
+    <property name="node.js.selected.package.stylelint" value="" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="ts.external.directory.path" value="D:\Program Files\JetBrains\WebStorm 2020.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Source\GitHub\MiddleEarth\assets\scss\components\affleck" />
+      <recent name="D:\Source\GitHub\MiddleEarth\assets\scss\components\dark" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Source\GitHub\MiddleEarth\assets\scss\components\global" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="js.build_tools.gulp">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile>$PROJECT_DIR$/gulpfile.js</gulpfile>
+      <tasks>
+        <task>watch</task>
+      </tasks>
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="watch" type="js.build_tools.gulp" temporary="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile>$PROJECT_DIR$/gulpfile.js</gulpfile>
+      <tasks>
+        <task>watch</task>
+      </tasks>
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gulp.js.watch" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7b4df756-377a-48de-bf3d-eae10a4430cb" name="Changes" comment="" />
-      <created>1666515156401</created>
+      <changelist id="318793aa-8048-4f80-892e-a688e801ce15" name="Default Changelist" comment="" />
+      <created>1605131119768</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1666515156401</updated>
-      <workItem from="1666515157671" duration="11907000" />
-      <workItem from="1666655293261" duration="45454000" />
-      <workItem from="1667743157162" duration="58017000" />
+      <updated>1605131119768</updated>
+      <workItem from="1605131124955" duration="5343000" />
+      <workItem from="1605151808838" duration="2847000" />
+      <workItem from="1605161354228" duration="14913000" />
+      <workItem from="1605184756158" duration="3156000" />
+      <workItem from="1605187969163" duration="653000" />
+      <workItem from="1605223445874" duration="4848000" />
+      <workItem from="1605479533754" duration="4909000" />
+      <workItem from="1605531944179" duration="3153000" />
+      <workItem from="1605658649699" duration="12651000" />
+      <workItem from="1605714350391" duration="39404000" />
+      <workItem from="1606359180288" duration="4574000" />
+      <workItem from="1606522658040" duration="6483000" />
+      <workItem from="1606548084461" duration="591000" />
+      <workItem from="1606548784910" duration="3321000" />
+      <workItem from="1606590131555" duration="3139000" />
+      <workItem from="1606872875433" duration="22506000" />
+      <workItem from="1606956978986" duration="9881000" />
+      <workItem from="1606980033427" duration="460000" />
+      <workItem from="1606980508833" duration="1106000" />
+      <workItem from="1606981634909" duration="113000" />
+      <workItem from="1606981760539" duration="82000" />
+      <workItem from="1606981860140" duration="690000" />
+      <workItem from="1606982588004" duration="1799000" />
+      <workItem from="1606992848590" duration="937000" />
+      <workItem from="1606993803931" duration="1138000" />
+      <workItem from="1606994963377" duration="2919000" />
+      <workItem from="1606998078103" duration="341000" />
+      <workItem from="1606998495342" duration="1916000" />
+      <workItem from="1607000675097" duration="225000" />
+      <workItem from="1607000915464" duration="2707000" />
+      <workItem from="1607406193792" duration="9443000" />
+      <workItem from="1607469763792" duration="24141000" />
+      <workItem from="1607590350571" duration="7341000" />
+      <workItem from="1608164170926" duration="24002000" />
+      <workItem from="1609159336673" duration="559000" />
+      <workItem from="1609159928173" duration="19764000" />
+      <workItem from="1609189206079" duration="17922000" />
+      <workItem from="1609684714213" duration="18762000" />
+      <workItem from="1609884282425" duration="5672000" />
+      <workItem from="1610146302318" duration="14262000" />
+      <workItem from="1610595382298" duration="12067000" />
+      <workItem from="1610987838422" duration="3934000" />
+      <workItem from="1611009784915" duration="18592000" />
+      <workItem from="1611286675913" duration="2512000" />
+      <workItem from="1611289306387" duration="37013000" />
+      <workItem from="1611792904170" duration="4032000" />
+      <workItem from="1611812861227" duration="12839000" />
+      <workItem from="1612226265335" duration="1048000" />
+      <workItem from="1612227423172" duration="7449000" />
+      <workItem from="1613469446183" duration="9116000" />
+      <workItem from="1617071382422" duration="5411000" />
+      <workItem from="1617570369304" duration="1422000" />
+      <workItem from="1617575412946" duration="6969000" />
+      <workItem from="1617955773660" duration="1012000" />
+      <workItem from="1617956921337" duration="1690000" />
+      <workItem from="1619444452089" duration="410000" />
+      <workItem from="1620509475675" duration="4424000" />
+      <workItem from="1620514712135" duration="9607000" />
+      <workItem from="1620596103099" duration="18935000" />
+      <workItem from="1620701551776" duration="15404000" />
+      <workItem from="1620893396690" duration="12744000" />
+      <workItem from="1621258166629" duration="1236000" />
+      <workItem from="1621582361643" duration="2414000" />
+      <workItem from="1621585727105" duration="19000" />
+      <workItem from="1621585795281" duration="2887000" />
+      <workItem from="1621653763822" duration="6528000" />
+      <workItem from="1621667829646" duration="61000" />
+      <workItem from="1621667909513" duration="300000" />
+      <workItem from="1621668234803" duration="33288000" />
+      <workItem from="1622409906711" duration="44521000" />
+      <workItem from="1622670156143" duration="3383000" />
+      <workItem from="1622712080989" duration="4310000" />
+      <workItem from="1622768962999" duration="9494000" />
+      <workItem from="1623112706521" duration="14532000" />
+      <workItem from="1623535044478" duration="6148000" />
+      <workItem from="1625107718067" duration="900000" />
+      <workItem from="1625115452201" duration="14691000" />
+      <workItem from="1625301976623" duration="3650000" />
+      <workItem from="1625712214717" duration="10194000" />
+      <workItem from="1626015098869" duration="7709000" />
+      <workItem from="1626214240126" duration="7045000" />
+      <workItem from="1627145757848" duration="667000" />
+      <workItem from="1627146796290" duration="3578000" />
+      <workItem from="1628988390188" duration="180000" />
+      <workItem from="1628988590564" duration="62000" />
+      <workItem from="1628988679777" duration="82000" />
+      <workItem from="1628988775344" duration="10467000" />
+      <workItem from="1629702697044" duration="24015000" />
+      <workItem from="1629987959303" duration="21050000" />
+      <workItem from="1631142359744" duration="14294000" />
+      <workItem from="1632357613144" duration="26000" />
+      <workItem from="1635391997155" duration="2460000" />
+      <workItem from="1636817457975" duration="20738000" />
+      <workItem from="1636911363374" duration="39595000" />
+      <workItem from="1637191383845" duration="8800000" />
+      <workItem from="1637206499574" duration="8961000" />
+      <workItem from="1637375755333" duration="41315000" />
+      <workItem from="1639270691696" duration="6814000" />
+      <workItem from="1647986741972" duration="3622000" />
+      <workItem from="1648187477218" duration="25057000" />
+      <workItem from="1648275663845" duration="48000" />
     </task>
+    <task id="LOCAL-00001" summary="update Frodo.js">
+      <created>1605165325612</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1605165325612</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add package-lock.json to .gitignore">
+      <created>1605165532960</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1605165532960</updated>
+    </task>
+    <task id="LOCAL-00003" summary="updates">
+      <created>1605166937018</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1605166937018</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update gitignore">
+      <created>1605186740994</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1605186740994</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add idea folder">
+      <created>1605186931729</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1605186931729</updated>
+    </task>
+    <task id="LOCAL-00006" summary="updates">
+      <created>1605187419875</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1605187419875</updated>
+    </task>
+    <task id="LOCAL-00007" summary="update require model paths">
+      <created>1605479773509</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1605479773509</updated>
+    </task>
+    <task id="LOCAL-00008" summary="update require db and config paths">
+      <created>1605480026486</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1605480026486</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -99,5 +318,13 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="update Frodo.js" />
+    <MESSAGE value="add package-lock.json to .gitignore" />
+    <MESSAGE value="update gitignore" />
+    <MESSAGE value="add idea folder" />
+    <MESSAGE value="updates" />
+    <MESSAGE value="update require model paths" />
+    <MESSAGE value="update require db and config paths" />
+    <option name="LAST_COMMIT_MESSAGE" value="update require db and config paths" />
   </component>
 </project>

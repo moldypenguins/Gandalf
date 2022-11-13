@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("templates/head", { alliance_name: alliance_name, site_title: site_title, page_title: page_title, page_description: "Error", site_theme: site_theme }); %>
+</head>
+<body class="page-error">
+<header>
+    <%- include("templates/header", {bot_name: bot_name}); %>
+</header>
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="content">
+                    <h2><%= message %></h2>
+                    <p><%= error.status %></p>
+                    <p>
+                    <pre><%= error.stack %></pre>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+    <%- include("templates/footer"); %>
+</footer>
+</body>
+</html>

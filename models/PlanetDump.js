@@ -36,7 +36,6 @@ let PlanetDumpSchema = new Mordor.Schema({
   score:      {type:Number, index:true},
   value:      {type:Number, index:true},
   xp:         {type:Number, index:true},
-  special:    {type: String},
 });
 
 module.exports = Mordor.model('PlanetDump', PlanetDumpSchema, 'PlanetDumps');

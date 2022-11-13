@@ -1,0 +1,52 @@
+/* # DOM ELEMENTS ################################################################################*/
+
+body, p, td, th, input {
+  font-family: $font-default;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+body, p, input {
+  color: #777;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-default;
+}
+
+h2 {
+  width: calc(100% + 1rem);
+  margin: -.5rem -.5rem .5rem;
+  font-size: 1rem;
+  padding: .5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: black;
+  background: #fff;
+  //background: linear-gradient(to right, rgba(white, 0) 0%, #ffffff 50%, rgba(white, 0) 100%);
+  border: 1px solid transparent;
+  border-image: linear-gradient(to right, rgba(#ccc, 0) 0%, #ccc 50%, rgba(#cccccc, 0) 100%);
+  border-image-slice: 1;
+  line-height: 100%;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+}
+
+h3 {
+  margin: 1rem 0;
+  font-size: .8rem;
+  padding: 8px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: black;
+  background: #fff;
+  background: linear-gradient(to right, transparent 0%, #ffffff 50%, transparent 100%);
+  border: 1px solid transparent;
+  border-image: linear-gradient(to right, transparent 0%, #ccc 50%, transparent 100%);
+  border-image-slice: 1;
+  line-height: 100%;
+}
+
+a {
+  text-decoration: none;
+}

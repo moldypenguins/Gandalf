@@ -1,0 +1,22 @@
+
+body, p, td, th, input {
+  font-family: $font-default;
+}
+
+a {
+  font-weight: normal;
+  text-decoration: none;
+  color: $col-primary;
+  transition: ease all .5s;
+
+  &:hover {
+	text-decoration: underline;
+	color: $col-primary-dark;
+  }
+}
+
+
+h2 {
+  background-color: #54a9eb;
+  color: white;
+}

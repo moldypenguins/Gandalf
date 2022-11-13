@@ -1,0 +1,13 @@
+body {
+  background-color: $col-background;
+  background-image: url('../images/bg/thematrix.gif');
+  background-repeat: repeat-x;
+  background-size: contain;
+}
+
+.content {
+  background: #1a222c;
+  border: 1px solid rgba(white, .25);
+  box-shadow: 0 1px 7px 1px rgba(green, .18);
+}
+

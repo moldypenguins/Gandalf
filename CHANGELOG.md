@@ -1,11 +1,33 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [1.0.0-beta] - 2022-10-22
+## [0.4.6-beta] - 2021-02-15
 ### Added
-- stuff
+- 
 ### Changed/Updated
-- stuff
+- models/*
+- Frodo.js
 ### Removed
-- stuff
+- 
+
+
+
+
+
+
+
+## [0.4.5-beta] - 2021-02-15
+### Added
+- Themes to config.js
+- Default theme option
+### Changed/Updated
+### Removed
+- Theme Database Model
+
+
+## [0.4.0-beta] - 2021-01-25
+### Added
+- CHANGELOG.md
+### Changed/Updated
+### Removed
 
