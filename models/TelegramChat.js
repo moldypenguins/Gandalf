@@ -15,21 +15,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Mordor.js
- * @version 2022/10/24
- * @summary Database
+ * @name TelegramChat.js
+ * @version 2022/11/11
+ * @summary Mongoose Model
  **/
 'use strict';
 
-const Config = require('config').get('config');
-const Mordor = require("mongoose");
+const Mordor = require('../Mordor');
 
-Mordor.connect(`${Config.db.uri}/${Config.db.name}`).catch(err => console.log(err.reason));
-Mordor.connection.on("error", () => {
-  console.log("Error: database connection failed.");
-});
-Mordor.connection.once("connected", () => {
-  console.log("Evil is stirring in Mordor.");
+let TelegramChatSchema = new Mordor.Schema({
+  _id:                      {type:Mordor.Schema.Types.ObjectId, required:true},
+  TelegramChat_id:          {type:String, unique:true, required:true},
+  TelegramChat_type:        {type:String, required: true},
+  TelegramChat_title:       {type:String},
+  TelegramChat_description: {type:String},
 });
 
-module.exports = Mordor;
+module.exports = Mordor.model('TelegramChat', TelegramChatSchema, 'TelegramChats');

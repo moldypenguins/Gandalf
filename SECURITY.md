@@ -2,10 +2,10 @@
 
 ## Supported Versions
 
-| Version    | Supported          |
-| ---------- | ------------------ |
-| 0.2.0-beta | :white_check_mark: |
-| 0.1.0-beta | :x:                |
+| Version        | Supported          |
+|----------------| ------------------ |
+| 1.0.0-beta     | :white_check_mark: |
+| Older Versions | :x:                |
 
 
 ## Major Bugs / Severe Security Vulnerabilities / Other Issues

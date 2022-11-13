@@ -15,21 +15,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Mordor.js
- * @version 2022/10/24
- * @summary Database
+ * @name links.tg
+ * @version 2022/10/26
+ * @summary Gandalf Spells
  **/
 'use strict';
 
 const Config = require('config').get('config');
-const Mordor = require("mongoose");
+const {encode} = require('html-entities');
+const dayjs = require('dayjs')
 
-Mordor.connect(`${Config.db.uri}/${Config.db.name}`).catch(err => console.log(err.reason));
-Mordor.connection.on("error", () => {
-  console.log("Error: database connection failed.");
-});
-Mordor.connection.once("connected", () => {
-  console.log("Evil is stirring in Mordor.");
-});
 
-module.exports = Mordor;
+let Admin_links_usage = encode('!links');
+let Admin_links_desc = 'Shows links.';
+let Admin_links = (args) => {
+  return new Promise(async (resolve, reject) => {
+    resolve(`<a href="${Config.web.uri}">${Config.alliance.name}</a>\n<a href="${Config.pa.links.game}">Planetarion</a>`);
+  });
+};
+
+module.exports = {
+  "links": { usage: Admin_links_usage, description: Admin_links_desc, cast: Admin_links }
+};

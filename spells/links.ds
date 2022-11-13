@@ -15,21 +15,34 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Mordor.js
- * @version 2022/10/24
- * @summary Database
+ * @name links.ds
+ * @version 2022/10/26
+ * @summary Gandalf Spells
  **/
 'use strict';
 
 const Config = require('config').get('config');
-const Mordor = require("mongoose");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder } = require('discord.js');
+const {encode} = require('html-entities');
 
-Mordor.connect(`${Config.db.uri}/${Config.db.name}`).catch(err => console.log(err.reason));
-Mordor.connection.on("error", () => {
-  console.log("Error: database connection failed.");
-});
-Mordor.connection.once("connected", () => {
-  console.log("Evil is stirring in Mordor.");
-});
 
-module.exports = Mordor;
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName('links')
+    .setDescription('Shows links.'),
+  async execute(interaction) {
+    const row = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setURL(Config.web.uri)
+          .setLabel(Config.alliance.name)
+          .setStyle(ButtonStyle.Link),
+        new ButtonBuilder()
+          .setURL(Config.pa.links.game)
+          .setLabel('Planetarion')
+          .setStyle(ButtonStyle.Link),
+      );
+    await interaction.reply({ components: [row] });
+  },
+  help: encode('/links')
+};
