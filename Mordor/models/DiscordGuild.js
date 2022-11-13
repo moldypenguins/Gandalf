@@ -15,24 +15,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name AllianceDump.js
- * @version 2022/11/06
+ * @name TelegramChat.js
+ * @version 2022/11/11
  * @summary Mongoose Model
  **/
 'use strict';
 
-const Mordor = require('../Mordor');
+const Mordor = require('../Mordor.js');
 
-let AllianceDumpSchema = new Mordor.Schema({
-  _id:           {type:Mordor.Schema.Types.ObjectId, required:true},
-  rank:          {type:Number, required:true},
-  name:          {type:String, required:true, trim:true},
-  size:          {type:Number},
-  members:       {type:Number},
-  counted_score: {type:Number},
-  points:        {type:Number},
-  total_score:   {type:Number},
-  total_value:   {type:Number},
+let TelegramChatSchema = new Mordor.Schema({
+  _id:                      {type:Mordor.Schema.Types.ObjectId, required:true},
+  TelegramChat_id:          {type:String, unique:true, required:true},
+  TelegramChat_type:        {type:String, required: true},
+  TelegramChat_title:       {type:String},
+  TelegramChat_description: {type:String},
 });
 
-module.exports = Mordor.model('AllianceDump', AllianceDumpSchema, 'AllianceDumps');
+module.exports = Mordor.model('TelegramChat', TelegramChatSchema, 'TelegramChats');

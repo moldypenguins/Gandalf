@@ -22,7 +22,7 @@
 'use strict';
 
 const Config = require('config').get('config');
-const Mordor = require('../Mordor');
+const Mordor = require('../Mordor.js');
 
 let TelegramUserSchema = new Mordor.Schema({
   _id:                   {type:Mordor.Schema.Types.ObjectId, required:true},

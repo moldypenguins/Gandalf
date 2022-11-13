@@ -1,0 +1,20 @@
+{
+  "name": "bilbo",
+  "description": "Planetarion Tools - Setup",
+  "exports": "./bilbo.js",
+  "version": "1.1.0-alpha",
+  "dependencies": {
+    "bent": "^7.3.12",
+    "config": "^3.3.8",
+    "dayjs": "^1.11.6",
+    "html-entities": "^2.3.3",
+    "minimist": "^1.2.7",
+    "mongoose": "^6.7.0",
+    "numeral": "^2.0.6",
+    "pm2": "^5.2.2",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "eslint": "^8.26.0"
+  }
+}

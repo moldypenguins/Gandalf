@@ -16,14 +16,14 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Gandalf.js
- * @version 2022-11-11
+ * @version 2022-11-13
  * @summary Bot
  **/
 'use strict';
 
 const util = require('util');
 const Config = require('config').get('config');
-const Mordor = require('./Mordor');
+const { Mordor } = require('Mordor');
 const minimist = require('minimist');
 
 let argv = minimist(process.argv.slice(2), {
@@ -38,12 +38,12 @@ const { Context, Telegraf } = require('telegraf');
 const { ActivityType, Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder} = require('discord.js');
 
 let tgCommands = {};
-Config.telegram.commands.forEach(function(name) { Object.assign(tgCommands, require(`./spells/${name}.tg`)); });
+Config.telegram.commands.forEach(function(name) { Object.assign(tgCommands, require(`./Gandalf/spells/${name}.tg`)); });
 
 let dscmds = []; //temporary for registering commands in discord
 let dsCommands = new Collection();
 Config.discord.commands.forEach(function(name) {
-  const cmd = require(`./spells/${name}.ds`);
+  const cmd = require(`./Gandalf/spells/${name}.ds`);
   if('data' in cmd && 'execute' in cmd) {
     dsCommands.set(cmd.data.name, cmd);
     dscmds.push(cmd.data.toJSON());

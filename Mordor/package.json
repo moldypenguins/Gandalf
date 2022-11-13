@@ -1,0 +1,13 @@
+{
+  "name": "mordor",
+  "description": "Planetarion Tools - Database",
+  "main": "./mordor.js",
+  "version": "1.0.0-alpha",
+  "type": "module",
+  "dependencies": {
+    "mongoose": "^6.7.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.26.0"
+  }
+}

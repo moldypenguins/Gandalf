@@ -26,7 +26,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const {encode} = require('html-entities');
 //const dayjs = require('dayjs');
 
-const Ship = require('../models/Ship');
+const Ship = require('../../Mordor/models/Ship');
 
 
 module.exports = {

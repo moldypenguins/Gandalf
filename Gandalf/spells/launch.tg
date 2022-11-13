@@ -32,8 +32,8 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(advancedFormat);
 
-const Mordor = require('../Mordor');
-const Tick = require('../models/Tick');
+const Mordor = require('../../Mordor/Mordor');
+const Tick = require('../../Mordor/models/Tick');
 
 module.exports = {
   "launch": {

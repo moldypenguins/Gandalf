@@ -37,12 +37,9 @@ const schedule = require('node-schedule');
 const rule = new schedule.RecurrenceRule();
 const minimist = require('minimist');
 
-const Mordor = require('./Mordor');
-const Tick = require('./models/Tick');
-const PlanetDump = require('./models/PlanetDump');
-const GalaxyDump = require('./models/GalaxyDump');
-const AllianceDump = require('./models/AllianceDump');
-//const UserFeed = require('./models/UserFeed');
+const {
+  Mordor, Tick, PlanetDump, GalaxyDump, AllianceDump, //UserFeed
+} = require('Mordor');
 
 
 let argv = minimist(process.argv.slice(2), {

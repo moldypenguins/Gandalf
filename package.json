@@ -1,16 +1,16 @@
 {
-  "name": "Gandalf",
+  "name": "middle_earth",
   "description": "Planetarion Tools",
   "keywords": [
     "Planetarion"
   ],
-  "version": "1.0.0-alpha",
   "private": true,
-  "workspaces": [
-    "Bilbo",
-    "Frodo",
-    "Gandalf"
-  ],
+  "imports": {
+    "#Bilbo": "./Bilbo/bilbo.js",
+    "#Frodo": "./Frodo/frodo.js",
+    "#Gandalf": "./Gandalf/gandalf.js",
+    "#Mordor": "./Mordor/mordor.js"
+  },
   "scripts": {
     "start": "pm2 start MiddleEarth.config.js",
     "stop": "pm2 stop MiddleEarth.config.js",
@@ -30,35 +30,19 @@
     "npm": "^8.19.2",
     "mongodb": "^6.0.2"
   },
+  "packageManager": "npm@8.19.2",
   "dependencies": {
-    "@popperjs/core": "^2.11.6",
     "bent": "^7.3.12",
-    "body-parser": "^1.20.1",
-    "bootstrap": "^5.2.2",
-    "concurrently": "^7.5.0",
     "config": "^3.3.8",
-    "cors": "^2.8.5",
     "dayjs": "^1.11.6",
-    "discord.js": "^14.6.0",
-    "express": "^4.18.2",
     "html-entities": "^2.3.3",
     "minimist": "^1.2.7",
-    "mongoose": "^6.7.0",
-    "node-schedule": "^2.1.0",
+    "mongoose": "^6.7.2",
     "numeral": "^2.0.6",
     "pm2": "^5.2.2",
-    "telegraf": "^4.10.0",
-    "vue": "^3.2.41",
-    "vue-router": "^4.1.5",
-    "xml-js": "^1.6.11",
-    "xml2json-ltx": "^0.11.4",
-    "xmltojson": "^1.3.5"
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.1.2",
-    "eslint": "^8.26.0",
-    "eslint-plugin-vue": "^9.6.0",
-    "sass": "^1.55.0",
-    "vite": "^3.1.8"
+    "eslint": "^8.26.0"
   }
 }

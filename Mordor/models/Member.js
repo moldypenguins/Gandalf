@@ -22,7 +22,7 @@
 'use strict';
 
 const CFG = require('../Config');
-const Mordor = require('../Mordor');
+const Mordor = require('../Mordor.js');
 
 let MemberSchema = new Mordor.Schema({
   _id:             {type:Mordor.Schema.Types.ObjectId, required:true},

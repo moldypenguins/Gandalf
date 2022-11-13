@@ -15,28 +15,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name PlanetDump.js
- * @version 2021/05/30
+ * @name TelegramChat.js
+ * @version 2022/11/11
  * @summary Mongoose Model
  **/
 'use strict';
 
-const Mordor = require('../Mordor');
+const Mordor = require('../Mordor.js');
 
-let PlanetDumpSchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
-  planet_id:  {type:String, index:true},
-  x:          {type:Number, required:true},
-  y:          {type:Number, required:true},
-  z:          {type:Number, required:true},
-  planetname: {type:String, required:true, trim:true},
-  rulername:  {type:String, required:true, trim:true},
-  race:       {type:String},
-  size:       {type:Number, index:true},
-  score:      {type:Number, index:true},
-  value:      {type:Number, index:true},
-  xp:         {type:Number, index:true},
-  special:    {type: String},
+let TelegramChatSchema = new Mordor.Schema({
+  _id:                      {type:Mordor.Schema.Types.ObjectId, required:true},
+  TelegramChat_id:          {type:String, unique:true, required:true},
+  TelegramChat_type:        {type:String, required: true},
+  TelegramChat_title:       {type:String},
+  TelegramChat_description: {type:String},
 });
 
-module.exports = Mordor.model('PlanetDump', PlanetDumpSchema, 'PlanetDumps');
+module.exports = Mordor.model('TelegramChat', TelegramChatSchema, 'TelegramChats');

@@ -15,35 +15,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Ship.js
- * @version 2021/06/12
+ * @name Tick.js
+ * @version 2021/05/22
  * @summary Mongoose Model
  **/
 'use strict';
 
-const Mordor = require('../Mordor');
+const Mordor = require('../Mordor.js');
+const dayjs = require('dayjs');
 
-let ShipSchema = new Mordor.Schema({
+let TickSchema = new Mordor.Schema({
   _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
-  ship_id:    {type:Number, unique:true, required:true},
-  name:       {type:String, index:true, required:true},
-  race:       {type:String, required:true},
-  class:      {type:String, required:true},
-  target1:    {type:String},
-  target2:    {type:String},
-  target3:    {type:String},
-  type:       {type:String},
-  initiative: {type:String},
-  guns:       {type:String},
-  armor:      {type:String},
-  damage:     {type:String},
-  empres:     {type:String},
-  metal:      {type:String},
-  crystal:    {type:String},
-  eonium:     {type:String},
-  armorcost:  {type:String},
-  damagecost: {type:String},
-  baseeta:    {type:String}
+  tick:       {type:Number, unique:true, index:true, required:true},
+  timestamp:  {type:Date, default: () => dayjs().utc().minute(0).second(0).millisecond(0)},
+  galaxies:   {type:Number},
+  planets:    {type:Number},
+  alliances:  {type:Number},
+  clusters:   {type:Number},
+  c200:       {type:Number},
+  ter:        {type:Number},
+  cat:        {type:Number},
+  xan:        {type:Number},
+  zik:        {type:Number},
+  etd:        {type:Number},
 });
 
-module.exports = Mordor.model('Ship', ShipSchema, 'Ships');
+TickSchema.statics.findLastTick = function () {
+  return this.findOne().sort({ tick: -1 });
+}
+
+module.exports = Mordor.model('Tick', TickSchema, 'Ticks');

@@ -1,6 +1,0 @@
-{
-  "name": "@internal/Bilbo",
-  "description": "Setup",
-  "main": "../Bilbo.js",
-  "version": "0.5.0-beta"
-}

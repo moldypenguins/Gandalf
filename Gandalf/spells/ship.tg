@@ -23,12 +23,12 @@
 
 const util = require('util');
 const Config = require('config').get('config');
-const Mordor = require('../Mordor');
+const Mordor = require('../../Mordor/Mordor');
 const numeral = require('numeral');
 const dayjs = require('dayjs')
 const {encode} = require('html-entities');
 
-const Ship = require('../models/Ship');
+const Ship = require('../../Mordor/models/Ship');
 
 
 let Ships_ship_usage = he.encode('!ship <ship>');

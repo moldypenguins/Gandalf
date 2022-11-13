@@ -30,9 +30,7 @@ const getStream = bent('string');
 const convert = require('xml-js');
 const minimist = require('minimist');
 
-const Mordor = require('./Mordor');
-const Ship = require('./models/Ship');
-const Tick = require('./models/Tick');
+const { Mordor, Ship, Tick } = require('Mordor');
 
 
 let argv = minimist(process.argv.slice(2), {

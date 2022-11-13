@@ -32,7 +32,8 @@ module.exports = {
     {
       namespace: "MiddleEarth",
       name: "Bilbo",
-      script: "./packages/Bilbo/Bilbo.js",
+      cwd: "./Bilbo",
+      script: "./bilbo.js",
       args: `-s ${dayjs().tz().format('YYYY-MM-DD H:mm z')}`,
       instance_var: 'INSTANCE_ID',
       watch: true,
@@ -42,7 +43,8 @@ module.exports = {
     {
       namespace: "MiddleEarth",
       name: "Frodo",
-      script: "./Frodo.js",
+      cwd: "./Frodo",
+      script: "./frodo.js",
       args: "-f -o",
       instance_var: 'INSTANCE_ID',
       watch: true,
@@ -52,7 +54,8 @@ module.exports = {
     {
       namespace: "MiddleEarth",
       name   : "Gandalf",
-      script : "./Gandalf.js",
+      cwd: "./Gandalf",
+      script : "./gandalf.js",
       instance_var: 'INSTANCE_ID',
       watch: true,
       time: true,
@@ -62,10 +65,12 @@ module.exports = {
     {
       namespace: "MiddleEarth",
       name   : "Sauron",
-      script : "./Sauron.js",
+      cwd: "./Sauron",
+      script : "./sauron.js",
       instance_var: 'INSTANCE_ID',
       watch: true,
-      time: true
+      time: true,
+      wait_ready: true
     },
     */
   ],

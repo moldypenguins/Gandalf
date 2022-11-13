@@ -32,4 +32,16 @@ Mordor.connection.once("connected", () => {
   console.log("Evil is stirring in Mordor.");
 });
 
-module.exports = Mordor;
+module.exports = {
+  "Mordor": Mordor,
+  "AllianceDump": require("./models/AllianceDump.js"),
+  "DiscordGuild": require("./models/DiscordGuild.js"),
+  "DiscordUser": require("./models/DiscordUser.js"),
+  "GalaxyDump": require("./models/GalaxyDump.js"),
+  "Member": require("./models/Member.js"),
+  "PlanetDump": require("./models/PlanetDump.js"),
+  "Ship": require("./models/AllianceDump.js"),
+  "TelegramChat": require("./models/AllianceDump.js"),
+  "TelegramUser": require("./models/AllianceDump.js"),
+  "Tick": require("./models/AllianceDump.js")
+};
