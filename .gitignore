@@ -117,8 +117,8 @@ dist-ssr
 *.local
 
 # Local config
-local.js
-local.json
+local.ts
+
 
 # Package lock
 package-lock.json
