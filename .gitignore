@@ -118,6 +118,7 @@ dist-ssr
 
 # Local config
 local.js
+local.json
 
 # Package lock
 package-lock.json
