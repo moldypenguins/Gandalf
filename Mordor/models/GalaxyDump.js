@@ -21,7 +21,7 @@
  **/
 'use strict';
 
-const Mordor = require('../Mordor.js');
+const Mordor  = require('mongoose');
 
 let GalaxyDumpSchema = new Mordor.Schema({
   _id:       {type:Mordor.Schema.Types.ObjectId, required:true},

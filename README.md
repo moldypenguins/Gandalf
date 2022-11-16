@@ -1,5 +1,5 @@
 # ![Imgur](https://imgur.com/SNQjhh4.png) Gandalf
-Planetarion Tools
+### Planetarion Tools
 
 ![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge)
 ![Release](https://img.shields.io/github/v/release/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub&include_prereleases)

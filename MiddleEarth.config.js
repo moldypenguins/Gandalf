@@ -21,12 +21,6 @@
  **/
 'use strict';
 
-const dayjs = require("dayjs");
-const utc = require('dayjs/plugin/utc');
-const timezone = require('dayjs/plugin/timezone');
-dayjs.extend(utc);
-dayjs.extend(timezone);
-
 module.exports = {
   apps : [
     {
@@ -34,7 +28,7 @@ module.exports = {
       name: "Bilbo",
       cwd: "./Bilbo",
       script: "./bilbo.js",
-      args: `-s ${dayjs().tz().format('YYYY-MM-DD H:mm z')}`,
+      args: `-s ${new Date().toISOString()}`,
       instance_var: 'INSTANCE_ID',
       watch: true,
       time: true,

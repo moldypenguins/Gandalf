@@ -21,7 +21,7 @@
  **/
 'use strict';
 
-const Mordor = require('../Mordor.js');
+const Mordor  = require('mongoose');
 const dayjs = require('dayjs');
 
 let TickSchema = new Mordor.Schema({

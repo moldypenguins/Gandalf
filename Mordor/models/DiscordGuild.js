@@ -21,14 +21,14 @@
  **/
 'use strict';
 
-const Mordor = require('../Mordor.js');
+const Mordor  = require('mongoose');
 
-let TelegramChatSchema = new Mordor.Schema({
+let DiscordGuildSchema = new Mordor.Schema({
   _id:                      {type:Mordor.Schema.Types.ObjectId, required:true},
-  TelegramChat_id:          {type:String, unique:true, required:true},
-  TelegramChat_type:        {type:String, required: true},
-  TelegramChat_title:       {type:String},
-  TelegramChat_description: {type:String},
+  DiscordGuild_id:          {type:String, unique:true, required:true},
+  DiscordGuild_type:        {type:String, required: true},
+  DiscordGuild_title:       {type:String},
+  DiscordGuild_description: {type:String},
 });
 
-module.exports = Mordor.model('TelegramChat', TelegramChatSchema, 'TelegramChats');
+module.exports = Mordor.model('DiscordGuilds', DiscordGuildSchema, 'DiscordGuilds');

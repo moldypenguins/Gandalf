@@ -21,7 +21,7 @@
  **/
 'use strict';
 
-const Mordor = require('../Mordor.js');
+const Mordor  = require('mongoose');
 
 let TelegramChatSchema = new Mordor.Schema({
   _id:                      {type:Mordor.Schema.Types.ObjectId, required:true},

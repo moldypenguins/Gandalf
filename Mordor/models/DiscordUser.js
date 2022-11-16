@@ -15,36 +15,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name TelegramUser.js
- * @version 2021/07/11
+ * @name DiscordUser.js
+ * @version 2021/11/14
  * @summary Mongoose Model
  **/
 'use strict';
 
 const Config = require('config').get('config');
-const Mordor = require('../Mordor.js');
+const Mordor  = require('mongoose');
 
-let TelegramUserSchema = new Mordor.Schema({
+let DiscordUserSchema = new Mordor.Schema({
   _id:                   {type:Mordor.Schema.Types.ObjectId, required:true},
-  TelegramUser_id:            {type:Number, unique:true, required:true},
-  TelegramUser_first_name:    {type:String},
-  TelegramUser_last_name:     {type:String},
-  TelegramUser_username:      {type:String},
-  TelegramUser_photo_url:     {type:String, default:Config.web.uri + '/' + Config.web.default_profile_pic},
-  TelegramUser_language_code: {type:String},
+  DiscordUser_id:            {type:Number, unique:true, required:true},
+  DiscordUser_first_name:    {type:String},
+  DiscordUser_last_name:     {type:String},
+  DiscordUser_username:      {type:String},
+  DiscordUser_photo_url:     {type:String, default:Config.web.uri + '/' + Config.web.default_profile_pic},
+  DiscordUser_language_code: {type:String},
 });
 
-/*
-TelegramUserSchema.virtual('tg_name')
-.get(function() {
-  let mention_name = this.tg_first_name;
-  if(this.tg_username) {
-    mention_name = this.tg_username;
-  } else if(this.tg_last_name) {
-    mention_name = `${this.tg_first_name} ${this.tg_last_name}`;
-  }
-  return mention_name;
-});
-*/
 
-module.exports = Mordor.model('TelegramUser', TelegramUserSchema, 'TelegramUsers');
+module.exports = Mordor.model('DiscordUser', DiscordUserSchema, 'DiscordUsers');

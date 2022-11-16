@@ -21,8 +21,10 @@
  **/
 'use strict';
 
-const CFG = require('../Config');
-const Mordor = require('../Mordor.js');
+process.env["NODE_CONFIG_DIR"] = '../../Galadriel';
+
+const Config = require('config').get('config');
+const Mordor  = require('mongoose');
 
 let MemberSchema = new Mordor.Schema({
   _id:             {type:Mordor.Schema.Types.ObjectId, required:true},
@@ -33,7 +35,7 @@ let MemberSchema = new Mordor.Schema({
   roles:           {type:Number, default:0, required:true},
   parent:          {type:Mordor.Schema.Types.ObjectId, ref:'Member'},
   birthed:         {type:Date, default:Date.now(), required:true},
-  photo_url:       {type:String, default:CFG.web.uri + '/' + CFG.web.default_profile_pic},
+  photo_url:       {type:String, default:Config.web.uri + '/' + Config.web.default_profile_pic},
   site_theme:      {type:String, default:'default', required:true},
   site_navigation: {type:String, default:'iconstext', required:true},
   last_access:     {type:Date},

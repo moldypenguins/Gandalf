@@ -21,8 +21,10 @@
  **/
 'use strict';
 
+process.env["NODE_CONFIG_DIR"] = '../../Galadriel';
+
 const Config = require('config').get('config');
-const Mordor = require('../Mordor.js');
+const Mordor  = require('mongoose');
 
 let TelegramUserSchema = new Mordor.Schema({
   _id:                   {type:Mordor.Schema.Types.ObjectId, required:true},

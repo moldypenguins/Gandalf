@@ -24,6 +24,8 @@
  **/
 'use strict';
 
+process.env["NODE_CONFIG_DIR"] = '../Galadriel';
+
 const util = require('util');
 const Config = require('config').get('config');
 const dayjs = require("dayjs");

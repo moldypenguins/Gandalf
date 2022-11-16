@@ -5,16 +5,28 @@
     "Planetarion"
   ],
   "private": true,
+  "exports": {
+    "#Mordor": "./Mordor/mordor.js"
+  },
   "imports": {
     "#Bilbo": "./Bilbo/bilbo.js",
     "#Frodo": "./Frodo/frodo.js",
     "#Gandalf": "./Gandalf/gandalf.js",
-    "#Mordor": "./Mordor/mordor.js"
+    "#Sauron": "./Sauron/sauron.js"
   },
   "scripts": {
+    "install:bilbo": "cd Bilbo && npm install",
+    "install:frodo": "cd Frodo && npm install",
+    "install:gandalf": "cd Gandalf && npm install",
+    "install:mordor": "cd Mordor && npm install",
+    "install:sauron": "cd Sauron && npm install",
+    "install": "npm run install:mordor && npm run install:bilbo && npm run install:frodo && npm run install:gandalf && npm run install:sauron",
     "start": "pm2 start MiddleEarth.config.js",
+    "restart": "pm2 restart MiddleEarth.config.js",
     "stop": "pm2 stop MiddleEarth.config.js",
-    "delete": "pm2 delete MiddleEarth.config.js"
+    "delete": "pm2 delete MiddleEarth.config.js",
+    "list": "pm2 list",
+    "watch": "pm2 monit"
   },
   "author": "Craig Roberts <craig.roberts@crdevel.com>",
   "contributors": [
@@ -30,19 +42,5 @@
     "npm": "^8.19.2",
     "mongodb": "^6.0.2"
   },
-  "packageManager": "npm@8.19.2",
-  "dependencies": {
-    "bent": "^7.3.12",
-    "config": "^3.3.8",
-    "dayjs": "^1.11.6",
-    "html-entities": "^2.3.3",
-    "minimist": "^1.2.7",
-    "mongoose": "^6.7.2",
-    "numeral": "^2.0.6",
-    "pm2": "^5.2.2",
-    "xml-js": "^1.6.11"
-  },
-  "devDependencies": {
-    "eslint": "^8.26.0"
-  }
+  "packageManager": "npm@8.19.2"
 }

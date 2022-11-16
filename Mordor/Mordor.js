@@ -15,14 +15,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Mordor.js
+ * @name mordor.js
  * @version 2022/10/24
  * @summary Database
  **/
 'use strict';
 
+process.env["NODE_CONFIG_DIR"] = '../Galadriel';
+
 const Config = require('config').get('config');
-const Mordor = require("mongoose");
+const Mordor  = require('mongoose');
 
 Mordor.connect(`${Config.db.uri}/${Config.db.name}`).catch(err => console.log(err.reason));
 Mordor.connection.on("error", () => {

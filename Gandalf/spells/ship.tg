@@ -23,7 +23,7 @@
 
 const util = require('util');
 const Config = require('config').get('config');
-const Mordor = require('../../Mordor/Mordor');
+const { Mordor } = require('../../Mordor/Mordor');
 const numeral = require('numeral');
 const dayjs = require('dayjs')
 const {encode} = require('html-entities');
