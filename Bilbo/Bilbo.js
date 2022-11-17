@@ -15,23 +15,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Bilbo.js
+ * @name bilbo.js
  * @version 2022-11-11
  * @summary setup
  * @param {string} -s,--start tick start date
  **/
 'use strict';
 
-process.env.NODE_CONFIG_DIR = '../Galadriel';
-
-import * as config from 'config';
+import { NODE_CONFIG_DIR, SUPPRESS_NO_CONFIG_WARNING } from './env.js';
+import Config from 'config';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import X2JS from 'x2js';
 import minimist from 'minimist';
 import { Mordor, Ship, Tick } from 'Mordor';
+import * as util from "util";
 
-const Config = config.get('config');
 
 let argv = minimist(process.argv.slice(2), {
   string: ['start'],
@@ -70,9 +69,9 @@ let load_ships = async() => {
   } catch (error) {
     console.error(error);
   }
-  if(shipstats !== undefined) {
+  if(shipstats?.status === 200 &&  shipstats?.data !== undefined) {
     let x2js = new X2JS();
-    let json = JSON.parse(x2js.xml2js(shipstats));
+    let json = x2js.xml2js(shipstats.data);
     // load each one in to the database
     let ship_id = 0;
     for (let json_ship of json["stats"]["ship"]) {
@@ -97,29 +96,3 @@ let load_ticks = async(start) => {
     console.log("First tick already exists!");
   }
 };
-
-
-const nativeType = (value) => {
-  let nValue = Number(value);
-  if (!isNaN(nValue)) {
-    return nValue;
-  }
-  let bValue = value.toLowerCase();
-  if (bValue === 'true') {
-    return true;
-  } else if (bValue === 'false') {
-    return false;
-  }
-  return value;
-}
-
-const removeJsonTextAttribute = (value, parentElement) => {
-  try {
-    let keyNo = Object.keys(parentElement._parent).length;
-    let keyName = Object.keys(parentElement._parent)[keyNo - 1];
-    parentElement._parent[keyName] = nativeType(value);
-  }
-  catch (e) {
-    console.log(`Error: ${e}`);
-  }
-}
