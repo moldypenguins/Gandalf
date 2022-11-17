@@ -35,7 +35,6 @@ import TelegramChat from './models/TelegramChat.js';
 import TelegramUser from './models/TelegramUser.js';
 import Tick from './models/Tick.js';
 
-
 mongoose.connect(`${Config.db.uri}/${Config.db.name}`).catch(err => console.log(err.reason));
 mongoose.connection.on("error", () => {
   console.log("Error: database connection failed.");

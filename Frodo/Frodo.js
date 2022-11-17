@@ -121,10 +121,12 @@ let process_tick = async (last_tick, start_time) => {
   console.log('Getting dump files...');
   let planet_dump, galaxy_dump, alliance_dump, user_dump;
   try {
-    planet_dump = await axios.get(Config.pa.dumps.planet);
-    galaxy_dump = await axios.get(Config.pa.dumps.galaxy);
-    alliance_dump = await axios.get(Config.pa.dumps.alliance);
-    //user_dump = await axios.get(Config.pa.dumps.user);
+    [ planet_dump, galaxy_dump, alliance_dump, user_dump ] = await Promise.all([
+      axios.get(Config.pa.dumps.planet),
+      axios.get(Config.pa.dumps.galaxy),
+      axios.get(Config.pa.dumps.alliance),
+      axios.get(Config.pa.dumps.user)
+    ]);
   } catch (error) {
     console.error(error);
   }
@@ -132,11 +134,16 @@ let process_tick = async (last_tick, start_time) => {
   console.log(`Loaded dumps from webserver in: ${current_ms - total_ms}ms`);
   total_ms += current_ms - total_ms;
 
-  if(planet_dump !== undefined && galaxy_dump !== undefined && alliance_dump !== undefined) { //&& user_dump !== undefined) {
-    planet_dump = planet_dump.split('\n');
-    galaxy_dump = galaxy_dump.split('\n');
-    alliance_dump = alliance_dump.split('\n');
-    //user_dump = user_dump.split('\n');
+  if(
+    planet_dump?.status === 200 && planet_dump.data &&
+    galaxy_dump?.status === 200 && galaxy_dump.data &&
+    alliance_dump?.status === 200 && alliance_dump.data &&
+    user_dump?.status === 200 && user_dump.data
+  ) {
+    planet_dump = planet_dump.data.split('\n');
+    galaxy_dump = galaxy_dump.data.split('\n');
+    alliance_dump = alliance_dump.data.split('\n');
+    user_dump = user_dump.data.split('\n');
 
     if(planet_dump[3] !== galaxy_dump[3] || galaxy_dump[3] !== alliance_dump[3] || planet_dump[3] !== alliance_dump[3]) {
       throw new Error(`Varying ticks found - planet: ${planet_dump[3].match(/\d+/g).map(Number)[0]} - galaxy: ${galaxy_dump[3].match(/\d+/g).map(Number)[0]} - alliance: ${alliance_dump[3].match(/\d+/g).map(Number)[0]}.`);

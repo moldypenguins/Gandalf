@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b4df756-377a-48de-bf3d-eae10a4430cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Frodo/env.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mordor/env.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gandalf/spells/discord.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gandalf/spells/telegram.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frodo/Frodo.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frodo/Frodo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frodo/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frodo/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Galadriel/config.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/config.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Galadriel/default.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/default.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/Gandalf.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/Gandalf.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mordor/Mordor.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/Mordor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/models/DiscordUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/DiscordUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/models/Member.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/Member.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/models/TelegramUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/TelegramUser.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +37,7 @@
     "WebServerToolWindowFactoryState": "false",
     "javascript.nodejs.core.library.configured.version": "16.18.0",
     "javascript.nodejs.core.library.typings.version": "16.18.0",
-    "last_opened_file_path": "D:/CR/GitHub/Gandalf/Mordor",
+    "last_opened_file_path": "D:/CR/GitHub/Gandalf/Gandalf/spells",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -52,11 +48,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\CR\GitHub\Gandalf\Mordor" />
-      <recent name="D:\CR\GitHub\Gandalf\Bilbo" />
-      <recent name="D:\CR\GitHub\Gandalf\Frodo" />
-      <recent name="D:\CR\GitHub\Gandalf\Gandalf" />
+      <recent name="D:\CR\GitHub\Gandalf\Gandalf\spells" />
       <recent name="D:\CR\GitHub\Gandalf\Sauron" />
+      <recent name="D:\CR\GitHub\Gandalf\Bilbo" />
+      <recent name="D:\CR\GitHub\Gandalf\Gandalf" />
+      <recent name="D:\CR\GitHub\Gandalf\Mordor" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\CR\GitHub\Gandalf\Frodo" />
@@ -80,7 +76,7 @@
       <workItem from="1668316329360" duration="14000" />
       <workItem from="1668316376732" duration="17138000" />
       <workItem from="1668365499575" duration="31907000" />
-      <workItem from="1668588198439" duration="24690000" />
+      <workItem from="1668588198439" duration="29072000" />
     </task>
     <servers />
   </component>
@@ -100,5 +96,17 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/Frodo/frodo.js</url>
+          <line>147</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

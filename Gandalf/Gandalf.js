@@ -21,11 +21,14 @@
  **/
 'use strict';
 
-process.env.NODE_CONFIG_DIR = '../Galadriel';
-const Config = require('config').get('config');
-const { Mordor } = require('Mordor');
-const minimist = require('minimist');
-const util = require('util');
+import { NODE_CONFIG_DIR, SUPPRESS_NO_CONFIG_WARNING } from './env.js';
+import Config from 'config';
+import { Mordor } from 'Mordor';
+import minimist from 'minimist';
+import util from 'util';
+
+import * as TG_Spells from './spells/telegram.js';
+import * as DS_Spells from './spells/discord.js';
 
 let argv = minimist(process.argv.slice(2), {
   string: [],
@@ -35,16 +38,16 @@ let argv = minimist(process.argv.slice(2), {
   unknown: false
 });
 
-const { Context, Telegraf } = require('telegraf');
-const { ActivityType, Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder} = require('discord.js');
+import { Context, Telegraf } from 'telegraf';
+import { Client, Collection, Events, REST } from 'discord.js';
 
 let tgCommands = {};
-Config.telegram.commands.forEach(function(name) { Object.assign(tgCommands, require(`./spells/${name}.tg`)); });
+Config.telegram.commands.forEach(function(name) { Object.assign(tgCommands, TG_Spells); });
 
 let dscmds = []; //temporary for registering commands in discord
 let dsCommands = new Collection();
 Config.discord.commands.forEach(function(name) {
-  const cmd = require(`./spells/${name}.ds`);
+  const cmd = DS_Spells;
   if('data' in cmd && 'execute' in cmd) {
     dsCommands.set(cmd.data.name, cmd);
     dscmds.push(cmd.data.toJSON());
