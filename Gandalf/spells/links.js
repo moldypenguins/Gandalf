@@ -15,18 +15,41 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name links.ds
- * @version 2022/10/26
+ * @name links.js
+ * @version 2022/11/17
  * @summary Gandalf Spells
  **/
 'use strict';
 
-const Config = require('config').get('config');
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder } = require('discord.js');
-const {encode} = require('html-entities');
+import { NODE_CONFIG_DIR, SUPPRESS_NO_CONFIG_WARNING } from '../env.js';
+import Config from 'config';
+import { Mordor, Tick } from 'Mordor';
+
+import { Context } from 'telegraf';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder } from "discord.js";
+
+import { encode } from 'html-entities';
+import numeral from 'numeral';
+import dayjs from 'dayjs';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+dayjs.extend(advancedFormat);
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 
-module.exports = {
+export const telegram = {
+  usage: encode('/ship <ship>'),
+  description: 'Returns the stats of the specified ship.',
+  cast: (args) => {
+    return new Promise(async (resolve, reject) => {
+      resolve(`<a href="${Config.web.uri}">${Config.alliance.name}</a>\n<a href="${Config.pa.links.game}">Planetarion</a>`);
+    });
+  }
+};
+
+export const discord = {
   data: new SlashCommandBuilder()
     .setName('links')
     .setDescription('Shows links.'),

@@ -2,13 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b4df756-377a-48de-bf3d-eae10a4430cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Gandalf/spells/discord.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gandalf/spells/telegram.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gandalf/spells/launch.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gandalf/spells/links.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gandalf/spells/ship.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gandalf/spells/tick.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frodo/Frodo.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frodo/Frodo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gandalf/Gandalf.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/Gandalf.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gandalf/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/Mordor.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/Mordor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/discord.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/discord.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/launch.ds" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/launch.tg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/links.ds" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/links.tg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/ship.ds" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/ship.tg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/telegram.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/telegram.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/tick.ds" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/tick.tg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,23 +37,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "javascript.nodejs.core.library.configured.version": "16.18.0",
-    "javascript.nodejs.core.library.typings.version": "16.18.0",
-    "last_opened_file_path": "D:/CR/GitHub/Gandalf/Gandalf/spells",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "C:\\Users\\craig\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\222.4345.14\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;16.18.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;16.18.0&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CR/GitHub/Gandalf/Gandalf/spells&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\craig\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\222.4345.14\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\CR\GitHub\Gandalf\Gandalf\spells" />
@@ -77,6 +85,7 @@
       <workItem from="1668316376732" duration="17138000" />
       <workItem from="1668365499575" duration="31907000" />
       <workItem from="1668588198439" duration="29072000" />
+      <workItem from="1668676618680" duration="2466000" />
     </task>
     <servers />
   </component>
@@ -103,7 +112,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/Frodo/frodo.js</url>
           <line>147</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

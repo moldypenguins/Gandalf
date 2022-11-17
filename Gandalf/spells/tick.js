@@ -15,23 +15,78 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name tick.ds
- * @version 2022/10/26
+ * @name tick.js
+ * @version 2022/11/17
  * @summary Gandalf Spells
  **/
 'use strict';
 
-const Config = require('config').get('config');
-const { SlashCommandBuilder } = require('discord.js');
-const {encode} = require('html-entities');
-const Tick = require("../../Mordor/models/Tick");
-const dayjs = require("dayjs");
-const utc = require('dayjs/plugin/utc');
-const timezone = require('dayjs/plugin/timezone');
+import { NODE_CONFIG_DIR, SUPPRESS_NO_CONFIG_WARNING } from '../env.js';
+import Config from 'config';
+import { Mordor, Tick } from 'Mordor';
+
+import { Context } from 'telegraf';
+import { SlashCommandBuilder } from "discord.js";
+
+import { encode } from 'html-entities';
+import numeral from 'numeral';
+import dayjs from 'dayjs';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-module.exports = {
+
+export const telegram = {
+  usage: encode('/tick [tick=NOW] [timezone=UTC]'),
+  description: 'Calculate when a tick will occur.',
+  cast: (args) => {
+    return new Promise(async (resolve, reject) => {
+      let now_tick = await Tick.findLastTick();
+      let _tick = numeral(args.length > 0 ? args[0] : now_tick.tick).value();
+      if(_tick == null) {
+        reject(`tick provided must be a number`);
+      }
+      else {
+        let now_time = dayjs(now_tick.timestamp).utc();
+        let _timezone = 'UTC';
+        if(args.length > 1) {
+          try {
+            now_time.tz(args[1]);
+            _timezone = args[1];
+          }
+          catch(err) {
+            _timezone = undefined;
+          }
+        }
+
+        if(!_timezone) {
+          reject(`invalid timezone: ${args[1]}`);
+        }
+        else {
+          let reply;
+          if(now_tick.tick === _tick) {
+            reply = `It is currently tick <b>${now_tick.tick}</b> (<i>${now_time.tz(_timezone).format('YYYY-MM-DD H:mm z')}</i>)`;
+          }
+          else {
+            now_time = now_time.add(_tick - now_tick.tick, 'hour');
+            if(_tick > now_tick.tick) {
+              reply = `Tick <b>${_tick}</b> will happen in ${_tick - now_tick.tick} ticks (<i>${now_time.tz(_timezone).format('YYYY-MM-DD H:mm z')}</i>)`;
+            }
+            else {
+              reply = `Tick <b>${_tick}</b> happened ${now_tick.tick - _tick} ticks ago (<i>${now_time.tz(_timezone).format('YYYY-MM-DD H:mm z')}</i>)`;
+            }
+          }
+          resolve(reply);
+        }
+      }
+    });
+  }
+};
+
+export const discord = {
   data: new SlashCommandBuilder()
     .setName('tick')
     .setDescription('Shows when the given tick will happen.')

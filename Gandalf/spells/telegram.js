@@ -21,10 +21,10 @@
  **/
 'use strict';
 
-import Tick from './tick.tg';
-import Links from './links.tg';
-import Launch from './launch.tg';
-import Ship from './ship.tg';
+import { telegram as Tick } from './tick.js';
+import { telegram as Links } from './links.js';
+import { telegram as Launch } from './launch.js';
+import { telegram as Ship } from './ship.js';
 
 export default {
   Tick,

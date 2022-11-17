@@ -15,21 +15,70 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name tick.ds
- * @version 2022/10/26
+ * @name ship.js
+ * @version 2022/11/17
  * @summary Gandalf Spells
  **/
 'use strict';
 
-const Config = require('config').get('config');
-const { SlashCommandBuilder } = require('discord.js');
-const {encode} = require('html-entities');
-//const dayjs = require('dayjs');
+import { NODE_CONFIG_DIR, SUPPRESS_NO_CONFIG_WARNING } from '../env.js';
+import Config from 'config';
+import { Mordor, Tick, Ship } from 'Mordor';
 
-const Ship = require('../../Mordor/models/Ship');
+import { Context } from 'telegraf';
+import { SlashCommandBuilder } from "discord.js";
+
+import { encode } from 'html-entities';
+import numeral from 'numeral';
+import dayjs from 'dayjs';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+dayjs.extend(advancedFormat);
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 
-module.exports = {
+export const telegram = {
+  usage: encode('/ship <ship>'),
+  description: 'Returns the stats of the specified ship.',
+  cast: (args) => {
+    return new Promise(function(resolve, reject) {
+      if (!Array.isArray(args) || args.length < 1) { reject(Ships_ship_usage); }
+      let _ship = args[0];
+      //console.log(`ARGS: ship=${_ship}`);
+
+      Ship.find().then((ships) => {
+        //console.log(ships);
+        let ship = ships.find(s => s.name.toLowerCase().startsWith(_ship.toLowerCase()) );
+        if(!ship) {
+          reject(`Cannot find ship ${_ship}`);
+        } else {
+          let reply = `${ship.name} (${ship.race}) is class ${ship.class} | Target 1: ${ship.target1}`;
+          if(ship.target2 != '-') {
+            reply += ` | Target 2: ${ship.target2}`;
+          }
+          if(ship.target3 != '-') {
+            reply += ` | Target 3: ${ship.target3}`;
+          }
+          reply += ` | Type: ${ship.type} | Init: ${ship.initiative}`;
+          reply += ` | EMPres: ${ship.empres}`;
+
+          if(ship.type.toLowerCase() == 'emp') {
+            reply += ` | Guns: ${ship.guns}`;
+          } else {
+            reply += ` | D/C: ${Math.trunc(Number(ship.damage)*10000/(Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
+          }
+          reply += ` | A/C: ${Math.trunc(Number(ship.armor)*10000/(Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
+          resolve(reply);
+        }
+      }).catch((err) => { reject(err); });
+    });
+  }
+};
+
+
+export const discord = {
   data: new SlashCommandBuilder()
     .setName('ship')
     .setDescription('Shows the stats of the specified ship.')

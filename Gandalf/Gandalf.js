@@ -27,8 +27,8 @@ import { Mordor } from 'Mordor';
 import minimist from 'minimist';
 import util from 'util';
 
-import * as TG_Spells from './spells/telegram.js';
-import * as DS_Spells from './spells/discord.js';
+import tgSpells from './spells/telegram.js';
+import dsSpells from './spells/discord.js';
 
 let argv = minimist(process.argv.slice(2), {
   string: [],
@@ -42,12 +42,12 @@ import { Context, Telegraf } from 'telegraf';
 import { Client, Collection, Events, REST } from 'discord.js';
 
 let tgCommands = {};
-Config.telegram.commands.forEach(function(name) { Object.assign(tgCommands, TG_Spells); });
+Config.telegram.commands.forEach(function(name) { Object.assign(tgCommands, tgSpells); });
 
 let dscmds = []; //temporary for registering commands in discord
 let dsCommands = new Collection();
 Config.discord.commands.forEach(function(name) {
-  const cmd = DS_Spells;
+  const cmd = dsSpells;
   if('data' in cmd && 'execute' in cmd) {
     dsCommands.set(cmd.data.name, cmd);
     dscmds.push(cmd.data.toJSON());
