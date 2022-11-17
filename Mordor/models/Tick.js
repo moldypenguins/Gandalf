@@ -21,11 +21,11 @@
  **/
 'use strict';
 
-const Mordor  = require('mongoose');
-const dayjs = require('dayjs');
+import mongoose from "mongoose";
+import dayjs from "dayjs";
 
-let TickSchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
+let TickSchema = new mongoose.Schema({
+  _id:        {type:mongoose.Schema.Types.ObjectId, required:true},
   tick:       {type:Number, unique:true, index:true, required:true},
   timestamp:  {type:Date, default: () => dayjs().utc().minute(0).second(0).millisecond(0)},
   galaxies:   {type:Number},
@@ -44,4 +44,4 @@ TickSchema.statics.findLastTick = function () {
   return this.findOne().sort({ tick: -1 });
 }
 
-module.exports = Mordor.model('Tick', TickSchema, 'Ticks');
+export default mongoose.model('Tick', TickSchema, 'Ticks');

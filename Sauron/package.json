@@ -1,19 +1,15 @@
 {
   "name": "sauron",
-  "description": "Planetarion Tools - Web",
-  "main": "./Sauron.js",
+  "private": true,
   "version": "1.0.0-alpha",
+  "type": "module",
   "dependencies": {
     "@popperjs/core": "^2.11.6",
-    "bent": "^7.3.12",
-    "body-parser": "^1.20.1",
     "bootstrap": "^5.2.2",
     "config": "^3.3.8",
-    "cors": "^2.8.5",
     "dayjs": "^1.11.6",
     "express": "^4.18.2",
     "html-entities": "^2.3.3",
-    "minimist": "^1.2.7",
     "mongoose": "^6.7.2",
     "mordor": "file:../Mordor",
     "numeral": "^2.0.6",
@@ -23,10 +19,10 @@
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.1.2",
-    "eslint": "^8.26.0",
-    "eslint-plugin-vue": "^9.6.0",
-    "sass": "^1.55.0",
-    "vite": "^3.1.8"
+    "@vitejs/plugin-vue": "^3.2.0",
+    "eslint": "^8.27.0",
+    "eslint-plugin-vue": "^9.7.0",
+    "sass": "^1.56.1",
+    "vite": "^3.2.3"
   }
 }

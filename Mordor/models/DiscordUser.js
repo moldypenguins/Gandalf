@@ -21,11 +21,14 @@
  **/
 'use strict';
 
-const Config = require('config').get('config');
-const Mordor  = require('mongoose');
+process.env.NODE_CONFIG_DIR = '../../Galadriel';
+import * as config from 'config';
+import mongoose from 'mongoose';
 
-let DiscordUserSchema = new Mordor.Schema({
-  _id:                   {type:Mordor.Schema.Types.ObjectId, required:true},
+const Config = config.get('config');
+
+let DiscordUserSchema = new mongoose.Schema({
+  _id:                   {type:mongoose.Schema.Types.ObjectId, required:true},
   DiscordUser_id:            {type:Number, unique:true, required:true},
   DiscordUser_first_name:    {type:String},
   DiscordUser_last_name:     {type:String},
@@ -34,5 +37,4 @@ let DiscordUserSchema = new Mordor.Schema({
   DiscordUser_language_code: {type:String},
 });
 
-
-module.exports = Mordor.model('DiscordUser', DiscordUserSchema, 'DiscordUsers');
+export default mongoose.model('DiscordUser', DiscordUserSchema, 'DiscordUsers');

@@ -21,13 +21,14 @@
  **/
 'use strict';
 
-process.env["NODE_CONFIG_DIR"] = '../../Galadriel';
+process.env.NODE_CONFIG_DIR = '../../Galadriel';
+import * as config from 'config';
+import mongoose from 'mongoose';
 
-const Config = require('config').get('config');
-const Mordor  = require('mongoose');
+const Config = config.get('config');
 
-let TelegramUserSchema = new Mordor.Schema({
-  _id:                   {type:Mordor.Schema.Types.ObjectId, required:true},
+let TelegramUserSchema = new mongoose.Schema({
+  _id:                   {type:mongoose.Schema.Types.ObjectId, required:true},
   TelegramUser_id:            {type:Number, unique:true, required:true},
   TelegramUser_first_name:    {type:String},
   TelegramUser_last_name:     {type:String},
@@ -49,4 +50,4 @@ TelegramUserSchema.virtual('tg_name')
 });
 */
 
-module.exports = Mordor.model('TelegramUser', TelegramUserSchema, 'TelegramUsers');
+export default mongoose.model('TelegramUser', TelegramUserSchema, 'TelegramUsers');

@@ -3,12 +3,12 @@
   "description": "Planetarion Tools - Database",
   "main": "./mordor.js",
   "version": "1.0.0-alpha",
+  "type": "module",
   "dependencies": {
     "config": "^3.3.8",
     "dayjs": "^1.11.6",
     "mongoose": "^6.7.2",
     "mongoose-autopopulate": "^0.16.1"
-
   },
   "devDependencies": {
     "eslint": "^8.26.0"

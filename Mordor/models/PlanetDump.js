@@ -21,10 +21,10 @@
  **/
 'use strict';
 
-const Mordor  = require('mongoose');
+import mongoose from 'mongoose';
 
-let PlanetDumpSchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
+let PlanetDumpSchema = new mongoose.Schema({
+  _id:        {type:mongoose.Schema.Types.ObjectId, required:true},
   planet_id:  {type:String, index:true},
   x:          {type:Number, required:true},
   y:          {type:Number, required:true},
@@ -39,4 +39,4 @@ let PlanetDumpSchema = new Mordor.Schema({
   special:    {type: String},
 });
 
-module.exports = Mordor.model('PlanetDump', PlanetDumpSchema, 'PlanetDumps');
+export default mongoose.model('PlanetDump', PlanetDumpSchema, 'PlanetDumps');

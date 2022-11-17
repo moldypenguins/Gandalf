@@ -16,34 +16,44 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name mordor.js
- * @version 2022/10/24
+ * @version 2022/11/16
  * @summary Database
  **/
 'use strict';
 
-process.env["NODE_CONFIG_DIR"] = '../Galadriel';
+import * as config from 'config';
+import mongoose from 'mongoose';
+import AllianceDump from './models/AllianceDump.js';
+import DiscordGuild from './models/DiscordGuild.js';
+import DiscordUser from './models/DiscordUser.js';
+import GalaxyDump from './models/GalaxyDump.js';
+import Member from './models/Member.js';
+import PlanetDump from './models/PlanetDump.js';
+import Ship from './models/Ship.js';
+import TelegramChat from './models/TelegramChat.js';
+import TelegramUser from './models/TelegramUser.js';
+import Tick from './models/Tick.js';
 
-const Config = require('config').get('config');
-const Mordor  = require('mongoose');
+const Config = config.get('config');
 
-Mordor.connect(`${Config.db.uri}/${Config.db.name}`).catch(err => console.log(err.reason));
-Mordor.connection.on("error", () => {
+mongoose.connect(`${Config.db.uri}/${Config.db.name}`).catch(err => console.log(err.reason));
+mongoose.connection.on("error", () => {
   console.log("Error: database connection failed.");
 });
-Mordor.connection.once("connected", () => {
+mongoose.connection.once("connected", () => {
   console.log("Evil is stirring in Mordor.");
 });
 
-module.exports = {
-  "Mordor": Mordor,
-  "AllianceDump": require("./models/AllianceDump.js"),
-  "DiscordGuild": require("./models/DiscordGuild.js"),
-  "DiscordUser": require("./models/DiscordUser.js"),
-  "GalaxyDump": require("./models/GalaxyDump.js"),
-  "Member": require("./models/Member.js"),
-  "PlanetDump": require("./models/PlanetDump.js"),
-  "Ship": require("./models/AllianceDump.js"),
-  "TelegramChat": require("./models/AllianceDump.js"),
-  "TelegramUser": require("./models/AllianceDump.js"),
-  "Tick": require("./models/AllianceDump.js")
+export {
+  mongoose as Mordor,
+  AllianceDump,
+  DiscordGuild,
+  DiscordUser,
+  GalaxyDump,
+  Member,
+  PlanetDump,
+  Ship,
+  TelegramChat,
+  TelegramUser,
+  Tick
 };

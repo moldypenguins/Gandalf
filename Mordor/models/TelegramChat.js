@@ -21,14 +21,14 @@
  **/
 'use strict';
 
-const Mordor  = require('mongoose');
+import mongoose from 'mongoose';
 
-let TelegramChatSchema = new Mordor.Schema({
-  _id:                      {type:Mordor.Schema.Types.ObjectId, required:true},
+let TelegramChatSchema = new mongoose.Schema({
+  _id:                      {type:mongoose.Schema.Types.ObjectId, required:true},
   TelegramChat_id:          {type:String, unique:true, required:true},
   TelegramChat_type:        {type:String, required: true},
   TelegramChat_title:       {type:String},
   TelegramChat_description: {type:String},
 });
 
-module.exports = Mordor.model('TelegramChat', TelegramChatSchema, 'TelegramChats');
+export default mongoose.model('TelegramChat', TelegramChatSchema, 'TelegramChats');

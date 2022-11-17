@@ -55,18 +55,16 @@ module.exports = {
       time: true,
       wait_ready: true
     },
-    /*
     {
       namespace: "MiddleEarth",
       name   : "Sauron",
       cwd: "./Sauron",
-      script : "./sauron.js",
+      script : "sauron.js",
       instance_var: 'INSTANCE_ID',
       watch: true,
-      time: true,
-      wait_ready: true
-    },
-    */
+      time: true//,
+      //wait_ready: true
+    }
   ],
   deploy : {
     production : {

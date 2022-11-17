@@ -21,14 +21,14 @@
  **/
 'use strict';
 
-const Mordor  = require('mongoose');
+import mongoose from 'mongoose';
 
-let DiscordGuildSchema = new Mordor.Schema({
-  _id:                      {type:Mordor.Schema.Types.ObjectId, required:true},
+let DiscordGuildSchema = new mongoose.Schema({
+  _id:                      {type:mongoose.Schema.Types.ObjectId, required:true},
   DiscordGuild_id:          {type:String, unique:true, required:true},
   DiscordGuild_type:        {type:String, required: true},
   DiscordGuild_title:       {type:String},
   DiscordGuild_description: {type:String},
 });
 
-module.exports = Mordor.model('DiscordGuilds', DiscordGuildSchema, 'DiscordGuilds');
+export default mongoose.model('DiscordGuilds', DiscordGuildSchema, 'DiscordGuilds');

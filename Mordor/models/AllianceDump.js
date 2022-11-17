@@ -21,10 +21,10 @@
  **/
 'use strict';
 
-const Mordor  = require('mongoose');
+import mongoose from 'mongoose';
 
-let AllianceDumpSchema = new Mordor.Schema({
-  _id:           {type:Mordor.Schema.Types.ObjectId, required:true},
+let AllianceDumpSchema = new mongoose.Schema({
+  _id:           {type:mongoose.Schema.Types.ObjectId, required:true},
   rank:          {type:Number, required:true},
   name:          {type:String, required:true, trim:true},
   size:          {type:Number},
@@ -35,4 +35,4 @@ let AllianceDumpSchema = new Mordor.Schema({
   total_value:   {type:Number},
 });
 
-module.exports = Mordor.model('AllianceDump', AllianceDumpSchema, 'AllianceDumps');
+export default mongoose.model('AllianceDump', AllianceDumpSchema, 'AllianceDumps');

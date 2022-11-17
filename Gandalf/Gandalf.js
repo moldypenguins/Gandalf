@@ -21,12 +21,11 @@
  **/
 'use strict';
 
-process.env["NODE_CONFIG_DIR"] = '../Galadriel';
-
-const util = require('util');
+process.env.NODE_CONFIG_DIR = '../Galadriel';
 const Config = require('config').get('config');
 const { Mordor } = require('Mordor');
 const minimist = require('minimist');
+const util = require('util');
 
 let argv = minimist(process.argv.slice(2), {
   string: [],
@@ -172,6 +171,3 @@ Mordor.connection.once("open", async () => {
   });
 
 });
-
-
-

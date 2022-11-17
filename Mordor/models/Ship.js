@@ -21,10 +21,10 @@
  **/
 'use strict';
 
-const Mordor  = require('mongoose');
+import mongoose from 'mongoose';
 
-let ShipSchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
+let ShipSchema = new mongoose.Schema({
+  _id:        {type:mongoose.Schema.Types.ObjectId, required:true},
   ship_id:    {type:Number, unique:true, required:true},
   name:       {type:String, index:true, required:true},
   race:       {type:String, required:true},
@@ -46,4 +46,4 @@ let ShipSchema = new Mordor.Schema({
   baseeta:    {type:String}
 });
 
-module.exports = Mordor.model('Ship', ShipSchema, 'Ships');
+export default mongoose.model('Ship', ShipSchema, 'Ships');

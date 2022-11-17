@@ -22,18 +22,16 @@
  **/
 'use strict';
 
-process.env["NODE_CONFIG_DIR"] = '../Galadriel';
+process.env.NODE_CONFIG_DIR = '../Galadriel';
 
-const util = require('util');
-const Config = require('config').get('config');
-const dayjs = require('dayjs');
-const bent = require('bent');
-const getStream = bent('string');
-const convert = require('xml-js');
-const minimist = require('minimist');
+import * as config from 'config';
+import dayjs from 'dayjs';
+import axios from 'axios';
+import X2JS from 'x2js';
+import minimist from 'minimist';
+import { Mordor, Ship, Tick } from 'Mordor';
 
-const { Mordor, Ship, Tick } = require('Mordor');
-
+const Config = config.get('config');
 
 let argv = minimist(process.argv.slice(2), {
   string: ['start'],
@@ -66,24 +64,27 @@ let clear_database = async() => {
 };
 
 let load_ships = async() => {
-  let stream = await getStream(Config.pa.dumps.ship_stats);
-  let json = JSON.parse(convert.xml2json(stream, {
-      compact: true,
-      nativeType: false,
-      spaces: 0,
-      textFn: removeJsonTextAttribute
-    }));
-  // load each one in to the database
-  let ship_id = 0;
-  for (let json_ship of json["stats"]["ship"]) {
-    let ship = new Ship(json_ship);
-    ship._id = Mordor.Types.ObjectId();
-    ship.ship_id = ship_id++; // set primary key
-    let saved = await ship.save();
-    if (saved) {
-      console.log(`${saved.name} saved to Ships collection!`);
-    } else {
-      console.error(`${json_ship["name"]} could not be saved!`)
+  let shipstats;
+  try {
+    shipstats = await axios.get(Config.pa.dumps.ship_stats);
+  } catch (error) {
+    console.error(error);
+  }
+  if(shipstats !== undefined) {
+    let x2js = new X2JS();
+    let json = JSON.parse(x2js.xml2js(shipstats));
+    // load each one in to the database
+    let ship_id = 0;
+    for (let json_ship of json["stats"]["ship"]) {
+      let ship = new Ship(json_ship);
+      ship._id = Mordor.Types.ObjectId();
+      ship.ship_id = ship_id++; // set primary key
+      let saved = await ship.save();
+      if (saved) {
+        console.log(`${saved.name} saved to Ships collection!`);
+      } else {
+        console.error(`${json_ship["name"]} could not be saved!`)
+      }
     }
   }
 };

@@ -24,24 +24,24 @@
  **/
 'use strict';
 
-process.env["NODE_CONFIG_DIR"] = '../Galadriel';
-
-const util = require('util');
-const Config = require('config').get('config');
-const dayjs = require("dayjs");
-const utc = require('dayjs/plugin/utc');
-const timezone = require('dayjs/plugin/timezone');
+process.env.NODE_CONFIG_DIR = '../Galadriel';
+import config from 'config';
+import axios from 'axios';
+import schedule from 'node-schedule';
+import minimist from 'minimist';
+import util from 'util';
+import dayjs from 'dayjs';
+import advancedFormat from 'dayjs/plugin/advancedFormat.js';
+import utc from 'dayjs/plugin/utc.js';
+import timezone from 'dayjs/plugin/timezone.js';
+dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
-const bent = require('bent');
-const getStream = bent('string');
-const schedule = require('node-schedule');
-const rule = new schedule.RecurrenceRule();
-const minimist = require('minimist');
 
-const {
-  Mordor, Tick, PlanetDump, GalaxyDump, AllianceDump, //UserFeed
-} = require('Mordor');
+const Config = config.get('config');
+const rule = new schedule.RecurrenceRule();
+
+import { Mordor, Tick, PlanetDump, GalaxyDump, AllianceDump } from 'Mordor';
 
 
 let argv = minimist(process.argv.slice(2), {
@@ -120,10 +120,15 @@ let process_tick = async (last_tick, start_time) => {
 
   //get dump files
   console.log('Getting dump files...');
-  let planet_dump = await getStream(Config.pa.dumps.planet);
-  let galaxy_dump = await getStream(Config.pa.dumps.galaxy);
-  let alliance_dump = await getStream(Config.pa.dumps.alliance);
-  //let user_dump = await getStream(Config.pa.dumps.user);
+  let planet_dump, galaxy_dump, alliance_dump, user_dump;
+  try {
+    planet_dump = await axios.get(Config.pa.dumps.planet);
+    galaxy_dump = await axios.get(Config.pa.dumps.galaxy);
+    alliance_dump = await axios.get(Config.pa.dumps.alliance);
+    //user_dump = await axios.get(Config.pa.dumps.user);
+  } catch (error) {
+    console.error(error);
+  }
   current_ms = (new Date()) - start_time;
   console.log(`Loaded dumps from webserver in: ${current_ms - total_ms}ms`);
   total_ms += current_ms - total_ms;

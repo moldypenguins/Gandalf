@@ -21,19 +21,21 @@
  **/
 'use strict';
 
-process.env["NODE_CONFIG_DIR"] = '../../Galadriel';
+process.env.NODE_CONFIG_DIR = '../../Galadriel';
+import * as config from 'config';
+import mongoose from 'mongoose';
+import mongooseAutoPopulate from 'mongoose-autopopulate';
 
-const Config = require('config').get('config');
-const Mordor  = require('mongoose');
+const Config = config.get('config');
 
-let MemberSchema = new Mordor.Schema({
-  _id:             {type:Mordor.Schema.Types.ObjectId, required:true},
+let MemberSchema = new mongoose.Schema({
+  _id:             {type:mongoose.Schema.Types.ObjectId, required:true},
   pa_nick:         {type:String, trim:true, unique:true, index:true, required:true},
-  telegram_user:   {type:Mordor.Schema.Types.ObjectId, ref:'TelegramUser', autopopulate: true},
-  discord_user:    {type:Mordor.Schema.Types.ObjectId, ref:'DiscordUser'},
+  telegram_user:   {type:mongoose.Schema.Types.ObjectId, ref:'TelegramUser', autopopulate: true},
+  discord_user:    {type:mongoose.Schema.Types.ObjectId, ref:'DiscordUser'},
   access:          {type:Number, default:0, required:true},
   roles:           {type:Number, default:0, required:true},
-  parent:          {type:Mordor.Schema.Types.ObjectId, ref:'Member'},
+  parent:          {type:mongoose.Schema.Types.ObjectId, ref:'Member'},
   birthed:         {type:Date, default:Date.now(), required:true},
   photo_url:       {type:String, default:Config.web.uri + '/' + Config.web.default_profile_pic},
   site_theme:      {type:String, default:'default', required:true},
@@ -42,13 +44,13 @@ let MemberSchema = new Mordor.Schema({
   timezone:        {type:String},
   email:           {type:String},
   phone:           {type:String},
-  planet:          {type:Mordor.Schema.Types.ObjectId, ref:'Planet', autopopulate: true},
+  planet:          {type:mongoose.Schema.Types.ObjectId, ref:'Planet', autopopulate: true},
 });
 
 MemberSchema.statics.findByTelegramUser = async function(telegram_user) {
   return await this.findOne({telegram_user: telegram_user});
 }
 
-MemberSchema.plugin(require('mongoose-autopopulate'));
+MemberSchema.plugin(mongooseAutoPopulate);
 
-module.exports = Mordor.model('Member', MemberSchema, 'Members');
+export default mongoose.model('Member', MemberSchema, 'Members');
