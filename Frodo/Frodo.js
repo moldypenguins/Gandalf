@@ -24,8 +24,8 @@
  **/
 'use strict';
 
-process.env.NODE_CONFIG_DIR = '../Galadriel';
-import config from 'config';
+import { NODE_CONFIG_DIR, SUPPRESS_NO_CONFIG_WARNING } from './env.js';
+import Config from 'config';
 import axios from 'axios';
 import schedule from 'node-schedule';
 import minimist from 'minimist';
@@ -38,7 +38,6 @@ dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const Config = config.get('config');
 const rule = new schedule.RecurrenceRule();
 
 import { Mordor, Tick, PlanetDump, GalaxyDump, AllianceDump } from 'Mordor';
@@ -107,7 +106,7 @@ Mordor.connection.once("open", async () => {
       }
     } //end while
   });
-  process.send('ready');
+  //process.send('ready');
 });
 
 

@@ -21,12 +21,10 @@
  **/
 'use strict';
 
-process.env.NODE_CONFIG_DIR = '../../Galadriel';
-import * as config from 'config';
+import { NODE_CONFIG_DIR, SUPPRESS_NO_CONFIG_WARNING } from '../env.js';
+import Config from 'config';
 import mongoose from 'mongoose';
 import mongooseAutoPopulate from 'mongoose-autopopulate';
-
-const Config = config.get('config');
 
 let MemberSchema = new mongoose.Schema({
   _id:             {type:mongoose.Schema.Types.ObjectId, required:true},

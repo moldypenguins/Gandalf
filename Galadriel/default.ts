@@ -22,137 +22,135 @@
 import Configuration from "./config";
 
 const config: Configuration = {
-  config: {
-    alliance: {
-      name: null,
-      attack: {
-        default_waves: 3,
-        after_land_ticks: 2,
-        max_claims: 0
-      }
-    },
-    discord: {
-      owner: null,
-      token: null,
-      client_id: null,
-      guild_id: null,
-      commands: null
-    },
-    telegram: {
-      owner: null,
-      token: null,
-      username: null,
-      group_id: null,
-      commands: null
-    },
-    twilio: {
-      url: 'https://demo.twilio.com/welcome/voice/',
-      sid: null,
-      secret: null,
-      number: null,
-      ring_timeout: 30
-    },
-    db: {
-      uri: 'mongodb://localhost:27017',
-      name: 'Mordor'
-    },
-    web: {
-      port: 8080,
-      uri: null,
-      session: null,
-      default_profile_pic:'/images/member.jpg',
-      default_theme: 'affleck',
-      themes: {
-        affleck: { name: 'Affleck', navbar: 'light' },
-        murphy: { name: 'Murphy', navbar: 'dark' },
-        shamrock: { name: 'Shamrock', navbar: 'light' },
-        telegram: { name: 'Telegram', navbar: 'light' },
-        thematrix: { name: 'The Matrix', navbar: 'dark' },
-        ultimate: { name: 'Ultimate', navbar: 'dark' },
-      }
-    },
-    access: {
-      0: "None",
-      1: "Member",
-      3: "Commander",
-      5: "Administrator",
-    },
-    roles:{
-      0x1: "OOT",
-      0x2: "Scanner",
-      0x4: "BattleCommander",
-      0x8: "DefenceCommander",
-      0x16: "HighCommander"
-    },
-    pa: {
-      links: {
-        game: 'https://game.planetarion.com',
-        scans: 'https://game.planetarion.com/showscan.pl',
-        bcalc: 'https://game.planetarion.com/bcalc.pl'
-      },
-      dumps: {
-        ship_stats: 'https://game.planetarion.com/manual.pl?action=statsxml',
-        planet: 'https://game.planetarion.com/botfiles/planet_listing.txt',
-        galaxy: 'https://game.planetarion.com/botfiles/galaxy_listing.txt',
-        alliance: 'https://game.planetarion.com/botfiles/alliance_listing.txt',
-        user: 'https://game.planetarion.com/botfiles/user_feed.txt'
-      },
-      tick: {
-        start: 0,
-        shuffle: 12,
-        protection: 24,
-        end: 1177
-      },
-      numbers: {
-        tag_total: 60,
-        tag_count: 40,
-        roid_value: 200,
-        cons_value: 200,
-        res_value: 150,
-        ship_value: 100,
-        xp_value: 60
-      },
-      ships:{
-        min_uni_eta: 8,
-        targets:{
-          t1: "target1",
-          t2: "target2",
-          t3: "target3"
-        },
-        damagetypes:{
-          normal: "kill",
-          cloak: "kill",
-          steal: "steal",
-          emp: "hug",
-          pod: "capture",
-          structure: "destroy"
-        },
-        targeteffs:{
-          "target1": 1,
-          "target2": 0.7,
-          "target3": 0.5
-        },
-        classes: {
-          fi: "Fighter",
-          co: "Corvette",
-          fr: "Frigate",
-          de: "Destroyer",
-          cr: "Cruiser",
-          bs: "Battleship"
-        },
-      },
-      roids: {
-        maxcap: 0.2,
-        mincap: 0,
-        mining: 250
-      },
-      bash: {
-        value: 0.4,
-        score: 0.6
-      },
+  alliance: {
+    name: null,
+    attack: {
+      default_waves: 3,
+      after_land_ticks: 2,
+      max_claims: 0
     }
+  },
+  discord: {
+    owner: null,
+    token: null,
+    client_id: null,
+    guild_id: null,
+    commands: null
+  },
+  telegram: {
+    owner: null,
+    token: null,
+    username: null,
+    group_id: null,
+    commands: null
+  },
+  twilio: {
+    url: 'https://demo.twilio.com/welcome/voice/',
+    sid: null,
+    secret: null,
+    number: null,
+    ring_timeout: 30
+  },
+  db: {
+    uri: 'mongodb://localhost:27017',
+    name: 'Mordor'
+  },
+  web: {
+    port: 8080,
+    uri: null,
+    session: null,
+    default_profile_pic:'/images/member.jpg',
+    default_theme: 'affleck',
+    themes: {
+      affleck: { name: 'Affleck', navbar: 'light' },
+      murphy: { name: 'Murphy', navbar: 'dark' },
+      shamrock: { name: 'Shamrock', navbar: 'light' },
+      telegram: { name: 'Telegram', navbar: 'light' },
+      thematrix: { name: 'The Matrix', navbar: 'dark' },
+      ultimate: { name: 'Ultimate', navbar: 'dark' },
+    }
+  },
+  access: {
+    0: "None",
+    1: "Member",
+    3: "Commander",
+    5: "Administrator",
+  },
+  roles:{
+    0x1: "OOT",
+    0x2: "Scanner",
+    0x4: "BattleCommander",
+    0x8: "DefenceCommander",
+    0x16: "HighCommander"
+  },
+  pa: {
+    links: {
+      game: 'https://game.planetarion.com',
+      scans: 'https://game.planetarion.com/showscan.pl',
+      bcalc: 'https://game.planetarion.com/bcalc.pl'
+    },
+    dumps: {
+      ship_stats: 'https://game.planetarion.com/manual.pl?action=statsxml',
+      planet: 'https://game.planetarion.com/botfiles/planet_listing.txt',
+      galaxy: 'https://game.planetarion.com/botfiles/galaxy_listing.txt',
+      alliance: 'https://game.planetarion.com/botfiles/alliance_listing.txt',
+      user: 'https://game.planetarion.com/botfiles/user_feed.txt'
+    },
+    tick: {
+      start: 0,
+      shuffle: 12,
+      protection: 24,
+      end: 1177
+    },
+    numbers: {
+      tag_total: 60,
+      tag_count: 40,
+      roid_value: 200,
+      cons_value: 200,
+      res_value: 150,
+      ship_value: 100,
+      xp_value: 60
+    },
+    ships:{
+      min_uni_eta: 8,
+      targets:{
+        t1: "target1",
+        t2: "target2",
+        t3: "target3"
+      },
+      damagetypes:{
+        normal: "kill",
+        cloak: "kill",
+        steal: "steal",
+        emp: "hug",
+        pod: "capture",
+        structure: "destroy"
+      },
+      targeteffs:{
+        "target1": 1,
+        "target2": 0.7,
+        "target3": 0.5
+      },
+      classes: {
+        fi: "Fighter",
+        co: "Corvette",
+        fr: "Frigate",
+        de: "Destroyer",
+        cr: "Cruiser",
+        bs: "Battleship"
+      },
+    },
+    roids: {
+      maxcap: 0.2,
+      mincap: 0,
+      mining: 250
+    },
+    bash: {
+      value: 0.4,
+      score: 0.6
+    },
   }
-};
+}
 
 export default config;
 

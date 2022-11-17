@@ -21,64 +21,62 @@
  **/
 
 export default interface Configuration {
-  config : {
-    alliance: {
-      name: string;
-      attack?: {
-        default_waves?: number;
-        after_land_ticks?: number;
-        max_claims?: number;
-      }
-    };
-    discord?: {
-      owner: string,
-      token: string;
-      client_id: string;
-      guild_id: string;
-      commands: string[];
-    };
-    telegram?: {
-      owner: string,
-      token: string;
-      username: string;
-      group_id: string;
-      commands: string[];
-    };
-    twilio?: {
-      url?: string;
-      sid: string;
-      secret: string;
-      number: string;
-      ring_timeout?: number;
-    };
-    db?: {
-      uri?: string;
-      name?: string;
-    },
-    web: {
-      port?: number;
-      uri: string;
-      session: string;
-      default_profile_pic?: string;
-      default_theme: string;
-      themes?: { [key: string]: { name: string; navbar: string }; }
-    },
-    access?: { [key: number]: string; },
-    roles?:{ [key: number]: string; },
-    pa?: {
-      links?: { [key: string]: string; },
-      dumps?: { [key: string]: string; },
-      tick?: { [key: string]: number; },
-      numbers?: { [key: string]: number; },
-      ships?:{
-        min_uni_eta?: number;
-        targets?:{ [key: string]: string; },
-        damagetypes?:{ [key: string]: string; },
-        targeteffs?:{ [key: string]: number; },
-        classes?: { [key: string]: string; },
-      },
-      roids?: { [key: string]: number; },
-      bash?: { [key: string]: number; },
+  alliance: {
+    name: string;
+    attack?: {
+      default_waves?: number;
+      after_land_ticks?: number;
+      max_claims?: number;
     }
+  };
+  discord?: {
+    owner: string,
+    token: string;
+    client_id: string;
+    guild_id: string;
+    commands: string[];
+  };
+  telegram?: {
+    owner: string,
+    token: string;
+    username: string;
+    group_id: string;
+    commands: string[];
+  };
+  twilio?: {
+    url?: string;
+    sid: string;
+    secret: string;
+    number: string;
+    ring_timeout?: number;
+  };
+  db?: {
+    uri?: string;
+    name?: string;
+  },
+  web: {
+    port?: number;
+    uri: string;
+    session: string;
+    default_profile_pic?: string;
+    default_theme: string;
+    themes?: { [key: string]: { name: string; navbar: string }; }
+  },
+  access?: { [key: number]: string; },
+  roles?:{ [key: number]: string; },
+  pa?: {
+    links?: { [key: string]: string; },
+    dumps?: { [key: string]: string; },
+    tick?: { [key: string]: number; },
+    numbers?: { [key: string]: number; },
+    ships?:{
+      min_uni_eta?: number;
+      targets?:{ [key: string]: string; },
+      damagetypes?:{ [key: string]: string; },
+      targeteffs?:{ [key: string]: number; },
+      classes?: { [key: string]: string; },
+    },
+    roids?: { [key: string]: number; },
+    bash?: { [key: string]: number; },
   }
 }
