@@ -5,10 +5,9 @@
     "Planetarion"
   ],
   "private": true,
-  "exports": {
-    "#Mordor": "./Mordor/mordor.js"
-  },
   "imports": {
+    "#Galadriel": "./Galadriel/galadriel.js",
+    "#Mordor": "./Mordor/mordor.js",
     "#Bilbo": "./Bilbo/bilbo.js",
     "#Frodo": "./Frodo/frodo.js",
     "#Gandalf": "./Gandalf/gandalf.js",
@@ -17,14 +16,15 @@
   "scripts": {
     "install:bilbo": "cd Bilbo && npm install",
     "install:frodo": "cd Frodo && npm install",
+    "install:galadriel": "cd Galadriel && npm install",
     "install:gandalf": "cd Gandalf && npm install",
     "install:mordor": "cd Mordor && npm install",
     "install:sauron": "cd Sauron && npm install",
-    "install": "npm run install:mordor && npm run install:bilbo && npm run install:frodo && npm run install:gandalf && npm run install:sauron",
-    "start": "pm2 start MiddleEarth.config.js",
-    "restart": "pm2 restart MiddleEarth.config.js",
-    "stop": "pm2 stop MiddleEarth.config.js",
-    "delete": "pm2 delete MiddleEarth.config.js",
+    "install": "npm run install:mordor && npm run install:galadriel && npm run install:bilbo && npm run install:frodo && npm run install:gandalf && npm run install:sauron",
+    "start": "pm2 start MiddleEarth.js",
+    "restart": "pm2 restart MiddleEarth.js",
+    "stop": "pm2 stop MiddleEarth.js",
+    "delete": "pm2 delete MiddleEarth.js",
     "list": "pm2 list",
     "watch": "pm2 monit"
   },

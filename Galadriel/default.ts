@@ -19,9 +19,9 @@
  * @version 2022/11/16
  * @summary default configuration file
  **/
-import Configuration from "./config";
+import Configuration from "./configuration";
 
-const config: Configuration = {
+const configDefault: Configuration = {
   alliance: {
     name: null,
     attack: {
@@ -59,15 +59,15 @@ const config: Configuration = {
     port: 8080,
     uri: null,
     session: null,
-    default_profile_pic:'/images/member.jpg',
+    default_profile_pic: '/images/member.jpg',
     default_theme: 'affleck',
     themes: {
-      affleck: { name: 'Affleck', navbar: 'light' },
-      murphy: { name: 'Murphy', navbar: 'dark' },
-      shamrock: { name: 'Shamrock', navbar: 'light' },
-      telegram: { name: 'Telegram', navbar: 'light' },
-      thematrix: { name: 'The Matrix', navbar: 'dark' },
-      ultimate: { name: 'Ultimate', navbar: 'dark' },
+      affleck: {name: 'Affleck', navbar: 'light'},
+      murphy: {name: 'Murphy', navbar: 'dark'},
+      shamrock: {name: 'Shamrock', navbar: 'light'},
+      telegram: {name: 'Telegram', navbar: 'light'},
+      thematrix: {name: 'The Matrix', navbar: 'dark'},
+      ultimate: {name: 'Ultimate', navbar: 'dark'},
     }
   },
   access: {
@@ -76,7 +76,7 @@ const config: Configuration = {
     3: "Commander",
     5: "Administrator",
   },
-  roles:{
+  roles: {
     0x1: "OOT",
     0x2: "Scanner",
     0x4: "BattleCommander",
@@ -111,14 +111,14 @@ const config: Configuration = {
       ship_value: 100,
       xp_value: 60
     },
-    ships:{
+    ships: {
       min_uni_eta: 8,
-      targets:{
+      targets: {
         t1: "target1",
         t2: "target2",
         t3: "target3"
       },
-      damagetypes:{
+      damagetypes: {
         normal: "kill",
         cloak: "kill",
         steal: "steal",
@@ -126,7 +126,7 @@ const config: Configuration = {
         pod: "capture",
         structure: "destroy"
       },
-      targeteffs:{
+      targeteffs: {
         "target1": 1,
         "target2": 0.7,
         "target3": 0.5
@@ -152,6 +152,6 @@ const config: Configuration = {
   }
 }
 
-export default config;
+export default configDefault
 
 

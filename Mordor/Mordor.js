@@ -21,8 +21,7 @@
  **/
 'use strict';
 
-import { NODE_CONFIG_DIR, SUPPRESS_NO_CONFIG_WARNING } from './env.js';
-import Config from 'config';
+import Config from 'galadriel';
 import mongoose from 'mongoose';
 import AllianceDump from './models/AllianceDump.js';
 import DiscordGuild from './models/DiscordGuild.js';
@@ -34,6 +33,8 @@ import Ship from './models/Ship.js';
 import TelegramChat from './models/TelegramChat.js';
 import TelegramUser from './models/TelegramUser.js';
 import Tick from './models/Tick.js';
+
+
 
 mongoose.connect(`${Config.db.uri}/${Config.db.name}`).catch(err => console.log(err.reason));
 mongoose.connection.on("error", () => {

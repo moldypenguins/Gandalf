@@ -2,7 +2,7 @@
   "name": "bilbo",
   "description": "Planetarion Tools - Setup",
   "exports": "./bilbo.js",
-  "version": "1.1.0-alpha",
+  "version": "1.0.0-alpha",
   "type": "module",
   "dependencies": {
     "axios": "^1.1.3",

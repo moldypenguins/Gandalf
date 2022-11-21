@@ -63,17 +63,17 @@ export default interface Configuration {
     themes?: { [key: string]: { name: string; navbar: string }; }
   },
   access?: { [key: number]: string; },
-  roles?:{ [key: number]: string; },
+  roles?: { [key: number]: string; },
   pa?: {
     links?: { [key: string]: string; },
     dumps?: { [key: string]: string; },
     tick?: { [key: string]: number; },
     numbers?: { [key: string]: number; },
-    ships?:{
+    ships?: {
       min_uni_eta?: number;
-      targets?:{ [key: string]: string; },
-      damagetypes?:{ [key: string]: string; },
-      targeteffs?:{ [key: string]: number; },
+      targets?: { [key: string]: string; },
+      damagetypes?: { [key: string]: string; },
+      targeteffs?: { [key: string]: number; },
       classes?: { [key: string]: string; },
     },
     roids?: { [key: string]: number; },

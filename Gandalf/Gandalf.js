@@ -21,9 +21,8 @@
  **/
 'use strict';
 
-import { NODE_CONFIG_DIR, SUPPRESS_NO_CONFIG_WARNING } from './env.js';
-import Config from 'config';
-import { Mordor } from 'Mordor';
+import Config from 'galadriel';
+import { Mordor } from 'mordor';
 import minimist from 'minimist';
 import util from 'util';
 
@@ -39,7 +38,7 @@ let argv = minimist(process.argv.slice(2), {
 });
 
 import { Context, Telegraf } from 'telegraf';
-import { Client, Collection, Events, REST } from 'discord.js';
+import { ActivityType, Client, Collection, Events, GatewayIntentBits, REST } from 'discord.js';
 
 let tgCommands = {};
 Config.telegram.commands.forEach(function(name) { Object.assign(tgCommands, tgSpells); });
@@ -157,13 +156,13 @@ Mordor.connection.once("open", async () => {
   });
   await discordBot.login(Config.discord.token);
 
-  process.send('ready');
+  //process.send('ready');
 
   // Enable graceful stop
   let death = (code) => {
       console.log(`Death Code: ${code}`);
       telegramBot.stop(code);
-      discordBot.close();
+      //discordBot.close(); //TODO: TypeError: discordBot.close is not a function
       process.exit();
   };
   [`SIGINT`, `SIGUSR1`, `SIGUSR2`, `SIGTERM`, `uncaughtException`].forEach((ev) => {

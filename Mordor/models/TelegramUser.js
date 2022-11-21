@@ -21,8 +21,7 @@
  **/
 'use strict';
 
-import { NODE_CONFIG_DIR, SUPPRESS_NO_CONFIG_WARNING } from '../env.js';
-import Config from 'config';
+import Config from 'galadriel';
 import mongoose from 'mongoose';
 
 let TelegramUserSchema = new mongoose.Schema({

@@ -10,6 +10,7 @@
     "ts-node": "^10.9.1",
     "dayjs": "^1.11.6",
     "discord.js": "^14.6.0",
+    "galadriel": "file:../Galadriel",
     "html-entities": "^2.3.3",
     "minimist": "^1.2.7",
     "mongoose": "^6.7.2",

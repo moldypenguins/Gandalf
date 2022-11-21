@@ -26,6 +26,7 @@
 
 import { NODE_CONFIG_DIR, SUPPRESS_NO_CONFIG_WARNING } from './env.js';
 import Config from 'config';
+import { Mordor, Tick, PlanetDump, GalaxyDump, AllianceDump } from 'Mordor';
 import axios from 'axios';
 import schedule from 'node-schedule';
 import minimist from 'minimist';
@@ -37,10 +38,7 @@ import timezone from 'dayjs/plugin/timezone.js';
 dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
-
 const rule = new schedule.RecurrenceRule();
-
-import { Mordor, Tick, PlanetDump, GalaxyDump, AllianceDump } from 'Mordor';
 
 
 let argv = minimist(process.argv.slice(2), {

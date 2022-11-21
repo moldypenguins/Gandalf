@@ -21,9 +21,8 @@
  **/
 'use strict';
 
-import { NODE_CONFIG_DIR, SUPPRESS_NO_CONFIG_WARNING } from '../env.js';
-import Config from 'config';
-import { Mordor, Tick, Ship } from 'Mordor';
+import Config from 'galadriel';
+import { Mordor, Tick, Ship } from 'mordor';
 
 import { Context } from 'telegraf';
 import { SlashCommandBuilder } from "discord.js";
@@ -31,9 +30,9 @@ import { SlashCommandBuilder } from "discord.js";
 import { encode } from 'html-entities';
 import numeral from 'numeral';
 import dayjs from 'dayjs';
-import advancedFormat from 'dayjs/plugin/advancedFormat';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
+import advancedFormat from 'dayjs/plugin/advancedFormat.js';
+import utc from 'dayjs/plugin/utc.js';
+import timezone from 'dayjs/plugin/timezone.js';
 dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
