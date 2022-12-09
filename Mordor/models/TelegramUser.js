@@ -21,17 +21,16 @@
  **/
 'use strict';
 
-import Config from 'galadriel';
 import mongoose from 'mongoose';
 
 let TelegramUserSchema = new mongoose.Schema({
-  _id:                   {type:mongoose.Schema.Types.ObjectId, required:true},
-  TelegramUser_id:            {type:Number, unique:true, required:true},
-  TelegramUser_first_name:    {type:String},
-  TelegramUser_last_name:     {type:String},
-  TelegramUser_username:      {type:String},
-  TelegramUser_photo_url:     {type:String, default:Config.web.uri + '/' + Config.web.default_profile_pic},
-  TelegramUser_language_code: {type:String},
+  _id:              {type:mongoose.Schema.Types.ObjectId, required:true},
+  tguser_id:            {type:Number, unique:true, required:true},
+  tguser_first_name:    {type:String},
+  tguser_last_name:     {type:String},
+  tguser_username:      {type:String},
+  tguser_language_code: {type:String},
+  tguser_photo_url:     {type:String},
 });
 
 /*

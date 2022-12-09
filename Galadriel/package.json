@@ -1,9 +1,11 @@
 {
   "name": "galadriel",
   "description": "Planetarion Tools - Configuration",
-  "main": "galadriel.js",
   "version": "1.0.0-alpha",
   "type": "module",
+  "exports": {
+    ".": "./galadriel.js"
+  },
   "dependencies": {
     "copy-anything": "^3.0.2",
     "merge-anything": "^5.1.3",

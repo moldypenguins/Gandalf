@@ -26,12 +26,12 @@ import mongoose from 'mongoose';
 
 let DiscordUserSchema = new mongoose.Schema({
   _id:                   {type:mongoose.Schema.Types.ObjectId, required:true},
-  DiscordUser_id:            {type:Number, unique:true, required:true},
-  DiscordUser_first_name:    {type:String},
-  DiscordUser_last_name:     {type:String},
-  DiscordUser_username:      {type:String},
-  DiscordUser_photo_url:     {type:String, default:Config.web.uri + '/' + Config.web.default_profile_pic},
-  DiscordUser_language_code: {type:String},
+  dsuser_id:            {type:Number, unique:true, required:true},
+  dsuser_first_name:    {type:String},
+  dsuser_last_name:     {type:String},
+  dsuser_username:      {type:String},
+  dsuser_photo_url:     {type:String, default:Config.web.uri + '/' + Config.web.default_profile_pic},
+  dsuser_language_code: {type:String},
 });
 
 export default mongoose.model('DiscordUser', DiscordUserSchema, 'DiscordUsers');

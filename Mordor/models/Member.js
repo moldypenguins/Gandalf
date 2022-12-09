@@ -24,12 +24,13 @@
 import Config from 'galadriel';
 import mongoose from 'mongoose';
 import mongooseAutoPopulate from 'mongoose-autopopulate';
+import {TelegramUser} from "../mordor.js";
 
 let MemberSchema = new mongoose.Schema({
   _id:             {type:mongoose.Schema.Types.ObjectId, required:true},
   pa_nick:         {type:String, trim:true, unique:true, index:true, required:true},
-  telegram_user:   {type:mongoose.Schema.Types.ObjectId, ref:'TelegramUser', autopopulate: true},
-  discord_user:    {type:mongoose.Schema.Types.ObjectId, ref:'DiscordUser'},
+  tg_user:         {type:mongoose.Schema.Types.ObjectId, ref:'TelegramUser', autopopulate: true},
+  ds_user:         {type:mongoose.Schema.Types.ObjectId, ref:'DiscordUser'},
   access:          {type:Number, default:0, required:true},
   roles:           {type:Number, default:0, required:true},
   parent:          {type:mongoose.Schema.Types.ObjectId, ref:'Member'},
@@ -44,8 +45,12 @@ let MemberSchema = new mongoose.Schema({
   planet:          {type:mongoose.Schema.Types.ObjectId, ref:'Planet', autopopulate: true},
 });
 
-MemberSchema.statics.findByTelegramUser = async function(telegram_user) {
-  return await this.findOne({telegram_user: telegram_user});
+MemberSchema.statics.findByTGUser = async function(tg_user) {
+  return await this.findOne({tg_user: tg_user});
+}
+
+MemberSchema.statics.findByTGId = async function(tg_id) {
+  return await TelegramUser.exists({tg_id: tg_id}) ? await this.findOne({tg_user: await TelegramUser.findOne({tg_id: tg_id})}) : null;
 }
 
 MemberSchema.plugin(mongooseAutoPopulate);

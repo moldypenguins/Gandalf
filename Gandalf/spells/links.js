@@ -39,9 +39,9 @@ dayjs.extend(timezone);
 
 
 export const telegram = {
-  usage: encode('/ship <ship>'),
-  description: 'Returns the stats of the specified ship.',
-  cast: (args) => {
+  usage: encode('/links'),
+  description: 'Returns links',
+  cast: (ctx, args) => {
     return new Promise(async (resolve, reject) => {
       resolve(`<a href="${Config.web.uri}">${Config.alliance.name}</a>\n<a href="${Config.pa.links.game}">Planetarion</a>`);
     });

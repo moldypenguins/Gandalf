@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name config.d.ts
+ * @name types.d.ts
  * @version 2022/11/16
  * @summary configuration declaration file
  **/
 
-export default interface Configuration {
+export default interface Config {
   alliance: {
     name: string;
     attack?: {
@@ -51,12 +51,12 @@ export default interface Configuration {
     ring_timeout?: number;
   };
   db?: {
-    uri?: string;
+    url?: string;
     name?: string;
   },
   web: {
     port?: number;
-    uri: string;
+    url: string;
     session: string;
     default_profile_pic?: string;
     default_theme: string;

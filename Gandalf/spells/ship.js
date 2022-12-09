@@ -41,7 +41,7 @@ dayjs.extend(timezone);
 export const telegram = {
   usage: encode('/ship <ship>'),
   description: 'Returns the stats of the specified ship.',
-  cast: (args) => {
+  cast: (ctx, args) => {
     return new Promise(function(resolve, reject) {
       if (!Array.isArray(args) || args.length < 1) { reject(Ships_ship_usage); }
       let _ship = args[0];

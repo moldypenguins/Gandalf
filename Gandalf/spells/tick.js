@@ -40,8 +40,8 @@ dayjs.extend(timezone);
 
 export const telegram = {
   usage: encode('/tick [tick=NOW] [timezone=UTC]'),
-  description: 'Calculate when a tick will occur.',
-  cast: (args) => {
+  description: 'Calculates when a tick will occur.',
+  cast: (ctx, args) => {
     return new Promise(async (resolve, reject) => {
       let now_tick = await Tick.findLastTick();
       let _tick = numeral(args.length > 0 ? args[0] : now_tick.tick).value();

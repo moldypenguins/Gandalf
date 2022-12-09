@@ -21,15 +21,46 @@
  **/
 'use strict';
 
-import { telegram as Tick } from './tick.js';
-import { telegram as Links } from './links.js';
-import { telegram as Launch } from './launch.js';
-import { telegram as Ship } from './ship.js';
+import { telegram as tick } from './tick.js';
+import { telegram as links } from './links.js';
+import { telegram as launch } from './launch.js';
+import { telegram as ship } from './ship.js';
+import { telegram as addmem } from './addmem.js';
 
 export default {
-  Tick,
-  Links,
-  Launch,
-  Ship
+  tick,
+  links,
+  launch,
+  ship,
+  addmem
 };
 
+/*
+const commandArgs = () => (ctx, next) => {
+    if (ctx.updateType === 'message' && ctx.updateSubType === 'text') {
+        const text = ctx.update.message.text.toLowerCase();
+        if (text.startsWith('/')) {
+            const match = text.match(/^\/([^\s]+)\s?(.+)?/);
+            let args = [];
+            let command;
+            if (match !== null) {
+                if (match[1]) {
+                    command = match[1];
+                }
+                if (match[2]) {
+                    args = match[2].split(' ');
+                }
+            }
+
+            ctx.state.command = {
+                raw: text,
+                command,
+                args,
+            };
+        }
+    }
+    return next();
+};
+
+module.exports = commandArgs;
+ */

@@ -21,15 +21,15 @@
  **/
 'use strict';
 
-import { discord as Tick } from './tick.js';
-import { discord as Links } from './links.js';
-import { discord as Launch } from './launch.js';
-import { discord as Ship } from './ship.js';
+import { discord as tick } from './tick.js';
+import { discord as links } from './links.js';
+import { discord as launch } from './launch.js';
+import { discord as ship } from './ship.js';
 
 export default {
-  Tick,
-  Links,
-  Launch,
-  Ship
+  tick,
+  links,
+  launch,
+  ship
 };
 

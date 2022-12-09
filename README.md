@@ -30,47 +30,45 @@
 
 
 ## Environment
-[![Ubuntu](https://img.shields.io/static/v1?style=for-the-badge&logo=Ubuntu&label=Ubuntu&message=v20.04&color=E95420)](https://ubuntu.com/)
-[![Fail2ban](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=Fail2ban&message=v0.11.1&color=FCC624)](https://www.fail2ban.org/)
-[![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=v5.0.7&color=47A248)](https://www.mongodb.com/)
-[![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=v16.14.2&color=339933)](https://nodejs.org/)
-[![NPM](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=NPM&message=v8.7.0&color=CB3837)](https://www.npmjs.com/)
+[![Ubuntu](https://img.shields.io/static/v1?style=for-the-badge&logo=Ubuntu&label=Ubuntu&message=22.04.1&color=E95420)](https://ubuntu.com/)  
+[![CrowdSec](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=CrowdSec&message=1.4.0&color=FCC624)](https://crowdsec.net/)  
+[![Linus](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=Lynis&message=v&color=FCC624)](https://cisofy.com/lynis/)  
+[![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=6.0.3&color=47A248)](https://www.mongodb.com/)  
+[![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=18.12.1&color=339933)](https://nodejs.org/)  
+[![NPM](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=NPM&message=v8.19.3&color=CB3837)](https://www.npmjs.com/)  
+[![PNPM](https://img.shields.io/static/v1?style=for-the-badge&logo=PNPM&label=PNPM&message=7.18.1&color=f69220)](https://www.pnpm.io/)  
+[![Vue.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Vue.js&label=Vue.js&message=v&color=339933)](https://vuejs.io/)  
+[![Nuxt.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Nuxt.js&label=Nuxt.js&message=v&color=339933)](https://nuxtjs.io/)  
+[![Vite.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Vite&label=Vite&message=v&color=339933)](https://github.com/antfu/vite)  
 
-### Node Packages
-[![@fortawesome/fontawesome-free](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/@fortawesome/fontawesome-free?style=for-the-badge&logo=NPM&color=339af0)](https://www.npmjs.com/package/@fortawesome/fontawesome-free) 
-[![clipboard](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/clipboard?style=for-the-badge&logo=NPM&color=1bc1a1)](https://www.npmjs.com/package/clipboard) 
-[![Mongoose](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/mongoose?style=for-the-badge&logo=NPM&color=800800)](https://www.npmjs.com/package/mongoose) 
-[![Node Schedule](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/node-schedule?style=for-the-badge&logo=NPM&color=CB3837)](https://www.npmjs.com/package/node-schedule) 
-[![Numeral.js](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/numeral?style=for-the-badge&logo=NPM&color=ff6a00)](https://www.npmjs.com/package/numeral) 
-[![telegraf.js](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/telegraf?style=for-the-badge&logo=NPM&color=E74625)](https://www.npmjs.com/package/telegraf) 
-[![twilio](https://img.shields.io/github/package-json/dependency-version/moldypenguins/Gandalf/twilio?style=for-the-badge&logo=NPM&color=f22f46)](https://www.npmjs.com/package/twilio) 
 
 
 ## Change Log
-See [CHANGELOG.md](CHANGELOG.md) for changes.
+See [CHANGELOG.md](CHANGELOG.md) for changes.  
+
 
 
 ## Setup / Installation
-See [Gandalf Wiki - Installation](https://github.com/moldypenguins/Gandalf/wiki/Installation) for guide.
+See [INSTALLATION.md](INSTALLATION.md) for setup guide.  
 
 
 ## Issues / Support
 Check [Gandalf Wiki](https://github.com/moldypenguins/Gandalf/wiki) for reference.  
 Join [Gandalf Support](https://t.me/joinchat/HPVnlgHnFUShtg_D) on Telegram.  
-See [SECURITY.md](SECURITY.md) for feature requests or bug reports.
+See [SECURITY.md](SECURITY.md) for feature requests or bug reports. 
 
 
 ## Contributing
-See [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for more information. 
 
 
 ## Code of Conduct
-See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) 
 
 
 ## Related Projects
-* [Merlin](https://github.com/ellonweb/merlin) - Robin K. Hansen, Elliot Rosemarine, Andreas Jacobsen
-* [Munin](https://github.com/munin/munin) - Andreas Jacobsen
+* [Merlin](https://github.com/ellonweb/merlin) - Robin K. Hansen, Elliot Rosemarine, Andreas Jacobsen 
+* [Munin](https://github.com/munin/munin) - Andreas Jacobsen 
 
 
 ## Author

@@ -40,9 +40,9 @@ dayjs.extend(timezone);
 
 
 export const telegram = {
-  usage: encode('/ship <ship>'),
-  description: 'Returns the stats of the specified ship.',
-  cast: (args) => {
+  usage: encode('/launch <class|eta> <LT>'),
+  description: 'Calculates when ships should be launched to land at LT.',
+  cast: (ctx, args) => {
     return new Promise(async (resolve, reject) => {
       if(!Array.isArray(args) || args.length < 2) {
         reject('invalid number of arguments.');

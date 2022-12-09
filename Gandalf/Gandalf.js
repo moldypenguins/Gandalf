@@ -22,7 +22,7 @@
 'use strict';
 
 import Config from 'galadriel';
-import { Mordor } from 'mordor';
+import {Member, Mordor, TelegramUser} from 'mordor';
 import minimist from 'minimist';
 import util from 'util';
 
@@ -42,6 +42,9 @@ import { ActivityType, Client, Collection, Events, GatewayIntentBits, REST } fro
 
 let tgCommands = {};
 Config.telegram.commands.forEach(function(name) { Object.assign(tgCommands, tgSpells); });
+
+
+
 
 let dscmds = []; //temporary for registering commands in discord
 let dsCommands = new Collection();
@@ -73,9 +76,46 @@ if(argv.register) {
 Mordor.connection.once("open", async () => {
   // Telegram
   const telegramBot = new Telegraf(Config.telegram.token, { telegram: { agent: null, webhookReply: false }, username: Config.telegram.username });
+  // telegramBot.use(async(ctx, next) => {
+  //   if(ctx.message.entities && ctx.message.entities[0]?.type === 'bot_command') {
+  //     let _mem = Member.findByTGId(ctx.from.id);
+  //     if(_mem) {
+  //       ctx.member = _mem;
+  //       return next();
+  //     }
+  //   }
+  // });
 
-  telegramBot.start(async (ctx) => ctx.replyWithHTML(`Sign up: <a href="${Config.web.uri}">${Config.alliance.name}</a>`));
-  telegramBot.help(async (ctx) => {
+
+  telegramBot.entity(async(entity, s, ctx) => {
+    console.log(`e: ${util.inspect(entity, true, null, true)}\ns: ${s}`);
+  });
+  telegramBot.mention(async(mention, fns) => {
+    console.log(`m: ${util.inspect(mention, true, null, true)}`);
+  });
+
+
+
+  telegramBot.start(async(ctx) => {
+    if(!await TelegramUser.exists({TelegramUser_id: ctx.message.from.id})) {
+      if(await new TelegramUser({
+        _id: Mordor.Types.ObjectId(),
+        tguser_id: ctx.message.from.id,
+        tguser_first_name: ctx.message.from.first_name,
+        tguser_username: ctx.message.from.username,
+        tguser_language_code: ctx.message.from.language_code
+      }).save()) {
+        ctx.replyWithHTML(`Welcome!`);
+      }
+      else {
+        ctx.replyWithHTML(`Try again!`);
+      }
+    }
+    else {
+      ctx.replyWithHTML(`You already did this.`);
+    }
+  });
+  telegramBot.help(async(ctx) => {
     let commands = '<b>Commands:</b>\n<b>help:</b> <i>Shows list of commands</i>\n';
     for(let [key, value] of Object.entries(tgCommands)) {
       //if(!(tgCommands[key].access !== undefined && (mem == null || (!tgCommands[key].access(mem))))) {
@@ -85,13 +125,14 @@ Mordor.connection.once("open", async () => {
     await ctx.telegram.sendMessage(ctx.message.from.id, commands, {parse_mode: 'HTML'});
   });
 
-  telegramBot.command(async (ctx) => {
+  telegramBot.command(async(ctx) => {
     console.log('command', ctx.message.text)
     // Dynamic command handling
     let args = ctx.message.text.substring(1).toLowerCase().replace(/\s+/g, ' ').split(' ');
     let cmd = args.shift();
+
     if(cmd in tgCommands && typeof(tgCommands[cmd].cast) == 'function') {
-      tgCommands[cmd].cast(args).then((message) => {
+      tgCommands[cmd].cast(ctx, args).then((message) => {
         console.log(`Reply: ${message.toString()}`);
         ctx.replyWithHTML(message.toString(), {reply_to_message_id: ctx.message.message_id});
       }).catch((error) => {
@@ -101,11 +142,11 @@ Mordor.connection.once("open", async () => {
     }
   });
 
-  telegramBot.catch(async (err, ctx) => {
+  telegramBot.catch(async(err, ctx) => {
     console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)
   });
 
-
+//console.log(util.inspect(ctx.message, true, null, true));
 
   // Discord
   const discordBot = new Client({

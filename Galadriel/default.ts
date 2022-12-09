@@ -19,9 +19,10 @@
  * @version 2022/11/16
  * @summary default configuration file
  **/
-import Configuration from "./configuration";
 
-const configDefault: Configuration = {
+import Config from "./types";
+
+const configDefault: Config = {
   alliance: {
     name: null,
     attack: {
@@ -52,12 +53,12 @@ const configDefault: Configuration = {
     ring_timeout: 30
   },
   db: {
-    uri: 'mongodb://localhost:27017',
+    url: 'mongodb://localhost:27017',
     name: 'Mordor'
   },
   web: {
     port: 8080,
-    uri: null,
+    url: null,
     session: null,
     default_profile_pic: '/images/member.jpg',
     default_theme: 'affleck',

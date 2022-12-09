@@ -1,6 +1,62 @@
-// Base theme styles
 
 
+// Bootstrap global options
+$enable-gradients: true;
+$enable-shadows: true;
+
+//@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+// Merge color maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+// Required
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+// Optional
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/button-group";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar"; // Requires nav
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/breadcrumb";
+@import "~bootstrap/scss/accordion";
+@import "~bootstrap/scss/pagination";
+@import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/progress";
+@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/toasts";
+@import "~bootstrap/scss/modal"; // Requires transitions
+@import "~bootstrap/scss/tooltip";
+@import "~bootstrap/scss/popover";
+@import "~bootstrap/scss/carousel";
+@import "~bootstrap/scss/spinners";
+@import "~bootstrap/scss/offcanvas"; // Requires transitions
+@import "~bootstrap/scss/placeholders";
+// Helpers
+@import "~bootstrap/scss/helpers";
+// Utilities
+@import "~bootstrap/scss/utilities/api";
+
+
+
+// ###############
+// Custom styles
+// ###############
 
 html, body {
   width: 100%;
@@ -9,6 +65,10 @@ html, body {
 
 a {
   text-decoration: none;
+}
+
+.ter {
+  background-color: $gndf-ter;
 }
 
 #app {
@@ -70,8 +130,8 @@ a {
         box-shadow: 0 1px 7px 1px rgb(0 0 0 / 15%);
 
         h2 {
-          background-color: #333333;
-          color: #ffffff;
+          background-color: $primary;
+          color: $body-color;
           border-top-left-radius: 0.5rem;
           border-top-right-radius: 0.5rem;
           text-transform: uppercase;
@@ -111,6 +171,9 @@ a {
       border-top-right-radius: 5px;
       background-color: var(--bs-footer-tab-bg);
       color: var(--bs-footer-tab-color);
+      box-shadow: 0 0 5px 0 rgba(var(--bs-shadow-color-rgb), 0.5);
+      -webkit-box-shadow: 0 0 5px 0 rgba(var(--bs-shadow-color-rgb), 0.5);
+      -moz-box-shadow: 0 0 5px 0 rgba(var(--bs-shadow-color-rgb), 0.5);
 
       svg {
         margin-right: 5px;
@@ -142,4 +205,23 @@ a {
 
 
 
-}
+
+  //TODO: use variable replacement for colors (see btn:btn-dark as example)
+  // replace colors rather than overriding them
+  .btn-ds {
+    border-radius: 40px;
+    padding: 7px 16px;
+    color: #efefef;
+    background-color: #23272a
+  }
+
+
+
+
+
+
+
+
+
+
+} //end #app

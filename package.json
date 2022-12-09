@@ -1,9 +1,7 @@
 {
   "name": "middle_earth",
   "description": "Planetarion Tools",
-  "keywords": [
-    "Planetarion"
-  ],
+  "keywords": [ "Planetarion", "Bot" ],
   "private": true,
   "imports": {
     "#Galadriel": "./Galadriel/galadriel.js",
@@ -37,6 +35,7 @@
   "repository": "github:moldypenguins/Gandalf",
   "bugs": "https://github.com/moldypenguins/Gandalf/issues",
   "homepage": "https://github.com/moldypenguins/Gandalf",
+  "funding": "",
   "engines": {
     "node": "^16.18.0",
     "npm": "^8.19.2",

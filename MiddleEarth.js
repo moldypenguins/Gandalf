@@ -21,6 +21,9 @@
  **/
 'use strict';
 
+//TODO: update package.json to use workspaces
+//TODO: https://docs.npmjs.com/cli/v9/using-npm/workspaces
+
 module.exports = {
   apps : [
     {
@@ -43,7 +46,7 @@ module.exports = {
       instance_var: 'INSTANCE_ID',
       watch: true,
       time: true,
-      wait_ready: true
+      //wait_ready: true
     },
     {
       namespace: "MiddleEarth",
@@ -53,7 +56,7 @@ module.exports = {
       instance_var: 'INSTANCE_ID',
       watch: true,
       time: true,
-      wait_ready: true
+      //wait_ready: true
     },
     {
       namespace: "MiddleEarth",
@@ -62,7 +65,7 @@ module.exports = {
       script : "sauron.js",
       instance_var: 'INSTANCE_ID',
       watch: true,
-      time: true//,
+      time: true,
       //wait_ready: true
     }
   ],

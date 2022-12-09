@@ -1,0 +1,35 @@
+// Shamrock
+
+// Custom theme variables - these are imported into each theme so they can be overwritten if necessary
+@import "./variables";
+
+// Bootstrap theme color variables
+$primary: #02A04B;
+$secondary: #ffd700;
+$body-bg: #ffffff;
+$body-color: #333333;
+$link-color: #333333;
+$link-hover-color: #666633;
+$border-color: #333333;
+$gradient: linear-gradient(0deg, rgba(var(--bs-dark-rgb), 0.05), rgba(var(--bs-dark-rgb), 0));
+$font-family-sans-serif: 'Century Gothic', 'Arial', 'sans-serif';
+
+// Custom Bootstrap theme color variables
+$custom-colors: (
+  "shadow-color": #333333,
+  "footer-tab-bg": #ffd700,
+  "footer-tab-color": #333333,
+  "footer-tab-link-color": #333333,
+  "footer-tab-link-hover-color": #666633,
+);
+
+// Import theme styles - includes Bootstrap
+@import "./theme";
+
+// #####################
+// Custom theme styles
+// #####################
+
+body {
+  background-image: url('../public/img/bg/shamrock.jpg');
+}

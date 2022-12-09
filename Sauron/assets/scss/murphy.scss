@@ -1,0 +1,35 @@
+// Charlie Murphy
+
+// Custom theme variables - these are imported into each theme so they can be overwritten if necessary
+@import "./variables";
+
+// Bootstrap theme color variables
+$primary: #232323;
+$secondary: #efefef;
+$body-bg: #232323;
+$body-color: #efefef;
+$link-color: #efefef;
+$link-hover-color: #996699;
+$border-color: #efefef;
+$gradient: linear-gradient(180deg, rgba(var(--bs-light-rgb), 0.15), rgba(var(--bs-light-rgb), 0));
+$font-family-sans-serif: 'Century Gothic', 'Arial', 'sans-serif';
+
+// Custom Bootstrap theme color variables
+$custom-colors: (
+  "shadow-color": #efefef,
+  "footer-tab-bg": #efefef,
+  "footer-tab-color": #232323,
+  "footer-tab-link-color": #232323,
+  "footer-tab-link-hover-color": #663366,
+);
+
+// Import theme styles - includes Bootstrap
+@import "./theme";
+
+// #####################
+// Custom theme styles
+// #####################
+
+body {
+  background-image: url('../public/img/bg/murphy.jpg');
+}
