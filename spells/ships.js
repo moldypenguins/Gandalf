@@ -51,54 +51,56 @@ let Ships_eff = (args) => {
     //if(!Object.keys(PA.ships.targets).includes(_target.toLowerCase())) { reject(`${_target} is not a valid target`); }
     //let target = PA.ships.targets[_target.toLowerCase()];
     if(_ship == null) { reject(`${_ship} is not a valid ship`); }
-    let ship = await Ship.findOne({$where:`this.name.toLowerCase().startsWith("${_ship.toLowerCase()}")`});
-    //console.log("SHIP: " + util.inspect(ship, false, null, true));
-    //let ship = ships.find(s => s.name.toLowerCase().startsWith(_ship.toLowerCase()) );
-    if(!ship) {
-      reject(`Cannot find ship ${_ship}`);
-    } else {
-      let damage = ship.damage !== '-' ? numeral(ship.damage).value() * number : 0
-      let message = `<b>${numeral(number).format('0,0')} ${ship.name} (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / PA.numbers.ship_value).format('0a') })</b>`;
+    else {
+        let ship = await Ship.findOne({$where:`this.name.toLowerCase().startsWith("${_ship.toLowerCase()}")`});
+        //console.log("SHIP: " + util.inspect(ship, false, null, true));
+        //let ship = ships.find(s => s.name.toLowerCase().startsWith(_ship.toLowerCase()) );
+        if(!ship) {
+          reject(`Cannot find ship ${_ship}`);
+        } else {
+          let damage = ship.damage !== '-' ? numeral(ship.damage).value() * number : 0
+          let message = `<b>${numeral(number).format('0,0')} ${ship.name} (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / PA.numbers.ship_value).format('0a') })</b>`;
 
-      switch (ship.type.toLowerCase()) {
-        case 'pod':
-          message += ` will capture ${numeral(damage / 50).format('0,0')} roids`;
-          break;
-        case 'structure':
-          message += ` will destroy ${numeral(damage / 50).format('0,0')} structures`;
-          break;
-        default:
-          message += ` will ${PA.ships.damagetypes[ship.type.toLowerCase()]}:\n`;
-          for(let t in PA.ships.targets) {
-            let target = PA.ships.targets[t];
-            //console.log("TARGET: " + util.inspect(target, false, null, true));
-            if (ship[target] !== '-') {
-              message += `<i>${t}: ${ship[target]}s (${PA.ships.targeteffs[target] * 100}%)</i>\n`;
-              let shiptargets = await Ship.find({class: ship[target]});
-              //console.log("TARGETED SHIPS: " + util.inspect(shiptargets, false, null, true));
-              if (shiptargets) {
-                var results = shiptargets.map(function (shiptarget) {
-                  switch (ship.type.toLowerCase()) {
-                    case 'emp':
-                      let empnumber = Math.trunc(PA.ships.targeteffs[target] * ship.guns * number * (100 - shiptarget.empres) / 100);
-                      return (`${numeral(empnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(empnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / PA.numbers.ship_value).format('0a')})`);
-                      break;
-                    default:
-                      let targetnumber = Math.trunc(PA.ships.targeteffs[target] * damage / shiptarget.armor);
-                      return (`${numeral(targetnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(targetnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / PA.numbers.ship_value).format('0a')})`);
-                      break;
+          switch (ship.type.toLowerCase()) {
+            case 'pod':
+              message += ` will capture ${numeral(damage / 50).format('0,0')} roids`;
+              break;
+            case 'structure':
+              message += ` will destroy ${numeral(damage / 50).format('0,0')} structures`;
+              break;
+            default:
+              message += ` will ${PA.ships.damagetypes[ship.type.toLowerCase()]}:\n`;
+              for(let t in PA.ships.targets) {
+                let target = PA.ships.targets[t];
+                //console.log("TARGET: " + util.inspect(target, false, null, true));
+                if (ship[target] !== '-') {
+                  message += `<i>${t}: ${ship[target]}s (${PA.ships.targeteffs[target] * 100}%)</i>\n`;
+                  let shiptargets = await Ship.find({class: ship[target]});
+                  //console.log("TARGETED SHIPS: " + util.inspect(shiptargets, false, null, true));
+                  if (shiptargets) {
+                    var results = shiptargets.map(function (shiptarget) {
+                      switch (ship.type.toLowerCase()) {
+                        case 'emp':
+                          let empnumber = Math.trunc(PA.ships.targeteffs[target] * ship.guns * number * (100 - shiptarget.empres) / 100);
+                          return (`${numeral(empnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(empnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / PA.numbers.ship_value).format('0a')})`);
+                          break;
+                        default:
+                          let targetnumber = Math.trunc(PA.ships.targeteffs[target] * damage / shiptarget.armor);
+                          return (`${numeral(targetnumber).format('0,0')} <b>${shiptarget.name}</b> (${numeral(targetnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / PA.numbers.ship_value).format('0a')})`);
+                          break;
+                      }
+                    });
+                    message += results.join('; ') + `\n`;
                   }
-                });
-                message += results.join('; ') + `\n`;
+                }
               }
-            }
+              break;
           }
-          break;
+          resolve(message);
+        }
       }
-      resolve(message);
-    }
-  });
-};
+      });
+    };
 
 var Ships_stop_usage = he.encode('!stop <number> <ship>');
 var Ships_stop_desc = 'Calculates the required defense to the specified number of ships.';
@@ -119,7 +121,7 @@ var Ships_stop = (args) => {
         var ship = ships.find(s => s.name.toLowerCase().startsWith(_ship.toLowerCase()));
         if (!ship) {
           reject(`Cannot find ship ${_ship}`);
-        }
+        } else {
 
         // TODO: stop structure killers / roiders
         var ships_who_target_class = ships.filter(s => s.target1 == ship.class || s.target2 == ship.class || s.target3 == ship.class);
@@ -143,6 +145,7 @@ var Ships_stop = (args) => {
         }
         message += results.join("; ");
         resolve(message);
+}
       });
     }
   });
@@ -274,5 +277,3 @@ module.exports = {
   "ship": { usage: Ships_ship_usage, description: Ships_ship_desc, cast: Ships_ship },
   "launch": { usage: Ships_launch_usage, description: Ships_launch_desc, cast: Ships_launch },
 };
-
-
