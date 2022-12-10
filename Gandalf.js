@@ -185,11 +185,16 @@ Mordor.connection.once("open", () => {
       let gm8 = await GalMate.findOne({telegram_user: tgUser});
       
       if(!mem && !gm8) {
-        ctx.replyWithHTML('<i>Access denied!</i>', {reply_to_message_id: ctx.message.message_id});
+        ctx.replyWithHTML('<i>You Shall Not Pass!</i>', {reply_to_message_id: ctx.message.message_id});
         //ctx.replyWithAnimation({url: 'https://media.giphy.com/media/5SAPlGAS1YnLN9jHua/giphy-downsized-large.gif'}, {caption: 'Access denied!', inReplyTo: ctx.message.message_id});
       } else {
-        let args = ctx.message.text.substr(1).toLowerCase().replace(/\s+/g, ' ').split(' ');
-        let cmd = args.shift();
+        var args = ctx.message.text.substr(1).toLowerCase().replace(/\s+/g, ' ').split(' ');
+        let cmd = args.shift()
+        
+        if (cmd === "addmember") {
+          var args = ctx.message.text.substr(1).replace(/\s+/g, ' ').split(' ');
+          args.shift();
+        }
         //console.log('Command: ' + cmd);
         
         if (cmd === "help") {
