@@ -173,8 +173,6 @@ var Calcs_tick = (args) => {
   });
 };
 
-
-
 var Calcs_refsvsfcs_usage = he.encode('!refsvsfcs <roids> <metal ref #> <crystal ref #> <eonium ref #> <FC #> <gov> <mining population> <cores>');
 var Calcs_refsvsfcs_desc = 'Calculates if you should be building refs or fcs based on inputs';
 var Calcs_refsvsfcs = (args) =>{
@@ -203,9 +201,9 @@ var Calcs_refsvsfcs = (args) =>{
 
     console.log(`gov bonus: ${gov_bonus}`);
 
-    let now = await Tick.findOne().sort({ id: -1 }); 
+    let now = await Tick.findOne().sort({ tick: -1 }); 
     console.log(`now.tick ${now.tick}`);
-    let ticksLeft = 1157 - now.tick;//numeral(PA.tick.end).value() - numeral(now.tick).value();
+    let ticksLeft = 1177 - now.tick;//numeral(PA.tick.end).value() - numeral(now.tick).value();
     console.log(`ticks left ${ticksLeft}`);
 
     // Assume they will build the cheapest refinery next. This is always the most efficient thing to do for maxing income anyway.
@@ -253,7 +251,6 @@ var Calcs_refsvsfcs = (args) =>{
     }
   })
 };
-
 
 function coresIncValue(cores) {
   if (cores == 0) {
