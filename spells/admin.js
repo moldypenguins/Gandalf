@@ -134,6 +134,45 @@ let Admin_addgalmate = (args, ctx) => {
   });
 }
 
+let Admin_addmember_usage = he.encode('!addmember <@Member> <pa-nick>');
+let Admin_addmember_desc = 'Adds a TG user as an ally member.';
+let Admin_addmember = (args, ctx) => {
+  return new Promise(async (resolve, reject) => {
+    if (args.length > 0) {
+      let tguser = args[0];
+      let nick = args[1];
+      console.log(`tguser: ${tguser}`);
+      console.log(`nick: ${nick}`);
+      if (!tguser || !nick){
+         reject(Admin_addmember_usage);
+      } else { 
+         let mentions = await ctx.mentions.get(ctx.message);
+         //console.log('MENTIONS: ' + util.inspect(mentions, false, null, true));
+         if(mentions.length <= 0) {
+           reject(`User ${tguser} not found.`);
+         } else {
+           if (!await Member.exists({telegram_user: mentions[0]})) {
+             let membr = await new Member({
+               _id: Mordor.Types.ObjectId(),
+               pa_nick: nick,
+               telegram_user: mentions[0]
+             });
+             let saved = await membr.save();
+             if (saved != null) {
+               resolve(`Member added`);
+             } else {
+               reject(`Unable to add Member`);
+             }
+           } else {
+             reject(`Member already exists`);
+           }
+         }
+       }
+    } else {
+      reject(Admin_addmember_usage);
+    }
+  });
+}
 
 
 module.exports = {
