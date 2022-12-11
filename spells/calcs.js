@@ -308,7 +308,7 @@ var Calcs_prodtime = (args) => {
     let prod_time = Math.round((pu_needed + (10000 * factories)) / pu_output);
     let prod_time_long = Math.round((pu_needed + (10000 * factories)) / pu_output_min);
     let prod_time_short = Math.round((pu_needed + (10000 * factories)) / pu_output_max);
-    console.log (`Prod time ${prod_time}) ticks`);
+    console.log (`Prod time ${prod_time} ticks`);
     console.log (`Min prod time ${prod_time_short} ticks`);
     console.log (`Max prod time ${prod_time_long} ticks`);
     
