@@ -108,8 +108,7 @@ var Calcs_bonus = (args) => {
     }
     bonus = 1.0 + (args.length == 2 ? (numeral(args[1]).value() / 100) : 0);
     Tick.findOne().sort({ id: -1 }).then((last_tick) => {
-      tick = tick == null ? last_tick.id : tick;
-      
+      tick = tick == null ? last_tick.id : tick; 
       let resource_bonus = 10000 + (tick * 4800);
       let roid_bonus = Math.trunc(6 + (tick * 0.15));
       let rp_bonus = Math.trunc((4000 + (tick * 24) * bonus));
@@ -252,6 +251,78 @@ var Calcs_refsvsfcs = (args) =>{
   })
 };
 
+var Calcs_prodtime_usage = he.encode('!prodtime <total resources> <factories> <race> [govt] [pop bonus]');
+var Calcs_prodtime_desc = 'Calculate ticks taken to produce ships costing &lt;total resources&gt; (assumes Soc & 60 pop if blank)';
+var Calcs_prodtime = (args) => {
+  return new Promise(async (resolve, reject) => {
+    if (args.length < 3) {
+      reject(Calcs_prodtime_usage);
+      return;
+    }
+    let resources = numeral(args[0]).value();
+    let factories = numeral(args[1]).value();
+    let race_bonus = 0; // args[2]
+    let gov_bonus = 0; // args[3]
+    let pop_bonus = numeral(args[4]).value();
+    if (!pop_bonus) {
+      pop_bonus = 60;
+      var assumed = 1;
+      console.log(`Max pop assumed!`);
+    }
+    console.log(`Pop bonus ${pop_bonus}`);
+    let races = PA.race;
+    for (var xeno in races) {
+      let race = races[xeno];
+      console.log(`Race ${JSON.stringify(race)}`);
+      if (race.name.toLowerCase().startsWith(args[2].toLowerCase()) || race.name.toLowerCase().includes(args[2])) {
+        race_bonus = race.prodtime * 100;
+        console.log(`Race bonus found ${race_bonus}`)
+      }
+    }
+    if (args[3] == null || args[3] == undefined) {
+      gov_bonus = 20;
+      assumed++;
+      console.log(`Socialism assumed! Gov bonus ${gov_bonus}`)
+    }  else  {
+      let goverments = PA.governments;
+      for (var gov in goverments) {
+        let goverment = goverments[gov];
+        console.log(`Government ${JSON.stringify(goverment)}`);
+        if (goverment.name.toLowerCase().startsWith(args[3].toLowerCase()) || goverment.name.toLowerCase().includes(args[3])) {
+          gov_bonus = goverment.prodtime * 100;
+          console.log(`Gov bonus found ${gov_bonus}`)
+        }
+      }
+    }
+    
+    let pu_needed = (resources ** 0.5) * (Math.log(resources ** 2));
+    console.log (`PU needed ${pu_needed}`);
+    
+    let pu_output = Math.round(((4000 * factories) ** 0.98) * (1 + (pop_bonus + gov_bonus + race_bonus) / 100));
+    let pu_output_min = Math.round(((4000 * factories) ** 0.98) * (1 + (0 + -20 + race_bonus) / 100));
+    let pu_output_max = Math.round(((4000 * factories) ** 0.98) * (1 + (60 + 20 + race_bonus) / 100));
+    console.log (`PU output/tick ${pu_output}`);
+    console.log (`Min PU output ${pu_output_min}`);
+    console.log (`Max PU output ${pu_output_max}`);
+    
+    let prod_time = Math.round((pu_needed + (10000 * factories)) / pu_output);
+    let prod_time_long = Math.round((pu_needed + (10000 * factories)) / pu_output_min);
+    let prod_time_short = Math.round((pu_needed + (10000 * factories)) / pu_output_max);
+    console.log (`Prod time ${prod_time}) ticks`);
+    console.log (`Min prod time ${prod_time_short} ticks`);
+    console.log (`Max prod time ${prod_time_long} ticks`);
+    
+    let reply = `Production time for ${resources} worth of ships in ${factories} factories: ${prod_time} ticks\n`;
+    if (!assumed || assumed != 2) {
+      reply += `Shortest possible prod time (Socialism & 60 pop): ${prod_time_short} ticks\n`;
+    }
+    reply += `Longest possible prod time ( Anarchy & 0 pop): ${prod_time_long} ticks\n`;
+    resolve(reply);
+  });
+};
+
+
+
 function coresIncValue(cores) {
   if (cores == 0) {
     return 1000
@@ -273,4 +344,5 @@ module.exports = {
   "bonus": { usage: Calcs_bonus_usage, description: Calcs_bonus_desc, cast: Calcs_bonus },
   "bonusmining": { usage: Calcs_bonusmining_usage, description: Calcs_bonusmining_desc, cast: Calcs_bonusmining },
   "refsvsfcs": { usage: Calcs_refsvsfcs_usage, description: Calcs_refsvsfcs_desc, cast: Calcs_refsvsfcs },
+  "prodtime": { usage: Calcs_prodtime_usage, description: Calcs_prodtime_desc, cast: Calcs_prodtime },
 };
