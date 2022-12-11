@@ -25,6 +25,7 @@ const CFG = require('../Config');
 const PA = require('../PA');
 const AXS = require('../Access');
 const FNCS = require('../Functions');
+const Mordor = require('../Mordor');
 
 const Intel = require('../models/Intel');
 const Planet = require('../models/Planet');
@@ -149,7 +150,7 @@ return response;
 
 function coordsToPlanetLookup(input) {
   return new Promise(async (resolve, reject) => {
-    let coords = parseCoords(input);
+    let coords = FNCS.parseCoords(input);
     if (!coords) {
       reject(formatInvalidResponse(input));
       return;
@@ -227,8 +228,6 @@ resolve(await intelSet(parsed));
 
 //######################################################################################################################
 
-
-
 let Intel_spam_usage = he.encode('!spam <alliance>');
 let Intel_spam_desc = 'Displays a set of coords based on alliance';
 let Intel_spam = (args) => {
@@ -238,14 +237,18 @@ let Intel_spam = (args) => {
     }
 
     let alliance = await Alliance.findOne({"name": new RegExp(args[0], 'i')});
-    let response = `Spam for <b>${alliance.name}</b>\n`;
-    let intels = await Intel.find({alliance_id: alliance._id});
-    for(let intel of intels) {
-      let planet = await Planet.findOne({id: intel.planet_id});
-      if (planet && planet.x && planet.y && planet.z) {
-        response += `${planet.x}:${planet.y}:${planet.z} `;
-      }
-    }
+	if (!alliance) {
+		var response = 'Alliance not found!';
+	} else {
+		var response = `Spam for <b>${alliance.name}</b>\n`;
+		let intels = await Intel.find({alliance: alliance});
+		for(let intel of intels) {
+			let planet = await Planet.findOne({_id: intel.planet});
+			if (planet && planet.x && planet.y && planet.z) {
+			response += `${planet.x}:${planet.y}:${planet.z} `;
+			}
+		}
+	}
     resolve(response);
   });
 };
@@ -259,23 +262,29 @@ let Intel_spamset = (args) => {
     }
 
     let alliance = await Alliance.findOne({"name": new RegExp(args[0], 'i')});
-    for(let i = 1; i < args.length; i++) {
-      let planet = await coordsToPlanetLookup(args[i]);
-      console.log(planet);
-      let intel = await Intel.findOne({planet_id: planet.id});
-      if (!intel) {
-        console.log(`creating new intel`);
-        intel = new Intel({planet_id: planet.id});
-      }
-      intel.alliance_id = alliance._id;
-      await intel.save();
-      console.log(`intel saved for ${intel}`);
-    }
-    resolve(`Spam for <b>${alliance.name}</b> set.\n`);
+	if (!alliance) {
+		var response = 'Alliance not found!';
+	} else {
+		for(let i = 1; i < args.length; i++) {
+		  let planet = await coordsToPlanetLookup(args[i]);
+		  console.log(planet);
+		  let intel = await Intel.findOne({planet: planet});
+		  if (!intel) {
+			console.log(`creating new intel`);
+			intel = new Intel({
+				_id: new Mordor.Types.ObjectId(),
+				planet: planet
+			});
+		  }
+		  intel.alliance = alliance;		  
+		  await intel.save();
+		  console.log(`intel saved for ${intel}`);
+		}
+		var response = `Spam for <b>${alliance.name}</b> set.\n`;
+	}
+	resolve (response);
   });
 };
-
-
 
 let Intel_oomph_usage = he.encode('!oomph <alliance> <ship_class>');
 let Intel_oomph_desc = 'List alliance ship counts versus given ship class.';
