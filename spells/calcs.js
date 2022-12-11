@@ -316,7 +316,7 @@ var Calcs_prodtime = (args) => {
     if (!assumed || assumed != 2) {
       reply += `Shortest possible prod time (Socialism & 60 pop): ${prod_time_short} ticks\n`;
     }
-    reply += `Longest possible prod time ( Anarchy & 0 pop): ${prod_time_long} ticks\n`;
+    reply += `Longest possible prod time (Anarchy & 0 pop): ${prod_time_long} ticks\n`;
     resolve(reply);
   });
 };
