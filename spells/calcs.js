@@ -259,17 +259,23 @@ var Calcs_prodtime = (args) => {
       reject(Calcs_prodtime_usage);
       return;
     }
+    
     let resources = numeral(args[0]).value();
     let factories = numeral(args[1]).value();
     let race_bonus = 0; // args[2]
     let gov_bonus = 0; // args[3]
     let pop_bonus = numeral(args[4]).value();
+    if (!resources || !factories) {
+      reject('Those are not numbers.\n' + Calcs_prodtime_usage);
+      return;
+    }     
     if (!pop_bonus) {
       pop_bonus = 60;
       var assumed = 1;
       console.log(`Max pop assumed!`);
     }
     console.log(`Pop bonus ${pop_bonus}`);
+
     let races = PA.race;
     for (var xeno in races) {
       let race = races[xeno];
@@ -277,8 +283,14 @@ var Calcs_prodtime = (args) => {
       if (race.name.toLowerCase().startsWith(args[2].toLowerCase()) || race.name.toLowerCase().includes(args[2])) {
         race_bonus = race.prodtime * 100;
         console.log(`Race bonus found ${race_bonus}`)
+        var racefound = 1;
       }
     }
+    if (!racefound) {
+      reject(`${args[2].charAt(0).toUpperCase() + args[2].slice(1)} is not a race.\n` + Calcs_prodtime_usage);
+      return;
+    }
+    
     if (args[3] == null || args[3] == undefined) {
       gov_bonus = 20;
       assumed++;
