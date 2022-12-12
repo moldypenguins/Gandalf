@@ -17,7 +17,7 @@ module.exports = {
     end:1177,
   },
   numbers:{
-    tag_total:60,
+    tag_total:50,
     tag_count:40,
     roid_value:200,
     cons_value:200,
@@ -38,6 +38,28 @@ module.exports = {
     xan: "Xandathrii",
     zik: "Zikonian",
     etd: "Eitraides",
+  },
+  race:{
+    ter: {
+    name: "Terran",
+    prodtime: 0.1
+    },
+    cat: {
+    name: "Cathaar",
+    prodtime: 0
+    },
+    xan: {
+    name: "Xandathrii",
+    prodtime: 0.05
+    },
+    zik: {
+    name: "Zikonian",
+    prodtime: 0.15
+    },
+    etd: {
+    name: "Eitraides",
+    prodtime: 0
+    }  
   },
   scantypes:{
     1: "Planet Scan",
@@ -89,7 +111,7 @@ module.exports = {
     }
   },
   roids: {
-    maxcap: 0.2,
+    maxcap: 0.25,
     mincap: 0,
     mining: 250,
   },
@@ -106,7 +128,7 @@ module.exports = {
     },
     demo: {
       name: "Democracy",
-      prodcost: -0.07,
+      prodcost: -0.08,
       mining: 0,
       prodtime: 0,
     },
@@ -120,13 +142,19 @@ module.exports = {
       name: "Socialism",
       prodcost: 0,
       mining: 0.1,
-      prodtime: 0.1,
+      prodtime: 0.2,
     },
     total: {
       name: "Totalitarianism",
-      prodcost: -0.08,
+      prodcost: -0.06,
       mining: 0,
       prodtime: -0.10,
+    },
+    anar: {
+      name: "Anarchy",
+      prodcost: 0,
+      mining: -0.25,
+      prodtime: -0.20,
     }
   },
   construction: {
