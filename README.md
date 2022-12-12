@@ -32,12 +32,12 @@
 ## Environment
 [![Ubuntu](https://img.shields.io/static/v1?style=for-the-badge&logo=Ubuntu&label=Ubuntu&message=22.04.1&color=E95420)](https://ubuntu.com/)  
 [![CrowdSec](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=CrowdSec&message=1.4.0&color=FCC624)](https://crowdsec.net/)  
-[![Linus](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=Lynis&message=v&color=FCC624)](https://cisofy.com/lynis/)  
+[![Lynis](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=Lynis&message=3.0.8&color=FCC624)](https://cisofy.com/lynis/)  
 [![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=6.0.3&color=47A248)](https://www.mongodb.com/)  
 [![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=18.12.1&color=339933)](https://nodejs.org/)  
 [![NPM](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=NPM&message=v8.19.3&color=CB3837)](https://www.npmjs.com/)  
 [![PNPM](https://img.shields.io/static/v1?style=for-the-badge&logo=PNPM&label=PNPM&message=7.18.1&color=f69220)](https://www.pnpm.io/)  
-[![Vue.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Vue.js&label=Vue.js&message=v&color=339933)](https://vuejs.io/)  
+[![Vue.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Vue.js&label=Vue.js&message=3.2.45&color=339933)](https://vuejs.io/)  
 [![Nuxt.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Nuxt.js&label=Nuxt.js&message=v&color=339933)](https://nuxtjs.io/)  
 [![Vite.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Vite&label=Vite&message=v&color=339933)](https://github.com/antfu/vite)  
 
@@ -72,12 +72,13 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 
 ## Author
-* **Craig Roberts** - *Developer* - [@moldypenguins](https://t.me/moldypenguins)
+* **Craig Roberts** - [@moldypenguins](https://t.me/moldypenguins)
 
 
 ## Contributors
-* **Braden Edmunds** - *Developer* - [@blanq4](https://t.me/blanq4)
-* **Alex High** - *Designer* - [@UltimateNewbie](https://t.me/UltimateNewbie)
+* **Braden Edmunds** - [@blanq4](https://t.me/blanq4)
+* **Alex High** - [@UltimateNewbie](https://t.me/UltimateNewbie)
+* **Sam Powis** - [@knoidable](https://t.me/knoidable)
 
 
 ## Licenses
