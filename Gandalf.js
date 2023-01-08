@@ -188,11 +188,11 @@ Mordor.connection.once("open", () => {
         ctx.replyWithHTML('<i>You Shall Not Pass!</i>', {reply_to_message_id: ctx.message.message_id});
         //ctx.replyWithAnimation({url: 'https://media.giphy.com/media/5SAPlGAS1YnLN9jHua/giphy-downsized-large.gif'}, {caption: 'Access denied!', inReplyTo: ctx.message.message_id});
       } else {
-        var args = ctx.message.text.substr(1).toLowerCase().replace(/\s+/g, ' ').split(' ');
+        var args = ctx.message.text.substr(1).toLowerCase().replace(/\s+/g, ' ').replace(/[^a-z0-9áéíóúñü \.,_-]/gim,'').split(' ');
         let cmd = args.shift()
-        
+		
         if (cmd === "addmember") {
-          var args = ctx.message.text.substr(1).replace(/\s+/g, ' ').split(' ');
+          args = ctx.message.text.substr(1).replace(/\s+/g, ' ').replace(/[^a-z0-9áéíóúñü \.,_-]/gim,'').split(' ');
           args.shift();
         }
         //console.log('Command: ' + cmd);
@@ -278,4 +278,3 @@ Mordor.connection.once("open", () => {
   }, CFG.bot.message_interval * 1000);
 
 });
-
