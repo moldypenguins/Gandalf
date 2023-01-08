@@ -1,6 +1,6 @@
 /**
  * Gandalf
- * Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High
+ * Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High, Sam Powis
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Gandalf.js
- * @version 2021/07/08
+ * @version 2023/01/08
  * @summary Telegram Bot
  **/
 'use strict';
