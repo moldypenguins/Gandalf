@@ -33,6 +33,7 @@ let ShipSchema = new Mordor.Schema({
   target2:    {type:String},
   target3:    {type:String},
   type:       {type:String},
+  cloaked:    {type:String},  
   initiative: {type:String},
   guns:       {type:String},
   armor:      {type:String},
