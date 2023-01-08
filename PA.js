@@ -30,14 +30,18 @@ module.exports = {
     cat:2,
     xan:3,
     zik:4,
-    etd:5,
+//    etd:5,
+    kin:5,
+    sly:6,
   },
   racenames:{
     ter: "Terran",
     cat: "Cathaar",
     xan: "Xandathrii",
     zik: "Zikonian",
-    etd: "Eitraides",
+//    etd: "Eitraides",
+    kin: "Kinthia",
+    sly: "Slythonian",
   },
   race:{
     ter: {
@@ -56,10 +60,18 @@ module.exports = {
     name: "Zikonian",
     prodtime: 0.15
     },
-    etd: {
+ /*   etd: {
     name: "Eitraides",
     prodtime: 0
-    }  
+    }  */
+    kin: {
+    name: "Kinthia",
+    prodtime: 0
+    },   
+    sly: {
+    name: "Slythonian",
+    prodtime: 0
+    }    
   },
   scantypes:{
     1: "Planet Scan",
@@ -70,6 +82,7 @@ module.exports = {
     6: "Incoming Scan",
     7: "Jumpgate Probe",
     8: "Advanced Unit Scan",
+    9: "Military Scan",
   },
   scans:{
     P:{bestbefore:3,expiry:5,request:true},
@@ -80,6 +93,7 @@ module.exports = {
     I:{bestbefore:3,expiry:5,request:false},
     J:{bestbefore:1,expiry:2,request:true},
     A:{bestbefore:3,expiry:5,request:true},
+    M:{bestbefore:3,expiry:5,request:true},    
   },
   ships:{
     min_uni_eta:8,
