@@ -21,6 +21,7 @@
 * [Change Log](#change-log)
 * [Setup / Installation](#setup-/-installation)
 * [Issues / Support](#issues-/-support)
+* [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [Code of Conduct](#code-of-conduct)
 * [Related Projects](#related-projects)
@@ -56,6 +57,22 @@ See [INSTALLATION.md](INSTALLATION.md) for setup guide.
 Check [Gandalf Wiki](https://github.com/moldypenguins/Gandalf/wiki) for reference.  
 Join [Gandalf Support](https://t.me/joinchat/HPVnlgHnFUShtg_D) on Telegram.  
 See [SECURITY.md](SECURITY.md) for feature requests or bug reports. 
+
+
+## Roadmap
+- [x] Galadriel
+- [ ] Mordor
+  - [ ] update models
+  - [ ] add functions to models
+- [ ] Bilbo
+  - [ ] add missing db cleanup
+  - [ ] add backup round functions
+- [ ] Frodo
+  - [ ] add calculations
+- [ ] Gandalf
+  - [ ] add spells
+- [ ] Sauron
+  -  [ ] endless amounts of work
 
 
 ## Contributing
