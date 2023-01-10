@@ -1,7 +1,7 @@
 'use strict';
 /**
  * Gandalf
- * Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High
+ * Copyright (c) 2020 Gandalf Planetarion Tools
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

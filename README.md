@@ -99,7 +99,7 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 
 ## Licenses
-Copyright © 2020 Craig Roberts, Braden Edmunds, Alex High  
+Copyright © 2020 Gandalf Planetarion Tools
 Licensed under the GNU General Public License Version 3  
 See [LICENSE.md](LICENSE.md) or [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html) for more details
 *** 

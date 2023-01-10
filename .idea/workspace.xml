@@ -5,57 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b4df756-377a-48de-bf3d-eae10a4430cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Galadriel/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/img/bg/affleck.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/img/bg/maplesyrup.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/img/bg/murphy.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/img/bg/shamrock.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/img/bg/telegram.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/img/bg/thematrix.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/img/bg/ultimate.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/img/member.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/public/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/src/components/HelloWorld.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/src/views/About.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/src/views/Admin.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/src/views/Authentication.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/src/views/Members.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/src/views/NotFound.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sauron/src/views/Universe.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/codeql-analysis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/codeql-analysis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bilbo/Bilbo.js" beforeDir="false" afterPath="$PROJECT_DIR$/Bilbo/Bilbo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bilbo/env.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bilbo/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Bilbo/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frodo/Frodo.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frodo/Frodo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frodo/env.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Frodo/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frodo/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Galadriel/default.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/src/default.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Galadriel/galadriel.js" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/src/galadriel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Galadriel/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Galadriel/types.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/src/Config.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/INSTALLATION.md" beforeDir="false" afterPath="$PROJECT_DIR$/INSTALLATION.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Galadriel/src/Config.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/src/Config.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Galadriel/src/default.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/src/default.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Galadriel/src/galadriel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/src/galadriel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/addmem.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/addmem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/discord.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/discord.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/launch.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/launch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/links.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/links.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/ship.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/ship.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/telegram.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/telegram.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/spells/tick.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/tick.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MiddleEarth.js" beforeDir="false" afterPath="$PROJECT_DIR$/MiddleEarth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/Mordor.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/Mordor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mordor/models/AllianceDump.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/AllianceDump.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mordor/models/DiscordGuild.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/DiscordGuild.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mordor/models/DiscordUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/DiscordUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mordor/models/GalaxyDump.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/GalaxyDump.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mordor/models/Member.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/Member.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mordor/models/PlanetDump.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/PlanetDump.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mordor/models/Ship.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/Ship.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/assets/scss/affleck.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/assets/scss/maplesyrup.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/assets/scss/murphy.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/assets/scss/shamrock.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/assets/scss/telegram.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/assets/scss/theme.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/assets/scss/variables.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/components/NuxtLogo.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/components/Tutorial.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/nuxt.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/pages/index.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/static/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mordor/models/TelegramChat.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/TelegramChat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mordor/models/TelegramUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/TelegramUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mordor/models/Tick.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/Tick.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/sauron.js" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/sauron.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/src/entry-server.js" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/src/entry-server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/src/router.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +131,7 @@
       <workItem from="1672015202883" duration="813000" />
       <workItem from="1672016326488" duration="36398000" />
       <workItem from="1673238583944" duration="7334000" />
-      <workItem from="1673328626843" duration="4982000" />
+      <workItem from="1673328626843" duration="6206000" />
     </task>
     <servers />
   </component>
