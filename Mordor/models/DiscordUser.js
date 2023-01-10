@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -19,7 +20,7 @@
  * @version 2021/11/14
  * @summary Mongoose Model
  **/
-'use strict';
+
 
 import Config from 'galadriel';
 import mongoose from 'mongoose';

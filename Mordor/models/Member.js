@@ -24,7 +24,7 @@
 import Config from 'galadriel';
 import mongoose from 'mongoose';
 import mongooseAutoPopulate from 'mongoose-autopopulate';
-import {TelegramUser} from "../mordor.js";
+import {DiscordUser, TelegramUser} from "../mordor.js";
 
 let MemberSchema = new mongoose.Schema({
   _id:             {type:mongoose.Schema.Types.ObjectId, required:true},
@@ -51,6 +51,14 @@ MemberSchema.statics.findByTGUser = async function(tg_user) {
 
 MemberSchema.statics.findByTGId = async function(tg_id) {
   return await TelegramUser.exists({tg_id: tg_id}) ? await this.findOne({tg_user: await TelegramUser.findOne({tg_id: tg_id})}) : null;
+}
+
+MemberSchema.statics.findByDSUser = async function(ds_user) {
+  return await this.findOne({ds_user: ds_user});
+}
+
+MemberSchema.statics.findByDSId = async function(ds_id) {
+  return await DiscordUser.exists({ds_id: ds_id}) ? await this.findOne({ds_user: await DiscordUser.findOne({ds_id: ds_id})}) : null;
 }
 
 MemberSchema.plugin(mongooseAutoPopulate);

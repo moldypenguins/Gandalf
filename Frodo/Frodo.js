@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -15,17 +16,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Frodo.js
+ * @name frodo.js
  * @version 2022-11-11
  * @summary Ticker
  * @param {string} -h,--havoc start Frodo in havoc mode
  * @param {flag} -f,--force force to start now
  * @param {flag} -o,--overwrite overwrite current tick
  **/
-'use strict';
 
-import { NODE_CONFIG_DIR, SUPPRESS_NO_CONFIG_WARNING } from './env.js';
-import Config from 'src';
+
+
+import Config from 'galadriel';
 import { Mordor, Tick, PlanetDump, GalaxyDump, AllianceDump } from 'Mordor';
 import axios from 'axios';
 import schedule from 'node-schedule';
@@ -85,26 +86,22 @@ Mordor.connection.once("open", async () => {
     let stop_trying = false;
     while(!stop_trying) {
       let iteration_start = new Date();
-      try {
-        //TODO: add time to wait for retry (ie. if status code from http request is not returning 200)
-        stop_trying = await process_tick(last_tick, start_time);
-      } catch(error) {
-        console.log(util.inspect(error, false, null, true));
-        //TODO: exit here on error
-        //break; //stop_trying = true;???
+      let {success, error} = await process_tick(last_tick, start_time);
+      if(error) {
+        console.error(`${error}\nUnable to process tick, giving up!\n\n`);
+        stop_trying = true;
       }
-      if(!stop_trying) {
+      if(!success) {
         while((new Date()).getTime() - iteration_start.getTime() < 15) { //wait at least 15 seconds between each iteration
           await sleep(5 * 1000); //sleep for 5 seconds
         }
         if((new Date()).getTime() - start_time.getTime() < (argv.havoc ? start_time.getMinutes() + 10 : 55) * 60) { //give up after 55 minutes past the hour - havoc 10 minutes past the 15
-          console.log(`Reached timeout without a successful dump, giving up!\n\n`);
+          console.warn(`Reached timeout without a successful dump, giving up!\n\n`);
           stop_trying = true;
         }
       }
     } //end while
   });
-  //process.send('ready');
 });
 
 
@@ -112,6 +109,7 @@ Mordor.connection.once("open", async () => {
 
 let process_tick = async (last_tick, start_time) => {
   let success = false;
+  let error = null;
   let current_ms = 0;
   let total_ms = 0;
 
@@ -125,12 +123,10 @@ let process_tick = async (last_tick, start_time) => {
       axios.get(Config.pa.dumps.alliance),
       axios.get(Config.pa.dumps.user)
     ]);
-  } catch (error) {
-    console.error(error);
   }
-  current_ms = (new Date()) - start_time;
-  console.log(`Loaded dumps from webserver in: ${current_ms - total_ms}ms`);
-  total_ms += current_ms - total_ms;
+  catch(err) {
+    error = err;
+  }
 
   if(
     planet_dump?.status === 200 && planet_dump.data &&
@@ -138,6 +134,10 @@ let process_tick = async (last_tick, start_time) => {
     alliance_dump?.status === 200 && alliance_dump.data &&
     user_dump?.status === 200 && user_dump.data
   ) {
+    current_ms = (new Date()) - start_time;
+    console.log(`Loaded dumps from webserver in: ${current_ms - total_ms}ms`);
+    total_ms += current_ms - total_ms;
+
     planet_dump = planet_dump.data.split('\n');
     galaxy_dump = galaxy_dump.data.split('\n');
     alliance_dump = alliance_dump.data.split('\n');
@@ -368,5 +368,5 @@ let process_tick = async (last_tick, start_time) => {
       }
     }
   }
-  return success;
+  return {success, error};
 }

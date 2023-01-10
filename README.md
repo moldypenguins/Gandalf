@@ -60,19 +60,7 @@ See [SECURITY.md](SECURITY.md) for feature requests or bug reports.
 
 
 ## Roadmap
-- [x] Galadriel
-- [ ] Mordor
-  - [ ] update models
-  - [ ] add functions to models
-- [ ] Bilbo
-  - [ ] add missing db cleanup
-  - [ ] add backup round functions
-- [ ] Frodo
-  - [ ] add calculations
-- [ ] Gandalf
-  - [ ] add spells
-- [ ] Sauron
-  -  [ ] endless amounts of work
+See [ROADMAP.md](ROADMAP.md) for more information.
 
 
 ## Contributing
