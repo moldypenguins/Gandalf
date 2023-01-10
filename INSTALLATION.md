@@ -46,9 +46,9 @@ sudo npm install @crowdsec/express-bouncer
 
 # https://docs.crowdsec.net/docs/bouncers/cloudflare/
 sudo apt-get install crowdsec-cloudflare-bouncer
-# auto-generate cloudflare config for provided space separated tokens 
+# auto-generate cloudflare src for provided space separated tokens 
 sudo crowdsec-cloudflare-bouncer -g <CLOUDFLARE_TOKEN1>,<CLOUDFLARE_TOKEN2> -o /etc/crowdsec/bouncers/crowdsec-cloudflare-bouncer.yaml
-# this sets up IP lists and firewall rules at cloudflare for the provided config. 
+# this sets up IP lists and firewall rules at cloudflare for the provided src. 
 sudo crowdsec-cloudflare-bouncer -s
 # the bouncer now syncs the crowdsec decisions with cloudflare components.
 sudo systemctl start crowdsec-cloudflare-bouncer
@@ -109,7 +109,7 @@ sudo apt-get install fail2ban
 sudo apt-get install sendmail
 #sudo vi /etc/mail/sendmail.conf
 sudo sendmailconfig
--put sendmail config instructions here
+-put sendmail src instructions here
 ```
 ```bash
 #configure fail2ban/sendmail
@@ -187,7 +187,7 @@ cd MiddleEarth
 ll
 sudo npm install
 sudo npm audit fix
-#create config.js
+#create src.js
 cp Config.example.js Config.js
 vi Config.js
 #create page content

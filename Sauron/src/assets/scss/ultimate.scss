@@ -1,0 +1,35 @@
+// Ultimate
+
+// Custom theme variables - these are imported into each theme so they can be overwritten if necessary
+@import "./variables";
+
+// Bootstrap theme color variables
+$primary: #24303f;
+$secondary: #24303f;
+$body-bg: #1a222c;
+$body-color: #232323;
+$link-color: #232323;
+$link-hover-color: #333366;
+$border-color: #232323;
+$gradient: linear-gradient(0deg, rgba(var(--bs-dark-rgb), 0.05), rgba(var(--bs-dark-rgb), 0));
+$font-family-sans-serif: 'Century Gothic', 'Arial', 'sans-serif';
+
+// Custom Bootstrap theme color variables
+$custom-colors: (
+  "shadow-color": #000000,
+  "footer-tab-bg": #ffd700,
+  "footer-tab-color": #232323,
+  "footer-tab-link-color": #232323,
+  "footer-tab-link-hover-color": #333333,
+);
+
+// Import theme styles - includes Bootstrap
+@import "./theme";
+
+// #####################
+// Custom theme styles
+// #####################
+
+body {
+  background-image: url('../img/bg/ultimate.jpg');
+}

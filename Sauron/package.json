@@ -1,20 +1,39 @@
 {
   "name": "sauron",
-  "version": "1.0.0-alpha",
   "private": true,
+  "version": "1.0.0-alpha",
+  "type": "module",
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "start": "node sauron.js",
+    "build": "build:client && build:server",
+    "build:client": "vite build --outDir dist/client --ssrManifest",
+    "build:server": "vite build --outDir dist/server --ssr src/entry-server.js"
   },
   "dependencies": {
-    "@nuxt/vite-builder": "^3.0.0",
-    "core-js": "^3.26.1",
     "galadriel": "file:../Galadriel",
-    "nuxt": "^3.0.0",
-    "vue": "^3.2.45",
-    "vue-server-renderer": "^2.7.14",
-    "vue-template-compiler": "^2.7.14"
+    "mordor": "file:../Mordor",
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-brands-svg-icons": "^6.2.1",
+    "@fortawesome/free-regular-svg-icons": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/vue-fontawesome": "^3.0.2",
+    "@popperjs/core": "^2.11.6",
+    "bootstrap": "^5.2.2",
+    "crypto-js": "^4.1.1",
+    "dayjs": "^1.11.6",
+    "express": "^4.18.2",
+    "html-entities": "^2.3.3",
+    "numeral": "^2.0.6",
+    "pinia": "^2.0.24",
+    "pm2": "^5.2.2",
+    "vue": "^3.2.41",
+    "vue-router": "^4.1.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.2.0",
+    "eslint": "^8.27.0",
+    "eslint-plugin-vue": "^9.7.0",
+    "sass": "^1.56.1",
+    "vite": "^3.2.3"
   }
 }

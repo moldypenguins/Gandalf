@@ -22,14 +22,12 @@
  **/
 'use strict';
 
-import { NODE_CONFIG_DIR, SUPPRESS_NO_CONFIG_WARNING } from './env.js';
-import Config from 'config';
+import Config from 'galadriel';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import X2JS from 'x2js';
 import minimist from 'minimist';
-import { Mordor, Ship, Tick } from 'Mordor';
-import * as util from "util";
+import { Mordor, Ship, Tick } from 'mordor';
 
 
 let argv = minimist(process.argv.slice(2), {

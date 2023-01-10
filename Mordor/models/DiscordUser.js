@@ -25,7 +25,7 @@ import Config from 'galadriel';
 import mongoose from 'mongoose';
 
 let DiscordUserSchema = new mongoose.Schema({
-  _id:                   {type:mongoose.Schema.Types.ObjectId, required:true},
+  _id:                  {type:mongoose.Schema.Types.ObjectId, required:true},
   dsuser_id:            {type:Number, unique:true, required:true},
   dsuser_first_name:    {type:String},
   dsuser_last_name:     {type:String},

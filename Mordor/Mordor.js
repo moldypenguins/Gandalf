@@ -34,15 +34,15 @@ import TelegramChat from './models/TelegramChat.js';
 import TelegramUser from './models/TelegramUser.js';
 import Tick from './models/Tick.js';
 
-
-
-mongoose.connect(`${Config.db.url}/${Config.db.name}`).catch(err => console.log(err.reason));
-mongoose.connection.on("error", () => {
-  console.log("Error: database connection failed.");
-});
-mongoose.connection.once("connected", () => {
-  console.log("Evil is stirring in Mordor.");
-});
+mongoose.set('strictQuery', true);
+mongoose.connect(`mongodb://${Config.db.url}`, {
+    authSource:'admin',
+    user: Config.db.user,
+    pass: Config.db.pass,
+    dbName: Config.db.name
+  }).catch((err) => console.log(err.reason));
+mongoose.connection.on("error", (err) => console.log(err.reason));
+mongoose.connection.once("connected", () => console.log(`Evil is stirring in Mordor.`));
 
 export {
   mongoose as Mordor,

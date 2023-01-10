@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High
@@ -19,7 +20,6 @@
  * @version 2021/06/12
  * @summary Mongoose Model
  **/
-'use strict';
 
 import mongoose from 'mongoose';
 
@@ -33,6 +33,7 @@ let ShipSchema = new mongoose.Schema({
   target2:    {type:String},
   target3:    {type:String},
   type:       {type:String},
+  cloaked:    {type:Boolean},
   initiative: {type:String},
   guns:       {type:String},
   armor:      {type:String},

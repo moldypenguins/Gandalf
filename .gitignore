@@ -116,7 +116,7 @@ dist-ssr/
 .DS_Store
 *.local
 
-# Local config
+# Local src
 local.ts
 
 
