@@ -1,12 +1,21 @@
 {
   "name": "mordor",
   "description": "Planetarion Tools - Database",
+  "private": true,
+  "engines": {
+    "node": ">=18.12.1",
+    "pnpm": ">=7.18.2"
+  },
+  "packageManager": "pnpm@7.18.2",
   "main": "./mordor.js",
   "version": "1.0.0-alpha",
   "type": "module",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
   "dependencies": {
+    "dayjs": "^1.11.7",
     "galadriel": "file:../Galadriel",
-    "dayjs": "^1.11.6",
     "mongoose": "^6.7.2",
     "mongoose-autopopulate": "^0.16.1"
   },

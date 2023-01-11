@@ -5,34 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b4df756-377a-48de-bf3d-eae10a4430cb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.npmrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pnpm-workspace.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bilbo/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Bilbo/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frodo/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frodo/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Galadriel/src/Config.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/src/Config.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Galadriel/src/default.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/src/default.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Galadriel/src/galadriel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/src/galadriel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gandalf/spells/addmem.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/addmem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gandalf/spells/discord.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/discord.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gandalf/spells/launch.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/launch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gandalf/spells/links.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/links.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gandalf/spells/ship.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/ship.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gandalf/spells/telegram.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/telegram.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gandalf/spells/tick.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/tick.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MiddleEarth.js" beforeDir="false" afterPath="$PROJECT_DIR$/MiddleEarth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/models/AllianceDump.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/AllianceDump.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/models/DiscordGuild.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/DiscordGuild.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/models/DiscordUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/DiscordUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/models/GalaxyDump.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/GalaxyDump.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/models/Member.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/Member.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/models/PlanetDump.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/PlanetDump.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/models/Ship.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/Ship.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/models/TelegramChat.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/TelegramChat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/models/TelegramUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/TelegramUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/models/Tick.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/Tick.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/sauron.js" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/sauron.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/src/entry-server.js" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/src/entry-server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sauron/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/src/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Galadriel/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gandalf/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mordor/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sauron/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Sauron/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +115,7 @@
       <workItem from="1672015202883" duration="813000" />
       <workItem from="1672016326488" duration="36398000" />
       <workItem from="1673238583944" duration="7334000" />
-      <workItem from="1673328626843" duration="6206000" />
+      <workItem from="1673328626843" duration="20726000" />
     </task>
     <servers />
   </component>

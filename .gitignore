@@ -122,3 +122,6 @@ local.ts
 
 # Package lock
 package-lock.json
+
+
+.npmrc

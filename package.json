@@ -1,24 +1,16 @@
 {
   "name": "middle_earth",
   "description": "Planetarion Tools",
-  "keywords": [ "Planetarion", "Bot" ],
+  "keywords": [ "Planetarion", "Bot", "Alliance", "Tools" ],
   "private": true,
-  "imports": {
-    "#Galadriel": "./Galadriel/galadriel.js",
-    "#Mordor": "./Mordor/mordor.js",
-    "#Bilbo": "./Bilbo/bilbo.js",
-    "#Frodo": "./Frodo/frodo.js",
-    "#Gandalf": "./Gandalf/gandalf.js",
-    "#Sauron": "./Sauron/sauron.js"
+  "engines": {
+    "node": ">=18.12.1",
+    "pnpm": ">=7.18.2"
   },
+  "packageManager": "pnpm@7.18.2",
   "scripts": {
-    "install:bilbo": "cd Bilbo && npm install",
-    "install:frodo": "cd Frodo && npm install",
-    "install:galadriel": "cd Galadriel && npm install",
-    "install:gandalf": "cd Gandalf && npm install",
-    "install:mordor": "cd Mordor && npm install",
-    "install:sauron": "cd Sauron && npm install",
-    "install": "npm run install:mordor && npm run install:galadriel && npm run install:bilbo && npm run install:frodo && npm run install:gandalf && npm run install:sauron",
+    "preinstall": "npx only-allow pnpm",
+
     "start": "pm2 start MiddleEarth.js",
     "restart": "pm2 restart MiddleEarth.js",
     "stop": "pm2 stop MiddleEarth.js",
@@ -29,17 +21,12 @@
   "author": "Craig Roberts <craig.roberts@crdevel.com>",
   "contributors": [
     "Braden Edmunds <braden.edmunds@gmail.com>",
-    "Alex High <freshlondon.biz@gmail.com>"
+    "Alex High <freshlondon.biz@gmail.com>",
+    "Sam Powis <knoid1@gmail.com>"
   ],
   "license": "GPL-3.0",
   "repository": "github:moldypenguins/Gandalf",
   "bugs": "https://github.com/moldypenguins/Gandalf/issues",
   "homepage": "https://github.com/moldypenguins/Gandalf",
-  "funding": "",
-  "engines": {
-    "node": "^16.18.0",
-    "npm": "^8.19.2",
-    "mongodb": "^6.0.2"
-  },
-  "packageManager": "npm@8.19.2"
+  "funding": ""
 }

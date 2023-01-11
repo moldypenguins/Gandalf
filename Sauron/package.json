@@ -1,9 +1,16 @@
 {
   "name": "sauron",
+  "description": "Planetarion Tools - Website",
   "private": true,
+  "engines": {
+    "node": ">=18.12.1",
+    "pnpm": ">=7.18.2"
+  },
+  "packageManager": "pnpm@7.18.2",
   "version": "1.0.0-alpha",
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "start": "node sauron.js",
     "build": "build:client && build:server",
     "build:client": "vite build --outDir dist/client --ssrManifest",
