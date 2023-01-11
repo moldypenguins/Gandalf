@@ -6,7 +6,7 @@
 ![Release Date](https://img.shields.io/github/release-date-pre/moldypenguins/Gandalf?logo=GitHub&style=for-the-badge)  
 ![Contributors](https://img.shields.io/github/contributors/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
-![Build](https://img.shields.io/github/workflow/status/moldypenguins/Gandalf/CodeQL?style=for-the-badge&logo=GitHub)  
+![Build](https://img.shields.io/github/actions/workflow/status/moldypenguins/Gandalf/CodeQL?style=for-the-badge&logo=GitHub)  
 ![Open Issues](https://img.shields.io/github/issues-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Open Pull Requests](https://img.shields.io/github/issues-pr-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Dependabot](https://img.shields.io/static/v1?style=for-the-badge&label=Dependabot&message=enabled&color=33CC11&logo=Dependabot)  
@@ -36,17 +36,13 @@
 [![Lynis](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=Lynis&message=3.0.8&color=FCC624)](https://cisofy.com/lynis/)  
 [![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=6.0.3&color=47A248)](https://www.mongodb.com/)  
 [![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=18.12.1&color=339933)](https://nodejs.org/)  
-[![NPM](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=NPM&message=v8.19.3&color=CB3837)](https://www.npmjs.com/)  
 [![PNPM](https://img.shields.io/static/v1?style=for-the-badge&logo=PNPM&label=PNPM&message=7.18.1&color=f69220)](https://www.pnpm.io/)  
 [![Vue.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Vue.js&label=Vue.js&message=3.2.45&color=339933)](https://vuejs.io/)  
-[![Nuxt.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Nuxt.js&label=Nuxt.js&message=v&color=339933)](https://nuxtjs.io/)  
-[![Vite.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Vite&label=Vite&message=v&color=339933)](https://github.com/antfu/vite)  
-
+[![Vite.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Vite&label=Vite&message=2.0&color=339933)](https://github.com/antfu/vite)  
 
 
 ## Change Log
 See [CHANGELOG.md](CHANGELOG.md) for changes.  
-
 
 
 ## Setup / Installation
