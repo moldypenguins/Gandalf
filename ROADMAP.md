@@ -3,19 +3,19 @@
 ## Galadriel (config)  
 - [ ] update readme
 ## Mordor (database)  
-- [ ] add readme
+- [ ] update readme
 - [ ] update models
 - [ ] add functions to models
 ## Bilbo (setup)  
-- [ ] add readme
+- [ ] update readme
 - [ ] add missing db cleanup
 - [ ] add backup round functions
 ## Frodo (ticker)  
-- [ ] add readme
+- [ ] update readme
 - [ ] add calculations
 ## Gandalf (bot)  
-- [ ] add readme
+- [ ] update readme
 - [ ] add spells
 ## Sauron (web)  
-- [ ] add readme
+- [ ] update readme
 - [ ] make it work
