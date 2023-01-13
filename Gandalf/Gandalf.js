@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -19,7 +20,7 @@
  * @version 2022-11-14
  * @summary Bot
  **/
-'use strict';
+
 
 import Config from 'galadriel';
 import {Member, Mordor, TelegramUser} from 'mordor';
@@ -44,12 +45,10 @@ let tgCommands = {};
 Config.telegram.commands.forEach(function(name) { Object.assign(tgCommands, tgSpells); });
 
 
-
-
 let dscmds = []; //temporary for registering commands in discord
 let dsCommands = new Collection();
 Config.discord.commands.forEach(function(name) {
-  const cmd = dsSpells;
+  const cmd = dsSpells[name];
   if('data' in cmd && 'execute' in cmd) {
     dsCommands.set(cmd.data.name, cmd);
     dscmds.push(cmd.data.toJSON());
