@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -19,10 +20,6 @@
  * @version 2022/11/11
  * @summary pm2 src
  **/
-'use strict';
-
-//TODO: update package.json to use workspaces
-//TODO: https://docs.npmjs.com/cli/v9/using-npm/workspaces
 
 module.exports = {
   apps : [

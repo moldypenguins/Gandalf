@@ -118,7 +118,7 @@ export const discord = {
       else {
         reply += ` (${ticktime.tz().format('YYYY-MM-DD H:mm z')})`;
       }
-      await interaction.reply(reply);
+      await interaction.reply(`\`\`\`${reply}\`\`\``);
     }
   },
   help: encode('/tick [tick] [timezone]')

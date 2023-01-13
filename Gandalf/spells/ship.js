@@ -99,12 +99,12 @@ export const discord = {
       }
       reply += `\nType: ${ship.type}\nInit: ${ship.initiative}`;
       reply += `\nEMP Res: ${ship.empres}`;
-      if(ship.type.toLowerCase() == 'emp') {
+      if(ship.type.toLowerCase() === 'emp') {
         reply += `\nGuns: ${ship.guns}`;
       }
       reply += `\nD/C: ${Math.trunc(Number(ship.damage)*10000/(Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
       reply += `\nA/C: ${Math.trunc(Number(ship.armor)*10000/(Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
-      await interaction.reply(reply);
+      await interaction.reply(`\`\`\`${reply}\`\`\``);
     }
   },
   help: encode('/ship <ship>')
