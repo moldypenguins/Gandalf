@@ -25,6 +25,6 @@
     "x2js": "^3.4.4"
   },
   "devDependencies": {
-    "eslint": "^8.26.0"
+    "eslint": "^8.32.0"
   }
 }

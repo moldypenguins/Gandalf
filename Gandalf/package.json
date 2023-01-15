@@ -30,6 +30,6 @@
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
-    "eslint": "^8.26.0"
+    "eslint": "^8.32.0"
   }
 }
