@@ -36,7 +36,6 @@ import Tick from './models/Tick.js';
 
 mongoose.set('strictQuery', true);
 mongoose.connect(`mongodb://${Config.db.url}`, {
-    authSource:'admin',
     user: Config.db.user,
     pass: Config.db.pass,
     dbName: Config.db.name
