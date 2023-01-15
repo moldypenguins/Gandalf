@@ -4,10 +4,11 @@
 * [HOSTNAME] = domain.com
 * [DEFAULTUSER] = ubuntu
 * [USERNAME] = administrator
+* [USERPASS] = P@ssw0rd
 * [USEREMAIL] = administrator@domain.com
 * [BOTNAME] = Somebot
 * [DATABASENAME] = Mordor
-* [DATABASEUSER] = administrator
+* [DATABASEUSER] = Gandalf
 * [DATABASEPASS] = abcd1234
 
 
@@ -142,22 +143,31 @@ sudo systemctl status mongod
 #test mongo
 mongo
 
+use admin
+db.createUser({user:'[USERNAME]',pwd:'[USERPASS]',roles:[{role:'userAdminAnyDatabase',db:'admin'},{role:'readWriteAnyDatabase',db:'admin'}]})
+
 use [DATABASENAME]
-db.createUser({user: [DATABASEUSER], pwd: [DATABASEPASS], roles: ['readWrite']})
+db.createUser({user: '[DATABASEUSER]', pwd: '[DATABASEPASS]', roles: ['readWrite']})
 
 exit
+
+sudo vi /etc/mongod.conf
+    security:
+      authorization: enabled
+      
+sudo service mongod restart
+
+# mongo --username [USERNAME] --password --authenticationDatabase admin
 ```
 
-### install node.js/npm/pnpm/pm2/typescript
+### install node.js/npm and global packages
 ```bash
 sudo apt -y install gcc g++ make
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt-get install -y nodejs
 node -v
 npm -v
-sudo npm i -g pnpm
-sudo npm i -g pm2
-sudo npm i -g typescript
+sudo npm i -g pnpm pm2 typescript
 ```
 
 ### download git

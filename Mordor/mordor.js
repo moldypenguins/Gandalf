@@ -42,7 +42,7 @@ mongoose.connect(`mongodb://${Config.db.url}`, {
     dbName: Config.db.name
   }).catch((err) => console.log(err.reason));
 mongoose.connection.on("error", (err) => console.log(err.reason));
-mongoose.connection.once("connected", () => console.log(`Evil is stirring in Mordor.`));
+mongoose.connection.once("open", () => console.log(`Evil is stirring in Mordor.`));
 
 export {
   mongoose as Mordor,
