@@ -144,7 +144,7 @@ mongo
 exit
 ```
 
-### install node.js/npm/pnpm/typescript
+### install node.js/npm/pnpm/pm2/typescript
 ```bash
 sudo apt -y install gcc g++ make
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
@@ -152,6 +152,7 @@ sudo apt-get install -y nodejs
 node -v
 npm -v
 sudo npm i -g pnpm
+sudo npm i -g pm2
 sudo npm i -g typescript
 ```
 
