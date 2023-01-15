@@ -186,6 +186,20 @@ cd ..
 pnpm i
 ```
 
+```bash
+cd Bilbo/
+node Bilbo.js -s YYYY-MM-DDThh:mmZ
+cd ..
+pm2 start Frodo/frodo.js
+pm2 start Gandalf/gandalf.js
+pnpm watch
+```
+
+
+
+
+
+
 
 
 
