@@ -14,17 +14,17 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
-    "axios": "workspace:*",
-    "dayjs": "workspace:*",
-    "galadriel": "workspace:*",
-    "html-entities": "workspace:*",
-    "minimist": "workspace:*",
-    "mordor": "workspace:*",
-    "numeral": "workspace:*",
-    "pm2": "workspace:*",
-    "x2js": "workspace:*"
+    "axios": "^1.2.2",
+    "dayjs": "^1.11.6",
+    "galadriel": "file:../Galadriel",
+    "html-entities": "^2.3.3",
+    "minimist": "^1.2.7",
+    "mordor": "file:../Mordor",
+    "numeral": "^2.0.6",
+    "pm2": "^5.2.2",
+    "x2js": "^3.4.4"
   },
   "devDependencies": {
-    "eslint": "workspace:*"
+    "eslint": "^8.26.0"
   }
 }
