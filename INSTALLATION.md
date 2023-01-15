@@ -141,6 +141,10 @@ sudo systemctl start mongod
 sudo systemctl status mongod
 #test mongo
 mongo
+
+use [DATABASENAME]
+db.createUser({user: [DATABASEUSER], pwd: [DATABASEPASS], roles: ['readWrite']})
+
 exit
 ```
 
@@ -156,11 +160,10 @@ sudo npm i -g pm2
 sudo npm i -g typescript
 ```
 
-### download Git and install modules
+### download git
 ```bash
 git clone https://github.com/moldypenguins/Gandalf MiddleEarth
 cd MiddleEarth/
-pnpm i
 ```
 
 
@@ -174,7 +177,10 @@ ll
 cd ..
 ```
 
-
+### install node modules
+```bash
+pnpm i
+```
 
 
 
