@@ -142,21 +142,15 @@ sudo systemctl start mongod
 sudo systemctl status mongod
 #test mongo
 mongo
-
-use admin
-db.createUser({user:'[USERNAME]',pwd:'[USERPASS]',roles:[{role:'userAdminAnyDatabase',db:'admin'},{role:'readWriteAnyDatabase',db:'admin'}]})
-
-use [DATABASENAME]
-db.createUser({user: '[DATABASEUSER]', pwd: '[DATABASEPASS]', roles: ['readWrite']})
-
+#use admin
+#db.createUser({user:'[USERNAME]',pwd:'[USERPASS]',roles:[{role:'userAdminAnyDatabase',db:'admin'},{role:'readWriteAnyDatabase',db:'admin'}]})
+#use [DATABASENAME]
+#db.createUser({user: '[DATABASEUSER]', pwd: '[DATABASEPASS]', roles: ['readWrite']})
 exit
-
-sudo vi /etc/mongod.conf
-    security:
-      authorization: enabled
-      
-sudo service mongod restart
-
+#sudo vi /etc/mongod.conf
+#    security:
+#      authorization: enabled
+#sudo systemctl restart mongod
 # mongo --username [USERNAME] --password --authenticationDatabase admin
 ```
 
