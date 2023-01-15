@@ -11,8 +11,7 @@
   "type": "module",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "build": "tsc",
-    "test": "node ./dist/test.js"
+    "build": "tsc"
   },
   "exports": {
     ".": "./dist/galadriel.js"

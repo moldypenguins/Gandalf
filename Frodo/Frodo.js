@@ -100,6 +100,9 @@ Mordor.connection.once("open", async () => {
           stop_trying = true;
         }
       }
+      else {
+        stop_trying = true;
+      }
     } //end while
   });
 });
