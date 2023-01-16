@@ -177,7 +177,7 @@ cd Galadriel/
 vi src/local.ts
   [paste config]
 pnpm build
-ll
+ls -alf
 cd ..
 ```
 
