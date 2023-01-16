@@ -87,10 +87,10 @@ Mordor.connection.once("open", async () => {
 
 
   telegramBot.entity(async(entity, s, ctx) => {
-    console.log(`e: ${util.inspect(entity, true, null, true)}\ns: ${s}`);
+    //console.log(`e: ${util.inspect(entity, true, null, true)}\ns: ${s}`);
   });
   telegramBot.mention(async(mention, fns) => {
-    console.log(`m: ${util.inspect(mention, true, null, true)}`);
+    //console.log(`m: ${util.inspect(mention, true, null, true)}`);
   });
 
 
@@ -145,7 +145,7 @@ Mordor.connection.once("open", async () => {
     console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)
   });
 
-//console.log(util.inspect(ctx.message, true, null, true));
+
 
   // Discord
   const discordBot = new Client({
@@ -165,7 +165,7 @@ Mordor.connection.once("open", async () => {
 
   discordBot.on(Events.InteractionCreate, async (interaction) => {
     if(!interaction.isChatInputCommand()) { return; }
-    console.log(interaction);
+    //console.log(interaction);
 
     const command = interaction.client.commands.get(interaction.commandName);
 
@@ -196,7 +196,6 @@ Mordor.connection.once("open", async () => {
   });
   await discordBot.login(Config.discord.token);
 
-  //process.send('ready');
 
   // Enable graceful stop
   let death = (code) => {
