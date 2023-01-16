@@ -39,8 +39,10 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 
+const helpText = encode('/tick [tick=NOW] [timezone=UTC]');
+
 export const telegram = {
-  usage: encode('/tick [tick=NOW] [timezone=UTC]'),
+  usage: helpText,
   description: 'Calculates when a tick will occur.',
   cast: (ctx, args) => {
     return new Promise(async (resolve, reject) => {
@@ -64,7 +66,7 @@ export const discord = {
     let _reply = await getReply({tick: _tick, timezone: _tzone});
     await interaction.reply(`\`\`\`${_reply}\`\`\``);
   },
-  help: encode('/tick [tick] [timezone]')
+  help: helpText
 };
 
 
