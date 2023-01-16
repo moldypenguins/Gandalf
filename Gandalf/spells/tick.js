@@ -74,7 +74,8 @@ async function getReply(params) {
   let reply;
   if(params.tick || params.timezone) {
     //param validation
-
+    //var spacing = options.spacing || 0;
+    //var width = options.width || "50%";
   }
   let tick = await Tick.findLastTick();
   if(!tick) {
