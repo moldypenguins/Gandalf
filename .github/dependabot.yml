@@ -4,11 +4,36 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    directory: "/"
+    directory: "/Bilbo/"
+    schedule:
+      interval: "monthly"
+
+  - package-ecosystem: "npm"
+    directory: "/Frodo/"
+    schedule:
+      interval: "monthly"
+
+  - package-ecosystem: "npm"
+    directory: "/Galadriel/"
+    schedule:
+      interval: "monthly"
+
+  - package-ecosystem: "npm"
+    directory: "/Gandalf/"
+    schedule:
+      interval: "monthly"
+
+  - package-ecosystem: "npm"
+    directory: "/Mordor/"
+    schedule:
+      interval: "monthly"
+
+  - package-ecosystem: "npm"
+    directory: "/Sauron/"
     schedule:
       interval: "monthly"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
