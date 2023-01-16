@@ -46,7 +46,7 @@ export const telegram = {
     return new Promise(async (resolve, reject) => {
       let _tick = args[0];
       let _tzone = args[1];
-      let _reply = getReply({tick: _tick, timezone: _tzone});
+      let _reply = await getReply({tick: _tick, timezone: _tzone});
       resolve(_reply);
     });
   }
@@ -61,7 +61,7 @@ export const discord = {
   async execute(interaction) {
     let _tick = interaction.options.getInteger('tick');
     let _tzone = interaction.options.getString('timezone');
-    let _reply = getReply({tick: _tick, timezone: _tzone});
+    let _reply = await getReply({tick: _tick, timezone: _tzone});
     await interaction.reply(`\`\`\`${_reply}\`\`\``);
   },
   help: encode('/tick [tick] [timezone]')
@@ -72,7 +72,7 @@ async function getReply(params) {
   let reply;
   if(params.tick || params.timezone) {
     //param validation
-    
+
   }
   let tick = await Tick.findLastTick();
   if(!tick) {
