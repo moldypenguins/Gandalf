@@ -39,7 +39,7 @@ let argv = minimist(process.argv.slice(2), {
 });
 
 import { Context, Telegraf } from 'telegraf';
-import { ActivityType, Client, Collection, Events, GatewayIntentBits, REST } from 'discord.js';
+import { ActivityType, Client, Collection, Events, GatewayIntentBits, Routes, REST } from 'discord.js';
 
 let tgCommands = {};
 Config.telegram.commands.forEach(function(name) { Object.assign(tgCommands, tgSpells); });
