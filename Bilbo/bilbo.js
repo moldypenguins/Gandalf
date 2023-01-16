@@ -45,11 +45,11 @@ Mordor.connection.once("open", async() => {
   }
   else {
     _start = dayjs(argv.start);
-    if(_start > dayjs()) {
+    //if(_start > dayjs()) {
       await clear_database();
       await load_ships();
       await load_ticks(_start);
-    }
+    //}
   }
   process.exit(0);
 });

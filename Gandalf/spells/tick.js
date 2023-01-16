@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -19,7 +20,7 @@
  * @version 2022/11/17
  * @summary Gandalf Spells
  **/
-'use strict';
+
 
 import Config from 'galadriel';
 import { Mordor, Tick } from 'mordor';
@@ -43,44 +44,10 @@ export const telegram = {
   description: 'Calculates when a tick will occur.',
   cast: (ctx, args) => {
     return new Promise(async (resolve, reject) => {
-      let now_tick = await Tick.findLastTick();
-      let _tick = numeral(args.length > 0 ? args[0] : now_tick.tick).value();
-      if(_tick == null) {
-        reject(`tick provided must be a number`);
-      }
-      else {
-        let now_time = dayjs(now_tick.timestamp).utc();
-        let _timezone = 'UTC';
-        if(args.length > 1) {
-          try {
-            now_time.tz(args[1]);
-            _timezone = args[1];
-          }
-          catch(err) {
-            _timezone = undefined;
-          }
-        }
-
-        if(!_timezone) {
-          reject(`invalid timezone: ${args[1]}`);
-        }
-        else {
-          let reply;
-          if(now_tick.tick === _tick) {
-            reply = `It is currently tick <b>${now_tick.tick}</b> (<i>${now_time.tz(_timezone).format('YYYY-MM-DD H:mm z')}</i>)`;
-          }
-          else {
-            now_time = now_time.add(_tick - now_tick.tick, 'hour');
-            if(_tick > now_tick.tick) {
-              reply = `Tick <b>${_tick}</b> will happen in ${_tick - now_tick.tick} ticks (<i>${now_time.tz(_timezone).format('YYYY-MM-DD H:mm z')}</i>)`;
-            }
-            else {
-              reply = `Tick <b>${_tick}</b> happened ${now_tick.tick - _tick} ticks ago (<i>${now_time.tz(_timezone).format('YYYY-MM-DD H:mm z')}</i>)`;
-            }
-          }
-          resolve(reply);
-        }
-      }
+      let _tick = args[0];
+      let _tzone = args[1];
+      let _reply = getReply({tick: _tick, timezone: _tzone});
+      resolve(_reply);
     });
   }
 };
@@ -94,32 +61,40 @@ export const discord = {
   async execute(interaction) {
     let _tick = interaction.options.getInteger('tick');
     let _tzone = interaction.options.getString('timezone');
-    let tick = await Tick.findLastTick();
-    if(!tick) {
-      await interaction.reply(`Cannot find current tick.`);
-    }
-    else {
-      let reply;
-      if(!_tick || tick.tick === _tick) {
-        reply = `It is currently tick ${tick.tick}`;
-      }
-      else {
-        if(_tick > tick.tick) {
-          reply = `Tick ${_tick} is expected to happen in ${_tick - tick.tick} ticks`;
-        }
-        else {
-          reply = `Tick ${_tick} happened ${tick.tick - _tick} ticks ago`;
-        }
-      }
-      let ticktime = dayjs(tick.timestamp);
-      if(_tzone) {
-        reply += ` (${ticktime.tz(_tzone).format('YYYY-MM-DD H:mm z')})`
-      }
-      else {
-        reply += ` (${ticktime.tz().format('YYYY-MM-DD H:mm z')})`;
-      }
-      await interaction.reply(`\`\`\`${reply}\`\`\``);
-    }
+    let _reply = getReply({tick: _tick, timezone: _tzone});
+    await interaction.reply(`\`\`\`${_reply}\`\`\``);
   },
   help: encode('/tick [tick] [timezone]')
 };
+
+
+async function getReply(params) {
+  let reply;
+  if(params.tick || params.timezone) {
+
+  }
+  let tick = await Tick.findLastTick();
+  if(!tick) {
+    reply = `Cannot find current tick.`;
+  }
+  else {
+    let reply;
+    if (!params.tick || tick.tick === params.tick) {
+      reply = `It is currently tick ${tick.tick}`;
+    } else {
+      if (params.tick > tick.tick) {
+        reply = `Tick ${params.tick} is expected to happen in ${params.tick - tick.tick} ticks`;
+      } else {
+        reply = `Tick ${params.tick} happened ${tick.tick - params.tick} ticks ago`;
+      }
+    }
+    let ticktime = dayjs(tick.timestamp);
+    if (params.timezone) {
+      reply += ` (${ticktime.tz(params.timezone).format('YYYY-MM-DD H:mm z')})`
+    } else {
+      reply += ` (${ticktime.tz().format('YYYY-MM-DD H:mm z')})`;
+    }
+  }
+  return reply;
+}
+
