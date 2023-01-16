@@ -71,14 +71,14 @@ export const discord = {
 async function getReply(params) {
   let reply;
   if(params.tick || params.timezone) {
-
+    //param validation
+    
   }
   let tick = await Tick.findLastTick();
   if(!tick) {
     reply = `Cannot find current tick.`;
   }
   else {
-    let reply;
     if (!params.tick || tick.tick === params.tick) {
       reply = `It is currently tick ${tick.tick}`;
     } else {
