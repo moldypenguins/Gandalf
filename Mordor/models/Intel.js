@@ -21,12 +21,12 @@
  **/
 'use strict';
 
-const Mordor = require('../Mordor');
+import mongoose from 'mongoose';
 
-let IntelSchema = new Mordor.Schema({
-  _id:         {type:Mordor.Schema.Types.ObjectId, required:true},
-  planet:      {type:Mordor.Schema.Types.ObjectId, ref:'Planet', autopopulate: true},
-  alliance:    {type:Mordor.Schema.Types.ObjectId, ref:'Alliance', autopopulate: true},
+let IntelSchema = new mongoose.Schema({
+  _id:         {type:mongoose.Schema.Types.ObjectId, required:true},
+  planet:      {type:mongoose.Schema.Types.ObjectId, ref:'Planet', autopopulate: true},
+  alliance:    {type:mongoose.Schema.Types.ObjectId, ref:'Alliance', autopopulate: true},
   nick:        {type:String},
   fakenick:    {type:String},
   defwhore:    {type:Boolean},
@@ -42,4 +42,4 @@ let IntelSchema = new Mordor.Schema({
 
 IntelSchema.plugin(require('mongoose-autopopulate'));
 
-module.exports = Mordor.model('Intel', IntelSchema, 'Intels');
+module.exports = mongoose.model('Intel', IntelSchema, 'Intels');

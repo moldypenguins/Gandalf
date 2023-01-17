@@ -21,7 +21,7 @@
  **/
 'use strict';
 
-const Mordor = require('../Mordor');
+import mongoose from 'mongoose';
 
 let AttackSchema = new Mordor.Schema({
   _id:          {type:Mordor.Schema.Types.ObjectId, required:true},

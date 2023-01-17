@@ -21,11 +21,11 @@
  **/
 'use strict';
 
-const Mordor = require('../Mordor');
+import mongoose from 'mongoose';
 
-let GalaxyHistorySchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
-  tick:       {type:Mordor.Schema.Types.ObjectId, required:true, ref:'Tick'},
+let GalaxyHistorySchema = new mongoose.Schema({
+  _id:        {type:mongoose.Schema.Types.ObjectId, required:true},
+  tick:       {type:mongoose.Schema.Types.ObjectId, required:true, ref:'Tick'},
   x:          {type:Number, required:true},
   y:          {type:Number, required:true},
   name:       {type:String, required:true, trim:true},
@@ -111,4 +111,4 @@ let GalaxyHistorySchema = new Mordor.Schema({
   */
 });
 
-module.exports = Mordor.model('GalaxyHistory', GalaxyHistorySchema, 'GalaxyHistories');
+module.exports = mongoose.model('GalaxyHistory', GalaxyHistorySchema, 'GalaxyHistories');

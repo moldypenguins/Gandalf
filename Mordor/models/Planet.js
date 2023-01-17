@@ -21,8 +21,7 @@
  **/
 'use strict';
 
-const Mordor = require('../Mordor');
-const util = require("util");
+import mongoose from 'mongoose';
 
 let PlanetSchema = new Mordor.Schema({
   _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
@@ -139,7 +138,7 @@ let PlanetSchema = new Mordor.Schema({
 
 PlanetSchema.statics.findByCoords = function(coords) {
   let xyz = coords.match(/(\d+)[:.](\d+)[:.](\d+)/);
-  console.log('XYZ: ' + util.inspect(xyz, false, null, true));
+  //console.log('XYZ: ' + util.inspect(xyz, false, null, true));
   return null;
 };
 

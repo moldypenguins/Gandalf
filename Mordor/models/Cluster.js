@@ -21,10 +21,10 @@
  **/
 'use strict';
 
-const Mordor = require('../Mordor');
+import mongoose from 'mongoose';
 
-let ClusterSchema = new Mordor.Schema({
-  _id:      {type:Mordor.Schema.Types.ObjectId, required:true},
+let ClusterSchema = new mongoose.Schema({
+  _id:      {type:mongoose.Schema.Types.ObjectId, required:true},
   x:        {type:Number, required:true},
   size:     {type:Number, default:0},
   score:    {type:Number, default:0},
@@ -97,4 +97,4 @@ let ClusterSchema = new Mordor.Schema({
   */
 });
 
-module.exports = Mordor.model('Cluster', ClusterSchema, 'Clusters');
+module.exports = mongoose.model('Cluster', ClusterSchema, 'Clusters');

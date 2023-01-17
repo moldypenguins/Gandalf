@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High
@@ -19,12 +20,12 @@
  * @version 2021/05/25
  * @summary Mongoose Model
  **/
-'use strict';
 
-const Mordor = require('../Mordor');
 
-let AllianceSchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
+import mongoose from 'mongoose';
+
+let AllianceSchema = new mongoose.Schema({
+  _id:        {type:mongoose.Schema.Types.ObjectId, required:true},
   name:       {type:String, required:true, trim:true},
   size:       {type:Number},
   members:    {type:Number},
@@ -132,4 +133,4 @@ AllianceSchema.statics.findByName = function (name, cb) {
     (a.alias !== undefined && a.alias.toLowerCase() === name.toLowerCase()), cb);
 }
 
-module.exports = Mordor.model('Alliance', AllianceSchema, 'Alliances');
+module.exports = mongoose.model('Alliance', AllianceSchema, 'Alliances');

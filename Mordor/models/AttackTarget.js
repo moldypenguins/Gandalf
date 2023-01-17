@@ -21,14 +21,14 @@
  **/
 'use strict';
 
-const Mordor = require('../Mordor');
+import mongoose from 'mongoose';
 
-let AttackTargetSchema = new Mordor.Schema({
-  _id:    {type:Mordor.Schema.Types.ObjectId, required:true},
-  attack: {type:Mordor.Schema.Types.ObjectId, ref:'Attack', autopopulate:true},
-  planet: {type:Mordor.Schema.Types.ObjectId, ref:'Planet', autopopulate:true},
+let AttackTargetSchema = new mongoose.Schema({
+  _id:    {type:mongoose.Schema.Types.ObjectId, required:true},
+  attack: {type:mongoose.Schema.Types.ObjectId, ref:'Attack', autopopulate:true},
+  planet: {type:mongoose.Schema.Types.ObjectId, ref:'Planet', autopopulate:true},
 });
 
 AttackTargetSchema.plugin(require('mongoose-autopopulate'));
 
-module.exports = Mordor.model('AttackTarget', AttackTargetSchema, 'AttackTargets');
+module.exports = mongoose.model('AttackTarget', AttackTargetSchema, 'AttackTargets');

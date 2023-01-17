@@ -21,13 +21,13 @@
  **/
 'use strict';
 
-const Mordor = require('../Mordor');
+import mongoose from 'mongoose';
 
-let PlanetTrackSchema = new Mordor.Schema({
-  _id:         {type:Mordor.Schema.Types.ObjectId, required:true},
-  planet:      {type:Mordor.Schema.Types.ObjectId, ref:'Planet'},
+let PlanetTrackSchema = new mongoose.Schema({
+  _id:         {type:mongoose.Schema.Types.ObjectId, required:true},
+  planet:      {type:mongoose.Schema.Types.ObjectId, ref:'Planet'},
   //planet_id: {type:String},
-  tick:        {type:Mordor.Schema.Types.ObjectId, ref:'Tick'},
+  tick:        {type:mongoose.Schema.Types.ObjectId, ref:'Tick'},
   //tick:      {type:Number},
   old_x:       {type:Number},
   old_y:       {type:Number},
@@ -37,4 +37,4 @@ let PlanetTrackSchema = new Mordor.Schema({
   new_z:       {type:Number},
 });
 
-module.exports = Mordor.model('PlanetTrack', PlanetTrackSchema, 'PlanetTracks');
+module.exports = mongoose.model('PlanetTrack', PlanetTrackSchema, 'PlanetTracks');
