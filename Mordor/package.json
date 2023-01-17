@@ -17,7 +17,7 @@
     "dayjs": "^1.11.7",
     "galadriel": "file:../Galadriel",
     "mongoose": "^6.7.2",
-    "mongoose-autopopulate": "^0.16.1"
+    "mongoose-autopopulate": "^0.17.1"
   },
   "devDependencies": {
     "eslint": "^8.32.0"
