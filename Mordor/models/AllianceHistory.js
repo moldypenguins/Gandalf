@@ -23,9 +23,9 @@
 
 import mongoose from 'mongoose';
 
-let AllianceHistorySchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
-  tick:       {type:Mordor.Schema.Types.ObjectId, required:true, ref:'Tick'},
+let AllianceHistorySchema = new mongoose.Schema({
+  _id:        {type:mongoose.Schema.Types.ObjectId, required:true},
+  tick:       {type:mongoose.Schema.Types.ObjectId, required:true, ref:'Tick'},
   name:       {type:String, required:true, trim:true},
   size:       {type:Number},
   members:    {type:Number},
@@ -130,4 +130,4 @@ let AllianceHistorySchema = new Mordor.Schema({
 */
 });
 
-export default Mordor.model('AllianceHistory', AllianceHistorySchema, 'AllianceHistories');
+export default mongoose.model('AllianceHistory', AllianceHistorySchema, 'AllianceHistories');
