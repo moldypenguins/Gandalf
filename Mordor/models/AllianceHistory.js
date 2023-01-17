@@ -130,4 +130,4 @@ let AllianceHistorySchema = new Mordor.Schema({
 */
 });
 
-module.exports = Mordor.model('AllianceHistory', AllianceHistorySchema, 'AllianceHistories');
+export default Mordor.model('AllianceHistory', AllianceHistorySchema, 'AllianceHistories');

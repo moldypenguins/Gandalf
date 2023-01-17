@@ -23,8 +23,8 @@
 
 import mongoose from 'mongoose';
 
-let AttackSchema = new Mordor.Schema({
-  _id:          {type:Mordor.Schema.Types.ObjectId, required:true},
+let AttackSchema = new mongoose.Schema({
+  _id:          {type:mongoose.Schema.Types.ObjectId, required:true},
   number:       {type:Number, unique:true, required:true},
   hash:         {type:String},
   landtick:     {type:Number},
@@ -33,7 +33,7 @@ let AttackSchema = new Mordor.Schema({
   title:        {type:String},
   comment:      {type:String},
   createtick:   {type:Number},
-  commander:    {type:Mordor.Schema.Types.ObjectId, ref:'Member'}
+  commander:    {type:mongoose.Schema.Types.ObjectId, ref:'Member'}
 });
 
-module.exports = Mordor.model('Attack', AttackSchema, 'Attacks');
+export default mongoose.model('Attack', AttackSchema, 'Attacks');
