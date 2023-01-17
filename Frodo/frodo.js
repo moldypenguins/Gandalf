@@ -527,7 +527,7 @@ let process_tick = async (last_tick, start_time) => {
             points: alliances[a_temp].points,
             active: true,
             age: alliance.age + 1 ?? 1,
-            ratio: alliances[a_temp].score !== 0 ? 10000.0 * alliances[a_temp].size / alliances[a_temp].score : 0,
+            ratio: 0, //alliances[a_temp].score !== 0 ? 10000.0 * alliances[a_temp].size / alliances[a_temp].score : 0,
 
             //TODO: add remaining fields
 
