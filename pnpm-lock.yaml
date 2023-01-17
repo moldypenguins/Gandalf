@@ -111,12 +111,12 @@ importers:
       eslint: ^8.32.0
       galadriel: file:../Galadriel
       mongoose: ^6.7.2
-      mongoose-autopopulate: ^0.16.1
+      mongoose-autopopulate: ^0.17.1
     dependencies:
       dayjs: 1.11.7
       galadriel: file:Galadriel
       mongoose: 6.8.3
-      mongoose-autopopulate: 0.16.1_mongoose@6.8.3
+      mongoose-autopopulate: 0.17.1_mongoose@6.8.3
     devDependencies:
       eslint: 8.32.0
 
@@ -3054,8 +3054,8 @@ packages:
       - aws-crt
     dev: false
 
-  /mongoose-autopopulate/0.16.1_mongoose@6.8.3:
-    resolution: {integrity: sha512-/wWogmjgAbry7E0u99E6ulwLc522ubQRNdbLdsSJEQ10DBFUOMOzNHMsNs0NhILps+vRm9xcqxSAsqav6APviQ==}
+  /mongoose-autopopulate/0.17.1_mongoose@6.8.3:
+    resolution: {integrity: sha512-a2EzHvvol0L9k4XVR+ekzRVdiW+7mqCUTvhStPh2yr00cMV3/g/Z7o29ilQh2RMBFszRO+97wsy+1S8Z3Zf+sg==}
     peerDependencies:
       mongoose: 6.x
     dependencies:
@@ -4349,7 +4349,7 @@ packages:
       dayjs: 1.11.7
       galadriel: file:Galadriel
       mongoose: 6.8.3
-      mongoose-autopopulate: 0.16.1_mongoose@6.8.3
+      mongoose-autopopulate: 0.17.1_mongoose@6.8.3
     transitivePeerDependencies:
       - aws-crt
       - supports-color

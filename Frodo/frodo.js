@@ -27,7 +27,14 @@
 
 
 import Config from 'galadriel';
-import { Mordor, Tick, PlanetDump, GalaxyDump, AllianceDump } from 'mordor';
+import {
+  Mordor,
+  Tick,
+  Planet, PlanetDump, PlanetHistory, PlanetTrack,
+  Galaxy, GalaxyDump, GalaxyHistory,
+  Alliance, AllianceDump, AllianceHistory,
+  Cluster, ClusterHistory
+} from 'mordor';
 import axios from 'axios';
 import schedule from 'node-schedule';
 import minimist from 'minimist';

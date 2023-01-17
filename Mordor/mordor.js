@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -16,19 +17,28 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name mordor.js
- * @version 2022/11/16
+ * @version 2023/01/18
  * @summary Database
  **/
-'use strict';
+
 
 import Config from 'galadriel';
 import mongoose from 'mongoose';
+import Alliance from "./models/Alliance.js";
 import AllianceDump from './models/AllianceDump.js';
+import AllianceHistory from "./models/AllianceHistory.js";
+import Cluster from './models/Cluster.js';
+import ClusterHistory from './models/ClusterHistory.js';
 import DiscordGuild from './models/DiscordGuild.js';
 import DiscordUser from './models/DiscordUser.js';
+import Galaxy from './models/Galaxy.js';
 import GalaxyDump from './models/GalaxyDump.js';
+import GalaxyHistory from './models/GalaxyHistory.js';
 import Member from './models/Member.js';
+import Planet from './models/Planet.js';
 import PlanetDump from './models/PlanetDump.js';
+import PlanetHistory from './models/PlanetHistory.js';
+import PlanetTrack from './models/PlanetTrack.js';
 import Ship from './models/Ship.js';
 import TelegramChat from './models/TelegramChat.js';
 import TelegramUser from './models/TelegramUser.js';
@@ -45,12 +55,21 @@ mongoose.connection.once("open", () => console.log(`Evil is stirring in Mordor.`
 
 export {
   mongoose as Mordor,
+  Alliance,
   AllianceDump,
+  AllianceHistory,
+  Cluster,
+  ClusterHistory,
   DiscordGuild,
   DiscordUser,
+  Galaxy,
   GalaxyDump,
+  GalaxyHistory,
   Member,
+  Planet,
   PlanetDump,
+  PlanetHistory,
+  PlanetTrack,
   Ship,
   TelegramChat,
   TelegramUser,

@@ -1,7 +1,7 @@
 {
   "name": "middle_earth",
   "description": "Planetarion Tools",
-  "keywords": [ "Planetarion", "Bot", "Alliance", "Tools" ],
+  "keywords": [ "Planetarion", "Tools", "Alliance", "Bot" ],
   "private": true,
   "engines": {
     "node": ">=18.12.1",
