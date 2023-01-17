@@ -35,5 +35,5 @@ AttackTargetClaimSchema.index({attack_id:1, planet_id:1, wave:1}, {unique:true})
 
 AttackTargetClaimSchema.plugin(require('mongoose-autopopulate'));
 
-module.exports = mongoose.model('AttackTargetClaim', AttackTargetClaimSchema, 'AttackTargetClaims');
+export default mongoose.model('AttackTargetClaim', AttackTargetClaimSchema, 'AttackTargetClaims');
 

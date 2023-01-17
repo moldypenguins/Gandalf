@@ -97,4 +97,4 @@ let ClusterSchema = new mongoose.Schema({
   */
 });
 
-module.exports = mongoose.model('Cluster', ClusterSchema, 'Clusters');
+export default mongoose.model('Cluster', ClusterSchema, 'Clusters');

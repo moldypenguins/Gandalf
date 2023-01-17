@@ -98,4 +98,4 @@ let ClusterHistorySchema = new mongoose.Schema({
   */
 });
 
-module.exports = mongoose.model('ClusterHistory', ClusterHistorySchema, 'ClusterHistories');
+export default mongoose.model('ClusterHistory', ClusterHistorySchema, 'ClusterHistories');

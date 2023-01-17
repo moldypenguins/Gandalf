@@ -31,4 +31,4 @@ let AttackTargetSchema = new mongoose.Schema({
 
 AttackTargetSchema.plugin(require('mongoose-autopopulate'));
 
-module.exports = mongoose.model('AttackTarget', AttackTargetSchema, 'AttackTargets');
+export default mongoose.model('AttackTarget', AttackTargetSchema, 'AttackTargets');

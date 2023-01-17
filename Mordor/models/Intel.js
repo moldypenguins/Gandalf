@@ -42,4 +42,4 @@ let IntelSchema = new mongoose.Schema({
 
 IntelSchema.plugin(require('mongoose-autopopulate'));
 
-module.exports = mongoose.model('Intel', IntelSchema, 'Intels');
+export default mongoose.model('Intel', IntelSchema, 'Intels');

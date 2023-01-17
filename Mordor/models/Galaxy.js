@@ -110,4 +110,4 @@ let GalaxySchema = new mongoose.Schema({
   */
 });
 
-module.exports = mongoose.model('Galaxy', GalaxySchema, 'Galaxies');
+export default mongoose.model('Galaxy', GalaxySchema, 'Galaxies');

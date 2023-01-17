@@ -136,4 +136,4 @@ let PlanetHistorySchema = new mongoose.Schema({
   */
 });
 
-module.exports = mongoose.model('PlanetHistory', PlanetHistorySchema, 'PlanetHistories');
+export default mongoose.model('PlanetHistory', PlanetHistorySchema, 'PlanetHistories');

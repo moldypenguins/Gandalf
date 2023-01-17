@@ -23,8 +23,8 @@
 
 import mongoose from 'mongoose';
 
-let PlanetSchema = new Mordor.Schema({
-  _id:        {type:Mordor.Schema.Types.ObjectId, required:true},
+let PlanetSchema = new mongoose.Schema({
+  _id:        {type:mongoose.Schema.Types.ObjectId, required:true},
   planet_id:  {type:String, index:true, required:true},
   x:          {type:Number, required:true},
   y:          {type:Number, required:true},
@@ -142,4 +142,4 @@ PlanetSchema.statics.findByCoords = function(coords) {
   return null;
 };
 
-module.exports = Mordor.model('Planet', PlanetSchema, 'Planets');
+export default mongoose.model('Planet', PlanetSchema, 'Planets');

@@ -133,4 +133,4 @@ AllianceSchema.statics.findByName = function (name, cb) {
     (a.alias !== undefined && a.alias.toLowerCase() === name.toLowerCase()), cb);
 }
 
-module.exports = mongoose.model('Alliance', AllianceSchema, 'Alliances');
+export default mongoose.model('Alliance', AllianceSchema, 'Alliances');

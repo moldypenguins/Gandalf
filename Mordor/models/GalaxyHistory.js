@@ -111,4 +111,4 @@ let GalaxyHistorySchema = new mongoose.Schema({
   */
 });
 
-module.exports = mongoose.model('GalaxyHistory', GalaxyHistorySchema, 'GalaxyHistories');
+export default mongoose.model('GalaxyHistory', GalaxyHistorySchema, 'GalaxyHistories');

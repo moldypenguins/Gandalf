@@ -37,4 +37,4 @@ let PlanetTrackSchema = new mongoose.Schema({
   new_z:       {type:Number},
 });
 
-module.exports = mongoose.model('PlanetTrack', PlanetTrackSchema, 'PlanetTracks');
+export default mongoose.model('PlanetTrack', PlanetTrackSchema, 'PlanetTracks');
