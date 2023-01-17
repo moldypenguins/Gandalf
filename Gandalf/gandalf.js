@@ -97,18 +97,14 @@ Mordor.connection.once("open", async () => {
 
   telegramBot.start(async(ctx) => {
     if(!await TelegramUser.exists({TelegramUser_id: ctx.message.from.id})) {
-      if(await new TelegramUser({
+      await new TelegramUser({
         _id: Mordor.Types.ObjectId(),
         tguser_id: ctx.message.from.id,
         tguser_first_name: ctx.message.from.first_name,
         tguser_username: ctx.message.from.username,
         tguser_language_code: ctx.message.from.language_code
-      }).save()) {
-        ctx.replyWithHTML(`Welcome!`);
-      }
-      else {
-        ctx.replyWithHTML(`Try again!`);
-      }
+      }).save();
+      ctx.replyWithHTML(`Welcome.`);
     }
     else {
       ctx.replyWithHTML(`You already did this.`);
@@ -126,6 +122,9 @@ Mordor.connection.once("open", async () => {
 
   telegramBot.command(async(ctx) => {
     console.log('command', ctx.message.text)
+
+    //TODO: parse text for scan links
+
     // Dynamic command handling
     let args = ctx.message.text.substring(1).toLowerCase().replace(/\s+/g, ' ').split(' ');
     let cmd = args.shift();
@@ -162,6 +161,8 @@ Mordor.connection.once("open", async () => {
     console.log(`Discord: Logged in as ${discordBot.user.tag}!`);
     discordBot.user.setActivity('over Endor', { type: ActivityType.Watching });
   });
+
+  //TODO: parse text for scan links - figure out how in discord
 
   discordBot.on(Events.InteractionCreate, async (interaction) => {
     if(!interaction.isChatInputCommand()) { return; }
@@ -212,3 +213,42 @@ Mordor.connection.once("open", async () => {
   });
 
 });
+
+
+
+
+/*
+let scanurl = new URL(ctx.message.text.substring(ctx.message.entities[entity].offset, ctx.message.entities[entity].length));
+console.log('SCANURL: ' + util.inspect(scanurl.searchParams, true, null, true));
+
+if(scanurl.hostname === 'game.planetarion.com') {
+  //let scanurl = url.parse(ctx.message.text.substr(ctx.message.entities[entity].offset, ctx.message.entities[entity].length), true);
+  let page_content = await getStream(scanurl.href);
+  if (scanurl.searchParams.get('scan_id') !== undefined && !await Scan.exists({scan_id: scanurl.searchParams.get('scan_id')})) {
+    //scan
+    try {
+      let result = await Scan.parse(ctx.message.from.id, scanurl.searchParams.get('scan_id'), null, page_content);
+      //console.log('SUCCESS: ' + result);
+    } catch (err) {
+      console.log('ERROR: ' + err);
+    }
+  }
+  if (scanurl.searchParams.get('scan_grp') !== undefined) {
+    //group
+    let scans = page_content.split("<hr>");
+    for (let i = 1; i < scans.length; i++) {
+      let m = scans[i].match(/scan_id=([0-9a-zA-Z]+)/i);
+      if (m != null && !await Scan.exists({scan_id: m[1]})) {
+        //console.log('M: ' +  util.inspect(m, false, null, true));
+        try {
+          let result = await Scan.parse(ctx.message.from.id, m[1], scanurl.searchParams.get('scan_grp'), scans[i]);
+          //console.log('SUCCESS: ' + result);
+        } catch (err) {
+          console.log('ERROR: ' + err);
+        }
+      }
+    }
+  }
+}
+*/
+

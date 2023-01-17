@@ -11,10 +11,10 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
 
-    "start": "pm2 start MiddleEarth.js",
-    "restart": "pm2 restart MiddleEarth.js",
-    "stop": "pm2 stop MiddleEarth.js",
-    "delete": "pm2 delete MiddleEarth.js",
+    "start": "pm2 start MiddleEarth.config.js",
+    "restart": "pm2 restart MiddleEarth.config.js",
+    "stop": "pm2 stop MiddleEarth.config.js",
+    "delete": "pm2 delete MiddleEarth.config.js",
     "list": "pm2 list",
     "watch": "pm2 monit"
   },
