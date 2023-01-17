@@ -17,7 +17,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name frodo.js
- * @version 2022-11-11
+ * @version 2023-01-16
  * @summary Ticker
  * @param {string} -h,--havoc start Frodo in havoc mode
  * @param {flag} -f,--force force to start now
@@ -293,58 +293,388 @@ let process_tick = async (last_tick, start_time) => {
         //Clusters
         //##############################################################################################################
 
+        //set all clusters to inactive
+        await Cluster.updateMany({}, {active: false, size: 0, score: 0, value: 0, xp: 0, galaxies: 0, planets: 0, ratio: 0});
 
+        //loop through distinct x in galaxies
+        let clusters = await GalaxyDump.find({}, {x: 1}).distinct('x');
+        //console.log(`CLUSTERS: ` + util.inspect(clusters, true, null, true));
 
+        for (let c_temp in clusters) {
+          //create cluster if not exists
+          if (!await Cluster.exists({x: clusters[c_temp]})) {
+            await new Cluster({_id:Mordor.Types.ObjectId(), x: clusters[c_temp]}).save();
+          }
+
+          //get cluster
+          let cluster = await Cluster.findOne({x: clusters[c_temp]});
+          //console.log(`CLUSTER: ` + util.inspect(cluster, true, null, true));
+
+          //aggregate galaxies
+          let g = await GalaxyDump.aggregate([
+            {$match: {x: cluster.x}},
+            {
+              $group: {
+                _id: null,
+                size: {$sum: '$size'},
+                score: {$sum: '$score'},
+                value: {$sum: '$value'},
+                xp: {$sum: '$xp'},
+                members: {$sum: 1}
+              }
+            }
+          ]);
+          //aggregate planets
+          let p = await PlanetDump.aggregate([
+            {$match: {x: cluster.x}},
+            {
+              $group: {
+                _id: null,
+                members: {$sum: 1}
+              }
+            }
+          ]);
+          //update cluster
+          await Cluster.updateOne({x: cluster.x}, {
+            size: g[0].size,
+            score: g[0].score,
+            value: g[0].value,
+            xp: g[0].xp,
+            active: true,
+            age: cluster.age + 1 ?? 1,
+            galaxies: g[0].members,
+            planets: p[0].members,
+            ratio: g[0].value !== 0 ? 10000.0 * g[0].size / g[0].value : 0,
+
+            //TODO: add remaining fields
+
+          });
+        }
+
+        current_ms = (new Date()) - start_time;
+        console.log(`Updated clusters in: ${current_ms - total_ms}ms`);
+        total_ms += current_ms - total_ms;
 
 
         //##############################################################################################################
         //Galaxies
         //##############################################################################################################
 
+        //set all galaxies to inactive
+        await Galaxy.updateMany({}, {active: false, size: 0, score: 0, value: 0, xp: 0, planets: 0, ratio: 0});
+
+        //loop through galaxies
+        let galaxies = await GalaxyDump.find({});
+        //console.log(`GALAXIES: ` + util.inspect(galaxies, true, null, true));
+
+        for (let g_temp in galaxies) {
+          //create galaxy if not exists
+          if (!await Galaxy.exists({x:galaxies[g_temp].x, y:galaxies[g_temp].y})) {
+            await new Galaxy({_id:Mordor.Types.ObjectId(), x:galaxies[g_temp].x, y:galaxies[g_temp].y, name:galaxies[g_temp].name}).save();
+          }
+          //get galaxy
+          let galaxy = await Galaxy.findOne({x: galaxies[g_temp].x, y: galaxies[g_temp].y});
+
+          //aggregate planets
+          let p = await PlanetDump.aggregate([
+            {$match: {x: galaxy.x, y: galaxy.y}},
+            {
+              $group: {
+                _id: null,
+                members: {$sum: 1}
+              }
+            }
+          ]);
+
+          //console.log(`GALAXY: ` + util.inspect(galaxy, true, null, true));
+
+          //update galaxy
+          await Galaxy.updateOne({x: galaxy.x, y: galaxy.y}, {
+            name: galaxies[g_temp].name,
+            size: galaxies[g_temp].size,
+            score: galaxies[g_temp].score,
+            value: galaxies[g_temp].value,
+            xp: galaxies[g_temp].xp,
+            active: true,
+            age: galaxy.age + 1 ?? 1,
+            planets: p[0].members,
+            ratio: galaxies[g_temp].value !== 0 ? 10000.0 * galaxies[g_temp].size / galaxies[g_temp].value : 0,
+
+            //TODO: add remaining fields
+
+          });
+        }
+
+        current_ms = (new Date()) - start_time;
+        console.log(`Updated galaxies in: ${current_ms - total_ms}ms`);
+        total_ms += current_ms - total_ms;
 
 
         //##############################################################################################################
         //Planets
         //##############################################################################################################
 
+        //set all planets to inactive
+        await Planet.updateMany({}, {active: false, size: 0, score: 0, value: 0, xp: 0, ratio: 0});
+
+        //loop through planets
+        let planets = await PlanetDump.find({});
+        //console.log(`PLANETS: ` + util.inspect(planets, true, null, true));
+
+        for (let p_temp in planets) {
+          //console.log('PTEMP: ' + util.inspect(planets[p_temp], true, null, true));
+
+          //create planet if not exists
+          if (!await Planet.exists({planet_id: planets[p_temp].planet_id})) {
+            await new Planet({_id:Mordor.Types.ObjectId(), planet_id: planets[p_temp].planet_id, x: planets[p_temp].x, y: planets[p_temp].y, z: planets[p_temp].z, planetname: planets[p_temp].planetname, rulername: planets[p_temp].rulername, race: planets[p_temp].race}).save();
+            //track new planet
+            await new PlanetTrack({_id:Mordor.Types.ObjectId(), planet_id: planets[p_temp].planet_id, new_x: planets[p_temp].x, new_y: planets[p_temp].y, new_z: planets[p_temp].z}).save();
+          }
+          //get planet
+          let planet = await Planet.findOne({planet_id: planets[p_temp].planet_id});
+
+          //track renamed planet
+          if (planet.rulername !== planets[p_temp].rulername || planet.planetname !== planets[p_temp].planetname) {
+            await new PlanetTrack({_id:Mordor.Types.ObjectId(), planet_id: planet.planet_id, old_x: planet.x, old_y: planet.y, old_z: planet.z, new_x: planets[p_temp].x, new_y: planets[p_temp].y, new_z: planets[p_temp].z}).save();
+          }
+
+          //track exiled planet
+          if (planet.x !== planets[p_temp].x || planet.y !== planets[p_temp].y || planet.z !== planets[p_temp].z) {
+            await new PlanetTrack({_id:Mordor.Types.ObjectId(), planet_id: planet.planet_id, old_x: planet.x, old_y: planet.y, old_z: planet.z, new_x: planets[p_temp].x, new_y: planets[p_temp].y, new_z: planets[p_temp].z}).save();
+          }
+
+          //update planet
+          await Planet.updateOne({planet_id: planet.planet_id}, {
+            x: planets[p_temp].x,
+            y: planets[p_temp].y,
+            z: planets[p_temp].z,
+            planetname: planets[p_temp].planetname,
+            rulername: planets[p_temp].rulername,
+            race: planets[p_temp].race,
+            size: planets[p_temp].size,
+            score: planets[p_temp].score,
+            value: planets[p_temp].value,
+            xp: planets[p_temp].xp,
+            active: true,
+            age: planet.age + 1 ?? 1,
+            ratio: planets[p_temp].value !== 0 ? 10000.0 * planets[p_temp].size / planets[p_temp].value : 0,
+            size_rank:  await PlanetDump.find({size:{$gt:planets[p_temp].size},x:{$ne:200}}).countDocuments() + 1,
+            score_rank: await PlanetDump.find({score:{$gt:planets[p_temp].score},x:{$ne:200}}).countDocuments() + 1,
+            value_rank: await PlanetDump.find({value:{$gt:planets[p_temp].value},x:{$ne:200}}).countDocuments() + 1,
+            xp_rank:    await PlanetDump.find({xp:{$gt:planets[p_temp].xp},x:{$ne:200}}).countDocuments() + 1,
+
+            //TODO: add remaining fields
+
+          });
+        }
+
+        //track deleted planets
+        let deleted_planets = await Planet.find({active: false});
+        for (let dp in deleted_planets) {
+          await new PlanetTrack({_id:Mordor.Types.ObjectId(), planet_id: dp.planet_id, old_x: dp.x, old_y: dp.y, old_z: dp.z}).save();
+          await Planet.deleteOne({planet_id: dp.planet_id});
+        }
+
+
+        //idle
+
+
+        //value drops
+
+
+        //landings
+
+
+        //landed on
 
 
 
 
+        current_ms = (new Date()) - start_time;
+        console.log(`Updated planets in: ${current_ms - total_ms}ms`);
+        total_ms += current_ms - total_ms;
 
 
         //##############################################################################################################
         //Alliances
         //##############################################################################################################
 
+        //set all alliances to inactive
+        await Alliance.updateMany({}, {active: false, size: 0, score: 0, members: 0, points: 0, ratio: 0});
 
+        //loop through alliances
+        let alliances = await AllianceDump.find({});
+        for (let a_temp in alliances) {
+          //create alliance if not exists
+          if (!await Alliance.exists({name: alliances[a_temp].name.trim()})) {
+            await new Alliance({_id:Mordor.Types.ObjectId(), name: alliances[a_temp].name.trim()}).save();
+          }
+          //get alliance
+          let alliance = await Alliance.findOne({name: alliances[a_temp].name.trim()});
+
+          //update alliance
+          await Alliance.updateOne({name: alliance.name}, {
+            size: alliances[a_temp].size,
+            score: alliances[a_temp].score,
+            members: alliances[a_temp].members,
+            points: alliances[a_temp].points,
+            active: true,
+            age: alliance.age + 1 ?? 1,
+            ratio: alliances[a_temp].score !== 0 ? 10000.0 * alliances[a_temp].size / alliances[a_temp].score : 0,
+
+            //TODO: add remaining fields
+
+          });
+        }
+
+        current_ms = (new Date()) - start_time;
+        console.log(`Updated alliances in: ${current_ms - total_ms}ms`);
+        total_ms += current_ms - total_ms;
 
 
         //##############################################################################################################
         //Tick Statistics
         //##############################################################################################################
 
+        let cluster_count = await Cluster.aggregate([
+          {$match: {active: {$eq: true}}},
+          {$group: {_id: null, count: {$sum: 1}}}
+        ]);
+        let galaxy_count = await Galaxy.aggregate([
+          {$match: {active: {$eq: true}}},
+          {$group: {_id: null, count: {$sum: 1}}}
+        ]);
+        let planet_count = await Planet.aggregate([
+          {$match: {active: {$eq: true}}},
+          {$group: {_id: null, count: {$sum: 1}}}
+        ]);
+        let alliance_count = await Alliance.aggregate([
+          {$match: {active: {$eq: true}}},
+          {$group: {_id: null, count: {$sum: 1}}}
+        ]);
+        let c200_count = await Planet.aggregate([
+          {$match: {active: {$eq: true}, x: {$eq: 200}}},
+          {$group: {_id: null, count: {$sum: 1}}}
+        ]);
+        let ter_count = await Planet.aggregate([
+          {$match: {active: {$eq: true}, race: {$regex: /^ter$/i}}},
+          {$group: {_id: null, count: {$sum: 1}}}
+        ]);
+        let cat_count = await Planet.aggregate([
+          {$match: {active: {$eq: true}, race: {$regex: /^cat$/i}}},
+          {$group: {_id: null, count: {$sum: 1}}}
+        ]);
+        let xan_count = await Planet.aggregate([
+          {$match: {active: {$eq: true}, race: {$regex: /^xan$/i}}},
+          {$group: {_id: null, count: {$sum: 1}}}
+        ]);
+        let zik_count = await Planet.aggregate([
+          {$match: {active: {$eq: true}, race: {$regex: /^zik$/i}}},
+          {$group: {_id: null, count: {$sum: 1}}}
+        ]);
+        let etd_count = await Planet.aggregate([
+          {$match: {active: {$eq: true}, race: {$regex: /^etd$/i}}},
+          {$group: {_id: null, count: {$sum: 1}}}
+        ]);
 
-
+        new_tick.clusters = typeof (cluster_count[0]) != 'undefined' ? cluster_count[0].count : 0;
+        new_tick.galaxies = typeof (galaxy_count[0]) != 'undefined' ? galaxy_count[0].count : 0;
+        new_tick.planets = typeof (planet_count[0]) != 'undefined' ? planet_count[0].count : 0;
+        new_tick.alliances = typeof (alliance_count[0]) != 'undefined' ? alliance_count[0].count : 0;
+        new_tick.c200 = typeof (c200_count[0]) != 'undefined' ? c200_count[0].count : 0;
+        new_tick.ter = typeof (ter_count[0]) != 'undefined' ? ter_count[0].count : 0;
+        new_tick.cat = typeof (cat_count[0]) != 'undefined' ? cat_count[0].count : 0;
+        new_tick.xan = typeof (xan_count[0]) != 'undefined' ? xan_count[0].count : 0;
+        new_tick.zik = typeof (zik_count[0]) != 'undefined' ? zik_count[0].count : 0;
+        new_tick.etd = typeof (etd_count[0]) != 'undefined' ? etd_count[0].count : 0;
 
         let this_tick = await new_tick.save();
         console.log(`pt${this_tick.tick} saved to Ticks collection.`);
-        //##############################################################################################################
+
         current_ms = (new Date()) - start_time;
         console.log(`Updated tick stats in: ${current_ms - total_ms}ms`);
         total_ms += current_ms - total_ms;
-
-
 
 
         //##############################################################################################################
         //History
         //##############################################################################################################
 
+        clusters = await Cluster.find({active: true});
+        for(let c in clusters) {
+          await new ClusterHistory({
+            _id:Mordor.Types.ObjectId(),
+            tick: this_tick._id,
+            x:c.x,
+            size:c.size,
+            score:c.score,
+            value:c.value,
+            xp:c.xp,
+            active:c.active,
+            age:c.age,
+            galaxies:c.galaxies,
+            planets:c.planets,
+            ratio:c.ratio,
+          });
+        }
+        galaxies = await Galaxy.find({active: true});
+        for(let g in galaxies) {
+          await new GalaxyHistory({
+            _id:Mordor.Types.ObjectId(),
+            tick: this_tick._id,
+            x:g.x,
+            y:g.y,
+            name:g.name,
+            size:g.size,
+            score:g.score,
+            value:g.value,
+            xp:g.xp,
+            active:g.active,
+            age:g.age,
+            planets:g.planets,
+            ratio:g.ratio,
+          });
+        }
+        planets = await Planet.find({active: true});
+        for(let p in planets) {
+          await new PlanetHistory({
+            _id:Mordor.Types.ObjectId(),
+            tick: this_tick._id,
+            x:p.x,
+            y:p.y,
+            z:p.z,
+            name:p.name,
+            size:p.size,
+            score:p.score,
+            value:p.value,
+            xp:p.xp,
+            active:p.active,
+            age:p.age,
+            galaxies:p.galaxies,
+            planets:p.planets,
+            ratio:p.ratio,
+          });
+        }
+        alliances = await Alliance.find({active: true});
+        for(let a in alliances) {
+          await new AllianceHistory({
+            _id:Mordor.Types.ObjectId(),
+            tick: this_tick._id,
+            name:a.name,
+            size:a.size,
+            score:a.score,
+            points:a.points,
+            active:a.active,
+            age:a.age,
+            alias: a.alias,
+            members:a.members,
+            ratio:a.ratio,
+          });
+        }
 
-
-
-
+        current_ms = (new Date()) - start_time;
+        console.log(`Updated history in: ${current_ms - total_ms}ms`);
+        total_ms += current_ms - total_ms;
 
 
         //##############################################################################################################
@@ -354,16 +684,33 @@ let process_tick = async (last_tick, start_time) => {
 
 
 
-
+        current_ms = (new Date()) - start_time;
+        console.log(`Updated dicks in: ${current_ms - total_ms}ms`);
+        total_ms += current_ms - total_ms;
 
 
         //##############################################################################################################
         //Send Message
         //##############################################################################################################
 
-
-
-
+        /*
+        let txt = `pt<b>${this_tick.tick}</b> ${moment(this_tick.timestamp).utc().format('H:mm')} <i>GMT</i>`;
+        let atts = await Attack.find({releasetick: this_tick.tick});
+        for (let m = 0; m < atts.length; m++) {
+          txt += `\n<b>Attack ${atts[m].id}</b> released. <a href="${CFG.web.uri}/att/${atts[m].hash}">Claim Targets</a>`;
+        }
+        //console.log(util.inspect('TEXT: ' + txt, false, null, true));
+        if (CFG.bot.tick_alert || atts.length > 0) {
+          await new BotMessage({
+            _id:Mordor.Types.ObjectId(),
+            message_id: crypto.randomBytes(8).toString("hex"),
+            group_id: CFG.groups.private,
+            message: txt,
+            sent: false
+          }).save();
+          console.log(`Sent Message: "${txt}"`);
+        }
+        */
 
         current_ms = (new Date()) - start_time;
         console.log(`Quest completed successfully in: ${current_ms}ms!\n\n`);
