@@ -96,7 +96,7 @@ Mordor.connection.once("open", async () => {
       let iteration_start = new Date();
       let {success, error} = await process_tick(last_tick, start_time);
       if(error) {
-        console.error(`${error}\nUnable to process tick, giving up!\n`);
+        console.error(`${error}\nUnable to process tick, giving up!\n\n`);
         stop_trying = true;
       }
       if(!success) {
@@ -104,15 +104,15 @@ Mordor.connection.once("open", async () => {
           await sleep(5 * 1000); //sleep for 5 seconds
         }
         if((new Date()).getTime() - start_time.getTime() < (argv.havoc ? start_time.getMinutes() + 10 : 55) * 60) { //give up after 55 minutes past the hour - havoc 10 minutes past the 15
-          console.warn(`Reached timeout without a successful dump, giving up!\n`);
+          console.warn(`Reached timeout without a successful dump, giving up!\n\n`);
           stop_trying = true;
         }
       }
       else {
+        console.log(`Quest completed successfully!\n`);
         stop_trying = true;
       }
     } //end while
-    console.log(`done\n\n`);
   });
 });
 
@@ -722,7 +722,7 @@ let process_tick = async (last_tick, start_time) => {
         */
 
         current_ms = (new Date()) - start_time;
-        console.log(`Quest completed successfully in: ${current_ms}ms!\n`);
+        console.log(`Total time: ${current_ms}ms!`);
         success = true;
       }
     }
