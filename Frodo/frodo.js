@@ -46,7 +46,8 @@ import timezone from 'dayjs/plugin/timezone.js';
 dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
-const rule = new schedule.RecurrenceRule();
+
+const sleep = (ms) => { return new Promise(r => setTimeout(r, ms)) }
 
 
 let argv = minimist(process.argv.slice(2), {
@@ -57,6 +58,9 @@ let argv = minimist(process.argv.slice(2), {
   unknown: false
 });
 
+
+const rule = new schedule.RecurrenceRule();
+
 if(argv.havoc) {
   rule.minute = [0, 15, 30, 45];
   rule.second = 30;
@@ -65,9 +69,6 @@ if(argv.havoc) {
   rule.second = 30;
 }
 
-const sleep = (ms) => {
-  return new Promise(r => setTimeout(r, ms))
-}
 
 Mordor.connection.once("open", async () => {
   if(argv.havoc) { console.log("Havoc enabled."); }
