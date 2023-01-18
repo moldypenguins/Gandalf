@@ -28,7 +28,6 @@ module.exports = {
       name: "Bilbo",
       cwd: "./Bilbo",
       script: "./bilbo.js",
-      args: `-s ${new Date().toISOString()}`,
       instance_var: 'INSTANCE_ID',
       watch: true,
       time: true,
@@ -39,11 +38,9 @@ module.exports = {
       name: "Frodo",
       cwd: "./Frodo",
       script: "./frodo.js",
-      args: "-f -o",
       instance_var: 'INSTANCE_ID',
       watch: true,
       time: true,
-      //wait_ready: true
     },
     {
       namespace: "MiddleEarth",
@@ -53,7 +50,6 @@ module.exports = {
       instance_var: 'INSTANCE_ID',
       watch: true,
       time: true,
-      //wait_ready: true
     },
     {
       namespace: "MiddleEarth",
@@ -63,17 +59,6 @@ module.exports = {
       instance_var: 'INSTANCE_ID',
       watch: true,
       time: true,
-      //wait_ready: true
     }
-  ],
-  deploy : {
-    production : {
-      "user" : "ubuntu",
-      "host" : ["127.0.0.1"],
-      "ref"  : "origin/master",
-      "repo" : "git@github.com:moldypenguins/Gandalf.git",
-      "path" : "/home/ubuntu/MiddleEarth",
-      "post-deploy" : "npm install"
-    }
-  }
+  ]
 };
