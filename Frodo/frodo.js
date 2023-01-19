@@ -45,7 +45,6 @@ if(argv.overwrite) { console.log("Overwrite enabled."); }
 
 const bree = new Bree({
   root: url.fileURLToPath(new URL('.', import.meta.url)),
-  doRootCheck: false,
   closeWorkerAfterMs: 60000 * 55, // 55 minutes
   hasSeconds: true,
   worker: {
