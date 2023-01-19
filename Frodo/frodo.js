@@ -43,7 +43,7 @@ if(argv.force) { console.log("Force enabled."); }
 if(argv.overwrite) { console.log("Overwrite enabled."); }
 
 const bree = new Bree({
-  root: false,
+  root: __dirname,
   doRootCheck: false,
   closeWorkerAfterMs: 60000 * 55, // 55 minutes
   hasSeconds: true,
@@ -54,7 +54,7 @@ const bree = new Bree({
   jobs: [
     {
       name: 'Frodo',
-      path: './quest.js',
+      path: 'quest',
       cron: argv.havoc ? '30 0,15,30,45 * * * *' : '30 0 * * * *'
     }
   ],
@@ -65,7 +65,7 @@ const bree = new Bree({
 if(argv.force) {
   bree.config.jobs.push({
     name: 'Frodo-force',
-    path: './quest.js',
+    path: 'quest',
     date: dayjs().add(5, 'seconds').toDate()
   });
 }
