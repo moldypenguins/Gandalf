@@ -22,10 +22,7 @@
  **/
 
 
-import { Worker, isMainThread, parentPort, workerData } from 'worker_threads';
-import pRetry from 'p-retry';
-import pTimeout from 'p-timeout';
-
+import { parentPort, workerData } from 'worker_threads';
 import Config from 'galadriel';
 import {
   Mordor,
