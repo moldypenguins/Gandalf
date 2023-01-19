@@ -28,7 +28,6 @@
 import Bree from 'bree';
 import minimist from 'minimist';
 import dayjs from 'dayjs';
-import * as url from 'url';
 
 
 let argv = minimist(process.argv.slice(2), {
@@ -44,7 +43,8 @@ if(argv.force) { console.log("Force enabled."); }
 if(argv.overwrite) { console.log("Overwrite enabled."); }
 
 const bree = new Bree({
-  root: url.fileURLToPath(new URL('.', import.meta.url)),
+  root: false,
+  doRootCheck: false,
   closeWorkerAfterMs: 60000 * 55, // 55 minutes
   hasSeconds: true,
   worker: {
@@ -54,7 +54,7 @@ const bree = new Bree({
   jobs: [
     {
       name: 'Frodo',
-      path: 'quest.js',
+      path: './quest.js',
       cron: argv.havoc ? '30 0,15,30,45 * * * *' : '30 0 * * * *'
     }
   ],
@@ -65,7 +65,7 @@ const bree = new Bree({
 if(argv.force) {
   bree.config.jobs.push({
     name: 'Frodo-force',
-    path: 'quest.js',
+    path: './quest.js',
     date: dayjs().add(5, 'seconds').toDate()
   });
 }
