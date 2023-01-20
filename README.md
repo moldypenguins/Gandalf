@@ -5,7 +5,7 @@
 </picture>
 <h1>Gandalf</h1>
 <h3>Planetarion Tools</h3>
-<hr />
+
 
 ![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge)
 ![Release](https://img.shields.io/github/v/release/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub&include_prereleases&sort=date)
