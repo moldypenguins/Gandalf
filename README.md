@@ -1,8 +1,10 @@
 
-
-![Imgur](https://i.imgur.com/WYVv7q3.png) 
-# Gandalf
-### Planetarion Tools
+<div style="margin: 20px auto; text-align: center;">
+    <img src="https://i.imgur.com/WYVv7q3.png" alt="Logo" /> 
+    <div style="font-size: 40px; font-weight: bold;">Gandalf</div>
+    <div style="font-size: 25px; font-style: italic;">Planetarion Tools</div>
+</div>
+<hr style="margin-bottom: 40px;" />
 
 ![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge)
 ![Release](https://img.shields.io/github/v/release/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub&include_prereleases&sort=date)
