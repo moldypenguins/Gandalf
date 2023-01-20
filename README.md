@@ -1,4 +1,7 @@
-# ![Imgur](https://i.imgur.com/WYVv7q3.png) Gandalf
+
+
+![Imgur](https://i.imgur.com/WYVv7q3.png) 
+# Gandalf
 ### Planetarion Tools
 
 ![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge)
