@@ -16,11 +16,16 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Config.d.ts
- * @version 2022/12/25
+ * @version 2023/01/20
  * @summary configuration declaration
  **/
 
 export default interface Config {
+  admin: {
+    pa_nick: string | null;
+    telegram_id?: string | null;
+    discord_id?: string | null;
+  }
   alliance: {
     name: string | null;
     attack?: {
@@ -30,14 +35,12 @@ export default interface Config {
     }
   };
   discord?: {
-    owner: string | null,
     token: string | null;
     client_id: string | null;
     guild_id: string | null;
     commands: string[] | null;
   };
   telegram?: {
-    owner: string | null,
     token: string | null;
     username: string | null;
     group_id: string | null;

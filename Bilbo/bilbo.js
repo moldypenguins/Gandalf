@@ -28,7 +28,7 @@ import dayjs from 'dayjs';
 import axios from 'axios';
 import X2JS from 'x2js';
 import minimist from 'minimist';
-import { Mordor, Ship, Tick } from 'mordor';
+import {DiscordUser, Member, Mordor, Ship, TelegramUser, Tick, PlanetDump, Planet, Cluster, Galaxy, GalaxyDump, Alliance, AllianceDump} from 'mordor';
 
 
 let argv = minimist(process.argv.slice(2), {
@@ -38,18 +38,15 @@ let argv = minimist(process.argv.slice(2), {
   unknown: false
 });
 
-let _start = null;
 Mordor.connection.once("open", async() => {
   if(!argv.start) {
     console.log(`A start date must be provided.`);
   }
   else {
-    _start = dayjs(argv.start);
-    //if(_start > dayjs()) {
-      await clear_database();
-      await load_ships();
-      await load_ticks(_start);
-    //}
+    await clear_database();
+    await load_ships();
+    await load_ticks(dayjs(argv.start));
+    await setup_admin();
   }
   process.exit(0);
 });
@@ -59,6 +56,15 @@ let clear_database = async() => {
   await Ship.deleteMany({});
   await Tick.deleteMany({});
 
+  await PlanetDump.deleteMany({});
+  await GalaxyDump.deleteMany({});
+  await AllianceDump.deleteMany({});
+  await Planet.deleteMany({});
+  await Galaxy.deleteMany({});
+  await Cluster.deleteMany({});
+  await Alliance.deleteMany({});
+
+  await Member.updateMany({}, {$unset:{planet:""}})
 };
 
 let load_ships = async() => {
@@ -87,11 +93,54 @@ let load_ships = async() => {
   }
 };
 
+
 let load_ticks = async(start) => {
   if(!await Tick.exists({ tick: 0 })) {
-    await new Tick({ _id: Mordor.Types.ObjectId(), tick: 0, timestamp: _start }).save();
+    await new Tick({ _id: Mordor.Types.ObjectId(), tick: 0, timestamp: start }).save();
     console.log("Added first tick!");
   } else {
     console.log("First tick already exists!");
   }
 };
+
+
+let setup_admin = async() => {
+  if(!await Member.exists({pa_nick: Config.admin.pa_nick})) {
+    let adm = new Member({
+      _id: Mordor.Types.ObjectId(),
+      pa_nick: Config.admin.pa_nick,
+      access: 5
+    });
+
+    if(Config.admin.discord_id) {
+      if(await DiscordUser.exists({dsuser_id: Config.admin.discord_id})) {
+        adm.ds_user = await DiscordUser.findOne({dsuser_id: Config.admin.discord_id});
+      }
+      else {
+        adm.ds_user = await new DiscordUser({
+          _id: Mordor.Types.ObjectId(),
+          dsuser_id: Config.admin.discord_id
+        }).save();
+      }
+    }
+    if(Config.admin.telegram_id) {
+      if(await TelegramUser.exists({tguser_id: Config.admin.telegram_id})) {
+        adm.tg_user = await TelegramUser.findOne({tguser_id: Config.admin.telegram_id});
+      }
+      else {
+        adm.tg_user = await new TelegramUser({
+          _id: Mordor.Types.ObjectId(),
+          tguser_id: Config.admin.telegram_id
+        }).save();
+      }
+    }
+
+    try {
+      await adm.save();
+      console.log(`${Config.admin.pa_nick} saved to Members as Administrator`);
+    } catch (error) {
+      console.error(`${error}`)
+    }
+  }
+};
+

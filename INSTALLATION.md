@@ -162,9 +162,10 @@ sudo apt-get install -y nodejs
 node -v
 npm -v
 sudo npm i -g pnpm pm2 typescript
-pm2 install pm2-logrotate
-pm2 set pm2-logrotate:max_size 10M
-pm2 set pm2-logrotate:compress true
+sudo pnpm setup
+sudo pm2 install pm2-logrotate
+sudo pm2 set pm2-logrotate:max_size 10M
+sudo pm2 set pm2-logrotate:compress true
 ```
 
 ### download git

@@ -15,26 +15,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name local.ts
- * @version 2022/11/16
+ * @name local.example.ts
+ * @version 2023/01/20
  * @summary local configuration file
  **/
 
 import Config from "./Config";
 
 const configLocal: Config = {
+  admin: {
+    pa_nick: '',
+    discord_id: '',
+    telegram_id: ''
+  },
   alliance: {
     name: ''
   },
   discord: {
-    owner: '',
     token: '',
     client_id: '',
     guild_id: '',
     commands: ['links', 'tick', 'ship']
   },
   telegram: {
-    owner: '',
     token: '',
     username: '',
     group_id: '',

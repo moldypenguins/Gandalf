@@ -31,7 +31,7 @@ let DiscordUserSchema = new mongoose.Schema({
   dsuser_first_name:    {type:String},
   dsuser_last_name:     {type:String},
   dsuser_username:      {type:String},
-  dsuser_photo_url:     {type:String, default:Config.web.uri + '/' + Config.web.default_profile_pic},
+  dsuser_photo_url:     {type:String},
   dsuser_language_code: {type:String},
 });
 

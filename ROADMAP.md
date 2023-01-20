@@ -1,8 +1,8 @@
 # Roadmap
-- [ ] fix pnpm
 
 ### Galadriel (config)  
 - [ ] update readme
+- [ ] explore adding merge to build step
 
 ### Mordor (database)  
 - [ ] update readme
@@ -13,15 +13,19 @@
 - [ ] update readme
 - [ ] add missing db cleanup
 - [ ] add backup round functions
+- [ ] explore adding to frodo (bree worker/job)
 
 ### Frodo (ticker)  
 - [ ] update readme
 - [ ] add calculations
+- [ ] fix the timeout/retries
 
 ### Gandalf (bot)  
 - [ ] update readme
 - [ ] add spells
+- [ ] add security
 
 ### Sauron (web)  
 - [ ] update readme
 - [ ] make it work
+- [ ] infinity tasks...

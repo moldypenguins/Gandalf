@@ -16,13 +16,18 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name default.ts
- * @version 2022/11/16
+ * @version 2023/01/20
  * @summary default configuration file
  **/
 
 import Config from "./Config";
 
 const configDefault: Config = {
+  admin: {
+    pa_nick: null,
+    discord_id: null,
+    telegram_id: null
+  },
   alliance: {
     name: null,
     attack: {
@@ -32,14 +37,12 @@ const configDefault: Config = {
     }
   },
   discord: {
-    owner: null,
     token: null,
     client_id: null,
     guild_id: null,
     commands: null
   },
   telegram: {
-    owner: null,
     token: null,
     username: null,
     group_id: null,
