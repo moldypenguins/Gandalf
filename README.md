@@ -3,10 +3,8 @@
   <source media="(prefers-color-scheme: light)" srcset="https://i.imgur.com/h52GYwT.png">
   <img alt="logo" src="https://i.imgur.com/h52GYwT.png">
 </picture>
-<div style="display: inline-block; font-size: 40px; font-weight: bold;">Gandalf</div>
-
-### *Planetarion Tools*
-
+<h1>Gandalf</h1>
+<h3>Planetarion Tools</h3>
 <hr />
 
 ![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge)
