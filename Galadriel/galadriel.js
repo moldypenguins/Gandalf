@@ -17,18 +17,15 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name galadriel.js
- * @version 2023-01-07
+ * @version 2023-01-20
  * @summary Config
  **/
 
 
 import { merge } from 'merge-anything';
 import { copy } from 'copy-anything';
-
-import configDefault from './default.js'
-import configLocal from './local.js'
-
+import configDefault from './dist/default'
+import configLocal from './dist/local'
 
 const cfg = copy(merge(configDefault, configLocal));
-
 export default cfg;

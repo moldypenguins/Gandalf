@@ -14,7 +14,7 @@
     "build": "tsc"
   },
   "exports": {
-    ".": "./dist/galadriel.js"
+    ".": "./galadriel.js"
   },
   "dependencies": {
     "copy-anything": "^3.0.3",
