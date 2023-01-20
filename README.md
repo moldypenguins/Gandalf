@@ -1,9 +1,9 @@
 
 <p style="text-align: center;">
     <img src="https://i.imgur.com/WYVv7q3.png" alt="Logo" /> 
-    <div style="text-align: center; font-size: 40px; font-weight: bold;">Gandalf</div>
-    <div style="text-align: center; font-size: 25px; font-style: italic;">Planetarion Tools</div>
 </p>
+<p style="font-weight: bold;">Gandalf</p>
+<p style="font-style: italic;">Planetarion Tools</p>
 <hr style="margin-bottom: 40px;" />
 
 ![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge)
