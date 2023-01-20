@@ -1,10 +1,13 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://i.imgur.com/TzXnGDi.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://i.imgur.com/h52GYwT.png">
+  <img alt="logo" src="https://i.imgur.com/h52GYwT.png">
+</picture>
+<div style="display: inline-block; font-size: 40px; font-weight: bold;">Gandalf</div>
 
-<p style="text-align: center;">
-    <img src="https://i.imgur.com/WYVv7q3.png" alt="Logo" /> 
-</p>
-<p style="font-weight: bold;">Gandalf</p>
-<p style="font-style: italic;">Planetarion Tools</p>
-<hr style="margin-bottom: 40px;" />
+### *Planetarion Tools*
+
+<hr />
 
 ![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge)
 ![Release](https://img.shields.io/github/v/release/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub&include_prereleases&sort=date)
