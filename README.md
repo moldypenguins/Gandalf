@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://i.imgur.com/TzXnGDi.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://i.imgur.com/h52GYwT.png">
-  <img alt="logo" src="https://i.imgur.com/h52GYwT.png">
+  <source media="(prefers-color-scheme: dark)" srcset=".github/images/dark.png">
+  <source media="(prefers-color-scheme: light)" srcset=".github/images/light.png">
+  <img alt="logo" src=".github/images/dark.png">
 </picture>
 <h1>Gandalf</h1>
 <h3>Planetarion Tools</h3>
