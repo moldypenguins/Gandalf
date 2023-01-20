@@ -2,14 +2,14 @@
 
 ## Table of Contents
 * [Options](#options)
-* [Commands](#commands)
+* [Spells (commands)](#spells)
 
 ## Options
 | option         | description                  |
 |----------------|------------------------------|
 | --register, -r | register commands in discord |
 
-## Spells (command modules)
+## Spells
 #### Legend
 * `<>` Required Parameter
 * `[]` Optional Parameter
