@@ -21,12 +21,13 @@
  * @summary Gandalf Spells
  **/
 
-
+import util from 'util';
 import Config from 'galadriel';
 import { Mordor, Tick } from 'mordor';
+import Access from '../access.js';
 
 import { Context } from 'telegraf';
-import { SlashCommandBuilder } from "discord.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder } from "discord.js";
 
 import { encode } from 'html-entities';
 import numeral from 'numeral';
@@ -37,7 +38,6 @@ import timezone from 'dayjs/plugin/timezone.js';
 dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
-
 
 
 const tick = {
@@ -58,7 +58,7 @@ const tick = {
     }
   },
   telegram: {
-    cast: (ctx, args) => {
+    async execute(ctx, args) {
       return new Promise(async (resolve, reject) => {
         let _tick = args[0];
         let _tzone = args[1];

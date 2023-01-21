@@ -21,7 +21,7 @@
  * @summary Gandalf Spells
  **/
 
-
+import util from 'util';
 import Config from 'galadriel';
 import {Mordor, Member, TelegramUser, Tick} from 'mordor';
 import Access from '../access.js';
@@ -35,17 +35,16 @@ import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat.js';
 import utc from 'dayjs/plugin/utc.js';
 import timezone from 'dayjs/plugin/timezone.js';
-import util from "util";
 dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 
 
-const addmem = {
+const adduser = {
   access: Access.Admin,
-  usage: encode('/addmem <user> [panick]'),
-  description: 'Adds a member',
+  usage: encode('/adduser <user> [panick]'),
+  description: 'Adds a user',
   discord: {
     data: new SlashCommandBuilder()
       .setName('adduser')
@@ -55,7 +54,7 @@ const addmem = {
     }
   },
   telegram: {
-    cast: (ctx, args) => {
+    async execute(ctx, args) {
       return new Promise(async (resolve, reject) => {
         if(!Array.isArray(args) || args.length < 5) {
           reject('invalid number of arguments.');
@@ -98,4 +97,4 @@ async function executeCommand(params) {
 
 }
 
-export default addmem
+export default adduser

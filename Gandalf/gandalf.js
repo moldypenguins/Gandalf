@@ -23,12 +23,11 @@
 
 
 import Config from 'galadriel';
-import {Member, Mordor, TelegramUser} from 'mordor';
+import { Mordor, Member, TelegramUser } from 'mordor';
 import minimist from 'minimist';
 import util from 'util';
 
-import tgSpells from './spells/telegram.js';
-import dsSpells from './spells/discord.js';
+import Spells from './spells/book.js';
 
 let argv = minimist(process.argv.slice(2), {
   string: [],
@@ -41,29 +40,15 @@ let argv = minimist(process.argv.slice(2), {
 import { Context, Telegraf } from 'telegraf';
 import { ActivityType, Client, Collection, Events, GatewayIntentBits, Routes, REST } from 'discord.js';
 
-let tgCommands = {};
-Config.telegram.commands.forEach(function(name) { Object.assign(tgCommands, tgSpells); });
 
-
-let dscmds = []; //temporary for registering commands in discord
-let dsCommands = new Collection();
-Config.discord.commands.forEach(function(name) {
-  const cmd = dsSpells[name];
-  if('data' in cmd && 'execute' in cmd) {
-    dsCommands.set(cmd.data.name, cmd);
-    dscmds.push(cmd.data.toJSON());
-  }
-  else {
-    console.log(`[WARNING] The command ${name} is missing a required "data" or "execute" property.`);
-  }
-});
 
 //register discord commands
 if(argv.register) {
   const rest = new REST().setToken(Config.discord.token);
   (async () => {
     try {
-      const data = await rest.put(Routes.applicationCommands(Config.discord.client_id), {body: dscmds});
+      const dsSpells = [];
+      const data = await rest.put(Routes.applicationCommands(Config.discord.client_id), {body: dsSpells});
       console.log(`Reloaded ${data.length} discord commands.`);
     } catch (err) {
       console.error(err);
@@ -73,7 +58,9 @@ if(argv.register) {
 
 // connect to database
 Mordor.connection.once("open", async () => {
+  // *******************************************************************************************************************
   // Telegram
+  // *******************************************************************************************************************
   const telegramBot = new Telegraf(Config.telegram.token, { telegram: { agent: null, webhookReply: false }, username: Config.telegram.username });
   // telegramBot.use(async(ctx, next) => {
   //   if(ctx.message.entities && ctx.message.entities[0]?.type === 'bot_command') {
@@ -129,13 +116,13 @@ Mordor.connection.once("open", async () => {
     let args = ctx.message.text.substring(1).toLowerCase().replace(/\s+/g, ' ').split(' ');
     let cmd = args.shift();
 
-    if(cmd in tgCommands && typeof(tgCommands[cmd].cast) == 'function') {
-      tgCommands[cmd].cast(ctx, args).then((message) => {
+    if(Config.telegram.commands.indexOf(cmd) >= 0 && typeof(Spells[cmd]?.telegram?.execute) === 'function') {
+      Spells[cmd].telegram.execute(ctx, args).then((message) => {
         console.log(`Reply: ${message.toString()}`);
         ctx.replyWithHTML(message.toString(), {reply_to_message_id: ctx.message.message_id});
       }).catch((error) => {
         console.log(`Error: ${error}`);
-        ctx.replyWithHTML(`Error: ${error}\n${tgCommands[cmd].usage}`, {reply_to_message_id: ctx.message.message_id});
+        ctx.replyWithHTML(`Error: ${error}\n${Spells[cmd].usage}`, {reply_to_message_id: ctx.message.message_id});
       });
     }
   });
@@ -146,7 +133,13 @@ Mordor.connection.once("open", async () => {
 
 
 
+
+
+
+
+  // *******************************************************************************************************************
   // Discord
+  // *******************************************************************************************************************
   const discordBot = new Client({
     intents: [
       GatewayIntentBits.Guilds,
@@ -155,6 +148,22 @@ Mordor.connection.once("open", async () => {
     ]
   });
 
+
+  let dsCommands = new Collection();
+  Config.discord.commands.forEach(function(name) {
+    if(Spells[name]) {
+      const cmd = Spells[name].discord;
+      if ('data' in cmd && 'execute' in cmd) {
+        dsCommands.set(cmd.data.name, cmd);
+      }
+      else {
+        console.log(`[WARNING] The command ${name} is missing a required "data" or "execute" property.`);
+      }
+    }
+    else {
+      console.log(`[WARNING] The command ${name} was not found.`);
+    }
+  });
   discordBot.commands = dsCommands;
 
   discordBot.on(Events.ClientReady, () => {
@@ -186,19 +195,22 @@ Mordor.connection.once("open", async () => {
   });
 
 
-
+  // *******************************************************************************************************************
   // Run bots
+  // *******************************************************************************************************************
   console.log("Informing Gandalf of Sauron's return.");
   telegramBot.launch().then(r => {
     console.log(`Telegram: Logged in as ${telegramBot.botInfo.username}!`);
     if(argv.register) {
-      telegramBot.api.setMyCommands(Object.entries(tgCommands).map(([k, v], i) => { return { command: k, description: v.description }; }));
+      //telegramBot.api.setMyCommands(Object.entries(tgCommands).map(([k, v], i) => { return { command: k, description: v.description }; }));
     }
   });
   await discordBot.login(Config.discord.token);
 
 
+  // *******************************************************************************************************************
   // Enable graceful stop
+  // *******************************************************************************************************************
   let death = (code) => {
       console.log(`Death Code: ${code}`);
       telegramBot.stop(code);

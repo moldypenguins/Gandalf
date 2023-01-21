@@ -22,12 +22,13 @@
 'use strict';
 
 
-const tick = (await import('./tick.js')).default.discord
-const addmem = (await import('./addmem.js')).default.discord
+import tick from './tick.js'
+//import adduser from './adduser.js'
 
 
-export default {
+const Spells =  {
   tick,
-  addmem
+  //adduser
 };
 
+export default Spells
