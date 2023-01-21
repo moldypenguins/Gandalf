@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -16,51 +17,16 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name telegram.js
- * @version 2022/11/17
- * @summary Spells
+ * @version 2023/01/21
+ * @summary Gandalf Spells
  **/
-'use strict';
 
-import { telegram as tick } from './tick.js';
-import { telegram as links } from './links.js';
-import { telegram as launch } from './launch.js';
-import { telegram as ship } from './ship.js';
-import { telegram as addmem } from './addmem.js';
+
+const tick = (await import('./tick.js')).default.telegram
+const addmem = (await import('./addmem.js')).default.telegram
+
 
 export default {
   tick,
-  links,
-  launch,
-  ship,
   addmem
 };
-
-/*
-const commandArgs = () => (ctx, next) => {
-    if (ctx.updateType === 'message' && ctx.updateSubType === 'text') {
-        const text = ctx.update.message.text.toLowerCase();
-        if (text.startsWith('/')) {
-            const match = text.match(/^\/([^\s]+)\s?(.+)?/);
-            let args = [];
-            let command;
-            if (match !== null) {
-                if (match[1]) {
-                    command = match[1];
-                }
-                if (match[2]) {
-                    args = match[2].split(' ');
-                }
-            }
-
-            ctx.state.command = {
-                raw: text,
-                command,
-                args,
-            };
-        }
-    }
-    return next();
-};
-
-module.exports = commandArgs;
- */

@@ -39,38 +39,38 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 
-const helpText = encode('/tick [tick=NOW] [timezone=UTC]');
 
-export const telegram = {
-  usage: helpText,
+const tick = {
+  usage: encode('/tick [tick=NOW] [timezone=UTC]'),
   description: 'Calculates when a tick will occur.',
-  cast: (ctx, args) => {
-    return new Promise(async (resolve, reject) => {
-      let _tick = args[0];
-      let _tzone = args[1];
-      let _reply = await getReply({tick: _tick, timezone: _tzone});
-      resolve(_reply);
-    });
+  discord: {
+    data: new SlashCommandBuilder()
+      .setName('tick')
+      .setDescription('Shows when the given tick will happen.')
+      .addIntegerOption(o => o.setName('tick').setDescription('tick').setRequired(false).setMinValue(Config.pa.tick.start).setMaxValue(Config.pa.tick.end))
+      .addStringOption(o => o.setName('timezone').setDescription('timezone').setRequired(false)),
+    async execute(interaction) {
+      let _tick = interaction.options.getInteger('tick');
+      let _tzone = interaction.options.getString('timezone');
+      let _reply = await executeCommand({tick: _tick, timezone: _tzone});
+      await interaction.reply(`\`\`\`${_reply}\`\`\``);
+    }
+  },
+  telegram: {
+    cast: (ctx, args) => {
+      return new Promise(async (resolve, reject) => {
+        let _tick = args[0];
+        let _tzone = args[1];
+        let _reply = await executeCommand({tick: _tick, timezone: _tzone});
+        resolve(_reply);
+      });
+    }
   }
 };
 
-export const discord = {
-  data: new SlashCommandBuilder()
-    .setName('tick')
-    .setDescription('Shows when the given tick will happen.')
-    .addIntegerOption(o => o.setName('tick').setDescription('tick').setRequired(false).setMinValue(Config.pa.tick.start).setMaxValue(Config.pa.tick.end))
-    .addStringOption(o => o.setName('timezone').setDescription('timezone').setRequired(false)),
-  async execute(interaction) {
-    let _tick = interaction.options.getInteger('tick');
-    let _tzone = interaction.options.getString('timezone');
-    let _reply = await getReply({tick: _tick, timezone: _tzone});
-    await interaction.reply(`\`\`\`${_reply}\`\`\``);
-  },
-  help: helpText
-};
 
 
-async function getReply(params) {
+async function executeCommand(params) {
   let reply;
   if(params.tick || params.timezone) {
     //param validation
@@ -101,3 +101,4 @@ async function getReply(params) {
   return reply;
 }
 
+export default tick;

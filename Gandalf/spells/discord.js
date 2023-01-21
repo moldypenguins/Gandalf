@@ -21,15 +21,13 @@
  **/
 'use strict';
 
-import { discord as tick } from './tick.js';
-import { discord as links } from './links.js';
-import { discord as launch } from './launch.js';
-import { discord as ship } from './ship.js';
+
+const tick = (await import('./tick.js')).default.discord
+const addmem = (await import('./addmem.js')).default.discord
+
 
 export default {
   tick,
-  links,
-  launch,
-  ship
+  addmem
 };
 

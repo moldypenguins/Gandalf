@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -16,10 +17,10 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name addmem.js
- * @version 2022/11/22
+ * @version 2023/01/21
  * @summary Gandalf Spells
  **/
-'use strict';
+
 
 import Config from 'galadriel';
 import {Mordor, Member, TelegramUser, Tick} from 'mordor';
@@ -39,55 +40,60 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 
-export const telegram = {
+
+const addmem = {
   usage: encode('/addmem <user> [panick]'),
   description: 'Adds a member',
-  cast: (ctx, args) => {
-    return new Promise(async (resolve, reject) => {
-      if(!Array.isArray(args) || args.length < 5) {
-        reject('invalid number of arguments.');
-      }
-      else {
-        let _user = ctx.message.entities && ctx.message.entities[1]?.type === 'mention' ? null : null;
-        if(_user?.length <= 0) { reject(`User must be a Telegram user.`); }
-        let _nick = args[1];
-        if (_nick?.length <= 0) { reject(`PA nick must be a valid string.`); }
+  discord: {
+    data: new SlashCommandBuilder()
+      .setName('adduser')
+      .setDescription('adds a user'),
+    async execute(interaction) {
+      await interaction.reply();
+    }
+  },
+  telegram: {
+    cast: (ctx, args) => {
+      return new Promise(async (resolve, reject) => {
+        if(!Array.isArray(args) || args.length < 5) {
+          reject('invalid number of arguments.');
+        }
+        else {
+          let _user = ctx.message.entities && ctx.message.entities[1]?.type === 'mention' ? null : null;
+          if(_user?.length <= 0) { reject(`User must be a Telegram user.`); }
+          let _nick = args[1];
+          if (_nick?.length <= 0) { reject(`PA nick must be a valid string.`); }
 
-        console.log(util.inspect(ctx.message.entities, true, null, true));
+          console.log(util.inspect(ctx.message.entities, true, null, true));
 
-        let tguser = await TelegramUser.exists({tg_id: 4});
-        if(!tguser) {
-          reject(`invalid user: ${args[1]}`);
-        } else {
+          let tguser = await TelegramUser.exists({tg_id: 4});
+          if(!tguser) {
+            reject(`invalid user: ${args[1]}`);
+          } else {
 
-          let member = await new Member({
+            let member = await new Member({
               _id: Mordor.Types.ObjectId(),
               pa_nick: _nick,
               tg_user: tguser,
               parent: ctx.member
             }).save();
-          console.log(`Error: ${util.inspect(member, true, null, true)}`);
-          if(member) {
-            resolve(`${member.pa_nick} has been added.`);
-            //ctx.replyWithHTML(`Member added`);
-          } else {
-            reject(`Error: try again`);
-            //ctx.replyWithHTML(`Error: try again`);
+            console.log(`Error: ${util.inspect(member, true, null, true)}`);
+            if(member) {
+              resolve(`${member.pa_nick} has been added.`);
+              //ctx.replyWithHTML(`Member added`);
+            } else {
+              reject(`Error: try again`);
+              //ctx.replyWithHTML(`Error: try again`);
+            }
           }
         }
-      }
-    });
+      });
+    }
   }
-};
+}
 
+async function executeCommand(params) {
 
+}
 
-export const discord = {
-  data: new SlashCommandBuilder()
-    .setName('adduser')
-    .setDescription('adds a user'),
-  async execute(interaction) {
-    await interaction.reply();
-  },
-  help: encode('/adduser <user>')
-};
+export default addmem
