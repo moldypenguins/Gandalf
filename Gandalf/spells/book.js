@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -15,20 +16,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name discord.js
- * @version 2022/11/17
- * @summary Spells
+ * @name book.js
+ * @version 2023/01/21
+ * @summary Spell Book
  **/
-'use strict';
+
 
 
 import tick from './tick.js'
-//import adduser from './adduser.js'
+import adduser from './adduser.js'
 
 
 const Spells =  {
   tick,
-  //adduser
+  adduser
 };
 
 export default Spells

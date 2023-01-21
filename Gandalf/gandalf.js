@@ -112,18 +112,29 @@ Mordor.connection.once("open", async () => {
 
     //TODO: parse text for scan links
 
-    // Dynamic command handling
-    let args = ctx.message.text.substring(1).toLowerCase().replace(/\s+/g, ' ').split(' ');
-    let cmd = args.shift();
+    let mem = await Member.findByTGId(ctx.message.from.id);
 
-    if(Config.telegram.commands.indexOf(cmd) >= 0 && typeof(Spells[cmd]?.telegram?.execute) === 'function') {
-      Spells[cmd].telegram.execute(ctx, args).then((message) => {
-        console.log(`Reply: ${message.toString()}`);
-        ctx.replyWithHTML(message.toString(), {reply_to_message_id: ctx.message.message_id});
-      }).catch((error) => {
-        console.log(`Error: ${error}`);
-        ctx.replyWithHTML(`Error: ${error}\n${Spells[cmd].usage}`, {reply_to_message_id: ctx.message.message_id});
-      });
+    if(!mem) {
+      ctx.replyWithHTML('<i>Thou Shall Not Pass!</i>', {reply_to_message_id: ctx.message.message_id});
+    }
+    else {
+      // Dynamic command handling
+      let args = ctx.message.text.substring(1).toLowerCase().replace(/\s+/g, ' ').split(' ');
+      let cmd = args.shift();
+
+      if (
+        Config.telegram.commands.indexOf(cmd) >= 0 &&
+        typeof (Spells[cmd]?.telegram?.execute) === 'function' &&
+        !Spells[cmd].access || (Spells[cmd].access && Spells[cmd].access(mem))
+      ) {
+        Spells[cmd].telegram.execute(ctx, args).then((message) => {
+          console.log(`Reply: ${message.toString()}`);
+          ctx.replyWithHTML(message.toString(), {reply_to_message_id: ctx.message.message_id});
+        }).catch((error) => {
+          console.log(`Error: ${error}`);
+          ctx.replyWithHTML(`Error: ${error}\n${Spells[cmd].usage}`, {reply_to_message_id: ctx.message.message_id});
+        });
+      }
     }
   });
 
