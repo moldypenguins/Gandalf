@@ -60,8 +60,7 @@ See [INSTALLATION.md](INSTALLATION.md) for setup guide.
 Check [Gandalf Wiki](https://github.com/moldypenguins/Gandalf/wiki) for reference.  
 See [SECURITY.md](SECURITY.md) for feature requests or bug reports.  
 
-Join [Gandalf Support](https://t.me/+UkMZETiCNjWhtg_D) on Telegram.  
-Join [#wtf](https://discord.gg/Ean6FvV) on Discord.  
+Find us on [Discord](https://discord.gg/Ean6FvV) or [Telegram](https://t.me/+UkMZETiCNjWhtg_D)
 
 
 ## Roadmap
