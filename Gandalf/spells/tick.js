@@ -17,7 +17,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name tick.js
- * @version 2022/11/17
+ * @version 2023/01/21
  * @summary Gandalf Spells
  **/
 
@@ -41,6 +41,7 @@ dayjs.extend(timezone);
 
 
 const tick = {
+  access: null,
   usage: encode('/tick [tick=NOW] [timezone=UTC]'),
   description: 'Calculates when a tick will occur.',
   discord: {

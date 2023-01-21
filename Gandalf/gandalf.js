@@ -113,7 +113,7 @@ Mordor.connection.once("open", async () => {
   telegramBot.help(async(ctx) => {
     let commands = '<b>Commands:</b>\n<b>help:</b> <i>Shows list of commands</i>\n';
     for(let [key, value] of Object.entries(tgCommands)) {
-      //if(!(tgCommands[key].access !== undefined && (mem == null || (!tgCommands[key].access(mem))))) {
+      //if(!(tgCommands[key].access.js !== undefined && (mem == null || (!tgCommands[key].access.js(mem))))) {
         commands += (`<b>${key}:</b> <i>${value.description}</i>\n`);
       //}
     }

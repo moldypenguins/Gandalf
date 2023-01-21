@@ -24,6 +24,7 @@
 
 import Config from 'galadriel';
 import {Mordor, Member, TelegramUser, Tick} from 'mordor';
+import Access from '../access.js';
 
 import { Context } from 'telegraf';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder } from "discord.js";
@@ -42,6 +43,7 @@ dayjs.extend(timezone);
 
 
 const addmem = {
+  access: Access.Admin,
   usage: encode('/addmem <user> [panick]'),
   description: 'Adds a member',
   discord: {
