@@ -5,8 +5,8 @@
 </picture>
 <h1>Gandalf</h1>
 <h3>Planetarion Tools</h3>
-<hr />
 
+***  
 ![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge)
 ![Release](https://img.shields.io/github/v/release/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub&include_prereleases&sort=date)
 ![Release Date](https://img.shields.io/github/release-date-pre/moldypenguins/Gandalf?logo=GitHub&style=for-the-badge&include_prereleases&sort=date)  
@@ -19,8 +19,8 @@
 ![Languages](https://img.shields.io/github/languages/count/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Top Language](https://img.shields.io/github/languages/top/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Total Lines](https://img.shields.io/tokei/lines/github/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
-![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/moldypenguins/Gandalf?style=for-the-badge&logo=CodeFactor)
-
+![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/moldypenguins/Gandalf?style=for-the-badge&logo=CodeFactor)  
+***  
 
 ## Table of Contents
 * [Environment](#environment)
