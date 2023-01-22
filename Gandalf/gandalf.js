@@ -143,6 +143,15 @@ Mordor.connection.once("open", async () => {
       let args = ctx.message.text.substring(1).toLowerCase().replace(/\s+/g, ' ').split(' ');
       let cmd = args.shift();
 
+      // Command alias check
+      if(Config.telegram.commands.indexOf(cmd) < 0) {
+        for(let [key, value] of Object.entries(Spells)) {
+          if(value.alias && value.alias.includes(cmd)) {
+            cmd = key;
+          }
+        }
+      }
+
       if(Config.telegram.commands.indexOf(cmd) >= 0 && typeof (Spells[cmd]?.telegram?.execute) === 'function') {
         if(Spells[cmd].access && !Spells[cmd].access(ctx.member)) {
           ctx.replyWithHTML('You do not have access to this command.', {reply_to_message_id: ctx.message.message_id});

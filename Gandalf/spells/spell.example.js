@@ -42,6 +42,7 @@ dayjs.extend(timezone);
 
 const spellname = {
   access: Access.Member,
+  alias: ['spelln'],
   usage: encode('/spellname [param1] [param2]'),
   description: 'Lorem ipsum.',
   discord: {
