@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -16,10 +17,10 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name links.js
- * @version 2022/11/17
+ * @version 2023/01/22
  * @summary Gandalf Spells
  **/
-'use strict';
+
 
 import Config from 'galadriel';
 import { Mordor, Tick } from 'mordor';
@@ -33,38 +34,43 @@ import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat.js';
 import utc from 'dayjs/plugin/utc.js';
 import timezone from 'dayjs/plugin/timezone.js';
+import tick from "./tick.js";
 dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 
-export const telegram = {
+const links = {
+  access: null,
   usage: encode('/links'),
   description: 'Returns links',
-  cast: (ctx, args) => {
-    return new Promise(async (resolve, reject) => {
-      resolve(`<a href="${Config.web.uri}">${Config.alliance.name}</a>\n<a href="${Config.pa.links.game}">Planetarion</a>`);
-    });
+  discord: {
+    data: new SlashCommandBuilder()
+      .setName('links')
+      .setDescription('Shows links.'),
+    async execute(interaction) {
+      const row = new ActionRowBuilder()
+        .addComponents(
+          new ButtonBuilder()
+            .setURL(Config.web.uri)
+            .setLabel(Config.alliance.name)
+            .setStyle(ButtonStyle.Link),
+          new ButtonBuilder()
+            .setURL(Config.pa.links.game)
+            .setLabel('Planetarion')
+            .setStyle(ButtonStyle.Link),
+        );
+      await interaction.reply({ components: [row] });
+    },
+    help: encode('/links')
+  },
+  telegram: {
+    async execute(ctx, args) {
+      return new Promise(async (resolve, reject) => {
+        resolve(`<a href="${Config.web.uri}">${Config.alliance.name}</a>\n<a href="${Config.pa.links.game}">Planetarion</a>`);
+      });
+    }
   }
 };
 
-export const discord = {
-  data: new SlashCommandBuilder()
-    .setName('links')
-    .setDescription('Shows links.'),
-  async execute(interaction) {
-    const row = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-          .setURL(Config.web.uri)
-          .setLabel(Config.alliance.name)
-          .setStyle(ButtonStyle.Link),
-        new ButtonBuilder()
-          .setURL(Config.pa.links.game)
-          .setLabel('Planetarion')
-          .setStyle(ButtonStyle.Link),
-      );
-    await interaction.reply({ components: [row] });
-  },
-  help: encode('/links')
-};
+export default links;

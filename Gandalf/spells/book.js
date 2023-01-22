@@ -17,7 +17,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name book.js
- * @version 2023/01/21
+ * @version 2023/01/22
  * @summary Spell Book
  **/
 
@@ -25,8 +25,10 @@
 import addmember from './addmember.js'
 
 import launch from './launch.js'
+import links from './links.js';
 import ship from './ship.js'
 import tick from './tick.js'
+
 
 
 
@@ -35,6 +37,7 @@ const Spells =  {
   addmember,
 
   launch,
+  links,
   ship,
   tick
 };
