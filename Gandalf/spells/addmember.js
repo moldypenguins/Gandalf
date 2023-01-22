@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name addmem.js
+ * @name addmember.js
  * @version 2023/01/21
  * @summary Gandalf Spells
  **/
@@ -41,14 +41,14 @@ dayjs.extend(timezone);
 
 
 
-const adduser = {
+const addmember = {
   access: Access.Admin,
-  usage: encode('/adduser <user> [panick]'),
-  description: 'Adds a user',
+  usage: encode('/addmember <user> <panick> [access=0]'),
+  description: 'Adds a member',
   discord: {
     data: new SlashCommandBuilder()
-      .setName('adduser')
-      .setDescription('adds a user'),
+      .setName('addmember')
+      .setDescription('adds a member'),
     async execute(interaction) {
       await interaction.reply();
     }
@@ -56,7 +56,7 @@ const adduser = {
   telegram: {
     async execute(ctx, args) {
       return new Promise(async (resolve, reject) => {
-        if(!Array.isArray(args) || args.length < 5) {
+        if(!Array.isArray(args) || args.length < 2) {
           reject('invalid number of arguments.');
         }
         else {
@@ -64,20 +64,22 @@ const adduser = {
           if(_user?.length <= 0) { reject(`User must be a Telegram user.`); }
           let _nick = args[1];
           if (_nick?.length <= 0) { reject(`PA nick must be a valid string.`); }
+          let _access = args[2] | 0;
 
-          console.log(util.inspect(ctx.message.entities, true, null, true));
+          console.log('HERE' + util.inspect(ctx, true, null, true));
 
-          let tguser = await TelegramUser.exists({tg_id: 4});
+          let tguser = await TelegramUser.exists({tguser_id: 4});
           if(!tguser) {
-            reject(`invalid user: ${args[1]}`);
+            reject(`Invalid telegram user: ${args[1]}\nThey should use the \/start command`);
           } else {
 
-            let member = await new Member({
+            let member = new Member({
               _id: Mordor.Types.ObjectId(),
               pa_nick: _nick,
               tg_user: tguser,
               parent: ctx.member
-            }).save();
+            })
+            await member.save();
             console.log(`Error: ${util.inspect(member, true, null, true)}`);
             if(member) {
               resolve(`${member.pa_nick} has been added.`);
@@ -97,4 +99,4 @@ async function executeCommand(params) {
 
 }
 
-export default adduser
+export default addmember

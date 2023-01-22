@@ -24,12 +24,12 @@
 
 
 import tick from './tick.js'
-import adduser from './adduser.js'
+import addmember from './addmember.js'
 
 
 const Spells =  {
   tick,
-  adduser
+  addmember
 };
 
 export default Spells
