@@ -67,7 +67,7 @@ const links = {
   telegram: {
     async execute(ctx, args) {
       return new Promise(async (resolve, reject) => {
-        resolve(`<a href="${Config.web.uri}">${Config.alliance.name}</a>\n<a href="${Config.pa.links.game}">Planetarion</a>`);
+        resolve(`<a href="${Config.web.url}">${Config.alliance.name}</a>\n<a href="${Config.pa.links.game}">Planetarion</a>`);
       });
     }
   }

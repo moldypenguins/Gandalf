@@ -218,6 +218,7 @@ Mordor.connection.once("open", async () => {
       console.error(`No command matching ${interaction.commandName} was found.`);
     }
     else {
+      //TODO: add security
       try {
         await command.execute(interaction);
       }
