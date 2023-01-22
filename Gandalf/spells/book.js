@@ -22,7 +22,7 @@
  **/
 
 
-import addmember from './addmember.js'
+import addmem from './addmem.js'
 
 import launch from './launch.js'
 import links from './links.js';
@@ -34,7 +34,7 @@ import tick from './tick.js'
 
 
 const Spells =  {
-  addmember,
+  addmem,
 
   launch,
   links,
