@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name addmem.js
+ * @name addmember.js
  * @version 2023/01/22
  * @summary Gandalf Spells
  **/
@@ -41,13 +41,14 @@ dayjs.extend(timezone);
 
 
 
-const addmem = {
+const addmember = {
   access: Access.Admin,
-  usage: encode('/addmem <user> <panick> [access=0]'),
+  alias: ['addmem'],
+  usage: encode('/addmember <user> <panick> [access=0]'),
   description: 'Adds a member',
   discord: {
     data: new SlashCommandBuilder()
-      .setName('addmem')
+      .setName('addmember')
       .setDescription('adds a member'),
     async execute(interaction) {
       await interaction.reply();
@@ -105,4 +106,4 @@ async function executeCommand(params) {
 
 }
 
-export default addmem
+export default addmember

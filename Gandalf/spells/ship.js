@@ -60,13 +60,15 @@ let ship = {
     async execute(ctx, args) {
       return new Promise(function (resolve, reject) {
         if (!Array.isArray(args) || args.length < 1) {
-          reject(Ships_ship_usage);
+          reject('Invalid number of arguments.');
         }
-        let _ship = args[0];
-        //console.log(`ARGS: ship=${_ship}`);
+        else {
+          let _ship = args[0];
+          //console.log(`ARGS: ship=${_ship}`);
 
-        let reply = executeCommand({ship: _ship});
-        resolve(reply);
+          let reply = executeCommand({ship: _ship});
+          resolve(reply);
+        }
       });
     }
   }

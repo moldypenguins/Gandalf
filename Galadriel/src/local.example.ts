@@ -35,13 +35,13 @@ const configLocal: Config = {
     token: '',
     client_id: '',
     guild_id: '',
-    commands: ['tick', 'addmem']
+    commands: ['tick', 'addmember']
   },
   telegram: {
     token: '',
     username: '',
     group_id: '',
-    commands: ['tick', 'addmem']
+    commands: ['tick', 'addmember']
   },
   twilio: {
     sid: "",
