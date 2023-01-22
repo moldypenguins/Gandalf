@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -16,10 +17,10 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name ship.js
- * @version 2022/11/17
+ * @version 2023/01/22
  * @summary Gandalf Spells
  **/
-'use strict';
+
 
 import Config from 'galadriel';
 import { Mordor, Tick, Ship } from 'mordor';
@@ -33,79 +34,99 @@ import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat.js';
 import utc from 'dayjs/plugin/utc.js';
 import timezone from 'dayjs/plugin/timezone.js';
+import tick from "./tick.js";
 dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 
-export const telegram = {
+let ship = {
   usage: encode('/ship <ship>'),
   description: 'Returns the stats of the specified ship.',
-  cast: (ctx, args) => {
-    return new Promise(function(resolve, reject) {
-      if (!Array.isArray(args) || args.length < 1) { reject(Ships_ship_usage); }
-      let _ship = args[0];
-      //console.log(`ARGS: ship=${_ship}`);
-
-      Ship.find().then((ships) => {
-        //console.log(ships);
-        let ship = ships.find(s => s.name.toLowerCase().startsWith(_ship.toLowerCase()) );
-        if(!ship) {
-          reject(`Cannot find ship ${_ship}`);
-        } else {
-          let reply = `${ship.name} (${ship.race}) is class ${ship.class} | Target 1: ${ship.target1}`;
-          if(ship.target2 != '-') {
-            reply += ` | Target 2: ${ship.target2}`;
-          }
-          if(ship.target3 != '-') {
-            reply += ` | Target 3: ${ship.target3}`;
-          }
-          reply += ` | Type: ${ship.type} | Init: ${ship.initiative}`;
-          reply += ` | EMPres: ${ship.empres}`;
-
-          if(ship.type.toLowerCase() == 'emp') {
-            reply += ` | Guns: ${ship.guns}`;
-          } else {
-            reply += ` | D/C: ${Math.trunc(Number(ship.damage)*10000/(Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
-          }
-          reply += ` | A/C: ${Math.trunc(Number(ship.armor)*10000/(Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
-          resolve(reply);
+  discord: {
+    data: new SlashCommandBuilder()
+      .setName('ship')
+      .setDescription('Shows the stats of the specified ship.')
+      .addStringOption(o => o.setName('ship').setDescription('ship').setRequired(true)),
+    async execute(interaction) {
+      let _ship = interaction.options.getString('ship');
+      let ship = await Ship.findOne({ name: { $regex: '^' + _ship, $options: 'i'} });
+      if(!ship) {
+        await interaction.reply(`Cannot find ship ${_ship}`);
+      }
+      else {
+        console.log(`SHIP: ${ship}`);
+        let reply = `${ship.name} (${ship.race})\nClass: ${ship.class}\nTarget 1: ${ship.target1}`;
+        if(ship.target2 !== '-') {
+          reply += `\nTarget 2: ${ship.target2}`;
         }
-      }).catch((err) => { reject(err); });
-    });
+        if(ship.target3 !== '-') {
+          reply += `\nTarget 3: ${ship.target3}`;
+        }
+        reply += `\nType: ${ship.type}\nInit: ${ship.initiative}`;
+        reply += `\nEMP Res: ${ship.empres}`;
+        if(ship.type.toLowerCase() === 'emp') {
+          reply += `\nGuns: ${ship.guns}`;
+        }
+        reply += `\nD/C: ${Math.trunc(Number(ship.damage)*10000/(Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
+        reply += `\nA/C: ${Math.trunc(Number(ship.armor)*10000/(Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
+        await interaction.reply(`\`\`\`${reply}\`\`\``);
+      }
+    }
+  },
+  telegram: {
+    async execute(ctx, args) {
+      return new Promise(function (resolve, reject) {
+        if (!Array.isArray(args) || args.length < 1) {
+          reject(Ships_ship_usage);
+        }
+        let _ship = args[0];
+        //console.log(`ARGS: ship=${_ship}`);
+
+        Ship.find().then((ships) => {
+          //console.log(ships);
+          let ship = ships.find(s => s.name.toLowerCase().startsWith(_ship.toLowerCase()));
+          if (!ship) {
+            reject(`Cannot find ship ${_ship}`);
+          } else {
+            let reply = executeCommand({ship: ship});
+            resolve(reply);
+          }
+        }).catch((err) => {
+          reject(err);
+        });
+      });
+    }
   }
 };
 
 
-export const discord = {
-  data: new SlashCommandBuilder()
-    .setName('ship')
-    .setDescription('Shows the stats of the specified ship.')
-    .addStringOption(o => o.setName('ship').setDescription('ship').setRequired(true)),
-  async execute(interaction) {
-    let _ship = interaction.options.getString('ship');
-    let ship = await Ship.findOne({ name: { $regex: '^' + _ship, $options: 'i'} });
-    if(!ship) {
-      await interaction.reply(`Cannot find ship ${_ship}`);
-    }
-    else {
-      console.log(`SHIP: ${ship}`);
-      let reply = `${ship.name} (${ship.race})\nClass: ${ship.class}\nTarget 1: ${ship.target1}`;
-      if(ship.target2 !== '-') {
-        reply += `\nTarget 2: ${ship.target2}`;
-      }
-      if(ship.target3 !== '-') {
-        reply += `\nTarget 3: ${ship.target3}`;
-      }
-      reply += `\nType: ${ship.type}\nInit: ${ship.initiative}`;
-      reply += `\nEMP Res: ${ship.empres}`;
-      if(ship.type.toLowerCase() === 'emp') {
-        reply += `\nGuns: ${ship.guns}`;
-      }
-      reply += `\nD/C: ${Math.trunc(Number(ship.damage)*10000/(Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
-      reply += `\nA/C: ${Math.trunc(Number(ship.armor)*10000/(Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
-      await interaction.reply(`\`\`\`${reply}\`\`\``);
-    }
-  },
-  help: encode('/ship <ship>')
-};
+async function executeCommand(params) {
+  let reply;
+  if(params.ship) {
+    //param validation
+    //var spacing = options.spacing || 0;
+    //var width = options.width || "50%";
+  }
+
+  let ship = await Ship.findOne({name: new RegExp("^"+ params.ship)});
+
+  reply = `${ship.name} (${ship.race}) is class ${ship.class} | Target 1: ${ship.target1}`;
+  if (ship.target2 !== '-') {
+    reply += ` | Target 2: ${ship.target2}`;
+  }
+  if (ship.target3 !== '-') {
+    reply += ` | Target 3: ${ship.target3}`;
+  }
+  reply += ` | Type: ${ship.type} | Init: ${ship.initiative}`;
+  reply += ` | EMPres: ${ship.empres}`;
+
+  if (ship.type.toLowerCase() === 'emp') {
+    reply += ` | Guns: ${ship.guns}`;
+  } else {
+    reply += ` | D/C: ${Math.trunc(Number(ship.damage) * 10000 / (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
+  }
+  reply += ` | A/C: ${Math.trunc(Number(ship.armor) * 10000 / (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
+}
+
+export default ship;

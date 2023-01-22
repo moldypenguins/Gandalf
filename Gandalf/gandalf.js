@@ -63,6 +63,8 @@ Mordor.connection.once("open", async () => {
   // *******************************************************************************************************************
   const telegramBot = new Telegraf(Config.telegram.token, { telegram: { agent: null, webhookReply: false }, username: Config.telegram.username });
 
+  //TODO: parse text for scan links
+
   telegramBot.use(async(ctx, next) => {
     if(ctx.message.entities && ctx.message.entities[0]?.type === 'bot_command') {
       let _mem = await Member.findByTGId(ctx.message.from.id);
@@ -132,11 +134,7 @@ Mordor.connection.once("open", async () => {
   });
 
   telegramBot.command(async(ctx) => {
-    console.log('command', ctx.message.text)
-
-    //TODO: parse text for scan links
-
-
+    console.log('command: ', ctx.message.text);
     if(!ctx.member) {
       ctx.replyWithHTML('<i>You shall not pass!</i>', {reply_to_message_id: ctx.message.message_id});
     }
