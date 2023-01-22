@@ -35,12 +35,14 @@ import advancedFormat from 'dayjs/plugin/advancedFormat.js';
 import utc from 'dayjs/plugin/utc.js';
 import timezone from 'dayjs/plugin/timezone.js';
 import tick from "./tick.js";
+import util from "util";
 dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 
 let ship = {
+  access: null,
   usage: encode('/ship <ship>'),
   description: 'Returns the stats of the specified ship.',
   discord: {
@@ -50,28 +52,8 @@ let ship = {
       .addStringOption(o => o.setName('ship').setDescription('ship').setRequired(true)),
     async execute(interaction) {
       let _ship = interaction.options.getString('ship');
-      let ship = await Ship.findOne({ name: { $regex: '^' + _ship, $options: 'i'} });
-      if(!ship) {
-        await interaction.reply(`Cannot find ship ${_ship}`);
-      }
-      else {
-        console.log(`SHIP: ${ship}`);
-        let reply = `${ship.name} (${ship.race})\nClass: ${ship.class}\nTarget 1: ${ship.target1}`;
-        if(ship.target2 !== '-') {
-          reply += `\nTarget 2: ${ship.target2}`;
-        }
-        if(ship.target3 !== '-') {
-          reply += `\nTarget 3: ${ship.target3}`;
-        }
-        reply += `\nType: ${ship.type}\nInit: ${ship.initiative}`;
-        reply += `\nEMP Res: ${ship.empres}`;
-        if(ship.type.toLowerCase() === 'emp') {
-          reply += `\nGuns: ${ship.guns}`;
-        }
-        reply += `\nD/C: ${Math.trunc(Number(ship.damage)*10000/(Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
-        reply += `\nA/C: ${Math.trunc(Number(ship.armor)*10000/(Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
-        await interaction.reply(`\`\`\`${reply}\`\`\``);
-      }
+      let reply = await executeCommand({ship: _ship});
+      await interaction.reply(`\`\`\`${reply}\`\`\``);
     }
   },
   telegram: {
@@ -83,18 +65,8 @@ let ship = {
         let _ship = args[0];
         //console.log(`ARGS: ship=${_ship}`);
 
-        Ship.find().then((ships) => {
-          //console.log(ships);
-          let ship = ships.find(s => s.name.toLowerCase().startsWith(_ship.toLowerCase()));
-          if (!ship) {
-            reject(`Cannot find ship ${_ship}`);
-          } else {
-            let reply = executeCommand({ship: ship});
-            resolve(reply);
-          }
-        }).catch((err) => {
-          reject(err);
-        });
+        let reply = executeCommand({ship: _ship});
+        resolve(reply);
       });
     }
   }
@@ -109,24 +81,32 @@ async function executeCommand(params) {
     //var width = options.width || "50%";
   }
 
-  let ship = await Ship.findOne({name: new RegExp("^"+ params.ship)});
+  console.log(`PARAM: ${util.inspect(params.ship, true, null, true)}`)
 
-  reply = `${ship.name} (${ship.race}) is class ${ship.class} | Target 1: ${ship.target1}`;
-  if (ship.target2 !== '-') {
-    reply += ` | Target 2: ${ship.target2}`;
-  }
-  if (ship.target3 !== '-') {
-    reply += ` | Target 3: ${ship.target3}`;
-  }
-  reply += ` | Type: ${ship.type} | Init: ${ship.initiative}`;
-  reply += ` | EMPres: ${ship.empres}`;
+  let _ship = await Ship.findOne({$where: () => {this.name.toLowerCase().startsWith(params.ship.toLowerCase())}});
 
-  if (ship.type.toLowerCase() === 'emp') {
-    reply += ` | Guns: ${ship.guns}`;
-  } else {
-    reply += ` | D/C: ${Math.trunc(Number(ship.damage) * 10000 / (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
+  console.log(`SHIP: ${util.inspect(_ship, true, null, true)}`)
+
+  if(!_ship) {
+    reply = 'Ship not found.';
   }
-  reply += ` | A/C: ${Math.trunc(Number(ship.armor) * 10000 / (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)))}`;
+  else {
+    reply = `${_ship.name} (${_ship.race})\nClass: ${_ship.class}\nTarget 1: ${_ship.target1}`;
+    if(_ship.target2 !== '-') {
+      reply += `\nTarget 2: ${_ship.target2}`;
+    }
+    if(_ship.target3 !== '-') {
+      reply += `\nTarget 3: ${_ship.target3}`;
+    }
+    reply += `\nType: ${_ship.type}\nInit: ${_ship.initiative}`;
+    reply += `\nEMP Res: ${_ship.empres}`;
+    if(_ship.type.toLowerCase() === 'emp') {
+      reply += `\nGuns: ${_ship.guns}`;
+    }
+    reply += `\nD/C: ${Math.trunc(Number(_ship.damage)*10000/(Number(_ship.metal) + Number(_ship.crystal) + Number(_ship.eonium)))}`;
+    reply += `\nA/C: ${Math.trunc(Number(_ship.armor)*10000/(Number(_ship.metal) + Number(_ship.crystal) + Number(_ship.eonium)))}`;
+  }
+  return reply;
 }
 
 export default ship;

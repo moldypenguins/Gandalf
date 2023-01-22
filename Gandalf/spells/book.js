@@ -22,14 +22,21 @@
  **/
 
 
-
-import tick from './tick.js'
 import addmember from './addmember.js'
+
+import launch from './launch.js'
+import ship from './ship.js'
+import tick from './tick.js'
+
+
 
 
 const Spells =  {
-  tick,
-  addmember
+  addmember,
+
+  launch,
+  ship,
+  tick
 };
 
 export default Spells
