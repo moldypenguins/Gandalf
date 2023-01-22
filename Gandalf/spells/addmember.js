@@ -60,34 +60,40 @@ const addmember = {
           reject('invalid number of arguments.');
         }
         else {
-          let _user = ctx.message.entities && ctx.message.entities[1]?.type === 'mention' ? null : null;
-          if(_user?.length <= 0) { reject(`User must be a Telegram user.`); }
-          let _nick = args[1];
-          if (_nick?.length <= 0) { reject(`PA nick must be a valid string.`); }
-          let _access = args[2] | 0;
+          let mentions = await ctx.mentions.get(ctx.message);
+          //console.log('MENTIONS: ' + util.inspect(mentions, false, null, true));
 
-          console.log('HERE' + util.inspect(ctx, true, null, true));
-
-          let tguser = await TelegramUser.exists({tguser_id: 4});
-          if(!tguser) {
+          if(mentions.length <= 0) {
             reject(`Invalid telegram user: ${args[1]}\nThey should use the \/start command`);
           } else {
+            let _user = mentions[0]
+            if (_user?.length <= 0) {
+              reject(`User must be a Telegram user.`);
+            }
+            let _nick = args[1];
+            if (_nick?.length <= 0) {
+              reject(`PA nick must be a valid string.`);
+            }
+            let _access = args[2] | 0;
+
+            //console.log('HERE: ' + util.inspect(_user, true, null, true));
 
             let member = new Member({
               _id: Mordor.Types.ObjectId(),
               pa_nick: _nick,
-              tg_user: tguser,
+              tg_user: _user,
               parent: ctx.member
             })
             await member.save();
-            console.log(`Error: ${util.inspect(member, true, null, true)}`);
-            if(member) {
+
+            if (member) {
               resolve(`${member.pa_nick} has been added.`);
               //ctx.replyWithHTML(`Member added`);
             } else {
               reject(`Error: try again`);
               //ctx.replyWithHTML(`Error: try again`);
             }
+
           }
         }
       });

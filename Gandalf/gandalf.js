@@ -62,46 +62,46 @@ Mordor.connection.once("open", async () => {
   // Telegram
   // *******************************************************************************************************************
   const telegramBot = new Telegraf(Config.telegram.token, { telegram: { agent: null, webhookReply: false }, username: Config.telegram.username });
-  // telegramBot.use(async(ctx, next) => {
-  //   if(ctx.message.entities && ctx.message.entities[0]?.type === 'bot_command') {
-  //     let _mem = Member.findByTGId(ctx.from.id);
-  //     if(_mem) {
-  //       ctx.member = _mem;
-  //       return next();
-  //     }
-  //   }
-  // });
 
-/*
-  telegramBot.entity(async(entity, s, ctx) => {
-    //console.log(`e: ${util.inspect(entity, true, null, true)}\ns: ${s}`);
-  });
-  telegramBot.mention(async(mention, fns) => {
-    //console.log(`m: ${util.inspect(mention, true, null, true)}`);
-    let mentions = [];
-    if(mention.message.entities !== undefined) {
-      for (let i = 0; i < mention.message.entities.filter(e => e.type === 'mention').length; i++) {
-        let usrnm = mention.message.text.substring(mention.message.entities[i].offset, mention.message.entities[i].length);
-        console.log('usrnm: ' + util.inspect(usrnm, false, null, true));
-        let usr = await TelegramUser.findOne({telegram_username: usrnm.replace('@', '')});
-        if(usr != null) {
-          mentions.push(usr);
-        }
+  telegramBot.use(async(ctx, next) => {
+    if(ctx.message.entities && ctx.message.entities[0]?.type === 'bot_command') {
+      let _mem = await Member.findByTGId(ctx.message.from.id);
+      if(_mem) {
+        ctx.member = _mem;
       }
-      for (let i = 0; i < mention.message.entities.filter(e => e.type === 'text_mention').length; i++) {
-        let usr = await TelegramUser.findOne({telegram_first_name: mention.message.entities[i].user.first_name, telegram_last_name: mention.message.entities[i].user.last_name});
-        if(usr != null) {
-          mentions.push(usr);
-        }
-      }
+      return next();
     }
-    console.log(`m: ${util.inspect(mentions, true, null, true)}`);
-    return mentions;
   });
-*/
+
+  telegramBot.context.mentions = {
+    get: async (message) => {
+      let mentions = [];
+      if(message.entities !== undefined) {
+        let eMentions = message.entities.filter(e => e.type === 'mention');
+        for (let i = 0; i < eMentions.length; i++) {
+          //console.log(`EMENT: ${util.inspect(eMentions[i], true, null, true)}`);
+          let usrnm = message.text.slice(eMentions[i].offset, eMentions[i].offset + eMentions[i].length);
+          //console.log('usrnm: ' + util.inspect(usrnm, false, null, true));
+          let usr = await TelegramUser.findOne({tguser_username: usrnm.replace('@', '')});
+          if(usr != null) {
+            mentions.push(usr);
+          }
+        }
+        let etMentions = message.entities.filter(e => e.type === 'text_mention');
+        for (let i = 0; i < etMentions.length; i++) {
+          let usr = await TelegramUser.findOne({tguser_first_name: etMentions.user.first_name, tguser_last_name: etMentions.user.last_name});
+          if(usr != null) {
+            mentions.push(usr);
+          }
+        }
+      }
+      return mentions;
+    }
+  }
+
 
   telegramBot.start(async(ctx) => {
-    if(!await TelegramUser.exists({TelegramUser_id: ctx.message.from.id})) {
+    if(!await TelegramUser.exists({tguser_id: ctx.message.from.id})) {
       await new TelegramUser({
         _id: Mordor.Types.ObjectId(),
         tguser_id: ctx.message.from.id,
@@ -115,17 +115,17 @@ Mordor.connection.once("open", async () => {
       ctx.replyWithHTML(`You already did this.`);
     }
   });
+
   telegramBot.help(async(ctx) => {
-    let mem = await Member.findByTGId(ctx.message.from.id);
-    if(!mem) {
+    if(!ctx.member) {
       ctx.replyWithHTML('<i>You shall not pass!</i>', {reply_to_message_id: ctx.message.message_id});
     }
     else {
       let commands = '<b>Commands:</b>\n<b>help:</b> <i>Shows list of commands</i>\n';
       for (let [key, value] of Object.entries(Spells)) {
-        //if(!(tgCommands[key].access.js !== undefined && (mem == null || (!tgCommands[key].access.js(mem))))) {
-        commands += (`<b>${key}:</b> <i>${value.description}</i>\n`);
-        //}
+        if(!Spells[key].access || Spells[key].access(ctx.member)) {
+          commands += (`<b>${key}:</b> <i>${value.description}</i>\n`);
+        }
       }
       await ctx.telegram.sendMessage(ctx.message.from.id, commands, {parse_mode: 'HTML'});
     }
@@ -136,8 +136,8 @@ Mordor.connection.once("open", async () => {
 
     //TODO: parse text for scan links
 
-    let mem = await Member.findByTGId(ctx.message.from.id);
-    if(!mem) {
+
+    if(!ctx.member) {
       ctx.replyWithHTML('<i>You shall not pass!</i>', {reply_to_message_id: ctx.message.message_id});
     }
     else {
@@ -146,7 +146,7 @@ Mordor.connection.once("open", async () => {
       let cmd = args.shift();
 
       if(Config.telegram.commands.indexOf(cmd) >= 0 && typeof (Spells[cmd]?.telegram?.execute) === 'function') {
-        if(Spells[cmd].access && !Spells[cmd].access(mem)) {
+        if(Spells[cmd].access && !Spells[cmd].access(ctx.member)) {
           ctx.replyWithHTML('You do not have access to this command.', {reply_to_message_id: ctx.message.message_id});
         }
         else {
