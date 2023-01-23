@@ -48,6 +48,11 @@ if(argv.register) {
   (async () => {
     try {
       const dsSpells = [];
+      Config.discord.commands.forEach(function(name) {
+        if(Spells[name]) {
+          dsSpells.push(Spells[name].discord.data.toJSON());
+        }
+      });
       const data = await rest.put(Routes.applicationCommands(Config.discord.client_id), {body: dsSpells});
       console.log(`Reloaded ${data.length} discord commands.`);
     } catch (err) {
@@ -250,7 +255,7 @@ Mordor.connection.once("open", async () => {
       //telegramBot.api.setMyCommands(Object.entries(tgCommands).map(([k, v], i) => { return { command: k, description: v.description }; }));
     }
   });
-  await discordBot.login(Config.discord.token);
+  discordBot.login(Config.discord.token);
 
 
   // *******************************************************************************************************************
