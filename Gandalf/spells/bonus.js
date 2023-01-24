@@ -50,8 +50,8 @@ const bonus = {
     data: new SlashCommandBuilder()
       .setName('bonus')
       .setDescription(verbiage)
-      .addIntegerOption(o => o.setName('tick').setDescription('tick').setRequired(false).setMinValue(0).setMaxValue(100))
-      .addStringOption(o => o.setName('prbonus').setDescription('prbonus').setRequired(false)),
+      .addIntegerOption(o => o.setName('tick').setDescription('tick').setRequired(false).setMinValue(0))
+      .addIntegerOption(o => o.setName('prbonus').setDescription('prbonus').setRequired(false).setMinValue(0).setMaxValue(10)),
     async execute(interaction) {
       let _tick = interaction.options.getInteger('tick');
       let _prbonus = interaction.options.getString('prbonus');
