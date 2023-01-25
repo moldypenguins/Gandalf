@@ -156,6 +156,44 @@ const configDefault: Config = {
       value: 0.4,
       score: 0.6
     },
+    governments: {
+      corp: {
+        name: "Corporatism",
+        prodcost: 0,
+        mining: 0.24,
+        prodtime: 0,
+      },
+      demo: {
+        name: "Democracy",
+        prodcost: -0.08,
+        mining: 0,
+        prodtime: 0,
+      },
+      nation: {
+        name: "Nationalism",
+        prodcost: 0,
+        mining: 0.16,
+        prodtime: -0.10,
+      },
+      soc: {
+        name: "Socialism",
+        prodcost: 0,
+        mining: 0.1,
+        prodtime: 0.2,
+      },
+      total: {
+        name: "Totalitarianism",
+        prodcost: -0.06,
+        mining: 0,
+        prodtime: -0.10,
+      },
+      anar: {
+        name: "Anarchy",
+        prodcost: 0,
+        mining: -0.25,
+        prodtime: -0.20,
+      }
+    },
   }
 }
 

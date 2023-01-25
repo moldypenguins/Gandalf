@@ -39,22 +39,20 @@ dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const verbiage = 'Calculates upgrade bonus at specified tick. Check PA upgrade bonus page for prev round bonus %.';
-
 const bonus = {
   access: Access.Member,
 //  alias: ['spelln'],
   usage: encode('/bonus [tick=NOW] [prev-round-bonus=0]'),
-  description: verbiage,
+  description: 'Calculates upgrade bonus at specified tick. Check PA upgrade bonus page for prev round bonus %.',
   discord: {
     data: new SlashCommandBuilder()
       .setName('bonus')
-      .setDescription(verbiage)
-      .addIntegerOption(o => o.setName('tick').setDescription('tick').setRequired(false).setMinValue(0))
-      .addIntegerOption(o => o.setName('prbonus').setDescription('prbonus').setRequired(false).setMinValue(0).setMaxValue(10)),
+      .setDescription('Calculates upgrade bonus at specified tick. Check PA upgrade bonus page for prev round bonus %.')
+      .addIntegerOption(o => o.setName('tick').setDescription('Tick').setRequired(false).setMinValue(0))
+      .addIntegerOption(o => o.setName('prbonus').setDescription('Previous rounds bonus').setRequired(false).setMinValue(0).setMaxValue(10)),
     async execute(interaction) {
       let _tick = interaction.options.getInteger('tick');
-      let _prbonus = interaction.options.getString('prbonus');
+      let _prbonus = interaction.options.getInteger('prbonus');
       let _reply = await executeCommand({tick: _tick, prbonus: _prbonus});
       await interaction.reply(`\`\`\`${_reply}\`\`\``);
     }
