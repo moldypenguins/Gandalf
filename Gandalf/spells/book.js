@@ -26,6 +26,7 @@ import addmember from './addmember.js'
 import bonus from './bonus.js'
 import launch from './launch.js'
 import links from './links.js';
+import roidcost from './roidcost.js';
 import ship from './ship.js'
 import tick from './tick.js'
 
@@ -38,6 +39,7 @@ const Spells =  {
   bonus,
   launch,
   links,
+  roidcost,
   ship,
   tick
 };
