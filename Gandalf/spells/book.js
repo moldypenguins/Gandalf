@@ -24,6 +24,7 @@
 
 import addmember from './addmember.js';
 import bonus from './bonus.js';
+import cost from './cost.js';
 import eff from './eff.js';
 import launch from './launch.js';
 import links from './links.js';
@@ -39,6 +40,7 @@ import tick from './tick.js';
 const Spells =  {
   addmember,
   bonus,
+  cost,
   eff,
   launch,
   links,
