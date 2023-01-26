@@ -92,6 +92,6 @@ export default interface Config {
         prodtime: number;
       };
     },
-    construction?: { [key: string]: number; },
+    construction?: { [key: number]: number; },
   }
 }
