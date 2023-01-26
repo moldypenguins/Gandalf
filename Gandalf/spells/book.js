@@ -17,7 +17,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name book.js
- * @version 2023/01/22
+ * @version 2023/01/25
  * @summary Spell Book
  **/
 
