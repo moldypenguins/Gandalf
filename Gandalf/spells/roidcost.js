@@ -42,7 +42,7 @@ dayjs.extend(timezone);
 const roidcost = {
   access: Access.Member,
 //  alias: ['spelln'],
-  usage: encode('/roidcost <roids> <value_cost> [mining_bonus]'),
+  usage: encode('/roidcost <roids> <value_cost> [pop_mining_bonus]'),
   description: 'Calculate how long it will take to repay a value loss capping roids.',
   discord: {
     data: new SlashCommandBuilder()

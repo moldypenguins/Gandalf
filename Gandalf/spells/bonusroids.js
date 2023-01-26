@@ -42,7 +42,7 @@ dayjs.extend(timezone);
 const bonusroids = {
   access: Access.Member,
   alias: ['broids'],
-  usage: encode('/bonusroids || /broids [tick=NOW] [pop_bonus=0]'),
+  usage: encode('/bonusroids || /broids [tick=NOW] [pop_mining_bonus=0]'),
   description: 'Calculates how many ticks you need to keep the bonus roids to be worth it vs accepting resources.',
   discord: {
     data: new SlashCommandBuilder()
