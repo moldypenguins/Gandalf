@@ -84,5 +84,13 @@ export default interface Config {
     },
     roids?: { [key: string]: number; },
     bash?: { [key: string]: number; },
+    governments?: {
+      [key: string]: {
+        name: string;
+        prodcost: number;
+        mining: number;
+        prodtime: number;
+      };
+    }
   }
 }
