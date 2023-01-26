@@ -30,6 +30,7 @@ import exile from './exile.js';
 import eff from './eff.js';
 import launch from './launch.js';
 import links from './links.js';
+import prodtime from './prodtime.js';
 import roidcost from './roidcost.js';
 import refsvsfcs from './refsvsfcs.js';
 import ship from './ship.js';
@@ -49,8 +50,9 @@ const Spells =  {
   exile,
   launch,
   links,
-  roidcost,
+  prodtime,
   refsvsfcs,
+  roidcost,
   ship,
   stop,
   tick

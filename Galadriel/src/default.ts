@@ -194,6 +194,36 @@ const configDefault: Config = {
         prodtime: -0.20,
       }
     },
+    race:{
+      ter: {
+      name: "Terran",
+      prodtime: 0.1
+      },
+      cat: {
+      name: "Cathaar",
+      prodtime: 0
+      },
+      xan: {
+      name: "Xandathrii",
+      prodtime: 0.05
+      },
+      zik: {
+      name: "Zikonian",
+      prodtime: 0.15
+      },
+   /*   etd: {
+      name: "Eitraides",
+      prodtime: 0
+      }  */
+      kin: {
+      name: "Kinthia",
+      prodtime: 0
+      },   
+      sly: {
+      name: "Slythonian",
+      prodtime: 0
+      }    
+    },    
     construction: {
       baseRefCost: 3000,
       baseFCCost: 4500,

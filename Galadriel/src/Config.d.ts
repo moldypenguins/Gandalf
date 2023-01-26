@@ -92,6 +92,12 @@ export default interface Config {
         prodtime: number;
       };
     },
+    race?: {
+      [key: string]: {
+        name: string;
+        prodtime: number;
+      };
+    },
     construction?: { [key: number]: number; },
   }
 }
