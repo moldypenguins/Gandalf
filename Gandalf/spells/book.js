@@ -17,18 +17,21 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name book.js
- * @version 2023/01/22
+ * @version 2023/01/25
  * @summary Spell Book
  **/
 
 
-import addmember from './addmember.js'
-import bonus from './bonus.js'
-import launch from './launch.js'
+import addmember from './addmember.js';
+import bonus from './bonus.js';
+import cost from './cost.js';
+import eff from './eff.js';
+import launch from './launch.js';
 import links from './links.js';
 import roidcost from './roidcost.js';
-import ship from './ship.js'
-import tick from './tick.js'
+import ship from './ship.js';
+import stop from './stop.js';
+import tick from './tick.js';
 
 
 
@@ -37,10 +40,13 @@ import tick from './tick.js'
 const Spells =  {
   addmember,
   bonus,
+  cost,
+  eff,
   launch,
   links,
   roidcost,
   ship,
+  stop,
   tick
 };
 

@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name spell.example.js
- * @version 2023/01/22
+ * @name roidcost.js
+ * @version 2023/01/25
  * @summary Gandalf Spells
  **/
 
@@ -75,7 +75,7 @@ const roidcost = {
 async function executeCommand(params) {
   let reply;
   if (!params.roids || !params.cost) {
-    reply = roidcost.usage;
+    reply = `Usage: ${roidcost.usage}`;
   } else {
     let mining = Config.pa.roids.mining;
     mining = mining * ((params.bonus + 100) / 100);
@@ -90,7 +90,7 @@ async function executeCommand(params) {
       let bonus = Config.pa.governments[gov].prodcost;
       if (bonus === 0) continue;
       let ticks_b = ticks * (1 + bonus);
-      reply += ` ${Config.pa.governments[gov].name}: ${ticks_b} ticks (${Math.trunc(ticks_b/24)} days)`      
+      reply += ` - ${Config.pa.governments[gov].name}: ${ticks_b} ticks (${Math.trunc(ticks_b/24)} days)`      
     }
   }
   return reply;
