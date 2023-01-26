@@ -196,32 +196,34 @@ const configDefault: Config = {
     },
     race:{
       ter: {
-      name: "Terran",
-      prodtime: 0.1
+        name: "Terran",
+        prodtime: 0.1
       },
       cat: {
-      name: "Cathaar",
-      prodtime: 0
+        name: "Cathaar",
+        prodtime: 0
       },
       xan: {
-      name: "Xandathrii",
-      prodtime: 0.05
+        name: "Xandathrii",
+        prodtime: 0.05
       },
       zik: {
-      name: "Zikonian",
-      prodtime: 0.15
+        name: "Zikonian",
+        prodtime: 0.15
       },
-   /*   etd: {
-      name: "Eitraides",
-      prodtime: 0
-      }  */
+      /*
+      etd: {
+        name: "Eitraides",
+        prodtime: 0
+      }
+      */
       kin: {
-      name: "Kinthia",
-      prodtime: 0
+        name: "Kinthia",
+        prodtime: 0
       },   
       sly: {
-      name: "Slythonian",
-      prodtime: 0
+        name: "Slythonian",
+        prodtime: 0
       }    
     },    
     construction: {

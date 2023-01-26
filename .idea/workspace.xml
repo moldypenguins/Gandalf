@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7b4df756-377a-48de-bf3d-eae10a4430cb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gandalf/gandalf.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/gandalf.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gandalf/spells/links.js" beforeDir="false" afterPath="$PROJECT_DIR$/Gandalf/spells/links.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Galadriel/src/Config.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/src/Config.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Galadriel/src/default.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/src/default.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +114,7 @@
       <workItem from="1673577087939" duration="28414000" />
       <workItem from="1673824428430" duration="24982000" />
       <workItem from="1674046045279" duration="62647000" />
-      <workItem from="1674384720214" duration="13239000" />
+      <workItem from="1674384720214" duration="28518000" />
     </task>
     <servers />
   </component>

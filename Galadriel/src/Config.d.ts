@@ -98,6 +98,7 @@ export default interface Config {
         prodtime: number;
       };
     },
-    construction?: { [key: number]: number; },
+    construction?: { [key: string]: number; },
+    cores?: { [key: number]: number; }
   }
 }
