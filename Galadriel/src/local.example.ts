@@ -35,13 +35,13 @@ const configLocal: Config = {
     token: '',
     client_id: '',
     guild_id: '',
-    commands: ['addmember', 'bonus', 'bonusroids', 'cost', 'eff', 'links', 'launch', 'roidcost', 'tick', 'ship', 'stop']
+    commands: ['addmember', 'bonus', 'bonusroids', 'cost', 'eff', 'exile', 'links', 'launch', 'roidcost', 'tick', 'ship', 'stop']
   },
   telegram: {
     token: '',
     username: '',
     group_id: '',
-    commands: ['addmember', 'bonus', 'bonusroids', 'cost', 'eff', 'links', 'launch', 'roidcost', 'tick', 'ship', 'stop']
+    commands: ['addmember', 'bonus', 'bonusroids', 'cost', 'eff', 'exile', 'links', 'launch', 'roidcost', 'tick', 'ship', 'stop']
   },
   twilio: {
     sid: "",

@@ -26,6 +26,7 @@ import addmember from './addmember.js';
 import bonus from './bonus.js';
 import bonusroids from './bonusroids.js';
 import cost from './cost.js';
+import exile from './exile.js';
 import eff from './eff.js';
 import launch from './launch.js';
 import links from './links.js';
@@ -44,6 +45,7 @@ const Spells =  {
   bonusroids,
   cost,
   eff,
+  exile,
   launch,
   links,
   roidcost,
