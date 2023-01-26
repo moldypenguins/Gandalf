@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name spell.example.js
- * @version 2023/01/22
+ * @name roidcost.js
+ * @version 2023/01/25
  * @summary Gandalf Spells
  **/
 
