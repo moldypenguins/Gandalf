@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name local.example.ts
- * @version 2023/01/20
+ * @version 2023/01/26
  * @summary local configuration file
  **/
 
@@ -35,13 +35,13 @@ const configLocal: Config = {
     token: '',
     client_id: '',
     guild_id: '',
-    commands: ['addmember', 'bonus', 'bonusroids', 'cost', 'eff', 'exile', 'links', 'launch', 'roidcost', 'tick', 'ship', 'stop']
+    commands: ['addmember', 'bonus', 'bonusroids', 'cost', 'eff', 'exile', 'links', 'launch', 'refsvsfcs', 'roidcost', 'tick', 'ship', 'stop']
   },
   telegram: {
     token: '',
     username: '',
     group_id: '',
-    commands: ['addmember', 'bonus', 'bonusroids', 'cost', 'eff', 'exile', 'links', 'launch', 'roidcost', 'tick', 'ship', 'stop']
+    commands: ['addmember', 'bonus', 'bonusroids', 'cost', 'eff', 'exile', 'links', 'launch', 'refsvsfcs', 'roidcost', 'tick', 'ship', 'stop']
   },
   twilio: {
     sid: "",

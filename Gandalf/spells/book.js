@@ -31,6 +31,7 @@ import eff from './eff.js';
 import launch from './launch.js';
 import links from './links.js';
 import roidcost from './roidcost.js';
+import refsvsfcs from './refsvsfcs.js';
 import ship from './ship.js';
 import stop from './stop.js';
 import tick from './tick.js';
@@ -49,6 +50,7 @@ const Spells =  {
   launch,
   links,
   roidcost,
+  refsvsfcs,
   ship,
   stop,
   tick

@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name default.ts
- * @version 2023/01/20
+ * @version 2023/01/26
  * @summary default configuration file
  **/
 
@@ -110,7 +110,7 @@ const configDefault: Config = {
       end: 1177
     },
     numbers: {
-      tag_total: 60,
+      tag_total: 50,
       tag_count: 40,
       roid_value: 200,
       cons_value: 200,
@@ -194,6 +194,21 @@ const configDefault: Config = {
         prodtime: -0.20,
       }
     },
+    construction: {
+      baseRefCost: 3000,
+      baseFCCost: 4500,
+      refIncome: 1100,
+      fcBonus: 0.005,
+      refCU: 750,
+      fcCU: 1000,
+    },
+    cores: {
+      0: 1000,
+      1: 3500,
+      2: 7000,
+      3: 12500,
+      4: 20000,
+    },     
   }
 }
 
