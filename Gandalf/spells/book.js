@@ -24,11 +24,15 @@
 
 import addmember from './addmember.js';
 import bonus from './bonus.js';
+import bonusroids from './bonusroids.js';
 import cost from './cost.js';
+import exile from './exile.js';
 import eff from './eff.js';
 import launch from './launch.js';
 import links from './links.js';
+import prodtime from './prodtime.js';
 import roidcost from './roidcost.js';
+import refsvsfcs from './refsvsfcs.js';
 import ship from './ship.js';
 import stop from './stop.js';
 import tick from './tick.js';
@@ -40,10 +44,14 @@ import tick from './tick.js';
 const Spells =  {
   addmember,
   bonus,
+  bonusroids,
   cost,
   eff,
+  exile,
   launch,
   links,
+  prodtime,
+  refsvsfcs,
   roidcost,
   ship,
   stop,

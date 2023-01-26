@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Config.d.ts
- * @version 2023/01/20
+ * @version 2023/01/26
  * @summary configuration declaration
  **/
 
@@ -91,6 +91,13 @@ export default interface Config {
         mining: number;
         prodtime: number;
       };
-    }
+    },
+    race?: {
+      [key: string]: {
+        name: string;
+        prodtime: number;
+      };
+    },
+    construction?: { [key: number]: number; },
   }
 }

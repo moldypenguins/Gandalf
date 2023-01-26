@@ -35,8 +35,8 @@
 
 #### Calculations
 * `!exile` Shows information regarding chances of landing in desired galaxies.
-* `!bonusmining [tick]=NOW [bonus]=0` Calculates how many ticks you need to keep the bonus roids to be worth it vs accepting resources.
-* `!bonus [tick=NOW] [bonus=0]` Calculates the bonus for a given tick. (bonus argument is provided by PA bonus screen 3% etc.)
+* `!bonusroids [tick]=NOW [pop_bonus]=0` Calculates how many ticks you need to keep the bonus roids to be worth it vs accepting resources.
+* `!bonus [tick=NOW] [prev_round_bonus=0]` Calculates the bonus for a given tick. (bonus argument is provided by PA bonus screen 3% etc.)
 * `!roidcost <roids> <value_cost> [mining_bonus]` Calculate how long it will take to repay a value loss capping roids.
 * `!tick [tick]=NOW [timezone]=GMT` Calculate when a tick will occur.
 * `!refsvsfcs <roids> <metal_refs> <crystal_refs> <eonium_refs> <finance_centers> <government> <mining_population> <cores>` Calculates if you should be building refs or fcs based on inputs

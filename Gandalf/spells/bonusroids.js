@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name bonus.js
- * @version 2023/01/22
+ * @name bonusroids.js
+ * @version 2023/01/25
  * @summary Gandalf Spells
  **/
 
@@ -39,21 +39,21 @@ dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const bonus = {
+const bonusroids = {
   access: Access.Member,
-//  alias: ['spelln'],
-  usage: encode('/bonus [tick=NOW] [prev-round-bonus=0]'),
-  description: 'Calculates upgrade bonus at specified tick. Check PA upgrade bonus page for prev round bonus %.',
+  alias: ['broids'],
+  usage: encode('/bonusroids || /broids [tick=NOW] [pop_mining_bonus=0]'),
+  description: 'Calculates how many ticks you need to keep the bonus roids to be worth it vs accepting resources.',
   discord: {
     data: new SlashCommandBuilder()
-      .setName('bonus')
-      .setDescription('Calculates upgrade bonus at specified tick. Check PA upgrade bonus page for prev round bonus %.')
+      .setName('bonusroids')
+      .setDescription('Calculates how many ticks you need to keep the bonus roids to be worth it vs accepting resources.')
       .addIntegerOption(o => o.setName('tick').setDescription('Tick').setRequired(false).setMinValue(0))
-      .addIntegerOption(o => o.setName('prbonus').setDescription('Previous rounds bonus').setRequired(false).setMinValue(0).setMaxValue(10)),
+      .addIntegerOption(o => o.setName('popbonus').setDescription('Previous rounds bonus').setRequired(false).setMinValue(0).setMaxValue(10)),
     async execute(interaction) {
       let _tick = interaction.options.getInteger('tick');
-      let _prbonus = interaction.options.getInteger('prbonus');
-      let _reply = await executeCommand({tick: _tick, prbonus: _prbonus});
+      let _popbonus = interaction.options.getInteger('popbonus');
+      let _reply = await executeCommand({tick: _tick, popbonus: _popbonus});
       await interaction.reply(`\`\`\`${_reply}\`\`\``);
     }
   },
@@ -61,8 +61,8 @@ const bonus = {
     async execute(ctx, args) {
       return new Promise(async (resolve, reject) => {
         let _tick = numeral(args[0]).value();
-        let _prbonus = numeral(args[1]).value();
-        let _reply = await executeCommand({tick: _tick, prbonus: _prbonus});
+        let _popbonus = numeral(args[1]).value();
+        let _reply = await executeCommand({tick: _tick, popbonus: _popbonus});
         resolve(_reply);
       });
     }
@@ -72,7 +72,7 @@ const bonus = {
 async function executeCommand(params) {
   let reply;
   let tick = params.tick;
-  let bonus = 1.0 + (params.prbonus / 100);
+  let bonus = params.popbonus > 0 ? params.popbonus / 100 : 0;
   let nowtick = await Tick.findLastTick();
   if(!nowtick) {
     reply = `Cannot find current tick.`;
@@ -81,16 +81,19 @@ async function executeCommand(params) {
     if (!tick || tick == 0 || tick == null) {
       tick = nowtick.tick;
     }
-
+    
     let resource_bonus = 10000 + (tick * 4800);
-    let roid_bonus = Math.trunc(6 + (tick * 0.15));
-    let rp_bonus = Math.trunc((4000 + (tick * 24) * bonus));
-    let cp_bonus = Math.trunc((2000 + (tick * 18) * bonus));  
-
-    reply = `Upgrade Bonus calculation for tick: ${tick}\nResource Bonus: ${resource_bonus}\nRoid Bonus: ${roid_bonus}\nResearch Point Bonus: ${rp_bonus}\nConstruction Point Bonus: ${cp_bonus}`;
+    let roids = Math.trunc(6 + (tick * 0.15));
+    let mining = Config.pa.roids.mining;
+    let mining_bonus = mining * (1 + bonus);
+    
+    reply = `Resource Bonus at tick ${tick}: ${resource_bonus}\nRoid bonus at tick ${tick}: ${roids}\nResource mined per roid per tick: ${mining_bonus}\n`;
+    let ticks = resource_bonus / (roids * mining_bonus);
+    reply += `Would take ${Math.ceil(ticks)} ticks (${Math.trunc(ticks / 24)} days) to produce ${resource_bonus} of each mineral`
+    
   }  
   
   return reply;
 }
 
-export default bonus;
+export default bonusroids;
