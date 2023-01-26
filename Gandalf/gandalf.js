@@ -145,8 +145,13 @@ Mordor.connection.once("open", async () => {
     }
     else {
       // Dynamic command handling
-      let args = ctx.message.text.substring(1).toLowerCase().replace(/\s+/g, ' ').split(' ');
+      let args = ctx.message.text.substring(1).toLowerCase().replace(/\s+/g, ' ').replace(/[^a-z0-9áéíóúñü \.,_-]/gim,'').split(' ');
       let cmd = args.shift();
+
+      if (cmd === "addmember") {
+        args = ctx.message.text.substr(1).replace(/\s+/g, ' ').replace(/[^a-z0-9áéíóúñü \.,_-]/gim,'').split(' ');
+        args.shift();
+      }
 
       // Command alias check
       if(Config.telegram.commands.indexOf(cmd) < 0) {

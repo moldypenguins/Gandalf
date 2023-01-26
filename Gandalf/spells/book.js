@@ -22,13 +22,15 @@
  **/
 
 
-import addmember from './addmember.js'
-import bonus from './bonus.js'
-import launch from './launch.js'
+import addmember from './addmember.js';
+import bonus from './bonus.js';
+import eff from './eff.js';
+import launch from './launch.js';
 import links from './links.js';
 import roidcost from './roidcost.js';
-import ship from './ship.js'
-import tick from './tick.js'
+import ship from './ship.js';
+import stop from './stop.js';
+import tick from './tick.js';
 
 
 
@@ -37,10 +39,12 @@ import tick from './tick.js'
 const Spells =  {
   addmember,
   bonus,
+  eff,
   launch,
   links,
   roidcost,
   ship,
+  stop,
   tick
 };
 
