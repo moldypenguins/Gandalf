@@ -22,10 +22,8 @@
  **/
 
 
-import { merge } from 'merge-anything';
-import { copy } from 'copy-anything';
 import configDefault from './dist/default.js'
 import configLocal from './dist/local.js'
 
-const cfg = copy(merge(configDefault, configLocal));
+const cfg = {...configDefault, ...configLocal};
 export default cfg;

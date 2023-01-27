@@ -2,7 +2,6 @@
 
 ### Galadriel (config)  
 - [ ] update readme
-- [ ] explore adding merge to build step
 
 ### Mordor (database)  
 - [ ] update readme
