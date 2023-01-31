@@ -244,16 +244,7 @@ Mordor.connection.once("open", async () => {
         //##############################################################################################################
 
         //set all clusters to inactive
-        await Cluster.updateMany({}, {
-          active: false,
-          size: 0,
-          score: 0,
-          value: 0,
-          xp: 0,
-          galaxies: 0,
-          planets: 0,
-          ratio: 0
-        });
+        await Cluster.updateMany({}, { active: false });
 
         //loop through distinct x in galaxies
         let clusters = await GalaxyDump.find({}, {x: 1}).distinct('x');
@@ -305,10 +296,24 @@ Mordor.connection.once("open", async () => {
             planets: p[0].members,
             ratio: g[0].value !== 0 ? 10000.0 * g[0].size / g[0].value : 0,
 
+            size_growth: g[0].size - (cluster.size ?? 0),
+            score_growth: g[0].score - (cluster.score ?? 0),
+            value_growth: g[0].value - (cluster.value ?? 0),
+            xp_growth: g[0].xp - (cluster.xp ?? 0),
+            galaxy_growth: g[0].members - (cluster.galaxies ?? 0),
+            planet_growth: p[0].members - (cluster.planets ?? 0),
+
             //TODO: add remaining fields
 
           });
         }
+
+        //update ranks
+        //size_rank: await PlanetDump.find({size: {$gt: p[0].size}, x: {$ne: 200}}).countDocuments() + 1,
+        //score_rank: Number,
+        //value_rank: Number,
+        //xp_rank: Number,
+
 
         current_ms = (new Date()) - start_time;
         log(`Updated clusters in: ${current_ms - total_ms}ms`);
