@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High
@@ -16,10 +17,9 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Galaxy.js
- * @version 2021/05/30
+ * @version 2023/01/31
  * @summary Mongoose Model
  **/
-'use strict';
 
 import mongoose from 'mongoose';
 
@@ -34,21 +34,19 @@ let GalaxySchema = new mongoose.Schema({
   xp:         {type:Number},
   active:     {type:Boolean},
   age:        {type:Number, default:0},
-  real_score: {type:Number},
   planets:    {type:Number},
   ratio:      {type:Number},
+
+  size_growth: {type:Number},
+  score_growth: {type:Number},
+  value_growth: {type:Number},
+  xp_growth: {type:Number},
+  planet_growth: {type:Number},
+  size_rank: {type:Number},
+  score_rank: {type:Number},
+  value_rank: {type:Number},
+  xp_rank: {type:Number},
   /*
-  size_rank: Number,
-  score_rank: Number,
-  real_score_rank: Number,
-  value_rank: Number,
-  xp_rank: Number,
-  size_growth: Number,
-  score_growth: Number,
-  real_score_growth: Number,
-  value_growth: Number,
-  xp_growth: Number,
-  member_growth: Number,
   size_growth_pc: Number,
   score_growth_pc: Number,
   real_score_growth_pc: Number,

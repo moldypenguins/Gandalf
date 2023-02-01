@@ -114,6 +114,9 @@ Mordor.connection.once("open", async () => {
         let new_tick;
         if (dump_tick <= last_tick) {
           new_tick = await Tick.findOne({tick: dump_tick});
+
+          //TODO: restore Clusters/Galaxies/Planets/Alliances from history tables
+
           log(`Updating Tick: pt${new_tick.tick} - ${dayjs(new_tick.timestamp).tz().format('YYYY-MM-dd HH:mm z')}`);
         } else {
           new_tick = await new Tick({
@@ -240,236 +243,87 @@ Mordor.connection.once("open", async () => {
 
 
         //##############################################################################################################
-        //Clusters
-        //##############################################################################################################
-
-        //set all clusters to inactive
-        await Cluster.updateMany({}, { active: false });
-
-        //loop through distinct x in galaxies
-        let clusters = await GalaxyDump.find({}, {x: 1}).distinct('x');
-        //log(`CLUSTERS: ` + util.inspect(clusters, true, null, true));
-
-        for (let c_temp in clusters) {
-          //create cluster if not exists
-          if (!await Cluster.exists({x: clusters[c_temp]})) {
-            await new Cluster({_id: Mordor.Types.ObjectId(), x: clusters[c_temp]}).save();
-          }
-
-          //get cluster
-          let cluster = await Cluster.findOne({x: clusters[c_temp]});
-          //log(`CLUSTER: ` + util.inspect(cluster, true, null, true));
-
-          //aggregate galaxies
-          let g = await GalaxyDump.aggregate([
-            {$match: {x: cluster.x}},
-            {
-              $group: {
-                _id: null,
-                size: {$sum: '$size'},
-                score: {$sum: '$score'},
-                value: {$sum: '$value'},
-                xp: {$sum: '$xp'},
-                members: {$sum: 1}
-              }
-            }
-          ]);
-          //aggregate planets
-          let p = await PlanetDump.aggregate([
-            {$match: {x: cluster.x}},
-            {
-              $group: {
-                _id: null,
-                members: {$sum: 1}
-              }
-            }
-          ]);
-          //update cluster
-          await Cluster.updateOne({x: cluster.x}, {
-            size: g[0].size,
-            score: g[0].score,
-            value: g[0].value,
-            xp: g[0].xp,
-            active: true,
-            age: cluster.age + 1 ?? 1,
-            galaxies: g[0].members,
-            planets: p[0].members,
-            ratio: g[0].value !== 0 ? 10000.0 * g[0].size / g[0].value : 0,
-
-            size_growth: g[0].size - (cluster.size ?? 0),
-            score_growth: g[0].score - (cluster.score ?? 0),
-            value_growth: g[0].value - (cluster.value ?? 0),
-            xp_growth: g[0].xp - (cluster.xp ?? 0),
-            galaxy_growth: g[0].members - (cluster.galaxies ?? 0),
-            planet_growth: p[0].members - (cluster.planets ?? 0),
-
-            //TODO: add remaining fields
-
-          });
-        }
-
-        //update ranks
-        //size_rank: await PlanetDump.find({size: {$gt: p[0].size}, x: {$ne: 200}}).countDocuments() + 1,
-        //score_rank: Number,
-        //value_rank: Number,
-        //xp_rank: Number,
-
-
-        current_ms = (new Date()) - start_time;
-        log(`Updated clusters in: ${current_ms - total_ms}ms`);
-        total_ms += current_ms - total_ms;
-
-
-        //##############################################################################################################
-        //Galaxies
-        //##############################################################################################################
-
-        //set all galaxies to inactive
-        await Galaxy.updateMany({}, {active: false, size: 0, score: 0, value: 0, xp: 0, planets: 0, ratio: 0});
-
-        //loop through galaxies
-        let galaxies = await GalaxyDump.find({});
-        //log(`GALAXIES: ` + util.inspect(galaxies, true, null, true));
-
-        for (let g_temp in galaxies) {
-          //create galaxy if not exists
-          if (!await Galaxy.exists({x: galaxies[g_temp].x, y: galaxies[g_temp].y})) {
-            await new Galaxy({
-              _id: Mordor.Types.ObjectId(),
-              x: galaxies[g_temp].x,
-              y: galaxies[g_temp].y,
-              name: galaxies[g_temp].name
-            }).save();
-          }
-          //get galaxy
-          let galaxy = await Galaxy.findOne({x: galaxies[g_temp].x, y: galaxies[g_temp].y});
-
-          //aggregate planets
-          let p = await PlanetDump.aggregate([
-            {$match: {x: galaxy.x, y: galaxy.y}},
-            {
-              $group: {
-                _id: null,
-                members: {$sum: 1}
-              }
-            }
-          ]);
-
-          //log(`GALAXY: ` + util.inspect(galaxy, true, null, true));
-
-          //update galaxy
-          await Galaxy.updateOne({x: galaxy.x, y: galaxy.y}, {
-            name: galaxies[g_temp].name,
-            size: galaxies[g_temp].size,
-            score: galaxies[g_temp].score,
-            value: galaxies[g_temp].value,
-            xp: galaxies[g_temp].xp,
-            active: true,
-            age: galaxy.age + 1 ?? 1,
-            planets: p[0].members,
-            ratio: galaxies[g_temp].value !== 0 ? 10000.0 * galaxies[g_temp].size / galaxies[g_temp].value : 0,
-
-            //TODO: add remaining fields
-
-          });
-        }
-
-        current_ms = (new Date()) - start_time;
-        log(`Updated galaxies in: ${current_ms - total_ms}ms`);
-        total_ms += current_ms - total_ms;
-
-
-        //##############################################################################################################
         //Planets
         //##############################################################################################################
 
         //set all planets to inactive
-        await Planet.updateMany({}, {active: false, size: 0, score: 0, value: 0, xp: 0, ratio: 0});
+        await Planet.updateMany({}, { active: false });
 
         //loop through planets
-        let planets = await PlanetDump.find({});
-        //log(`PLANETS: ` + util.inspect(planets, true, null, true));
+        let dumpPlanets = await PlanetDump.find({});
 
-        for (let p_temp in planets) {
-          //log('PTEMP: ' + util.inspect(planets[p_temp], true, null, true));
-
+        for(let p_temp in dumpPlanets) {
           //create planet if not exists
-          if (!await Planet.exists({planet_id: planets[p_temp].planet_id})) {
+          if (!await Planet.exists({planet_id: dumpPlanets[p_temp].planet_id})) {
             await new Planet({
               _id: Mordor.Types.ObjectId(),
-              planet_id: planets[p_temp].planet_id,
-              x: planets[p_temp].x,
-              y: planets[p_temp].y,
-              z: planets[p_temp].z,
-              planetname: planets[p_temp].planetname,
-              rulername: planets[p_temp].rulername,
-              race: planets[p_temp].race
+              planet_id: dumpPlanets[p_temp].planet_id,
+              x: dumpPlanets[p_temp].x,
+              y: dumpPlanets[p_temp].y,
+              z: dumpPlanets[p_temp].z,
+              planetname: dumpPlanets[p_temp].planetname,
+              rulername: dumpPlanets[p_temp].rulername,
+              race: dumpPlanets[p_temp].race
             }).save();
             //track new planet
             await new PlanetTrack({
               _id: Mordor.Types.ObjectId(),
-              planet_id: planets[p_temp].planet_id,
-              new_x: planets[p_temp].x,
-              new_y: planets[p_temp].y,
-              new_z: planets[p_temp].z
+              planet_id: dumpPlanets[p_temp].planet_id,
+              new_x: dumpPlanets[p_temp].x,
+              new_y: dumpPlanets[p_temp].y,
+              new_z: dumpPlanets[p_temp].z
             }).save();
           }
           //get planet
-          let planet = await Planet.findOne({planet_id: planets[p_temp].planet_id});
+          let planet = await Planet.findOne({planet_id: dumpPlanets[p_temp].planet_id});
 
           //track renamed planet
-          if (planet.rulername !== planets[p_temp].rulername || planet.planetname !== planets[p_temp].planetname) {
+          if (planet.rulername !== dumpPlanets[p_temp].rulername || planet.planetname !== dumpPlanets[p_temp].planetname) {
             await new PlanetTrack({
               _id: Mordor.Types.ObjectId(),
               planet_id: planet.planet_id,
               old_x: planet.x,
               old_y: planet.y,
               old_z: planet.z,
-              new_x: planets[p_temp].x,
-              new_y: planets[p_temp].y,
-              new_z: planets[p_temp].z
+              new_x: dumpPlanets[p_temp].x,
+              new_y: dumpPlanets[p_temp].y,
+              new_z: dumpPlanets[p_temp].z
             }).save();
           }
 
           //track exiled planet
-          if (planet.x !== planets[p_temp].x || planet.y !== planets[p_temp].y || planet.z !== planets[p_temp].z) {
+          if (planet.x !== dumpPlanets[p_temp].x || planet.y !== dumpPlanets[p_temp].y || planet.z !== dumpPlanets[p_temp].z) {
             await new PlanetTrack({
               _id: Mordor.Types.ObjectId(),
               planet_id: planet.planet_id,
               old_x: planet.x,
               old_y: planet.y,
               old_z: planet.z,
-              new_x: planets[p_temp].x,
-              new_y: planets[p_temp].y,
-              new_z: planets[p_temp].z
+              new_x: dumpPlanets[p_temp].x,
+              new_y: dumpPlanets[p_temp].y,
+              new_z: dumpPlanets[p_temp].z
             }).save();
           }
 
           //update planet
           await Planet.updateOne({planet_id: planet.planet_id}, {
-            x: planets[p_temp].x,
-            y: planets[p_temp].y,
-            z: planets[p_temp].z,
-            planetname: planets[p_temp].planetname,
-            rulername: planets[p_temp].rulername,
-            race: planets[p_temp].race,
-            size: planets[p_temp].size,
-            score: planets[p_temp].score,
-            value: planets[p_temp].value,
-            xp: planets[p_temp].xp,
+            x: dumpPlanets[p_temp].x,
+            y: dumpPlanets[p_temp].y,
+            z: dumpPlanets[p_temp].z,
+            planetname: dumpPlanets[p_temp].planetname,
+            rulername: dumpPlanets[p_temp].rulername,
+            race: dumpPlanets[p_temp].race,
+            size: dumpPlanets[p_temp].size,
+            score: dumpPlanets[p_temp].score,
+            value: dumpPlanets[p_temp].value,
+            xp: dumpPlanets[p_temp].xp,
             active: true,
             age: planet.age + 1 ?? 1,
-            ratio: planets[p_temp].value !== 0 ? 10000.0 * planets[p_temp].size / planets[p_temp].value : 0,
-            size_rank: await PlanetDump.find({size: {$gt: planets[p_temp].size}, x: {$ne: 200}}).countDocuments() + 1,
-            score_rank: await PlanetDump.find({
-              score: {$gt: planets[p_temp].score},
-              x: {$ne: 200}
-            }).countDocuments() + 1,
-            value_rank: await PlanetDump.find({
-              value: {$gt: planets[p_temp].value},
-              x: {$ne: 200}
-            }).countDocuments() + 1,
-            xp_rank: await PlanetDump.find({xp: {$gt: planets[p_temp].xp}, x: {$ne: 200}}).countDocuments() + 1,
+            ratio: dumpPlanets[p_temp].value !== 0 ? 10000.0 * dumpPlanets[p_temp].size / dumpPlanets[p_temp].value : 0,
+            size_rank: await PlanetDump.find({size: {$gt: dumpPlanets[p_temp].size}, x: {$ne: 200}}).countDocuments() + 1,
+            score_rank: await PlanetDump.find({score: {$gt: dumpPlanets[p_temp].score}, x: {$ne: 200}}).countDocuments() + 1,
+            value_rank: await PlanetDump.find({value: {$gt: dumpPlanets[p_temp].value}, x: {$ne: 200}}).countDocuments() + 1,
+            xp_rank: await PlanetDump.find({xp: {$gt: dumpPlanets[p_temp].xp}, x: {$ne: 200}}).countDocuments() + 1,
 
             //TODO: add remaining fields
 
@@ -477,16 +331,16 @@ Mordor.connection.once("open", async () => {
         }
 
         //track deleted planets
-        let deleted_planets = await Planet.find({active: false});
-        for (let dp in deleted_planets) {
+        let deletedPlanets = await Planet.find({active: false});
+        for (let dp in deletedPlanets) {
           await new PlanetTrack({
             _id: Mordor.Types.ObjectId(),
-            planet_id: dp.planet_id,
-            old_x: dp.x,
-            old_y: dp.y,
-            old_z: dp.z
+            planet_id: deletedPlanets[dp].planet_id,
+            old_x: deletedPlanets[dp].x,
+            old_y: deletedPlanets[dp].y,
+            old_z: deletedPlanets[dp].z
           }).save();
-          await Planet.deleteOne({planet_id: dp.planet_id});
+          await Planet.deleteOne({planet_id: deletedPlanets[dp].planet_id});
         }
 
 
@@ -504,6 +358,156 @@ Mordor.connection.once("open", async () => {
 
         current_ms = (new Date()) - start_time;
         log(`Updated planets in: ${current_ms - total_ms}ms`);
+        total_ms += current_ms - total_ms;
+
+
+        //##############################################################################################################
+        //Galaxies
+        //##############################################################################################################
+
+        //set all galaxies to inactive
+        await Galaxy.updateMany({}, { active: false });
+
+        //loop through galaxies
+        let dumpGalaxies = await GalaxyDump.find({});
+
+        for (let g_temp in dumpGalaxies) {
+          //create galaxy if not exists
+          if (!await Galaxy.exists({x: dumpGalaxies[g_temp].x, y: dumpGalaxies[g_temp].y})) {
+            await new Galaxy({
+              _id: Mordor.Types.ObjectId(),
+              x: dumpGalaxies[g_temp].x,
+              y: dumpGalaxies[g_temp].y,
+              name: dumpGalaxies[g_temp].name
+            }).save();
+          }
+          //get galaxy
+          let galaxy = await Galaxy.findOne({x: dumpGalaxies[g_temp].x, y: dumpGalaxies[g_temp].y});
+          //aggregate planets
+          let p = await PlanetDump.aggregate([
+            {$match: {x: galaxy.x, y: galaxy.y}},
+            {
+              $group: {
+                _id: null,
+                planets: {$sum: 1}
+              }
+            }
+          ]);
+          //update galaxy
+          await Galaxy.updateOne({x: galaxy.x, y: galaxy.y}, {
+            name: dumpGalaxies[g_temp].name,
+            size: dumpGalaxies[g_temp].size,
+            score: dumpGalaxies[g_temp].score,
+            value: dumpGalaxies[g_temp].value,
+            xp: dumpGalaxies[g_temp].xp,
+            active: true,
+            age: galaxy.age + 1 ?? 1,
+            planets: p[0].planets,
+            ratio: dumpGalaxies[g_temp].value !== 0 ? 10000.0 * dumpGalaxies[g_temp].size / dumpGalaxies[g_temp].value : 0,
+
+            size_growth: dumpGalaxies[g_temp].size - (galaxy.size ?? 0),
+            score_growth: dumpGalaxies[g_temp].score - (galaxy.score ?? 0),
+            value_growth: dumpGalaxies[g_temp].value - (galaxy.value ?? 0),
+            xp_growth: dumpGalaxies[g_temp].xp - (galaxy.xp ?? 0),
+            planet_growth: dumpGalaxies[g_temp].planets - (galaxy.planets ?? 0),
+            size_rank: await GalaxyDump.find({size: {$gt: dumpGalaxies[g_temp].size}, x: {$ne: 200}}).countDocuments() + 1,
+            score_rank: await GalaxyDump.find({score: {$gt: dumpGalaxies[g_temp].score}, x: {$ne: 200}}).countDocuments() + 1,
+            value_rank: await GalaxyDump.find({value: {$gt: dumpGalaxies[g_temp].value}, x: {$ne: 200}}).countDocuments() + 1,
+            xp_rank: await GalaxyDump.find({xp: {$gt: dumpGalaxies[g_temp].xp}, x: {$ne: 200}}).countDocuments() + 1,
+
+            //TODO: add remaining fields
+
+          });
+        }
+
+        current_ms = (new Date()) - start_time;
+        log(`Updated galaxies in: ${current_ms - total_ms}ms`);
+        total_ms += current_ms - total_ms;
+
+
+
+        //##############################################################################################################
+        //Clusters
+        //##############################################################################################################
+
+        //set all clusters to inactive
+        await Cluster.updateMany({}, { active: false });
+
+        //loop through distinct x in galaxies
+        let dumpClusters = await GalaxyDump.find({}, {x: 1}).distinct('x');
+        //log(`CLUSTERS: ` + util.inspect(clusters, true, null, true));
+
+        //loop through x in galaxies to update clusters
+        for(let c_temp in dumpClusters) {
+          //create cluster if not exists
+          if(!await Cluster.exists({x: dumpClusters[c_temp]})) {
+            await new Cluster({_id: Mordor.Types.ObjectId(), x: dumpClusters[c_temp]}).save();
+          }
+          //get cluster
+          let cluster = await Cluster.findOne({x: dumpClusters[c_temp]});
+          //aggregate galaxies
+          let g = await GalaxyDump.aggregate([
+            {$match: {x: cluster.x}},
+            {
+              $group: {
+                _id: null,
+                size: {$sum: '$size'},
+                score: {$sum: '$score'},
+                value: {$sum: '$value'},
+                xp: {$sum: '$xp'},
+                galaxies: {$sum: 1},
+              }
+            }
+          ]);
+          //aggregate planets
+          let p = await PlanetDump.aggregate([
+            {$match: {x: cluster.x}},
+            {
+              $group: {
+                _id: null,
+                planets: {$sum: 1}
+              }
+            }
+          ]);
+          //update cluster
+          await Cluster.updateOne({x: cluster.x}, {
+            size: g[0].size,
+            score: g[0].score,
+            value: g[0].value,
+            xp: g[0].xp,
+            active: true,
+            age: cluster.age + 1 ?? 1,
+            galaxies: g[0].galaxies,
+            planets: p[0].planets,
+            ratio: g[0].value !== 0 ? 10000.0 * g[0].size / g[0].value : 0,
+            size_growth: g[0].size - (cluster.size ?? 0),
+            score_growth: g[0].score - (cluster.score ?? 0),
+            value_growth: g[0].value - (cluster.value ?? 0),
+            xp_growth: g[0].xp - (cluster.xp ?? 0),
+            galaxy_growth: g[0].galaxies - (cluster.galaxies ?? 0),
+            planet_growth: p[0].planets - (cluster.planets ?? 0),
+
+            //TODO: add remaining fields
+
+          });
+        }
+
+        //delete inactive clusters
+        await Cluster.deleteMany({active: false});
+
+        //loop through clusters to update ranks
+        let rankClusters = await Cluster.find({active: true});
+        for(let c in rankClusters) {
+          await Cluster.updateOne({x: rankClusters[c].x}, {
+            size_rank: await Cluster.find({size: {$gt: rankClusters[c].size}, x: {$ne: 200}}).countDocuments() + 1,
+            score_rank: await Cluster.find({score: {$gt: rankClusters[c].score}, x: {$ne: 200}}).countDocuments() + 1,
+            value_rank: await Cluster.find({value: {$gt: rankClusters[c].value}, x: {$ne: 200}}).countDocuments() + 1,
+            xp_rank: await Cluster.find({xp: {$gt: rankClusters[c].xp}, x: {$ne: 200}}).countDocuments() + 1,
+          });
+        }
+
+        current_ms = (new Date()) - start_time;
+        log(`Updated clusters in: ${current_ms - total_ms}ms`);
         total_ms += current_ms - total_ms;
 
 
@@ -612,43 +616,10 @@ Mordor.connection.once("open", async () => {
         //History
         //##############################################################################################################
 
-        clusters = await Cluster.find({active: true});
-        for (let c in clusters) {
-          await new ClusterHistory({
-            _id: Mordor.Types.ObjectId(),
-            tick: this_tick._id,
-            x: c.x,
-            size: c.size,
-            score: c.score,
-            value: c.value,
-            xp: c.xp,
-            active: c.active,
-            age: c.age,
-            galaxies: c.galaxies,
-            planets: c.planets,
-            ratio: c.ratio,
-          });
-        }
-        galaxies = await Galaxy.find({active: true});
-        for (let g in galaxies) {
-          await new GalaxyHistory({
-            _id: Mordor.Types.ObjectId(),
-            tick: this_tick._id,
-            x: g.x,
-            y: g.y,
-            name: g.name,
-            size: g.size,
-            score: g.score,
-            value: g.value,
-            xp: g.xp,
-            active: g.active,
-            age: g.age,
-            planets: g.planets,
-            ratio: g.ratio,
-          });
-        }
-        planets = await Planet.find({active: true});
-        for (let p in planets) {
+        //TODO: verify this works
+
+        let historyPlanets = await Planet.find({active: true});
+        for (let p in historyPlanets) {
           await new PlanetHistory({
             _id: Mordor.Types.ObjectId(),
             tick: this_tick._id,
@@ -667,8 +638,43 @@ Mordor.connection.once("open", async () => {
             ratio: p.ratio,
           });
         }
-        alliances = await Alliance.find({active: true});
-        for (let a in alliances) {
+        let historyGalaxies = await Galaxy.find({active: true});
+        for (let g in historyGalaxies) {
+          await new GalaxyHistory({
+            _id: Mordor.Types.ObjectId(),
+            tick: this_tick._id,
+            x: g.x,
+            y: g.y,
+            name: g.name,
+            size: g.size,
+            score: g.score,
+            value: g.value,
+            xp: g.xp,
+            active: g.active,
+            age: g.age,
+            planets: g.planets,
+            ratio: g.ratio,
+          });
+        }
+        let historyClusters = await Cluster.find({active: true});
+        for (let c in historyClusters) {
+          await new ClusterHistory({
+            _id: Mordor.Types.ObjectId(),
+            tick: this_tick._id,
+            x: c.x,
+            size: c.size,
+            score: c.score,
+            value: c.value,
+            xp: c.xp,
+            active: c.active,
+            age: c.age,
+            galaxies: c.galaxies,
+            planets: c.planets,
+            ratio: c.ratio,
+          });
+        }
+        let historyAlliances = await Alliance.find({active: true});
+        for (let a in historyAlliances) {
           await new AllianceHistory({
             _id: Mordor.Types.ObjectId(),
             tick: this_tick._id,
@@ -690,12 +696,12 @@ Mordor.connection.once("open", async () => {
 
 
         //##############################################################################################################
-        //Dicks
+        //Heroes & Asshats
         //##############################################################################################################
 
 
         current_ms = (new Date()) - start_time;
-        log(`Updated dicks in: ${current_ms - total_ms}ms`);
+        log(`Updated heroes and asshats in: ${current_ms - total_ms}ms`);
         total_ms += current_ms - total_ms;
 
 

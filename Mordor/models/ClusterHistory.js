@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High
@@ -16,10 +17,10 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name ClusterHistory.js
- * @version 2021/06/01
+ * @version 2023/01/31
  * @summary Mongoose Model
  **/
-'use strict';
+
 
 import mongoose from 'mongoose';
 
@@ -36,16 +37,18 @@ let ClusterHistorySchema = new mongoose.Schema({
   galaxies: {type:Number, default:0},
   planets:  {type:Number, default:0},
   ratio:    {type:Number, default:0},
+
+  size_rank: {type:Number},
+  score_rank: {type:Number},
+  value_rank: {type:Number},
+  xp_rank: {type:Number},
+  size_growth: {type:Number},
+  score_growth: {type:Number},
+  value_growth: {type:Number},
+  xp_growth: {type:Number},
+  galaxy_growth: {type:Number},
+  planet_growth: {type:Number},
   /*
-  size_rank: Number,
-  score_rank: Number,
-  value_rank: Number,
-  xp_rank: Number,
-  size_growth: Number,
-  score_growth: Number,
-  value_growth: Number,
-  xp_growth: Number,
-  member_growth: Number,
   size_growth_pc: Number,
   score_growth_pc: Number,
   value_growth_pc: Number,
