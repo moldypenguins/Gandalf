@@ -37,7 +37,9 @@ let TickSchema = new mongoose.Schema({
   cat:        {type:Number},
   xan:        {type:Number},
   zik:        {type:Number},
-  etd:        {type:Number},
+  //etd:        {type:Number},
+  kin:        {type:Number},
+  sly:        {type:Number},
 });
 
 TickSchema.statics.findLastTick = function () {
