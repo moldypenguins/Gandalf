@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name heroes.js
+ * @name asshats.js
  * @version 2023/02/04
  * @summary Gandalf Spells
  **/
@@ -40,15 +40,15 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 
-const heroes = {
+const asshats = {
   access: Access.Member,
   alias: null,
-  usage: encode('/heroes'),
-  description: 'Shows top 5 Hero Power!.',
+  usage: encode('/asshats'),
+  description: 'Shows 5 biggest Asshats!.',
   discord: {
     data: new SlashCommandBuilder()
-      .setName('heroes')
-      .setDescription('Shows top 5 Hero Power!.'),
+      .setName('asshats')
+      .setDescription('Shows 5 biggest Asshats!.'),
     async execute(interaction) {
       let _reply = await executeCommand();
       await interaction.reply(`\`\`\`${_reply}\`\`\``);
@@ -75,12 +75,12 @@ async function executeCommand(params) {
   } else {
     let powers = await HeroPower.find({
       tick: tick
-    }).sort({rank: 1}).limit(5);
+    }).sort({rank: -1}).limit(5);
     if(!powers) {
       reply = "No powers were found."
     }
     else {
-      reply = "Top 5 Hero Power:\n";
+      reply = "Biggest 5 Asshats:\n";
       //console.log(`POWER: ${util.inspect(power, true, null, true)}`);
       let _powers = powers.map((hp) => {return `${hp.rank}: ${hp.member.pa_nick}`;});
       reply += _powers.join('\n');

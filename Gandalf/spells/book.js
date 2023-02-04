@@ -23,6 +23,7 @@
 
 
 import adduser from './adduser.js';
+import asshats from './asshats.js';
 import bonus from './bonus.js';
 import bonusroids from './bonusroids.js';
 import coords from './coords.js';
@@ -44,6 +45,7 @@ import tick from './tick.js';
 
 const Spells =  {
   adduser,
+  asshats,
   bonus,
   bonusroids,
   coords,
