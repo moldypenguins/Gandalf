@@ -23,7 +23,7 @@
 
 
 import Config from 'galadriel';
-import { Mordor, Member, TelegramUser } from 'mordor';
+import { Mordor, User, TelegramUser } from 'mordor';
 import minimist from 'minimist';
 import util from 'util';
 
@@ -72,9 +72,9 @@ Mordor.connection.once("open", async () => {
 
   telegramBot.use(async(ctx, next) => {
     if(ctx.message.entities && ctx.message.entities[0]?.type === 'bot_command') {
-      let _mem = await Member.findByTGId(ctx.message.from.id);
-      if(_mem) {
-        ctx.member = _mem;
+      let _user = await User.findByTGId(ctx.message.from.id);
+      if(_user) {
+        ctx.user = _user;
       }
       return next();
     }
@@ -124,13 +124,13 @@ Mordor.connection.once("open", async () => {
   });
 
   telegramBot.help(async(ctx) => {
-    if(!ctx.member) {
+    if(!ctx.user) {
       ctx.replyWithHTML('<i>You shall not pass!</i>', {reply_to_message_id: ctx.message.message_id});
     }
     else {
       let commands = '<b>Commands:</b>\n<b>help:</b> <i>Shows list of commands</i>\n';
       for (let [key, value] of Object.entries(Spells)) {
-        if(!Spells[key].access || Spells[key].access(ctx.member)) {
+        if(!Spells[key].access || Spells[key].access(ctx.user)) {
           commands += (`<b>${key}:</b> <i>${value.description}</i>\n`);
         }
       }
@@ -140,18 +140,13 @@ Mordor.connection.once("open", async () => {
 
   telegramBot.command(async(ctx) => {
     console.log('command: ', ctx.message.text);
-    if(!ctx.member) {
+    if(!ctx.user) {
       ctx.replyWithHTML('<i>You shall not pass!</i>', {reply_to_message_id: ctx.message.message_id});
     }
     else {
       // Dynamic command handling
-      let args = ctx.message.text.substring(1).toLowerCase().replace(/\s+/g, ' ').replace(/[^a-z0-9áéíóúñü \.,_-]/gim,'').split(' ');
-      let cmd = args.shift();
-
-      if (cmd === "addmember") {
-        args = ctx.message.text.substr(1).replace(/\s+/g, ' ').replace(/[^a-z0-9áéíóúñü \.,_-]/gim,'').split(' ');
-        args.shift();
-      }
+      let args = ctx.message.text.substring(1).replace(/\s+/g, ' ').replace(/[^a-z0-9áéíóúñü \.,_-]/gim,'').split(' ');
+      let cmd = args.shift().toLowerCase();
 
       // Command alias check
       if(Config.telegram.commands.indexOf(cmd) < 0) {
@@ -163,7 +158,7 @@ Mordor.connection.once("open", async () => {
       }
 
       if(Config.telegram.commands.indexOf(cmd) >= 0 && typeof (Spells[cmd]?.telegram?.execute) === 'function') {
-        if(Spells[cmd].access && !Spells[cmd].access(ctx.member)) {
+        if(Spells[cmd].access && !Spells[cmd].access(ctx.user)) {
           ctx.replyWithHTML('You do not have access to this command.', {reply_to_message_id: ctx.message.message_id});
         }
         else {

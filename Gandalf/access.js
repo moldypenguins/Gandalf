@@ -17,10 +17,9 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name access.js
- * @version 2023/01/21
+ * @version 2023/02/03
  * @summary Gandalf User Access
  **/
-
 
 
 const Access = {
@@ -44,7 +43,7 @@ const Access = {
   },
   Member: (mem) => {
     return mem.access >= 1;
-  },
+  }
 }
 
 export default Access
