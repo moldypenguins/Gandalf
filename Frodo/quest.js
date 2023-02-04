@@ -320,6 +320,10 @@ const retry = pRetry(async() => {
               active: true,
               age: planet.age + 1 ?? 1,
               ratio: dumpPlanets[p_temp].value !== 0 ? 10000.0 * dumpPlanets[p_temp].size / dumpPlanets[p_temp].value : 0,
+              size_growth: dumpPlanets[p_temp].size - (planet.size ?? 0),
+              score_growth: dumpPlanets[p_temp].score - (planet.score ?? 0),
+              value_growth: dumpPlanets[p_temp].value - (planet.value ?? 0),
+              xp_growth: dumpPlanets[p_temp].xp - (planet.xp ?? 0),
               size_rank: await PlanetDump.find({size: {$gt: dumpPlanets[p_temp].size}, x: {$ne: 200}}).countDocuments() + 1,
               score_rank: await PlanetDump.find({score: {$gt: dumpPlanets[p_temp].score}, x: {$ne: 200}}).countDocuments() + 1,
               value_rank: await PlanetDump.find({value: {$gt: dumpPlanets[p_temp].value}, x: {$ne: 200}}).countDocuments() + 1,
@@ -642,6 +646,14 @@ const retry = pRetry(async() => {
               active: historyPlanets[p].active,
               age: historyPlanets[p].age,
               ratio: historyPlanets[p].ratio,
+              size_growth: historyPlanets[p].size,
+              score_growth: historyPlanets[p].score,
+              value_growth: historyPlanets[p].value,
+              xp_growth: historyPlanets[p].xp,
+              size_rank: historyPlanets[p].size_rank,
+              score_rank: historyPlanets[p].score_rank,
+              value_rank: historyPlanets[p].value_rank,
+              xp_rank: historyPlanets[p].xp_rank,
             }).save();
           }
           let historyGalaxies = await Galaxy.find({active: true});
@@ -660,6 +672,14 @@ const retry = pRetry(async() => {
               age: historyGalaxies[g].age,
               planets: historyGalaxies[g].planets,
               ratio: historyGalaxies[g].ratio,
+              size_growth: historyGalaxies[g].size,
+              score_growth: historyGalaxies[g].score,
+              value_growth: historyGalaxies[g].value,
+              xp_growth: historyGalaxies[g].xp,
+              size_rank: historyGalaxies[g].size_rank,
+              score_rank: historyGalaxies[g].score_rank,
+              value_rank: historyGalaxies[g].value_rank,
+              xp_rank: historyGalaxies[g].xp_rank,
             }).save();
           }
           let historyClusters = await Cluster.find({active: true});
@@ -717,7 +737,7 @@ const retry = pRetry(async() => {
             for(let mem in users) {
               if(users[mem].planet?.planet_id) {
 
-                console.log(`PID: ${util.inspect(users[mem].planet.planet_id, true, null, true)}`);
+                //console.log(`PID: ${util.inspect(users[mem].planet.planet_id, true, null, true)}`);
 
                 //aggregate planet history
                 let hGrowth = await PlanetHistory.aggregate([
@@ -732,7 +752,7 @@ const retry = pRetry(async() => {
                   }
                 ]);
 
-                console.log(`HGROWTH: ${util.inspect(hGrowth[0], true, null, true)}`);
+                //console.log(`HGROWTH: ${util.inspect(hGrowth[0], true, null, true)}`);
 
                 hPowers.push({
                   member: users[mem],
