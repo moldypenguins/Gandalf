@@ -145,7 +145,7 @@ Mordor.connection.once("open", async () => {
     }
     else {
       // Dynamic command handling
-      let args = ctx.message.text.substring(1).replace(/\s+/g, ' ').replace(/[^a-z0-9áéíóúñü \.,_-]/gim,'').split(' ');
+      let args = ctx.message.text.substring(1).replace(/\s+/g, ' ').split(' ');
       let cmd = args.shift().toLowerCase();
 
       // Command alias check

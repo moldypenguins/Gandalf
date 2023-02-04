@@ -70,7 +70,7 @@ const adduser = {
             if (_user?.length <= 0) {
               reject(`User must be a Telegram user.`);
             }
-            let _nick = args[1];
+            let _nick = args[1].replace(/[^a-z0-9áéíóúñü \.,_-]/gim,'');
             if (_nick?.length <= 0) {
               reject(`PA nick must be a valid string.`);
             }
