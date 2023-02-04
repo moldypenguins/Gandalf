@@ -27,8 +27,7 @@
 #### Administration
 * `!leavegroup [group_id]=current_group` Leaves a group, supergroup, or channel.
 * `!listgroups` Lists groups bot is a member of.
-* `!addmember` 
-* `!addgalmate <@tg_user>` Adds a TG user as a GalMate.
+* `!adduser <@tg_user> <pa_nick>` Adds a TG user as a GalMate.
 
 #### Attacks
 * `!claims [attack_number]` List your claims.

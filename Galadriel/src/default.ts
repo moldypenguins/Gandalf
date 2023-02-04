@@ -85,10 +85,11 @@ const configDefault: Config = {
   },
   roles: {
     0x1: "OOT",
-    0x2: "Scanner",
-    0x4: "BattleCommander",
-    0x8: "DefenceCommander",
-    0x16: "HighCommander"
+    0x2: "Recruit",
+    0x4: "Scanner",
+    0x8: "BattleCommander",
+    0x16: "DefenceCommander",
+    0x32: "HighCommander"
   },
   pa: {
     links: {

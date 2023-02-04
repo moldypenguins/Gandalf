@@ -22,7 +22,7 @@
  **/
 
 
-import addmember from './addmember.js';
+import adduser from './adduser.js';
 import bonus from './bonus.js';
 import bonusroids from './bonusroids.js';
 import cost from './cost.js';
@@ -39,10 +39,8 @@ import tick from './tick.js';
 
 
 
-
-
 const Spells =  {
-  addmember,
+  adduser,
   bonus,
   bonusroids,
   cost,

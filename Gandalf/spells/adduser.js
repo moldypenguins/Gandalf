@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name addmember.js
- * @version 2023/01/22
+ * @name adduser.js
+ * @version 2023/02/03
  * @summary Gandalf Spells
  **/
 
 import util from 'util';
 import Config from 'galadriel';
-import {Mordor, Member, TelegramUser, Tick} from 'mordor';
+import {Mordor, User, TelegramUser, Tick} from 'mordor';
 import Access from '../access.js';
 
 import { Context } from 'telegraf';
@@ -40,16 +40,15 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 
-
-const addmember = {
+const adduser = {
   access: Access.Admin,
-  alias: ['addmem'],
-  usage: encode('/addmember <user> <panick> [access=0]'),
-  description: 'Adds a member',
+  alias: null,
+  usage: encode('/adduser <user> <panick> [access=0]'),
+  description: 'Adds a user',
   discord: {
     data: new SlashCommandBuilder()
-      .setName('addmember')
-      .setDescription('adds a member'),
+      .setName('adduser')
+      .setDescription('adds a user'),
     async execute(interaction) {
       await interaction.reply();
     }
@@ -79,17 +78,17 @@ const addmember = {
 
             //console.log('HERE: ' + util.inspect(_user, true, null, true));
 
-            let member = new Member({
+            let user = new User({
               _id: Mordor.Types.ObjectId(),
               pa_nick: _nick,
               tg_user: _user,
-              parent: ctx.member
+              parent: ctx.user
             })
-            await member.save();
+            await user.save();
 
-            if (member) {
-              resolve(`${member.pa_nick} has been added.`);
-              //ctx.replyWithHTML(`Member added`);
+            if(user) {
+              resolve(`${user.pa_nick} has been added.`);
+              //ctx.replyWithHTML(`User added`);
             } else {
               reject(`Error: try again`);
               //ctx.replyWithHTML(`Error: try again`);
@@ -106,4 +105,4 @@ async function executeCommand(params) {
 
 }
 
-export default addmember
+export default adduser
