@@ -81,6 +81,9 @@ async function executeCommand(params) {
       reply = `Cannot find user.`;
     } else {
       let _coords = params.coords.split(':')
+
+      console.log(`COORDS: ${util.inspect(_coords, true, null, true)}`)
+
       let p = await Planet.findOne({x: _coords[0], y: _coords[1], z: _coords[2]})
       if(!p) {
         reply = "Cannot find planet.";
