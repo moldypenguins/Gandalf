@@ -70,7 +70,7 @@ async function executeCommand(params) {
   let reply;
   if(!params.user) {
     //param validation
-    return "error";
+    reply = "error";
   }
   let tick = await Tick.findLastTick();
   if(!tick) {
