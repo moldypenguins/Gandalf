@@ -82,9 +82,8 @@ async function executeCommand(params) {
     else {
       reply = "Top 5 Hero Power:\n";
       //console.log(`POWER: ${util.inspect(power, true, null, true)}`);
-      for(let p in powers) {
-        reply += `${powers[p].rank}: ${powers[p].member.pa_nick}`;
-      }
+      let _powers = powers.map((hp) => {return `${hp.rank}: ${hp.member.pa_nick}`;});
+      reply += _powers.join('\n');
     }
   }
 
