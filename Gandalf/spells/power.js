@@ -57,7 +57,7 @@ const power = {
   telegram: {
     async execute(ctx, args) {
       return new Promise(async (resolve, reject) => {
-        let _reply = await executeCommand(ctx.user);
+        let _reply = await executeCommand({user: ctx.user});
         resolve(_reply);
       });
     }
