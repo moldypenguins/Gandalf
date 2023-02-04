@@ -75,7 +75,7 @@ async function executeCommand(params) {
   } else {
     let powers = await HeroPower.find({
       tick: tick
-    }).sort({rank: 1}).top(5);
+    }).sort({rank: 1}).limit(5);
     if(!powers) {
       reply = "No powers were found."
     }
