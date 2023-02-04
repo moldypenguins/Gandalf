@@ -25,7 +25,7 @@ import mongoose from 'mongoose';
 
 let AttackTargetClaimSchema = new mongoose.Schema({
   _id:    {type:mongoose.Schema.Types.ObjectId, required:true},
-  member: {type:mongoose.Schema.Types.ObjectId, ref:'Member', autopopulate: true},
+  user: {type:mongoose.Schema.Types.ObjectId, ref:'User', autopopulate: true},
   attack: {type:mongoose.Schema.Types.ObjectId, ref:'Attack'},
   planet: {type:mongoose.Schema.Types.ObjectId, ref:'Planet', autopopulate: true},
   wave:   {type:Number},

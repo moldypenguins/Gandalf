@@ -27,22 +27,31 @@ const Access = {
     return mem.access === 5;
   },
   HighCommand: (mem) => {
-    return mem.access === 5 || (mem.access >= 3 && (mem.roles & 16) !== 0);
+    return mem.access === 5 || (mem.access >= 3 && (mem.roles & 32) !== 0);
   },
   DefenceCommand: (mem) => {
-    return mem.access === 5 || mem.access >= 3 && (mem.roles & 8) !== 0;
+    return mem.access === 5 || mem.access >= 3 && (mem.roles & 16) !== 0;
   },
   BattleCommand: (mem) => {
-    return mem.access === 5 || mem.access >= 3 && (mem.roles & 4) !== 0;
+    return mem.access === 5 || mem.access >= 3 && (mem.roles & 8) !== 0;
   },
   Command: (mem) => {
     return mem.access >= 3;
   },
   Scanner: (mem) => {
-    return mem.access === 5 || mem.access >= 1 && (mem.roles & 2) !== 0;
+    return mem.access === 5 || mem.access >= 1 && (mem.roles & 4) !== 0;
   },
   Member: (mem) => {
     return mem.access >= 1;
+  },
+  Recruit: (mem) => {
+    return mem.access === 5 || mem.access === 1 && (mem.roles & 2) !== 0;
+  },
+  OOT: (mem) => {
+    return mem.access === 5 || mem.access === 0 && (mem.roles & 0) !== 0;
+  },
+  None: (mem) => {
+    return mem.access === 0
   }
 }
 

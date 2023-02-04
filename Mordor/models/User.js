@@ -33,7 +33,7 @@ let UserSchema = new mongoose.Schema({
   tg_user:         {type:mongoose.Schema.Types.ObjectId, ref:'TelegramUser', autopopulate: true},
   access:          {type:Number, default:0, required:true},
   roles:           {type:Number, default:0, required:true},
-  parent:          {type:mongoose.Schema.Types.ObjectId, ref:'Member'},
+  parent:          {type:mongoose.Schema.Types.ObjectId, ref:'User'},
   birthed:         {type:Date, default:Date.now(), required:true},
   photo_url:       {type:String, default:Config.web.url + Config.web.default_profile_pic},
   site_theme:      {type:String, default:'default', required:true},

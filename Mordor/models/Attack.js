@@ -33,7 +33,7 @@ let AttackSchema = new mongoose.Schema({
   title:        {type:String},
   comment:      {type:String},
   createtick:   {type:Number},
-  commander:    {type:mongoose.Schema.Types.ObjectId, ref:'Member'}
+  commander:    {type:mongoose.Schema.Types.ObjectId, ref:'User'}
 });
 
 export default mongoose.model('Attack', AttackSchema, 'Attacks');

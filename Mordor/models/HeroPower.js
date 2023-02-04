@@ -28,7 +28,7 @@ import mongooseAutoPopulate from 'mongoose-autopopulate';
 let HeroPowerSchema = new mongoose.Schema({
   _id:     {type:mongoose.Schema.Types.ObjectId, required:true},
   tick:    {type:mongoose.Schema.Types.ObjectId, required:true, ref:'Tick', autopopulate: true},
-  member:  {type:mongoose.Schema.Types.ObjectId, required:true, ref:'Member', autopopulate: true},
+  member:  {type:mongoose.Schema.Types.ObjectId, required:true, ref:'User', autopopulate: true},
   size:    {type:Number, required:true},
   rank:    {type:Number, required:true},
   members: {type:Number, required:true}

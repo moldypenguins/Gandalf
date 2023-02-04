@@ -627,72 +627,73 @@ const retry = pRetry(async() => {
           for (let p in historyPlanets) {
             await new PlanetHistory({
               _id: Mordor.Types.ObjectId(),
-              tick: this_tick._id,
-              x: p.x,
-              y: p.y,
-              z: p.z,
-              name: p.name,
-              size: p.size,
-              score: p.score,
-              value: p.value,
-              xp: p.xp,
-              active: p.active,
-              age: p.age,
-              galaxies: p.galaxies,
-              planets: p.planets,
-              ratio: p.ratio,
-            });
+              tick: this_tick,
+              planet_id: historyPlanets[p].planet_id,
+              x: historyPlanets[p].x,
+              y: historyPlanets[p].y,
+              z: historyPlanets[p].z,
+              planetname: historyPlanets[p].planetname,
+              rulername: historyPlanets[p].rulername,
+              race: historyPlanets[p].race,
+              size: historyPlanets[p].size,
+              score: historyPlanets[p].score,
+              value: historyPlanets[p].value,
+              xp: historyPlanets[p].xp,
+              active: historyPlanets[p].active,
+              age: historyPlanets[p].age,
+              ratio: historyPlanets[p].ratio,
+            }).save();
           }
           let historyGalaxies = await Galaxy.find({active: true});
           for (let g in historyGalaxies) {
             await new GalaxyHistory({
               _id: Mordor.Types.ObjectId(),
-              tick: this_tick._id,
-              x: g.x,
-              y: g.y,
-              name: g.name,
-              size: g.size,
-              score: g.score,
-              value: g.value,
-              xp: g.xp,
-              active: g.active,
-              age: g.age,
-              planets: g.planets,
-              ratio: g.ratio,
-            });
+              tick: this_tick,
+              x: historyGalaxies[g].x,
+              y: historyGalaxies[g].y,
+              name: historyGalaxies[g].name,
+              size: historyGalaxies[g].size,
+              score: historyGalaxies[g].score,
+              value: historyGalaxies[g].value,
+              xp: historyGalaxies[g].xp,
+              active: historyGalaxies[g].active,
+              age: historyGalaxies[g].age,
+              planets: historyGalaxies[g].planets,
+              ratio: historyGalaxies[g].ratio,
+            }).save();
           }
           let historyClusters = await Cluster.find({active: true});
           for (let c in historyClusters) {
             await new ClusterHistory({
               _id: Mordor.Types.ObjectId(),
-              tick: this_tick._id,
-              x: c.x,
-              size: c.size,
-              score: c.score,
-              value: c.value,
-              xp: c.xp,
-              active: c.active,
-              age: c.age,
-              galaxies: c.galaxies,
-              planets: c.planets,
-              ratio: c.ratio,
-            });
+              tick: this_tick,
+              x: historyClusters[c].x,
+              size: historyClusters[c].size,
+              score: historyClusters[c].score,
+              value: historyClusters[c].value,
+              xp: historyClusters[c].xp,
+              active: historyClusters[c].active,
+              age: historyClusters[c].age,
+              galaxies: historyClusters[c].galaxies,
+              planets: historyClusters[c].planets,
+              ratio: historyClusters[c].ratio,
+            }).save();
           }
           let historyAlliances = await Alliance.find({active: true});
           for (let a in historyAlliances) {
             await new AllianceHistory({
               _id: Mordor.Types.ObjectId(),
-              tick: this_tick._id,
-              name: a.name,
-              size: a.size,
-              score: a.score,
-              points: a.points,
-              active: a.active,
-              age: a.age,
-              alias: a.alias,
-              members: a.members,
-              ratio: a.ratio,
-            });
+              tick: this_tick,
+              name: historyAlliances[a].name,
+              size: historyAlliances[a].size,
+              score: historyAlliances[a].score,
+              points: historyAlliances[a].points,
+              active: historyAlliances[a].active,
+              age: historyAlliances[a].age,
+              alias: historyAlliances[a].alias,
+              members: historyAlliances[a].members,
+              ratio: historyAlliances[a].ratio,
+            }).save();
           }
 
           current_ms = (new Date()) - start_time;
@@ -715,6 +716,9 @@ const retry = pRetry(async() => {
             //let members = await Alliance.find({name: Config.alliance.name})
             for(let mem in users) {
               if(users[mem].planet?.planet_id) {
+
+                console.log(`PID: ${util.inspect(users[mem].planet.planet_id, true, null, true)}`);
+
                 //aggregate planet history
                 let hGrowth = await PlanetHistory.aggregate([
                   {$match: {planet_id: users[mem].planet.planet_id}},
@@ -727,6 +731,9 @@ const retry = pRetry(async() => {
                     }
                   }
                 ]);
+
+                console.log(`HGROWTH: ${util.inspect(hGrowth[0], true, null, true)}`);
+
                 hPowers.push({
                   member: users[mem],
                   size: hGrowth[0].score_growth
@@ -740,7 +747,7 @@ const retry = pRetry(async() => {
                 tick: this_tick,
                 member: hPowers[d].member,
                 size: hPowers[d].size,
-                rank: d,
+                rank: d + 1,
                 members: hPowers.length
               });
               await heroPower.save();
