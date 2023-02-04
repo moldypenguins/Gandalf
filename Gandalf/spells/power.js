@@ -80,7 +80,7 @@ async function executeCommand(params) {
         tick: tick,
         member: params.user
       });
-      if(power != null) {
+      if(typeof(power) !== 'undefined') {
         console.log(`POWER: ${util.inspect(power, true, null, true)}`);
         reply = `Your power is ${power.size} strong. Rank: ${power.rank} of ${power.members}`;
       }
