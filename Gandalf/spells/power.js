@@ -77,7 +77,7 @@ async function executeCommand(params) {
     reply = `Cannot find current tick.`;
   }
   else {
-    let power = HeroPower.findOne({
+    let power = await HeroPower.findOne({
       tick: tick,
       member: params.user
     });
