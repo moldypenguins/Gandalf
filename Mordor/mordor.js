@@ -35,7 +35,6 @@ import Galaxy from './models/Galaxy.js';
 import GalaxyDump from './models/GalaxyDump.js';
 import GalaxyHistory from './models/GalaxyHistory.js';
 import HeroPower from './models/HeroPower.js';
-import Member from './models/Member.js';
 import Planet from './models/Planet.js';
 import PlanetDump from './models/PlanetDump.js';
 import PlanetHistory from './models/PlanetHistory.js';
@@ -44,6 +43,7 @@ import Ship from './models/Ship.js';
 import TelegramChat from './models/TelegramChat.js';
 import TelegramUser from './models/TelegramUser.js';
 import Tick from './models/Tick.js';
+import User from './models/User.js';
 
 mongoose.set('strictQuery', true);
 mongoose.connect(`mongodb://${Config.db.url}`, {
@@ -67,7 +67,7 @@ export {
   GalaxyDump,
   GalaxyHistory,
   HeroPower,
-  Member,
+  User,
   Planet,
   PlanetDump,
   PlanetHistory,

@@ -33,7 +33,7 @@ import {
   Galaxy, GalaxyDump, GalaxyHistory,
   Alliance, AllianceDump, AllianceHistory,
   Cluster, ClusterHistory,
-  Member, HeroPower
+  User, HeroPower
 } from 'mordor';
 import axios from 'axios';
 import dayjs from 'dayjs';
@@ -709,15 +709,15 @@ const retry = pRetry(async() => {
             log(`Your alliance does not exist in the database.`);
           }
           else {
-            //let memPlanets = await Alliance.find({name: Config.alliance.name})
-
             let hPowers = [];
-            let members = await Member.find({});
-            for(let mem in members) {
-              if(members[mem].planet?.planet_id) {
+            let users = await User.find({});
+            //TODO: add filter users by coords in alliance
+            //let members = await Alliance.find({name: Config.alliance.name})
+            for(let mem in users) {
+              if(users[mem].planet?.planet_id) {
                 //aggregate planet history
                 let hGrowth = await PlanetHistory.aggregate([
-                  {$match: {planet_id: members[mem].planet.planet_id}},
+                  {$match: {planet_id: users[mem].planet.planet_id}},
                   {$sort: {tick: -1}},
                   {$limit: 72},
                   {
@@ -728,7 +728,7 @@ const retry = pRetry(async() => {
                   }
                 ]);
                 hPowers.push({
-                  member: members[mem],
+                  member: users[mem],
                   size: hGrowth[0].score_growth
                 });
               }
