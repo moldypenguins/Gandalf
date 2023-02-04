@@ -60,6 +60,7 @@ const coords = {
     async execute(ctx, args) {
       return new Promise(async (resolve, reject) => {
         let _coords = args[0];
+        console.log(`COORDS: ${util.inspect(_coords, true, null, true)}`)
         let _reply = await executeCommand({user: ctx.user, coords: _coords});
         resolve(_reply);
       });
@@ -80,9 +81,11 @@ async function executeCommand(params) {
     if (!_user) {
       reply = `Cannot find user.`;
     } else {
+      console.log(`COORDS: ${util.inspect(params.coords, true, null, true)}`)
+
       let _coords = params.coords.split(':')
 
-      console.log(`COORDS: ${util.inspect(_coords, true, null, true)}`)
+
 
       let p = await Planet.findOne({x: _coords[0], y: _coords[1], z: _coords[2]})
       if(!p) {
