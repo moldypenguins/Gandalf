@@ -82,7 +82,7 @@ async function executeCommand(params) {
     else {
       reply = "Biggest 5 Asshats:\n";
       //console.log(`POWER: ${util.inspect(power, true, null, true)}`);
-      let _powers = powers.map((hp) => {return `${hp.rank}: ${hp.member.pa_nick}`;});
+      let _powers = powers.map((hp) => {return `${hp.rank - hp.members}: ${hp.member.pa_nick}`;});
       reply += _powers.join('\n');
     }
   }
