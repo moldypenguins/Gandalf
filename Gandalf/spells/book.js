@@ -30,6 +30,7 @@ import exile from './exile.js';
 import eff from './eff.js';
 import launch from './launch.js';
 import links from './links.js';
+import power from './power.js';
 import prodtime from './prodtime.js';
 import roidcost from './roidcost.js';
 import refsvsfcs from './refsvsfcs.js';
@@ -48,6 +49,7 @@ const Spells =  {
   exile,
   launch,
   links,
+  power,
   prodtime,
   refsvsfcs,
   roidcost,
