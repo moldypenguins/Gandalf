@@ -90,4 +90,4 @@ async function executeCommand(params) {
   return reply;
 }
 
-export default heroes;
+export default asshats;
