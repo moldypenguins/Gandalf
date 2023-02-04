@@ -91,13 +91,10 @@ async function executeCommand(params) {
       if(!p) {
         reply = "Cannot find planet.";
       }
-      else if(_user.planet) {
-        reply = "Planet is already set.";
-      }
       else {
         _user.planet = p;
         _user.save();
-        reply = `Added planet ${p.planet_id} to ${_user.pa_nick}`;
+        reply = `Set your planet to ${p.x}:${p.y}:${p.z}`;
       }
     }
   }
