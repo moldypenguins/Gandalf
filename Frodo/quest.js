@@ -305,6 +305,9 @@ const retry = pRetry(async() => {
               }).save();
             }
 
+
+            //console.log(`HERE: ${util.inspect(planet.size, true, null, true)}`);
+
             //update planet
             await Planet.updateOne({planet_id: planet.planet_id}, {
               x: dumpPlanets[p_temp].x,

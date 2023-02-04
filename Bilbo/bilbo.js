@@ -28,7 +28,7 @@ import dayjs from 'dayjs';
 import axios from 'axios';
 import X2JS from 'x2js';
 import minimist from 'minimist';
-import {DiscordUser, Member, Mordor, Ship, TelegramUser, Tick, PlanetDump, Planet, Cluster, Galaxy, GalaxyDump, Alliance, AllianceDump} from 'mordor';
+import {DiscordUser, User, Mordor, Ship, TelegramUser, Tick, PlanetDump, Planet, Cluster, Galaxy, GalaxyDump, Alliance, AllianceDump} from 'mordor';
 
 
 let argv = minimist(process.argv.slice(2), {
@@ -64,7 +64,7 @@ let clear_database = async() => {
   await Cluster.deleteMany({});
   await Alliance.deleteMany({});
 
-  await Member.updateMany({}, {$unset:{planet:""}})
+  await User.updateMany({}, {$unset:{planet:""}})
 };
 
 let load_ships = async() => {
@@ -105,8 +105,8 @@ let load_ticks = async(start) => {
 
 
 let setup_admin = async() => {
-  if(!await Member.exists({pa_nick: Config.admin.pa_nick})) {
-    let adm = new Member({
+  if(!await User.exists({pa_nick: Config.admin.pa_nick})) {
+    let adm = new User({
       _id: Mordor.Types.ObjectId(),
       pa_nick: Config.admin.pa_nick,
       access: 5
@@ -137,7 +137,7 @@ let setup_admin = async() => {
 
     try {
       await adm.save();
-      console.log(`${Config.admin.pa_nick} saved to Members as Administrator`);
+      console.log(`${Config.admin.pa_nick} saved to Users as Administrator`);
     } catch (error) {
       console.error(`${error}`)
     }

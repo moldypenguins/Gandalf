@@ -43,11 +43,12 @@ let PlanetSchema = new mongoose.Schema({
   score_rank: {type:Number},
   value_rank: {type:Number},
   xp_rank:    {type:Number},
+  size_growth: {type:Number},
+  score_growth: {type:Number},
+  value_growth: {type:Number},
+  xp_growth: {type:Number},
   /*
-  size_growth: Number,
-  score_growth: Number,
-  value_growth: Number,
-  xp_growth: Number,
+
   size_growth_pc: Number,
   score_growth_pc: Number,
   value_growth_pc: Number,
