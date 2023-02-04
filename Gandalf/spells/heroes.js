@@ -44,11 +44,11 @@ const heroes = {
   access: Access.Member,
   alias: null,
   usage: encode('/heroes'),
-  description: 'Shows top 5 Hero Power!.',
+  description: 'Shows 5 strongest heroes!.',
   discord: {
     data: new SlashCommandBuilder()
       .setName('heroes')
-      .setDescription('Shows top 5 Hero Power!.'),
+      .setDescription('Shows 5 strongest heroes!.'),
     async execute(interaction) {
       let _reply = await executeCommand();
       await interaction.reply(`\`\`\`${_reply}\`\`\``);
@@ -80,7 +80,7 @@ async function executeCommand(params) {
       reply = "No powers were found."
     }
     else {
-      reply = "Top 5 Hero Power:\n";
+      reply = "Top 5 strongest heroes:\n";
       //console.log(`POWER: ${util.inspect(power, true, null, true)}`);
       let _powers = powers.map((hp) => {return `${hp.rank}: ${hp.member.pa_nick}`;});
       reply += _powers.join('\n');

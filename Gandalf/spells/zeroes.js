@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name asshats.js
+ * @name zeroes.js
  * @version 2023/02/04
  * @summary Gandalf Spells
  **/
@@ -40,15 +40,15 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 
-const asshats = {
+const zeroes = {
   access: Access.Member,
   alias: null,
-  usage: encode('/asshats'),
-  description: 'Shows 5 biggest Asshats!.',
+  usage: encode('/zeroes'),
+  description: 'Shows 5 biggest zeroes!.',
   discord: {
     data: new SlashCommandBuilder()
-      .setName('asshats')
-      .setDescription('Shows 5 biggest Asshats!.'),
+      .setName('zeroes')
+      .setDescription('Shows 5 biggest zeroes!.'),
     async execute(interaction) {
       let _reply = await executeCommand();
       await interaction.reply(`\`\`\`${_reply}\`\`\``);
@@ -80,7 +80,7 @@ async function executeCommand(params) {
       reply = "No powers were found."
     }
     else {
-      reply = "Biggest 5 Asshats:\n";
+      reply = "Top 5 biggest zeroes:\n";
       //console.log(`POWER: ${util.inspect(power, true, null, true)}`);
       let _powers = powers.map((hp) => {return `${hp.members - hp.rank + 1}: ${hp.member.pa_nick}`;});
       reply += _powers.join('\n');
@@ -90,4 +90,4 @@ async function executeCommand(params) {
   return reply;
 }
 
-export default asshats;
+export default zeroes;

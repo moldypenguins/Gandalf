@@ -23,7 +23,6 @@
 
 
 import adduser from './adduser.js';
-import asshats from './asshats.js';
 import bonus from './bonus.js';
 import bonusroids from './bonusroids.js';
 import coords from './coords.js';
@@ -40,12 +39,11 @@ import refsvsfcs from './refsvsfcs.js';
 import ship from './ship.js';
 import stop from './stop.js';
 import tick from './tick.js';
-
+import zeroes from './zeroes.js';
 
 
 const Spells =  {
   adduser,
-  asshats,
   bonus,
   bonusroids,
   coords,
@@ -61,7 +59,8 @@ const Spells =  {
   roidcost,
   ship,
   stop,
-  tick
+  tick,
+  zeroes
 };
 
 export default Spells
