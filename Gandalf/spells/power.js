@@ -76,12 +76,13 @@ async function executeCommand(params) {
     if (!tick) {
       reply = `Cannot find current tick.`;
     } else {
-      console.log(`TICK: ${util.inspect(tick,true,null,true)}`);
       let power = await HeroPower.findOne({
         tick: tick,
         member: params.user
       });
-      if (power) {
+      console.log(`here`);
+      if(power) {
+        console.log(`here2`);
         console.log(`POWER: ${util.inspect(power, true, null, true)}`);
         reply = `Your power is ${power.size} strong. Rank: ${power.rank} of ${power.members}`;
       }
