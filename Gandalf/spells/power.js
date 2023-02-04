@@ -71,18 +71,20 @@ async function executeCommand(params) {
   if(!params.user) {
     //param validation
     reply = "error";
-  }
-  let tick = await Tick.findLastTick();
-  if(!tick) {
-    reply = `Cannot find current tick.`;
-  }
-  else {
-    let power = await HeroPower.findOne({
-      tick: tick,
-      member: params.user
-    });
-    if(power) {
-      reply = `Your power is ${power.size} strong. Rank: ${power.rank} of ${power.members}`;
+  } else {
+    console.log(`USER: ${util.inspect(params.user,true,null,true)}`);
+    let tick = await Tick.findLastTick();
+    if (!tick) {
+      reply = `Cannot find current tick.`;
+    } else {
+      let power = await HeroPower.findOne({
+        tick: tick,
+        member: params.user
+      });
+      if (power) {
+        console.log(`POWER: ${util.inspect(power, true, null, true)}`);
+        reply = `Your power is ${power.size} strong. Rank: ${power.rank} of ${power.members}`;
+      }
     }
   }
   return reply;
