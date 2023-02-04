@@ -27,8 +27,9 @@ import bonus from './bonus.js';
 import bonusroids from './bonusroids.js';
 import coords from './coords.js';
 import cost from './cost.js';
-import exile from './exile.js';
 import eff from './eff.js';
+import exile from './exile.js';
+import heroes from './heroes.js';
 import launch from './launch.js';
 import links from './links.js';
 import power from './power.js';
@@ -49,6 +50,7 @@ const Spells =  {
   cost,
   eff,
   exile,
+  heroes,
   launch,
   links,
   power,
