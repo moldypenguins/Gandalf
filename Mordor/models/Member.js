@@ -42,7 +42,7 @@ let MemberSchema = new mongoose.Schema({
   timezone:        {type:String},
   email:           {type:String},
   phone:           {type:String},
-  planet:          {type:mongoose.Schema.Types.ObjectId, ref:'Planet', autopopulate: true},
+  planet:          {type:mongoose.Schema.Types.ObjectId, ref:'Planet', autopopulate: true}
 });
 
 MemberSchema.statics.findByTGUser = async function(tg_user) {

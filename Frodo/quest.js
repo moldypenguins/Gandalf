@@ -32,7 +32,8 @@ import {
   Planet, PlanetDump, PlanetHistory, PlanetTrack,
   Galaxy, GalaxyDump, GalaxyHistory,
   Alliance, AllianceDump, AllianceHistory,
-  Cluster, ClusterHistory
+  Cluster, ClusterHistory,
+  Member, HeroPower
 } from 'mordor';
 import axios from 'axios';
 import dayjs from 'dayjs';
@@ -699,15 +700,56 @@ const retry = pRetry(async() => {
           total_ms += current_ms - total_ms;
 
 
+
           //##############################################################################################################
-          //Heroes & Asshats
+          //Hero Power
           //##############################################################################################################
+          if(false) {
+          //if(!await Alliance.exists({name: Config.alliance.name})) {
+            log(`Your alliance does not exist in the database.`);
+          }
+          else {
+            //let memPlanets = await Alliance.find({name: Config.alliance.name})
 
+            let hPowers = [];
+            let members = await Member.find({});
+            for(let mem in members) {
+              if(members[mem].planet?.planet_id) {
+                //aggregate planet history
+                let hGrowth = await PlanetHistory.aggregate([
+                  {$match: {planet_id: members[mem].planet.planet_id}},
+                  {$sort: {tick: -1}},
+                  {$limit: 72},
+                  {
+                    $group: {
+                      _id: null,
+                      score_growth: {$sum: '$score_growth'},
+                    }
+                  }
+                ]);
+                hPowers.push({
+                  member: members[mem],
+                  size: hGrowth[0].score_growth
+                });
+              }
+            }
+            hPowers = hPowers.sort((a, b) => { return b.size - a.size; });
+            for(let d = 0; d < hPowers.length; d++) {
+              let heroPower = new HeroPower({
+                _id: Mordor.Types.ObjectId(),
+                tick: this_tick,
+                member: hPowers[d].member,
+                size: hPowers[d].size,
+                rank: d,
+                members: hPowers.length
+              });
+              await heroPower.save();
+            }
 
-          current_ms = (new Date()) - start_time;
-          log(`Updated heroes and asshats in: ${current_ms - total_ms}ms`);
-          total_ms += current_ms - total_ms;
-
+            current_ms = (new Date()) - start_time;
+            log(`Updated hero power in: ${current_ms - total_ms}ms`);
+            total_ms += current_ms - total_ms;
+          }
 
           //##############################################################################################################
           //Send Message

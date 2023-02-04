@@ -21,7 +21,6 @@
  * @summary Mongoose Model
  **/
 
-
 import mongoose from 'mongoose';
 
 let AllianceSchema = new mongoose.Schema({

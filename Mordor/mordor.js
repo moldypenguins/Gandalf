@@ -34,6 +34,7 @@ import DiscordUser from './models/DiscordUser.js';
 import Galaxy from './models/Galaxy.js';
 import GalaxyDump from './models/GalaxyDump.js';
 import GalaxyHistory from './models/GalaxyHistory.js';
+import HeroPower from './models/HeroPower.js';
 import Member from './models/Member.js';
 import Planet from './models/Planet.js';
 import PlanetDump from './models/PlanetDump.js';
@@ -65,6 +66,7 @@ export {
   Galaxy,
   GalaxyDump,
   GalaxyHistory,
+  HeroPower,
   Member,
   Planet,
   PlanetDump,
