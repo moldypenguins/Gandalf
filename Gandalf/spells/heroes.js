@@ -83,7 +83,7 @@ async function executeCommand(params) {
       reply = "Top 5 Hero Power:\n";
       //console.log(`POWER: ${util.inspect(power, true, null, true)}`);
       for(let p in powers) {
-        reply += `${power.rank}: ${powers[p].member.pa_nick}`;
+        reply += `${powers[p].rank}: ${powers[p].member.pa_nick}`;
       }
     }
   }
