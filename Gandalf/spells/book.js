@@ -25,6 +25,7 @@
 import adduser from './adduser.js';
 import bonus from './bonus.js';
 import bonusroids from './bonusroids.js';
+import coords from './coords.js';
 import cost from './cost.js';
 import exile from './exile.js';
 import eff from './eff.js';
@@ -44,6 +45,7 @@ const Spells =  {
   adduser,
   bonus,
   bonusroids,
+  coords,
   cost,
   eff,
   exile,
