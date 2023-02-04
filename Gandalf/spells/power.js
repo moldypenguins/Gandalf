@@ -72,11 +72,11 @@ async function executeCommand(params) {
     //param validation
     reply = "error";
   } else {
-    console.log(`USER: ${util.inspect(params.user,true,null,true)}`);
     let tick = await Tick.findLastTick();
     if (!tick) {
       reply = `Cannot find current tick.`;
     } else {
+      console.log(`TICK: ${util.inspect(tick,true,null,true)}`);
       let power = await HeroPower.findOne({
         tick: tick,
         member: params.user
