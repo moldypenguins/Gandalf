@@ -3,6 +3,17 @@
   "description": "Planetarion Tools",
   "keywords": [ "Planetarion", "Tools", "Alliance", "Bot" ],
   "private": true,
+  "license": "GPL-3.0",
+  "repository": "github:moldypenguins/Gandalf",
+  "homepage": "https://github.com/moldypenguins/Gandalf",
+  "bugs": "https://github.com/moldypenguins/Gandalf/issues",
+  "funding": "https://www.buymeacoffee.com/moldypenguins",
+  "author": "Craig Roberts <craig.roberts@crdevel.com>",
+  "contributors": [
+    "Braden Edmunds <braden.edmunds@gmail.com>",
+    "Alex High <freshlondon.biz@gmail.com>",
+    "Sam Powis <knoid1@gmail.com>"
+  ],
   "engines": {
     "node": ">=18.12.1",
     "pnpm": ">=7.18.2"
@@ -18,15 +29,5 @@
     "list": "pm2 list",
     "watch": "pm2 monit"
   },
-  "author": "Craig Roberts <craig.roberts@crdevel.com>",
-  "contributors": [
-    "Braden Edmunds <braden.edmunds@gmail.com>",
-    "Alex High <freshlondon.biz@gmail.com>",
-    "Sam Powis <knoid1@gmail.com>"
-  ],
-  "license": "GPL-3.0",
-  "repository": "github:moldypenguins/Gandalf",
-  "bugs": "https://github.com/moldypenguins/Gandalf/issues",
-  "homepage": "https://github.com/moldypenguins/Gandalf",
-  "funding": ""
+
 }

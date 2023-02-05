@@ -39,6 +39,12 @@ import Planet from './models/Planet.js';
 import PlanetDump from './models/PlanetDump.js';
 import PlanetHistory from './models/PlanetHistory.js';
 import PlanetTrack from './models/PlanetTrack.js';
+import Scan from './models/Scan.js';
+import ScanDevelopment from './models/ScanDevelopment.js';
+import ScanJumpgate from './models/ScanJumpgate.js';
+import ScanMilitary from './models/ScanMilitary.js';
+import ScanPlanet from './models/ScanPlanet.js';
+import ScanUnit from './models/ScanUnit.js';
 import Ship from './models/Ship.js';
 import TelegramChat from './models/TelegramChat.js';
 import TelegramUser from './models/TelegramUser.js';
@@ -67,13 +73,19 @@ export {
   GalaxyDump,
   GalaxyHistory,
   HeroPower,
-  User,
   Planet,
   PlanetDump,
   PlanetHistory,
   PlanetTrack,
+  Scan,
+  ScanDevelopment,
+  ScanJumpgate,
+  ScanMilitary,
+  ScanPlanet,
+  ScanUnit,
   Ship,
   TelegramChat,
   TelegramUser,
-  Tick
+  Tick,
+  User,
 };

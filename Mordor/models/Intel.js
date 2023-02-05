@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Gandalf
  * Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High
@@ -19,27 +20,39 @@
  * @version 2021/06/02
  * @summary Mongoose Model
  **/
-'use strict';
+
 
 import mongoose from 'mongoose';
+import {TelegramUser} from "../mordor.js";
 
 let IntelSchema = new mongoose.Schema({
   _id:         {type:mongoose.Schema.Types.ObjectId, required:true},
   planet:      {type:mongoose.Schema.Types.ObjectId, ref:'Planet', autopopulate: true},
   alliance:    {type:mongoose.Schema.Types.ObjectId, ref:'Alliance', autopopulate: true},
+  amps:        {type:Number},
+  dists:       {type:Number},
   nick:        {type:String},
+  /*
   fakenick:    {type:String},
   defwhore:    {type:Boolean},
   covop:       {type:Boolean},
-  amps:        {type:Number},
-  dists:       {type:Number},
   bg:          {type:String},
   gov:         {type:String},
   relay:       {type:Boolean},
   reportchan:  {type:String},
   comment:     {type:String},
+  */
 });
+
+
+IntelSchema.statics.findByPlanet = async function(planet) {
+  return await this.findOne({planet: planet});
+}
+
+IntelSchema.statics.findByAlliance = async function(alliance) {
+  return await this.find({alliance: alliance});
+}
 
 IntelSchema.plugin(require('mongoose-autopopulate'));
 
-export default mongoose.model('Intel', IntelSchema, 'Intels');
+export default mongoose.model('Intel', IntelSchema, 'Intel');

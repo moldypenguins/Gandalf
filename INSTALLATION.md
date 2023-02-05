@@ -154,15 +154,16 @@ exit
 # mongo --username [USERNAME] --password --authenticationDatabase admin
 ```
 
-### install node.js/npm and global packages
+### install node.js and pnpm
 ```bash
 sudo apt -y install gcc g++ make
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt-get install -y nodejs
 node -v
-npm -v
-sudo npm i -g pnpm pm2 typescript
+curl -fsSL https://get.pnpm.io/install.sh | sh -
 sudo pnpm setup
+
+sudo npm i -g pm2 typescript
 sudo pm2 install pm2-logrotate
 sudo pm2 set pm2-logrotate:max_size 10M
 sudo pm2 set pm2-logrotate:compress true

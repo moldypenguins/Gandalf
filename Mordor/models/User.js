@@ -51,7 +51,6 @@ UserSchema.statics.findByTGUser = async function(tg_user) {
 
 UserSchema.statics.findByTGId = async function(tg_id) {
   return await TelegramUser.exists({tguser_id: tg_id}) ? await this.findOne({tg_user: await TelegramUser.findOne({tguser_id: tg_id})}) : null;
-
 }
 
 UserSchema.statics.findByDSUser = async function(ds_user) {

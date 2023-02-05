@@ -144,8 +144,10 @@ Mordor.connection.once("open", async () => {
       ctx.replyWithHTML('<i>You shall not pass!</i>', {reply_to_message_id: ctx.message.message_id});
     }
     else {
+      //.replace(/[^a-z0-9áéíóúñü \.,_-:]/gim,'');
+
       // Dynamic command handling
-      let args = ctx.message.text.substring(1).replace(/\s+/g, ' ').split(' ');
+      let args = ctx.message.text.substring(1).split(/\s+/);
       let cmd = args.shift().toLowerCase();
 
       // Command alias check
