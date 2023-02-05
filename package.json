@@ -29,5 +29,8 @@
     "list": "pm2 list",
     "watch": "pm2 monit"
   },
-
+  "dependencies": {
+    "pm2": "^5.2.2",
+    "typescript": "^4.9.5"
+  }
 }

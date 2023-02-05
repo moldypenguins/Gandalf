@@ -162,11 +162,6 @@ sudo apt-get install -y nodejs
 node -v
 curl -fsSL https://get.pnpm.io/install.sh | sh -
 sudo pnpm setup
-
-sudo npm i -g pm2 typescript
-sudo pm2 install pm2-logrotate
-sudo pm2 set pm2-logrotate:max_size 10M
-sudo pm2 set pm2-logrotate:compress true
 ```
 
 ### download git
@@ -189,12 +184,32 @@ cd ..
 ### install node modules
 ```bash
 pnpm i
+
+#verify the following
+sudo pm2 install pm2-logrotate
+sudo pm2 set pm2-logrotate:max_size 10M
+sudo pm2 set pm2-logrotate:compress true
 ```
+
+```bash
+#ssl certificate
+-suggest using cloudflare (with crowdsec)
+
+
+
+cd ~/MiddleEarth/Sauron/ssl/
+openssl req -new -newkey rsa:2048 -nodes -keyout yourdomain.key -out yourdomain.csr
+cd ~/MiddleEarth/
+```
+
+
 
 ```bash
 cd Bilbo/
 node Bilbo.js -s YYYY-MM-DDThh:mmZ
 cd ..
+
+#only use this for single unit testing
 pm2 start Frodo/frodo.js
 pm2 start Gandalf/gandalf.js
 pnpm watch
@@ -202,57 +217,13 @@ pnpm watch
 
 
 
-
-
-
-
-
-
-# BELOW HERE IS OLD STUFF
-
-```bash
-#ssl certificate
--suggest using cloudflare
-cd ~/MiddleEarth/ssl/
-openssl req -new -newkey rsa:2048 -nodes -keyout yourdomain.key -out yourdomain.csr
-
-cd ~/MiddleEarth/
-```
-
-### Bilbo
-```bash
-node Bilbo.js [-s|--start YYYYMMDDThhZ]
-#Wait for the script to finish
-#Press Ctrl+C
-```
-
-### Frodo
-```bash
-screen -dmS Frodo
-screen -r Frodo
-nodemon Frodo.js [-c|--havoc] [-o|--overwrite]
-Press Ctrl+A, D
-```
-
-### Gandalf
-```bash
-screen -dmS Gandalf
-screen -r Gandalf
-nodemon Gandalf.js
-Press Ctrl+A, D
-```
-
-### Sauron
-```bash
-#ln -s node_modules/@fortawesome/fontawesome-free/webfonts/ public/
-screen -dmS Sauron
-screen -r Sauron
-sudo nodemon Sauron.js
-#Press Ctrl+A, D
-```
-
 ## Other Helpful Commands
 ```bash
+#pm2
+pm2 list
+pm2 monit
+pm2 start MiddleEarth.config.js --only "Frodo,Gandalf,Sauron"
+
 #check apps listening
 sudo netstat -tulpn | grep LISTEN
 ```
