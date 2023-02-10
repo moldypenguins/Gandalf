@@ -61,8 +61,8 @@ See [INSTALLATION.md](INSTALLATION.md) for setup guide.
 Check [Gandalf Wiki](https://github.com/moldypenguins/Gandalf/wiki) for reference.  
 See [SECURITY.md](SECURITY.md) for feature requests or bug reports.  
 
-Find us on [Discord](https://discord.gg/Ean6FvV) or [Telegram](https://t.me/+UkMZETiCNjWhtg_D)
-
+Find us on [Discord](https://discord.gg/Ean6FvV) or [Telegram](https://t.me/+UkMZETiCNjWhtg_D)  
+![Discord](https://img.shields.io/discord/481232479693307904?label=%23wtf&logo=discord&style=flat-square)
 
 ## Roadmap
 See [ROADMAP.md](ROADMAP.md) for more information.
@@ -97,3 +97,4 @@ Licensed under the GNU General Public License Version 3
 See [LICENSE.md](LICENSE.md) or [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html) for more details
 *** 
 [![JetBrains](https://img.shields.io/badge/JetBrains-Official-E97A31?style=for-the-badge&logo=JetBrains)](https://www.jetbrains.com/)
+![Official](https://jb.gg/badges/official-plastic.svg)

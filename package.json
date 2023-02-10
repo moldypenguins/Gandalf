@@ -4,6 +4,7 @@
   "keywords": ["Planetarion", "Tools", "Alliance", "Bot"],
   "private": true,
   "license": "GPL-3.0",
+  "version": "1.0.0-alpha",
   "repository": "github:moldypenguins/Gandalf",
   "homepage": "https://github.com/moldypenguins/Gandalf",
   "bugs": "https://github.com/moldypenguins/Gandalf/issues",
