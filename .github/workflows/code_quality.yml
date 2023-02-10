@@ -4,7 +4,7 @@ on:
   pull_request:
   push:
     branches:
-      - main
+      - 1.0.0-alpha
       - 'releases/*'
 
 jobs:
