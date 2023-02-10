@@ -40,11 +40,11 @@ jobs:
           --config .eslintrc.js
           --ext .js,.jsx,.ts,.tsx
           --format @microsoft/eslint-formatter-sarif
-          --output-file eslint-results.sarif.json
+          --output-file ${{ runner.temp }}/eslint/results/eslint.sarif.json
         continue-on-error: true
 
       - name: Upload analysis results to GitHub
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: eslint-results.sarif.json
+          sarif_file: ${{ runner.temp }}/eslint/results/eslint.sarif.json
           wait-for-processing: true
