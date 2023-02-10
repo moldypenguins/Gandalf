@@ -170,6 +170,11 @@ git clone https://github.com/moldypenguins/Gandalf MiddleEarth
 cd MiddleEarth/
 ```
 
+### Qodana
+```bash
+curl -fsSL https://jb.gg/qodana-cli/install | bash
+```
+
 
 ### create local config
 ```bash

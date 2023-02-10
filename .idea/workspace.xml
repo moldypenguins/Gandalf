@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b4df756-377a-48de-bf3d-eae10a4430cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Sauron/.editorconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Galadriel/src/Config.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/src/Config.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Galadriel/src/default.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Galadriel/src/default.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/models/Scan.js" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/models/Scan.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mordor/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Mordor/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ROADMAP.md" beforeDir="false" afterPath="$PROJECT_DIR$/ROADMAP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/INSTALLATION.md" beforeDir="false" afterPath="$PROJECT_DIR$/INSTALLATION.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qodana.yml" beforeDir="false" afterPath="$PROJECT_DIR$/qodana.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +117,7 @@
       <workItem from="1674384720214" duration="39647000" />
       <workItem from="1675138446682" duration="35137000" />
       <workItem from="1675470851251" duration="46628000" />
-      <workItem from="1675808479513" duration="7658000" />
+      <workItem from="1675808479513" duration="9357000" />
     </task>
     <servers />
   </component>
