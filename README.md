@@ -13,7 +13,7 @@
 ![Top Language](https://img.shields.io/github/languages/top/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Total Lines](https://img.shields.io/tokei/lines/github/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)  
 ![Contributors](https://img.shields.io/github/contributors/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
-![Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)  
+![Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Open Issues](https://img.shields.io/github/issues-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Open Pull Requests](https://img.shields.io/github/issues-pr-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)  
 ![CodeFactor](https://img.shields.io/codefactor/grade/github/moldypenguins/Gandalf?style=for-the-badge&label=CodeFactor%20Grade&logo=CodeFactor)
