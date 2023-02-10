@@ -1,7 +1,7 @@
 {
   "name": "middle_earth",
   "description": "Planetarion Tools",
-  "keywords": [ "Planetarion", "Tools", "Alliance", "Bot" ],
+  "keywords": ["Planetarion", "Tools", "Alliance", "Bot"],
   "private": true,
   "license": "GPL-3.0",
   "repository": "github:moldypenguins/Gandalf",
@@ -21,7 +21,6 @@
   "packageManager": "pnpm@7.18.2",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-
     "start": "pm2 start MiddleEarth.config.js",
     "restart": "pm2 restart MiddleEarth.config.js",
     "stop": "pm2 stop MiddleEarth.config.js",
@@ -32,5 +31,9 @@
   "dependencies": {
     "pm2": "^5.2.2",
     "typescript": "^4.9.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.32.0",
+    "eslint-plugin-jsdoc": "^39.8.0"
   }
 }
