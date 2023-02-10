@@ -1,18 +1,15 @@
 
 
-import jsdoc from "eslint-plugin-jsdoc";
+
 export default [
   {
     ignores: ["*.config.js"],
-    plugins: {
-      jsdoc: jsdoc
-    },
+    plugins: {},
     rules: {
       indent: ["error", 4],
       quotes: ["error", "double"],
       semi: ["error", "always"],
-      "linebreak-style": ["error", "unix"],
-      "jsdoc/require-description": "warn",
+      "linebreak-style": ["error", "unix"]
     },
     linterOptions: {
       noInlineConfig: true
