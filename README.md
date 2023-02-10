@@ -8,6 +8,7 @@
 
 ***  
 ![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/moldypenguins/Gandalf?style=for-the-badge)  
 ![Release](https://img.shields.io/github/v/release/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub&include_prereleases&sort=date)
 ![Release Date](https://img.shields.io/github/release-date-pre/moldypenguins/Gandalf?logo=GitHub&style=for-the-badge&include_prereleases&sort=date)  
 ![Languages](https://img.shields.io/github/languages/count/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
