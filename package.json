@@ -19,6 +19,7 @@
     "pnpm": ">=7.18.2"
   },
   "packageManager": "pnpm@7.18.2",
+  "type": "module",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "start": "pm2 start MiddleEarth.config.js",

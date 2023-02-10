@@ -1,14 +1,4 @@
 
-/*
-export default [{
-  root: true,
-  extends: "eslint:recommended",
-  rules: {
-
-    semi:
-  }
-}];
-*/
 
 import jsdoc from "eslint-plugin-jsdoc";
 export default [
