@@ -37,7 +37,6 @@ jobs:
 
       - name: Run ESLint
         run: npx eslint .
-          --ext .js,.jsx,.ts,.tsx
           --format @microsoft/eslint-formatter-sarif
           --output-file ${{ runner.temp }}/eslint/results/eslint.sarif.json
         continue-on-error: true
