@@ -8,21 +8,19 @@
 
 ***  
 ![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge)
-![GitHub package.json version](https://img.shields.io/github/package-json/v/moldypenguins/Gandalf?style=for-the-badge)  
-![Release](https://img.shields.io/github/v/release/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub&include_prereleases&sort=date)
-![Release Date](https://img.shields.io/github/release-date-pre/moldypenguins/Gandalf?logo=GitHub&style=for-the-badge&include_prereleases&sort=date)  
+![GitHub package.json version](https://img.shields.io/github/package-json/v/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)  
 ![Languages](https://img.shields.io/github/languages/count/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Top Language](https://img.shields.io/github/languages/top/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
-![Total Lines](https://img.shields.io/tokei/lines/github/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
-![CodeFactor](https://img.shields.io/codefactor/grade/github/moldypenguins/Gandalf?style=for-the-badge&label=CodeFactor&logo=CodeFactor)  
+![Total Lines](https://img.shields.io/tokei/lines/github/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)  
 ![Contributors](https://img.shields.io/github/contributors/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
-![Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
+![Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)  
 ![Open Issues](https://img.shields.io/github/issues-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Open Pull Requests](https://img.shields.io/github/issues-pr-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)  
-![Dependabot](https://img.shields.io/static/v1?style=for-the-badge&label=Dependabot&message=enabled&color=33CC11&logo=Dependabot)
+![CodeFactor](https://img.shields.io/codefactor/grade/github/moldypenguins/Gandalf?style=for-the-badge&label=CodeFactor%20Grade&logo=CodeFactor)
+![Dependabot](https://img.shields.io/static/v1?style=for-the-badge&label=Dependabot&message=enabled&color=33CC11&logo=Dependabot)  
 ![CodeQL](https://img.shields.io/github/actions/workflow/status/moldypenguins/Gandalf/codeql-analysis.yml?label=CodeQL&logo=github&style=for-the-badge)
-![Qodana](https://img.shields.io/github/actions/workflow/status/moldypenguins/Gandalf/code_quality.yml?label=Qodana&logo=jetbrains&style=for-the-badge)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/moldypenguins/Gandalf/eslint.yml?label=ESLint&logo=eslint&style=for-the-badge)  
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/moldypenguins/Gandalf/eslint.yml?label=ESLint&logo=eslint&style=for-the-badge)
+![Qodana](https://img.shields.io/github/actions/workflow/status/moldypenguins/Gandalf/code_quality.yml?label=Qodana&logo=jetbrains&style=for-the-badge)  
 ***  
 
 ## Table of Contents
