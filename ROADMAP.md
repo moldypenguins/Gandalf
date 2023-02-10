@@ -1,7 +1,9 @@
 # Roadmap
+- [ ] replace/update pm2
 
 ### Galadriel (config)  
 - [ ] update readme
+- [ ] explore merge on compile
 
 ### Mordor (database)  
 - [ ] update readme
@@ -16,8 +18,7 @@
 
 ### Frodo (ticker)  
 - [ ] update readme
-- [ ] add calculations
-- [ ] fix the timeout/retries
+- [ ] add missing calculations
 
 ### Gandalf (bot)  
 - [ ] update readme

@@ -92,13 +92,22 @@ export default interface Config {
         prodtime: number;
       };
     },
-    race?: {
+    races?: {
       [key: string]: {
-        name: string;
-        prodtime: number;
+        number: number,
+        name: string,
+        prodtime: number
       };
     },
-    construction?: { [key: string]: number; },
-    cores?: { [key: number]: number; }
+    construction?: { [key: string]: number },
+    cores?: number[],
+    scans?: {
+      [key: string]: {
+        name: string,
+        best_before: number,
+        expiry: number,
+        request: boolean
+      }
+    }
   }
 }

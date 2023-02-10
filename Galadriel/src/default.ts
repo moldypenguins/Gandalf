@@ -195,20 +195,24 @@ const configDefault: Config = {
         prodtime: -0.20,
       }
     },
-    race:{
+    races:{
       ter: {
+        number: 1,
         name: "Terran",
         prodtime: 0.1
       },
       cat: {
+        number: 2,
         name: "Cathaar",
         prodtime: 0
       },
       xan: {
+        number: 3,
         name: "Xandathrii",
         prodtime: 0.05
       },
       zik: {
+        number: 4,
         name: "Zikonian",
         prodtime: 0.15
       },
@@ -219,14 +223,16 @@ const configDefault: Config = {
       }
       */
       kin: {
+        number: 5,
         name: "Kinthia",
         prodtime: 0
       },   
       sly: {
+        number: 6,
         name: "Slythonian",
         prodtime: 0
       }    
-    },    
+    },
     construction: {
       baseRefCost: 3000,
       baseFCCost: 4500,
@@ -235,13 +241,63 @@ const configDefault: Config = {
       refCU: 750,
       fcCU: 1000,
     },
-    cores: {
-      0: 1000,
-      1: 3500,
-      2: 7000,
-      3: 12500,
-      4: 20000,
-    },     
+    cores: [1000, 3500, 7000, 12500, 20000],
+    scans: {
+      P: {
+        name: "Planet Scan",
+        best_before: 3,
+        expiry: 5,
+        request: true,
+      },
+      L: {
+        name: "Landing Scan",
+        best_before: 3,
+        expiry: 5,
+        request: false,
+      },
+      D: {
+        name: "Development Scan",
+        best_before: 3,
+        expiry: 5,
+        request: true,
+      },
+      U: {
+        name: "Unit Scan",
+        best_before: 3,
+        expiry: 5,
+        request: true,
+      },
+      N: {
+        name: "News Scan",
+        best_before: 3,
+        expiry: 5,
+        request: true,
+      },
+      I: {
+        name: "Incoming Scan",
+        best_before: 3,
+        expiry: 5,
+        request: false,
+      },
+      J: {
+        name: "Jumpgate Probe",
+        best_before: 1,
+        expiry: 3,
+        request: true,
+      },
+      A: {
+        name: "Advanced Unit Scan",
+        best_before: 3,
+        expiry: 5,
+        request: true,
+      },
+      M: {
+        name: "Military Scan",
+        best_before: 1,
+        expiry: 3,
+        request: true,
+      }
+    }
   }
 }
 
