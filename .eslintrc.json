@@ -1,7 +1,7 @@
 
 {
   "root": true,
-  "plugins": {},
+  "plugins": [],
   "env": {
     "browser": true,
     "node": true,
