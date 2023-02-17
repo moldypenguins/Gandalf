@@ -17,10 +17,17 @@
   ],
   "engines": {
     "node": ">=18.12.1",
-    "pnpm": ">=7.18.2"
+    "npm": ">=9.5.0"
   },
-  "packageManager": "pnpm@7.18.2",
-  "type": "module",
+  "packageManager": "npm@9.5.0",
+  "workspaces": [
+    "Bilbo",
+    "Frodo",
+    "Galadriel",
+    "Gandalf",
+    "Mordor",
+    "Sauron"
+  ],
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "start": "pm2 start MiddleEarth.config.js",
@@ -30,11 +37,9 @@
     "list": "pm2 list",
     "watch": "pm2 monit"
   },
-  "dependencies": {
-    "pm2": "^5.2.2",
-    "typescript": "^4.9.5"
-  },
   "devDependencies": {
+    "nodemon": "^2.0.20",
+    "typescript": "^4.9.5",
     "eslint": "^8.32.0",
     "eslint-plugin-jsdoc": "^39.8.0"
   }
