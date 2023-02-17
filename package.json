@@ -1,7 +1,12 @@
 {
   "name": "middle_earth",
   "description": "Planetarion Tools",
-  "keywords": ["Planetarion", "Tools", "Alliance", "Bot"],
+  "keywords": [
+    "Planetarion",
+    "Tools",
+    "Alliance",
+    "Bot"
+  ],
   "private": true,
   "license": "GPL-3.0",
   "version": "1.0.0-alpha",
@@ -31,7 +36,6 @@
     "start": "concurrently \"command1 arg\" \"command2 arg\""
   },
   "devDependencies": {
-    "concurrently": "7.6.0",
     "eslint": "^8.32.0",
     "eslint-plugin-jsdoc": "^39.8.0",
     "nodemon": "^2.0.20",
