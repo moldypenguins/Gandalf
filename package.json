@@ -16,10 +16,10 @@
     "Sam Powis <knoid1@gmail.com>"
   ],
   "engines": {
-    "node": ">=18.12.1",
-    "npm": ">=9.5.0"
+    "node": ">=16.19.0",
+    "npm": ">=8.19.3"
   },
-  "packageManager": "npm@9.5.0",
+  "packageManager": "npm@9.2.0",
   "workspaces": [
     "Bilbo",
     "Frodo",
@@ -29,7 +29,6 @@
     "Sauron"
   ],
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "start": "pm2 start MiddleEarth.config.js",
     "restart": "pm2 restart MiddleEarth.config.js",
     "stop": "pm2 stop MiddleEarth.config.js",

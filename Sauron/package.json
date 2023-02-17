@@ -3,22 +3,19 @@
   "description": "Planetarion Tools - Website",
   "private": true,
   "engines": {
-    "node": ">=18.12.1",
-    "pnpm": ">=7.18.2"
+    "node": ">=16.19.0",
+    "npm": ">=8.19.3"
   },
-  "packageManager": "pnpm@7.18.2",
+  "packageManager": "npm@9.2.0",
   "version": "1.0.0-alpha",
   "type": "module",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "start": "node sauron.js",
     "build": "build:client && build:server",
     "build:client": "vite build --outDir dist/client --ssrManifest",
     "build:server": "vite build --outDir dist/server --ssr src/entry-server.js"
   },
   "dependencies": {
-    "galadriel": "file:../Galadriel",
-    "mordor": "file:../Mordor",
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-brands-svg-icons": "^6.2.1",
     "@fortawesome/free-regular-svg-icons": "^6.2.1",
@@ -32,7 +29,6 @@
     "html-entities": "^2.3.3",
     "numeral": "^2.0.6",
     "pinia": "^2.0.28",
-    "pm2": "^5.2.2",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
