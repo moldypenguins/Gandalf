@@ -1,7 +1,22 @@
 
 {
-  "ignores": ["*.config.js"],
   "plugins": {},
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "languageOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 6
+  },
   "rules": {
     "indent": ["error", 4],
     "quotes": ["error", "double"],
@@ -10,9 +25,5 @@
   },
   "linterOptions": {
     "noInlineConfig": true
-  },
-  "languageOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 6
   }
 }
