@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b4df756-377a-48de-bf3d-eae10a4430cb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MiddleEarth.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +123,7 @@
       <workItem from="1675470851251" duration="46628000" />
       <workItem from="1675808479513" duration="22055000" />
       <workItem from="1676037154197" duration="1786000" />
-      <workItem from="1676438079726" duration="10609000" />
+      <workItem from="1676438079726" duration="11837000" />
     </task>
     <servers />
   </component>
