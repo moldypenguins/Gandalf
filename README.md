@@ -7,7 +7,7 @@
 <h3>Planetarion Tools</h3>
 
 ***  
-![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge)  
+![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge)
 ![GitHub (Pre-)Release](https://img.shields.io/github/v/release/moldypenguins/Gandalf?include_prereleases&label=Version&logo=GitHub&style=for-the-badge)
 ![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/moldypenguins/Gandalf?logo=GitHub&style=for-the-badge)  
 ![Contributors](https://img.shields.io/github/contributors/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
