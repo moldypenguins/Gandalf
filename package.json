@@ -19,7 +19,6 @@
     "node": ">=16.19.0",
     "npm": ">=8.19.3"
   },
-  "packageManager": "npm@9.2.0",
   "workspaces": [
     "Bilbo",
     "Frodo",
@@ -28,14 +27,7 @@
     "Mordor",
     "Sauron"
   ],
-  "scripts": {
-    "start": "pm2 start MiddleEarth.config.js",
-    "restart": "pm2 restart MiddleEarth.config.js",
-    "stop": "pm2 stop MiddleEarth.config.js",
-    "delete": "pm2 delete MiddleEarth.config.js",
-    "list": "pm2 list",
-    "watch": "pm2 monit"
-  },
+  "scripts": {},
   "devDependencies": {
     "nodemon": "^2.0.20",
     "typescript": "^4.9.5",

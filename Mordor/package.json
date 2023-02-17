@@ -6,7 +6,6 @@
     "node": ">=16.19.0",
     "npm": ">=8.19.3"
   },
-  "packageManager": "npm@9.2.0",
   "main": "./mordor.js",
   "version": "1.0.0-alpha",
   "type": "module",
