@@ -1,5 +1,6 @@
 
 {
+  "root": true,
   "plugins": {},
   "env": {
     "browser": true,
@@ -12,10 +13,6 @@
     "ecmaFeatures": {
       "jsx": true
     }
-  },
-  "languageOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 6
   },
   "rules": {
     "indent": ["error", 4],
