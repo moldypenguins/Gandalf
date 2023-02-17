@@ -27,11 +27,14 @@
     "Mordor",
     "Sauron"
   ],
-  "scripts": {},
+  "scripts": {
+    "start": "concurrently \"command1 arg\" \"command2 arg\""
+  },
   "devDependencies": {
-    "nodemon": "^2.0.20",
-    "typescript": "^4.9.5",
+    "concurrently": "7.6.0",
     "eslint": "^8.32.0",
-    "eslint-plugin-jsdoc": "^39.8.0"
+    "eslint-plugin-jsdoc": "^39.8.0",
+    "nodemon": "^2.0.20",
+    "typescript": "^4.9.5"
   }
 }
