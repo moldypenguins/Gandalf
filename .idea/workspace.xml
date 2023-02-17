@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b4df756-377a-48de-bf3d-eae10a4430cb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/INSTALLATION.md" beforeDir="false" afterPath="$PROJECT_DIR$/INSTALLATION.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qodana.yml" beforeDir="false" afterPath="$PROJECT_DIR$/qodana.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +19,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2GWrPEQVuGdYcij0jx5XbyUaIhd" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -37,7 +40,8 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.12.1&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.11.18&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/CR/GitHub/Gandalf/Gandalf/spells&quot;,
+    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CR/GitHub/Gandalf/eslint.config.js&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
@@ -59,11 +63,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\CR\GitHub\Gandalf" />
       <recent name="D:\CR\GitHub\Gandalf\Gandalf\spells" />
       <recent name="D:\CR\GitHub\Gandalf\Mordor\models" />
       <recent name="D:\CR\GitHub\Gandalf\Galadriel\src" />
       <recent name="D:\CR\GitHub\Gandalf\Sauron" />
-      <recent name="D:\CR\GitHub\Gandalf\Gandalf" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\CR\GitHub\Gandalf\Galadriel" />
@@ -117,7 +121,9 @@
       <workItem from="1674384720214" duration="39647000" />
       <workItem from="1675138446682" duration="35137000" />
       <workItem from="1675470851251" duration="46628000" />
-      <workItem from="1675808479513" duration="9357000" />
+      <workItem from="1675808479513" duration="22055000" />
+      <workItem from="1676037154197" duration="1786000" />
+      <workItem from="1676438079726" duration="10609000" />
     </task>
     <servers />
   </component>
