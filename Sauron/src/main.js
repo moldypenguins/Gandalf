@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -16,42 +17,39 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name main.js
- * @version 2022-11-14
+ * @version 2023-02-18
  * @summary
  **/
-'use strict';
+
 
 // Import custom CSS
-// import './assets/scss/affleck.scss';
-// import './assets/scss/murphy.scss';
-import './assets/scss/maplesyrup.scss';
-// import './assets/scss/shamrock.scss';
-// import './assets/scss/telegram.scss';
-// import './assets/scss/thematrix.scss';
-// import './assets/scss/ultimate.scss';
+import "./assets/scss/affleck.scss";
+// import "./assets/scss/murphy.scss";
+// import "./assets/scss/maplesyrup.scss";
+// import "./assets/scss/shamrock.scss";
+// import "./assets/scss/telegram.scss";
+// import "./assets/scss/thematrix.scss";
+// import "./assets/scss/ultimate.scss";
 
 // import * as bootstrap from 'bootstrap'
-const bootstrap = typeof window !== `undefined` && import("bootstrap")
+const bootstrap = typeof window !== "undefined" && import("bootstrap");
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faClock, faCrosshairs, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons'
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faClock, faCrosshairs, faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
 library.add(faClock, faCrosshairs, faGlobeAmericas);
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-import { createPinia } from 'pinia'
-import { createSSRApp } from 'vue'
-import App from './App.vue'
-import { createRouter } from './router'
+import { createPinia } from "pinia";
+import { createSSRApp } from "vue";
+import App from "./App.vue";
+import { createRouter } from "./router";
 
-// SSR requires a fresh app instance per request, therefore we export a function
-// that creates a fresh app instance. If using Vuex, we'd also be creating a
-// fresh store here.
 export function createApp() {
-  const app = createSSRApp(App);
-  const pinia = createPinia();
-  app.use(pinia);
-  const router = createRouter();
-  app.use(router);
-  app.component('font-awesome-icon', FontAwesomeIcon);
-  return { app, router };
+    const app = createSSRApp(App);
+    const pinia = createPinia();
+    app.use(pinia);
+    const router = createRouter();
+    app.use(router);
+    app.component("fa-icon", FontAwesomeIcon);
+    return { app, router };
 }

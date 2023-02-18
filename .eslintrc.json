@@ -4,14 +4,16 @@
   "plugins": [],
   "env": {
     "browser": true,
+    "commonjs": true,
     "node": true,
-    "es6": true
+    "mongo": true,
+    "es2022": true
   },
   "parserOptions": {
-    "ecmaVersion": 6,
     "sourceType": "module",
     "ecmaFeatures": {
-      "jsx": true
+      "impliedStrict": true,
+      "experimentalObjectRestSpread": true
     }
   },
   "rules": {

@@ -70,13 +70,13 @@
     <div class="container-fluid">
       <div class="d-flex justify-content-between align-items-center">
         <div class="footer-tab show">
-          <font-awesome-icon icon="fa-solid fa-clock" />&nbsp;<b>1</b>
+          <fa-icon icon="fa-solid fa-clock" />&nbsp;<b>1</b>
         </div>
         <div class="footer-tab show">
-          <font-awesome-icon icon="fa-solid fa-crosshairs" />&nbsp;<strong><a href="/att/daec29ae9bede5260b9e8a6c2db4dee2">1</a></strong>
+          <fa-icon icon="fa-solid fa-crosshairs" />&nbsp;<strong><a href="/att/daec29ae9bede5260b9e8a6c2db4dee2">1</a></strong>
         </div>
         <div class="footer-tab show">
-          <font-awesome-icon icon="fa-solid fa-globe-americas" />&nbsp;<strong><a href="/uni/c/1">1</a><span class="separator">:</span><a href="/uni/g/1/1">1</a><span class="separator">:</span><a href="/uni/p/1/1/1">1</a></strong>
+          <fa-icon icon="fa-solid fa-globe-americas" />&nbsp;<strong><a href="/uni/c/1">1</a><span class="separator">:</span><a href="/uni/g/1/1">1</a><span class="separator">:</span><a href="/uni/p/1/1/1">1</a></strong>
         </div>
       </div>
     </div>

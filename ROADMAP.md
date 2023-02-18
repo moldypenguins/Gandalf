@@ -1,5 +1,5 @@
 # Roadmap
-- [ ] replace/update pm2
+- [ ] replace/update pm2 (see bree as example)
 
 ### Galadriel (config)  
 - [ ] update readme
