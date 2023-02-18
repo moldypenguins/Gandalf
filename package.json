@@ -33,7 +33,7 @@
     "Sauron"
   ],
   "scripts": {
-    "start": "concurrently \"command1 arg\" \"command2 arg\""
+    "start": ""
   },
   "devDependencies": {
     "eslint": "^8.32.0",
