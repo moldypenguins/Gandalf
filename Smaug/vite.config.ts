@@ -1,6 +1,9 @@
 /// <reference types="vitest" />
 
-import { dirname, relative } from 'path'
+
+
+
+import { dirname, relative, resolve } from 'path'
 import type { UserConfig } from 'vite'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
@@ -11,6 +14,9 @@ import AutoImport from 'unplugin-auto-import/vite'
 import UnoCSS from 'unocss/vite'
 import { isDev, port, r } from './scripts/utils'
 
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 export const sharedConfig: UserConfig = {
   root: r('src'),
   resolve: {
@@ -18,6 +24,7 @@ export const sharedConfig: UserConfig = {
       '~/': `${r('src')}/`,
     },
   },
+  cacheDir: resolve(__dirname, "../node_modules/.vite"),
   define: {
     __DEV__: isDev,
   },
