@@ -20,7 +20,7 @@
  * @summary default configuration file
  **/
 
-import Config from "./Config";
+import Config from "./config.js";
 
 const configDefault: Config = {
   admin: {

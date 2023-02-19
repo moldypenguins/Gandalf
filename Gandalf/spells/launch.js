@@ -22,7 +22,7 @@
  **/
 
 
-import Config from 'galadriel';
+import Config from 'Galadriel/src/galadriel.ts';
 import { Mordor, Tick } from 'mordor';
 
 import { Context } from 'telegraf';

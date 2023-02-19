@@ -12,7 +12,7 @@
     "build": "tsc"
   },
   "exports": {
-    ".": "./galadriel.js"
+    ".": "./dist/galadriel.js"
   },
   "devDependencies": {
     "typescript": "^4.9.5",

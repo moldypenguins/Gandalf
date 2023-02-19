@@ -21,7 +21,7 @@
  * @summary Mongoose Model
  **/
 
-import Config from 'galadriel';
+import Config from 'Galadriel/src/galadriel.ts';
 import mongoose from 'mongoose';
 import mongooseAutoPopulate from 'mongoose-autopopulate';
 import {Mordor, Planet, ScanPlanet, ScanDevelopment, ScanUnit, ScanMilitary} from "../mordor.js";

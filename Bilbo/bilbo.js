@@ -23,7 +23,7 @@
  **/
 
 
-import Config from 'galadriel';
+import Config from 'Galadriel/src/galadriel.ts';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import X2JS from 'x2js';

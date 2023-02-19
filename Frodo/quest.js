@@ -25,7 +25,7 @@
 import { parentPort, workerData } from 'worker_threads';
 import pRetry, {AbortError} from 'p-retry';
 import pTimeout from 'p-timeout';
-import Config from 'galadriel';
+import Config from 'Galadriel/src/galadriel.ts';
 import {
   Mordor,
   Tick,

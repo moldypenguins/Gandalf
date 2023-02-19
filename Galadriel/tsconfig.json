@@ -1,16 +1,23 @@
 {
   "compilerOptions": {
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "target": "es2021",
+    "lib": ["DOM", "ESNext"],
+    "strict": true,
+    "esModuleInterop": true,
+    "incremental": false,
+    "skipLibCheck": true,
+    "moduleResolution": "nodenext",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
     "outDir": "./dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "declaration": true
   },
-  "ts-node": {
-    "esm": true
-  },
+  "typeRoots": [
+    "./node_modules/@types/"
+  ],
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.example.ts"]
 }

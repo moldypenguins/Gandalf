@@ -22,7 +22,7 @@
  **/
 
 
-import Config from 'galadriel';
+import Config from 'Galadriel/src/galadriel.ts';
 import mongoose from 'mongoose';
 import Alliance from "./models/Alliance.js";
 import AllianceDump from './models/AllianceDump.js';

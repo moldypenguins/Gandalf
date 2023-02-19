@@ -22,7 +22,7 @@
  **/
 
 
-import Config from 'galadriel';
+import Config from 'Galadriel/src/galadriel.ts';
 import mongoose from 'mongoose';
 
 let DiscordUserSchema = new mongoose.Schema({

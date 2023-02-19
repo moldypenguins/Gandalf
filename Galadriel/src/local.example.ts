@@ -20,7 +20,7 @@
  * @summary local configuration file
  **/
 
-import Config from "./Config";
+import Config from "./config";
 
 const configLocal: Config = {
   admin: {
