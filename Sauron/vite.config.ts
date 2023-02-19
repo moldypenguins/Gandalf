@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
 
-import path, {resolve} from "path";
+import path from "path";
 import { defineConfig } from "vite";
 import Vue from "@vitejs/plugin-vue";
 import Pages from "vite-plugin-pages";
@@ -18,7 +18,7 @@ export default defineConfig({
             "~/": `${path.resolve(__dirname, "src")}/`,
         },
     },
-    cacheDir: resolve(__dirname, "../node_modules/.vite"),
+    cacheDir: path.resolve(__dirname, "../node_modules/.vite"),
     plugins: [
         VueMacros({
             plugins: {

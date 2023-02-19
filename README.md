@@ -78,18 +78,19 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 
 ## Related Projects
-* [Merlin](https://github.com/ellonweb/merlin) - Robin K. Hansen, Elliot Rosemarine, Andreas Jacobsen 
-* [Munin](https://github.com/munin/munin) - Andreas Jacobsen 
+* [Merlin](https://github.com/ellonweb/merlin) - [Robin K. Hansen](https://github.com/berten), [Elliot Rosemarine](https://github.com/ellonweb), [Andreas Jacobsen](https://github.com/andreaja)
+* [Munin](https://github.com/munin/munin) - [Andreas Jacobsen](https://github.com/andreaja)
+* [vitesse-lite](https://github.com/antfu/vitesse-lite) / [vitesse-webext](https://github.com/antfu/vitesse-webext) - [Anthony Fu](https://github.com/antfu)
 
 
 ## Author
-* **Craig Roberts** - [@moldypenguins](https://t.me/moldypenguins)
+* **[Craig Roberts](https://github.com/moldypenguins)** - [@moldypenguins](https://t.me/moldypenguins)
 
 
 ## Contributors
-* **Braden Edmunds** - [@blanq4](https://t.me/blanq4)
-* **Alex High** - [@UltimateNewbie](https://t.me/UltimateNewbie)
-* **Sam Powis** - [@knoidable](https://t.me/knoidable)
+* **[Braden Edmunds](https://github.com/bradenedmunds)** - [@blanq4](https://t.me/blanq4)
+* **[Alex High](https://github.com/FreshLondon)** - [@UltimateNewbie](https://t.me/UltimateNewbie)
+* **[Sam Powis](https://github.com/knoidable)** - [@knoidable](https://t.me/knoidable)
 
 
 ## Licenses
