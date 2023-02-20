@@ -1,4 +1,6 @@
 <script setup lang="ts" generic="T extends any, O extends any">
+import Config from 'galadriel'
+
 defineOptions({
   name: 'IndexPage',
 })
@@ -16,8 +18,8 @@ const go = () => {
   <div>
     <img src="/logo.png" alt="Gandalf" class="mx-auto" />
     <h1 mt-5>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse-lite" target="_blank">
-        Gandalf
+      <a rel="noreferrer" href="http://localhost:3333/" target="_blank">
+        {{ Config.alliance.name }}
       </a>
     </h1>
     <p>
@@ -32,6 +34,8 @@ const go = () => {
       autocomplete="false"
       @keydown.enter="go"
     />
+
+    <TheCounter my-5 />
 
     <div>
       <button class="m-3 text-sm btn" :disabled="!name" @click="go">
