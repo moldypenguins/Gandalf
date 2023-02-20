@@ -14,31 +14,27 @@ const go = () => {
 
 <template>
   <div>
-    <div i-carbon-campsite text-4xl inline-block />
-    <p>
+    <img src="/logo.png" alt="Gandalf" class="mx-auto" />
+    <h1 mt-5>
       <a rel="noreferrer" href="https://github.com/antfu/vitesse-lite" target="_blank">
-        Vitesse Lite
+        Gandalf
       </a>
-    </p>
+    </h1>
     <p>
-      <em text-sm op75>Opinionated Vite Starter Template</em>
+      <em text-sm op75>Planetarion Tools</em>
     </p>
 
     <div py-4 />
 
     <TheInput
       v-model="name"
-      placeholder="What's your name?"
+      placeholder="What's your panick?"
       autocomplete="false"
       @keydown.enter="go"
     />
 
     <div>
-      <button
-        class="m-3 text-sm btn"
-        :disabled="!name"
-        @click="go"
-      >
+      <button class="m-3 text-sm btn" :disabled="!name" @click="go">
         Go
       </button>
     </div>

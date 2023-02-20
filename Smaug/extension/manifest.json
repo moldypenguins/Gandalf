@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Smaug",
   "version": "1.0.0",
-  "description": "Planetarion Tools",
+  "description": "Gandalf Planetarion Tools",
   "browser_action": {
     "default_icon": "./assets/icon-512.png",
     "default_popup": "./dist/popup/index.html"
@@ -25,8 +25,8 @@
     "tabs",
     "storage",
     "activeTab",
-    "http://*.planetarion.com/",
-    "https://*.planetarion.com/",
+    "http://*/",
+    "https://*/",
     "webNavigation"
   ],
   "web_accessible_resources": [

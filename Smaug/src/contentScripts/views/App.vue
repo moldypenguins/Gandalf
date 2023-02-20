@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
 import 'uno.css'
+import Config from 'galadriel'
 import GandalfIcon from '~/assets/icon.svg'
 
 const [show, toggle] = useToggle(false)
@@ -15,12 +16,14 @@ const [show, toggle] = useToggle(false)
       transition="opacity duration-300"
       :class="show ? 'opacity-100' : 'opacity-0'"
     >
-      <h1 class="text-lg">Zero Tolerance</h1>
+      <h1 class="text-lg">{{ Config.alliance.name }}</h1>
       <SharedSubtitle />
+
+
     </div>
     <div
       class="flex w-10 h-10 rounded-full shadow cursor-pointer"
-      bg="gray-500 hover:gray-400"
+      bg="gray-400 hover:gray-200"
       @click="toggle()"
     >
       <GandalfIcon class="block m-auto text-white text-lg" />

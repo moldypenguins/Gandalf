@@ -8,6 +8,8 @@ export async function getManifest() {
 
   // update this file to update this manifest.json
   // can also be conditional based on your need
+  // TODO: needs to be updated to version 3
+  // see https://github.com/GoogleChrome/chrome-extensions-samples
   const manifest: Manifest.WebExtensionManifest = {
     manifest_version: 2,
     name: pkg.displayName || pkg.name,
@@ -35,11 +37,11 @@ export async function getManifest() {
       'tabs',
       'storage',
       'activeTab',
-      'http://*.planetarion.com/',
-      'https://*.planetarion.com/',
+      'http://*/',
+      'https://*/',
     ],
     content_scripts: [{
-      matches: ['http://*.planetarion.com/*', 'https://*.planetarion.com/*'],
+      matches: ['http://*/*', 'https://*/*'],
       js: ['./dist/contentScripts/index.global.js'],
     }],
     web_accessible_resources: [

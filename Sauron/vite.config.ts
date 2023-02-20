@@ -1,63 +1,65 @@
 /// <reference types="vitest" />
 
-import path from "path";
-import { defineConfig } from "vite";
-import Vue from "@vitejs/plugin-vue";
-import Pages from "vite-plugin-pages";
-import Components from "unplugin-vue-components/vite";
-import AutoImport from "unplugin-auto-import/vite";
-import Unocss from "unocss/vite";
-import VueMacros from "unplugin-vue-macros/vite";
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { defineConfig } from 'vite'
+import Vue from '@vitejs/plugin-vue'
+import Pages from 'vite-plugin-pages'
+import Components from 'unplugin-vue-components/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Unocss from 'unocss/vite'
+import VueMacros from 'unplugin-vue-macros/vite'
+import svgLoader from 'vite-svg-loader'
 
-import { fileURLToPath } from "url";
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
-    resolve: {
-        alias: {
-            "~/": `${path.resolve(__dirname, "src")}/`,
-        },
+  resolve: {
+    alias: {
+      '~/': `${path.resolve(__dirname, 'src')}/`,
     },
-    cacheDir: path.resolve(__dirname, "../node_modules/.vite"),
-    plugins: [
-        VueMacros({
-            plugins: {
-                vue: Vue({
-                    reactivityTransform: true,
-                }),
-            },
+  },
+  cacheDir: path.resolve(__dirname, '../node_modules/.vite'),
+  plugins: [
+    VueMacros({
+      plugins: {
+        vue: Vue({
+          reactivityTransform: true,
         }),
+      },
+    }),
+    svgLoader(),
 
-        // https://github.com/hannoeru/vite-plugin-pages
-        Pages(),
+    // https://github.com/hannoeru/vite-plugin-pages
+    Pages(),
 
-        // https://github.com/antfu/unplugin-auto-import
-        AutoImport({
-            imports: [
-                "vue",
-                "vue/macros",
-                "vue-router",
-                "@vueuse/core",
-            ],
-            dts: true,
-            dirs: [
-                "./src/composables",
-            ],
-            vueTemplate: true,
-        }),
+    // https://github.com/antfu/unplugin-auto-import
+    AutoImport({
+      imports: [
+        'vue',
+        'vue/macros',
+        'vue-router',
+        '@vueuse/core',
+      ],
+      dts: true,
+      dirs: [
+        './src/composables',
+      ],
+      vueTemplate: true,
+    }),
 
-        // https://github.com/antfu/vite-plugin-components
-        Components({
-            dts: true,
-        }),
+    // https://github.com/antfu/vite-plugin-components
+    Components({
+      dts: true,
+    }),
 
-        // https://github.com/antfu/unocss
-        // see unocss.config.ts for config
-        Unocss(),
-    ],
+    // https://github.com/antfu/unocss
+    // see unocss.config.ts for config
+    Unocss(),
+  ],
 
-    // https://github.com/vitest-dev/vitest
-    test: {
-        environment: "jsdom",
-    },
-});
+  // https://github.com/vitest-dev/vitest
+  test: {
+    environment: 'jsdom',
+  },
+})

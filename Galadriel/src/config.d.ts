@@ -28,7 +28,6 @@ export default interface Config {
   }
   alliance: {
     name: string | null;
-    addon?: string;
     attack?: {
       default_waves?: number;
       after_land_ticks?: number;
