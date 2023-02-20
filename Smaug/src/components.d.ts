@@ -10,7 +10,6 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Logo: typeof import('./components/Logo.vue')['default']
-    PixelarticonsZap: typeof import('~icons/pixelarticons/zap')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SharedSubtitle: typeof import('./components/SharedSubtitle.vue')['default']
