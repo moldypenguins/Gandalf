@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
 import 'uno.css'
+import GandalfIcon from '~/assets/icon.svg'
 
 const [show, toggle] = useToggle(false)
 </script>
@@ -14,17 +15,15 @@ const [show, toggle] = useToggle(false)
       transition="opacity duration-300"
       :class="show ? 'opacity-100' : 'opacity-0'"
     >
-      <h1 class="text-lg">
-        Vitesse WebExt
-      </h1>
+      <h1 class="text-lg">Zero Tolerance</h1>
       <SharedSubtitle />
     </div>
     <div
       class="flex w-10 h-10 rounded-full shadow cursor-pointer"
-      bg="teal-600 hover:teal-700"
+      bg="gray-500 hover:gray-400"
       @click="toggle()"
     >
-      <pixelarticons-power class="block m-auto text-white text-lg" />
+      <GandalfIcon class="block m-auto text-white text-lg" />
     </div>
   </div>
 </template>

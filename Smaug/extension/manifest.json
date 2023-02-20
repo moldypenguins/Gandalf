@@ -25,8 +25,8 @@
     "tabs",
     "storage",
     "activeTab",
-    "http://*/",
-    "https://*/",
+    "http://*.planetarion.com/",
+    "https://*.planetarion.com/",
     "webNavigation"
   ],
   "web_accessible_resources": [

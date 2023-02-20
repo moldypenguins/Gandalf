@@ -30,6 +30,7 @@ const configDefault: Config = {
   },
   alliance: {
     name: null,
+    addon: 'Smaug',
     attack: {
       default_waves: 3,
       after_land_ticks: 2,

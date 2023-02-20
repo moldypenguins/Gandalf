@@ -35,11 +35,11 @@ export async function getManifest() {
       'tabs',
       'storage',
       'activeTab',
-      'http://*/',
-      'https://*/',
+      'http://*.planetarion.com/',
+      'https://*.planetarion.com/',
     ],
     content_scripts: [{
-      matches: ['http://*/*', 'https://*/*'],
+      matches: ['http://*.planetarion.com/*', 'https://*.planetarion.com/*'],
       js: ['./dist/contentScripts/index.global.js'],
     }],
     web_accessible_resources: [

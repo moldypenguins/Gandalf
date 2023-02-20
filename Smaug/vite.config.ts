@@ -1,9 +1,7 @@
 /// <reference types="vitest" />
 
-
-
-
 import { dirname, relative, resolve } from 'path'
+import { fileURLToPath } from 'url'
 import type { UserConfig } from 'vite'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
@@ -12,10 +10,10 @@ import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import UnoCSS from 'unocss/vite'
+import svgLoader from 'vite-svg-loader'
 import { isDev, port, r } from './scripts/utils'
 
-import { fileURLToPath } from 'url';
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export const sharedConfig: UserConfig = {
   root: r('src'),
@@ -24,12 +22,13 @@ export const sharedConfig: UserConfig = {
       '~/': `${r('src')}/`,
     },
   },
-  cacheDir: resolve(__dirname, "../node_modules/.vite"),
+  cacheDir: resolve(__dirname, '../node_modules/.vite'),
   define: {
     __DEV__: isDev,
   },
   plugins: [
     Vue(),
+    svgLoader(),
 
     AutoImport({
       imports: [

@@ -29,7 +29,8 @@ const configLocal: Config = {
     telegram_id: ''
   },
   alliance: {
-    name: ''
+    name: '',
+    addon: 'Smaug'
   },
   discord: {
     token: '',
