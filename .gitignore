@@ -60,6 +60,7 @@ dist-ssr/
 
 # Editor directories and files
 *.workspace
+*.code-workspace
 
 # Others
 .DS_Store
