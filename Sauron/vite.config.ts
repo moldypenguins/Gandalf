@@ -21,9 +21,9 @@ export default defineConfig({
   },
   cacheDir: path.resolve(__dirname, '../node_modules/.vite'),
   plugins: [
-    VueMacros.default({
+    VueMacros({
       plugins: {
-        vue: Vue.default({
+        vue: Vue({
           reactivityTransform: true,
         }),
       },
@@ -31,7 +31,7 @@ export default defineConfig({
     svgLoader(),
 
     // https://github.com/hannoeru/vite-plugin-pages
-    Pages.default(),
+    Pages(),
 
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
@@ -49,13 +49,13 @@ export default defineConfig({
     }),
 
     // https://github.com/antfu/vite-plugin-components
-    Components.default({
+    Components({
       dts: true,
     }),
 
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
-    Unocss.default(),
+    Unocss(),
   ],
 
   // https://github.com/vitest-dev/vitest
