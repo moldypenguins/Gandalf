@@ -27,7 +27,7 @@ export const sharedConfig: UserConfig = {
     __DEV__: isDev,
   },
   plugins: [
-    Vue(),
+    Vue.default(),
     svgLoader(),
 
     AutoImport({
@@ -43,23 +43,23 @@ export const sharedConfig: UserConfig = {
     }),
 
     // https://github.com/antfu/unplugin-vue-components
-    Components({
+    Components.default({
       dirs: [r('src/components')],
       // generate `components.d.ts` for ts support with Volar
       dts: r('src/components.d.ts'),
       resolvers: [
         // auto import icons
-        IconsResolver({
+        IconsResolver.default({
           componentPrefix: '',
         }),
       ],
     }),
 
     // https://github.com/antfu/unplugin-icons
-    Icons(),
+    Icons.default(),
 
     // https://github.com/unocss/unocss
-    UnoCSS(),
+    UnoCSS.default(),
 
     // rewrite assets to use relative path
     {
