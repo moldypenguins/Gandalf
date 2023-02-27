@@ -14,7 +14,7 @@
     "axios": "^1.2.2",
     "dayjs": "^1.11.7",
     "mongoose": "^6.7.2",
-    "mongoose-autopopulate": "^0.17.1"
+    "mongoose-autopopulate": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^8.32.0"
