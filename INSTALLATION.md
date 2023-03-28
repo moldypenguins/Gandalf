@@ -49,8 +49,7 @@ sudo vi /etc/ssh/sshd_config
     PermitEmptyPasswords no
 sudo systemctl restart sshd
 exit
-```
-
+S
 ## Login as [USERNAME]
 
 ```bash
@@ -131,8 +130,8 @@ sudo vi /etc/apt/sources.list.d/mongodb-org-5.0.list
   deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse
 sudo apt-get update
 
-#wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
-#sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
 
 sudo apt-get install -y mongodb-org
 #start mongod on boot
@@ -160,19 +159,23 @@ sudo apt -y install gcc g++ make
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt-get install -y nodejs
 node -v
-curl -fsSL https://get.pnpm.io/install.sh | sh -
-sudo pnpm setup
+#curl -fsSL https://get.pnpm.io/install.sh | sh -
+#sudo pnpm setup
+sudo apt install node-typescript
+sudo npm install -D typescript@next
 ```
 
 ### download git
 ```bash
 git clone https://github.com/moldypenguins/Gandalf MiddleEarth
 cd MiddleEarth/
+npm i
 ```
 
 ### Qodana
 ```bash
-curl -fsSL https://jb.gg/qodana-cli/install | bash
+sudo curl -fsSL https://jb.gg/qodana-cli/install | bash
+#mv: cannot move './qodana' to '/usr/local/bin/qodana': Permission denied
 ```
 
 
@@ -188,23 +191,21 @@ cd ..
 
 ### install node modules
 ```bash
-pnpm i
-
 #verify the following
-sudo pm2 install pm2-logrotate
-sudo pm2 set pm2-logrotate:max_size 10M
-sudo pm2 set pm2-logrotate:compress true
+#sudo pm2 install pm2-logrotate
+#sudo pm2 set pm2-logrotate:max_size 10M
+#sudo pm2 set pm2-logrotate:compress true
 ```
 
 ```bash
 #ssl certificate
--suggest using cloudflare (with crowdsec)
+#-suggest using cloudflare (with crowdsec)
 
 
-
-cd ~/MiddleEarth/Sauron/ssl/
-openssl req -new -newkey rsa:2048 -nodes -keyout yourdomain.key -out yourdomain.csr
-cd ~/MiddleEarth/
+#no webby atm
+#cd ~/MiddleEarth/Sauron/ssl/
+#openssl req -new -newkey rsa:2048 -nodes -keyout yourdomain.key -out yourdomain.csr
+#cd ~/MiddleEarth/
 ```
 
 

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -23,124 +23,124 @@
  **/
 
 
-import Config from 'Galadriel/src/galadriel.ts';
-import dayjs from 'dayjs';
-import axios from 'axios';
-import X2JS from 'x2js';
-import minimist from 'minimist';
-import {DiscordUser, User, Mordor, Ship, TelegramUser, Tick, PlanetDump, Planet, Cluster, Galaxy, GalaxyDump, Alliance, AllianceDump} from 'mordor';
+import Config from "Galadriel";
+import dayjs from "dayjs";
+import axios from "axios";
+import X2JS from "x2js";
+import minimist from "minimist";
+import {DiscordUser, User, Mordor, Ship, TelegramUser, Tick, PlanetDump, Planet, Cluster, Galaxy, GalaxyDump, Alliance, AllianceDump} from "mordor";
 
 
 let argv = minimist(process.argv.slice(2), {
-  string: ['start'],
-  boolean: [],
-  alias: {s:'start'},
-  unknown: false
+    string: ["start"],
+    boolean: [],
+    alias: {s:"start"},
+    unknown: false
 });
 
 Mordor.connection.once("open", async() => {
-  if(!argv.start) {
-    console.log(`A start date must be provided.`);
-  }
-  else {
-    await clear_database();
-    await load_ships();
-    await load_ticks(dayjs(argv.start));
-    await setup_admin();
-  }
-  process.exit(0);
+    if(!argv.start) {
+        console.log("A start date must be provided.");
+    }
+    else {
+        await clear_database();
+        await load_ships();
+        await load_ticks(dayjs(argv.start));
+        await setup_admin();
+    }
+    process.exit(0);
 });
 
 
 let clear_database = async() => {
-  await Ship.deleteMany({});
-  await Tick.deleteMany({});
+    await Ship.deleteMany({});
+    await Tick.deleteMany({});
 
-  await PlanetDump.deleteMany({});
-  await GalaxyDump.deleteMany({});
-  await AllianceDump.deleteMany({});
-  await Planet.deleteMany({});
-  await Galaxy.deleteMany({});
-  await Cluster.deleteMany({});
-  await Alliance.deleteMany({});
+    await PlanetDump.deleteMany({});
+    await GalaxyDump.deleteMany({});
+    await AllianceDump.deleteMany({});
+    await Planet.deleteMany({});
+    await Galaxy.deleteMany({});
+    await Cluster.deleteMany({});
+    await Alliance.deleteMany({});
 
-  await User.updateMany({}, {$unset:{planet:""}})
+    await User.updateMany({}, {$unset:{planet:""}});
 };
 
 let load_ships = async() => {
-  let shipstats;
-  try {
-    shipstats = await axios.get(Config.pa.dumps.ship_stats);
-  } catch (error) {
-    console.error(error);
-  }
-  if(shipstats?.status === 200 &&  shipstats?.data !== undefined) {
-    let x2js = new X2JS();
-    let json = x2js.xml2js(shipstats.data);
-    // load each one in to the database
-    let ship_id = 0;
-    for (let json_ship of json["stats"]["ship"]) {
-      let ship = new Ship(json_ship);
-      ship._id = Mordor.Types.ObjectId();
-      ship.ship_id = ship_id++; // set primary key
-      let saved = await ship.save();
-      if (saved) {
-        console.log(`${saved.name} saved to Ships collection!`);
-      } else {
-        console.error(`${json_ship["name"]} could not be saved!`)
-      }
+    let shipstats;
+    try {
+        shipstats = await axios.get(Config.pa.dumps.ship_stats);
+    } catch (error) {
+        console.error(error);
     }
-  }
+    if(shipstats?.status === 200 &&  shipstats?.data !== undefined) {
+        let x2js = new X2JS();
+        let json = x2js.xml2js(shipstats.data);
+        // load each one in to the database
+        let ship_id = 0;
+        for (let json_ship of json["stats"]["ship"]) {
+            let ship = new Ship(json_ship);
+            ship._id = Mordor.Types.ObjectId();
+            ship.ship_id = ship_id++; // set primary key
+            let saved = await ship.save();
+            if (saved) {
+                console.log(`${saved.name} saved to Ships collection!`);
+            } else {
+                console.error(`${json_ship["name"]} could not be saved!`);
+            }
+        }
+    }
 };
 
 
 let load_ticks = async(start) => {
-  if(!await Tick.exists({ tick: 0 })) {
-    await new Tick({ _id: Mordor.Types.ObjectId(), tick: 0, timestamp: start }).save();
-    console.log("Added first tick!");
-  } else {
-    console.log("First tick already exists!");
-  }
+    if(!await Tick.exists({ tick: 0 })) {
+        await new Tick({ _id: Mordor.Types.ObjectId(), tick: 0, timestamp: start }).save();
+        console.log("Added first tick!");
+    } else {
+        console.log("First tick already exists!");
+    }
 };
 
 
 let setup_admin = async() => {
-  if(!await User.exists({pa_nick: Config.admin.pa_nick})) {
-    let adm = new User({
-      _id: Mordor.Types.ObjectId(),
-      pa_nick: Config.admin.pa_nick,
-      access: 5
-    });
+    if(!await User.exists({pa_nick: Config.admin.pa_nick})) {
+        let adm = new User({
+            _id: Mordor.Types.ObjectId(),
+            pa_nick: Config.admin.pa_nick,
+            access: 5
+        });
 
-    if(Config.admin.discord_id) {
-      if(await DiscordUser.exists({dsuser_id: Config.admin.discord_id})) {
-        adm.ds_user = await DiscordUser.findOne({dsuser_id: Config.admin.discord_id});
-      }
-      else {
-        adm.ds_user = await new DiscordUser({
-          _id: Mordor.Types.ObjectId(),
-          dsuser_id: Config.admin.discord_id
-        }).save();
-      }
-    }
-    if(Config.admin.telegram_id) {
-      if(await TelegramUser.exists({tguser_id: Config.admin.telegram_id})) {
-        adm.tg_user = await TelegramUser.findOne({tguser_id: Config.admin.telegram_id});
-      }
-      else {
-        adm.tg_user = await new TelegramUser({
-          _id: Mordor.Types.ObjectId(),
-          tguser_id: Config.admin.telegram_id
-        }).save();
-      }
-    }
+        if(Config.admin.discord_id) {
+            if(await DiscordUser.exists({dsuser_id: Config.admin.discord_id})) {
+                adm.ds_user = await DiscordUser.findOne({dsuser_id: Config.admin.discord_id});
+            }
+            else {
+                adm.ds_user = await new DiscordUser({
+                    _id: Mordor.Types.ObjectId(),
+                    dsuser_id: Config.admin.discord_id
+                }).save();
+            }
+        }
+        if(Config.admin.telegram_id) {
+            if(await TelegramUser.exists({tguser_id: Config.admin.telegram_id})) {
+                adm.tg_user = await TelegramUser.findOne({tguser_id: Config.admin.telegram_id});
+            }
+            else {
+                adm.tg_user = await new TelegramUser({
+                    _id: Mordor.Types.ObjectId(),
+                    tguser_id: Config.admin.telegram_id
+                }).save();
+            }
+        }
 
-    try {
-      await adm.save();
-      console.log(`${Config.admin.pa_nick} saved to Users as Administrator`);
-    } catch (error) {
-      console.error(`${error}`)
+        try {
+            await adm.save();
+            console.log(`${Config.admin.pa_nick} saved to Users as Administrator`);
+        } catch (error) {
+            console.error(`${error}`);
+        }
     }
-  }
 };
 
