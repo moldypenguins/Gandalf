@@ -15,7 +15,7 @@
     ".": "./dist/galadriel.js"
   },
   "devDependencies": {
-    "typescript": "^4.9.5",
+    "typescript": "^5.0.3",
     "@types/node": "^18.13.0",
     "eslint": "^8.32.0"
   }
