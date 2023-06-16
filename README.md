@@ -7,8 +7,8 @@
 <h3>Planetarion Tools</h3>
 
 ***  
-![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge)
-![Package Version](https://img.shields.io/github/package-json/v/moldypenguins/Gandalf?logo=GitHub&style=for-the-badge)
+![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge&color=BD0000)
+![Package Version](https://img.shields.io/github/package-json/v/moldypenguins/Gandalf?logo=GitHub&style=for-the-badge&color=007EC6)
 ![Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)  
 ![Open Issues](https://img.shields.io/github/issues-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Open Pull Requests](https://img.shields.io/github/issues-pr-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
@@ -36,8 +36,6 @@
 
 ## Environment
 [![Ubuntu](https://img.shields.io/static/v1?style=for-the-badge&logo=Ubuntu&label=Ubuntu&message=22.04.1&color=E95420)](https://ubuntu.com/)
-[![CrowdSec](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=CrowdSec&message=1.4.0&color=FCC624)](https://crowdsec.net/)
-[![Lynis](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=Lynis&message=3.0.8&color=FCC624)](https://cisofy.com/lynis/)  
 [![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=16.13.0&color=339933)](https://nodejs.org/)
 [![NPM](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=NPM&message=8.19.3&color=990000)](https://www.npmjs.com/)
 [![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=6.0.3&color=47A248)](https://www.mongodb.com/)
@@ -58,10 +56,9 @@ Bot Status
 Check [Gandalf Wiki](https://github.com/moldypenguins/Gandalf/wiki) for reference.  
 See [SECURITY.md](SECURITY.md) for feature requests or bug reports.  
 
-Find us on Discord  
-[![Discord](https://img.shields.io/discord/481232479693307904?label=%23wtf&logo=discord&style=for-the-badge)](https://discord.gg/Ean6FvV)   
-Find us on Telegram  
-[![Telegram](https://img.shields.io/badge/Gandalf%20Support-27A7E7?logo=telegram&style=for-the-badge&labelColor=555555)](https://t.me/+UkMZETiCNjWhtg_D)  
+| Find us on Discord                                                                                                                        | Find us on Telegram                                                                                                                                      |
+|-------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [![Discord](https://img.shields.io/discord/481232479693307904?label=%23wtf&logo=discord&style=for-the-badge)](https://discord.gg/Ean6FvV) | [![Telegram](https://img.shields.io/badge/Gandalf%20Support-27A7E7?logo=telegram&style=for-the-badge&labelColor=555555)](https://t.me/+UkMZETiCNjWhtg_D) |
 
 
 
