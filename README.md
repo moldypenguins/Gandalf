@@ -50,8 +50,7 @@ See [INSTALLATION.md](INSTALLATION.md) for setup guide.
 
 
 ## Issues / Support
-Bot Status  
-![Uptime Robot](https://img.shields.io/uptimerobot/status/m794584411-5dccaf5bfff4f3a158952de0?logo=uptimerobot&label=Status&logo=uptimerobot&style=for-the-badge)  
+![Uptime Robot](https://img.shields.io/uptimerobot/status/m794584411-5dccaf5bfff4f3a158952de0?label=Bot%20Status&logo=ovh&style=for-the-badge)  
 
 Check [Gandalf Wiki](https://github.com/moldypenguins/Gandalf/wiki) for reference.  
 See [SECURITY.md](SECURITY.md) for feature requests or bug reports.  
