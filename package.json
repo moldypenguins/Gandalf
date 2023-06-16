@@ -21,7 +21,7 @@
     "Sam Powis <knoid1@gmail.com>"
   ],
   "engines": {
-    "node": ">=16.19.0",
+    "node": ">=16.13.0",
     "npm": ">=8.19.3"
   },
   "workspaces": [

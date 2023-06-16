@@ -3,7 +3,7 @@
   "description": "Planetarion Tools - Bot",
   "private": true,
   "engines": {
-    "node": ">=16.19.0",
+    "node": ">=16.13.0",
     "npm": ">=8.19.3"
   },
   "version": "1.0.0-alpha",
