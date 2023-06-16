@@ -8,21 +8,20 @@
 
 ***  
 ![License](https://img.shields.io/github/license/moldypenguins/Gandalf?logo=GNU&style=for-the-badge)
-![GitHub (Pre-)Release](https://img.shields.io/github/v/release/moldypenguins/Gandalf?include_prereleases&label=Version&logo=GitHub&style=for-the-badge)
-![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/moldypenguins/Gandalf?logo=GitHub&style=for-the-badge)  
+![GitHub package.json version](https://img.shields.io/github/package-json/v/moldypenguins/Gandalf?logo=GitHub&style=for-the-badge)
+![Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)  
 ![Contributors](https://img.shields.io/github/contributors/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
-![Last Commit](https://img.shields.io/github/last-commit/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
-![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/moldypenguins/Gandalf?style=for-the-badge&label=Code%20Grade&logo=CodeFactor)  
+![Languages](https://img.shields.io/github/languages/count/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
+![Top Language](https://img.shields.io/github/languages/top/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)  
+
 ![Open Issues](https://img.shields.io/github/issues-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
 ![Open Pull Requests](https://img.shields.io/github/issues-pr-raw/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
-![Snyk Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/moldypenguins/Gandalf?style=for-the-badge&logo=Snyk)  
-![Languages](https://img.shields.io/github/languages/count/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
-![Top Language](https://img.shields.io/github/languages/top/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)
-![Total Lines](https://img.shields.io/tokei/lines/github/moldypenguins/Gandalf?style=for-the-badge&logo=GitHub)  
-![Dependabot](https://img.shields.io/static/v1?style=for-the-badge&label=Dependabot&message=enabled&color=33CC11&logo=Dependabot)
+![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/moldypenguins/Gandalf?style=for-the-badge&label=Code%20Grade&logo=CodeFactor)  
+![Snyk Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/moldypenguins/Gandalf?style=for-the-badge&logo=Snyk)
+![Dependabot](https://img.shields.io/static/v1?style=for-the-badge&label=Dependabot&message=enabled&color=33CC11&logo=Dependabot)  
 ![CodeQL](https://img.shields.io/github/actions/workflow/status/moldypenguins/Gandalf/codeql-analysis.yml?label=CodeQL&logo=github&style=for-the-badge)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/moldypenguins/Gandalf/eslint.yml?label=ESLint&logo=eslint&style=for-the-badge)
-![Qodana](https://img.shields.io/github/actions/workflow/status/moldypenguins/Gandalf/code_quality.yml?label=Qodana&logo=jetbrains&style=for-the-badge)  
+![Qodana](https://img.shields.io/github/actions/workflow/status/moldypenguins/Gandalf/code_quality.yml?label=Qodana&logo=jetbrains&style=for-the-badge)
 ***  
 
 ## Table of Contents
@@ -60,8 +59,12 @@ See [INSTALLATION.md](INSTALLATION.md) for setup guide.
 Check [Gandalf Wiki](https://github.com/moldypenguins/Gandalf/wiki) for reference.  
 See [SECURITY.md](SECURITY.md) for feature requests or bug reports.  
 
-Find us on [Discord](https://discord.gg/Ean6FvV) or [Telegram](https://t.me/+UkMZETiCNjWhtg_D)  
-![Discord](https://img.shields.io/discord/481232479693307904?label=%23wtf&logo=discord&style=flat-square)
+Find us on [Discord](https://discord.gg/Ean6FvV)  
+![Discord](https://img.shields.io/discord/481232479693307904?label=%23wtf&logo=discord&style=for-the-badge)  
+Find us on [Telegram](https://t.me/+UkMZETiCNjWhtg_D)  
+![Telegram](https://img.shields.io/badge/Gandalf%20Support-27A7E7?logo=telegram&style=for-the-badge&labelColor=555555)  
+Bot Status  
+![Uptime Robot](https://img.shields.io/uptimerobot/status/m784662292-dda412300dd77e355edda2d7?logo=uptimerobot&style=for-the-badge)
 
 ## Roadmap
 See [ROADMAP.md](ROADMAP.md) for more information.
