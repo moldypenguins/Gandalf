@@ -63,7 +63,7 @@ Find us on [Discord](https://discord.gg/Ean6FvV)
 Find us on [Telegram](https://t.me/+UkMZETiCNjWhtg_D)  
 ![Telegram](https://img.shields.io/badge/Gandalf%20Support-27A7E7?logo=telegram&style=for-the-badge&labelColor=555555)  
 Bot Status  
-![Uptime Robot](https://img.shields.io/uptimerobot/status/m794584411-5dccaf5bfff4f3a158952de0?logo=uptimerobot&label=UptimeRobot&logo=uptimerobot&style=for-the-badge)
+![Uptime Robot](https://img.shields.io/uptimerobot/status/m794584411-5dccaf5bfff4f3a158952de0?logo=uptimerobot&label=Status&logo=uptimerobot&style=for-the-badge)
 
 ## Roadmap
 See [ROADMAP.md](ROADMAP.md) for more information.
