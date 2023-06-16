@@ -83,7 +83,7 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 
 ## Author
-**Craig Roberts**  
+_**Craig Roberts**_  
 [![GitHub](https://img.shields.io/badge/moldypenguins-6e5494?labelColor=555555&logo=github&style=for-the-badge)](https://github.com/moldypenguins)
 [![Discord](https://img.shields.io/badge/@moldypenguins-5865F2?labelColor=555555&logo=discord&style=for-the-badge)](https://discordapp.com/users/346771877211144194)
 [![Telegram](https://img.shields.io/badge/@moldypenguins-27A7E7?labelColor=555555&logo=telegram&style=for-the-badge)](https://t.me/moldypenguins)  
@@ -91,9 +91,16 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
     
 
 ## Contributors
-* **[Braden Edmunds](https://github.com/bradenedmunds)**
-* **[Alex High](https://github.com/FreshLondon)** - [@UltimateNewbie](https://t.me/UltimateNewbie)
-* **[Sam Powis](https://github.com/knoidable)** - [@knoidable](https://t.me/knoidable)
+_**Braden Edmunds**_  
+[![GitHub](https://img.shields.io/badge/bradenedmunds-6e5494?labelColor=555555&logo=github&style=for-the-badge)](https://github.com/bradenedmunds)  
+
+_**Alex High**_    
+[![GitHub](https://img.shields.io/badge/FreshLondon-6e5494?labelColor=555555&logo=github&style=for-the-badge)](https://github.com/FreshLondon)
+[![Telegram](https://img.shields.io/badge/@UltimateNewbie-27A7E7?labelColor=555555&logo=telegram&style=for-the-badge)](https://t.me/UltimateNewbie)  
+
+_**Sam Powis**_  
+[![GitHub](https://img.shields.io/badge/bradenedmunds-6e5494?labelColor=555555&logo=github&style=for-the-badge)](https://github.com/knoidable)
+[![Telegram](https://img.shields.io/badge/@knoidable-27A7E7?labelColor=555555&logo=telegram&style=for-the-badge)](https://t.me/knoidable)  
 
 
 ## Licenses
