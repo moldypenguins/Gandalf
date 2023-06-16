@@ -18,7 +18,7 @@
     "minimist": "^1.2.7",
     "numeral": "^2.0.6",
     "p-retry": "5.1.2",
-    "p-timeout": "6.1.1"
+    "p-timeout": "6.1.2"
   },
   "devDependencies": {
     "eslint": "^8.32.0"
