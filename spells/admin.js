@@ -142,7 +142,7 @@ let Admin_addmember = (args, ctx) => {
       let access_level = 'Recruit';
       console.log(`tguser: ${tguser}`);
       console.log(`nick: ${nick}`);
-      if (!tguser || !nick){
+      if (!tguser || !nick  || !isNaN(nick)){
         reject(Admin_addmember_usage);
       } else { 
         let mentions = await ctx.mentions.get(ctx.message);
