@@ -97,6 +97,7 @@ _**Alex High**_
 
 _**Sam Powis**_  
 [![GitHub](https://img.shields.io/badge/knoidable-6e5494?labelColor=555555&logo=github&style=for-the-badge)](https://github.com/knoidable)
+[![Discord](https://img.shields.io/badge/@knoid-5865F2?labelColor=555555&logo=discord&style=for-the-badge)](https://discordapp.com/users/279845476130488332)
 [![Telegram](https://img.shields.io/badge/@knoidable-27A7E7?labelColor=555555&logo=telegram&style=for-the-badge)](https://t.me/knoidable)  
 
 
