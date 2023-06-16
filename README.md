@@ -52,15 +52,18 @@ See [INSTALLATION.md](INSTALLATION.md) for setup guide.
 
 
 ## Issues / Support
+Bot Status  
+![Uptime Robot](https://img.shields.io/uptimerobot/status/m794584411-5dccaf5bfff4f3a158952de0?logo=uptimerobot&label=Status&logo=uptimerobot&style=for-the-badge)  
+
 Check [Gandalf Wiki](https://github.com/moldypenguins/Gandalf/wiki) for reference.  
 See [SECURITY.md](SECURITY.md) for feature requests or bug reports.  
 
-Find us on [Discord](https://discord.gg/Ean6FvV)  
-![Discord](https://img.shields.io/discord/481232479693307904?label=%23wtf&logo=discord&style=for-the-badge)  
-Find us on [Telegram](https://t.me/+UkMZETiCNjWhtg_D)  
-![Telegram](https://img.shields.io/badge/Gandalf%20Support-27A7E7?logo=telegram&style=for-the-badge&labelColor=555555)  
-Bot Status  
-![Uptime Robot](https://img.shields.io/uptimerobot/status/m794584411-5dccaf5bfff4f3a158952de0?logo=uptimerobot&label=Status&logo=uptimerobot&style=for-the-badge)
+Find us on Discord  
+[![Discord](https://img.shields.io/discord/481232479693307904?label=%23wtf&logo=discord&style=for-the-badge)](https://discord.gg/Ean6FvV)   
+Find us on Telegram  
+[![Telegram](https://img.shields.io/badge/Gandalf%20Support-27A7E7?logo=telegram&style=for-the-badge&labelColor=555555)](https://t.me/+UkMZETiCNjWhtg_D)  
+
+
 
 ## Roadmap
 See [ROADMAP.md](ROADMAP.md) for more information.
@@ -80,11 +83,15 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 
 ## Author
-* **[Craig Roberts](https://github.com/moldypenguins)** - [@moldypenguins](https://t.me/moldypenguins)
+**Craig Roberts**  
+[![GitHub](https://img.shields.io/badge/moldypenguins-6e5494?labelColor=555555&logo=github&style=for-the-badge)](https://github.com/moldypenguins)
+[![Discord](https://img.shields.io/badge/@moldypenguins-5865F2?labelColor=555555&logo=discord&style=for-the-badge)](https://discordapp.com/users/346771877211144194)
+[![Telegram](https://img.shields.io/badge/@moldypenguins-27A7E7?labelColor=555555&logo=telegram&style=for-the-badge)](https://t.me/moldypenguins)  
 
+    
 
 ## Contributors
-* **[Braden Edmunds](https://github.com/bradenedmunds)** - [@blanq4](https://t.me/blanq4)
+* **[Braden Edmunds](https://github.com/bradenedmunds)**
 * **[Alex High](https://github.com/FreshLondon)** - [@UltimateNewbie](https://t.me/UltimateNewbie)
 * **[Sam Powis](https://github.com/knoidable)** - [@knoidable](https://t.me/knoidable)
 
