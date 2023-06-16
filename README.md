@@ -96,7 +96,7 @@ _**Alex High**_
 [![Telegram](https://img.shields.io/badge/@UltimateNewbie-27A7E7?labelColor=555555&logo=telegram&style=for-the-badge)](https://t.me/UltimateNewbie)  
 
 _**Sam Powis**_  
-[![GitHub](https://img.shields.io/badge/bradenedmunds-6e5494?labelColor=555555&logo=github&style=for-the-badge)](https://github.com/knoidable)
+[![GitHub](https://img.shields.io/badge/knoidable-6e5494?labelColor=555555&logo=github&style=for-the-badge)](https://github.com/knoidable)
 [![Telegram](https://img.shields.io/badge/@knoidable-27A7E7?labelColor=555555&logo=telegram&style=for-the-badge)](https://t.me/knoidable)  
 
 
