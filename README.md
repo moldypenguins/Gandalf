@@ -93,6 +93,7 @@ _**Braden Edmunds**_
 
 _**Alex High**_    
 [![GitHub](https://img.shields.io/badge/FreshLondon-6e5494?labelColor=555555&logo=github&style=for-the-badge)](https://github.com/FreshLondon)
+[![Discord](https://img.shields.io/badge/@HIGHHIGH-5865F2?labelColor=555555&logo=discord&style=for-the-badge)](https://discordapp.com/users/400039161391874069)
 [![Telegram](https://img.shields.io/badge/@UltimateNewbie-27A7E7?labelColor=555555&logo=telegram&style=for-the-badge)](https://t.me/UltimateNewbie)  
 
 _**Sam Powis**_  
