@@ -1,37 +1,23 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "module": "ESNext",
     "target": "es2021",
     "lib": ["DOM", "ESNext"],
     "strict": true,
-    "jsx": "preserve",
+    "esModuleInterop": true,
     "incremental": false,
     "skipLibCheck": true,
-    "moduleResolution": "nodenext",
-    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
-    "resolveJsonModule": true,
-    "noUnusedLocals": true,
-    "strictNullChecks": true,
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
-    "types": [
-      "vite/client",
-      "vite-plugin-pages/client",
-      "unplugin-vue-macros/macros-global"
-    ],
-    "paths": {
-      "~/*": ["src/*"]
-    }
+    "outDir": "./dist",
+    "sourceMap": true,
+    "declaration": true
   },
-  "vueCompilerOptions": {
-    "plugins": [
-      "@vue-macros/volar/define-model",
-      "@vue-macros/volar/define-slots"
-    ]
-  },
-  "exclude": ["dist", "node_modules"]
+  "typeRoots": [
+    "./node_modules/@types/"
+  ],
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.example.ts"]
 }

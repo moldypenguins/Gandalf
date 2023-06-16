@@ -22,7 +22,7 @@
  **/
 
 import util from 'util';
-import Config from 'Galadriel/src/galadriel.ts';
+import Config from "sauron";
 import { Mordor, Tick, User, Planet } from 'mordor';
 import Access from '../access.js';
 

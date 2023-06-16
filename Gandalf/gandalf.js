@@ -22,7 +22,7 @@
  **/
 
 
-import Config from "Galadriel/src/galadriel.ts";
+import Config from "sauron";
 import { Mordor, User, TelegramUser } from "mordor";
 import minimist from "minimist";
 import util from "util";

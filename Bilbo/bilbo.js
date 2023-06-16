@@ -23,12 +23,13 @@
  **/
 
 
-import Config from "Galadriel";
+import Config from "sauron";
 import dayjs from "dayjs";
 import axios from "axios";
 import X2JS from "x2js";
 import minimist from "minimist";
 import {DiscordUser, User, Mordor, Ship, TelegramUser, Tick, PlanetDump, Planet, Cluster, Galaxy, GalaxyDump, Alliance, AllianceDump} from "mordor";
+import * as util from "util";
 
 
 let argv = minimist(process.argv.slice(2), {
@@ -70,11 +71,12 @@ let clear_database = async() => {
 let load_ships = async() => {
     let shipstats;
     try {
-        shipstats = await axios.get(Config.pa.dumps.ship_stats);
+        shipstats = await axios.get(Config.pa.dumps.ship_stats, { responseType: "text", headers: { "User-Agent": "Gandalf-1.0.0" }});
     } catch (error) {
         console.error(error);
     }
     if(shipstats?.status === 200 &&  shipstats?.data !== undefined) {
+        console.log(`HERE: ${util.inspect(shipstats.request._header, true, 2, true)}`);
         let x2js = new X2JS();
         let json = x2js.xml2js(shipstats.data);
         // load each one in to the database

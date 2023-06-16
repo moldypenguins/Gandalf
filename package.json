@@ -27,31 +27,15 @@
   "workspaces": [
     "Bilbo",
     "Frodo",
-    "Galadriel",
     "Gandalf",
     "Mordor",
-    "Sauron",
-    "Smaug"
+    "Sauron"
   ],
-  "scripts": {
-    "start": "pm2 start MiddleEarth.config.js",
-    "restart": "pm2 restart MiddleEarth.config.js",
-    "stop": "pm2 stop MiddleEarth.config.js",
-    "delete": "pm2 delete MiddleEarth.config.js",
-    "list": "pm2 list",
-    "watch": "pm2 monit"
-  },
-  "dependencies": {
-    "pm2": "^5.2.2"
-  },
   "devDependencies": {
-    "@types/fs-extra": "^11.0.1",
     "@types/node": "^18.13.0",
     "eslint": "^8.34.0",
     "eslint-plugin-jsdoc": "^39.8.0",
-    "fs-extra": "^11.1.0",
     "nodemon": "^2.0.20",
-    "rimraf": "^4.1.2",
     "typescript": "^4.9.5"
   }
 }

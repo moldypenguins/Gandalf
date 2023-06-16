@@ -21,7 +21,7 @@
  * @summary Mongoose Model
  **/
 
-import Config from 'Galadriel/src/galadriel.ts';
+import Config from "sauron";
 import mongoose from 'mongoose';
 import mongooseAutoPopulate from 'mongoose-autopopulate';
 import {DiscordUser, TelegramUser} from "../mordor.js";

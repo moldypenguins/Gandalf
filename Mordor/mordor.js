@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -22,70 +22,70 @@
  **/
 
 
-import Config from 'Galadriel/src/galadriel.ts';
-import mongoose from 'mongoose';
+import Config from "sauron";
+import mongoose from "mongoose";
 import Alliance from "./models/Alliance.js";
-import AllianceDump from './models/AllianceDump.js';
+import AllianceDump from "./models/AllianceDump.js";
 import AllianceHistory from "./models/AllianceHistory.js";
-import Cluster from './models/Cluster.js';
-import ClusterHistory from './models/ClusterHistory.js';
-import DiscordGuild from './models/DiscordGuild.js';
-import DiscordUser from './models/DiscordUser.js';
-import Galaxy from './models/Galaxy.js';
-import GalaxyDump from './models/GalaxyDump.js';
-import GalaxyHistory from './models/GalaxyHistory.js';
-import HeroPower from './models/HeroPower.js';
-import Planet from './models/Planet.js';
-import PlanetDump from './models/PlanetDump.js';
-import PlanetHistory from './models/PlanetHistory.js';
-import PlanetTrack from './models/PlanetTrack.js';
-import Scan from './models/Scan.js';
-import ScanDevelopment from './models/ScanDevelopment.js';
-import ScanJumpgate from './models/ScanJumpgate.js';
-import ScanMilitary from './models/ScanMilitary.js';
-import ScanPlanet from './models/ScanPlanet.js';
-import ScanUnit from './models/ScanUnit.js';
-import Ship from './models/Ship.js';
-import TelegramChat from './models/TelegramChat.js';
-import TelegramUser from './models/TelegramUser.js';
-import Tick from './models/Tick.js';
-import User from './models/User.js';
+import Cluster from "./models/Cluster.js";
+import ClusterHistory from "./models/ClusterHistory.js";
+import DiscordGuild from "./models/DiscordGuild.js";
+import DiscordUser from "./models/DiscordUser.js";
+import Galaxy from "./models/Galaxy.js";
+import GalaxyDump from "./models/GalaxyDump.js";
+import GalaxyHistory from "./models/GalaxyHistory.js";
+import HeroPower from "./models/HeroPower.js";
+import Planet from "./models/Planet.js";
+import PlanetDump from "./models/PlanetDump.js";
+import PlanetHistory from "./models/PlanetHistory.js";
+import PlanetTrack from "./models/PlanetTrack.js";
+import Scan from "./models/Scan.js";
+import ScanDevelopment from "./models/ScanDevelopment.js";
+import ScanJumpgate from "./models/ScanJumpgate.js";
+import ScanMilitary from "./models/ScanMilitary.js";
+import ScanPlanet from "./models/ScanPlanet.js";
+import ScanUnit from "./models/ScanUnit.js";
+import Ship from "./models/Ship.js";
+import TelegramChat from "./models/TelegramChat.js";
+import TelegramUser from "./models/TelegramUser.js";
+import Tick from "./models/Tick.js";
+import User from "./models/User.js";
 
-mongoose.set('strictQuery', true);
+mongoose.set("strictQuery", true);
 mongoose.connect(`mongodb://${Config.db.url}`, {
     //user: Config.db.user,
     //pass: Config.db.pass,
     dbName: Config.db.name
-  }).catch((err) => console.log(err.reason));
+}).catch((err) => console.log(err.reason));
 mongoose.connection.on("error", (err) => console.log(err.reason));
-mongoose.connection.once("open", () => console.log(`Evil is stirring in Mordor.`));
+mongoose.connection.once("open", () => console.log("Evil is stirring in Mordor."));
 
 export {
-  mongoose as Mordor,
-  Alliance,
-  AllianceDump,
-  AllianceHistory,
-  Cluster,
-  ClusterHistory,
-  DiscordGuild,
-  DiscordUser,
-  Galaxy,
-  GalaxyDump,
-  GalaxyHistory,
-  HeroPower,
-  Planet,
-  PlanetDump,
-  PlanetHistory,
-  PlanetTrack,
-  Scan,
-  ScanDevelopment,
-  ScanJumpgate,
-  ScanMilitary,
-  ScanPlanet,
-  ScanUnit,
-  Ship,
-  TelegramChat,
-  TelegramUser,
-  Tick,
-  User,
+    mongoose as Mordor,
+    Alliance,
+    AllianceDump,
+    AllianceHistory,
+    Cluster,
+    ClusterHistory,
+    DiscordGuild,
+    DiscordUser,
+    Galaxy,
+    GalaxyDump,
+    GalaxyHistory,
+    HeroPower,
+    Planet,
+    PlanetDump,
+    PlanetHistory,
+    PlanetTrack,
+    Scan,
+    ScanDevelopment,
+    ScanJumpgate,
+    ScanMilitary,
+    ScanPlanet,
+    ScanUnit,
+    Ship,
+    TelegramChat,
+    TelegramUser,
+    Tick,
+    User,
 };

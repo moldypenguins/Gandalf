@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -22,17 +22,17 @@
  **/
 
 
-import Config from 'Galadriel/src/galadriel.ts';
-import mongoose from 'mongoose';
+import Config from "sauron";
+import mongoose from "mongoose";
 
 let DiscordUserSchema = new mongoose.Schema({
-  _id:                  {type:mongoose.Schema.Types.ObjectId, required:true},
-  dsuser_id:            {type:Number, unique:true, required:true},
-  dsuser_first_name:    {type:String},
-  dsuser_last_name:     {type:String},
-  dsuser_username:      {type:String},
-  dsuser_photo_url:     {type:String},
-  dsuser_language_code: {type:String},
+    _id:                  {type:mongoose.Schema.Types.ObjectId, required:true},
+    dsuser_id:            {type:Number, unique:true, required:true},
+    dsuser_first_name:    {type:String},
+    dsuser_last_name:     {type:String},
+    dsuser_username:      {type:String},
+    dsuser_photo_url:     {type:String},
+    dsuser_language_code: {type:String},
 });
 
-export default mongoose.model('DiscordUser', DiscordUserSchema, 'DiscordUsers');
+export default mongoose.model("DiscordUser", DiscordUserSchema, "DiscordUsers");

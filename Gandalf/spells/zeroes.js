@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -21,73 +21,73 @@
  * @summary Gandalf Spells
  **/
 
-import util from 'util';
-import Config from 'Galadriel/src/galadriel.ts';
-import { Mordor, Tick, HeroPower } from 'mordor';
-import Access from '../access.js';
+import util from "util";
+import Config from "sauron";
+import { Mordor, Tick, HeroPower } from "mordor";
+import Access from "../access.js";
 
-import { Context } from 'telegraf';
+import { Context } from "telegraf";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder } from "discord.js";
 
-import { encode } from 'html-entities';
-import numeral from 'numeral';
-import dayjs from 'dayjs';
-import advancedFormat from 'dayjs/plugin/advancedFormat.js';
-import utc from 'dayjs/plugin/utc.js';
-import timezone from 'dayjs/plugin/timezone.js';
+import { encode } from "html-entities";
+import numeral from "numeral";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat.js";
+import utc from "dayjs/plugin/utc.js";
+import timezone from "dayjs/plugin/timezone.js";
 dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 
 const zeroes = {
-  access: Access.Member,
-  alias: null,
-  usage: encode('/zeroes'),
-  description: 'Shows 5 biggest zeroes!.',
-  discord: {
-    data: new SlashCommandBuilder()
-      .setName('zeroes')
-      .setDescription('Shows 5 biggest zeroes!.'),
-    async execute(interaction) {
-      let _reply = await executeCommand();
-      await interaction.reply(`\`\`\`${_reply}\`\`\``);
+    access: Access.Member,
+    alias: null,
+    usage: encode("/zeroes"),
+    description: "Shows 5 biggest zeroes!.",
+    discord: {
+        data: new SlashCommandBuilder()
+            .setName("zeroes")
+            .setDescription("Shows 5 biggest zeroes!."),
+        async execute(interaction) {
+            let _reply = await executeCommand();
+            await interaction.reply(`\`\`\`${_reply}\`\`\``);
+        }
+    },
+    telegram: {
+        async execute(ctx, args) {
+            return new Promise(async (resolve, reject) => {
+                let _reply = await executeCommand();
+                resolve(_reply);
+            });
+        }
     }
-  },
-  telegram: {
-    async execute(ctx, args) {
-      return new Promise(async (resolve, reject) => {
-        let _reply = await executeCommand();
-        resolve(_reply);
-      });
-    }
-  }
 };
 
 
 
 async function executeCommand(params) {
-  let reply;
+    let reply;
 
-  let tick = await Tick.findLastTick();
-  if (!tick) {
-    reply = `Cannot find current tick.`;
-  } else {
-    let powers = await HeroPower.find({
-      tick: tick
-    }).sort({rank: -1}).limit(5);
-    if(!powers) {
-      reply = "No powers were found."
+    let tick = await Tick.findLastTick();
+    if (!tick) {
+        reply = "Cannot find current tick.";
+    } else {
+        let powers = await HeroPower.find({
+            tick: tick
+        }).sort({rank: -1}).limit(5);
+        if(!powers) {
+            reply = "No powers were found.";
+        }
+        else {
+            reply = "Top 5 biggest zeroes:\n";
+            //console.log(`POWER: ${util.inspect(power, true, null, true)}`);
+            let _powers = powers.map((hp) => {return `${hp.members - hp.rank + 1}: ${hp.member.pa_nick}`;});
+            reply += _powers.join("\n");
+        }
     }
-    else {
-      reply = "Top 5 biggest zeroes:\n";
-      //console.log(`POWER: ${util.inspect(power, true, null, true)}`);
-      let _powers = powers.map((hp) => {return `${hp.members - hp.rank + 1}: ${hp.member.pa_nick}`;});
-      reply += _powers.join('\n');
-    }
-  }
 
-  return reply;
+    return reply;
 }
 
 export default zeroes;

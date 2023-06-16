@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -21,20 +21,20 @@
  * @summary Mongoose Model
  **/
 
-import Config from 'Galadriel/src/galadriel.ts';
-import mongoose from 'mongoose';
-import mongooseAutoPopulate from 'mongoose-autopopulate';
+import Config from "sauron";
+import mongoose from "mongoose";
+import mongooseAutoPopulate from "mongoose-autopopulate";
 
 let HeroPowerSchema = new mongoose.Schema({
-  _id:     {type:mongoose.Schema.Types.ObjectId, required:true},
-  tick:    {type:mongoose.Schema.Types.ObjectId, required:true, ref:'Tick', autopopulate: true},
-  member:  {type:mongoose.Schema.Types.ObjectId, required:true, ref:'User', autopopulate: true},
-  size:    {type:Number, required:true},
-  rank:    {type:Number, required:true},
-  members: {type:Number, required:true}
+    _id:     {type:mongoose.Schema.Types.ObjectId, required:true},
+    tick:    {type:mongoose.Schema.Types.ObjectId, required:true, ref:"Tick", autopopulate: true},
+    member:  {type:mongoose.Schema.Types.ObjectId, required:true, ref:"User", autopopulate: true},
+    size:    {type:Number, required:true},
+    rank:    {type:Number, required:true},
+    members: {type:Number, required:true}
 });
 
 
 HeroPowerSchema.plugin(mongooseAutoPopulate);
 
-export default mongoose.model('HeroPower', HeroPowerSchema, 'HeroPowers');
+export default mongoose.model("HeroPower", HeroPowerSchema, "HeroPowers");
