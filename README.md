@@ -38,8 +38,8 @@
 [![Ubuntu](https://img.shields.io/static/v1?style=for-the-badge&logo=Ubuntu&label=Ubuntu&message=22.04.1&color=E95420)](https://ubuntu.com/)
 [![CrowdSec](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=CrowdSec&message=1.4.0&color=FCC624)](https://crowdsec.net/)
 [![Lynis](https://img.shields.io/static/v1?style=for-the-badge&logo=Linux&label=Lynis&message=3.0.8&color=FCC624)](https://cisofy.com/lynis/)  
-[![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=18.12.1&color=339933)](https://nodejs.org/)
-[![NPM](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=NPM&message=9.5.0&color=990000)](https://www.npmjs.com/)
+[![Node.js](https://img.shields.io/static/v1?style=for-the-badge&logo=Node.js&label=Node.js&message=16.13.0&color=339933)](https://nodejs.org/)
+[![NPM](https://img.shields.io/static/v1?style=for-the-badge&logo=NPM&label=NPM&message=8.19.3&color=990000)](https://www.npmjs.com/)
 [![MongoDB](https://img.shields.io/static/v1?style=for-the-badge&logo=MongoDB&label=MongoDB&message=6.0.3&color=47A248)](https://www.mongodb.com/)
 
 
@@ -77,7 +77,6 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 ## Related Projects
 * [Merlin](https://github.com/ellonweb/merlin) - [Robin K. Hansen](https://github.com/berten), [Elliot Rosemarine](https://github.com/ellonweb), [Andreas Jacobsen](https://github.com/andreaja)
 * [Munin](https://github.com/munin/munin) - [Andreas Jacobsen](https://github.com/andreaja)
-* [vitesse-lite](https://github.com/antfu/vitesse-lite) / [vitesse-webext](https://github.com/antfu/vitesse-webext) - [Anthony Fu](https://github.com/antfu)
 
 
 ## Author
