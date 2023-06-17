@@ -28,18 +28,11 @@ const configDefault: Config = {
     discord_id: null,
     telegram_id: null
   },
-  alliance: {
-    name: null,
-    attack: {
-      default_waves: 3,
-      after_land_ticks: 2,
-      max_claims: 0
-    }
-  },
   discord: {
     token: null,
     client_id: null,
     guild_id: null,
+    channel_id: null,
     commands: null
   },
   telegram: {
@@ -48,34 +41,11 @@ const configDefault: Config = {
     group_id: null,
     commands: null
   },
-  twilio: {
-    url: 'https://demo.twilio.com/welcome/voice/',
-    sid: null,
-    secret: null,
-    number: null,
-    ring_timeout: 30
-  },
   db: {
     url: '127.0.0.1:27017',
     name: 'Mordor',
     user: 'root',
     pass: ''
-  },
-  web: {
-    env: 'prod',
-    port: 80,
-    url: null,
-    session: null,
-    default_profile_pic: '/images/member.jpg',
-    default_theme: 'affleck',
-    themes: {
-      affleck: {name: 'Affleck', navbar: 'light'},
-      murphy: {name: 'Murphy', navbar: 'dark'},
-      shamrock: {name: 'Shamrock', navbar: 'light'},
-      telegram: {name: 'Telegram', navbar: 'light'},
-      thematrix: {name: 'The Matrix', navbar: 'dark'},
-      ultimate: {name: 'Ultimate', navbar: 'dark'},
-    }
   },
   access: {
     0: "None",
@@ -84,12 +54,7 @@ const configDefault: Config = {
     5: "Administrator",
   },
   roles: {
-    0x1: "OOT",
-    0x2: "Recruit",
-    0x4: "Scanner",
-    0x8: "BattleCommander",
-    0x16: "DefenceCommander",
-    0x32: "HighCommander"
+    0x1: "Scanner"
   },
   pa: {
     links: {

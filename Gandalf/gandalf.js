@@ -21,13 +21,15 @@
  * @summary Bot
  **/
 
-
+import util from "util";
 import Config from "sauron";
 import { Mordor, User, TelegramUser } from "mordor";
+import DiscordEvents from "./DiscordEvents/DiscordEvents.js";
+import DiscordCommands from "./DiscordCommands/DiscordCommands.js";
+import TelegramCommands from "./TelegramCommands/TelegramCommands.js";
+import { Context, Telegraf } from "telegraf";
+import { ActivityType, Client, Collection, Events, GatewayIntentBits, Routes, REST } from "discord.js";
 import minimist from "minimist";
-import util from "util";
-
-import Spells from "./spells/book.js";
 
 let argv = minimist(process.argv.slice(2), {
     string: [],
@@ -37,29 +39,28 @@ let argv = minimist(process.argv.slice(2), {
     unknown: false
 });
 
-import { Context, Telegraf } from "telegraf";
-import { ActivityType, Client, Collection, Events, GatewayIntentBits, Routes, REST } from "discord.js";
-
-
 
 //register discord commands
 if(argv.register) {
     const rest = new REST().setToken(Config.discord.token);
     (async () => {
         try {
-            const dsSpells = [];
+            const dsCommands = [];
             Config.discord.commands.forEach(function(name) {
-                if(Spells[name]) {
-                    dsSpells.push(Spells[name].discord.data.toJSON());
+                if(DiscordCommands[name]) {
+                    dsCommands.push(DiscordCommands[name].data.toJSON());
                 }
             });
-            const data = await rest.put(Routes.applicationCommands(Config.discord.client_id), {body: dsSpells});
+            const data = await rest.put(Routes.applicationCommands(Config.discord.client_id), {body: dsCommands});
             console.log(`Reloaded ${data.length} discord commands.`);
         } catch (err) {
             console.error(err);
         }
     })();
 }
+
+
+
 
 // connect to database
 Mordor.connection.once("open", async () => {
@@ -129,8 +130,8 @@ Mordor.connection.once("open", async () => {
         }
         else {
             let commands = "<b>Commands:</b>\n<b>help:</b> <i>Shows list of commands</i>\n";
-            for (let [key, value] of Object.entries(Spells)) {
-                if(!Spells[key].access || Spells[key].access(ctx.user)) {
+            for (let [key, value] of Object.entries(TelegramCommands)) {
+                if(!TelegramCommands[key].access || TelegramCommands[key].access(ctx.user)) {
                     commands += (`<b>${key}:</b> <i>${value.description}</i>\n`);
                 }
             }
@@ -152,26 +153,26 @@ Mordor.connection.once("open", async () => {
 
             // Command alias check
             if(Config.telegram.commands.indexOf(cmd) < 0) {
-                for(let [key, value] of Object.entries(Spells)) {
+                for(let [key, value] of Object.entries(TelegramCommands)) {
                     if(value.alias && value.alias.includes(cmd)) {
                         cmd = key;
                     }
                 }
             }
 
-            if(Config.telegram.commands.indexOf(cmd) >= 0 && typeof (Spells[cmd]?.telegram?.execute) === "function") {
-                if(Spells[cmd].access && !Spells[cmd].access(ctx.user)) {
+            if(Config.telegram.commands.indexOf(cmd) >= 0 && typeof (TelegramCommands[cmd]?.telegram?.execute) === "function") {
+                if(TelegramCommands[cmd].access && !TelegramCommands[cmd].access(ctx.user)) {
                     ctx.replyWithHTML("You do not have access to this command.", {reply_to_message_id: ctx.message.message_id});
                 }
                 else {
-                    Spells[cmd].telegram.execute(ctx, args)
+                    TelegramCommands[cmd].telegram.execute(ctx, args)
                         .then((message) => {
                             console.log(`Reply: ${message.toString()}`);
                             ctx.replyWithHTML(message.toString(), {reply_to_message_id: ctx.message.message_id});
                         })
                         .catch((error) => {
                             console.log(`Error: ${error}`);
-                            ctx.replyWithHTML(`Error: ${error}\n${Spells[cmd].usage}`, {reply_to_message_id: ctx.message.message_id});
+                            ctx.replyWithHTML(`Error: ${error}\n${TelegramCommands[cmd].usage}`, {reply_to_message_id: ctx.message.message_id});
                         });
                 }
             }
@@ -194,18 +195,31 @@ Mordor.connection.once("open", async () => {
     const discordBot = new Client({
         intents: [
             GatewayIntentBits.Guilds,
+            GatewayIntentBits.GuildModeration,
+            GatewayIntentBits.GuildIntegrations,
             GatewayIntentBits.GuildMessages,
-            GatewayIntentBits.DirectMessages
+            GatewayIntentBits.GuildMessageReactions,
+            GatewayIntentBits.GuildMessageTyping,
+            GatewayIntentBits.GuildVoiceStates,
+            GatewayIntentBits.GuildPresences,
+            GatewayIntentBits.GuildScheduledEvents,
+            GatewayIntentBits.GuildEmojisAndStickers,
+            GatewayIntentBits.GuildInvites,
+            GatewayIntentBits.GuildMembers,
+            GatewayIntentBits.GuildWebhooks,
+            GatewayIntentBits.DirectMessages,
+            GatewayIntentBits.DirectMessageReactions,
+            GatewayIntentBits.DirectMessageTyping,
+            GatewayIntentBits.MessageContent
         ]
     });
 
 
     let dsCommands = new Collection();
-    Config.discord.commands.forEach(function(name) {
-        if(Spells[name]) {
-            const cmd = Spells[name].discord;
-            if ("data" in cmd && "execute" in cmd) {
-                dsCommands.set(cmd.data.name, cmd);
+    for(let [name, command] of Object.entries(DiscordCommands)) {
+        if(DiscordCommands[name]) {
+            if("data" in command && "execute" in command) {
+                dsCommands.set(command.data.name, command);
             }
             else {
                 console.log(`[WARNING] The command ${name} is missing a required "data" or "execute" property.`);
@@ -214,15 +228,27 @@ Mordor.connection.once("open", async () => {
         else {
             console.log(`[WARNING] The command ${name} was not found.`);
         }
-    });
+    }
     discordBot.commands = dsCommands;
 
-    discordBot.on(Events.ClientReady, () => {
-        console.log(`Discord: Logged in as ${discordBot.user.tag}!`);
-        discordBot.user.setActivity("over Endor", { type: ActivityType.Watching });
+
+    for(const ev in DiscordEvents) {
+        //console.error(`HERE: ${util.inspect(BotEvents[ev], true, null, true)}`);
+        if (DiscordEvents[ev].once) {
+            discordBot.once(DiscordEvents[ev].name, (...args) => DiscordEvents[ev].execute(discordBot, ...args));
+        } else {
+            discordBot.on(DiscordEvents[ev].name, (...args) => DiscordEvents[ev].execute(discordBot, ...args));
+        }
+    }
+
+    discordBot.on("messageCreate", (msg) => {
+        //TODO: parse text for scan links
+        if(msg.channelId === Config.discord.channel_id && !msg.author.bot) {
+            console.log("text: ", util.inspect(msg.cleanContent, true, null, true));
+        }
     });
 
-    //TODO: parse text for scan links - figure out how in discord
+
 
     discordBot.on(Events.InteractionCreate, async (interaction) => {
         if(!interaction.isChatInputCommand()) { return; }
@@ -257,7 +283,7 @@ Mordor.connection.once("open", async () => {
             //telegramBot.api.setMyCommands(Object.entries(tgCommands).map(([k, v], i) => { return { command: k, description: v.description }; }));
         }
     });
-    discordBot.login(Config.discord.token);
+    await discordBot.login(Config.discord.token);
 
 
     // *******************************************************************************************************************

@@ -16,28 +16,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name access.js
- * @version 2023/02/03
- * @summary Gandalf User Access
+ * @name events.js
+ * @version 2023-05-20
+ * @summary bot DiscordEvents
  **/
 
+import Config from "sauron";
+import { ActivityType, Events } from "discord.js";
 
-const Access = {
-    Admin: (mem) => {
-        return mem.access === 5;
+export default {
+    name: Events.ClientReady,
+    once: true,
+    async execute(discordBot) {
+        console.log(`Discord: Logged in as ${discordBot.user.tag}!`);
+        discordBot.user.setActivity("over Endor", { type: ActivityType.Watching });
+        discordBot.channels.cache.get(Config.discord.channel_id).send("Gandalf embarking on the Quest for Erebor!");
     },
-    Command: (mem) => {
-        return mem.access >= 3;
-    },
-    Scanner: (mem) => {
-        return mem.access === 5 || mem.access >= 1 && (mem.roles & 1) !== 0;
-    },
-    Member: (mem) => {
-        return mem.access >= 1;
-    },
-    None: (mem) => {
-        return mem.access === 0;
-    }
 };
-
-export default Access;

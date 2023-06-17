@@ -16,28 +16,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name access.js
- * @version 2023/02/03
- * @summary Gandalf User Access
+ * @name book.js
+ * @version 2023/01/25
+ * @summary Spell Book
  **/
 
 
-const Access = {
-    Admin: (mem) => {
-        return mem.access === 5;
-    },
-    Command: (mem) => {
-        return mem.access >= 3;
-    },
-    Scanner: (mem) => {
-        return mem.access === 5 || mem.access >= 1 && (mem.roles & 1) !== 0;
-    },
-    Member: (mem) => {
-        return mem.access >= 1;
-    },
-    None: (mem) => {
-        return mem.access === 0;
-    }
+import tick from "./tick.js";
+
+
+const Spells =  {
+    tick
 };
 
-export default Access;
+export default Spells;

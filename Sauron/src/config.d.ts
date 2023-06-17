@@ -23,21 +23,14 @@
 export default interface Config {
   admin: {
     pa_nick: string | null;
-    telegram_id?: string | null;
     discord_id?: string | null;
+    telegram_id?: string | null;
   }
-  alliance: {
-    name: string | null;
-    attack?: {
-      default_waves?: number;
-      after_land_ticks?: number;
-      max_claims?: number;
-    }
-  };
   discord?: {
     token: string | null;
     client_id: string | null;
     guild_id: string | null;
+    channel_id: string | null;
     commands: string[] | null;
   };
   telegram?: {
@@ -46,27 +39,11 @@ export default interface Config {
     group_id: string | null;
     commands: string[] | null;
   };
-  twilio?: {
-    url?: string;
-    sid: string | null;
-    secret: string | null;
-    number: string | null;
-    ring_timeout?: number;
-  };
   db?: {
     url?: string;
     name?: string;
     user?: string;
     pass?: string;
-  },
-  web: {
-    env?: 'dev' | 'prod';
-    port?: number;
-    url: string | null;
-    session: string | null;
-    default_profile_pic?: string;
-    default_theme: string | null;
-    themes?: { [key: string]: { name: string; navbar: string }; }
   },
   access?: { [key: number]: string; },
   roles?: { [key: number]: string; },

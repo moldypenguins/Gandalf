@@ -28,9 +28,6 @@ const configLocal: Config = {
     discord_id: '',
     telegram_id: ''
   },
-  alliance: {
-    name: ''
-  },
   discord: {
     token: '',
     client_id: '',
@@ -43,23 +40,11 @@ const configLocal: Config = {
     group_id: '',
     commands: ['adduser', 'zeroes', 'bonus', 'bonusroids', 'coords', 'cost', 'eff', 'exile', 'heroes', 'links', 'launch', 'parse', 'power', 'prodtime', 'refsvsfcs', 'roidcost', 'tick', 'ship', 'stop']
   },
-  twilio: {
-    sid: "",
-    secret: "",
-    number: ''
-  },
   db: {
     url: '127.0.0.1:27017',
     name: 'Mordor',
     user: '',
     pass: ''
-  },
-  web: {
-    env: 'dev',
-    port: 8080,
-    url: '',
-    session: '',
-    default_theme: 'affleck'
   }
 };
 

@@ -16,28 +16,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name access.js
- * @version 2023/02/03
- * @summary Gandalf User Access
+ * @name TelegramCommands.js
+ * @version 2023-04-20
+ * @summary bot commands
  **/
 
 
-const Access = {
-    Admin: (mem) => {
-        return mem.access === 5;
-    },
-    Command: (mem) => {
-        return mem.access >= 3;
-    },
-    Scanner: (mem) => {
-        return mem.access === 5 || mem.access >= 1 && (mem.roles & 1) !== 0;
-    },
-    Member: (mem) => {
-        return mem.access >= 1;
-    },
-    None: (mem) => {
-        return mem.access === 0;
-    }
+
+
+import tick from "./Tick.js";
+
+
+let TelegramCommands = {
+    tick
 };
 
-export default Access;
+export default TelegramCommands;
+
