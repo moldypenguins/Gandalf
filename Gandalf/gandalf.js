@@ -112,7 +112,7 @@ Mordor.connection.once("open", async () => {
     telegramBot.start(async(ctx) => {
         if(!await TelegramUser.exists({tguser_id: ctx.message.from.id})) {
             await new TelegramUser({
-                _id: Mordor.Types.ObjectId(),
+                _id: new Mordor.Types.ObjectId(),
                 tguser_id: ctx.message.from.id,
                 tguser_first_name: ctx.message.from.first_name,
                 tguser_username: ctx.message.from.username,
