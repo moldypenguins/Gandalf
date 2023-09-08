@@ -29,7 +29,6 @@ import adduser from "./adduser.js";
 
 
 let TelegramCommands = {
-    adduser,
     tick
 };
 
