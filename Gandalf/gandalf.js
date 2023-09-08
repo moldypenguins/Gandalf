@@ -74,8 +74,11 @@ Mordor.connection.once("open", async () => {
 
     telegramBot.use(async(ctx, next) => {
         if(ctx.message.entities && ctx.message.entities[0]?.type === "bot_command") {
-            if(await TelegramUser.exists({tguser_id: ctx.message.from.id})) {
-                ctx.user = await TelegramUser.findOne({tguser_id: ctx.message.from.id});
+            let _user = await User.findByTGId(ctx.message.from.id);
+            if(_user) {
+                ctx.user = _user;
+            } else {
+                ctx.user = null;
             }
             return next();
         }
@@ -125,13 +128,13 @@ Mordor.connection.once("open", async () => {
     });
 
     telegramBot.help(async(ctx) => {
-        if(!ctx.user) {
-            ctx.replyWithHTML("<i>You shall not pass!</i>\nUse /start", {reply_to_message_id: ctx.message.message_id});
+        if(!await TelegramUser.exists({tguser_id: ctx.message.from.id})) {
+            ctx.replyWithHTML("<i>You shall not pass!</i>\nuse /start", {reply_to_message_id: ctx.message.message_id});
         }
         else {
             let commands = "<b>Commands:</b>\n<b>help:</b> <i>Shows list of commands</i>\n";
             for (let [key, value] of Object.entries(TelegramCommands)) {
-                if(!TelegramCommands[key].access || TelegramCommands[key].access(ctx.user)) {
+                if(!TelegramCommands[key].access || (ctx.user !== null && TelegramCommands[key].access(ctx.user))) {
                     commands += (`<b>${key}:</b> <i>${value.description}</i>\n`);
                 }
             }
@@ -141,8 +144,8 @@ Mordor.connection.once("open", async () => {
 
     telegramBot.command(async(ctx) => {
         console.log("command: ", ctx.message.text);
-        if(!ctx.user) {
-            ctx.replyWithHTML("<i>You shall not pass!</i>\nUse /start", {reply_to_message_id: ctx.message.message_id});
+        if(!await TelegramUser.exists({tguser_id: ctx.message.from.id})) {
+            ctx.replyWithHTML("<i>You shall not pass!</i>\nuse /start", {reply_to_message_id: ctx.message.message_id});
         }
         else {
             //.replace(/[^a-z0-9áéíóúñü \.,_-:]/gim,'');
@@ -161,7 +164,7 @@ Mordor.connection.once("open", async () => {
             }
 
             if(Config.telegram.commands.indexOf(cmd) >= 0 && typeof (TelegramCommands[cmd]?.telegram?.execute) === "function") {
-                if(TelegramCommands[cmd].access && !TelegramCommands[cmd].access(ctx.user)) {
+                if(TelegramCommands[cmd].access && (ctx.user === null || !TelegramCommands[cmd].access(ctx.user))) {
                     ctx.replyWithHTML("You do not have access to this command.", {reply_to_message_id: ctx.message.message_id});
                 }
                 else {
