@@ -13,8 +13,8 @@
   "dependencies": {
     "axios": "^1.2.2",
     "dayjs": "^1.11.7",
-    "mongoose": "^7.3.3",
-    "mongoose-autopopulate": "^0.17.1"
+    "mongoose": "^7.5.0",
+    "mongoose-autopopulate": "^1.0.1"
   },
   "devDependencies": {
     "eslint": "^8.32.0"
