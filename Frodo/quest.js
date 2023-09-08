@@ -28,7 +28,7 @@ import pTimeout from "p-timeout";
 import Config from "sauron";
 import {
     Mordor,
-    Tick,
+    BotMessage, Tick,
     Planet, PlanetDump, PlanetHistory, PlanetTrack,
     Galaxy, GalaxyDump, GalaxyHistory,
     Alliance, AllianceDump, AllianceHistory,
@@ -63,7 +63,7 @@ const retry = pRetry(async() => {
     let current_ms = 0;
     let total_ms = 0;
     const start_time = new Date();
-    log("Frodo Embarking on The Quest Of The Ring.");
+    log("Frodo embarking on The Quest Of The Ring.");
     //log(`Job Time: ${dayjs(fire_time).format('YYYY-MM-DD H:mm:ss')}`);
     log(`Start Time: ${dayjs(start_time).format("YYYY-MM-DD H:mm:ss")}`);
 
@@ -120,7 +120,7 @@ const retry = pRetry(async() => {
                     log(`Updating Tick: pt${new_tick.tick} - ${dayjs(new_tick.timestamp).tz().format("YYYY-MM-dd HH:mm z")}`);
                 } else {
                     new_tick = await new Tick({
-                        _id: Mordor.Types.ObjectId(),
+                        _id: new Mordor.Types.ObjectId(),
                         tick: dump_tick,
                         timestamp: dayjs().utc().minute(Math.floor(dayjs().minute() / (havoc ? 15 : 60)) * (havoc ? 15 : 60)).second(0).millisecond(0)
                     });
@@ -148,7 +148,7 @@ const retry = pRetry(async() => {
                             let p = planet_dump[i].split("\t");
                             //log(util.inspect(p, false, null, true));
                             await new PlanetDump({
-                                _id: Mordor.Types.ObjectId(),
+                                _id: new Mordor.Types.ObjectId(),
                                 planet_id: p[0],
                                 x: Number(p[1]),
                                 y: Number(p[2]),
@@ -176,7 +176,7 @@ const retry = pRetry(async() => {
                             let g = galaxy_dump[i].split("\t");
                             //log(util.inspect(g, false, null, true));
                             await new GalaxyDump({
-                                _id: Mordor.Types.ObjectId(),
+                                _id: new Mordor.Types.ObjectId(),
                                 x: Number(g[0]),
                                 y: Number(g[1]),
                                 name: g[2].replace(/"/g, ""),
@@ -199,7 +199,7 @@ const retry = pRetry(async() => {
                             let a = alliance_dump[i].split("\t");
                             //log(util.inspect(a, false, null, true));
                             await new AllianceDump({
-                                _id: Mordor.Types.ObjectId(),
+                                _id: new Mordor.Types.ObjectId(),
                                 rank: Number(a[0]),
                                 name: a[1].replace(/"/g, ""),
                                 size: Number(a[2] ?? 0),
@@ -225,7 +225,7 @@ const retry = pRetry(async() => {
                 let u = user_dump[i].split('\t');
                 //log(util.inspect(u, false, null, true));
                 await new UserDump({
-                  _id: Mordor.Types.ObjectId(),
+                  _id: new Mordor.Types.ObjectId(),
                   tick: Number(u[0]),
                   type: u[1].replace(/"/g, ''),
                   text: u[2].replace(/"/g, ''),
@@ -256,7 +256,7 @@ const retry = pRetry(async() => {
                     //create planet if not exists
                     if (!await Planet.exists({planet_id: dumpPlanets[p_temp].planet_id})) {
                         await new Planet({
-                            _id: Mordor.Types.ObjectId(),
+                            _id: new Mordor.Types.ObjectId(),
                             planet_id: dumpPlanets[p_temp].planet_id,
                             x: dumpPlanets[p_temp].x,
                             y: dumpPlanets[p_temp].y,
@@ -267,7 +267,7 @@ const retry = pRetry(async() => {
                         }).save();
                         //track new planet
                         await new PlanetTrack({
-                            _id: Mordor.Types.ObjectId(),
+                            _id: new Mordor.Types.ObjectId(),
                             planet_id: dumpPlanets[p_temp].planet_id,
                             new_x: dumpPlanets[p_temp].x,
                             new_y: dumpPlanets[p_temp].y,
@@ -280,7 +280,7 @@ const retry = pRetry(async() => {
                     //track renamed planet
                     if (planet.rulername !== dumpPlanets[p_temp].rulername || planet.planetname !== dumpPlanets[p_temp].planetname) {
                         await new PlanetTrack({
-                            _id: Mordor.Types.ObjectId(),
+                            _id: new Mordor.Types.ObjectId(),
                             planet_id: planet.planet_id,
                             old_x: planet.x,
                             old_y: planet.y,
@@ -294,7 +294,7 @@ const retry = pRetry(async() => {
                     //track exiled planet
                     if (planet.x !== dumpPlanets[p_temp].x || planet.y !== dumpPlanets[p_temp].y || planet.z !== dumpPlanets[p_temp].z) {
                         await new PlanetTrack({
-                            _id: Mordor.Types.ObjectId(),
+                            _id: new Mordor.Types.ObjectId(),
                             planet_id: planet.planet_id,
                             old_x: planet.x,
                             old_y: planet.y,
@@ -341,7 +341,7 @@ const retry = pRetry(async() => {
                 let deletedPlanets = await Planet.find({active: false});
                 for (let dp in deletedPlanets) {
                     await new PlanetTrack({
-                        _id: Mordor.Types.ObjectId(),
+                        _id: new Mordor.Types.ObjectId(),
                         planet_id: deletedPlanets[dp].planet_id,
                         old_x: deletedPlanets[dp].x,
                         old_y: deletedPlanets[dp].y,
@@ -382,7 +382,7 @@ const retry = pRetry(async() => {
                     //create galaxy if not exists
                     if (!await Galaxy.exists({x: dumpGalaxies[g_temp].x, y: dumpGalaxies[g_temp].y})) {
                         await new Galaxy({
-                            _id: Mordor.Types.ObjectId(),
+                            _id: new Mordor.Types.ObjectId(),
                             x: dumpGalaxies[g_temp].x,
                             y: dumpGalaxies[g_temp].y,
                             name: dumpGalaxies[g_temp].name
@@ -448,7 +448,7 @@ const retry = pRetry(async() => {
                 for(let c_temp in dumpClusters) {
                     //create cluster if not exists
                     if(!await Cluster.exists({x: dumpClusters[c_temp]})) {
-                        await new Cluster({_id: Mordor.Types.ObjectId(), x: dumpClusters[c_temp]}).save();
+                        await new Cluster({_id: new Mordor.Types.ObjectId(), x: dumpClusters[c_temp]}).save();
                     }
                     //get cluster
                     let cluster = await Cluster.findOne({x: dumpClusters[c_temp]});
@@ -530,7 +530,7 @@ const retry = pRetry(async() => {
                 for (let a_temp in alliances) {
                     //create alliance if not exists
                     if (!await Alliance.exists({name: alliances[a_temp].name.trim()})) {
-                        await new Alliance({_id: Mordor.Types.ObjectId(), name: alliances[a_temp].name.trim()}).save();
+                        await new Alliance({_id: new Mordor.Types.ObjectId(), name: alliances[a_temp].name.trim()}).save();
                     }
                     //get alliance
                     let alliance = await Alliance.findOne({name: alliances[a_temp].name.trim()});
@@ -633,7 +633,7 @@ const retry = pRetry(async() => {
                 let historyPlanets = await Planet.find({active: true});
                 for (let p in historyPlanets) {
                     await new PlanetHistory({
-                        _id: Mordor.Types.ObjectId(),
+                        _id: new Mordor.Types.ObjectId(),
                         tick: this_tick,
                         planet_id: historyPlanets[p].planet_id,
                         x: historyPlanets[p].x,
@@ -662,7 +662,7 @@ const retry = pRetry(async() => {
                 let historyGalaxies = await Galaxy.find({active: true});
                 for (let g in historyGalaxies) {
                     await new GalaxyHistory({
-                        _id: Mordor.Types.ObjectId(),
+                        _id: new Mordor.Types.ObjectId(),
                         tick: this_tick,
                         x: historyGalaxies[g].x,
                         y: historyGalaxies[g].y,
@@ -688,7 +688,7 @@ const retry = pRetry(async() => {
                 let historyClusters = await Cluster.find({active: true});
                 for (let c in historyClusters) {
                     await new ClusterHistory({
-                        _id: Mordor.Types.ObjectId(),
+                        _id: new Mordor.Types.ObjectId(),
                         tick: this_tick,
                         x: historyClusters[c].x,
                         size: historyClusters[c].size,
@@ -705,7 +705,7 @@ const retry = pRetry(async() => {
                 let historyAlliances = await Alliance.find({active: true});
                 for (let a in historyAlliances) {
                     await new AllianceHistory({
-                        _id: Mordor.Types.ObjectId(),
+                        _id: new Mordor.Types.ObjectId(),
                         tick: this_tick,
                         name: historyAlliances[a].name,
                         size: historyAlliances[a].size,
@@ -766,7 +766,7 @@ const retry = pRetry(async() => {
                     hPowers = hPowers.sort((a, b) => { return b.size - a.size; });
                     for(let d = 0; d < hPowers.length; d++) {
                         let heroPower = new HeroPower({
-                            _id: Mordor.Types.ObjectId(),
+                            _id: new Mordor.Types.ObjectId(),
                             tick: this_tick,
                             member: hPowers[d].member,
                             size: hPowers[d].size,
@@ -785,24 +785,18 @@ const retry = pRetry(async() => {
                 //Send Message
                 //##############################################################################################################
 
-                /*
-          let txt = `pt<b>${this_tick.tick}</b> ${moment(this_tick.timestamp).utc().format('H:mm')} <i>GMT</i>`;
-          let atts = await Attack.find({releasetick: this_tick.tick});
-          for (let m = 0; m < atts.length; m++) {
-            txt += `\n<b>Attack ${atts[m].id}</b> released. <a href="${CFG.web.uri}/att/${atts[m].hash}">Claim Targets</a>`;
-          }
-          //log(util.inspect('TEXT: ' + txt, false, null, true));
-          if (CFG.bot.tick_alert || atts.length > 0) {
-            await new BotMessage({
-              _id:Mordor.Types.ObjectId(),
-              message_id: crypto.randomBytes(8).toString("hex"),
-              group_id: CFG.groups.private,
-              message: txt,
-              sent: false
-            }).save();
-            log(`Sent Message: "${txt}"`);
-          }
-          */
+
+
+                if(Config.bot.tick_alert) {
+                    console.log(`BOT: ${util.inspect(Config.bot,true,null,true)}`);
+                    await new BotMessage({
+                        _id: new Mordor.Types.ObjectId(),
+                        tick: this_tick,
+                        title: `pt${this_tick.tick}`,
+                        description: `${dayjs(this_tick.timestamp).utc().format("H:mm")} GMT`
+                    }).save();
+                }
+          
 
                 current_ms = (new Date()) - start_time;
                 log(`Total time: ${current_ms}ms!`);

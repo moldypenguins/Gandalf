@@ -25,19 +25,25 @@ export default interface Config {
     pa_nick: string | null;
     discord_id?: string | null;
     telegram_id?: string | null;
-  }
+  };
+  bot?: {
+    tick_alert: boolean;
+    message_interval: number;
+  };
   discord?: {
     token: string | null;
     client_id: string | null;
     guild_id: string | null;
     channel_id: string | null;
     commands: string[] | null;
+    tick_alert: string | null;
   };
   telegram?: {
     token: string | null;
     username: string | null;
     group_id: string | null;
     commands: string[] | null;
+    tick_alert: string | null;
   };
   db?: {
     url?: string;

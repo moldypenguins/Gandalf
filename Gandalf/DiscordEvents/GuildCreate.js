@@ -30,15 +30,15 @@ export default {
     async execute(client, guild) {
         console.log(`Discord: Joined guild ${guild.name} (${guild.id})!`);
 
-        let res = await DiscordGuild.create({
-            _id: new DB.Types.ObjectId(),
-            guild_id: guild.id,
-            guild_ownerId: guild.ownerId,
-            guild_name: guild.name,
-            guild_description: guild.description
-        });
+        let res = await new DiscordGuild({
+            _id: new Mordor.Types.ObjectId(),
+            DiscordGuild_id: guild.id,
+            DiscordGuild_ownerId: guild.ownerId,
+            DiscordGuild_name: guild.name,
+            DiscordGuild_description: guild.description
+        }).save();
 
         //admin logging
-        client.channels.cache.get(Config.discord.channel_id).send(`GuildCreate: joined guild ${guild.name} (${guild.id}).`);
+        client.channels.cache.get(Config.discord.channel_id).send({ embeds: [{ color: 0x7f7b81, description: `GuildCreate: joined guild ${guild.name} (${guild.id}).` }] });
     },
 };

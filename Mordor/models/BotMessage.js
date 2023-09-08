@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name Tick.js
+ * @name BotMessage.js
  * @version 2021/05/22
  * @summary Mongoose Model
  **/
@@ -24,26 +24,14 @@
 import mongoose from "mongoose";
 import dayjs from "dayjs";
 
-let TickSchema = new mongoose.Schema({
-    _id:        {type:mongoose.Schema.Types.ObjectId, required:true},
-    tick:       {type:Number, unique:true, index:true, required:true},
-    timestamp:  {type:Date, default: () => dayjs().utc().minute(0).second(0).millisecond(0)},
-    galaxies:   {type:Number},
-    planets:    {type:Number},
-    alliances:  {type:Number},
-    clusters:   {type:Number},
-    c200:       {type:Number},
-    ter:        {type:Number},
-    cat:        {type:Number},
-    xan:        {type:Number},
-    zik:        {type:Number},
-    etd:        {type:Number},
-    kin:        {type:Number},
-    sly:        {type:Number},
+let BotMessageSchema = new mongoose.Schema({
+    _id:         {type:mongoose.Schema.Types.ObjectId, required:true},
+    tick:        {type:mongoose.Schema.Types.ObjectId, ref:"Tick", autopopulate: true},
+    title:       {type:String},
+    description: {type:String},
+    timestamp:   {type:Date, default: () => dayjs().utc().minute(0).second(0).millisecond(0)},
+    sent:        {type:Boolean, default: false}
 });
 
-TickSchema.statics.findLastTick = function () {
-    return this.findOne().sort({ tick: -1 });
-};
 
-export default mongoose.model("Tick", TickSchema, "Ticks");
+export default mongoose.model("BotMessage", BotMessageSchema, "BotMessages");

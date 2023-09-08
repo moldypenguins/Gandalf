@@ -19,16 +19,16 @@
  * @version 2022/11/11
  * @summary Mongoose Model
  **/
-'use strict';
+"use strict";
 
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 let TelegramChatSchema = new mongoose.Schema({
-  _id:                      {type:mongoose.Schema.Types.ObjectId, required:true},
-  TelegramChat_id:          {type:String, unique:true, required:true},
-  TelegramChat_type:        {type:String, required: true},
-  TelegramChat_title:       {type:String},
-  TelegramChat_description: {type:String},
+    _id:                      {type:mongoose.Schema.Types.ObjectId, required:true},
+    TelegramChat_id:          {type:String, unique:true, required:true},
+    TelegramChat_type:        {type:String, required: true},
+    TelegramChat_title:       {type:String},
+    TelegramChat_description: {type:String},
 });
 
-export default mongoose.model('TelegramChat', TelegramChatSchema, 'TelegramChats');
+export default mongoose.model("TelegramChat", TelegramChatSchema, "TelegramChats");

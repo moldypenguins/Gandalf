@@ -21,15 +21,16 @@
  * @summary Bot
  **/
 
-import util from "util";
+
 import Config from "sauron";
-import { Mordor, User, TelegramUser } from "mordor";
+import {Mordor, User, TelegramUser, BotMessage} from "mordor";
 import DiscordEvents from "./DiscordEvents/DiscordEvents.js";
 import DiscordCommands from "./DiscordCommands/DiscordCommands.js";
 import TelegramCommands from "./TelegramCommands/TelegramCommands.js";
 import { Context, Telegraf } from "telegraf";
 import { ActivityType, Client, Collection, Events, GatewayIntentBits, Routes, REST } from "discord.js";
 import minimist from "minimist";
+import util from "util";
 
 let argv = minimist(process.argv.slice(2), {
     string: [],
@@ -286,6 +287,8 @@ Mordor.connection.once("open", async () => {
     await discordBot.login(Config.discord.token);
 
 
+
+
     // *******************************************************************************************************************
     // Enable graceful stop
     // *******************************************************************************************************************
@@ -302,7 +305,52 @@ Mordor.connection.once("open", async () => {
         console.log("Exiting...");
     });
 
+
+
+
+
+
+    //check for messages from Frodo
+    setInterval(async () => {
+        if(await BotMessage.exists({sent:false})) {
+            let msgs = await BotMessage.find({sent:false});
+            if(msgs) {
+                console.log(`Peering into Palantír. (${msgs.length})`);
+                for (let m = 0; m < msgs.length; m++) {
+
+                    if(Config.bot.tick_alert) {
+                        await discordBot.channels.cache.get(Config.discord.tick_alert ? Config.discord.tick_alert : Config.discord.channel_id).send({
+                            embeds: [{color: 0x7f7b81, title: msgs[m].title, description: msgs[m].description}]
+                        });
+                        await telegramBot.telegram.sendMessage(Config.telegram.tick_alert ? Config.telegram.tick_alert : Config.telegram.group_id,
+                            `<b>${msgs[m].title}</b>\n${msgs[m].description}`,
+                            {parse_mode: "html"}
+                        );
+                    }
+
+
+                    //console.log("Message: " + util.inspect(res, false, 1, true));
+                    await BotMessage.updateOne({_id: msgs[m]._id}, {sent: true});
+                }
+            }
+        }
+    }, Config.bot.message_interval * 1000);
+
+
+
+
+
 });
+
+
+
+
+
+
+
+
+
+
 
 
 

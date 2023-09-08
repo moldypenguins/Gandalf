@@ -27,6 +27,7 @@ import mongoose from "mongoose";
 import Alliance from "./models/Alliance.js";
 import AllianceDump from "./models/AllianceDump.js";
 import AllianceHistory from "./models/AllianceHistory.js";
+import BotMessage from "./models/BotMessage.js";
 import Cluster from "./models/Cluster.js";
 import ClusterHistory from "./models/ClusterHistory.js";
 import DiscordGuild from "./models/DiscordGuild.js";
@@ -65,6 +66,7 @@ export {
     Alliance,
     AllianceDump,
     AllianceHistory,
+    BotMessage,
     Cluster,
     ClusterHistory,
     DiscordGuild,

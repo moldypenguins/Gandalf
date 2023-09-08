@@ -15,20 +15,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name TelegramChat.js
+ * @name DiscordGuild.js
  * @version 2022/11/11
  * @summary Mongoose Model
  **/
-'use strict';
+"use strict";
 
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 let DiscordGuildSchema = new mongoose.Schema({
-  _id:                      {type:mongoose.Schema.Types.ObjectId, required:true},
-  DiscordGuild_id:          {type:String, unique:true, required:true},
-  DiscordGuild_type:        {type:String, required: true},
-  DiscordGuild_title:       {type:String},
-  DiscordGuild_description: {type:String},
+    _id:                      {type:mongoose.Schema.Types.ObjectId, required:true},
+    DiscordGuild_id:          {type:String, unique:true, required:true},
+    DiscordGuild_ownerId:        {type:String, required: true},
+    DiscordGuild_name:       {type:String},
+    DiscordGuild_description: {type:String},
 });
 
-export default mongoose.model('DiscordGuilds', DiscordGuildSchema, 'DiscordGuilds');
+export default mongoose.model("DiscordGuild", DiscordGuildSchema, "DiscordGuilds");

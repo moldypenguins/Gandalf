@@ -30,6 +30,6 @@ export default {
     async execute(discordBot) {
         console.log(`Discord: Logged in as ${discordBot.user.tag}!`);
         discordBot.user.setActivity("over Endor", { type: ActivityType.Watching });
-        discordBot.channels.cache.get(Config.discord.channel_id).send("Gandalf embarking on the Quest for Erebor!");
+        discordBot.channels.cache.get(Config.discord.channel_id).send({ embeds: [{ color: 0x7f7b81, description: "Gandalf embarking on The Quest for Erebor!" }] });
     },
 };

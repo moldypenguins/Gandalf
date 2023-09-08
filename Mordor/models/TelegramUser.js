@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -22,16 +22,16 @@
  **/
 
 
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 let TelegramUserSchema = new mongoose.Schema({
-  _id:              {type:mongoose.Schema.Types.ObjectId, required:true},
-  tguser_id:            {type:Number, unique:true, required:true},
-  tguser_first_name:    {type:String},
-  tguser_last_name:     {type:String},
-  tguser_username:      {type:String},
-  tguser_language_code: {type:String},
-  tguser_photo_url:     {type:String},
+    _id:              {type:mongoose.Schema.Types.ObjectId, required:true},
+    tguser_id:            {type:Number, unique:true, required:true},
+    tguser_first_name:    {type:String},
+    tguser_last_name:     {type:String},
+    tguser_username:      {type:String},
+    tguser_language_code: {type:String},
+    tguser_photo_url:     {type:String},
 });
 
 /*
@@ -47,4 +47,4 @@ TelegramUserSchema.virtual('tg_name')
 });
 */
 
-export default mongoose.model('TelegramUser', TelegramUserSchema, 'TelegramUsers');
+export default mongoose.model("TelegramUser", TelegramUserSchema, "TelegramUsers");

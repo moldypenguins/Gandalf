@@ -24,7 +24,7 @@
 
 
 
-import tick from "./Tick.js";
+import tick from "./tick.js";
 
 
 let DiscordCommands = {

@@ -28,18 +28,24 @@ const configDefault: Config = {
     discord_id: null,
     telegram_id: null
   },
+  bot: {
+    tick_alert: true,
+    message_interval: 15
+  },
   discord: {
     token: null,
     client_id: null,
     guild_id: null,
     channel_id: null,
-    commands: null
+    commands: null,
+    tick_alert: null
   },
   telegram: {
     token: null,
     username: null,
     group_id: null,
-    commands: null
+    commands: null,
+    tick_alert: null
   },
   db: {
     url: '127.0.0.1:27017',
