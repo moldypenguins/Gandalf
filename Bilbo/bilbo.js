@@ -83,7 +83,7 @@ let load_ships = async() => {
         let ship_id = 0;
         for (let json_ship of json["stats"]["ship"]) {
             let ship = new Ship(json_ship);
-            ship._id = Mordor.Types.ObjectId();
+            ship._id = new Mordor.Types.ObjectId();
             ship.ship_id = ship_id++; // set primary key
             let saved = await ship.save();
             if (saved) {
@@ -98,7 +98,7 @@ let load_ships = async() => {
 
 let load_ticks = async(start) => {
     if(!await Tick.exists({ tick: 0 })) {
-        await new Tick({ _id: Mordor.Types.ObjectId(), tick: 0, timestamp: start }).save();
+        await new Tick({ _id: new Mordor.Types.ObjectId(), tick: 0, timestamp: start }).save();
         console.log("Added first tick!");
     } else {
         console.log("First tick already exists!");
@@ -109,7 +109,7 @@ let load_ticks = async(start) => {
 let setup_admin = async() => {
     if(!await User.exists({pa_nick: Config.admin.pa_nick})) {
         let adm = new User({
-            _id: Mordor.Types.ObjectId(),
+            _id: new Mordor.Types.ObjectId(),
             pa_nick: Config.admin.pa_nick,
             access: 5
         });
@@ -120,7 +120,7 @@ let setup_admin = async() => {
             }
             else {
                 adm.ds_user = await new DiscordUser({
-                    _id: Mordor.Types.ObjectId(),
+                    _id: new Mordor.Types.ObjectId(),
                     dsuser_id: Config.admin.discord_id
                 }).save();
             }
@@ -131,7 +131,7 @@ let setup_admin = async() => {
             }
             else {
                 adm.tg_user = await new TelegramUser({
-                    _id: Mordor.Types.ObjectId(),
+                    _id: new Mordor.Types.ObjectId(),
                     tguser_id: Config.admin.telegram_id
                 }).save();
             }
