@@ -142,7 +142,7 @@ let Admin_addmember = (args, ctx) => {
       let access_level = 'Recruit';
       console.log(`tguser: ${tguser}`);
       console.log(`nick: ${nick}`);
-      if (!tguser || !nick){
+      if (!tguser || !nick || !isNaN(nick)){
         reject(Admin_addmember_usage);
       } else { 
         let mentions = await ctx.mentions.get(ctx.message);
@@ -284,16 +284,15 @@ let Admin_access = (args, ctx) => {
             let mbr = await Member.findOne({
               telegram_user: mentions[0]
             });
-            mbr.access = access;            
-            let saved = await mbr.save();
-            if (saved != null) {
+            if (mbr != null) {
+              mbr.access = access;            
+              let saved = await mbr.save();
               resolve(`Set ${tguser} access as ${access_level}.`);
-            }
-          } else {
+            } else {
             reject(`${tguser} is not an allliance member.`);
+            }
           }
         }
-      }
     } else {
       reject(Admin_access_usage);
     }
