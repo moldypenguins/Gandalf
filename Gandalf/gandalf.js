@@ -126,7 +126,7 @@ Mordor.connection.once("open", async () => {
 
     telegramBot.help(async(ctx) => {
         if(!ctx.user) {
-            ctx.replyWithHTML("<i>You shall not pass!</i>", {reply_to_message_id: ctx.message.message_id});
+            ctx.replyWithHTML("<i>You shall not pass!</i>\nUse /start", {reply_to_message_id: ctx.message.message_id});
         }
         else {
             let commands = "<b>Commands:</b>\n<b>help:</b> <i>Shows list of commands</i>\n";
@@ -142,7 +142,7 @@ Mordor.connection.once("open", async () => {
     telegramBot.command(async(ctx) => {
         console.log("command: ", ctx.message.text);
         if(!ctx.user) {
-            ctx.replyWithHTML("<i>You shall not pass!</i>", {reply_to_message_id: ctx.message.message_id});
+            ctx.replyWithHTML("<i>You shall not pass!</i>\nUse /start", {reply_to_message_id: ctx.message.message_id});
         }
         else {
             //.replace(/[^a-z0-9áéíóúñü \.,_-:]/gim,'');
