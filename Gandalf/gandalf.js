@@ -74,9 +74,8 @@ Mordor.connection.once("open", async () => {
 
     telegramBot.use(async(ctx, next) => {
         if(ctx.message.entities && ctx.message.entities[0]?.type === "bot_command") {
-            let _user = await User.findByTGId(ctx.message.from.id);
-            if(_user) {
-                ctx.user = _user;
+            if(await TelegramUser.exists({tguser_id: ctx.message.from.id})) {
+                ctx.user = await TelegramUser.findOne({tguser_id: ctx.message.from.id});
             }
             return next();
         }
