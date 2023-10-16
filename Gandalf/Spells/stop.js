@@ -41,27 +41,6 @@ dayjs.extend(timezone);
 
 
 
-
-async function executeCommand(params) {
-    let reply;
-    let results;
-    if(!params.number || !params.ship) {
-        reply = `Usage: ${stop.usage}`;
-    } else {
-        let ships = await Ship.find({});
-        let ship = ships.find(s => s.name.toLowerCase().startsWith(params.ship));
-        let number = params.number;
-        if(!ship) {
-            reply = `Cannot find ship ${_ship}`;
-        } else {
-
-        }     
-    }
-    return reply;
-}
-
-
-
 //encode("/stop <number> <ship>")
 //Calculates the required defense to the specified number of ships.
 
