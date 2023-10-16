@@ -22,6 +22,7 @@
  **/
 
 
+import cost from "./cost.js";
 import eff from "./eff.js";
 import stop from "./stop.js";
 import ship from "./ship.js";
@@ -29,6 +30,7 @@ import tick from "./tick.js";
 
 
 let TelegramCommands = {
+    cost,
     eff,
     stop,
     ship,

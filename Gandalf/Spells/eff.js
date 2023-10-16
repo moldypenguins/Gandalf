@@ -42,7 +42,6 @@ dayjs.extend(timezone);
 //encode("/eff <number> <ship>")
 //Calculates the efficiency of the specified number of ships.
 
-
 export default async (params) => {
     let reply;
     if(!params.number || !params.ship) {
