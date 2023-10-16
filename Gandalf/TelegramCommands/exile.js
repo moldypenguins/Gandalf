@@ -48,17 +48,7 @@ export default {
     telegram: {
         async execute(ctx, args) {
             return new Promise(async (resolve, reject) => {
-                let tick = await Tick.findLastTick();
-                if(!tick) {
-                    reply = "Cannot find current tick.";
-                }
-                else {
-                    if(tick.tick <= 12) {
-                        reject("Universe has not shuffled.");
-                    } else {
-                        resolve(await Spells.exile());
-                    }
-                }
+                resolve(await Spells.exile());
             });
         }
     }
