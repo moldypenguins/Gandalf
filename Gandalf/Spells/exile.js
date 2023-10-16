@@ -51,7 +51,7 @@ export default async () => {
     else {
         let reply;
         if(tick.tick <= 12) {
-            reply = "Universe has not shuffled.";
+            reply = "The universe has not shuffled yet.";
         } else {
             let galaxy_count = await Galaxy.countDocuments({active: true, $and:[{x: {$ne: 200}},{$or: [{x: {$ne: 1}},{y: {$ne: 1}}]}]});
             //console.log(`galaxy_count: ${galaxy_count}`);

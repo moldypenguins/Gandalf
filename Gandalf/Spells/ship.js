@@ -37,6 +37,9 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 
+//encode("/ship <ship>")
+//Displays ship stats.
+
 export default async (params) => {
     let reply;
 

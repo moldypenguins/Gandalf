@@ -23,11 +23,12 @@
 
 
 
-
+import ship from "./ship.js";
 import tick from "./tick.js";
 
 
 let DiscordCommands = {
+    ship,
     tick
 };
 
