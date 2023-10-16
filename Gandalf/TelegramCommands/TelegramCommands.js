@@ -22,13 +22,14 @@
  **/
 
 
-
-
+import eff from "./eff.js";
+import ship from "./ship.js";
 import tick from "./tick.js";
-import adduser from "./adduser.js";
 
 
 let TelegramCommands = {
+    eff,
+    ship,
     tick
 };
 

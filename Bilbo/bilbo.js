@@ -28,7 +28,22 @@ import dayjs from "dayjs";
 import axios from "axios";
 import X2JS from "x2js";
 import minimist from "minimist";
-import {DiscordUser, User, Mordor, Ship, TelegramUser, Tick, PlanetDump, Planet, Cluster, Galaxy, GalaxyDump, Alliance, AllianceDump} from "mordor";
+import {
+    DiscordGuild, 
+    DiscordUser, 
+    User, 
+    Mordor, 
+    Ship, 
+    TelegramUser, 
+    Tick, 
+    PlanetDump, 
+    Planet, 
+    Cluster, 
+    Galaxy, 
+    GalaxyDump, 
+    Alliance, 
+    AllianceDump
+} from "mordor";
 import * as util from "util";
 
 
@@ -114,6 +129,17 @@ let setup_admin = async() => {
             access: 5
         });
 
+        //add discord guild
+        if(Config.admin.guild_id) {
+            if(!await DiscordGuild.exists({dsguild_id: Config.admin.guild_id})) {
+                await new DiscordGuild({
+                    _id: new Mordor.Types.ObjectId(),
+                    dsguild_id: Config.admin.guild_id
+                }).save();
+            }
+        }
+
+        //add discord user
         if(Config.admin.discord_id) {
             if(await DiscordUser.exists({dsuser_id: Config.admin.discord_id})) {
                 adm.ds_user = await DiscordUser.findOne({dsuser_id: Config.admin.discord_id});
@@ -125,6 +151,11 @@ let setup_admin = async() => {
                 }).save();
             }
         }
+
+
+
+
+
         if(Config.admin.telegram_id) {
             if(await TelegramUser.exists({tguser_id: Config.admin.telegram_id})) {
                 adm.tg_user = await TelegramUser.findOne({tguser_id: Config.admin.telegram_id});

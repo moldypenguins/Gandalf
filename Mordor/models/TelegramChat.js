@@ -25,10 +25,10 @@ import mongoose from "mongoose";
 
 let TelegramChatSchema = new mongoose.Schema({
     _id:                      {type:mongoose.Schema.Types.ObjectId, required:true},
-    TelegramChat_id:          {type:String, unique:true, required:true},
-    TelegramChat_type:        {type:String, required: true},
-    TelegramChat_title:       {type:String},
-    TelegramChat_description: {type:String},
+    tgchat_id:          {type:String, unique:true, required:true},
+    tgchat_type:        {type:String, required: true},
+    tgchat_title:       {type:String},
+    tgchat_description: {type:String},
 });
 
 export default mongoose.model("TelegramChat", TelegramChatSchema, "TelegramChats");

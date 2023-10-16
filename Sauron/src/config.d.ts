@@ -35,14 +35,12 @@ export default interface Config {
     client_id: string | null;
     guild_id: string | null;
     channel_id: string | null;
-    commands: string[] | null;
     tick_alert: string | null;
   };
   telegram?: {
     token: string | null;
     username: string | null;
     group_id: string | null;
-    commands: string[] | null;
     tick_alert: string | null;
   };
   db?: {

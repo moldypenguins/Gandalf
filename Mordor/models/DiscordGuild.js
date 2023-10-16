@@ -25,10 +25,10 @@ import mongoose from "mongoose";
 
 let DiscordGuildSchema = new mongoose.Schema({
     _id:                      {type:mongoose.Schema.Types.ObjectId, required:true},
-    DiscordGuild_id:          {type:String, unique:true, required:true},
-    DiscordGuild_ownerId:        {type:String, required: true},
-    DiscordGuild_name:       {type:String},
-    DiscordGuild_description: {type:String},
+    dsguild_id:          {type:String, unique:true, required:true},
+    dsguild_ownerId:        {type:String, required: true},
+    dsguild_name:       {type:String},
+    dsguild_description: {type:String},
 });
 
 export default mongoose.model("DiscordGuild", DiscordGuildSchema, "DiscordGuilds");

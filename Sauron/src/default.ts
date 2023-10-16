@@ -37,14 +37,12 @@ const configDefault: Config = {
     client_id: null,
     guild_id: null,
     channel_id: null,
-    commands: null,
     tick_alert: null
   },
   telegram: {
     token: null,
     username: null,
     group_id: null,
-    commands: null,
     tick_alert: null
   },
   db: {

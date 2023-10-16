@@ -22,10 +22,14 @@
  **/
 
 
+import eff from "./eff.js";
+import ship from "./ship.js";
 import tick from "./tick.js";
 
 
 const Spells =  {
+    eff,
+    ship,
     tick
 };
 

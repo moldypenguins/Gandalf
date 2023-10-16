@@ -24,7 +24,10 @@
 import util from "util";
 import Config from "sauron";
 import { Mordor, Ship } from "mordor";
+import Spells from "../Spells/Book.js";
+import Access from "../access.js";
 
+import { Context } from "telegraf";
 
 import { encode } from "html-entities";
 import numeral from "numeral";
@@ -37,34 +40,21 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 
-export default async (params) => {
-    let reply;
 
-    if(!params.ship) {
-        reply = "Ship must be provided.";
-    } else {
-        let _ship = await Ship.findOne({name: new RegExp(params.ship + ".*", "i")});
-        //console.log(`SHIP: ${util.inspect(_ship, true, null, true)}`);
-  
-        if(!_ship) {
-            reply = "Ship not found.";
-        }
-        else {
-            reply = `${_ship.name} (${_ship.race})\nClass: ${_ship.class}\nTarget 1: ${_ship.target1}`;
-            if(_ship.target2 !== "-") {
-                reply += `\nTarget 2: ${_ship.target2}`;
-            }
-            if(_ship.target3 !== "-") {
-                reply += `\nTarget 3: ${_ship.target3}`;
-            }
-            reply += `\nType: ${_ship.type}\nInit: ${_ship.initiative}`;
-            reply += `\nEMP Res: ${_ship.empres}`;
-            if(_ship.type.toLowerCase() === "emp") {
-                reply += `\nGuns: ${_ship.guns}`;
-            }
-            reply += `\nD/C: ${Math.trunc(Number(_ship.damage)*10000/(Number(_ship.metal) + Number(_ship.crystal) + Number(_ship.eonium)))}`;
-            reply += `\nA/C: ${Math.trunc(Number(_ship.armor)*10000/(Number(_ship.metal) + Number(_ship.crystal) + Number(_ship.eonium)))}`;
+export default {
+    access: null,
+    usage: encode("/ship <ship>"),
+    description: "Displays ship stats.",
+    telegram: {
+        async execute(ctx, args) {
+            return new Promise(async (resolve, reject) => {
+                if(typeof(args[0]) == "undefined") {
+                    reject("Missing parameter.");
+                } else {
+                    resolve(await Spells.ship({ship: args[0]}));
+                }
+            });
         }
     }
-    return reply;
 };
+

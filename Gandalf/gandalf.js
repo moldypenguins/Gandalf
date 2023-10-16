@@ -47,10 +47,8 @@ if(argv.register) {
     (async () => {
         try {
             const dsCommands = [];
-            Config.discord.commands.forEach(function(name) {
-                if(DiscordCommands[name]) {
-                    dsCommands.push(DiscordCommands[name].data.toJSON());
-                }
+            DiscordCommands.forEach(function(cmd) {
+                dsCommands.push(cmd.data.toJSON());
             });
             const data = await rest.put(Routes.applicationCommands(Config.discord.client_id), {body: dsCommands});
             console.log(`Reloaded ${data.length} discord commands.`);
@@ -155,7 +153,7 @@ Mordor.connection.once("open", async () => {
             let cmd = args.shift().toLowerCase();
 
             // Command alias check
-            if(Config.telegram.commands.indexOf(cmd) < 0) {
+            if(TelegramCommands[cmd] != null) {
                 for(let [key, value] of Object.entries(TelegramCommands)) {
                     if(value.alias && value.alias.includes(cmd)) {
                         cmd = key;
@@ -163,7 +161,7 @@ Mordor.connection.once("open", async () => {
                 }
             }
 
-            if(Config.telegram.commands.indexOf(cmd) >= 0 && typeof (TelegramCommands[cmd]?.telegram?.execute) === "function") {
+            if(typeof (TelegramCommands[cmd]?.telegram?.execute) === "function") {
                 if(TelegramCommands[cmd].access && (ctx.user === null || !TelegramCommands[cmd].access(ctx.user))) {
                     ctx.replyWithHTML("You do not have access to this command.", {reply_to_message_id: ctx.message.message_id});
                 }

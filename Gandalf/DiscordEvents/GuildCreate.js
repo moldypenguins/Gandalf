@@ -32,10 +32,10 @@ export default {
 
         let res = await new DiscordGuild({
             _id: new Mordor.Types.ObjectId(),
-            DiscordGuild_id: guild.id,
-            DiscordGuild_ownerId: guild.ownerId,
-            DiscordGuild_name: guild.name,
-            DiscordGuild_description: guild.description
+            dsguild_id: guild.id,
+            dsguild_ownerId: guild.ownerId,
+            dsguild_name: guild.name,
+            dsguild_description: guild.description
         }).save();
 
         //admin logging
