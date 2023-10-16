@@ -23,12 +23,14 @@
 
 
 import eff from "./eff.js";
+import stop from "./stop.js";
 import ship from "./ship.js";
 import tick from "./tick.js";
 
 
 let TelegramCommands = {
     eff,
+    stop,
     ship,
     tick
 };
