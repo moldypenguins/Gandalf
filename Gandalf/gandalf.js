@@ -47,9 +47,9 @@ if(argv.register) {
     (async () => {
         try {
             const dsCommands = [];
-            DiscordCommands.forEach(function(cmd) {
-                dsCommands.push(cmd.data.toJSON());
-            });
+            for (let [key, value] of Object.entries(DiscordCommands)) {
+                dsCommands.push(value.data.toJSON());
+            }
             const data = await rest.put(Routes.applicationCommands(Config.discord.client_id), {body: dsCommands});
             console.log(`Reloaded ${data.length} discord commands.`);
         } catch (err) {
@@ -71,7 +71,7 @@ Mordor.connection.once("open", async () => {
     //TODO: parse text for scan links
 
     telegramBot.use(async(ctx, next) => {
-        if(ctx.message.entities && ctx.message.entities[0]?.type === "bot_command") {
+        if(ctx.message?.entities && ctx.message.entities[0]?.type === "bot_command") {
             let _user = await User.findByTGId(ctx.message.from.id);
             if(_user) {
                 ctx.user = _user;
