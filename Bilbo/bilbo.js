@@ -91,7 +91,7 @@ let load_ships = async() => {
         console.error(error);
     }
     if(shipstats?.status === 200 &&  shipstats?.data !== undefined) {
-        console.log(`HERE: ${util.inspect(shipstats.request._header, true, 2, true)}`);
+        //console.log(`HERE: ${util.inspect(shipstats.request._header, true, 2, true)}`);
         let x2js = new X2JS();
         let json = x2js.xml2js(shipstats.data);
         // load each one in to the database

@@ -185,22 +185,21 @@ const configDefault: Config = {
         name: "Zikonian",
         prodtime: 0.15
       },
-      /*
-      etd: {
-        name: "Eitraides",
-        prodtime: 0
-      }
-      */
       kin: {
         number: 5,
         name: "Kinthia",
         prodtime: 0
       },   
+      etd: {
+        number: 6,
+        name: "Eitraides",
+        prodtime: 0
+      }/*,   
       sly: {
         number: 6,
         name: "Slythonian",
         prodtime: 0
-      }    
+      }*/
     },
     construction: {
       baseRefCost: 3000,

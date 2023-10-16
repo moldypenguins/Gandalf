@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -21,30 +21,30 @@
  * @summary Mongoose Model
  **/
 
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 let ShipSchema = new mongoose.Schema({
-  _id:        {type:mongoose.Schema.Types.ObjectId, required:true},
-  ship_id:    {type:Number, unique:true, required:true},
-  name:       {type:String, index:true, required:true},
-  race:       {type:String, required:true},
-  class:      {type:String, required:true},
-  target1:    {type:String},
-  target2:    {type:String},
-  target3:    {type:String},
-  type:       {type:String},
-  cloaked:    {type:Boolean},
-  initiative: {type:String},
-  guns:       {type:String},
-  armor:      {type:String},
-  damage:     {type:String},
-  empres:     {type:String},
-  metal:      {type:String},
-  crystal:    {type:String},
-  eonium:     {type:String},
-  armorcost:  {type:String},
-  damagecost: {type:String},
-  baseeta:    {type:String}
+    _id:        {type:mongoose.Schema.Types.ObjectId, required:true},
+    ship_id:    {type:Number, unique:true, required:true},
+    name:       {type:String, index:true, required:true},
+    race:       {type:String, required:true},
+    class:      {type:String, required:true},
+    target1:    {type:String},
+    target2:    {type:String},
+    target3:    {type:String},
+    type:       {type:String},
+    cloaked:    {type:Boolean},
+    initiative: {type:Number},
+    guns:       {type:Number},
+    armor:      {type:Number},
+    damage:     {type:Number},
+    empres:     {type:Number},
+    metal:      {type:Number},
+    crystal:    {type:Number},
+    eonium:     {type:Number},
+    armorcost:  {type:Number},
+    damagecost: {type:Number},
+    baseeta:    {type:Number}
 });
 
-export default mongoose.model('Ship', ShipSchema, 'Ships');
+export default mongoose.model("Ship", ShipSchema, "Ships");

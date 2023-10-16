@@ -53,8 +53,8 @@ export default async (params) => {
         if(!ship) {
             reply = `Cannot find ship ${_ship}`;
         } else {
-            let damage = ship.damage !== "-" ? numeral(ship.damage).value() * number : 0;
-            reply = `${numeral(number).format("0,0")} ${ship.name} (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / Config.pa.numbers.ship_value).format("0a") })`;
+            let damage = ship.damage !== "-" ? numeral(ship.damage).value() * numeral(number).value() : 0;
+            reply = `${numeral(number).format("0,0")} ${ship.name} (${numeral(numeral(number).value() * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / Config.pa.numbers.ship_value).format("0a") })`;
 
             switch (ship.type.toLowerCase()) {
             case "pod":
@@ -74,15 +74,12 @@ export default async (params) => {
                         //console.log("TARGETED SHIPS: " + util.inspect(shiptargets, false, null, true));
                         if (shiptargets) {
                             var results = shiptargets.map(function (shiptarget) {
-                                switch (ship.type.toLowerCase()) {
-                                case "emp":
-                                    let empnumber = Math.trunc(Config.pa.ships.targeteffs[target] * ship.guns * number * (100 - shiptarget.empres) / 100);
+                                if (ship.type.toLowerCase() == "emp") {
+                                    let empnumber = Math.trunc(Config.pa.ships.targeteffs[target] * ship.guns * numeral(number).value() * (100 - shiptarget.empres) / 100);
                                     return (`${numeral(empnumber).format("0,0")} ${shiptarget.name} (${numeral(empnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / Config.pa.numbers.ship_value).format("0a")})`);
-                                    break;
-                                default:
+                                } else {
                                     let targetnumber = Math.trunc(Config.pa.ships.targeteffs[target] * damage / shiptarget.armor);
                                     return (`${numeral(targetnumber).format("0,0")} ${shiptarget.name} (${numeral(targetnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / Config.pa.numbers.ship_value).format("0a")})`);
-                                    break;
                                 }
                             });
                             reply += results.join("; ") + "\n";

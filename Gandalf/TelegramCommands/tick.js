@@ -43,14 +43,13 @@ dayjs.extend(timezone);
 
 export default {
     access: null,
-    usage: encode("/tick [tick=NOW] [timezone=UTC]"),
+    usage: encode("/tick [tick=NOW]"),
     description: "Calculates when a tick will occur.",
     telegram: {
         async execute(ctx, args) {
             return new Promise(async (resolve, reject) => {
                 let _tick = args[0];
-                let _tzone = args[1];
-                let _reply = await Spells.tick({tick: _tick, timezone: _tzone});
+                let _reply = await Spells.tick({tick: _tick});
                 resolve(_reply);
             });
         }

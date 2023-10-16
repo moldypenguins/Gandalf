@@ -57,13 +57,12 @@ export default async (params) => {
             if(_ship.target3 !== "-") {
                 reply += `\nTarget 3: ${_ship.target3}`;
             }
-            reply += `\nType: ${_ship.type}\nInit: ${_ship.initiative}`;
+            reply += `\nType: ${_ship.type}\nCloaked: ${_ship.cloaked ? "Yes" : "No"}\nInit: ${_ship.initiative}`;
             reply += `\nEMP Res: ${_ship.empres}`;
             if(_ship.type.toLowerCase() === "emp") {
                 reply += `\nGuns: ${_ship.guns}`;
             }
-            reply += `\nD/C: ${Math.trunc(Number(_ship.damage)*10000/(Number(_ship.metal) + Number(_ship.crystal) + Number(_ship.eonium)))}`;
-            reply += `\nA/C: ${Math.trunc(Number(_ship.armor)*10000/(Number(_ship.metal) + Number(_ship.crystal) + Number(_ship.eonium)))}`;
+            reply += `\nD/C: ${_ship.damagecost}\nA/C: ${_ship.armorcost}\nBase ETA: ${_ship.baseeta}`;
         }
     }
     return reply;
