@@ -43,7 +43,7 @@ export default {
     data: new SlashCommandBuilder()
         .setName("ship")
         .setDescription("Displays ship stats.")
-        .addStringOption(o => o.setName("ship").setDescription("ship").setRequired(false))
+        .addStringOption(o => o.setName("ship").setDescription("ship").setRequired(true))
     ,async execute(interaction) {
         let _ship = interaction.options.getString("ship");
         let _reply = await Spells.ship({ship: _ship});
