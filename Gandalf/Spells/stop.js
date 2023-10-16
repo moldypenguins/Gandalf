@@ -42,7 +42,6 @@ dayjs.extend(timezone);
 
 
 
-
 async function executeCommand(params) {
     let reply;
     let results;
@@ -72,17 +71,17 @@ export default async (params) => {
         reply = `Usage: ${encode("/stop <number> <ship>")}`;
     } else {            // TODO: stop structure killers / roiders
         let ships_who_target_class = ships.filter(s => s.target1 == ship.class || s.target2 == ship.class || s.target3 == ship.class);
-        reply = `To stop ${numeral(number).format("0a")} ${ship.name} (${numeral(number * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / Config.pa.numbers.ship_value).format("0a")}) you'll need:\n`;
+        reply = `To stop ${numeral(number).format("0a")} ${ship.name} (${numeral(numeral(number).value() * (Number(ship.metal) + Number(ship.crystal) + Number(ship.eonium)) / Config.pa.numbers.ship_value).format("0a")}) you'll need:\n`;
         if (ships_who_target_class) {
             results = ships_who_target_class.map(function (shiptarget) {
                 let target = shiptarget.target1 == ship.class ? "target1" : shiptarget.target2 == ship.class ? "target2" : "target3";
                 let efficiency = Config.pa.ships.targeteffs[target];
                 switch (shiptarget.type.toLowerCase()) {
                 case "emp":
-                    let empnumber = Math.trunc((Math.ceil(number / ((100 - (+ship.empres)) / 100) / (+shiptarget.guns))) / efficiency);
+                    let empnumber = Math.trunc((Math.ceil(numeral(number).value() / ((100 - (+ship.empres)) / 100) / (+shiptarget.guns))) / efficiency);
                     return (`${numeral(empnumber).format("0,0")} ${shiptarget.name} (${numeral(empnumber * (Number(shiptarget.metal) + Number(shiptarget.crystal) + Number(shiptarget.eonium)) / Config.pa.numbers.ship_value).format("0a")})`);
                 default:
-                    let targetnumber = Math.trunc((ship.armor * number) / shiptarget.damage / efficiency);
+                    let targetnumber = Math.trunc((ship.armor * numeral(number).value()) / shiptarget.damage / efficiency);
                     if (shiptarget.initiative > ship.initiative) {
                         targetnumber += Math.trunc(efficiency * shiptarget.damage / ship.armor);
                     }
