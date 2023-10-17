@@ -23,7 +23,7 @@
 
 
 import Config from "sauron";
-import {Mordor, User, TelegramUser, BotMessage} from "mordor";
+import {Mordor, User, TelegramChat, TelegramUser, BotMessage} from "mordor";
 import DiscordEvents from "./DiscordEvents/DiscordEvents.js";
 import DiscordCommands from "./DiscordCommands/DiscordCommands.js";
 import TelegramCommands from "./TelegramCommands/TelegramCommands.js";
@@ -71,6 +71,21 @@ Mordor.connection.once("open", async () => {
     //TODO: parse text for scan links
 
     telegramBot.use(async(ctx, next) => {
+        if(ctx.update?.my_chat_member?.chat && ctx.update?.my_chat_member?.new_chat_member?.status) {
+            if(ctx.update.my_chat_member.new_chat_member.status == "left") {
+                console.log("Left: ", ctx.update.my_chat_member.chat.title);
+            } else if(ctx.update.my_chat_member.new_chat_member.status == "member") {
+                console.log("Joined", ctx.update.my_chat_member.chat.title);
+
+                let _chat = await new TelegramChat({
+                    _id: new Mordor.Types.ObjectId(),
+                    tgchat_id: ctx.update.my_chat_member.chat.id,
+                    tgchat_type: ctx.update.my_chat_member.chat.type,
+                    tgchat_title: ctx.update.my_chat_member.chat.title
+                }).save();
+            }
+        }
+
         if(ctx.message?.entities && ctx.message.entities[0]?.type === "bot_command") {
             let _user = await User.findByTGId(ctx.message.from.id);
             if(_user) {
@@ -80,7 +95,13 @@ Mordor.connection.once("open", async () => {
             }
             return next();
         }
+
+        
+        
+
     });
+
+    telegramBot.on("", (ctx) => ctx.reply("👍"));
 
     telegramBot.context.mentions = {
         get: async (message) => {
@@ -179,6 +200,15 @@ Mordor.connection.once("open", async () => {
             }
         }
     });
+
+
+    telegramBot.on("my_chat_member", async (ctx) => {
+        // Explicit usage
+        
+        await ctx.telegram.sendMessage(ctx.message.chat.id, `Hello ${ctx.state.role}`, {parse_mode: "HTML"});
+    });
+
+
 
     telegramBot.catch(async(err, ctx) => {
         console.log(`Ooops, encountered an error for ${ctx.updateType}`, err);
