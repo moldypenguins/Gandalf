@@ -75,7 +75,7 @@ Mordor.connection.once("open", async () => {
         timeFrame: 3000,
         limit: 1,
         keyGenerator: (ctx) => {
-            if(!ctx?.message?.entities || ctx?.message?.entities?.filter(e => e.type === "url").length == 0) {
+            if(!ctx?.message?.from?.is_bot && (!ctx?.message?.entities || ctx?.message?.entities?.filter(e => e.type === "url").length == 0)) {
                 return ctx.from.id;
             }
         },
@@ -87,8 +87,8 @@ Mordor.connection.once("open", async () => {
     telegramBot.use(async(ctx, next) => {
         //bot added or removed from a Telegram group
         if(ctx.update?.my_chat_member?.chat && ctx.update?.my_chat_member?.new_chat_member?.status && ctx.update?.my_chat_member?.old_chat_member?.status) {
-            console.log("CTX: ", util.inspect(ctx.update, true, null, true));
-            if(ctx.update.my_chat_member.new_chat_member.status == "left" && (ctx.update.my_chat_member.old_chat_member.status == "member" || ctx.update.my_chat_member.old_chat_member.status == "administrator")) {
+            //console.log("CTX: ", util.inspect(ctx.update, true, null, true));
+            if((ctx.update.my_chat_member.new_chat_member.status == "left" || ctx.update.my_chat_member.new_chat_member.status == "kicked") && (ctx.update.my_chat_member.old_chat_member.status == "member" || ctx.update.my_chat_member.old_chat_member.status == "administrator")) {
                 if(await TelegramChat.exists({tgchat_id: ctx.update.my_chat_member.chat.id})) {
                     let _chat = await TelegramChat.deleteOne({tgchat_id: ctx.update.my_chat_member.chat.id});
                     console.log("Deleted: ", _chat);
@@ -124,6 +124,7 @@ Mordor.connection.once("open", async () => {
         return next();
     });
 
+    //other middleware
     telegramBot.use(async(ctx, next) => {
     //console.log("CTX: ", util.inspect(ctx.message, true, null, true));
         //check for unknown groups
