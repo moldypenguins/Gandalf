@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /**
  * Gandalf
  * Copyright (c) 2020 Gandalf Planetarion Tools
@@ -21,84 +21,84 @@
  * @summary Gandalf Spells
  **/
 
-import util from 'util';
+import util from "util";
 import Config from "sauron";
-import { Mordor, Tick, User, Planet } from 'mordor';
-import Access from '../access.js';
+import { Mordor, Tick, User, Planet } from "mordor";
+import Access from "../access.js";
 
-import { Context } from 'telegraf';
+import { Context } from "telegraf";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder } from "discord.js";
 
-import { encode } from 'html-entities';
-import numeral from 'numeral';
-import dayjs from 'dayjs';
-import advancedFormat from 'dayjs/plugin/advancedFormat.js';
-import utc from 'dayjs/plugin/utc.js';
-import timezone from 'dayjs/plugin/timezone.js';
+import { encode } from "html-entities";
+import numeral from "numeral";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat.js";
+import utc from "dayjs/plugin/utc.js";
+import timezone from "dayjs/plugin/timezone.js";
 dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 
 const coords = {
-  access: Access.Member,
-  alias: null,
-  usage: encode('/coords <x:y:z>'),
-  description: 'Set your member planet.',
-  discord: {
-    data: new SlashCommandBuilder()
-      .setName('coords')
-      .setDescription('Set your member planet.')
-      .addStringOption(o => o.setName('coords').setDescription('coords').setRequired(true)),
-    async execute(interaction) {
-      let _coords = interaction.options.getString('coords');
-      let _reply = await executeCommand({coords: _coords});
-      await interaction.reply(`\`\`\`${_reply}\`\`\``);
+    access: Access.Member,
+    alias: null,
+    usage: encode("/coords <x:y:z>"),
+    description: "Set your member planet.",
+    discord: {
+        data: new SlashCommandBuilder()
+            .setName("coords")
+            .setDescription("Set your member planet.")
+            .addStringOption(o => o.setName("coords").setDescription("coords").setRequired(true)),
+        async execute(interaction) {
+            let _coords = interaction.options.getString("coords");
+            let _reply = await executeCommand({coords: _coords});
+            await interaction.reply(`\`\`\`${_reply}\`\`\``);
+        }
+    },
+    telegram: {
+        async execute(ctx, args) {
+            return new Promise(async (resolve, reject) => {
+                let _coords = args[0];
+                console.log(`COORDS: ${util.inspect(_coords, true, null, true)}`);
+                let _reply = await executeCommand({user: ctx.user, coords: _coords});
+                resolve(_reply);
+            });
+        }
     }
-  },
-  telegram: {
-    async execute(ctx, args) {
-      return new Promise(async (resolve, reject) => {
-        let _coords = args[0];
-        console.log(`COORDS: ${util.inspect(_coords, true, null, true)}`)
-        let _reply = await executeCommand({user: ctx.user, coords: _coords});
-        resolve(_reply);
-      });
-    }
-  }
 };
 
 
 
 async function executeCommand(params) {
-  let reply;
-  if(!params.user || !params.coords) {
+    let reply;
+    if(!params.user || !params.coords) {
     //param validation
-    reply = "error";
-  }
-  else {
-    let _user = await User.findById(params.user._id);
-    if (!_user) {
-      reply = `Cannot find user.`;
-    } else {
-      console.log(`COORDS: ${util.inspect(params.coords, true, null, true)}`)
-
-      let _coords = params.coords.split(':')
-
-
-
-      let p = await Planet.findOne({x: _coords[0], y: _coords[1], z: _coords[2]})
-      if(!p) {
-        reply = "Cannot find planet.";
-      }
-      else {
-        _user.planet = p;
-        _user.save();
-        reply = `Set your planet to ${p.x}:${p.y}:${p.z}`;
-      }
+        reply = "error";
     }
-  }
-  return reply;
+    else {
+        let _user = await User.findById(params.user._id);
+        if (!_user) {
+            reply = "Cannot find user.";
+        } else {
+            console.log(`COORDS: ${util.inspect(params.coords, true, null, true)}`);
+
+            let _coords = params.coords.split(":");
+
+
+
+            let p = await Planet.findOne({x: _coords[0], y: _coords[1], z: _coords[2]});
+            if(!p) {
+                reply = "Cannot find planet.";
+            }
+            else {
+                _user.planet = p;
+                _user.save();
+                reply = `Set your planet to ${p.x}:${p.y}:${p.z}`;
+            }
+        }
+    }
+    return reply;
 }
 
 export default coords;
