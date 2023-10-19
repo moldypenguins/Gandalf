@@ -323,7 +323,7 @@ export default {
 
         }
   
-        client.channels.cache.get(Config.discord.channel_id).send({ embeds: [{ color: 0x7f7b81, description: audit_message }] });
+        client.channels.cache.get(Config.discord.channel_id).send({ embeds: [{ color: 0x7f7b81, title: "Discord", description: audit_message }] });
 
     },
 };

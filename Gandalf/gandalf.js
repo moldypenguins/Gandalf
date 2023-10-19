@@ -70,40 +70,52 @@ Mordor.connection.once("open", async () => {
     const telegramBot = new Telegraf(Config.telegram.token, { telegram: { agent: null, webhookReply: false }, username: Config.telegram.username });
     
     //rate limit command use
+    /*
     telegramBot.use(limit({
         timeFrame: 3000,
         limit: 1,
         keyGenerator: (ctx) => {
-            if(!ctx.message?.entities || ctx.message.entities.filter(e => e.type === "url").length == 0) {
+            if(!ctx?.message?.entities || ctx?.message?.entities?.filter(e => e.type === "url").length == 0) {
                 return ctx.from.id;
             }
         },
         onLimitExceeded: (ctx, next) => ctx.reply("Rate limit exceeded")
     }));
+    */
 
+    //telegram events
     telegramBot.use(async(ctx, next) => {
-        //console.log("CTX: ", util.inspect(ctx.message, true, null, true));
-
         //bot added or removed from a Telegram group
-        if(ctx.update?.my_chat_member?.chat && ctx.update?.my_chat_member?.new_chat_member?.status) {
-            if(ctx.update.my_chat_member.new_chat_member.status == "left") {
+        if(ctx.update?.my_chat_member?.chat && ctx.update?.my_chat_member?.new_chat_member?.status && ctx.update?.my_chat_member?.old_chat_member?.status) {
+            console.log("CTX: ", util.inspect(ctx.update, true, null, true));
+            if(ctx.update.my_chat_member.new_chat_member.status == "left" && ctx.update.my_chat_member.old_chat_member.status == "member") {
+                if(await TelegramChat.exists({tgchat_id: ctx.update.my_chat_member.chat.id})) {
+                    let _chat = await TelegramChat.deleteOne({tgchat_id: ctx.update.my_chat_member.chat.id});
+                    console.log("Deleted: ", _chat);
+                }
                 console.log("Left: ", ctx.update.my_chat_member.chat.title);
                 discordBot.channels.cache.get(Config.discord.channel_id).send({ embeds: [{ color: 0x7f7b81, title: "Telegram", description: `Removed from ${ctx.update.my_chat_member.chat.title}` }] });
-                if(await TelegramChat.exists({tgchat_id: ctx.update.my_chat_member.chat.id})) {
-                    await TelegramChat.deleteOne({tgchat_id: ctx.update.my_chat_member.chat.id});
+                
+            } else if(ctx.update.my_chat_member.new_chat_member.status == "member" && ctx.update.my_chat_member.old_chat_member.status == "left") {
+                if(!await TelegramChat.exists({tgchat_id: ctx.update.my_chat_member.chat.id})) {
+                    let _chat = await new TelegramChat({
+                        _id: new Mordor.Types.ObjectId(),
+                        tgchat_id: ctx.update.my_chat_member.chat.id,
+                        tgchat_type: ctx.update.my_chat_member.chat.type,
+                        tgchat_title: ctx.update.my_chat_member.chat.title
+                    }).save();
+                    console.log("Saved: ", _chat);
                 }
-            } else if(ctx.update.my_chat_member.new_chat_member.status == "member") {
+                console.log("Joined: ", ctx.update.my_chat_member.chat.title);  
                 discordBot.channels.cache.get(Config.discord.channel_id).send({ embeds: [{ color: 0x7f7b81, title: "Telegram", description: `Added to ${ctx.update.my_chat_member.chat.title}` }] });
-                console.log("Joined", ctx.update.my_chat_member.chat.title);
-                let _chat = await new TelegramChat({
-                    _id: new Mordor.Types.ObjectId(),
-                    tgchat_id: ctx.update.my_chat_member.chat.id,
-                    tgchat_type: ctx.update.my_chat_member.chat.type,
-                    tgchat_title: ctx.update.my_chat_member.chat.title
-                }).save();
+                
             }
         }
-        
+        return next();
+    });
+
+    telegramBot.use(async(ctx, next) => {
+    //console.log("CTX: ", util.inspect(ctx.message, true, null, true));
         //check for unknown groups
         if(ctx.message?.chat?.id && !ctx.message?.from?.is_bot && ctx.message.chat.type !== "private") {
             if(!(await TelegramChat.exists({tgchat_id: ctx.message.chat.id}))) {

@@ -39,6 +39,6 @@ export default {
         }).save();
 
         //admin logging
-        client.channels.cache.get(Config.discord.channel_id).send({ embeds: [{ color: 0x7f7b81, description: `GuildCreate: joined guild ${guild.name} (${guild.id}).` }] });
+        client.channels.cache.get(Config.discord.channel_id).send({ embeds: [{ color: 0x7f7b81, title: "Discord", description: `GuildCreate: joined guild ${guild.name} (${guild.id}).` }] });
     },
 };
