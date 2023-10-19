@@ -23,11 +23,12 @@
 
 
 import Config from "sauron";
-import {Mordor, User, TelegramChat, TelegramUser, BotMessage} from "mordor";
+import {Mordor, Scan, User, TelegramChat, TelegramUser, BotMessage} from "mordor";
 import DiscordEvents from "./DiscordEvents/DiscordEvents.js";
 import DiscordCommands from "./DiscordCommands/DiscordCommands.js";
 import TelegramCommands from "./TelegramCommands/TelegramCommands.js";
 import { Context, Telegraf } from "telegraf";
+import { limit } from "@grammyjs/ratelimiter";
 import { ActivityType, Client, Collection, Events, GatewayIntentBits, Routes, REST } from "discord.js";
 import minimist from "minimist";
 import util from "util";
@@ -67,16 +68,31 @@ Mordor.connection.once("open", async () => {
     // Telegram
     // *******************************************************************************************************************
     const telegramBot = new Telegraf(Config.telegram.token, { telegram: { agent: null, webhookReply: false }, username: Config.telegram.username });
-
-    //TODO: parse text for scan links
+    
+    //rate limit command use
+    telegramBot.use(limit({
+        timeFrame: 3000,
+        limit: 1,
+        keyGenerator: (ctx) => {
+            if(!ctx.message.entities || ctx.message.entities.filter(e => e.type === "url").length == 0) {
+                return ctx.from.id;
+            }
+        },
+        onLimitExceeded: (ctx, next) => ctx.reply("Rate limit exceeded")
+    }));
 
     telegramBot.use(async(ctx, next) => {
+        //console.log("CTX: ", util.inspect(ctx.message, true, null, true));
+
+        //bot added or removed from a Telegram group
         if(ctx.update?.my_chat_member?.chat && ctx.update?.my_chat_member?.new_chat_member?.status) {
             if(ctx.update.my_chat_member.new_chat_member.status == "left") {
                 console.log("Left: ", ctx.update.my_chat_member.chat.title);
+                if(await TelegramChat.exists({tgchat_id: ctx.update.my_chat_member.chat.id})) {
+                    await TelegramChat.deleteOne({tgchat_id: ctx.update.my_chat_member.chat.id});
+                }
             } else if(ctx.update.my_chat_member.new_chat_member.status == "member") {
                 console.log("Joined", ctx.update.my_chat_member.chat.title);
-
                 let _chat = await new TelegramChat({
                     _id: new Mordor.Types.ObjectId(),
                     tgchat_id: ctx.update.my_chat_member.chat.id,
@@ -85,23 +101,66 @@ Mordor.connection.once("open", async () => {
                 }).save();
             }
         }
+        
+        //check for unknown groups
+        if(ctx.message?.chat?.id && !ctx.message?.from?.is_bot && ctx.message.chat.type !== "private") {
+            if(!await TelegramChat.exists({tgchat_id: ctx.message.chat.id})) {
+                let _chat = await new TelegramChat({
+                    _id: new Mordor.Types.ObjectId(),
+                    tgchat_id: ctx.message.chat.id,
+                    tgchat_type: ctx.message.chat.type,
+                    tgchat_title: ctx.message.chat.title
+                }).save();
+            }
+        }
 
-        if(ctx.message?.entities && ctx.message.entities[0]?.type === "bot_command") {
+        //parse message text for scan links
+        if(ctx.message?.entities && !ctx.message?.from?.is_bot && ctx.message.entities.some(e => e.type === "url")) {
+            for(let e = 0; e < ctx.message.entities.length; e++) {
+                if(ctx.message.entities[e]?.type === "url") {
+                    let _url = ctx.message.text.slice(ctx.message.entities[e].offset, ctx.message.entities[e].offset + ctx.message.entities[e].length);
+                    if(_url.includes("showscan.pl")) {
+                        let scanurl = new URL(_url);
+                        //console.log("SCANURL: " + util.inspect(scanurl.searchParams, true, null, true));
+                        if(scanurl.searchParams.get("scan_id") !== undefined) {
+                            //scan
+                            if(!await Scan.exists({scan_id: scanurl.searchParams.get("scan_id")})) {
+                                try {
+                                    //let result = await Scan.parse(ctx.message.from.id, scanurl.searchParams.get("scan_id"), null);
+                                    //console.log('SUCCESS: ' + result);
+                                } catch (err) {
+                                    console.log("ERROR: " + err);
+                                }
+                            }
+                        }
+                        if (scanurl.searchParams.get("scan_grp") !== undefined) {
+                            //scan group
+                            if(!await Scan.exists({scan_grp: scanurl.searchParams.get("scan_grp")})) {
+                                try {
+                                    //let result = await Scan.parse(ctx.message.from.id, null, scanurl.searchParams.get("scan_grp"));
+                                    //console.log('SUCCESS: ' + result);
+                                } catch (err) {
+                                    console.log("ERROR: " + err);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //limit commands to known Telegram users
+        if(ctx.message?.entities && ctx.message.entities[0]?.type === "bot_command" && !ctx.message?.from?.is_bot) {
             let _user = await User.findByTGId(ctx.message.from.id);
             if(_user) {
                 ctx.user = _user;
             } else {
                 ctx.user = null;
             }
-            return next();
         }
 
-        
-        
-
+        return next();
     });
-
-    telegramBot.on("", (ctx) => ctx.reply("👍"));
 
     telegramBot.context.mentions = {
         get: async (message) => {
@@ -129,7 +188,6 @@ Mordor.connection.once("open", async () => {
         }
     };
 
-
     telegramBot.start(async(ctx) => {
         if(!await TelegramUser.exists({tguser_id: ctx.message.from.id})) {
             await new TelegramUser({
@@ -139,7 +197,7 @@ Mordor.connection.once("open", async () => {
                 tguser_username: ctx.message.from.username,
                 tguser_language_code: ctx.message.from.language_code
             }).save();
-            ctx.replyWithHTML("Welcome.");
+            ctx.replyWithHTML("Speak friend and enter.");
         }
         else {
             ctx.replyWithHTML("You already did this.");
@@ -201,23 +259,9 @@ Mordor.connection.once("open", async () => {
         }
     });
 
-
-    telegramBot.on("my_chat_member", async (ctx) => {
-        // Explicit usage
-        
-        await ctx.telegram.sendMessage(ctx.message.chat.id, `Hello ${ctx.state.role}`, {parse_mode: "HTML"});
-    });
-
-
-
     telegramBot.catch(async(err, ctx) => {
         console.log(`Ooops, encountered an error for ${ctx.updateType}`, err);
     });
-
-
-
-
-
 
 
     // *******************************************************************************************************************

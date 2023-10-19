@@ -22,8 +22,10 @@
  **/
 
 
+import util from "util";
 import Config from "sauron";
 import { Mordor, Tick } from "mordor";
+import Access from "../access.js";
 
 import { Context } from "telegraf";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder } from "discord.js";
@@ -38,81 +40,43 @@ dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
+//encode("/launch <class|eta> <LT> [timezone]")
+//Calculates when ships should be launched to land at LT.
 
-const launch = {
-    access: null,
-    usage: encode("/launch <class|eta> <LT> [timezone]"),
-    description: "Calculates when ships should be launched to land at LT.",
-    discord: {
-        data: new SlashCommandBuilder()
-            .setName("launch")
-            .setDescription("Calculates when ships should be launched to land at LT.")
-            .addIntegerOption(o => o.setName("eta").setDescription("eta").setRequired(false).setMinValue(8).setMaxValue(14))
-            .addIntegerOption(o => o.setName("lt").setDescription("lt").setRequired(false).setMinValue(Config.pa.tick.start).setMaxValue(Config.pa.tick.end))
-            .addStringOption(o => o.setName("timezone").setDescription("timezone").setRequired(false)),
-        async execute(interaction) {
-            let _eta = interaction.options.getInteger("eta");
-            let _lt = interaction.options.getInteger("lt");
-            let _tzone = interaction.options.getString("timezone");
-
-            let reply = await executeCommand({eta: _eta, lt: _lt, tz: _tzone});
-            await interaction.reply(reply);
-
-        }
-    },
-    telegram: {
-        async execute(ctx, args) {
-            return new Promise(async (resolve, reject) => {
-                if (!Array.isArray(args) || args.length < 2) {
-                    reject("invalid number of arguments.");
-                } else {
-                    let _eta = numeral(args[0]).value();
-                    if (_eta == null) {
-                        reject("ETA must be a valid number.");
-                    }
-                    let _lt = args[1];
-                    _lt = numeral(_lt).value();
-                    if (_lt == null) {
-                        reject("LT must be a valid number.");
-                    }
-                    let reply = executeCommand({eta: _eta, lt: _lt, tz: args[2]});
-                    resolve(reply);
-                }
-            });
-        }
-    }
-};
-
-async function executeCommand(params) {
+export default async (params) => {
     let reply;
-    if(params.eta || params.lt) {
-    //param validation
-    //var spacing = options.spacing || 0;
-    //var width = options.width || "50%";
-    }
-    let now_tick = await Tick.findLastTick();
-    let now_time = dayjs(now_tick.timestamp).utc();
-    let _timezone = "UTC";
-    if (params.tz) {
-        try {
-            now_time.tz(params.tz);
-            _timezone = params.tz;
-        } catch (err) {
-            _timezone = undefined;
-        }
-    }
-
-    if (!_timezone) {
-        reply = `invalid timezone: ${params.tz}`;
+    if(!params.eta || !params.lt) {
+        reply = `Usage: ${encode("/eff <number> <ship>")}`;
     } else {
-        let current_time = dayjs().utc();
-        let launch_tick = params.lt - params.eta;
-        let launch_time = current_time.add(launch_tick - now_tick.tick, "hours");
-        let prelaunch_tick = params.lt - params.eta + 1;
-        let prelaunch_mod = launch_tick - now_tick.tick;
-        reply = `eta ${params.eta} landing pt ${params.lt} (currently ${now_tick.tick}) must launch at pt ${launch_tick} (${launch_time.tz(_timezone).format("YYYY-MM-DD H:55 z")}), or with prelaunch tick ${prelaunch_tick} (currently +${prelaunch_mod})`;
+        let ship = await Ship.findOne({$where:`this.name.toLowerCase().startsWith("${params.ship}")`});
+        let number = params.number;
+        if(!ship) {
+            reply = `Cannot find ship ${_ship}`;
+        } else {
+            let now_tick = await Tick.findLastTick();
+            let now_time = dayjs(now_tick.timestamp).utc();
+            let _timezone = "UTC";
+            if (params.tz) {
+                try {
+                    now_time.tz(params.tz);
+                    _timezone = params.tz;
+                } catch (err) {
+                    _timezone = undefined;
+                }
+            }
+      
+            if (!_timezone) {
+                reply = `invalid timezone: ${params.tz}`;
+            } else {
+                let current_time = dayjs().utc();
+                let launch_tick = params.lt - params.eta;
+                let launch_time = current_time.add(launch_tick - now_tick.tick, "hours");
+                let prelaunch_tick = params.lt - params.eta + 1;
+                let prelaunch_mod = launch_tick - now_tick.tick;
+                reply = `eta ${params.eta} landing pt ${params.lt} (currently ${now_tick.tick}) must launch at pt ${launch_tick} (${launch_time.tz(_timezone).format("YYYY-MM-DD H:55 z")}), or with prelaunch tick ${prelaunch_tick} (currently +${prelaunch_mod})`;
+            }
+          
+        }
     }
     return reply;
-}
-
-export default launch;
+};

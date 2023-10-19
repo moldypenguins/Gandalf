@@ -11,6 +11,7 @@
   "exports": "./gandalf.js",
   "scripts": {},
   "dependencies": {
+    "@grammyjs/ratelimiter": "^1.2.0",
     "axios": "^1.2.2",
     "config": "^3.3.8",
     "dayjs": "^1.11.6",

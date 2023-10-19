@@ -25,6 +25,7 @@
 import cost from "./cost.js";
 import eff from "./eff.js";
 import exile from "./exile.js";
+import launch from "./launch.js";
 import stop from "./stop.js";
 import ship from "./ship.js";
 import tick from "./tick.js";
@@ -34,6 +35,7 @@ const Spells =  {
     cost,
     eff,
     exile,
+    launch,
     stop,
     ship,
     tick
