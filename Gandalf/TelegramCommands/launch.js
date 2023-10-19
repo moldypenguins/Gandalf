@@ -48,16 +48,20 @@ export default {
     telegram: {
         async execute(ctx, args) {
             return new Promise(async (resolve, reject) => {
-                let _eta = numeral(args[0]).value();
-                if (_eta == null) {
-                    reject("ETA must be a valid number.");
+                if(typeof(args[0]) == "undefined" || typeof(args[1]) == "undefined") {
+                    reject("Missing parameter.");
+                } else {
+                    let _eta = numeral(args[0]).value();
+                    if (_eta == null) {
+                        reject("ETA must be a valid number.");
+                    }
+                    let _lt = args[1];
+                    _lt = numeral(_lt).value();
+                    if (_lt == null) {
+                        reject("LT must be a valid number.");
+                    }
+                    resolve(await Spells.launch({eta: _eta, lt: _lt, tz: args[2]}));
                 }
-                let _lt = args[1];
-                _lt = numeral(_lt).value();
-                if (_lt == null) {
-                    reject("LT must be a valid number.");
-                }
-                resolve(await Spells.launch({eta: _eta, lt: _lt, tz: args[2]}));
             });
         }
     }
