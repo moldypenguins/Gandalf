@@ -48,34 +48,27 @@ export default async (params) => {
     if(!params.eta || !params.lt) {
         reply = `Usage: ${encode("/eff <number> <ship>")}`;
     } else {
-        let ship = await Ship.findOne({$where:`this.name.toLowerCase().startsWith("${params.ship}")`});
-        let number = params.number;
-        if(!ship) {
-            reply = `Cannot find ship ${_ship}`;
-        } else {
-            let now_tick = await Tick.findLastTick();
-            let now_time = dayjs(now_tick.timestamp).utc();
-            let _timezone = "UTC";
-            if (params.tz) {
-                try {
-                    now_time.tz(params.tz);
-                    _timezone = params.tz;
-                } catch (err) {
-                    _timezone = undefined;
-                }
+        let now_tick = await Tick.findLastTick();
+        let now_time = dayjs(now_tick.timestamp).utc();
+        let _timezone = "UTC";
+        if (params.tz) {
+            try {
+                now_time.tz(params.tz);
+                _timezone = params.tz;
+            } catch (err) {
+                _timezone = undefined;
             }
+        }
       
-            if (!_timezone) {
-                reply = `invalid timezone: ${params.tz}`;
-            } else {
-                let current_time = dayjs().utc();
-                let launch_tick = params.lt - params.eta;
-                let launch_time = current_time.add(launch_tick - now_tick.tick, "hours");
-                let prelaunch_tick = params.lt - params.eta + 1;
-                let prelaunch_mod = launch_tick - now_tick.tick;
-                reply = `eta ${params.eta} landing pt ${params.lt} (currently ${now_tick.tick}) must launch at pt ${launch_tick} (${launch_time.tz(_timezone).format("YYYY-MM-DD H:55 z")}), or with prelaunch tick ${prelaunch_tick} (currently +${prelaunch_mod})`;
-            }
-          
+        if (!_timezone) {
+            reply = `invalid timezone: ${params.tz}`;
+        } else {
+            let current_time = dayjs().utc();
+            let launch_tick = params.lt - params.eta;
+            let launch_time = current_time.add(launch_tick - now_tick.tick, "hours");
+            let prelaunch_tick = params.lt - params.eta + 1;
+            let prelaunch_mod = launch_tick - now_tick.tick;
+            reply = `eta ${params.eta} landing pt ${params.lt} (currently ${now_tick.tick}) must launch at pt ${launch_tick} (${launch_time.tz(_timezone).format("YYYY-MM-DD H:55 z")}), or with prelaunch tick ${prelaunch_tick} (currently +${prelaunch_mod})`;
         }
     }
     return reply;

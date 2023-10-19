@@ -43,7 +43,7 @@ dayjs.extend(timezone);
 
 export default {
     access: null,
-    usage: encode("/launch <number> <ship>"),
+    usage: encode("/launch <class|eta> <LT> [timezone]"),
     description: "Calculates when ships should be launched to land at LT.",
     telegram: {
         async execute(ctx, args) {
