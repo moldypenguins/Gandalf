@@ -88,10 +88,12 @@ Mordor.connection.once("open", async () => {
         if(ctx.update?.my_chat_member?.chat && ctx.update?.my_chat_member?.new_chat_member?.status) {
             if(ctx.update.my_chat_member.new_chat_member.status == "left") {
                 console.log("Left: ", ctx.update.my_chat_member.chat.title);
+                discordBot.channels.cache.get(Config.discord.channel_id).send({ embeds: [{ color: 0x7f7b81, title: "Telegram", description: `Removed from ${ctx.update.my_chat_member.chat.title}` }] });
                 if(await TelegramChat.exists({tgchat_id: ctx.update.my_chat_member.chat.id})) {
                     await TelegramChat.deleteOne({tgchat_id: ctx.update.my_chat_member.chat.id});
                 }
             } else if(ctx.update.my_chat_member.new_chat_member.status == "member") {
+                discordBot.channels.cache.get(Config.discord.channel_id).send({ embeds: [{ color: 0x7f7b81, title: "Telegram", description: `Added to ${ctx.update.my_chat_member.chat.title}` }] });
                 console.log("Joined", ctx.update.my_chat_member.chat.title);
                 let _chat = await new TelegramChat({
                     _id: new Mordor.Types.ObjectId(),
