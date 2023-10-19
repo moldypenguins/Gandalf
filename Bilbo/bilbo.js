@@ -97,6 +97,8 @@ let load_ships = async() => {
         // load each one in to the database
         let ship_id = 0;
         for (let json_ship of json["stats"]["ship"]) {
+            if(json_ship.damage === "-") { json_ship.damage = 0; }
+            console.log(json_ship);
             let ship = new Ship(json_ship);
             ship._id = new Mordor.Types.ObjectId();
             ship.ship_id = ship_id++; // set primary key
