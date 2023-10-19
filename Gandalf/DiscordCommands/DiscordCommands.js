@@ -22,12 +22,13 @@
  **/
 
 
-
+import launch from "./launch.js";
 import ship from "./ship.js";
 import tick from "./tick.js";
 
 
 let DiscordCommands = {
+    launch,
     ship,
     tick
 };
