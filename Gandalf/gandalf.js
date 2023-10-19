@@ -88,7 +88,7 @@ Mordor.connection.once("open", async () => {
         //bot added or removed from a Telegram group
         if(ctx.update?.my_chat_member?.chat && ctx.update?.my_chat_member?.new_chat_member?.status && ctx.update?.my_chat_member?.old_chat_member?.status) {
             console.log("CTX: ", util.inspect(ctx.update, true, null, true));
-            if(ctx.update.my_chat_member.new_chat_member.status == "left" && ctx.update.my_chat_member.old_chat_member.status == "member") {
+            if(ctx.update.my_chat_member.new_chat_member.status == "left" && (ctx.update.my_chat_member.old_chat_member.status == "member" || ctx.update.my_chat_member.old_chat_member.status == "administrator")) {
                 if(await TelegramChat.exists({tgchat_id: ctx.update.my_chat_member.chat.id})) {
                     let _chat = await TelegramChat.deleteOne({tgchat_id: ctx.update.my_chat_member.chat.id});
                     console.log("Deleted: ", _chat);
@@ -109,6 +109,16 @@ Mordor.connection.once("open", async () => {
                 console.log("Joined: ", ctx.update.my_chat_member.chat.title);  
                 discordBot.channels.cache.get(Config.discord.channel_id).send({ embeds: [{ color: 0x7f7b81, title: "Telegram", description: `Added to ${ctx.update.my_chat_member.chat.title}` }] });
                 
+
+
+            } else if(ctx.update.my_chat_member.new_chat_member.status == "administrator" && ctx.update.my_chat_member.old_chat_member.status == "member") {
+                console.log("Promoted: ", ctx.update.my_chat_member.chat.title);
+                discordBot.channels.cache.get(Config.discord.channel_id).send({ embeds: [{ color: 0x7f7b81, title: "Telegram", description: `Promoted in ${ctx.update.my_chat_member.chat.title}` }] });
+              
+            } else if(ctx.update.my_chat_member.new_chat_member.status == "member" && ctx.update.my_chat_member.old_chat_member.status == "administrator") {
+                console.log("Deomoted: ", ctx.update.my_chat_member.chat.title);
+                discordBot.channels.cache.get(Config.discord.channel_id).send({ embeds: [{ color: 0x7f7b81, title: "Telegram", description: `Deomoted in ${ctx.update.my_chat_member.chat.title}` }] });
+              
             }
         }
         return next();
