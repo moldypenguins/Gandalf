@@ -74,7 +74,7 @@ Mordor.connection.once("open", async () => {
         timeFrame: 3000,
         limit: 1,
         keyGenerator: (ctx) => {
-            if(!ctx.message.entities || ctx.message.entities.filter(e => e.type === "url").length == 0) {
+            if(!ctx.message?.entities || ctx.message.entities.filter(e => e.type === "url").length == 0) {
                 return ctx.from.id;
             }
         },
