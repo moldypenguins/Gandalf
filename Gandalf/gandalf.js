@@ -104,7 +104,7 @@ Mordor.connection.once("open", async () => {
         
         //check for unknown groups
         if(ctx.message?.chat?.id && !ctx.message?.from?.is_bot && ctx.message.chat.type !== "private") {
-            if(!await TelegramChat.exists({tgchat_id: ctx.message.chat.id})) {
+            if(!(await TelegramChat.exists({tgchat_id: ctx.message.chat.id}))) {
                 let _chat = await new TelegramChat({
                     _id: new Mordor.Types.ObjectId(),
                     tgchat_id: ctx.message.chat.id,
