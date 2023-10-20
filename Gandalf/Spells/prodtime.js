@@ -46,7 +46,7 @@ export default async (params) => {
     let reply, gov, xeno, assumed, racefound;
   
     if (params.resources == 0 || params.factories == 0 || params.race == undefined) {
-        reply = `Usage: ${prodtime.usage}`;
+        reply = `Usage: ${encode("/prodtime <total resources> <factories> <race> [govt] [pop bonus]")}`;
     } else {
         let resources = params.resources;
         let factories = params.factories;
@@ -61,7 +61,7 @@ export default async (params) => {
         }
         console.log(`Pop bonus ${pop_bonus}`);
 
-        let races = Config.pa.race;
+        let races = Config.pa.races;
         for (xeno in races) {
             let race = races[xeno];
             console.log(`Race ${JSON.stringify(race)}`);
