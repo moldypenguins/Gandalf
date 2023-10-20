@@ -40,9 +40,7 @@ dayjs.extend(timezone);
 export default async (params) => {
     let reply;
     if(params.tick || params.timezone) {
-    //param validation
-    //var spacing = options.spacing || 0;
-    //var width = options.width || "50%";
+        //validate here
     }
     let tick = await Tick.findLastTick();
     if(!tick) {
@@ -58,7 +56,7 @@ export default async (params) => {
                 reply = `Tick ${params.tick} happened ${tick.tick - params.tick} ticks ago`;
             }
         }
-        let ticktime = dayjs(tick.timestamp);
+        let ticktime = dayjs(tick.timestamp).utc().add(tick.tick - params.tick, "hour");
         if (params.timezone) {
             reply += ` (${ticktime.tz(params.timezone).format("YYYY-MM-DD H:mm z")})`;
         } else {
