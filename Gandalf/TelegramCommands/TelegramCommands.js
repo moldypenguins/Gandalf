@@ -27,6 +27,7 @@ import eff from "./eff.js";
 import exile from "./exile.js";
 import launch from "./launch.js";
 import prodtime from "./prodtime.js";
+import roidcost from "./roidcost.js";
 import stop from "./stop.js";
 import ship from "./ship.js";
 import tick from "./tick.js";
@@ -38,6 +39,7 @@ let TelegramCommands = {
     exile,
     launch,
     prodtime,
+    roidcost,
     stop,
     ship,
     tick

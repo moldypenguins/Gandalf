@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name prodtime.js
+ * @name roidcost.js
  * @version 2023/04/20
  * @summary Circuit command
  **/
@@ -41,20 +41,16 @@ dayjs.extend(timezone);
 
 export default {
     data: new SlashCommandBuilder()
-        .setName("prodtime")
-        .setDescription("Calculate ticks taken to produce ships costing <total resources> (assumes Soc & 60 pop if blank)")
-        .addIntegerOption(o => o.setName("resources").setDescription("Total resources in production").setRequired(true).setMinValue(0))
-        .addIntegerOption(o => o.setName("factories").setDescription("No. factories").setRequired(true).setMinValue(0))
-        .addStringOption(o => o.setName("race").setDescription("Race").setRequired(true))
-        .addStringOption(o => o.setName("govt").setDescription("Government type").setRequired(false))
-        .addIntegerOption(o => o.setName("pop_bonus").setDescription("Shipwrights pop bonus").setRequired(false).setMinValue(0)),
+        .setName("roidcost")
+        .setDescription("Calculate how long it will take to repay a value loss capping roids.")
+        .addIntegerOption(o => o.setName("roids").setDescription("roids").setRequired(true).setMinValue(1))
+        .addStringOption(o => o.setName("cost").setDescription("cost").setRequired(true))
+        .addIntegerOption(o => o.setName("bonus").setDescription("bonus").setRequired(false)),
     async execute(interaction) {
-        let _p1 = interaction.options.getInteger("resources");
-        let _p2 = interaction.options.getInteger("factories");
-        let _p3 = interaction.options.getString("race");
-        let _p4 = interaction.options.getString("govt");
-        let _p5 = interaction.options.getInteger("pop_bonus");
-        let _reply = await Spells.prodtime({resources: _p1, factories: _p2, race: _p3, govt: _p4, pop_bonus: _p5});
+        let _roids = interaction.options.getInteger("roids");
+        let _cost = numeral(interaction.options.getString("cost")).value();
+        let _bonus = interaction.options.getInteger("bonus") === null ? 0 : numeral(interaction.options.getInteger("bonus")).value();
+        let _reply = await executeCommand({roids: _roids, cost: _cost, bonus: _bonus});
         await interaction.reply(`\`\`\`${_reply}\`\`\``);
     }
 };
