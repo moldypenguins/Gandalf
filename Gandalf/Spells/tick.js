@@ -50,16 +50,17 @@ export default async (params) => {
         reply = "Cannot find current tick.";
     }
     else {
+        let ticktime = dayjs(tick.timestamp).utc();
         if (!params.tick || tick.tick === params.tick) {
             reply = `It is currently tick ${tick.tick}`;
         } else {
+            ticktime = dayjs(tick.timestamp).utc().add(params.tick - tick.tick, "hour");
             if (params.tick > tick.tick) {
                 reply = `Tick ${params.tick} is expected to happen in ${params.tick - tick.tick} ticks`;
             } else {
                 reply = `Tick ${params.tick} happened ${tick.tick - params.tick} ticks ago`;
             }
         }
-        let ticktime = dayjs(tick.timestamp).utc().add(params.tick - tick.tick, "hour");
         if (params.timezone) {
             reply += ` (${ticktime.tz(params.timezone).format("YYYY-MM-DD H:mm z")})`;
         } else {

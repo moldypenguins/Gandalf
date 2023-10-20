@@ -153,14 +153,13 @@ exit
 # mongo --username [USERNAME] --password --authenticationDatabase admin
 ```
 
-### install node.js and pnpm
+### install node.js and npm
 ```bash
 sudo apt -y install gcc g++ make
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt-get install -y nodejs
 node -v
-#curl -fsSL https://get.pnpm.io/install.sh | sh -
-#sudo pnpm setup
+npm -v
 sudo apt install node-typescript
 sudo npm install -D typescript@next
 ```
