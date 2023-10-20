@@ -40,7 +40,9 @@ dayjs.extend(timezone);
 export default async (params) => {
     let reply;
     if(params.tick || params.timezone) {
-        //validate here
+        if(params.tick < Config.pa.tick.start || params.tick > Config.pa.tick.end) {
+            reply = `Tick must be between ${Config.pa.tick.start} and ${Config.pa.tick.end}`;
+        }
     }
     let tick = await Tick.findLastTick();
     if(!tick) {
