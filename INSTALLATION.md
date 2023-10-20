@@ -171,12 +171,6 @@ cd MiddleEarth/
 npm i
 ```
 
-### Qodana
-```bash
-sudo curl -fsSL https://jb.gg/qodana-cli/install | bash
-#mv: cannot move './qodana' to '/usr/local/bin/qodana': Permission denied
-```
-
 
 ### create local config
 ```bash
@@ -188,18 +182,11 @@ ls -alf
 cd ..
 ```
 
-### install node modules
-```bash
-#verify the following
-#sudo pm2 install pm2-logrotate
-#sudo pm2 set pm2-logrotate:max_size 10M
-#sudo pm2 set pm2-logrotate:compress true
-```
+### ssl certificate
 
 ```bash
 #ssl certificate
 #-suggest using cloudflare (with crowdsec)
-
 
 #no webby atm
 #cd ~/MiddleEarth/Sauron/ssl/
@@ -208,26 +195,17 @@ cd ..
 ```
 
 
-
 ```bash
 cd Bilbo/
 node Bilbo.js -s YYYY-MM-DDThh:mmZ
 cd ..
 
-#only use this for single unit testing
-pm2 start Frodo/frodo.js
-pm2 start Gandalf/gandalf.js
-pnpm watch
 ```
 
 
 
 ## Other Helpful Commands
 ```bash
-#pm2
-pm2 list
-pm2 monit
-pm2 start MiddleEarth.config.js --only "Frodo,Gandalf,Sauron"
 
 #check apps listening
 sudo netstat -tulpn | grep LISTEN
