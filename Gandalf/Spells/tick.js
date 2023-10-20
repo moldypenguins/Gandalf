@@ -42,6 +42,7 @@ export default async (params) => {
     if(params.tick || params.timezone) {
         if(params.tick < Config.pa.tick.start || params.tick > Config.pa.tick.end) {
             reply = `Tick must be between ${Config.pa.tick.start} and ${Config.pa.tick.end}`;
+            return reply;
         }
     }
     let tick = await Tick.findLastTick();
