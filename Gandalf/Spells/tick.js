@@ -56,7 +56,7 @@ export default async (params) => {
                 reply = `Tick ${params.tick} happened ${tick.tick - params.tick} ticks ago`;
             }
         }
-        let ticktime = dayjs(tick.timestamp).utc().add(tick.tick - params.tick, "hour");
+        let ticktime = dayjs(tick.timestamp).utc().add(params.tick - tick.tick, "hour");
         if (params.timezone) {
             reply += ` (${ticktime.tz(params.timezone).format("YYYY-MM-DD H:mm z")})`;
         } else {
