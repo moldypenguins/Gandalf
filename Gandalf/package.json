@@ -12,7 +12,7 @@
   "scripts": {},
   "dependencies": {
     "@grammyjs/ratelimiter": "^1.2.0",
-    "axios": "^1.2.2",
+    "axios": "^1.6.0",
     "config": "^3.3.8",
     "dayjs": "^1.11.6",
     "discord.js": "^14.6.0",
