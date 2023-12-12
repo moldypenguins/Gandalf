@@ -1,6 +1,6 @@
 /**
  * Gandalf
- * Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High
+ * Copyright (C) 2020 Gandalf Planetarion Tools
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -76,8 +76,8 @@ const PLANET_COORD_TYPE = 0, GALAXY_COORD_TYPE = 1;
 function parseArgs(args) {
 // coords will always be 0
 let coords = FNCS.parseCoords(args[0]); // may be gal 1.2.* or planet 1.2.3
-//let type = FNCS.coordType(coords);
-let rval = {coords: coords};//, type: type};
+let coord_type = FNCS.coordType(args[0]);
+let rval = {coords: coords, type: coord_type};
 
 // display
 if (args.length === 1) {
@@ -101,44 +101,45 @@ return rval;
 }
 
 async function intelDisplayPlanet(coords) {
-let response = `${coords.x}:${coords.y}:${coords.z}`;
-let planet = await Planet.findOne({x: coords.x, y:coords.y, z: coords.z});
-if (planet) {
-let intel = await Intel.findOne({planet_id: planet.id});
-if (intel) {
-console.log(`intel: ${JSON.stringify(intel)}`);
-let alliance = await Alliance.findOne({ _id: intel.alliance_id});
-console.log(`alliance: ${JSON.stringify(alliance)}`);
-if (alliance && alliance.name) {
-response += `\t<b>${alliance.name}</b>`
-}
-if (intel.nick) {
-response += `\t<b>${intel.nick}</b>`
-} else {
-response += `\t<i>Nick not set</i>`
-}
-return response + '\n';
-}
-return response + `\tNone\n`;
-}
-return '\n';
+  let response = `${coords.x}:${coords.y}:${coords.z}`;
+  let planet = await Planet.findOne({x: coords.x, y:coords.y, z: coords.z});
+  if (planet) {
+    let intel = await Intel.findOne({planet: planet.id});
+    console.log(planet._id)
+    response += `\t${planet.rulername} of ${planet.planetname}`;
+    if (intel) {
+ //     console.log(`intel: ${JSON.stringify(intel)}`);
+      let alliance = await Alliance.findOne({ _id: intel.alliance});
+ //     console.log(`alliance: ${JSON.stringify(alliance)}`);
+      if (alliance && alliance.name) {
+        response += `\tAlly: <b>${alliance.name}</b>`
+      } 
+      if (intel.nick) {
+        response += `\tNick: <b>${intel.nick}</b>`
+      } 
+      return response + '\n';
+    }
+    return response + `\tNone\n`;
+  }
+  return '\n';
 }
 
 async function intelDisplayGalaxy(coords) {
-let response = `Intel ${coords.x}:${coords.y}\n`;
-for(let i = 1; i < 14; i++) {
-response += await intelDisplayPlanet({x:coords.x, y:coords.y, z: i});
-}
-if (!response) {
-return `No intel found for galaxy ${coords.x}:${coords.y}.`
-}
-return response;
+  let response = `Intel ${coords.x}:${coords.y}\n`;
+  for(let i = 1; i < 14; i++) {
+    response += await intelDisplayPlanet({x:coords.x, y:coords.y, z: i});
+  }
+  if (!response) {
+    return `No intel found for galaxy ${coords.x}:${coords.y}.`
+  }
+  return response;
 }
 
 async function intelDisplay(args) {
 switch(args.type) {
 case GALAXY_COORD_TYPE:
 return await intelDisplayGalaxy(args.coords);
+break;
 case PLANET_COORD_TYPE:
 let response = await intelDisplayPlanet(args.coords);
 if (!response) {
@@ -172,58 +173,66 @@ function formatInvalidResponse(str) {
 }
 
 async function intelSet(args) {
-if (args.type === GALAXY_COORD_TYPE) {
-return `You can't set intel for an entire galaxy gtfo.`;
-}
+  let alliance;
+  if (args.type === GALAXY_COORD_TYPE) {
+    return `You can't set intel for an entire galaxy gtfo.`;
+  }
 
-let coords = args.coords;
-let planet = await Planet.findOne({ x: coords.x, y: coords.y, z: coords.z});
-if (!planet) {
-return `No planet found`; // for ${x}:${y}:${z}!!`;
-}
+  let coords = args.coords;
+  let planet = await Planet.findOne({ x: coords.x, y: coords.y, z: coords.z});
+  if (!planet) {
+    return `No planet found`; // for ${x}:${y}:${z}!!`;
+  }
 
-let intel = await Intel.findOne({planet_id: planet.id});
-if (!intel) {
-intel = new Intel({planet_id: planet.id});
-}
+  let intel = await Intel.findOne({planet: planet._id});
+  if (!intel) {
+    intel = new Intel( {
+      _id: Mordor.Types.ObjectId(),
+      planet: planet._id
+      });
+  }
 
-if (args.alliance) {
-console.log(`finding alliance by name ${args.alliance}`);
-// let alliance = await Alliance.findByName(args.alliance);
-let alliance = await Alliance.findOne({"name": new RegExp(args.alliance, 'i')});
-//console.log(alliance._id);
-//console.log(alliance.name);
-if (!alliance) {
-return `No alliance found for ${args.alliance}!!`;
-}
+  if (args.alliance) {
+    console.log(`finding alliance by name ${args.alliance}`);
+    // let alliance = await Alliance.findByName(args.alliance);
+    alliance = await Alliance.findOne({"name": new RegExp(args.alliance, 'i')});
+  //   console.log(alliance._id);
+  //   console.log(alliance.name);
+  //   console.log(planet._id);
+    if (!alliance) {
+      return `No alliance found for ${args.alliance}!!`;
+    }
+    intel.alliance = alliance._id;
+  }
 
-intel.alliance_id = 5;
-console.log(intel);
-}
-
-if (args.nick) {
-intel.nick = args.nick;
-}
-
-await intel.save();
-let alliance = await Alliance.findOne({ _id: intel.alliance_id});
-return `Intel saved for ${coords.x}:${coords.y}:${coords.z} ${alliance.name}/${intel.nick}`;
+  if (args.nick) {
+    intel.nick = args.nick;
+  }
+  console.log(intel);
+  await intel.save();
+  // let alliance = await Alliance.findOne({ _id: alliance._id});
+  return `Intel saved for ${coords.x}:${coords.y}:${coords.z} ${alliance.name}/${intel.nick}`;
 }
 
 let Intel_usage = he.encode('!intel <coords> <alliance> <nick>');
 let Intel_desc = 'Displays or sets intel for given coords.';
 let Intel_fn = (args) => {
-return new Promise(async (resolve) => {
-let parsed = parseArgs(args);
-console.log(parsed);
-switch (parsed.action) {
-default:
-case INTEL_ACTION_DISPLAY:
-resolve(await intelDisplay(parsed));
-case INTEL_ACTION_SET:
-resolve(await intelSet(parsed));
-}
-});
+  return new Promise(async (resolve, reject) => {
+      if (args.length > 0) {
+        let parsed = parseArgs(args);
+        console.log(parsed);
+        switch (parsed.action) {
+          default:
+          case INTEL_ACTION_DISPLAY:
+            resolve(await intelDisplay(parsed));
+          break;
+          case INTEL_ACTION_SET:
+          resolve(await intelSet(parsed));  
+        }
+      } else {
+        reject(Intel_usage);
+      }
+  });
 };
 
 //######################################################################################################################
