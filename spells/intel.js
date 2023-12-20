@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name intel.js
- * @version 2021/06/07
+ * @version 2023/12/20
  * @summary Gandalf Spells
  **/
 'use strict';
@@ -87,14 +87,16 @@ return Object.assign(rval, {action:INTEL_ACTION_DISPLAY});
 // assinging
 rval = Object.assign(rval, {action:INTEL_ACTION_SET});
 
-// setting alliance
+// set either nick, alliance, or both
+
 if (args.length > 1) {
-rval['alliance'] = args[1];
+  rval['param1']=args[1];
+// rval['alliance'] = args[1];
 }
 
-// setting nick
 if (args.length > 2) {
-rval['nick'] = args[2];
+// rval['nick'] = args[2];
+  rval['param2']=args[2];
 }
 
 return rval;
@@ -105,21 +107,22 @@ async function intelDisplayPlanet(coords) {
   let planet = await Planet.findOne({x: coords.x, y:coords.y, z: coords.z});
   if (planet) {
     let intel = await Intel.findOne({planet: planet.id});
-    console.log(planet._id)
+//    console.log(planet._id)
     response += `\t${planet.rulername} of ${planet.planetname}`;
     if (intel) {
  //     console.log(`intel: ${JSON.stringify(intel)}`);
       let alliance = await Alliance.findOne({ _id: intel.alliance});
  //     console.log(`alliance: ${JSON.stringify(alliance)}`);
       if (alliance && alliance.name) {
-        response += `\tAlly: <b>${alliance.name}</b>`
+        response += `\t<b>Ally:</b> ${alliance.name}`
       } 
       if (intel.nick) {
-        response += `\tNick: <b>${intel.nick}</b>`
+        response += `\t<b>Nick:</b> ${intel.nick}`
       } 
       return response + '\n';
+    } else {
+      return response + `\tNone\n`;
     }
-    return response + `\tNone\n`;
   }
   return '\n';
 }
@@ -157,14 +160,15 @@ function coordsToPlanetLookup(input) {
       return;
     }
 
-    Planet.find().then((planets) => {
-      let planet = planets.find(p => p && p.x && p.y && p.z && p.x == coords.x && p.y == coords.y && p.z == coords.z);
+ //   Planet.find().then((planets) => {
+      let planet = await Planet.findOne({ x: coords.x, y: coords.y, z: coords.z});
+//      let planet = planets.find(p => p && p.x && p.y && p.z && p.x == coords.x && p.y == coords.y && p.z == coords.z);
       if (!planet) {
         resolve(null);
         return;
       }
       resolve(planet);
-    });
+//    });
   });
 }
 
@@ -174,7 +178,7 @@ function formatInvalidResponse(str) {
 
 async function intelSet(args) {
   let alliance;
-  if (args.type === GALAXY_COORD_TYPE) {
+   if (args.type === GALAXY_COORD_TYPE) {
     return `You can't set intel for an entire galaxy gtfo.`;
   }
 
@@ -183,6 +187,7 @@ async function intelSet(args) {
   if (!planet) {
     return `No planet found`; // for ${x}:${y}:${z}!!`;
   }
+  let response = `Intel saved for ${coords.x}:${coords.y}:${coords.z}`;
 
   let intel = await Intel.findOne({planet: planet._id});
   if (!intel) {
@@ -192,42 +197,48 @@ async function intelSet(args) {
       });
   }
 
-  if (args.alliance) {
-    console.log(`finding alliance by name ${args.alliance}`);
-    // let alliance = await Alliance.findByName(args.alliance);
-    alliance = await Alliance.findOne({"name": new RegExp(args.alliance, 'i')});
+  if (args.param1) {
+    console.log(`finding alliance by name ${args.param1}`);
+    alliance = await Alliance.findOne({"name": new RegExp(args.param1, 'i')});
   //   console.log(alliance._id);
   //   console.log(alliance.name);
   //   console.log(planet._id);
-    if (!alliance) {
-      return `No alliance found for ${args.alliance}!!`;
+    if (alliance) {
+      intel.alliance = alliance._id;
+      response += ` | ${alliance.name}`;
+      if (args.param2) {
+        intel.nick = args.param2;
+      }
+    } else {
+      // if both params specified, report no alliance found and break
+      if (args.param2) {
+         return `No alliance found for ${args.param1}!!`;
+      } else {
+         //assume first parameter is nick and set accordingly
+        intel.nick = args.param1;
+      }
     }
-    intel.alliance = alliance._id;
-  }
-
-  if (args.nick) {
-    intel.nick = args.nick;
-  }
+    response += ` | ${intel.nick}`;
+  } 
   console.log(intel);
   await intel.save();
-  // let alliance = await Alliance.findOne({ _id: alliance._id});
-  return `Intel saved for ${coords.x}:${coords.y}:${coords.z} ${alliance.name}/${intel.nick}`;
+  return response;
 }
 
-let Intel_usage = he.encode('!intel <coords> <alliance> <nick>');
+let Intel_usage = he.encode('!intel <coords> [alliance] [nick]');
 let Intel_desc = 'Displays or sets intel for given coords.';
 let Intel_fn = (args) => {
   return new Promise(async (resolve, reject) => {
       if (args.length > 0) {
         let parsed = parseArgs(args);
-        console.log(parsed);
+        console.log(args);
         switch (parsed.action) {
           default:
           case INTEL_ACTION_DISPLAY:
             resolve(await intelDisplay(parsed));
           break;
           case INTEL_ACTION_SET:
-          resolve(await intelSet(parsed));  
+            resolve(await intelSet(parsed));  
         }
       } else {
         reject(Intel_usage);
@@ -269,13 +280,14 @@ let Intel_spamset = (args) => {
     if (args.length < 2) {
       reject(Intel_spamset_usage);
     }
-
     let alliance = await Alliance.findOne({"name": new RegExp(args[0], 'i')});
 	if (!alliance) {
 		var response = 'Alliance not found!';
 	} else {
 		for(let i = 1; i < args.length; i++) {
+//      console.log (`${args[i]}`);
 		  let planet = await coordsToPlanetLookup(args[i]);
+      
 		  console.log(planet);
 		  let intel = await Intel.findOne({planet: planet});
 		  if (!intel) {
@@ -287,7 +299,7 @@ let Intel_spamset = (args) => {
 		  }
 		  intel.alliance = alliance;		  
 		  await intel.save();
-		  console.log(`intel saved for ${intel}`);
+//		  console.log(`intel saved for ${intel}`);
 		}
 		var response = `Spam for <b>${alliance.name}</b> set.\n`;
 	}
@@ -344,18 +356,11 @@ let Intel_lookup = (args, current_member) => {
 };
 
 
-
-
-
-
-
-
-
 module.exports = {
   "lookup": { usage: Intel_lookup_usage, description: Intel_lookup_desc, cast: Intel_lookup, include_member: true },
   "intel": { usage: Intel_usage, description: Intel_desc, cast: Intel_fn },
   "spam": { usage: Intel_spam_usage, description: Intel_spam_desc, cast: Intel_spam },
   "spamset": { usage: Intel_spamset_usage, description: Intel_spamset_desc, access: AXS.botCommandRequired, cast: Intel_spamset },
-  "oomph": { usage: Intel_oomph_usage, description: Intel_oomph_desc, cast: Intel_oomph },
+//  "oomph": { usage: Intel_oomph_usage, description: Intel_oomph_desc, cast: Intel_oomph },
 };
 
