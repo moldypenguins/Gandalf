@@ -17,7 +17,7 @@
     "html-entities": "^2.3.3",
     "minimist": "^1.2.7",
     "numeral": "^2.0.6",
-    "p-retry": "6.0.0",
+    "p-retry": "6.2.0",
     "p-timeout": "6.1.2"
   },
   "devDependencies": {
