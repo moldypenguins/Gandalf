@@ -35,7 +35,7 @@
                                     <td class="fit-content no-wrap">
                                         <% if(member.isADM || (member.isHC && !members[i].isADM && !members[i].isHC)) { %>
                                             <button class="btn btn-sm btn-warning" onclick="window.location = '/mem/<%= members[i].id %>';"><i class="fas fa-pen" aria-hidden="true"></i></button>
-                                            <form method="POST" action="/mem" class="d-inline-block">
+                                            <form method="POST" action="/mem/" class="d-inline-block">
                                                 <button type="submit" name="deactivate" value="<%= members[i].id %>" class="btn btn-sm btn-danger" onclick="if(!confirm('Are you sure?')) { return false; }"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
                                             </form>
                                         <% } %>
@@ -124,9 +124,7 @@
                             <thead>
                             <tr>
                                 <th scope="col" class="btn-col"></th>
-                                <th scope="col">Username (<%= inactives.length %>)</th>
-                                <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
+                                <th data-sortable="true" data-field="member" scope="col">Username (<%= inactives.length %>)</th>
                                 <th data-sortable="true" data-field="pa_nick" scope="col">PA Nick</th>
                                 <th data-field="phone" scope="col">Phone</th>
                                 <th data-field="email" scope="col">Email</th>
@@ -138,12 +136,12 @@
                                     <td class="btn-col">
                                         <form method="POST" action="/mem/inactives">
                                             <div class="btn-group btn-group-sm position-static" role="group">
-                                                <button type="submit" name="activate" value="<%= inactives[i].id %>" class="btn btn-sm btn-success">
+                                                <button type="submit" name="activate" value="<%= inactives[i]._id %>" class="btn btn-sm btn-success">
                                                     <i class="fas fa-plus" aria-hidden="true"></i>
                                                 </button>
                                             </div>
                                             <div class="btn-group btn-group-sm position-static" role="group">
-                                                <button type="submit" name="delete" value="<%= inactives[i].id %>" class="btn btn-sm btn-danger">
+                                                <button type="submit" name="delete" value="<%= inactives[i]._id %>" class="btn btn-sm btn-danger">
                                                     <i class="fas fa-trash-alt" aria-hidden="true"></i>
                                                 </button>
                                             </div>
@@ -151,21 +149,14 @@
                                     </td>
                                     <th scope="row">
                                         <img src="<% if(inactives[i].photo_url) { %><%= inactives[i].photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" class="tg-pic"/>
-                                        <% if(inactives[i].username) { %>
-                                            <a href="https://t.me/<%= inactives[i].username %>"><%= inactives[i].username %></a>
-                                        <% } else if(inactives[i].last_name) { %>
-                                            <%= inactives[i].first_name %> <%= inactives[i].last_name %>
-                                        <% } else { %>
-                                            <%= inactives[i].first_name %>
-                                        <% } %>
+                                        <a href="tg://user?id=<%= inactives[i].telegram_user.telegram_id %>"><%= inactives[i].telegram_user.telegram_username %></a>
                                     </th>
-                                    <td><%= inactives[i].first_name %></td>
-                                    <td><%= inactives[i].last_name %></td>
-                                    <td><%= inactives[i].pa_nick %></td>
+                                   
+                                    <td><%= inactives[i].pa_nick %></td> 
                                     <td class="no-wrap">
                                         <% if(inactives[i].phone) { %>
                                             <% if(member.isADM) { %>
-                                                <form class="d-inline-block" name="callMember" method='POST' action="/mem/call/<%= inactives[i].id %>">
+                                                <form class="d-inline-block" name="callMember" method='POST' action="/mem/call/<%= inactives[i]._id %>">
                                                     <div class="btn-group btn-group-sm position-static" role="group">
                                                         <button type="submit" name="submitcall" value="<%= inactives[i].phone %>" class="btn btn-info"><i class="fas fa-phone" aria-hidden="true"></i></button>
                                                     </div>
