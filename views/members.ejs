@@ -149,7 +149,17 @@
                                     </td>
                                     <th scope="row">
                                         <img src="<% if(inactives[i].photo_url) { %><%= inactives[i].photo_url %><% } else { %><%= default_profile_pic %><% } %>" width="30" height="30" class="tg-pic"/>
-                                        <a href="tg://user?id=<%= inactives[i].telegram_user.telegram_id %>"><%= inactives[i].telegram_user.telegram_username %></a>
+                                        <a href="tg://user?id=<%= inactives[i].telegram_user.telegram_id %>"><% if (inactives[i].telegram_user.telegram_username) { %>
+                                                                                                                <%= inactives[i].telegram_user.telegram_username %>
+                                                                                                              <% } else { %>
+                                                                                                                <% if (inactives[i].telegram_user.telegram_first_name) { %>
+                                                                                                                  <%= inactives[i].telegram_user.telegram_first_name %>
+                                                                                                                <% } else { %>
+                                                                                                                  <% if (inactives[i].telegram_user.telegram_last_name) { %>
+                                                                                                                    <%= inactives[i].telegram_user.telegram_last_name %>
+                                                                                                                  <% } %> 
+                                                                                                                <% } %>
+                                                                                                              <% } %></a>                                       
                                     </th>
                                    
                                     <td><%= inactives[i].pa_nick %></td> 
