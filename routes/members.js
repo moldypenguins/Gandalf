@@ -1,6 +1,6 @@
 /**
  * Gandalf
- * Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High
+ * Copyright (C) 2020 Gandalf Planetarion Tools
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
- * @name members.js
- * @version 2021/11/22
+* @name members.js
+ * @version 2024/01/12
  * @summary Express Route
  **/
 'use strict';
@@ -99,20 +99,21 @@ router.get('/', AXS.webMemberRequired, async (req, res, next) => {
 
 
 router.post('/', AXS.webHighCommandRequired, async(req, res, next) => {
-  //console.log('BODY: ' + util.inspect(req.body, false, null, true));
+  console.log('BODY: ' + util.inspect(req.body, false, null, true));
+  console.log(req.body.deactivate);
   if(req.body.deactivate !== undefined) {
-    let mbr = await Member.findOne({id: req.body.deactivate});
+    let mbr = await Member.findOne({_id: req.body.deactivate});
     if(mbr != null) {
       let inatv = new Inactive({
-        _id: mbr.id,
-        username: mbr.username,
-        first_name: mbr.first_name,
-        last_name: mbr.last_name,
-        photo_url: mbr.photo_url,
+        _id: mbr._id,
         pa_nick: mbr.pa_nick,
+        telegram_user: mbr.telegram_user,
+        discord_user: mbr.discord_user,
+        parent: mbr.parent,
+        birthed: mbr.birthed,
+        photo_url: mbr.photo_url,
         email: mbr.email,
         phone: mbr.phone,
-        sponsor: mbr.sponsor,
         timezone: mbr.timezone
       });
       inatv.save(function (err, saved) {
@@ -120,8 +121,8 @@ router.post('/', AXS.webHighCommandRequired, async(req, res, next) => {
           console.log(err);
           return;
         }
-        //console.log(saved.username + " saved to Inactives collection.");
-        Member.deleteOne({id: req.body.deactivate}, function(err) {
+        console.log(saved.pa_nick + " saved to Inactives collection.");
+        Member.deleteOne({_id: req.body.deactivate}, function(err) {
           if (err) return console.error(err);
           res.redirect('/mem');
         });
@@ -168,7 +169,7 @@ router.post('/applicants', AXS.webHighCommandRequired, async (req, res, next) =>
           console.log(err);
           return;
         }
-        console.log(saved.username + " has been rejected.");
+        console.log(saved.pa_nick + " has been rejected.");
         res.redirect('/mem');
       });
     });
@@ -180,18 +181,18 @@ router.post('/applicants', AXS.webHighCommandRequired, async (req, res, next) =>
 
 router.post('/inactives', AXS.webHighCommandRequired, async (req, res, next) => {
   if(req.body.activate !== undefined) {
-    let inact = await Inactive.findOne({id: req.body.activate});
+    let inact = await Inactive.findOne({_id: req.body.activate});
     if(inact != null) {
       let mbr = new Member({
-        _id: inact.id,
-        username: inact.username,
-        first_name: inact.first_name,
-        last_name: inact.last_name,
-        photo_url: inact.photo_url,
+        _id: inact._id,
         pa_nick: inact.pa_nick,
+        telegram_user: inact.telegram_user,
+        discord_user: inact.discord_user,
+        photo_url: inact.photo_url,
+        parent: inact.parent,
+        birthed: inact.birthed,
         email: inact.email,
         phone: inact.phone,
-        sponsor: inact.sponsor,
         timezone: inact.timezone,
         access: 0,
         roles: 0
@@ -201,15 +202,15 @@ router.post('/inactives', AXS.webHighCommandRequired, async (req, res, next) => 
           console.log(err);
           return;
         }
-        //console.log(saved.username + " saved to Members collection.");
-        Inactive.deleteOne({id: req.body.activate}, function(err) {
+        //console.log(saved.pa_nick + " saved to Members collection.");
+        Inactive.deleteOne({_id: req.body.activate}, function(err) {
           if (err) return console.error(err);
           res.redirect('/mem');
         });
       });
     }
   } else if(req.body.delete !== undefined) {
-    let rem = await Inactive.deleteOne({id: req.body.delete});
+    let rem = await Inactive.deleteOne({_id: req.body.delete});
     console.log(req.body.delete + " deleted.");
     res.redirect('/mem');
   }

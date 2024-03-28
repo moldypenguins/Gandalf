@@ -1,6 +1,6 @@
 /**
  * Gandalf
- * Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High
+ * Copyright (C) 2020 Gandalf Planetarion Tools
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,16 +43,29 @@ let getTelegramName = function(u) {
 
 let parseCoords = function(c) {
 	let coords = {};
-	let matches = c.match(/(\d+)[:.](\d+)[:.](\d+)/);
+	let matches = c.match(/(\d+)[:.](\d+)[:.]?(\d*)/);
 	if (matches) {
-		if (matches.length === 4) {
+    console.log(matches.length)
+		if (matches[3] > 0) {
 			coords = {x: +matches[1], y: +matches[2], z: +matches[3]};
-		} else if (matches.length === 3) {
+		} else  {
 			coords = {x: +matches[1], y: +matches[2]};
 		}
-
 	}
 	return coords;
+};
+
+let coordType = function(c) {
+	let type = {};
+	let matches = c.match(/(\d+)[:.](\d+)[:.]?(\d*)/);
+	if (matches) {
+		if (matches[3] > 0) {
+			type = 0;
+		} else {
+			type = 1;
+		}
+	}
+	return type;
 };
 
 
@@ -60,4 +73,5 @@ module.exports = {
 	"isValidDate": isValidDate,
 	"getTelegramName": getTelegramName,
 	"parseCoords": parseCoords,
+  "coordType": coordType,
 };

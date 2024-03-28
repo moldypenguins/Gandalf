@@ -1,6 +1,6 @@
 /**
  * Gandalf
- * Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High
+ * Copyright (C) 2020 Gandalf Planetarion Tools
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Frodo.js
- * @version 2021/06/07
+ * @version 2024/03/27
  * @summary Ticker
  * @param {string} -h,--havoc start Frodo in havoc mode
 **/
@@ -52,6 +52,13 @@ const minimist = require('minimist');
 const util = require('util');
 const crypto = require('crypto');
 
+const useragent = `{User-Agent: Frodo/0.05 (admin ${CFG.admin.pa_nick})}`;
+
+//workaround to avoid including the entire Math library for a single function
+function RoundNum(number){
+    var c = number % 1;
+    return number-c+(c/1+1.5>>1)*1
+}
 
 let argv = minimist(process.argv.slice(2), {
   string: [],
@@ -86,7 +93,7 @@ Mordor.connection.once("open", async () => {
 
     //get last tick
     let last_tick = (await Tick.findOne().sort({tick: -1})).tick; //.findLastTick().tick;
-    console.log('LAST_TICK: ' + util.inspect(last_tick, false, null, true));
+ //   console.log('LAST_TICK: ' + util.inspect(last_tick, false, null, true));
     if(typeof(last_tick) === 'undefined' || last_tick == null) {
       console.log('No ticks found in the database.');
       process.exit(0);
@@ -98,21 +105,31 @@ Mordor.connection.once("open", async () => {
     let stop_trying = false;
     while(!stop_trying) {
       let iteration_start = new Date();
-      try {
-        stop_trying = await process_tick(last_tick, start_time);
-      } catch(error) {
-        console.log(util.inspect(error, false, null, true));
-        //break; //stop_trying = true;???
-      }
-      if(!stop_trying) {
-        while((new Date()).getTime() - iteration_start.getTime() < 15) { //wait at least 15 seconds between each iteration
-          await sleep(5 * 1000); //sleep for 5 seconds
+//      console.log('Minutes rule: ' + (RoundNum(start_time.getMinutes()/15)));
+      let havoc_die = rule.minute[RoundNum(start_time.getMinutes()/15)] + 10;
+//      console.log('Iteration start (mins): ' + iteration_start.getMinutes());
+//      console.log('Give up after (mins): ' + (argv.havoc ? havoc_die : 55))
+      if (iteration_start.getMinutes() > (argv.havoc ? havoc_die : 55)) { 
+        //give up after 55 minutes past the hour - havoc 10 minutes past the 15
+        console.log(`Reached timeout without a successful dump, giving up!`);
+        stop_trying = true;
+      } else {
+        try {
+          stop_trying = await process_tick(last_tick, start_time);
+        } catch(error) {
+          let dump_err=util.inspect(error, false, null, true);
+          console.log(dump_err);
+          if (dump_err.indexOf('Stale') !== -1) {
+            console.log('Stale tick, giving up.');
+            stop_trying = true;
+          }
         }
-        if((new Date()).getTime() - start_time.getTime() < (argv.havoc ? start_time.getMinutes() + 10 : 55) * 60) { //give up after 55 minutes past the hour - havoc 10 minutes past the 15
-          console.log(`Reached timeout without a successful dump, giving up!`);
-          stop_trying = true;
-        }
       }
+      if (!stop_trying) { 
+        //wait at least 15 seconds between each iteration
+        console.log('<15 seconds elapsed since last attempt, sleeping');
+        await sleep(15 * 1000); //sleep for 15 seconds
+      } 
     } //end while
   });
 });
@@ -125,10 +142,10 @@ let process_tick = async (last_tick, start_time) => {
 
   //get dump files
   console.log('Getting dump files...');
-  let planet_dump = await getStream(PA.dumps.planet);
-  let galaxy_dump = await getStream(PA.dumps.galaxy);
-  let alliance_dump = await getStream(PA.dumps.alliance);
-  let user_dump = await getStream(PA.dumps.user);
+  let planet_dump = await getStream(PA.dumps.planet,useragent);
+  let galaxy_dump = await getStream(PA.dumps.galaxy,useragent);
+  let alliance_dump = await getStream(PA.dumps.alliance,useragent);
+  let user_dump = await getStream(PA.dumps.user,useragent);
   console.log(`Loaded dumps from webserver in: ${(new Date()) - start_time}ms`);
 
   if(planet_dump !== undefined && galaxy_dump !== undefined && alliance_dump !== undefined && user_dump !== undefined) {

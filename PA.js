@@ -30,18 +30,18 @@ module.exports = {
     cat:2,
     xan:3,
     zik:4,
-//    etd:5,
-    kin:5,
-    sly:6,
+    etd:5,
+    kin:6,
+//    sly:6,
   },
   racenames:{
     ter: "Terran",
     cat: "Cathaar",
     xan: "Xandathrii",
     zik: "Zikonian",
-//    etd: "Eitraides",
+    etd: "Eitraides",
     kin: "Kinthia",
-    sly: "Slythonian",
+ //   sly: "Slythonian",
   },
   race:{
     ter: {
@@ -60,18 +60,19 @@ module.exports = {
     name: "Zikonian",
     prodtime: 0.15
     },
- /*   etd: {
+    etd: {
     name: "Eitraides",
     prodtime: 0
-    }  */
+    }, 
     kin: {
     name: "Kinthia",
     prodtime: 0
-    },   
-    sly: {
+    }   
+/*    sly: {
     name: "Slythonian",
     prodtime: 0
-    }    
+    } 
+*/
   },
   scantypes:{
     1: "Planet Scan",
