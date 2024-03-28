@@ -1,6 +1,6 @@
 /**
  * Gandalf
- * Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High
+ * Copyright (C) Gandalf Planetarion Tools
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Bilbo.js
- * @version 2021/06/07
+ * @version 2024/03/27
  * @summary Initialization
  * @param {string} -s,--start tick start date
  **/
@@ -58,6 +58,7 @@ const xmlParser = require('xml2json');
 const minimist = require('minimist');
 const util = require('util');
 
+const useragent = `{User-Agent: Frodo/0.05 (admin ${CFG.admin.pa_nick})}`;
 
 let argv = minimist(process.argv.slice(2), {
   string: ['start'],
@@ -104,7 +105,7 @@ let clear_database = async() => {
 };
 
 let load_ships = async() => {
-  let stream = await getStream(PA.dumps.ship_stats);
+  let stream = await getStream(PA.dumps.ship_stats,useragent);
   let json = JSON.parse(xmlParser.toJson(stream));
   // load each one
   let ship_id = 0;
