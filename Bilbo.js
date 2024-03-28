@@ -58,7 +58,7 @@ const xmlParser = require('xml2json');
 const minimist = require('minimist');
 const util = require('util');
 
-const useragent = `{User-Agent: Frodo/0.05 (admin ${CFG.admin.pa_nick})}`;
+const useragent = `{User-Agent: Bilbo/0.05 (admin ${CFG.admin.pa_nick})}`;
 
 let argv = minimist(process.argv.slice(2), {
   string: ['start'],
