@@ -1,6 +1,6 @@
 /**
  * Gandalf
- * Copyright (C) 2020 Craig Roberts, Braden Edmunds, Alex High, Sam Powis
+ * Copyright (C) 2020 Gandalf Planetarion Tools
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  * along with this program.  If not, see https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @name Gandalf.js
- * @version 2023/01/08
+ * @version 2023/12/20
  * @summary Telegram Bot
  **/
 'use strict';
@@ -188,11 +188,11 @@ Mordor.connection.once("open", () => {
         ctx.replyWithHTML('<i>You Shall Not Pass!</i>', {reply_to_message_id: ctx.message.message_id});
         //ctx.replyWithAnimation({url: 'https://media.giphy.com/media/5SAPlGAS1YnLN9jHua/giphy-downsized-large.gif'}, {caption: 'Access denied!', inReplyTo: ctx.message.message_id});
       } else {
-        var args = ctx.message.text.substr(1).toLowerCase().replace(/\s+/g, ' ').replace(/[^a-z0-9áéíóúñü \.,_-]/gim,'').split(' ');
+        var args = ctx.message.text.substr(1).toLowerCase().replace(/\s+/g, ' ').replace(/[^a-z0-9áéíóúñü \.\:,_-]/gim,'').split(' ');
         let cmd = args.shift()
 		
         if (cmd === "addmember") {
-          args = ctx.message.text.substr(1).replace(/\s+/g, ' ').replace(/[^a-z0-9áéíóúñü \.,_-]/gim,'').split(' ');
+          args = ctx.message.text.substr(1).replace(/\s+/g, ' ').replace(/[^a-z0-9áéíóúñü \.\:,_-]/gim,'').split(' ');
           args.shift();
         }
         //console.log('Command: ' + cmd);
